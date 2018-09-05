@@ -1,0 +1,669 @@
+/*
+ * Copyright 2011 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * 2015 All rights (c)KYGroup Co.,Ltd. reserved.
+ * <p/>
+ * This software is the confidential and proprietary information
+ * of (c)KYGroup Co.,Ltd. ("Confidential Information").
+ * <p/>
+ * project	:	Karaoke.TV
+ * filename	:	Const2.java
+ * author	:	isyoon
+ * <p/>
+ * <pre>
+ * kr.kymedia.kykaraoke.tv.api
+ *    |_ Const2.java
+ * </pre>
+ */
+
+package kr.keumyoung.karaoke.api;
+
+/**
+ * <pre>
+ *
+ * </pre>
+ *
+ * @author isyoon
+ * @since 2015. 9. 25.
+ * @version 1.0
+ */
+interface Const2 extends Const {
+
+	final static String TAG_ERR = "[KYK][ERR]";
+	final static String TAG_MAIN = "[KYK][MAIN][main]";
+	final static String TAG_VIDEO = "[KYK][PLAY][video]";
+	final static String TAG_SING = "[KYK][PLAY][sing]";
+	final static String TAG_LISTEN = "[KYK][PLAY][listen]";
+	final static String TAG_LYRIC = "[KYK][PLAY][lyric]";
+
+	final static String TEST_BG = "http://kumyoung.hscdn.com/MPEG2_TS_Video/47203.mpg";
+	// final static String TEST_BG = "http://wp.kymedia.kr/class.php?class=Folder&action=down&data_id=20150612181520b50c";
+
+	/**
+	 * 동영상재시작(시간:10초)
+	 */
+	final static int TIMER_MP4_RETRY = 10000;
+	/**
+	 * 동영상재시작(횟수:3회)
+	 */
+	final static int COUNT_MP4_RETRY = 3;
+	/**
+	 * 반주곡재시작(시간:10초)
+	 */
+	final static int TIMER_MP3_RETRY = 10000;
+	/**
+	 * 반주곡재시작(횟수:3회)
+	 */
+	final static int COUNT_MP3_RETRY = 3;
+	/**
+	 * 재생
+	 */
+	final static int PLAY_NONE = 0;
+	final static int PLAY_STOP = Const.STOP;
+	final static int PLAY_NEXT = Const.NEXT;
+	final static int PLAY_PAUSE = Const.PAUSE;
+	final static int PLAY_PLAY = Const.PLAY;
+	final static int PLAY_ERROR = 5;
+
+	public static enum PLAY_ENGAGE {
+
+		PLAY_NONE(Const2.PLAY_NONE),
+		PLAY_STOP(Const2.PLAY_STOP),
+		PLAY_NEXT(Const2.PLAY_NEXT),
+		PLAY_PLAY(Const2.PLAY_PLAY),
+		PLAY_PAUSE(Const2.PLAY_PAUSE),
+		PLAY_ERROR(Const2.PLAY_ERROR);
+
+		private final int value;
+
+		PLAY_ENGAGE(int value) {
+			this.value = value;
+		}
+
+		public int value() {
+			return value;
+		}
+
+		public static PLAY_ENGAGE get(int value) {
+			PLAY_ENGAGE ret = null;
+			for (PLAY_ENGAGE state : PLAY_ENGAGE.values()) {
+				if (value == state.value()) {
+					ret = state;
+				}
+			}
+			return ret;
+		}
+	}
+
+	public static enum PANE_STATE {
+
+		PANE_HOME(Const.PANE_HOME),
+		PANE_MAIN(Const.PANE_MAIN);
+
+		private final int value;
+
+		PANE_STATE(int value) {
+			this.value = value;
+		}
+
+		public int value() {
+			return value;
+		}
+
+		public static PANE_STATE get(int value) {
+			PANE_STATE ret = null;
+			for (PANE_STATE remote : PANE_STATE.values()) {
+				if (value == remote.value()) {
+					ret = remote;
+				}
+			}
+			return ret;
+		}
+	}
+
+	public static enum VIDEO_NEXT {
+
+		VIDEO_REDRAW(Const.REDRAW),
+		VIDEO_NEWDRAW(Const.NEWDRAW);
+
+		private final int value;
+
+		VIDEO_NEXT(int value) {
+			this.value = value;
+		}
+
+		public int value() {
+			return value;
+		}
+
+		public static VIDEO_NEXT get(int value) {
+			VIDEO_NEXT ret = null;
+			for (VIDEO_NEXT remote : VIDEO_NEXT.values()) {
+				if (value == remote.value()) {
+					ret = remote;
+				}
+			}
+			return ret;
+		}
+	}
+
+	public static enum REMOTE_STATE {
+
+		REMOTE_NONE(Const.REMOTE_NONE),
+		REMOTE_LEFT(Const.REMOTE_LEFT),
+		REMOTE_RIGHT(Const.REMOTE_RIGHT),
+		REMOTE_UP(Const.REMOTE_UP),
+		REMOTE_DOWN(Const.REMOTE_DOWN),
+		REMOTE_ENTER(Const.REMOTE_ENTER),
+		REMOTE_RETURN(Const.REMOTE_RETURN),
+		REMOTE_INIT(Const.REMOTE_INIT),
+		REMOTE_MENU(Const.REMOTE_MENU);
+
+		private final int value;
+
+		REMOTE_STATE(int value) {
+			this.value = value;
+		}
+
+		public int value() {
+			return value;
+		}
+
+		public static REMOTE_STATE get(int value) {
+			REMOTE_STATE ret = null;
+			for (REMOTE_STATE remote : REMOTE_STATE.values()) {
+				if (value == remote.value()) {
+					ret = remote;
+				}
+			}
+			return ret;
+		}
+	}
+
+	public static enum MENU_STATE {
+
+		STATE_HOME_MENU(Const.STATE_HOME_MENU),
+		STATE_MAIN_MENU(Const.STATE_MAIN_MENU),
+		STATE_SING_MENU(Const.STATE_SING_MENU),
+		STATE_SING_GENRE(Const.STATE_SING_GENRE),
+		STATE_SONG_LIST(Const.STATE_SONG_LIST),
+		STATE_SONG_LIST_DETAIL(Const.STATE_SONG_LIST_DETAIL),
+		STATE_MY_MENU(Const.STATE_MY_MENU),
+		STATE_SHOP_MENU(Const.STATE_SHOP_MENU),
+		STATE_SHOP_TICKET(Const.STATE_SHOP_TICKET),
+		STATE_SHOP_CERTIFY(Const.STATE_SHOP_CERTIFY),
+		STATE_CUSTOMER_MENU(Const.STATE_CUSTOMER_MENU),
+		STATE_CUSTOMER_LIST(Const.STATE_CUSTOMER_LIST),
+		STATE_CUSTOMER_LIST_DETAIL(Const.STATE_CUSTOMER_LIST_DETAIL),
+		//븅신개삽지랄...안쓸껀왜만들어선!!!
+		//STATE_CUSTOMER_APP(Const.STATE_CUSTOMER_APP),
+		//븅신개삽지랄...안쓸껀왜만들어선!!!
+		//STATE_CUSTOMER_MIC(Const.STATE_CUSTOMER_MIC),
+		STATE_SEARCH_MENU(Const.STATE_SEARCH_MENU),
+		STATE_SEARCH_SELF(Const.STATE_SEARCH_SELF),
+		STATE_SEARCH_LETTER_KOR(Const.STATE_SEARCH_LETTER_KOR),
+		STATE_SEARCH_LETTER_ENG(Const.STATE_SEARCH_LETTER_ENG),
+		STATE_SEARCH_LETTER_NUM(Const.STATE_SEARCH_LETTER_NUM),
+		STATE_SEARCH_LIST(Const.STATE_SEARCH_LIST),
+		STATE_MY_LIST(Const.STATE_MY_LIST),
+		STATE_LISTEN_MENU(Const.STATE_LISTEN_MENU),
+		STATE_LISTEN_LIST(Const.STATE_LISTEN_LIST),
+		STATE_LISTENING(Const.STATE_LISTENING),
+		STATE_SEARCH_LIST_DETAIL(Const.STATE_SEARCH_LIST_DETAIL),
+		STATE_LISTEN_OTHER(Const.STATE_LISTEN_OTHER),
+		STATE_CERTIFY_HP(Const.STATE_CERTIFY_HP),
+		STATE_CERTIFY(Const.STATE_CERTIFY),
+		STATE_MESSAGE_OK(Const.STATE_MESSAGE_OK),
+		STATE_MESSAGE_PPV_INFO(Const.STATE_MESSAGE_PPX_INFO),
+		STATE_MESSAGE_PPM_NOTICE(Const.STATE_MESSAGE_PPX_NOTICE),
+		STATE_MESSAGE_PPV_PASS(Const.STATE_MESSAGE_PPX_PASS),
+		STATE_MESSAGE_PPV_SUCCESS(Const.STATE_MESSAGE_PPX_SUCCESS),
+		STATE_MESSAGE_GO_CERTIFY(Const.STATE_MESSAGE_GO_CERTIFY),
+		STATE_MY_RECORD_LIST(Const.STATE_MY_RECORD_LIST),
+		STATE_MY_RECORD_NONE(Const.STATE_MY_RECORD_NONE),
+		STATE_MY_RECORD_BEFORE(Const.STATE_MY_RECORD_BEFORE),
+		STATE_CUSTOMER_LIST_EVENT(Const.STATE_CUSTOMER_LIST_EVENT),
+		STATE_EVENT_HP(Const.STATE_EVENT_HP);
+
+		private final int value;
+
+		MENU_STATE(int value) {
+			this.value = value;
+		}
+
+		public int value() {
+			return value;
+		}
+
+		public static MENU_STATE get(int value) {
+			MENU_STATE ret = null;
+			for (MENU_STATE state : MENU_STATE.values()) {
+				if (value == state.value()) {
+					ret = state;
+				}
+			}
+			return ret;
+		}
+	}
+
+	public static enum REQUEST_VASS {
+
+		REQUEST_VASS_NONE(Const.REQUEST_VASS_NONE),
+		//REQUEST_VASS_DAY_PURCHASE(Const.REQUEST_VASS_DAY_PURCHASE),
+		//REQUEST_VASS_DAY_CHECK(Const.REQUEST_VASS_DAY_CHECK),
+		//REQUEST_VASS_MONTH_PURCHASE(Const.REQUEST_VASS_MONTH_PURCHASE),
+		//REQUEST_VASS_MONTH_CHECK(Const.REQUEST_VASS_MONTH_CHECK),
+		//REQUEST_VASS_YEAR_PURCHASE(Const.REQUEST_VASS_YEAR_PURCHASE),
+		//REQUEST_VASS_YEAR_CHECK(Const.REQUEST_VASS_YEAR_CHECK),
+		//REQUEST_VASS_DAY_CHECK_PLAY(Const.REQUEST_VASS_DAY_CHECK_PLAY),
+		//REQUEST_VASS_MONTH_CHECK_PLAY(Const.REQUEST_VASS_MONTH_CHECK_PLAY),
+		//REQUEST_VASS_YEAR_CHECK_PLAY(Const.REQUEST_VASS_YEAR_CHECK_PLAY),
+		//REQUEST_VASS_PASSWORD_FOR_DAY(Const.REQUEST_VASS_PASSWORD_FOR_DAY),
+		//REQUEST_VASS_PASSWORD_FOR_MONTH(Const.REQUEST_VASS_PASSWORD_FOR_MONTH),
+		//REQUEST_VASS_PASSWORD_FOR_YEAR(Const.REQUEST_VASS_PASSWORD_FOR_YEAR),
+		//REQUEST_VASS_PPM_PURCHASE(Const.REQUEST_VASS_PPM_PURCHASE),
+		//REQUEST_VASS_PPV_PURCHASE(Const.REQUEST_VASS_PPV_PURCHASE),
+		REQUEST_VASS_PPX_CHECK(Const.REQUEST_VASS_PPX_CHECK),
+		REQUEST_VASS_PPX_CHECK_PLAY(Const.REQUEST_VASS_PPX_CHECK_PLAY),
+		REQUEST_VASS_PPX_PASSWORD(Const.REQUEST_VASS_PPX_PASSWORD),
+		REQUEST_VASS_PPX_PURCHASE(Const.REQUEST_VASS_PPX_PURCHASE);
+
+		private final int value;
+
+		REQUEST_VASS(int value) {
+			this.value = value;
+		}
+
+		public int value() {
+			return value;
+		}
+
+		public static REQUEST_VASS get(int value) {
+			REQUEST_VASS ret = REQUEST_VASS_NONE;
+			for (REQUEST_VASS state : REQUEST_VASS.values()) {
+				if (value == state.value()) {
+					ret = state;
+				}
+			}
+			return ret;
+		}
+	}
+
+	public static enum COMPLETE_VASS {
+
+		COMPLETE_TIMER_SHOW_MESSAGE_NOT_RESPONSE(Const.COMPLETE_TIMER_SHOW_MESSAGE_NOT_RESPONSE),
+		COMPLETE_ERROR_REQUEST_NOT_RESPONSE(Const.COMPLETE_ERROR_REQUEST_NOT_RESPONSE),
+
+		COMPLETE_VASS_NONE(Const.COMPLETE_VASS_NONE),
+		//COMPLETE_VASS_DAY_PURCHASE(Const.COMPLETE_VASS_DAY_PURCHASE),
+		//COMPLETE_VASS_DAY_CHECK(Const.COMPLETE_VASS_DAY_CHECK),
+		//COMPLETE_VASS_MONTH_PURCHASE(Const.COMPLETE_VASS_MONTH_PURCHASE),
+		//COMPLETE_VASS_MONTH_CHECK(Const.COMPLETE_VASS_MONTH_CHECK),
+		//COMPLETE_VASS_YEAR_PURCHASE(Const.COMPLETE_VASS_YEAR_PURCHASE),
+		//COMPLETE_VASS_YEAR_CHECK(Const.COMPLETE_VASS_YEAR_CHECK),
+		//COMPLETE_VASS_PASSWORD_FOR_DAY(Const.COMPLETE_VASS_PASSWORD_FOR_DAY),
+		//COMPLETE_VASS_PASSWORD_FOR_MONTH(Const.COMPLETE_VASS_PASSWORD_FOR_MONTH),
+		//COMPLETE_VASS_PASSWORD_FOR_YEAR(Const.COMPLETE_VASS_PASSWORD_FOR_YEAR),
+		//COMPLETE_VASS_DAY_CHECK_PLAY(Const.COMPLETE_VASS_DAY_CHECK_PLAY),
+		//COMPLETE_VASS_MONTH_CHECK_PLAY(Const.COMPLETE_VASS_MONTH_CHECK_PLAY),
+		//COMPLETE_VASS_YEAR_CHECK_PLAY(Const.COMPLETE_VASS_YEAR_CHECK_PLAY),
+		//COMPLETE_VASS_PPM_PURCHASE(Const.COMPLETE_VASS_PPM_PURCHASE),
+		//COMPLETE_VASS_PPV_PURCHASE(Const.COMPLETE_VASS_PPV_PURCHASE),
+		COMPLETE_VASS_PPX_CHECK(Const.COMPLETE_VASS_PPX_CHECK),
+		COMPLETE_VASS_PPX_CHECK_PLAY(Const.COMPLETE_VASS_PPX_CHECK_PLAY),
+		COMPLETE_VASS_PPX_PASSWORD(Const.COMPLETE_VASS_PPX_PASSWORD),
+		COMPLETE_VASS_PPX_PURCHASE(Const.COMPLETE_VASS_PPX_PURCHASE);
+
+		private final int value;
+
+		COMPLETE_VASS(int value) {
+			this.value = value;
+		}
+
+		public int value() {
+			return value;
+		}
+
+		public static COMPLETE_VASS get(int value) {
+			COMPLETE_VASS ret = COMPLETE_VASS_NONE;
+			for (COMPLETE_VASS state : COMPLETE_VASS.values()) {
+				if (value == state.value()) {
+					ret = state;
+				}
+			}
+			return ret;
+		}
+	}
+
+	public static enum REQUEST_KP {
+
+		REQUEST_NONE(Const.REQUEST_NONE),
+		REQUEST_MAIN(Const.REQUEST_MAIN),
+		REQUEST_SONG_LIST(Const.REQUEST_SONG_LIST),
+		REQUEST_SONG_FILE(Const.REQUEST_SONG_FILE),
+		REQUEST_SONG_SYNC(Const.REQUEST_SONG_SYNC),
+		REQUEST_FAVOR(Const.REQUEST_FAVOR),
+		REQUEST_CUSTOMER_LIST(Const.REQUEST_CUSTOMER_LIST),
+		REQUEST_CUSTOMER_LIST_DETAIL(Const.REQUEST_CUSTOMER_LIST_DETAIL),
+		REQUEST_SEARCH_LIST(Const.REQUEST_SEARCH_LIST),
+		REQUEST_SONG_PLAY(Const.REQUEST_SONG_PLAY),
+		REQUEST_LISTEN_LIST(Const.REQUEST_LISTEN_LIST),
+		REQUEST_LISTEN_SONG(Const.REQUEST_LISTEN_SONG),
+		REQUEST_LISTEN_OTHER(Const.REQUEST_LISTEN_OTHER),
+		REQUEST_NUMBER_SEARCH(Const.REQUEST_NUMBER_SEARCH),
+		REQUEST_LISTEN_SONG_OTHER(Const.REQUEST_LISTEN_SONG_OTHER),
+		REQUEST_SONG_PLAYED_TIME(Const.REQUEST_SONG_PLAYED_TIME),
+		REQUEST_LISTEN_PLAYED_TIME(Const.REQUEST_LISTEN_PLAYED_TIME),
+		REQUEST_AUTH_NUMBER(Const.REQUEST_AUTH_NUMBER),
+		REQUEST_CERTIFY_STATE(Const.REQUEST_CERTIFY_STATE),
+		REQUEST_AUTH_NUMBER_CORRECT(Const.REQUEST_AUTH_NUMBER_CORRECT),
+		REQUEST_MY_RECORD_LIST(Const.REQUEST_MY_RECORD_LIST),
+		REQUEST_MY_SUB_MENU(Const.REQUEST_MY_SUB_MENU),
+		REQUEST_SHOP_SUB_MENU(Const.REQUEST_SHOP_SUB_MENU),
+		REQUEST_TICKET_SALES_STATE(Const.REQUEST_TICKET_SALES_STATE),
+		REQUEST_TICKET_PURCHASE_COMPLETE(Const.REQUEST_TICKET_PURCHASE_COMPLETE),
+		//REQUEST_YEAR_PURCHASE_COMPLETE(Const.REQUEST_YEAR_PURCHASE_COMPLETE),
+		//REQUEST_MONTH_PURCHASE_COMPLETE(Const.REQUEST_MONTH_PURCHASE_COMPLETE),
+		//REQUEST_DAY_PURCHASE_COMPLETE(Const.REQUEST_DAY_PURCHASE_COMPLETE),
+		REQUEST_EVENT_LIST(Const.REQUEST_EVENT_LIST),
+		REQUEST_EVENT_LIST_DETAIL(Const.REQUEST_EVENT_LIST_DETAIL),
+		REQUEST_EVENT_APPLY(Const.REQUEST_EVENT_APPLY),
+		REQUEST_EVENT_HP(Const.REQUEST_EVENT_HP),
+		REQUEST_COUPON_REGIST(Const.REQUEST_COUPON_REGIST);
+
+		private final int value;
+
+		REQUEST_KP(int value) {
+			this.value = value;
+		}
+
+		public int value() {
+			return value;
+		}
+
+		public static REQUEST_KP get(int value) {
+			REQUEST_KP ret = REQUEST_NONE;
+			for (REQUEST_KP state : REQUEST_KP.values()) {
+				if (value == state.value()) {
+					ret = state;
+				}
+			}
+			return ret;
+		}
+	}
+
+	public static enum REQUEST_UTIL {
+
+		REQUEST_UTIL_MAIN_EVENT_IMAGE(Const.REQUEST_UTIL_MAIN_EVENT_IMAGE),
+		REQUEST_UTIL_CUSTOMER_DETAIL_IMAGE(Const.REQUEST_UTIL_CUSTOMER_DETAIL_IMAGE),
+		REQUEST_UTIL_PROFILE_IMAGE_1(Const.REQUEST_UTIL_PROFILE_IMAGE_1),
+		REQUEST_UTIL_PROFILE_IMAGE_2(Const.REQUEST_UTIL_PROFILE_IMAGE_2),
+		REQUEST_UTIL_PROFILE_IMAGE_3(Const.REQUEST_UTIL_PROFILE_IMAGE_3),
+		REQUEST_UTIL_PROFILE_IMAGE_4(Const.REQUEST_UTIL_PROFILE_IMAGE_4),
+		REQUEST_UTIL_PROFILE_IMAGE_5(Const.REQUEST_UTIL_PROFILE_IMAGE_5),
+		REQUEST_UTIL_PROFILE_IMAGE_6(Const.REQUEST_UTIL_PROFILE_IMAGE_6),
+		REQUEST_UTIL_PROFILE_IMAGE_7(Const.REQUEST_UTIL_PROFILE_IMAGE_7),
+		REQUEST_UTIL_PROFILE_IMAGE_8(Const.REQUEST_UTIL_PROFILE_IMAGE_8),
+		REQUEST_UTIL_PROFILE_IMAGE_HOME(Const.REQUEST_UTIL_PROFILE_IMAGE_HOME),
+		REQUEST_UTIL_CERTIFY_PROFILE_IMAGE(Const.REQUEST_UTIL_CERTIFY_PROFILE_IMAGE),
+		REQUEST_UTIL_MY_RECORD_PROFILE_IMAGE(Const.REQUEST_UTIL_MY_RECORD_PROFILE_IMAGE),
+		REQUEST_UTIL_MAIN_QUICK_IMAGE_01_ON(Const.REQUEST_UTIL_MAIN_QUICK_IMAGE_01_ON),
+		REQUEST_UTIL_MAIN_QUICK_IMAGE_01_OFF(Const.REQUEST_UTIL_MAIN_QUICK_IMAGE_01_OFF),
+		REQUEST_UTIL_MAIN_QUICK_IMAGE_02_ON(Const.REQUEST_UTIL_MAIN_QUICK_IMAGE_02_ON),
+		REQUEST_UTIL_MAIN_QUICK_IMAGE_02_OFF(Const.REQUEST_UTIL_MAIN_QUICK_IMAGE_02_OFF),
+		REQUEST_UTIL_EVENT_DETAIL_ON(Const.REQUEST_UTIL_EVENT_DETAIL_ON),
+		REQUEST_UTIL_EVENT_DETAIL_OFF(Const.REQUEST_UTIL_EVENT_DETAIL_OFF),
+		REQUEST_UTIL_SHOP_ITEM_01(Const.REQUEST_UTIL_SHOP_ITEM_01),
+		REQUEST_UTIL_SHOP_ITEM_02(Const.REQUEST_UTIL_SHOP_ITEM_02),
+		REQUEST_UTIL_KY_LOGO(Const.REQUEST_UTIL_KY_LOGO),
+		REQUEST_UTIL_MIC(Const.REQUEST_UTIL_MIC);
+
+		private final int value;
+
+		REQUEST_UTIL(int value) {
+			this.value = value;
+		}
+
+		public int value() {
+			return value;
+		}
+
+		public static REQUEST_UTIL get(int value) {
+			REQUEST_UTIL ret = null;
+			for (REQUEST_UTIL state : REQUEST_UTIL.values()) {
+				if (value == state.value()) {
+					ret = state;
+				}
+			}
+			return ret;
+		}
+	}
+
+	public static enum COMPLETE_KP {
+
+		COMPLETE_ERROR_REQUEST_NOT_RESPONSE(Const2.COMPLETE_ERROR_REQUEST_NOT_RESPONSE),
+
+		COMPLETE_NONE(Const.COMPLETE_NONE),
+		COMPLETE_MAIN(Const.COMPLETE_MAIN),
+		COMPLETE_SONG_LIST(Const.COMPLETE_SONG_LIST),
+		COMPLETE_FAVOR(Const.COMPLETE_FAVOR),
+		COMPLETE_CUSTOMER_LIST(Const.COMPLETE_CUSTOMER_LIST),
+		COMPLETE_CUSTOMER_LIST_DETAIL(Const.COMPLETE_CUSTOMER_LIST_DETAIL),
+		COMPLETE_SEARCH_LIST(Const.COMPLETE_SEARCH_LIST),
+		COMPLETE_SONG_PLAY(Const.COMPLETE_SONG_PLAY),
+		COMPLETE_LISTEN_LIST(Const.COMPLETE_LISTEN_LIST),
+		COMPLETE_LISTEN_SONG(Const.COMPLETE_LISTEN_SONG),
+		COMPLETE_LISTEN_OTHER(Const.COMPLETE_LISTEN_OTHER),
+		COMPLETE_NUMBER_SEARCH(Const.COMPLETE_NUMBER_SEARCH),
+		COMPLETE_LISTEN_OTHER_SONG(Const.COMPLETE_LISTEN_OTHER_SONG),
+		COMPLETE_SONG_PLAYED_TIME(Const.COMPLETE_SONG_PLAYED_TIME),
+		COMPLETE_LISTEN_PLAYED_TIME(Const.COMPLETE_LISTEN_PLAYED_TIME),
+		COMPLETE_AUTH_NUMBER(Const.COMPLETE_AUTH_NUMBER),
+		COMPLETE_CERTIFY_STATE(Const.COMPLETE_CERTIFY_STATE),
+		COMPLETE_AUTH_NUMBER_CORRECT(Const.COMPLETE_AUTH_NUMBER_CORRECT),
+		COMPLETE_MY_RECORD_LIST(Const.COMPLETE_MY_RECORD_LIST),
+		COMPLETE_MY_SUB_MENU(Const.COMPLETE_MY_SUB_MENU),
+		COMPLETE_SHOP_SUB_MENU(Const.COMPLETE_SHOP_SUB_MENU),
+		COMPLETE_TICKET_SALES_STATE(Const.COMPLETE_TICKET_SALES_STATE),
+		COMPLETE_EVENT_APPLY(Const.COMPLETE_EVENT_APPLY),
+		COMPLETE_EVENT_HP(Const.COMPLETE_EVENT_HP),
+		COMPLETE_COUPON_REGIST(Const.COMPLETE_COUPON_REGIST),
+		COMPLETE_UTIL_EVENT_IMAGE(Const.COMPLETE_UTIL_EVENT_IMAGE),
+		COMPLETE_UTIL_CUSTOMER_DETAIL_IMAGE(Const.COMPLETE_UTIL_CUSTOMER_DETAIL_IMAGE),
+		COMPLETE_UTIL_PROFILE_IMAGE_1(Const.COMPLETE_UTIL_PROFILE_IMAGE_1),
+		COMPLETE_UTIL_PROFILE_IMAGE_2(Const.COMPLETE_UTIL_PROFILE_IMAGE_2),
+		COMPLETE_UTIL_PROFILE_IMAGE_3(Const.COMPLETE_UTIL_PROFILE_IMAGE_3),
+		COMPLETE_UTIL_PROFILE_IMAGE_4(Const.COMPLETE_UTIL_PROFILE_IMAGE_4),
+		COMPLETE_UTIL_PROFILE_IMAGE_5(Const.COMPLETE_UTIL_PROFILE_IMAGE_5),
+		COMPLETE_UTIL_PROFILE_IMAGE_6(Const.COMPLETE_UTIL_PROFILE_IMAGE_6),
+		COMPLETE_UTIL_PROFILE_IMAGE_7(Const.COMPLETE_UTIL_PROFILE_IMAGE_7),
+		COMPLETE_UTIL_PROFILE_IMAGE_8(Const.COMPLETE_UTIL_PROFILE_IMAGE_8),
+		COMPLETE_UTIL_PROFILE_IMAGE_HOME(Const.COMPLETE_UTIL_PROFILE_IMAGE_HOME),
+		COMPLETE_UTIL_CERTIFY_PROFILE_IMAGE(Const.COMPLETE_UTIL_CERTIFY_PROFILE_IMAGE),
+		COMPLETE_UTIL_MY_RECORD_PROFILE_IMAGE(Const.COMPLETE_UTIL_MY_RECORD_PROFILE_IMAGE),
+		COMPLETE_UTIL_MAIN_QUICK_IMAGE_01_ON(Const.COMPLETE_UTIL_MAIN_QUICK_IMAGE_01_ON),
+		COMPLETE_UTIL_MAIN_QUICK_IMAGE_01_OFF(Const.COMPLETE_UTIL_MAIN_QUICK_IMAGE_01_OFF),
+		COMPLETE_UTIL_MAIN_QUICK_IMAGE_02_ON(Const.COMPLETE_UTIL_MAIN_QUICK_IMAGE_02_ON),
+		COMPLETE_UTIL_MAIN_QUICK_IMAGE_02_OFF(Const.COMPLETE_UTIL_MAIN_QUICK_IMAGE_02_OFF),
+		COMPLETE_UTIL_EVENT_DETAIL_ON(Const.COMPLETE_UTIL_EVENT_DETAIL_ON),
+		COMPLETE_UTIL_EVENT_DETAIL_OFF(Const.COMPLETE_UTIL_EVENT_DETAIL_OFF),
+		COMPLETE_UTIL_SHOP_ITEM_01(Const.COMPLETE_UTIL_SHOP_ITEM_01),
+		COMPLETE_UTIL_SHOP_ITEM_02(Const.COMPLETE_UTIL_SHOP_ITEM_02),
+		COMPLETE_UTIL_KY_LOGO(Const.COMPLETE_UTIL_KY_LOGO),
+		COMPLETE_UTIL_MIC(Const.COMPLETE_UTIL_MIC),
+		COMPLETE_DOWN_ARTIST_IMAGE(Const.COMPLETE_DOWN_ARTIST_IMAGE),
+		COMPLETE_DOWN_SONG(Const.COMPLETE_DOWN_SONG),
+		COMPLETE_DOWN_LISTEN(Const.COMPLETE_DOWN_LISTEN),
+		COMPLETE_DOWN_LISTEN_OTHER(Const.COMPLETE_DOWN_LISTEN_OTHER),
+		COMPLETE_TIMER_HIDE_MESSAGE_COMMON(Const.COMPLETE_TIMER_HIDE_MESSAGE_COMMON),
+		COMPLETE_TIMER_HIDE_SCORE(Const.COMPLETE_TIMER_HIDE_SCORE),
+		COMPLETE_TIMER_SHOW_MESSAGE_NOT_RESPONSE(Const.COMPLETE_TIMER_SHOW_MESSAGE_NOT_RESPONSE),
+		COMPLETE_TIMER_START_NEXT_SONG(Const.COMPLETE_TIMER_START_SING_NEXT),
+		COMPLETE_TIMER_START_CURRENT_SONG(Const.COMPLETE_TIMER_START_SING_NOW);
+
+		private final int value;
+
+		COMPLETE_KP(int value) {
+			this.value = value;
+		}
+
+		public int value() {
+			return value;
+		}
+
+		public static COMPLETE_KP get(int value) {
+			COMPLETE_KP ret = COMPLETE_NONE;
+			for (COMPLETE_KP state : COMPLETE_KP.values()) {
+				if (value == state.value()) {
+					ret = state;
+				}
+			}
+			return ret;
+		}
+	}
+
+	public static enum LOADING_TIME {
+
+		LOADING_NONE(Const.LOADING_NONE),
+		LOADING_SHORT(Const.LOADING_SHORT),
+		LOADING_LONG(Const.LOADING_LONG),
+		LOADING_SING(Const.LOADING_SING),
+		LOADING_LISTEN(Const.LOADING_LISTEN);
+
+		private final int value;
+
+		LOADING_TIME(int value) {
+			this.value = value;
+		}
+
+		public int value() {
+			return value;
+		}
+
+		public static LOADING_TIME get(int value) {
+			LOADING_TIME ret = null;
+			for (LOADING_TIME state : LOADING_TIME.values()) {
+				if (value == state.value()) {
+					ret = state;
+				}
+			}
+			return ret;
+		}
+	}
+
+	/**
+	 * 상품유형(없음)
+	 */
+	final static String PRODUCT_TYPE_NONE = "none";
+	/**
+	 * 상품유형(정액)
+	 */
+	final static String PRODUCT_TYPE_PPM = "ppm";
+	/**
+	 * 상품유형(건별)
+	 */
+	final static String PRODUCT_TYPE_PPV = "ppv";
+	/**
+	 * 상품유형(쿠폰)
+	 */
+	final static String PRODUCT_TYPE_CPN = "cpn";
+
+	/**
+	 * 상품유형
+	 */
+	public static enum PRODUCT_TYPE {
+
+		NONE(PRODUCT_TYPE_NONE),
+		PPM(PRODUCT_TYPE_PPM),
+		PPV(PRODUCT_TYPE_PPV),
+		CPN(PRODUCT_TYPE_CPN);
+
+		private final String value;
+
+		PRODUCT_TYPE(String value) {
+			this.value = value;
+		}
+
+		public String value() {
+			return value;
+		}
+
+		public static PRODUCT_TYPE get(String value) {
+			PRODUCT_TYPE ret = NONE;
+			for (PRODUCT_TYPE key : PRODUCT_TYPE.values()) {
+				if (null != key.value() && key.value().equalsIgnoreCase(value)) {
+					ret = key;
+					break;
+				}
+			}
+			return ret;
+		}
+	}
+
+	///**
+	// * 이용권
+	// */
+	//final static String PASS_TYPE_NONE = "NONE";
+	///**
+	// * 1일이용권
+	// */
+	//final static String PASS_TYPE_DAY = "DAY";
+	///**
+	// * 월이용권
+	// */
+	//final static String PASS_TYPE_MONTH = "MONTH";
+	///**
+	// * 1년약정
+	// */
+	//final static String PASS_TYPE_YEAR = "YEAR";
+	///**
+	// * 무료쿠폰등록
+	// */
+	//final static String PASS_TYPE_COUPON = "COUPON";
+	//
+	///**
+	// * 이용권
+	// */
+	//public static enum PASS_TYPE {
+	//
+	//	NONE(PASS_TYPE_NONE),
+	//	DAY(PASS_TYPE_DAY),
+	//	MONTH(PASS_TYPE_MONTH),
+	//	YEAR(PASS_TYPE_YEAR),
+	//	COUPON(PASS_TYPE_COUPON);
+	//
+	//	private final String value;
+	//
+	//	PASS_TYPE(String value) {
+	//		this.value = value;
+	//	}
+	//
+	//	public String value() {
+	//		return value;
+	//	}
+	//
+	//	public static PASS_TYPE get(String value) {
+	//		PASS_TYPE ret = NONE;
+	//		for (PASS_TYPE key : PASS_TYPE.values()) {
+	//			if (null != key.value() && key.value().equalsIgnoreCase(value)) {
+	//				ret = key;
+	//				break;
+	//			}
+	//		}
+	//		return ret;
+	//	}
+	//}
+}

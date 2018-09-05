@@ -1,0 +1,225 @@
+<resources>
+    <!--<string name="app_name">Karaoke.PLAY</string>-->
+    <!-- 어플설치이름 -->
+    <string name="app_name">KY노래방</string>
+    <!-- 어플표시이름 -->
+    <string name="app_title">금영노래방</string>
+
+    <!-- 이용권(Atv) -->
+    <string name="app_ticket_end_date">해지 시까지(문의 : Atv 고객센터:???)</string>
+    <string name="app_ticket_go_certify_kpop">Atv 월정액 이용권을 구매하시면 금영의 안드로이드\n모바일 어플리케이션을 무제한으로 이용할 수 있습니다.</string>
+    <string name="app_ticket_guide">이용권을 구매하시면 해당 기간 내 Atv 및 모바일 노래방 서비스를 무제한 이용하실 수 있습니다.</string>
+    <string name="app_ticket_vat">※ 각 이용권은 부가세 별도 가격이며, 자동 결제 상품은 Atv 고객 센터 ???을 통해 해지하실 수 있습니다.</string>
+    <string name="app_ticket_bill_info_01">Atv 요금 고지서</string>
+    <string name="app_ticket_product_note_01">가. 본 상품은 월 정액제 요금으로 청구되며 각 콘텐츠 단위당 요금은 부과되지 않습니다.\n나. 본 상품 구매시 최초 1개월은 고객님의 기간 내 해약여부와 관계없이 자동 청구됩니다.\n다. 1개월 이후 고객님의 가입일 수에 따라 요금이 청구됩니다.\n라. 본 상품의 해약은 고객 상담전화(국번없이 ???번)을 통해서 가능합니다. \n마. 본 상품의 미 해지시 이용 요금이 지속적으로</string>
+    <string name="app_ticket_product_note_02">청구됩니다.\n바. 선불권 구매 가능 상품에 해당되지 않습니다.\n사. 본 상품은 회사의 사정(서비스 변경, 서비스 중지)에 따라 부득이하게 서비스 제공조건이 변경될 수 있으며 회사는 홈페이지, Atv 서비스 등을 통해 이 사실을 최소 15일 전에 고지합니다.</string>
+
+    <!-- Common -->
+    <string name="common_ok">확인</string>
+    <string name="common_engage">예약</string>
+    <string name="common_cancel">취소</string>
+    <string name="common_search">검색</string>
+    <string name="common_start">시작</string>
+    <string name="common_close">닫기</string>
+    <string name="common_exit">종료</string>
+    <string name="common_info">알림</string>
+    <string name="common_warning">경고</string>
+    <string name="common_error">오류</string>
+    <string name="common_back">이전화면</string>
+    <string name="common_new_version">새 버전</string>
+    <string name="common_agree">동의함</string>
+    <string name="common_disagree">동의안함</string>
+
+    <!-- 탑 메뉴 -->
+    <string name="txt_top_engage_list">00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000</string>
+    <string name="txt_top_search_item">검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과검색결과</string>
+    <string name="menu_top_song_num">00000</string>
+    <string name="menu_top_engage">예약곡 00</string>
+    <string name="menu_top_home">HOME</string>
+    <string name="menu_top_search">곡 찾기</string>
+    <string name="menu_top_search_item">검색결과</string>
+
+    <!-- 핫이벤트 -->
+    <string name="menu_sing">sing</string>
+    <string name="menu_listen">listen</string>
+
+    <!-- 서브 메뉴 -->
+    <string name="menu_sub_hot">인기곡</string>
+    <string name="menu_sub_new">최신곡</string>
+    <string name="menu_sub_genre">인기장르</string>
+    <string name="menu_sub_timeline">실시간</string>
+    <string name="menu_sub_week">주간차트</string>
+    <string name="menu_sub_best">최고인기곡</string>
+    <string name="menu_sub_recent">최근 부른곡</string>
+    <string name="menu_sub_favor">애창곡</string>
+    <string name="menu_sub_record">녹음곡</string>
+    <string name="menu_sub_ticket">이용권 구매</string>
+    <string name="menu_sub_certify">인증 센터</string>
+    <string name="menu_sub_notice">공지사항</string>
+    <string name="menu_sub_event">이벤트</string>
+    <string name="menu_sub_info">이용안내</string>
+    <string name="menu_sub_app">모바일 설치안내</string>
+    <string name="menu_sub_mic">마이크 구매안내</string>
+
+    <!-- 서브 메뉴 : 장르 -->
+    <string name="menu_sub_genre_ballad">발라드</string>
+    <string name="menu_sub_genre_dance">댄스/힙합</string>
+    <string name="menu_sub_genre_trot">트로트</string>
+    <string name="menu_sub_genre_rock">락</string>
+    <string name="menu_sub_genre_pop">팝송</string>
+    <string name="menu_sub_genre_ani">동요/만화</string>
+
+    <!-- 바텀 메뉴 -->
+    <string name="menu_bottom_ticket_free_event">현재는 무료 이벤트 기간입니다.</string>
+    <string name="menu_bottom_other_listen">다른녹음곡</string>
+    <string name="menu_bottom_start_song">예약시작</string>
+    <string name="menu_bottom_start_song_now">바로시작</string>
+    <string name="menu_bottom_stop_song">재생 중지</string>
+    <string name="menu_bottom_stop_open">열기취소</string>
+    <string name="menu_bottom_open">MENU</string>
+
+    <!-- 애창곡 -->
+    <string name="favor_add">애창곡 등록</string>
+    <string name="favor_delete">애창곡 삭제</string>
+
+    <!-- 이용권 -->
+    <string name="ticket_title">금영 노래방 이용권 구매</string>
+    <string name="ticket_pass_title">구매 인증 번호 입력</string>
+    <string name="ticket_notice_title">이용 약관 및 개인 보호 정책</string>
+    <string name="ticket_day">1일 이용권</string>
+    <string name="ticket_month">월 이용권</string>
+    <string name="ticket_year">1년 약정</string>
+    <string name="ticket_day_price">1,000원</string>
+    <string name="ticket_month_price">3,000원</string>
+    <string name="ticket_year_price">3,000원</string>
+    <string name="ticket_purchase">구매하기</string>
+    <string name="ticket_free_event">현재는 무료 이벤트 기간입니다.\n무료 기간에는 이용권을 구매하실 수 없습니다.</string>
+    <string name="ticket_popup_title_name">상품명</string>
+    <string name="ticket_popup_title_type">상품 유형</string>
+    <string name="ticket_popup_title_late">이용 기간</string>
+    <string name="ticket_popup_title_price">이용 금액</string>
+    <string name="ticket_popup_content_day_name">금영 노래방 1일 이용권</string>
+    <string name="ticket_popup_content_month_name">금영 노래방 월 이용권</string>
+    <string name="ticket_popup_content_year_name">금영 노래방 1년 약정</string>
+    <string name="ticket_popup_content_day_type">건별</string>
+    <string name="ticket_popup_content_month_type">월정액</string>
+    <string name="ticket_popup_content_year_type">약정</string>
+    <string name="product_type_none">읍~따</string>
+    <string name="product_type_ppv">건별</string>
+    <string name="product_type_ppm">정액</string>
+    <string name="product_type_cpn">쿠~뽕</string>
+    <string name="ticket_popup_content_day_price">1,000원 (VAT 별도)</string>
+    <string name="ticket_popup_content_month_price">3,000원 (VAT 별도)</string>
+    <string name="ticket_popup_content_year_price">3,000원 (VAT 별도)</string>
+    <string name="ticket_popup_content_vat_price">원 (VAT 별도)</string>
+    <string name="ticket_popup_content_price">원</string>
+    <string name="ticket_popup_bill_info_02">에 합산되어 청구됩니다.</string>
+    <string name="ticket_popup_pass_info_01">구매 인증 비밀번호를 입력해주세요.</string>
+    <string name="ticket_popup_pass_info_02">인증 번호를 잘못 입력하였습니다. 확인 후 다시 입력해주세요.</string>
+    <string name="ticket_popup_pass_info_03">4자리 구매 인증 번호를 모두 입력해주세요.</string>
+    <string name="ticket_popup_pass_error">구매 인증 비밀번호가 올바르지 않습니다.</string>
+    <string name="ticket_popup_bill_info_page_01">1/2</string>
+    <string name="ticket_popup_bill_info_page_02">2/2</string>
+    <string name="ticket_already_use">이미 사용 중인 이용권이 있습니다.\n이용권 만료 후에 구매가 가능합니다.</string>
+    <string name="ticket_have_no">사용 중인 이용권이 없어 반주곡을 시작할 수 없습니다.\n이용권 구매 메뉴로 이동하시겠습니까?</string>
+
+    <!-- 쿠폰 -->
+    <string name="coupon_title">무료쿠폰등록</string>
+    <string name="coupon_subscripte">※ 무료 쿠폰은 사용 중인 이용권이 없을 경우에만 등록이 가능합니다.</string>
+    <string name="coupon_not_input_serial">쿠폰 번호를 입력해주세요.</string>
+    <string name="coupon_wrong_input_serial">쿠폰 번호를 정확하게 입력해주세요.</string>
+
+    <!-- 인증 -->
+    <string name="hp_title">휴대폰 번호 등록</string>
+    <string name="hp_input">고객님의 휴대폰 번호를 입력하여 주세요.</string>
+    <string name="hp_input_guide">휴대폰 번호는 금영 노래방 모바일 앱 로그인에만 이용되며,\n월 1회에 한해 변경 가능하오니 신중하게 입력하여 주세요.</string>
+    <string name="certify_title">인증 번호 등록</string>
+    <string name="certify_send">휴대폰으로 인증번호가 발송되었습니다.\n인증 번호를 확인 후 정확히 입력해주세요.</string>
+    <string name="auth_num_input">인증 번호 : </string>
+    <string name="auth_receive_guide">문자 메세지 수신까지 다소 시간이 걸릴 수 있으니,\n잠시만 기다려주세요.</string>
+    <string name="certify_success">인증 완료</string>
+    <string name="certify_success_message">휴대폰 인증이 성공적으로 완료되었습니다.\n금영 노래방 앱에 로그인하시면 무료로 사용 가능합니다.\n(기존 이용자께서도 휴대폰에서\n금영 노래방 앱을 1회 실행해주세요)</string>
+    <string name="certify_free_event">현재는 무료 이벤트 기간입니다.\n무료 기간에는 휴대폰 인증을 하실 수 없습니다.</string>
+
+    <!-- 검색 -->
+    <string name="search_title">제목명</string>
+    <string name="search_singer">가수명</string>
+    <string name="search_self">직접 검색</string>
+    <string name="search_letter">색인 검색</string>
+    <string name="search_not_keyword">검색어를 입력해주세요.</string>
+
+    <!-- 이벤트 -->
+    <string name="event_hp_title">이벤트 응모하기</string>
+    <string name="event_hp_guide_2">입력하신 번호로 경품 발송 안내가 갈겁니다.</string>
+
+    <!-- 종료 -->
+    <string name="exit_app">확인을 선택하시면 앱이 종료됩니다.\n금영노래방을 종료하시겠습니까?</string>
+    <string name="message_error_exit_app">주의!!!노래방에 오류 발생하는 경우\n강제종료를 원하시면 이전/취소 키를 5초정도 누르십시요.</string>
+    <string name="message_load_exit_app">잠시만 기다려 주십시요.\n무응답시 이전/취소 키를 5초정도 누르십시요.</string>
+    <string name="message_error_network_timeout_exit_app">네트워크 오류로 앱을 종료합니다.</string>
+
+    <!-- 샘플텍스트 -->
+    <string name="hint_song_rank">999위</string>
+    <string name="hint_song_number">00000</string>
+    <string name="hint_song_icon">아이콘</string>
+    <string name="hint_song_title">제목</string>
+    <string name="hint_song_singer">가수</string>
+    <string name="hint_song_song">노래</string>
+    <string name="hint_song_composer">작곡</string>
+    <string name="hint_song_lyricist">작사</string>
+    <string name="hint_song_unknown">(없음)</string>
+    <string name="hint_song_song_unknown">(가수미상)</string>
+    <string name="hint_song_composer_unknown">(작자미상)</string>
+    <string name="hint_song_lyricist_unknown">(작자미상)</string>
+    <string name="hint_listen_profile">아이콘</string>
+    <string name="hint_listen_recommand">999</string>
+    <string name="hint_listen_count">999999</string>
+    <string name="hint_listen_title">제목명 - 가수명</string>
+    <string name="hint_listen_nickname">닉네임</string>
+    <string name="hint_listen_day">99hours</string>
+    <string name="hint_listen_focus">녹음곡감상</string>
+    <string name="hint_certify_state_phone">999-9999-9999</string>
+    <string name="hint_certify_state_date">9999-99-99 99:99:99</string>
+    <string name="hint_page_text">page 9999/9999</string>
+
+    <!-- 버전정보 -->
+    <string name="category_setting_version">버전</string>
+    <!-- 정보메시지 -->
+    <string name="message_info_ticket_start_date_format">(yyyy년MM월dd일HH시 부터)</string>
+    <string name="message_info_ticket_end_date_format">(yyyy년MM월dd일HH시 까지)</string>
+    <string name="message_info_ticket_have_ppx">%s 사용 중</string>
+    <!--<string name="message_info_ticket_have_ppy">1년 약정 사용 중</string>-->
+    <!--<string name="message_info_ticket_have_ppm">월정액 사용 중</string>-->
+    <!--<string name="message_info_ticket_have_ppv">1일 이용권 사용 중</string>-->
+    <!-- 오류메시지 -->
+    <string name="message_error_unknown">알수없는오류</string>
+    <string name="message_error_close_beta_warging">[릴리스버전(CBT)이 아닙니다.]</string>
+    <string name="message_error_close_debug_warging">[릴리스버전(DEBUG)이 아닙니다.]</string>
+    <string name="message_error_copyright_warging">(주)KYGroup 고유자산입니다.</string>
+    <string name="message_error_illegal_warging">경고:임의적 개변조및 무단배포시 민/형법에 따라\n10년이하의 직역 또는 2천만원 이하의\n벌금형 및 손해배상이 청구됩니다.</string>
+    <string name="message_error_killing_warging">(한마디로 아주 뒈진다!)</string>
+    <string name="message_error_stb_info">셋탑정보 확인오류가 발생하였습니다.\n고객센터에 문의하시기 바랍니다.</string>
+    <string name="message_error_network_timeout">서버 통신에 문제가 발생했습니다.\n네트워크 상태를 확인하시고 다시 시도해주세요.</string>
+    <string name="message_error_search_not_result">검색 결과가 존재하지 않습니다.</string>
+    <string name="message_error_commend_retry">다시 시도 해주시기 바랍니다.</string>
+    <string name="message_error_sing">반주곡오류가발생하였습니다.</string>
+    <string name="message_error_sing_number">곡번호오류가발생하였습니다.</string>
+    <string name="message_error_video">동영상오류가발생하였습니다.</string>
+    <string name="message_error_listen">녹음곡오류가발생하였습니다.</string>
+    <string name="message_error_lyric">가사오류가발생하였습니다.</string>
+    <!--<string name="message_error_ticket_buy">이용권 구매에 실패했습니다.</string>-->
+    <string name="message_error_ticket_buy">이용권 구매 실패</string>
+    <string name="message_error_ticket_no">사용 중인 이용권이 없습니다.</string>
+    <string name="message_error_certify_count">인증 번호 변경 대상이 아닙니다.\n변경 횟수를 모두 소진하였습니다.</string>
+    <string name="message_error_certify_ticket_month_no">인증 번호 등록 대상이 아닙니다.\n월정액 가입 고객만 등록 가능합니다.</string>
+    <!-- 오류타이틀 -->
+    <string name="message_error_title_number">번호:</string>
+    <string name="message_error_title_code">코드:</string>
+    <string name="message_error_title_message">내용:</string>
+    <!--음정/템포-->
+    <string name="label_pitch">음정</string>
+    <string name="example_pitch">-11(C#4)</string>
+    <string name="label_tempo">템포</string>
+    <string name="example_tempo">-1.0</string>
+
+</resources>

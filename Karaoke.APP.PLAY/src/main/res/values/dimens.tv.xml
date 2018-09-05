@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="space_loading">45dp</dimen>
+
+    <!-- text size -->
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_normal">14sp</dimen>
+    <dimen name="text_size_large">16sp</dimen>
+
+    <dimen name="text_padding_tiny">2dp</dimen>
+    <dimen name="text_padding_small">4dp</dimen>
+    <dimen name="text_padding_normal">8dp</dimen>
+    <dimen name="text_padding_large">12dp</dimen>
+    <dimen name="text_padding_xlarge">24dp</dimen>
+
+    <dimen name="text_margin_tiny">2dp</dimen>
+    <dimen name="text_margin_small">4dp</dimen>
+    <dimen name="text_margin_normal">8dp</dimen>
+    <dimen name="text_margin_large">12dp</dimen>
+    <dimen name="text_margin_xlarge">24dp</dimen>
+
+    <!--음정/템포-->
+    <dimen name="text_width_pitch">82dp</dimen>
+    <dimen name="text_width_tempo">82dp</dimen>
+
+    <!-- main menu size -->
+    <dimen name="main_menu_corner_radius">20dp</dimen>
+
+    <!-- main menu -->
+    <dimen name="main_menu_height">38dp</dimen>
+    <dimen name="main_menu_margin_bottom">13dp</dimen>
+    <dimen name="main_menu_margin_left">12dp</dimen>
+    <dimen name="main_menu_margin_right">12dp</dimen>
+    <dimen name="main_menu_margin_top">13dp</dimen>
+
+    <!-- sub menu -->
+    <dimen name="sub_menu_height">38dp</dimen>
+    <dimen name="sub_menu_margin_bottom">8dp</dimen>
+    <dimen name="sub_menu_margin_left">10dp</dimen>
+    <dimen name="sub_menu_margin_right">10dp</dimen>
+    <dimen name="sub_menu_margin_top">8dp</dimen>
+
+    <!-- sub menu -->
+    <dimen name="genre_menu_height">34dp</dimen>
+    <dimen name="genre_menu_margin_bottom">3dp</dimen>
+    <dimen name="genre_menu_margin_left">40dp</dimen>
+    <dimen name="genre_menu_margin_right">40dp</dimen>
+    <dimen name="genre_menu_margin_top">3dp</dimen>
+
+    <!-- home event -->
+    <dimen name="home_event_height">38dp</dimen>
+    <dimen name="home_event_margin_bottom">13dp</dimen>
+    <dimen name="home_event_margin_left">10dp</dimen>
+    <dimen name="home_event_margin_right">10dp</dimen>
+    <dimen name="home_event_margin_top">13dp</dimen>
+    <dimen name="home_event_padding">5dp</dimen>
+    <dimen name="home_event_padding_left">23dp</dimen>
+    <dimen name="home_event_text_margin_bottom">10dp</dimen>
+    <dimen name="home_event_text_margin_left">80dp</dimen>
+    <dimen name="home_event_text_margin_right">50dp</dimen>
+    <dimen name="home_event_text_margin_top">10dp</dimen>
+    <dimen name="home_event_image_margin_bottom">10dp</dimen>
+    <dimen name="home_event_image_margin_left">21.5dp</dimen>
+    <dimen name="home_event_image_margin_right">10dp</dimen>
+    <dimen name="home_event_image_margin_top">10dp</dimen>
+    <dimen name="home_event_bal_margin_left">300dp</dimen>
+    <dimen name="home_event_bal_sing_margin_top">180dp</dimen>
+    <dimen name="home_event_bal_listen_margin_top">255dp</dimen>
+
+    <!-- list menu size -->
+    <dimen name="list_arrow_height">100dp</dimen>
+    <dimen name="list_arrow_margin">24dp</dimen>
+
+    <!-- bottom guide textview width -->
+    <dimen name="txt_bottom_guide">250dp</dimen>
+    <dimen name="txt_bottom_guide_01">100dp</dimen>
+    <dimen name="txt_bottom_guide_02">100dp</dimen>
+    <dimen name="txt_bottom_guide_03">50dp</dimen>
+
+    <!-- top guide textview width -->
+    <dimen name="txt_top_engage">70dp</dimen>
+    <dimen name="txt_top_engage_list_padding">10dp</dimen>
+    <dimen name="txt_top_guide">213dp</dimen>
+    <dimen name="txt_top_guide_01">100dp</dimen>
+    <dimen name="txt_top_guide_02">100dp</dimen>
+    <dimen name="txt_top_guide_03">13dp</dimen>
+    <dimen name="txt_top_search_ok">60dp</dimen>
+    <dimen name="txt_top_search_cancel">60dp</dimen>
+    <dimen name="txt_top_search_blank">65dp</dimen>
+
+    <dimen name="spc_listen_play_sing_on">70dp</dimen>
+    <dimen name="txt_listen_play_sing_on">30dp</dimen>
+
+    <dimen name="layout_pitch">8dp</dimen>
+    <dimen name="layout_tempo">4dp</dimen>
+
+</resources>

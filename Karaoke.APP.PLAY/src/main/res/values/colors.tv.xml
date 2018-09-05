@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- background color -->
+    <color name="bg_title">#C870608F</color>
+    <color name="bg_name">#C84D4379</color>
+    <color name="bg_main">#CC5041A4</color>
+    <color name="bg_main_menu_dark">#FF5041A4</color>
+    <color name="bg_main_menu_light">#FF6754BE</color>
+    <!--<color name="bg_top_common_bar">#CC342B68</color>-->
+    <color name="bg_top_common_bar">#FF342B68</color>
+
+    <!-- KPOP TRANS Color -->
+    <color name="trans_white">#a0ffffff</color>
+    <color name="trans_light">#a0f3f3f3</color>
+    <color name="trans_gray">#a0c3c3c3</color>
+    <color name="trans_thick">#a0373737</color>
+    <color name="trans_dark">#a0111111</color>
+    <!--<color name="trans_black">#a0000000</color>-->
+    <color name="trans_black">#40000000</color>
+    <color name="trans_orange">#a0ff6C00</color>
+    <color name="trans_pink">#a0fa1d7d</color>
+    <color name="trans_red">#a0ff0000</color>
+
+    <!-- KPOP SOLID Color -->
+    <color name="solid_trans">#00ffffff</color>
+    <color name="solid_white_choco">#fffaf5e1</color>
+    <color name="solid_white">#ffffffff</color>
+    <color name="solid_light">#fff3f3f3</color>
+    <color name="solid_gray">#ffc3c3c3</color>
+    <color name="solid_thick">#ff373737</color>
+    <color name="solid_dark">#ff111111</color>
+    <color name="solid_black">#ff000000</color>
+    <color name="solid_orange">#ffff6C00</color>
+    <color name="solid_pink">#fffa1d7d</color>
+    <color name="solid_red">#ffff0000</color>
+    <color name="solid_brown">#ff73462f</color>
+    <color name="solid_blue">#ff64cdec</color>
+    <color name="solid_green">#ff01c968</color>
+    <color name="solid_green_dark">#ff00b07c</color>
+    <color name="solid_yellow">#ffffff00</color>
+
+    <!-- text color -->
+    <color name="solid_text_off">#ff83D5BE</color>
+    <color name="solid_text_on">#ffFFFFFF</color>
+
+    <!-- stroke color -->
+    <color name="solid_menu_line_dark">#FF453596</color>
+    <color name="solid_menu_line_light">#FF594AA8</color>
+    <color name="stroke_main_menu">#FF473A91</color>
+
+</resources>

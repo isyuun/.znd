@@ -1,0 +1,70 @@
+<!--
+  Copyright 2011 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<resources>
+
+    <!-- com.example.android.displayingbitmaps -->
+    <color name="grid_state_pressed">#1Affffff</color>
+    <color name="grid_state_focused">#80000000</color>
+
+    <!-- KPOP Text Color -->
+    <color name="body_time_1">#ff1de7ff</color>
+    <color name="body_time_2">#ff727272</color>
+    <color name="text_white">#fff7f7f7</color>
+    <color name="text_thick">#ffa4a4a4</color>
+    <color name="text_black">#ff010101</color>
+    <color name="text_dark">#ff787677</color>
+    <color name="text_gray">#ffc3c3c3</color>
+    <!-- <color name="block_column_1">#ff0fabff</color> -->
+    <!-- <color name="block_column_2">#ffdf1831</color> -->
+    <!-- <color name="block_column_3">#ff009939</color> -->
+    <color name="body_text_accent">#ff29549f</color>
+    <color name="body_text_hyperlink">#ffff549f</color>
+
+    <!-- KPOP TRANS Color -->
+    <color name="trans_white">#a0ffffff</color>
+    <color name="trans_light">#a0f3f3f3</color>
+    <color name="trans_gray">#a0c3c3c3</color>
+    <color name="trans_thick">#a0373737</color>
+    <color name="trans_dark">#a0111111</color>
+    <color name="trans_black">#a0000000</color>
+    <color name="trans_orange">#a0ff6C00</color>
+    <color name="trans_pink">#a0fa1d7d</color>
+    <color name="trans_red">#a0ff0000</color>
+
+    <!-- KPOP SOLID Color -->
+    <color name="solid_white_choco">#fffaf5e1</color>
+    <color name="solid_white">#ffffffff</color>
+    <color name="solid_light">#fff3f3f3</color>
+    <color name="solid_gray">#ffc3c3c3</color>
+    <color name="solid_thick">#ff373737</color>
+    <color name="solid_dark">#ff111111</color>
+    <color name="solid_black">#ff000000</color>
+    <color name="solid_orange">#ffff6C00</color>
+    <color name="solid_pink">#fffa1d7d</color>
+    <color name="solid_red">#ffff0000</color>
+    <color name="solid_brown">#ff73462f</color>
+    <color name="solid_blue">#ff64cdec</color>
+
+    <!-- KPOP STROKE Color -->
+    <color name="stroke_input">#ff787677</color>
+
+    <!-- KPOP background Color -->
+    <color name="background_dark">#ff111111</color>
+    <color name="background_light">#fff3f3f3</color>
+    <color name="background_default">#fff4eede</color>
+
+</resources>

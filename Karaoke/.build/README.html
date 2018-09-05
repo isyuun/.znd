@@ -1,0 +1,73 @@
+<pre>
+<b>개발정보(2016.06.17)</b>
+------------------------------------------------------------------------------------
+JAVA JDK	: java version "1.7.0_80"
+ANDROID API	: 5.0.1 (21)
+Android Developer Toolkit	: ver.23.0.7.2120684
+Android SDK Tools		: rev.24.3.4
+Android SDK Platform-tools	: rev.23.0.1
+Android SDK Build-tools		: rev.22.0.1 (일부:21.1.2)
+Android Support Library		: rev.22.2.1
+Google Play Services		: rev.26
+------------------------------------------------------------------------------------
+<font color="red"><b>빌드오류관련(몇달을고생한줄알아!!!이런개썅구글개새끼들...이걸해결책이라고...개병신들...대가릴똥구멍에쳐넣어버릴라)</b></font>
+<pre>
+<a href="http://stackoverflow.com/questions/29802168/upgraded-to-appcompat-v22-1-0-and-now-getting-removing-attribute-error">Upgraded to AppCompat v22.1.0 and now getting “removing attribute” error</a>
+<a href="https://code.google.com/p/android/issues/detail?id=164673">Issue 164673:	Removing attribute http://schemas.android.com/apk/res/android:layout_marginEnd from &lt;ImageView&gt;</a>
+<font color="red"><b>"android-sdk경로\extras\android\support\v7\project.properties"</b></font>
+  sdk.buildtools=21.1.2
+
+<a href="http://stackoverflow.com/questions/30812770/ant-jar-error-execute-failed-java-io-ioexception-cannot-run-program-aapt">ant jar error: Execute failed: java.io.IOException: Cannot run program…${aapt}": error=2, No such file or directory</a>
+<a href="https://code.google.com/p/android/issues/detail?id=176488">Issue 176488:	${aapt} not found in sdk-tools 24.*, but ok in 23.0.5</a>
+<font color="red"><b>"android-sdk경로\tools\ant\build.xml"</b></font><font color="blue">->라인No:484</font>
+  </font><font color="blue">&lt;getbuildtools name="android.build.tools.dir" verbose="${verbose}" /&gt;</font>
+  &lt;!-- find location of build tools --&gt;
+  &lt;getbuildtools name="android.build.tools.dir" verbose="${verbose}" /&gt;
+  &lt;!-- Issue 176488:	${aapt} not found in sdk-tools 24.*, but ok in 23.0.5 --&gt;
+  &lt;property name="aidl" location="${android.build.tools.dir}/aidl${exe}" /&gt;
+  &lt;property name="aapt" location="${android.build.tools.dir}/aapt${exe}" /&gt;
+  &lt;property name="dx" location="${android.build.tools.dir}/dx${bat}" /&gt;
+  &lt;property name="zipalign" location="${android.build.tools.dir}/zipalign${exe}" /&gt;
+</pre>
+------------------------------------------------------------------------------------
+프로젝트	: KPOP HOLIC.S.3 (KPOP/JPOP)
+OS지원	: android:minSdkVersion="10"	- Build.VERSION_CODES.GINGERBREAD_MR1(2.3.3)
+		  android:targetSdkVersion="21"	- Build.VERSION_CODES.LOLLIPOP (5.0.1)
+<font color="red"><b>SDK경로:</b></font>D:android-sdk
+------------------------------------------------------------------------------------
+<font color="red"><b>변경내용</b></font>
+	ant빌드자동화
+	SDK\extras\소스사용
+------------------------------------------------------------------------------------
+<font color="red"><b><프로젝트구조></b></font>
+	android-sdk(SDK루트)\extras 프로젝트사용
+  동일드라이브:\ 
+  -+- <font color="blue"><b>android-sdk(SDK루트)</b></font>
+   +- and
+        +- prj<font color="blue"><b>(소스루트)</b></font>
+             +- <font color="red"><b>프로젝트목록</b></font>
+
+<font color="red"><b><프로젝트목록></b></font>
+<font color="blue"><b>링크:빌드오더:Window->Preference->General->Workspace->Build Order</b></font>
+	android-support-v7-appcompat - <font color="red"><b>android-sdk(SDK루트)\extras\android\support\v7\appcompat</b></font> 
+	android-support-v7-gridlayout - <font color="red"><b>android-sdk(SDK루트)\extras\android\support\v7\gridlayout</b></font>
+	google-play-services_lib - <font color="red"><b>android-sdk(SDK루트)\extras\google\google_play_services\libproject\google-play-services_lib</b></font>
+	<font color="red"><b>ActionBar-PullToRefresh - 삭제(종료)</b></font>
+	<font color="red"><b>ActionBar-PullToRefresh-extras-actionbarcompat - 삭제(종료)</b></font>
+	Android-Universal-Image-Loader - jar변경 
+	Android-ViewPagerIndicator
+	QuickActionLib
+	liblame
+	IAP2.0_Lib
+	<font color="red"><b>Karaoke.PLAY3 - 삭제 - Karaoke통합 </b></font> 
+	Karaoke
+	<font color="red"><b>Karaoke.API - KY전문/빌링 API</b></font>
+	Karaoke.APP
+<b>어플</b>
+	Karaoke.KPOP
+	Karaoke.JPOP
+	Karaoke.KPOP.KAR
+	Karaoke.KPOP.NAVER
+	Karaoke.KPOP.ONSPOT
+	Karaoke.KPOP.S5
+</pre>

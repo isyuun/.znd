@@ -1,0 +1,78 @@
+<!--
+  Copyright 2011 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<resources>
+
+    <!-- ActionBar -->
+    <dimen name="actionbar_height">48dp</dimen>
+    <dimen name="actionbar_button_size">32dp</dimen>
+    
+    <!-- Play Bar elements -->
+    <dimen name="height_top_play_bar">50dp</dimen>
+    <dimen name="height_bottom_play_bar">68dp</dimen>
+    <dimen name="height_small_play_bar">40dp</dimen>
+    <dimen name="height_normal_play_bar">50dp</dimen>
+    <dimen name="height_large_play_bar">78dp</dimen>
+    <dimen name="height_bottom_adbase_bar">55dp</dimen>
+
+    <!-- Square Button elements -->
+    <dimen name="size_button_square_tiny">38dp</dimen>
+    <dimen name="size_button_square_small">40dp</dimen>
+    <dimen name="size_button_square_normal">48dp</dimen>
+    <dimen name="size_button_square_large">56dp</dimen>
+
+    <!-- Margin elements -->
+    <dimen name="margin_input_box">8dp</dimen>
+    <dimen name="marginT_input_box">4dp</dimen>
+    <dimen name="marginB_input_box">4dp</dimen>
+    <dimen name="marginL_input_box">8dp</dimen>
+    <dimen name="marginR_input_box">4dp</dimen>
+    <dimen name="margin_input_bar">8dp</dimen>
+    <dimen name="margin_micro">1dp</dimen>
+    <dimen name="margin_tiny">3dp</dimen>
+    <dimen name="margin_small">5dp</dimen>
+    <dimen name="margin_medium">10dp</dimen>
+    <dimen name="margin_large">15dp</dimen>
+    <dimen name="margin_xlarge">25dp</dimen>
+
+    <!-- Paadding elements -->
+    <dimen name="padding_button_small">3dp</dimen>
+    <dimen name="padding_button_medium">6dp</dimen>
+    <dimen name="padding_button_large">8dp</dimen>
+    <dimen name="padding_input_box">6dp</dimen>
+    <dimen name="padding_input_bar">8dp</dimen>
+    <dimen name="padding_micro">1dp</dimen>
+    <dimen name="padding_tiny">3dp</dimen>
+    <dimen name="padding_small">5dp</dimen>
+    <dimen name="padding_medium">10dp</dimen>
+    <dimen name="padding_large">15dp</dimen>
+    <dimen name="padding_xlarge">25dp</dimen>
+
+    <!-- UI elements -->
+    <dimen name="height_intput_box">48dp</dimen>
+    <dimen name="height_profile_bar">40dp</dimen>
+    <dimen name="height_tab">40dp</dimen>
+    <dimen name="padding_tab_side">0dp</dimen>
+
+    <!-- Text content -->
+    <dimen name="text_micro">10sp</dimen>
+    <dimen name="text_tiny">12sp</dimen>
+    <dimen name="text_small">14sp</dimen>
+    <dimen name="text_medium">16sp</dimen>
+    <dimen name="text_large">18sp</dimen>
+    <dimen name="text_xlarge">20sp</dimen>
+
+</resources>

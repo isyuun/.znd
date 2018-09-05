@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- <corners -->
+    <!-- android:bottomLeftRadius="integer" -->
+    <!-- android:bottomRightRadius="integer" -->
+    <!-- android:radius="integer" -->
+    <!-- android:topLeftRadius="integer" -->
+    <!-- android:topRightRadius="integer" /> -->
+    <!-- <corners android:radius="@dimen/main_menu_corner_radius" /> -->
+
+    <!-- <gradient -->
+    <!-- android:angle="integer" -->
+    <!-- android:centerX="integer" -->
+    <!-- android:centerY="integer" -->
+    <!-- android:centerColor="integer" -->
+    <!-- android:endColor="color" -->
+    <!-- android:gradientRadius="integer" -->
+    <!-- android:startColor="color" -->
+    <!-- android:type=["linear" | "radial" | "sweep"] -->
+    <!-- android:useLevel=["true" | "false"] /> -->
+    <!-- <gradient -->
+
+
+    <!-- <padding -->
+    <!-- android:bottom="integer" -->
+    <!-- android:left="integer" -->
+    <!-- android:right="integer" -->
+    <!-- android:top="integer" /> -->
+
+
+    <!-- <size -->
+    <!-- android:height="776px" -->
+    <!-- android:width="1714px" /> -->
+
+    <solid android:color="@color/bg_title"/>
+
+    <!-- <stroke -->
+    <!-- android:dashGap="integer" -->
+    <!-- android:dashWidth="integer" -->
+    <!-- android:width="integer" -->
+    <!-- android:color="color" /> -->
+    <!--<stroke-->
+    <!--android:width="0.1dp"-->
+    <!--android:color="@color/stroke_main_menu" />-->
+
+</shape>

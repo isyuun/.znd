@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/layout_pitch"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_marginTop="@dimen/layout_pitch"
+    android:orientation="horizontal"
+    android:visibility="visible">
+
+    <TextView
+        android:id="@+id/label_pitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_title"
+        android:drawableLeft="@drawable/btn_dpad_1"
+        android:drawablePadding="@dimen/text_padding_normal"
+        android:gravity="center_vertical"
+        android:padding="@dimen/text_padding_normal"
+        android:shadowColor="@color/solid_black"
+        android:shadowDx="2.0"
+        android:shadowDy="2.0"
+        android:shadowRadius="2.0"
+        android:maxLines="1"
+        android:text="@string/label_pitch"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/solid_white_choco"
+        android:textSize="@dimen/text_size_large"
+        android:textStyle="bold"
+        android:visibility="visible"/>
+
+    <TextView
+        android:id="@+id/txt_pitch"
+        android:layout_width="@dimen/text_width_pitch"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_name"
+        android:gravity="center_vertical"
+        android:padding="@dimen/text_padding_normal"
+        android:shadowColor="@color/solid_black"
+        android:shadowDx="2.0"
+        android:shadowDy="2.0"
+        android:shadowRadius="2.0"
+        android:maxLines="1"
+        android:text="@string/example_pitch"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/solid_white_choco"
+        android:textSize="@dimen/text_size_large"
+        android:textStyle="bold"
+        android:visibility="visible"/>
+</LinearLayout>
