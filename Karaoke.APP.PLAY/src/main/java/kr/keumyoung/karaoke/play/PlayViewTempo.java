@@ -220,8 +220,10 @@ class PlayViewTempo extends PlayViewPitch {
 	@Override
 	public void setTempoPercent(final int percent) {
 		///_LOG.e(_toString(), getMethodName() + percent);
-
-		super.setTempoPercent(percent);
+		if (isPrepared())
+		{
+			super.setTempoPercent(percent);
+		}
 
 		clearTempo();
 

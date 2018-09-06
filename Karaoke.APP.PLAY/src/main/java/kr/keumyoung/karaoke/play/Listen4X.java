@@ -155,10 +155,10 @@ class Listen4X extends Listen4 implements ISongPlay {
 	}
 
 	@Override
-	public boolean open(String path) throws Exception {
+	public boolean load(String path) throws Exception {
 		Log.w(_toString(), getMethodName() + "[ST]" + ":" + type + ":" + isPitchTempo + ":" + song);
-		//path = "http://211.236.190.103:8080/svc_media/mmp3/78535.mp3";
-		//path = "http://resource.kymedia.kr/record/kpop/20120712/89/120712BSJM92K89.m4a";
+		//load = "http://211.236.190.103:8080/svc_media/mmp3/78535.mp3";
+		//load = "http://resource.kymedia.kr/record/kpop/20120712/89/120712BSJM92K89.m4a";
 		this.path = path;
 
 		try {
@@ -179,8 +179,8 @@ class Listen4X extends Listen4 implements ISongPlay {
 					song.setHandler(this.handler);
 					Log.i(_toString(), getMethodName() + "[setOnListener]" + song);
 					song.setOnListener(this);
-					Log.i(_toString(), getMethodName() + "[open]" + song);
-					ret = song.open(path);
+					Log.i(_toString(), getMethodName() + "[load]" + song);
+					ret = song.load(path);
 					Log.i(_toString(), getMethodName() + "[setIsRetry]");
 					setIsRetry(!song.isRetry());
 				}
@@ -188,7 +188,7 @@ class Listen4X extends Listen4 implements ISongPlay {
 				return ret;
 
 			} else {
-				super.open(path);
+				super.load(path);
 			}
 		} catch (Exception e) {
 
@@ -475,11 +475,11 @@ class Listen4X extends Listen4 implements ISongPlay {
 		Log.w(_toString(), getMethodName());
 		if (song != null) {
 			//if (song instanceof ISongPlay) {
-			//	song.setPath(path);
+			//	song.setPath(load);
 			//	song.restart();
 			//} else {
 			//	stop();
-			//	open(path);
+			//	load(load);
 			//}
 			song.setPath(path);
 			song.restart();
@@ -491,7 +491,7 @@ class Listen4X extends Listen4 implements ISongPlay {
 		Log.w(_toString(), getMethodName());
 		if (song != null) {
 			//if (song instanceof ISongPlay) {
-			//	song.setPath(path);
+			//	song.setPath(load);
 			//	song.repeat();
 			//} else {
 			//	seek(0);

@@ -231,8 +231,8 @@ public class Player {
 	 * @return true(재생성공), false(재생실패)
 	 */
 	/*
-	 * public boolean open(String strMp3) {
-	 * boolean ret = playView.open(strMp3, null, false, 0, true);
+	 * public boolean load(String strMp3) {
+	 * boolean ret = playView.load(strMp3, null, false, 0, true);
 	 * 
 	 * return ret;
 	 * }
@@ -278,8 +278,8 @@ public class Player {
 	 * @return true(재생성공), false(재생실패)
 	 */
 	/*
-	 * public boolean open(String strMp3, String strLyc, boolean type) {
-	 * boolean ret = playView.open(strMp3, strLyc, false, 0, true);
+	 * public boolean load(String strMp3, String strLyc, boolean type) {
+	 * boolean ret = playView.load(strMp3, strLyc, false, 0, true);
 	 * 
 	 * return ret;
 	 * }
@@ -299,8 +299,8 @@ public class Player {
 	 * @return true(재생성공), false(재생실패)
 	 */
 	/*
-	 * public boolean open(String path, boolean isRuby, int rubyLang, boolean isSystem) {
-	 * boolean ret = playView.open(path, isRuby, rubyLang, isSystem);
+	 * public boolean load(String path, boolean isRuby, int rubyLang, boolean isSystem) {
+	 * boolean ret = playView.load(path, isRuby, rubyLang, isSystem);
 	 * 
 	 * return ret;
 	 * }
@@ -322,8 +322,8 @@ public class Player {
 	 * @return true(재생성공), false(재생실패)
 	 */
 	/*
-	 * public boolean open(String strMp3, String strLyc, boolean isRuby, int rubyLang, boolean isSystem) {
-	 * boolean ret = playView.open(strMp3, strLyc, isRuby, rubyLang, isSystem);
+	 * public boolean load(String strMp3, String strLyc, boolean isRuby, int rubyLang, boolean isSystem) {
+	 * boolean ret = playView.load(strMp3, strLyc, isRuby, rubyLang, isSystem);
 	 * 
 	 * return ret;
 	 * }
@@ -411,7 +411,7 @@ public class Player {
 			/*
 			 * if ( songRecord != null ) {
 			 * //songRecord.setPriority(android.os.Process.THREAD_PRIORITY_AUDIO);
-			 * return songRecord.open(path);
+			 * return songRecord.load(path);
 			 * } else {
 			 * return true;
 			 * }

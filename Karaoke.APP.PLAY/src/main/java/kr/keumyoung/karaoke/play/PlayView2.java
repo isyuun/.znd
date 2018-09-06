@@ -352,21 +352,21 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 		if (!isInEditMode()) {
 			create();
 			//test
-			// String path = "";
+			// String load = "";
 			// Bundle bundle = getIntent().getExtras();
 			// if (bundle != null) {
 			// m_songList = bundle.getStringArrayList(SONGPLAYER_SKYM);
 			//
 			// if (m_songList == null || m_songList.size() == 0) {
-			// path = getApplicationContext().getExternalFilesDir(null) + "/test.skym";
+			// load = getApplicationContext().getExternalFilesDir(null) + "/test.skym";
 			// } else {
-			// path = m_songList.get(m_songIdx).toString();
+			// load = m_songList.get(m_songIdx).toString();
 			// }
 			// } else {
-			// path = getApplicationContext().getExternalFilesDir(null) + "/test.skym";
+			// load = getApplicationContext().getExternalFilesDir(null) + "/test.skym";
 			// }
 			//
-			// open(path);
+			// load(load);
 			// play();
 		}
 	}
@@ -411,8 +411,8 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 		}
 	};
 
-	protected boolean open(String path) throws Exception {
-		if (BuildConfig.DEBUG) Log.i(_toString(), "open()" + path + "()");
+	protected boolean load(String path) throws Exception {
+		if (BuildConfig.DEBUG) Log.i(_toString(), "load()" + path + "()");
 
 		try {
 			m_data.release();

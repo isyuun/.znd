@@ -87,7 +87,7 @@ public class SongPlay /* extends SongService */ implements ISongPlay, ISongPlay.
 	}
 
 	@Override
-	public boolean open(String path) {
+	public boolean load(String path) {
 
 		return false;
 	}
@@ -265,7 +265,7 @@ public class SongPlay /* extends SongService */ implements ISongPlay, ISongPlay.
 			@Override
 			public void run() {
 
-				open(getPath());
+				load(getPath());
 			}
 		}, TIME_RESTART);
 	}

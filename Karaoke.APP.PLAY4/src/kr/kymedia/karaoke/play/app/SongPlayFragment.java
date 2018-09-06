@@ -255,7 +255,7 @@ public class SongPlayFragment extends SongServiceFragment implements ISongPlay, 
 
 		try {
 			if (!isPlaying()) {
-				open(path);
+				load(path);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -271,7 +271,7 @@ public class SongPlayFragment extends SongServiceFragment implements ISongPlay, 
 	}
 
 	@Override
-	public boolean open(String path) throws Exception {
+	public boolean load(String path) throws Exception {
 
 		// Log.w(toString(), getMethodName() + handler + " - " + path);
 		Log.w(toString(), getMethodName() + song + " - " + path);
@@ -287,7 +287,7 @@ public class SongPlayFragment extends SongServiceFragment implements ISongPlay, 
 			} else {
 				song.setOnListener(this);
 			}
-			ret = song.open(path);
+			ret = song.load(path);
 		}
 
 		return ret;
@@ -440,7 +440,7 @@ public class SongPlayFragment extends SongServiceFragment implements ISongPlay, 
 					((ISongPlay) song).restart();
 				} else {
 					stop();
-					open(path);
+					load(path);
 				}
 			}
 		} catch (Exception e) {

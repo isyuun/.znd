@@ -88,7 +88,7 @@ public class MediaPlayerPlay2 extends MediaPlayerPlay implements ISongPlay, ISon
 	private int id = -1;
 
 	@Override
-	public boolean open(String path) {
+	public boolean load(String path) {
 		Log.i(__CLASSNAME__, getMethodName());
 
 		this.path = path;
@@ -97,7 +97,7 @@ public class MediaPlayerPlay2 extends MediaPlayerPlay implements ISongPlay, ISon
 		boolean ret = false;
 
 		try {
-			ret = super.open(path);
+			ret = super.load(path);
 
 			id = mMediaPlayer.getAudioSessionId();
 			mMediaPlayer.setOnErrorListener(this);
@@ -534,7 +534,7 @@ public class MediaPlayerPlay2 extends MediaPlayerPlay implements ISongPlay, ISon
 			@Override
 			public void run() {
 
-				open(path);
+				load(path);
 			}
 		}, TIME_RESTART);
 	}

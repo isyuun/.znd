@@ -31,15 +31,10 @@
 package kr.keumyoung.karaoke.play;
 
 import android.content.Context;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
-
-import kr.kymedia.karaoke.play.impl.ISongPlay;
-import kr.keumyoung.karaoke.play.BuildConfig;
-import kr.keumyoung.karaoke.play.R;
 
 /**
  * <pre>
@@ -90,7 +85,7 @@ class PlayView5 extends PlayView4XX {
 		Log.e(_toString(), getMethodName());
 		super.setPlayView();
 
-		seekBar = (SeekBar) findViewById(R.id.seekBar);
+		seekBar = (SeekBar) findViewById(R.id.seek_bar);
 
 		if (seekBar != null) {
 			//if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {

@@ -1,12 +1,10 @@
 package kr.keumyoung.karaoke.mukin.activity;
 
 import android.graphics.Point;
-import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -23,23 +21,40 @@ public class play2 extends play {
         return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
     }
 
-    _PlayView player;
+    _PlayView play;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        this.fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                start();
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
+                play2.this.fab.setImageResource(android.R.drawable.ic_media_pause);
+                //start
+                if (!play.isPrepared()) {
+                    runOnUiThread(start);
+                } else if (play.isPlaying()) {
+                    if (!play.isPause()) {
+                        pause();
+                    } else {
+                        resume();
+                    }
+                }
             }
         });
 
-        setPlayer();
+        runOnUiThread(player);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //runOnUiThread(start);   //test
     }
 
     /**
@@ -51,12 +66,19 @@ public class play2 extends play {
      * <p/>
      * 자막하단여백
      */
-    protected void setPlayer() {
+    private Runnable player = new Runnable() {
+        @Override
+        public void run() {
+            player();
+        }
+    };
+
+    protected void player() {
         if (BuildConfig.DEBUG) Log.d(_toString(), getMethodName() + findViewById(R.id.player));
 
-        player = findViewById(R.id.player);
-        //player.setType(TYPE.MEDIAPLAYERPLAY);
-        player.start();
+        play = findViewById(R.id.player);
+        //play.setType(TYPE.MEDIAPLAYERPLAY);
+        play.start();
 
         int lyricsMarginBottom = 10;
 
@@ -81,19 +103,19 @@ public class play2 extends play {
         //if (findViewById(R.id.layout_information) != null) {
         //    lyricsMarginBottom += findViewById(R.id.layout_information).getHeight();
         //}
-        player.setLyricsMarginBottom(lyricsMarginBottom);
+        play.setLyricsMarginBottom(lyricsMarginBottom);
 
         // bgkim 폰트 TYPE 적용
-        //player.setTypeface(Typeface.createFromAsset(getAssets(), "yun.ttf.mp3"));
-        //player.setTypeface(Typeface.createFromAsset(getAssets(), "nanum.ttf.mp3"));
+        //play.setTypeface(Typeface.createFromAsset(getAssets(), "yun.ttf.mp3"));
+        //play.setTypeface(Typeface.createFromAsset(getAssets(), "nanum.ttf.mp3"));
 
         int iStrokeSize = 6;
         //if (P_APPNAME_SKT_BOX.equalsIgnoreCase(m_strSTBVender)) {
         //    iStrokeSize = 6;
         //}
-        player.setStrokeSize(iStrokeSize);
+        play.setStrokeSize(iStrokeSize);
 
-        player.setOnListener(new _Listener() {
+        play.setOnListener(new _Listener() {
 
             @Override
             public void onTime(int t) {
@@ -114,12 +136,13 @@ public class play2 extends play {
 
             @Override
             public void onError() {
+                Log.wtf(__CLASSNAME__, "onError()");
                 super.onError();
             }
         });
 
 
-        player.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
+        play.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
 
             @Override
             public void onBufferingUpdate(MediaPlayer mp, int percent) {
@@ -127,7 +150,7 @@ public class play2 extends play {
             }
         });
 
-        player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+        play.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 
             @Override
             public void onPrepared(MediaPlayer mp) {
@@ -135,7 +158,7 @@ public class play2 extends play {
             }
         });
 
-        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        play.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 
             @Override
             public void onCompletion(MediaPlayer mp) {
@@ -143,7 +166,7 @@ public class play2 extends play {
             }
         });
 
-        player.setOnInfoListener(new MediaPlayer.OnInfoListener() {
+        play.setOnInfoListener(new MediaPlayer.OnInfoListener() {
 
             @Override
             public boolean onInfo(MediaPlayer mp, int what, int extra) {
@@ -151,7 +174,7 @@ public class play2 extends play {
             }
         });
 
-        player.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+        play.setOnErrorListener(new MediaPlayer.OnErrorListener() {
 
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
@@ -160,14 +183,35 @@ public class play2 extends play {
         });
     }
 
+    private Runnable start = new Runnable() {
+        @Override
+        public void run() {
+            start();
+        }
+    };
+
     private void start() {
-        player.start("08888");
+        play.open("08888");
     }
 
-    private void play() { player.play(); }
+    private void play() {
+        play.play();
+        play2.this.fab.setImageResource(android.R.drawable.ic_media_pause);
+    }
+
+    private void pause() {
+        play.pause();
+        play2.this.fab.setImageResource(android.R.drawable.ic_media_play);
+    }
+
+    private void resume() {
+        play.resume();
+        play2.this.fab.setImageResource(android.R.drawable.ic_media_pause);
+    }
 
     private void stop() {
-        player.stop();
+        play.stop();
+        play2.this.fab.setImageResource(android.R.drawable.ic_media_play);
     }
 
     @Override
@@ -175,4 +219,5 @@ public class play2 extends play {
         super.onPause();
         stop();
     }
+
 }

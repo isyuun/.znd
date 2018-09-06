@@ -300,9 +300,10 @@ class PlayViewPitch extends PlayView4X {
 	@Override
 	public void setPitch(final int pitch) {
 		//_LOG.e(_toString(), getMethodName() + pitch);
-
-
-		super.setPitch(pitch);
+		if (isPrepared())
+		{
+			super.setPitch(pitch);
+		}
 
 		clearPitch();
 

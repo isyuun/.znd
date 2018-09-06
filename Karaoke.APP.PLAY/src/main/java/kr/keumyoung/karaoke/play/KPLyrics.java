@@ -29,7 +29,7 @@
  * </pre>
  */
 
-package kr.keumyoung.karaoke.api;
+package kr.keumyoung.karaoke.play;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -41,9 +41,8 @@ import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 
+import kr.keumyoung.karaoke.api._Const;
 import kr.keumyoung.karaoke.data.SongUtil;
-import kr.keumyoung.karaoke.play.BuildConfig;
-import kr.keumyoung.karaoke.play._LyricsPlay;
 
 /**
  *

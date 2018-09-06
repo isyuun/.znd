@@ -38,7 +38,6 @@ import android.util.Log;
 import android.view.View;
 
 import kr.keumyoung.karaoke.api._Const;
-import kr.keumyoung.karaoke.api._KPLyrics;
 import kr.keumyoung.karaoke.data._SongData;
 
 /**

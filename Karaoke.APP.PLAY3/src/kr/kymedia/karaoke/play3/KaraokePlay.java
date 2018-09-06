@@ -156,7 +156,7 @@ public class KaraokePlay extends Activity {
 		// 재생
 		play();
 		// record = new AudioRecordPlay();
-		// record.open("");
+		// record.load("");
 		// record.play();
 
 		// 검색바 설정
@@ -302,7 +302,7 @@ public class KaraokePlay extends Activity {
 		// mp3 설정
 		player.setSongPlayListener(onSongPlayListener);
 		// player.setSongRecordListener(onSongScoreListener);
-		// player.open(mp3);
+		// player.load(mp3);
 
 		Log.d("KaraokePlay", "play");
 
@@ -317,7 +317,7 @@ public class KaraokePlay extends Activity {
 			e.printStackTrace();
 		}
 		// player.close();
-		// player.open(mp3, lyc, false);
+		// player.load(mp3, lyc, false);
 		// player.setSyncTime(-300);
 		// if ( ret == true ) {
 		// // 미디어 리스너
@@ -351,7 +351,7 @@ public class KaraokePlay extends Activity {
 				// player.play(0);
 				player.play();
 				// player.record(Environment.getExternalStorageDirectory() + "/record.mp3");
-				// recorder.open(Environment.getExternalStorageDirectory() + "/record.mp3");
+				// recorder.load(Environment.getExternalStorageDirectory() + "/record.mp3");
 				// player.setVision(-1);
 
 				// mSeekBar.setMax(player.totalTime());
@@ -365,7 +365,7 @@ public class KaraokePlay extends Activity {
 			if (player != null) {
 				// Log.d("MainActivity", "score:"+player.getScore());
 				player.stop();
-				// score.open("", "");
+				// score.load("", "");
 				play();
 			}
 		}

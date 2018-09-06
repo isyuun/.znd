@@ -163,7 +163,7 @@ public class AudioVisualizer
 
 		/*
 		 * AudioEqualizer equalizer = new AudioEqualizer();
-		 * equalizer.open(player);
+		 * equalizer.load(player);
 		 * equalizer.enable(true);
 		 * int band = equalizer.getNumberOfBands();
 		 * int min = equalizer.getBandLevelRange()[0];

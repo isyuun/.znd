@@ -23,6 +23,6 @@ public class main2 extends main {
             }
         });
 
-        //startActivity(new Intent(main2.this, _play.class));
+        startActivity(new Intent(main2.this, _play.class));
     }
 }

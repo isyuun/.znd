@@ -72,10 +72,10 @@ public class AudioTrackPlay2 extends AudioTrackPlay implements ISongPlay, ISongP
 	}
 
 	@Override
-	public boolean open(String path) {
+	public boolean load(String path) {
 
 		isPrepared = false;
-		return super.open(path);
+		return super.load(path);
 	}
 
 	@Override
@@ -250,7 +250,7 @@ public class AudioTrackPlay2 extends AudioTrackPlay implements ISongPlay, ISongP
 			@Override
 			public void run() {
 
-				open(path);
+				load(path);
 			}
 		}, TIME_RESTART);
 	}

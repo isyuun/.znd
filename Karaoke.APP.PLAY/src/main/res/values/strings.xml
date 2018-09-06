@@ -219,7 +219,9 @@
     <!--음정/템포-->
     <string name="label_pitch">음정</string>
     <string name="example_pitch">-11(C#4)</string>
+    <string name="example_pitch_0">0(C5)</string>
     <string name="label_tempo">템포</string>
     <string name="example_tempo">-1.0</string>
+    <string name="example_tempo_0">0.0</string>
 
 </resources>

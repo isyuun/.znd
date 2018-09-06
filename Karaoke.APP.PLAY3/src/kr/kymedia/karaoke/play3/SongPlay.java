@@ -9,7 +9,7 @@ public interface SongPlay {
 
 	public void destroy();
 
-	public boolean open(String path);
+	public boolean load(String path);
 
 	public boolean mid_open(String path, String cfg, String patch);
 

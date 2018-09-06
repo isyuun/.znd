@@ -136,7 +136,8 @@ public class CircularSeekBar2 extends CircularSeekBar {
 		if (!isLoading) {
 			canvas.drawCircle(mPointerPositionXY[0], mPointerPositionXY[1], mPointerRadius + mPointerHaloWidth, mPointerHaloPaint);
 			canvas.drawCircle(mPointerPositionXY[0], mPointerPositionXY[1], mPointerRadius, mPointerPaint);
-			if (mUserIsMovingPointer) {
+			//if (mUserIsMovingPointer)
+			{
 				canvas.drawCircle(mPointerPositionXY[0], mPointerPositionXY[1], mPointerRadius + mPointerHaloWidth + (mPointerHaloBorderWidth / 2f), mPointerHaloBorderPaint);
 			}
 		}
@@ -198,8 +199,8 @@ public class CircularSeekBar2 extends CircularSeekBar {
 	};
 
 	private Runnable startRotateAnimation = new Runnable() {
-		@Override
-		public void run() {
+			@Override
+			public void run() {
 			setMax(100);
 			setProgress(5);
 			startAnimation(animLoadingRotate);
@@ -217,6 +218,8 @@ public class CircularSeekBar2 extends CircularSeekBar {
 		@Override
 		public void run() {
 			clearAnimation();
+			setMax(100);
+			setProgress(0);
 		}
 	};
 }

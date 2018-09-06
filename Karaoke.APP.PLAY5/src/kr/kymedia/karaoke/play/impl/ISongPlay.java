@@ -113,7 +113,7 @@ public interface ISongPlay {
 
 	void prepare();
 
-	boolean open(final String path) throws Exception;
+	boolean load(final String path) throws Exception;
 
 	boolean play();
 

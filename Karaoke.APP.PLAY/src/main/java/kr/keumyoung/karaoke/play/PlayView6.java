@@ -35,7 +35,7 @@ public class PlayView6 extends PlayView5 {
         super(context);
     }
 
-    public void start(String song_id) {
+    public void open(String song_id) {
         path_sd = getApplicationContext().getExternalFilesDir(null) + "";
         start();
         down(song_id);
@@ -47,8 +47,8 @@ public class PlayView6 extends PlayView5 {
     }
 
     @Override
-    public boolean open(String path) {
-        return super.open(path);
+    public boolean load(String path) {
+        return super.load(path);
     }
 
     /**
@@ -188,7 +188,7 @@ public class PlayView6 extends PlayView5 {
         if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ED]" + song_id + ":" + url_lyric);
     }
 
-    private String getString(int resId) {
+    protected String getString(int resId) {
         return getApplicationContext().getString(resId);
     }
 
@@ -201,5 +201,10 @@ public class PlayView6 extends PlayView5 {
             e.printStackTrace();
         }
         return ret;
+    }
+
+    @Override
+    public void stop() {
+        super.stop();
     }
 }

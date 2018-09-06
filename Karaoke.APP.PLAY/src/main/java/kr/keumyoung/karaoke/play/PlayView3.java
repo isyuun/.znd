@@ -34,13 +34,6 @@ package kr.keumyoung.karaoke.play;
 
 import android.content.Context;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnBufferingUpdateListener;
-import android.media.MediaPlayer.OnCompletionListener;
-import android.media.MediaPlayer.OnErrorListener;
-import android.media.MediaPlayer.OnInfoListener;
-import android.media.MediaPlayer.OnPreparedListener;
-import android.media.MediaPlayer.OnTimedTextListener;
 import android.util.AttributeSet;
 import android.util.Log;
 
@@ -136,23 +129,23 @@ class PlayView3 extends PlayView2X {
 
 		// KYM서버: http://resource.kymedia.kr/ky/mp/88/08888.mp3
 		// host = "http://resource.kymedia.kr/ky/mp/";
-		// path = String.format(getResources().getConfiguration().locale, "%05d", number).substring(3);
+		// load = String.format(getResources().getConfiguration().locale, "%05d", number).substring(3);
 		// form = "/%05d.mp3";
 
 		// if (server == R.id.radioServerKYS) {
 		// //금영서버: http://211.236.190.103:8080/svc_media/mmp3/08888.mp3
 		// host = "http://" + KaraokePath.getHosts()[0] + ":8080/svc_media/";
-		// path = "mmp3";
+		// load = "mmp3";
 		// form = "/%05d.mp3";
 		// } else if (server == R.id.radioServerKYM) {
 		// //KYM서버: http://resource.kymedia.kr/ky/mp/88/08888.mp3
 		// host = "http://" + KaraokePath.getHosts()[1] + "/ky/mp/";
-		// path = String.format(getResources().getConfiguration().locale, "%05d", number).substring(3);
+		// load = String.format(getResources().getConfiguration().locale, "%05d", number).substring(3);
 		// form = "/%05d.mp3";
 		// } else if (server == R.id.radioServerCYW) {
 		// //싸이월드: http://cyms.chorus.co.kr/cykara_dl2.asp?song_id=08888
 		// host = "http://" + KaraokePath.getHosts()[2] + "/";
-		// path = "cykara_dl2.asp?song_id=";
+		// load = "cykara_dl2.asp?song_id=";
 		// form = "%05d";
 		// }
 		switch (server) {
@@ -173,7 +166,7 @@ class PlayView3 extends PlayView2X {
 		case 2:
 			// 싸이월드: http://cyms.chorus.co.kr/cykara_dl2.asp?song_id=08888
 			host = "http://" + KaraokePath.getHosts()[2] + "/";
-			//path = "cykara_dl2.asp?song_id=";
+			//load = "cykara_dl2.asp?song_id=";
 			path = ".skym.asp?song_id=";
 			form = "%05d";
 			break;
@@ -210,38 +203,38 @@ class PlayView3 extends PlayView2X {
 
 	public void open() throws Exception {
 
-		// String path = getApplicationContext().getExternalFilesDir(null) + "/test.skym";
+		// String load = getApplicationContext().getExternalFilesDir(null) + "/test.skym";
 		// if (getLyricList() == null || getLyricList().size() == 0) {
-		// path = getApplicationContext().getExternalFilesDir(null) + "/test.skym";
+		// load = getApplicationContext().getExternalFilesDir(null) + "/test.skym";
 		// } else {
-		// path = getLyricList().get(getLyricIdx()).toString();
+		// load = getLyricList().get(getLyricIdx()).toString();
 		// }
 		String path = getLyric();
 		if (BuildConfig.DEBUG) Log.e(_toString(), getMethodName() + path);
-		open(path);
+		load(path);
 	}
 
 	/**
 	 * skym가사로드
 	 * mp3스트리밍
 	 * @throws Exception
-	 * @see kr.keumyoung.karaoke.play.PlayView2#open(java.lang.String)
+	 * @see kr.keumyoung.karaoke.play.PlayView2#load(java.lang.String)
 	 */
 	@Override
-	protected boolean open(String path) throws Exception {
+	protected boolean load(String path) throws Exception {
 
-		Log.w(_toString(), "open() " + "[ST]");
+		Log.w(_toString(), "load() " + "[ST]");
 
 		if (BuildConfig.DEBUG) Log.e(_toString(), getMethodName() + path);
 		this.path = path;
 
 		try {
-			Log.i(_toString(), "open() " + "[getSongData]");
+			Log.i(_toString(), "load() " + "[getSongData]");
 			getSongData().release();
 			getSongData().load(path);
 
-			Log.i(_toString(), "open() " + "[open]");
-			// (new open()).execute();
+			Log.i(_toString(), "load() " + "[load]");
+			// (new load()).execute();
 			if (TextUtil.isNetworkUrl(mp3)) {
 				stream();
 			} else {
@@ -249,14 +242,14 @@ class PlayView3 extends PlayView2X {
 			}
 
 		} catch (Exception e) {
-			Log.e(_toString(), "open() " + "[NG]" + "\n" + Log.getStackTraceString(e));
+			Log.e(_toString(), "load() " + "[NG]" + "\n" + Log.getStackTraceString(e));
 			e.printStackTrace();
 			stop();
 			throw (e);
 		}
 
-		// if (BuildConfig.DEBUG) _LOG.e(_toString(), getMethodName() + "[ED]" + path);
-		Log.w(_toString(), "open() " + "[ED]");
+		// if (BuildConfig.DEBUG) _LOG.e(_toString(), getMethodName() + "[ED]" + load);
+		Log.w(_toString(), "load() " + "[ED]");
 
 		return true;
 	}
@@ -269,12 +262,12 @@ class PlayView3 extends PlayView2X {
 	// * @author isyoon
 	// *
 	// */
-	// private class open extends AsyncTask<Void, Integer, String> {
+	// private class load extends AsyncTask<Void, Integer, String> {
 	//
 	// @Override
 	// protected String doInBackground(Void... params) {
 	//
-	// _LOG.i(_toString(), "open() " + "[doInBackground]");
+	// _LOG.i(_toString(), "load() " + "[doInBackground]");
 	// try {
 	// if (TextUtil.isNetworkUrl(mp3)) {
 	// stream();
@@ -283,7 +276,7 @@ class PlayView3 extends PlayView2X {
 	// }
 	// } catch (Exception e) {
 	//
-	// _LOG.e(_toString(), "open() " + "[doInBackground]" + "[NG]" + "\n" + _LOG.getStackTraceString(e));
+	// _LOG.e(_toString(), "load() " + "[doInBackground]" + "[NG]" + "\n" + _LOG.getStackTraceString(e));
 	// e.printStackTrace();
 	// }
 	// return null;

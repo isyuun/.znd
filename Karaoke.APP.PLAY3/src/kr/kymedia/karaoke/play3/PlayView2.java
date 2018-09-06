@@ -172,27 +172,27 @@ public class PlayView2 extends TextureView implements SongView, TextureView.Surf
 	}
 
 	/*
-	 * public boolean open(String url, boolean isRuby, int rubyLang, boolean isSystem) {
+	 * public boolean load(String url, boolean isRuby, int rubyLang, boolean isSystem) {
 	 * m_ruby = isRuby;
 	 * m_lang = rubyLang;
 	 * m_system = isSystem;
 	 * 
-	 * return open(url, "");
+	 * return load(url, "");
 	 * }
 	 * 
-	 * public boolean open(String mp3, String lyc, boolean isRuby, int rubyLang, boolean isSystem) {
+	 * public boolean load(String mp3, String lyc, boolean isRuby, int rubyLang, boolean isSystem) {
 	 * m_ruby = isRuby;
 	 * m_lang = rubyLang;
 	 * m_system = isSystem;
 	 * 
-	 * return open(mp3, lyc);
+	 * return load(mp3, lyc);
 	 * }
 	 */
 
 	public boolean open(String mp3, String lyc) {
 		boolean b = m_data.load(lyc);
 		if (b == true) {
-			b = songPlay.open(mp3);
+			b = songPlay.load(mp3);
 		}
 
 		return b;
@@ -201,7 +201,7 @@ public class PlayView2 extends TextureView implements SongView, TextureView.Surf
 	public boolean open(String mp3, InputStream is) {
 		boolean b = m_data.load(is);
 		if (b == true) {
-			b = songPlay.open(mp3);
+			b = songPlay.load(mp3);
 		}
 
 		return b;

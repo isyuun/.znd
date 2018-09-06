@@ -185,7 +185,7 @@ class PlayView4 extends PlayView3X {
 				stop();
 				reset();
 				release();
-				open(path);
+				load(path);
 				count++;
 				Log.wtf(_toString() + TAG_SING, "onRetry() " + "(" + count + ")");
 				onRetry(count);
@@ -215,7 +215,7 @@ class PlayView4 extends PlayView3X {
 	public void open() throws Exception {
 
 		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ST]");
-		Log.wtf(_toString(), "open() " + count);
+		Log.wtf(_toString(), "load() " + count);
 
 		super.open();
 		cancel();

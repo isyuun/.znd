@@ -134,7 +134,7 @@ public class AudioTrackPlay extends Thread implements SongPlay, SongPlayListener
 	}
 
 	@Override
-	public boolean open(String path)
+	public boolean load(String path)
 	{
 		int ret = -1;
 		try {

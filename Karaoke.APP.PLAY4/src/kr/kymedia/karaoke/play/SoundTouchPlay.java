@@ -203,10 +203,10 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	 * <pre>
 	 * </pre>
 	 *
-	 * @see SongPlay#open(java.lang.String)
+	 * @see SongPlay#load(java.lang.String)
 	 */
 	@Override
-	public boolean open(String path) {
+	public boolean load(String path) {
 		Log.wtf(_toString(), getMethodName());
 
 		if (isOpening || (open != null && open.isAlive())) {
@@ -224,7 +224,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 		setPath(path);
 
 		try {
-			if (open != null /*&& open.isAlive()*/) {
+			if (open != null /*&& load.isAlive()*/) {
 				open.interrupt();
 			}
 			open = null;
@@ -239,13 +239,13 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	}
 
 	// 븅신...지랄~~~
-	// private class open extends AsyncTask<Void, Integer, Void> {
+	// private class load extends AsyncTask<Void, Integer, Void> {
 	//
 	// @Override
 	// protected Void doInBackground(Void... params) {
 	// Log.e(SoundTouchPlay.this._toString(), getMethodName());
 	//
-	// open();
+	// load();
 	// return null;
 	// }
 	//

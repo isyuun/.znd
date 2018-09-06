@@ -191,7 +191,7 @@ abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 				stop();
 				reset();
 				release();
-				open(path);
+				load(path);
 				count++;
 				Log.wtf(_toString() + TAG_SING, "onRetry() " + "(" + count + ")");
 				onRetry(count);
@@ -220,18 +220,18 @@ abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 	@Override
 	public void open() throws Exception {
 		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ST]");
-		Log.wtf(_toString(), "open() " + count);
-		//super.open();
+		Log.wtf(_toString(), "load() " + count);
+		//super.load();
 		(new open()).execute();
 		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ED]");
 	}
 
-	//private class open extends AsyncTask<Void, Void, Void> {
+	//private class load extends AsyncTask<Void, Void, Void> {
 	//
 	//	@Override
 	//	protected Void doInBackground(Void... params) {
 	//
-	//		postDelayed(open, 100);
+	//		postDelayed(load, 100);
 	//		return null;
 	//	}
 	//
@@ -249,7 +249,7 @@ abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 		public void run() {
 			if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ST]");
 			try {
-				open(url);
+				load(url);
 				cancel();
 				startTry(getMethodName());
 			} catch (Exception e) {

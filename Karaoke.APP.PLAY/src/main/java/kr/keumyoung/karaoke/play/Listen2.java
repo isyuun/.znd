@@ -99,7 +99,7 @@ class Listen2 implements _Const {
 		// m_mp = new MediaPlayer();
 		//
 		// try {
-		// File sourceFile = new File(path);
+		// File sourceFile = new File(load);
 		// if (sourceFile.exists()) {
 		// FileInputStream fs = new FileInputStream(sourceFile);
 		// FileDescriptor fd = fs.getFD();
@@ -148,7 +148,7 @@ class Listen2 implements _Const {
 		// }
 	}
 
-	protected boolean open(String path) throws Exception {
+	protected boolean load(String path) throws Exception {
 		return false;
 	}
 

@@ -29,9 +29,7 @@
  * </pre>
  */
 
-package kr.keumyoung.karaoke.api;
-
-import kr.keumyoung.karaoke.play._LyricsPlay;
+package kr.keumyoung.karaoke.play;
 
 /**
  * <pre>

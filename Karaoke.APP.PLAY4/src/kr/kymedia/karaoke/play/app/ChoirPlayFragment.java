@@ -172,10 +172,10 @@ public class ChoirPlayFragment extends SongPlayFragment {
 	}
 
 	@Override
-	public boolean open(String path) throws Exception {
+	public boolean load(String path) throws Exception {
 
 		// setPath(path);
-		super.open(path);
+		super.load(path);
 
 		for (SongPlayView choir : choirs) {
 			AsycTaskExcuter.executePriorityAsyncTask(new open(), choir);
@@ -192,9 +192,9 @@ public class ChoirPlayFragment extends SongPlayFragment {
 			for (SongPlayView param : params) {
 				try {
 					if (TextUtils.isEmpty(param.getPath())) {
-						param.open(getPath());
+						param.load(getPath());
 					} else {
-						param.open(param.getPath());
+						param.load(param.getPath());
 					}
 				} catch (Exception e) {
 					e.printStackTrace();

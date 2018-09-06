@@ -29,7 +29,7 @@
  * </pre>
  */
 
-package kr.keumyoung.karaoke.api;
+package kr.keumyoung.karaoke.play;
 
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -44,9 +44,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
-import kr.keumyoung.karaoke.play.BuildConfig;
-import kr.keumyoung.karaoke.play.R;
-import kr.keumyoung.karaoke.play._LyricsPlay;
+import kr.keumyoung.karaoke.api._Const;
 import kr.kymedia.karaoke.util.TextUtil;
 
 /**
@@ -215,7 +213,7 @@ class KPLyricsX extends KPLyrics {
 	void setSinger(Canvas canvas, Paint paint, String str1, String str2, String str3) {
 		int m = 40;
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-			m = 120;
+			m /= 2;
 		}
 
 		// 노래

@@ -39,7 +39,7 @@ import java.util.TimeZone;
  * <p/>
  * <li>Only one Java file</li>
  * <li>Java 5 compatible</li>
- * <li>Released as open source, Modified BSD licence</li>
+ * <li>Released as load source, Modified BSD licence</li>
  * <li>No fixed config files, logging, authorization etc. (Implement yourself if you need them.)</li>
  * <li>Supports parameter parsing of GET and POST methods (+ rudimentary PUT support in 1.25)</li>
  * <li>Supports both dynamic content and file serving</li>
@@ -74,7 +74,7 @@ public abstract class NanoHTTPD {
 	/**
 	 * Maximum time to wait on Socket.getInputStream().read() (in milliseconds)
 	 * This is required as the Keep-Alive HTTP connections would otherwise
-	 * block the socket reading thread forever (or as long the browser is open).
+	 * block the socket reading thread forever (or as long the browser is load).
 	 */
 	public static final int SOCKET_READ_TIMEOUT = 5000;
 	/**
@@ -237,7 +237,7 @@ public abstract class NanoHTTPD {
 	}
 
 	/**
-	 * Forcibly closes all connections that are open.
+	 * Forcibly closes all connections that are load.
 	 */
 	public synchronized void closeAllConnections() {
 		for (Socket socket : openConnections) {

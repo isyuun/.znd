@@ -65,14 +65,14 @@ public class MediaPlayerPlay implements SongPlay, SongPlayListener
 	@Override
 	public boolean mid_open(String path, String cfg, String patch)
 	{
-		return open(path);
+		return load(path);
 	}
 
 	@Override
-	public boolean open(String path)
+	public boolean load(String path)
 	{
-		// Log.d("MediaPlayerPlay", "open");
-		Log.d("player", "open()");
+		// Log.d("MediaPlayerPlay", "load");
+		Log.d("player", "load()");
 		if (mDestroy == true)
 			return false;
 
@@ -87,9 +87,9 @@ public class MediaPlayerPlay implements SongPlay, SongPlayListener
 			mMediaPlayer.setDataSource(path);
 			mMediaPlayer.prepareAsync();
 		} catch (Exception e) {
-			// Log.d("MediaPlayerPlay", "open error");
+			// Log.d("MediaPlayerPlay", "load error");
 			// e.printStackTrace();
-			Log.e("player", "open() - ERROR!!!\n" + Log.getStackTraceString(e));
+			Log.e("player", "load() - ERROR!!!\n" + Log.getStackTraceString(e));
 			return false;
 		}
 

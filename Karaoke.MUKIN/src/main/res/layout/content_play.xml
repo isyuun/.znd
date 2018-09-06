@@ -8,6 +8,14 @@
     tools:context=".activity.play"
     tools:showIn="@layout/activity_play">
 
+    <ImageView
+        android:id="@+id/back_ground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bg"
+        android:scaleType="centerCrop"
+        android:visibility="visible" />
+
     <include
         layout="@layout/player"
         android:layout_width="0dp"

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:visibility="visible">
 
-    <RelativeLayout
+    <kr.keumyoung.karaoke.widget.ContCircularSeekBar
         android:id="@+id/layout_pitch_tempo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
             android:textStyle="bold"
             android:visibility="visible"/>
 
-        <com.devadvance.circularseekbar.CircularSeekBar3
+        <com.devadvance.circularseekbar._CircularSeekBar
             android:id="@+id/seek_pitch_tempo"
             android:layout_width="180dp"
             android:layout_height="180dp"
@@ -41,7 +41,7 @@
             android:visibility="visible"
             app:max="100"
             app:progress="0"/>
-    </RelativeLayout>
+    </kr.keumyoung.karaoke.widget.ContCircularSeekBar>
 
     <include
         layout="@layout/layout_pitch"
