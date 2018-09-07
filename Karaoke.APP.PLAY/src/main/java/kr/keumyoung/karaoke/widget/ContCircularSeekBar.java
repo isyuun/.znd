@@ -123,6 +123,8 @@ public class ContCircularSeekBar extends RelativeLayout {
         } else {
             setVisibility(View.INVISIBLE);
         }
+        bringToFront();
+        for (int i = 0 ; i < getChildCount() ; i++) bringChildToFront(getChildAt(i));
     }
 
     public boolean show() {
@@ -131,6 +133,10 @@ public class ContCircularSeekBar extends RelativeLayout {
 
     public void toggle() {
         show(!this.show);
+    }
+
+    public boolean isLoading() {
+        return seek.isLoading();
     }
 
     public void startLoading() {

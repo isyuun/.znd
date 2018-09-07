@@ -34,6 +34,8 @@ package kr.keumyoung.karaoke.play;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.graphics.Color;
+import android.graphics.PixelFormat;
 import android.view.SurfaceView;
 import android.view.WindowManager;
 
@@ -53,6 +55,10 @@ class LyricsPlay1 extends SurfaceView {
 	public LyricsPlay1(Context context) {
 		super(context);
 		this.context = context;
+
+		//transparent
+		this.setZOrderOnTop(true);    // necessary
+		getHolder().setFormat(PixelFormat.TRANSPARENT);
 	}
 
 	public Context getApplicationContext() {

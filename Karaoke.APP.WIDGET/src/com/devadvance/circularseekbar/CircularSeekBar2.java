@@ -150,7 +150,8 @@ public class CircularSeekBar2 extends CircularSeekBar {
 		}
 	};
 
-	boolean isLoading = false;
+	private boolean isLoading = false;
+	public boolean isLoading() { return isLoading; }
 
 	public void startLoading() {
 		isLoading = true;

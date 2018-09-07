@@ -48,6 +48,7 @@ public class PlayView7 extends PlayView6 {
         super.start();
 
         seek_pitch_tempo = findViewById(R.id.layout_pitch_tempo);
+        seek_pitch_tempo.bringToFront();
         seek_pitch_tempo.setProgress(0);
         seek_pitch_tempo.setMax(0);
         seek_pitch_tempo.setOnCrossClickListener(new ContCircularSeekBar.OnCrossClickListener() {
@@ -162,7 +163,7 @@ public class PlayView7 extends PlayView6 {
     protected Runnable hidePitchTempo = new Runnable() {
         @Override
         public void run() {
-            showPitchTempo(false);
+            if (!seek_pitch_tempo.isLoading()) showPitchTempo(false);
         }
     };
 
