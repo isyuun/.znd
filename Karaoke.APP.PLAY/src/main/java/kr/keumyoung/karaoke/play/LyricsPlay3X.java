@@ -33,6 +33,14 @@
 package kr.keumyoung.karaoke.play;
 
 import android.content.Context;
+import android.content.res.Configuration;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.os.Build;
+import android.util.Log;
+import android.view.Display;
+
+import kr.keumyoung.karaoke.api._Const;
 
 /**
  * <pre>
@@ -66,6 +74,12 @@ class LyricsPlay3X extends LyricsPlay3 {
 		super(context);
 	}
 
+	@Override
+	protected void onAttachedToWindow() {
+		super.onAttachedToWindow();
+		init();
+	}
+
 	/**
 	 * 자막하단여백
 	 */
@@ -86,9 +100,27 @@ class LyricsPlay3X extends LyricsPlay3 {
 	}
 
 	@Override
-	protected void init() {
+	protected void onConfigurationChanged(Configuration newConfig) {
+		Log.d(__CLASSNAME__, "Width: '" + getWidth() + "'");
+		Log.d(__CLASSNAME__, "Height: '" +getHeight() + "'");
+		super.onConfigurationChanged(newConfig);
+		Log.d(__CLASSNAME__, "Width: '" + getWidth() + "'");
+		Log.d(__CLASSNAME__, "Height: '" +getHeight() + "'");
 
-		super.init();
+		boolean orientation = false;
+		switch(newConfig.orientation){
+			case Configuration.ORIENTATION_LANDSCAPE:
+				//Log.e(__CLASSNAME__, getMethodName() + "[ORIENTATION_LANDSCAPE]" + newConfig);
+				orientation = true;
+				break;
+			case Configuration.ORIENTATION_PORTRAIT:
+				//Log.e(__CLASSNAME__, getMethodName() + "[ORIENTATION_PORTRAIT]" + newConfig);
+				orientation = true;
+				break;
+		}
+
+		if (orientation) {
+			init();
+		}
 	}
-
 }

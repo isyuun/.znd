@@ -34,6 +34,7 @@ package kr.keumyoung.karaoke.play;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.os.Build;
 import android.util.Log;
 import android.view.Display;
@@ -79,17 +80,20 @@ class LyricsPlay3 extends LyricsPlay2 {
 		int h = 0;
 		int w = 0;
 
-		Display display = getWindowManager().getDefaultDisplay();
-		Point size = new Point();
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
 
-		display.getSize(size);
+        display.getSize(size);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             display.getRealSize(size);
-		}
+        }
         w = size.x;
         h = size.y;
-
 		Log.e(_toString() + _Const.TAG_LYRIC, "init() " + w + "," + h + ":" + size);
+		//w = getWidth();
+		//h = getHeight();
+		////Log.e(_toString() + _Const.TAG_LYRIC, "init() " + w + "," + h + ":" + rect);
+		//Log.e(_toString() + _Const.TAG_LYRIC, "init() " + w + "," + h);
 
 		int iSongInfoPosition = w / 2;
 		int iTitleFontSize = h / 13;
@@ -112,5 +116,4 @@ class LyricsPlay3 extends LyricsPlay2 {
 		setReadyFontSize(iReadyFontSize);
 		setStrokeSize(4);
 	}
-
 }

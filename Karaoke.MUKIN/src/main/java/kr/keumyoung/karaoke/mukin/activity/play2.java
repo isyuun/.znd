@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.View;
 
 import kr.keumyoung.karaoke.mukin.BuildConfig;
 import kr.keumyoung.karaoke.mukin.R;
 import kr.keumyoung.karaoke.play._Listener;
 import kr.keumyoung.karaoke.play._PlayView;
+import kr.kymedia.karaoke.widget.util.WidgetUtils;
 
 public class play2 extends play {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
@@ -50,6 +52,45 @@ public class play2 extends play {
         });
 
         player();
+
+        WidgetUtils.setOnKeyListener(this, player, new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int code, KeyEvent event) {
+                if (event.getAction() != KeyEvent.ACTION_DOWN) return false;
+                switch (code) {
+                    case KeyEvent.KEYCODE_ENTER:
+                    case KeyEvent.KEYCODE_SPACE:
+                        //start
+                        if (!player.isPrepared()) {
+                            start();
+                        } else if (player.isPlaying()) {
+                            if (!player.isPause()) {
+                                pause();
+                            } else {
+                                resume();
+                            }
+                        }
+                        break;
+                    //case KeyEvent.KEYCODE_DPAD_UP:
+                    //    post(showPitchTempo);
+                    //    setPitchUP();
+                    //    break;
+                    //case KeyEvent.KEYCODE_DPAD_DOWN:
+                    //    post(showPitchTempo);
+                    //    setPitchDN();
+                    //    break;
+                    //case KeyEvent.KEYCODE_DPAD_LEFT:
+                    //    post(showPitchTempo);
+                    //    setTempoDN();
+                    //    break;
+                    //case KeyEvent.KEYCODE_DPAD_RIGHT:
+                    //    post(showPitchTempo);
+                    //    setTempoUP();
+                    //    break;
+                }
+                return false;
+            }
+        }, true);
     }
 
     @Override
@@ -95,19 +136,13 @@ public class play2 extends play {
         w = size.x;
         h = size.y;
 
-        lyricsMarginBottom = h / 5;
+        lyricsMarginBottom = h / 10;
 
-        //if (findViewById(R.id.layout_bottom) != null) {
-        //	lyricsMarginBottom += findViewById(R.id.layout_bottom).getHeight();
-        //}
-        //if (findViewById(R.id.layout_information) != null) {
-        //    lyricsMarginBottom += findViewById(R.id.layout_information).getHeight();
-        //}
         player.setLyricsMarginBottom(lyricsMarginBottom);
 
         // bgkim 폰트 TYPE 적용
-        player.setTypeface(Typeface.createFromAsset(getAssets(), "yun.ttf.mp3"));
-        //player.setTypeface(Typeface.createFromAsset(getAssets(), "nanum.ttf.mp3"));
+        //player.setTypeface(Typeface.createFromAsset(getAssets(), "yun.ttf.mp3"));
+        player.setTypeface(Typeface.createFromAsset(getAssets(), "nanum.ttf.mp3"));
 
         int iStrokeSize = 6;
         //if (P_APPNAME_SKT_BOX.equalsIgnoreCase(m_strSTBVender)) {
@@ -182,7 +217,7 @@ public class play2 extends play {
         });
     }
 
-    private void start() {
+    private void  start() {
         player.open("08888");
     }
 

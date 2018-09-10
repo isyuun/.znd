@@ -172,7 +172,7 @@ class KPLyrics extends Thread {
 
 	@Override
 	public void run() {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + mLyricsPlay.m_redraw + ":" + mLyricsPlay.getHolder() + ":" + mLyricsPlay.getHolder().getSurfaceFrame());
+		if (BuildConfig.DEBUG) Log.e(_toString(), getMethodName() + mLyricsPlay.m_redraw + ":" + mLyricsPlay.getHolder() + ":" + mLyricsPlay.getHolder().getSurfaceFrame());
 
 		mSurfaceHolder = mLyricsPlay.getHolder();
 
@@ -182,8 +182,8 @@ class KPLyrics extends Thread {
 		m_height = rect.height();
 
 		// bgkim 배경을 투명하게
-		//mLyricsPlay.setZOrderOnTop(true);    // necessary
-		//mSurfaceHolder.setFormat(PixelFormat.TRANSLUCENT);
+		mLyricsPlay.setZOrderOnTop(true);    // necessary
+		mSurfaceHolder.setFormat(PixelFormat.TRANSLUCENT);
 
 		runDraw();
 	}

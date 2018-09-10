@@ -152,6 +152,10 @@ class KPLyricsX extends KPLyrics {
 
 	@Override
 	protected void drawLyrics(Canvas canvas, int t) {
+		// 크기확인
+		Rect rect = mLyricsPlay.getHolder().getSurfaceFrame();
+		m_width = rect.width();
+		m_height = rect.height();
 
 		// isyoon_20150427
 		// canvas.setDensity(metrics.densityDpi);

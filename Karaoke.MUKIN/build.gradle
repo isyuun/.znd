@@ -18,10 +18,19 @@ android {
         multiDexEnabled true
     }
 
+    signingConfigs {
+        release {
+            storeFile file('../Karaoke/kr.keumyoung.karaoke.jks')
+            storePassword 'rmadudrmfnq1'
+            keyAlias 'keumyoung'
+            keyPassword 'rmadudrmfnq1'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), '../Karaoke.APP.PLAY/proguard-rules.pro', 'proguard-rules.pro'
         }
     }
 

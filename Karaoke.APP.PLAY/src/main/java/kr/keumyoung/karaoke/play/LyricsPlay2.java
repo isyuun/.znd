@@ -164,7 +164,6 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const/* , SurfaceHolder.Callba
 
 	public LyricsPlay2(Context context) {
 		super(context);
-		init();
 	}
 
 	private _KPLyrics mLyricsPlayThread;

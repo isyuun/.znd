@@ -48,7 +48,6 @@ public class PlayView7 extends PlayView6 {
         super.start();
 
         seek_pitch_tempo = findViewById(R.id.layout_pitch_tempo);
-        seek_pitch_tempo.bringToFront();
         seek_pitch_tempo.setProgress(0);
         seek_pitch_tempo.setMax(0);
         seek_pitch_tempo.setOnCrossClickListener(new ContCircularSeekBar.OnCrossClickListener() {
@@ -102,19 +101,27 @@ public class PlayView7 extends PlayView6 {
 
         setOnKeyListener(new OnKeyListener() {
             @Override
-            public boolean 	onKey(View v, int code, KeyEvent event) {
-                Log.e(__CLASSNAME__, "onKey()" + v + "," + code + "," + event);
+            public boolean onKey(View v, int code, KeyEvent event) {
+                //Log.e(__CLASSNAME__, "onKey()" + v + "," + code + "," + event);
+                if (event.getAction() != KeyEvent.ACTION_DOWN) return false;
                 switch (code) {
+                    case KeyEvent.KEYCODE_ENTER:
+                    case KeyEvent.KEYCODE_SPACE:
+                        break;
                     case KeyEvent.KEYCODE_DPAD_UP:
+                        post(showPitchTempo);
                         setPitchUP();
                         break;
                     case KeyEvent.KEYCODE_DPAD_DOWN:
+                        post(showPitchTempo);
                         setPitchDN();
                         break;
                     case KeyEvent.KEYCODE_DPAD_LEFT:
+                        post(showPitchTempo);
                         setTempoDN();
                         break;
                     case KeyEvent.KEYCODE_DPAD_RIGHT:
+                        post(showPitchTempo);
                         setTempoUP();
                         break;
                 }
@@ -125,6 +132,7 @@ public class PlayView7 extends PlayView6 {
 
     @Override
     public void setPitch(int pitch) {
+        if (!isPlaying()) return;
         super.setPitch(pitch);
         setSeekPitchInfo();
         postDelayed(hidePitchTempo, TIMER_HIDE_PITCH_TEMPO);
@@ -132,6 +140,7 @@ public class PlayView7 extends PlayView6 {
 
     @Override
     public void setTempoPercent(int percent) {
+        if (!isPlaying()) return;
         super.setTempoPercent(percent);
         setSeekTempoInfo();
         postDelayed(hidePitchTempo, TIMER_HIDE_PITCH_TEMPO);

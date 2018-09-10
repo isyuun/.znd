@@ -19,3 +19,30 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+#useLibrary 'org.apache.http.legacy'
+-keep class org.apache.http.** { *; }
+-keepclassmembers class org.apache.http.** {*;}
+-dontwarn org.apache.**
+-keep class android.net.http.** { *; }
+-keepclassmembers class android.net.http.** {*;}
+-dontwarn android.net.**
+
+#javazoom.jl.decoder
+-dontwarn javazoom.jl.**
+-keep class javazoom.jl.** { *; }
+-keep interface javazoom.jl.** { *; }
+
+#FileExplorer (com.lamerman.*)
+-dontwarn com.lamerman.**
+-keep class com.lamerman.** { *; }
+-keep interface com.lamerman.** { *; }
+
+##android.support.v4
+#-dontwarn android.support.**
+#-keep class android.support.v4.app.** { *; }
+#-keep interface android.support.v4.app.** { *; }
+#
+##android.support.v7
+#-dontwarn android.support.v7.**
+#-keep class android.support.v7.** { *; }
+#-keep interface android.support.v7.** { *; }
