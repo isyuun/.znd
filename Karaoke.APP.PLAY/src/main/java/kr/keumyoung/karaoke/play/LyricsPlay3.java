@@ -33,11 +33,13 @@ package kr.keumyoung.karaoke.play;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Build;
 import android.util.Log;
 import android.view.Display;
+import android.view.SurfaceHolder;
 
 import kr.keumyoung.karaoke.api._Const;
 
@@ -68,6 +70,36 @@ class LyricsPlay3 extends LyricsPlay2 {
 		super(context);
 	}
 
+	/**
+	 * 자막하단여백
+	 */
+	private int mLyricsMarginBottom = 0;
+
+	/**
+	 * 자막하단여백
+	 */
+	public void setLyricsMarginBottom(int lyricsMarginBottom) {
+		this.mLyricsMarginBottom = lyricsMarginBottom;
+	}
+
+	/**
+	 * 자막하단여백
+	 */
+	public int getLyricsMarginBottom() {
+		return mLyricsMarginBottom;
+	}
+
+	/**
+	 * <pre>
+	 * AOSP(BHX-S300)
+	 * <a href="http://pms.skdevice.net/redmine/issues/3482">3482 일부노래 자막 하단이 잘려서 출력되는 현상</a>
+	 * 	48859 - '씨스타 - Shake It' 노래 부르기 진행 중 일부 가사 하단부분이 잘려서 출력됩니다.
+	 * </pre>
+	 *
+	 * @author isyoon
+	 * @since 2015. 9. 3.
+	 * @version 1.0
+	 */
 	@Override
 	protected void init() {
 
@@ -77,23 +109,27 @@ class LyricsPlay3 extends LyricsPlay2 {
 		// bgkim 각각의 폰트 사이즈는 비율로 조절
 		// int h = getWindowManager().getDefaultDisplay().getHeight();
 		// int w = getWindowManager().getDefaultDisplay().getWidth();
-		int h = 0;
-		int w = 0;
+		Rect rect = getHolder().getSurfaceFrame();
+		int h = rect.height();
+		int w = rect.width();
+		Log.e(_toString() + _Const.TAG_LYRIC, "init() " + w + "," + h);
 
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-
-        display.getSize(size);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            display.getRealSize(size);
-        }
-        w = size.x;
-        h = size.y;
-		Log.e(_toString() + _Const.TAG_LYRIC, "init() " + w + "," + h + ":" + size);
+        //Display display = getWindowManager().getDefaultDisplay();
+        //Point size = new Point();
+        //
+        //display.getSize(size);
+        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+         //   display.getRealSize(size);
+        //}
+        //w = size.x;
+        //h = size.y;
+		//Log.e(_toString() + _Const.TAG_LYRIC, "init() " + w + "," + h + ":" + size);
 		//w = getWidth();
 		//h = getHeight();
 		////Log.e(_toString() + _Const.TAG_LYRIC, "init() " + w + "," + h + ":" + rect);
 		//Log.e(_toString() + _Const.TAG_LYRIC, "init() " + w + "," + h);
+
+		mLyricsMarginBottom = h / 5;
 
 		int iSongInfoPosition = w / 2;
 		int iTitleFontSize = h / 13;
@@ -102,11 +138,11 @@ class LyricsPlay3 extends LyricsPlay2 {
 		int iReadyFontSize = h / 18;
 
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-			//iSongInfoPosition = (int)(w / 1.5f);
-			iTitleFontSize /= 2;
-			iLyricsFontSize /= 2;
-			iSingerFontSize /= 2;
-			iReadyFontSize /= 2;
+			iSongInfoPosition = w / 4;
+			iTitleFontSize /= 1.5f;
+			iLyricsFontSize /= 1.5f;
+			iSingerFontSize /= 1.5f;
+			iReadyFontSize /= 1.5f;
 		}
 
 		setSongInfoPosition(iSongInfoPosition);
@@ -116,4 +152,55 @@ class LyricsPlay3 extends LyricsPlay2 {
 		setReadyFontSize(iReadyFontSize);
 		setStrokeSize(4);
 	}
+
+	@Override
+	protected void onAttachedToWindow() {
+		if (BuildConfig.DEBUG) Log.wtf(_toString(), getMethodName());
+		super.onAttachedToWindow();
+		setZOrderOnTop(true);    // necessary
+		getHolder().setFormat(PixelFormat.TRANSLUCENT);
+		getHolder().addCallback(this);
+	}
+
+	@Override
+	public void surfaceCreated(SurfaceHolder holder) {
+		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + holder);
+		//super.surfaceCreated(holder);
+		init();
+	}
+
+	@Override
+	public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
+		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + holder + ":" + format + ", " + w + ", " + h);
+		//super.surfaceChanged(holder, format, w, h);
+		init();
+	}
+
+	@Override
+	public void surfaceDestroyed(SurfaceHolder holder) {
+		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + holder);
+		//super.surfaceDestroyed(holder);
+	}
+
+	@Override
+	protected void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+
+		boolean orientation = false;
+		switch(newConfig.orientation){
+			case Configuration.ORIENTATION_LANDSCAPE:
+				//Log.e(__CLASSNAME__, getMethodName() + "[ORIENTATION_LANDSCAPE]" + newConfig);
+				orientation = true;
+				break;
+			case Configuration.ORIENTATION_PORTRAIT:
+				//Log.e(__CLASSNAME__, getMethodName() + "[ORIENTATION_PORTRAIT]" + newConfig);
+				orientation = true;
+				break;
+		}
+
+		if (orientation) {
+			init();
+		}
+	}
+
 }

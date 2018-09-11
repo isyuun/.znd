@@ -182,8 +182,8 @@ class KPLyrics extends Thread {
 		m_height = rect.height();
 
 		// bgkim 배경을 투명하게
-		mLyricsPlay.setZOrderOnTop(true);    // necessary
-		mSurfaceHolder.setFormat(PixelFormat.TRANSLUCENT);
+		//mLyricsPlay.setZOrderOnTop(true);    // necessary
+		//mSurfaceHolder.setFormat(PixelFormat.TRANSLUCENT);
 
 		runDraw();
 	}

@@ -40,7 +40,6 @@ public class PlayView7 extends PlayView6 {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        requestFocus();
     }
 
     @Override
@@ -93,10 +92,8 @@ public class PlayView7 extends PlayView6 {
             }
         });
 
-        //((TextView)findViewById(R.id.txt_pitch)).setText(R.string.example_pitch_0);
-        //((TextView)findViewById(R.id.txt_tempo)).setText(R.string.example_tempo_0);
-        setPitch(0);
-        setTempoPercent(0);
+        //setPitch(0);
+        //setTempoPercent(0);
         clearPitchTempoText();
 
         setOnKeyListener(new OnKeyListener() {
@@ -107,6 +104,13 @@ public class PlayView7 extends PlayView6 {
                 switch (code) {
                     case KeyEvent.KEYCODE_ENTER:
                     case KeyEvent.KEYCODE_SPACE:
+                        if (isPlaying()) {
+                            if (!isPause()) {
+                                pause();
+                            } else {
+                                play();
+                            }
+                        }
                         break;
                     case KeyEvent.KEYCODE_DPAD_UP:
                         post(showPitchTempo);
@@ -150,6 +154,8 @@ public class PlayView7 extends PlayView6 {
         String text = getString(R.string.label_pitch) + "\n" + getString(R.string.label_tempo);
         text_pitch_tempo.setText(text);
         seek_pitch_tempo.setProgress(0);
+        ((TextView)findViewById(R.id.txt_pitch)).setText(R.string.example_pitch_0);
+        ((TextView)findViewById(R.id.txt_tempo)).setText(R.string.example_tempo_0);
     }
 
     private static int TIMER_HIDE_PITCH_TEMPO = 3000;

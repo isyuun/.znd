@@ -39,9 +39,11 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
+import android.view.SurfaceHolder;
 import android.view.WindowManager;
 
 import kr.keumyoung.karaoke.api._Const;
@@ -109,6 +111,10 @@ class KPLyricsX extends KPLyrics {
 		}
 	}
 
+	public SurfaceHolder getHolder() {
+		return this.mLyricsPlay.getHolder();
+	}
+
 	/**
 	 * <pre>
 	 * <a href="http://stackoverflow.com/questions/24332205/android-graphics-picture-not-being-drawn-in-api-14">android.graphics.Picture not being drawn in API 14+</a>
@@ -121,22 +127,25 @@ class KPLyricsX extends KPLyrics {
 
 		metrics = getDisplayMetrics();
 
-		Display display = getWindowManager().getDefaultDisplay();
-		Point displaySize = new Point();
-
 		// int h = display.getHeight();
 		// int w = display.getWidth();
-		int h = 0;
-		int w = 0;
+		Rect rect = getHolder().getSurfaceFrame();
+		int h = rect.height();
+		int w = rect.width();
+		Log.e(_toString() + _Const.TAG_LYRIC, "init() " + w + "," + h);
 
-		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB_MR2) {
-			display.getRealSize(displaySize);
-			w = displaySize.x;
-			h = displaySize.y;
-		}
+		//Display display = getWindowManager().getDefaultDisplay();
+		//Point size = new Point();
+        //
+		//display.getSize(size);
+		//if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+		//	display.getRealSize(size);
+		//}
+		//w = size.x;
+		//h = size.y;
 
 		String text = "" + metrics;
-		text += "\n[RECT]" + "(" + w + "," + h + ")" + displaySize;
+		text += "\n[RECT]" + "(" + w + "," + h + ")" + rect;
 		text += "\n[RECT]" + "metrics.densityDpi:" + metrics.densityDpi;
 		text += "\n[RECT]" + "metrics.density:" + metrics.density;
 		text += "\n[RECT]" + "metrics.scaledDensity:" + metrics.scaledDensity;
@@ -153,7 +162,7 @@ class KPLyricsX extends KPLyrics {
 	@Override
 	protected void drawLyrics(Canvas canvas, int t) {
 		// 크기확인
-		Rect rect = mLyricsPlay.getHolder().getSurfaceFrame();
+		Rect rect = getHolder().getSurfaceFrame();
 		m_width = rect.width();
 		m_height = rect.height();
 
@@ -192,8 +201,11 @@ class KPLyricsX extends KPLyrics {
 		int l = m + mLyricsPlay.m_iSongInfoPosition;
 		int c = w + mLyricsPlay.m_iSongInfoPosition;
 
+		//int r = mLyricsPlay.m_iSongInfoPosition * 2;
+		int r = m_width;
+
 		Rect r1 = new Rect(l, y - mLyricsPlay.m_iSingerFontSize, c, y + (mLyricsPlay.m_iSingerFontSize / 3));
-		Rect r2 = new Rect(c, y - mLyricsPlay.m_iSingerFontSize, mLyricsPlay.m_iSongInfoPosition * 2, y + (mLyricsPlay.m_iSingerFontSize / 3));
+		Rect r2 = new Rect(c, y - mLyricsPlay.m_iSingerFontSize, r, y + (mLyricsPlay.m_iSingerFontSize / 3));
 
 		// if (BuildConfig.DEBUG) _LOG.i(_toString(), getMethodName() + mLyricsPlay.m_iSongInfoPosition + ":" + r1 + ":" + r2);
 
@@ -241,9 +253,9 @@ class KPLyricsX extends KPLyrics {
 		Rect r2 = outSize(paint, getString(R.string.hint_song_composer));
 		Rect r3 = outSize(paint, getString(R.string.hint_song_lyricist));
 
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + strSinger + ":" + r1);
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + strComposer + ":" + r2);
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + strLyricist + ":" + r3);
+		//if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + strSinger + ":" + r1);
+		//if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + strComposer + ":" + r2);
+		//if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + strLyricist + ":" + r3);
 
 		int w = r1.width();
 		Rect rect = r1;

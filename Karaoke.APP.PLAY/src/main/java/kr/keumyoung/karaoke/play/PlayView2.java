@@ -331,8 +331,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 	/**
 	 */
 	private void create() {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName());
-
+		if (BuildConfig.DEBUG) Log.wtf(_toString(), getMethodName() + "[ST]");
 		mLyricsPlay = new _LyricsPlay(context);
 
 		setSongData(new _SongData());
@@ -342,6 +341,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 		mLyricsPlay.setVisibility(View.INVISIBLE);
 
 		setRedraw(true);
+		if (BuildConfig.DEBUG) Log.wtf(_toString(), getMethodName() + "[ED]");
 	}
 
 	@Override

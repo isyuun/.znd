@@ -59,7 +59,7 @@ import kr.kymedia.karaoke.play.impl.ISongPlay;
  * @see _SoundTouchPlay
  * @since 2015. 3. 12.
  */
-class PlayView4 extends PlayView3X {
+class PlayView4 extends PlayView3 {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
 	private String _toString() {

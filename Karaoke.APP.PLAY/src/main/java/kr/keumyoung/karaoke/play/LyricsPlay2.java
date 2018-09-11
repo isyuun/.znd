@@ -32,9 +32,11 @@
 package kr.keumyoung.karaoke.play;
 
 import android.content.Context;
+import android.graphics.PixelFormat;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.util.Log;
+import android.view.SurfaceHolder;
 import android.view.View;
 
 import kr.keumyoung.karaoke.api._Const;
@@ -46,7 +48,7 @@ import kr.keumyoung.karaoke.data._SongData;
  * @since 2015. 2. 3.
  * @version 1.0
  */
-class LyricsPlay2 extends LyricsPlay1 implements _Const/* , SurfaceHolder.Callback */ {
+class LyricsPlay2 extends LyricsPlay1 implements _Const , SurfaceHolder.Callback  {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
 	private String _toString() {
@@ -196,17 +198,19 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const/* , SurfaceHolder.Callba
 		}
 	}
 
-	// private boolean hasSurface;
+	private boolean hasSurface;
 
+	SurfaceHolder holder;
 	protected void init() {
 		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName());
-		// holder = getHolder();
-		// bgkim 배경을 투명하게
-		// getHolder().setFormat(PixelFormat.TRANSLUCENT);
-		// getHolder().addCallback(this);
-		// hasSurface = false;
-		// setFocusable(true);
-		// setFocusableInTouchMode(true);
+		 this.holder = getHolder();
+		 //bgkim 배경을 투명하게
+		 setZOrderOnTop(true);    // necessary
+		 getHolder().setFormat(PixelFormat.TRANSLUCENT);
+		 getHolder().addCallback(this);
+		 hasSurface = false;
+		 //setFocusable(true);
+		 //setFocusableInTouchMode(true);
 	}
 
 	private void start() {
@@ -276,39 +280,40 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const/* , SurfaceHolder.Callba
 
 	public void pause() {
 		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName());
-		setRedraw(true);
+		setVisibility(View.VISIBLE);
+		setRedraw(false);
 	}
 
 	public void resume() {
 		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName());
+		setVisibility(View.VISIBLE);
 		setRedraw(false);
 	}
 
-	// @Override
-	// public void surfaceCreated(SurfaceHolder holder) {
-	// if (BuildConfig.DEBUG) _LOG.e(_toString(), getMethodName() + holder);
-	// //this.holder = holder;
-	// //hasSurface = true;
-	// //if (mLyricsViewThread == null) {
-	// // mLyricsViewThread = new KPLyrics(this);
-	// //}
-	// }
-	//
-	// @Override
-	// public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
-	// if (BuildConfig.DEBUG) _LOG.e(_toString(), getMethodName() + holder + ":" + format + ", " + w + ", " + h);
-	// //this.holder = holder;
-	// //hasSurface = true;
-	// //if (mLyricsViewThread != null) {
-	// // mLyricsViewThread.onWindowResize(w, h);
-	// //}
-	// }
-	//
-	// @Override
-	// public void surfaceDestroyed(SurfaceHolder holder) {
-	// if (BuildConfig.DEBUG) _LOG.e(_toString(), getMethodName() + holder);
-	// //this.holder = holder;
-	// //hasSurface = false;
-	//
-	// }
+	 @Override
+	 public void surfaceCreated(SurfaceHolder holder) {
+		 if (BuildConfig.DEBUG) Log.e(_toString(), getMethodName() + holder);
+		 this.holder = holder;
+		 hasSurface = true;
+		 //if (mLyricsViewThread == null) {
+		 // mLyricsViewThread = new KPLyrics(this);
+		 //}
+	 }
+
+	 @Override
+	 public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
+		if (BuildConfig.DEBUG) Log.e(_toString(), getMethodName() + holder + ":" + format + ", " + w + ", " + h);
+		this.holder = holder;
+		hasSurface = true;
+		//if (mLyricsPlayThread != null) {
+		//	mLyricsPlayThread.onWindowResize(w, h);
+		//}
+	 }
+
+	 @Override
+	 public void surfaceDestroyed(SurfaceHolder holder) {
+		 if (BuildConfig.DEBUG) Log.e(_toString(), getMethodName() + holder);
+		 //this.holder = holder;
+		 hasSurface = false;
+	 }
 }

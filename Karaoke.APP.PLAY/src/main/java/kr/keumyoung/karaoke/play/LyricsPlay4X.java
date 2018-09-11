@@ -53,7 +53,7 @@ import android.content.Context;
  * @since 2015. 3. 12.
  * @version 1.0
  */
-class LyricsPlay4X extends LyricsPlay3X {
+class LyricsPlay4X extends LyricsPlay3 {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
 	private String _toString() {

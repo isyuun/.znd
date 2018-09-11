@@ -15,6 +15,7 @@ import kr.keumyoung.karaoke.mukin.BuildConfig;
 import kr.keumyoung.karaoke.mukin.R;
 import kr.keumyoung.karaoke.play._Listener;
 import kr.keumyoung.karaoke.play._PlayView;
+import kr.kymedia.karaoke.api.KPItem;
 import kr.kymedia.karaoke.widget.util.WidgetUtils;
 
 public class play2 extends play {
@@ -24,14 +25,27 @@ public class play2 extends play {
         return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
     }
 
-    _PlayView player;
     FloatingActionButton fab;
+
+    _PlayView player;
+    KPItem item;
+    String song_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        this.item = getIntent().getExtras().getParcelable("item");
+        Log.e(__CLASSNAME__, getMethodName() + "\n" + this.item.toString(2));
+        //String number = item.getValue("number");
+        //String title = item.getValue("title");
+        //String artist = item.getValue("artist");
+        //String composer = item.getValue("composer");
+        //String lyricist = item.getValue("lyricist");
+        song_id = String.format("%05d", Integer.parseInt(item.getValue("number")));
+
         this.fab = (FloatingActionButton) findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,52 +65,13 @@ public class play2 extends play {
             }
         });
 
-        player();
-
-        WidgetUtils.setOnKeyListener(this, player, new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int code, KeyEvent event) {
-                if (event.getAction() != KeyEvent.ACTION_DOWN) return false;
-                switch (code) {
-                    case KeyEvent.KEYCODE_ENTER:
-                    case KeyEvent.KEYCODE_SPACE:
-                        //start
-                        if (!player.isPrepared()) {
-                            start();
-                        } else if (player.isPlaying()) {
-                            if (!player.isPause()) {
-                                pause();
-                            } else {
-                                resume();
-                            }
-                        }
-                        break;
-                    //case KeyEvent.KEYCODE_DPAD_UP:
-                    //    post(showPitchTempo);
-                    //    setPitchUP();
-                    //    break;
-                    //case KeyEvent.KEYCODE_DPAD_DOWN:
-                    //    post(showPitchTempo);
-                    //    setPitchDN();
-                    //    break;
-                    //case KeyEvent.KEYCODE_DPAD_LEFT:
-                    //    post(showPitchTempo);
-                    //    setTempoDN();
-                    //    break;
-                    //case KeyEvent.KEYCODE_DPAD_RIGHT:
-                    //    post(showPitchTempo);
-                    //    setTempoUP();
-                    //    break;
-                }
-                return false;
-            }
-        }, true);
+        fab.requestFocus();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        //runOnUiThread(start);   //test
+        player();
     }
 
     /**
@@ -121,28 +96,9 @@ public class play2 extends play {
         //player.setType(TYPE.MEDIAPLAYERPLAY);
         player.start();
 
-        int lyricsMarginBottom = 10;
-
-        int h = 0;
-        int w = 0;
-
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-
-        display.getSize(size);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            display.getRealSize(size);
-        }
-        w = size.x;
-        h = size.y;
-
-        lyricsMarginBottom = h / 10;
-
-        player.setLyricsMarginBottom(lyricsMarginBottom);
-
         // bgkim 폰트 TYPE 적용
-        //player.setTypeface(Typeface.createFromAsset(getAssets(), "yun.ttf.mp3"));
-        player.setTypeface(Typeface.createFromAsset(getAssets(), "nanum.ttf.mp3"));
+        player.setTypeface(Typeface.createFromAsset(getAssets(), "yun.ttf.mp3"));
+        //player.setTypeface(Typeface.createFromAsset(getAssets(), "nanum.ttf.mp3"));
 
         int iStrokeSize = 6;
         //if (P_APPNAME_SKT_BOX.equalsIgnoreCase(m_strSTBVender)) {
@@ -218,7 +174,7 @@ public class play2 extends play {
     }
 
     private void  start() {
-        player.open("08888");
+        player.open(this.song_id);
     }
 
     private void play() {
