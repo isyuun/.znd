@@ -79,8 +79,6 @@ class KPLyricsX extends KPLyrics {
 		return name;
 	}
 
-	DisplayMetrics metrics;
-
 	public DisplayMetrics getDisplayMetrics() {
 		try {
 			return mLyricsPlay.getResources().getDisplayMetrics();
@@ -125,27 +123,9 @@ class KPLyricsX extends KPLyrics {
 	KPLyricsX(_LyricsPlay lyricsPlay) {
 		super(lyricsPlay);
 
-		metrics = getDisplayMetrics();
-
-		// int h = display.getHeight();
-		// int w = display.getWidth();
-		Rect rect = getHolder().getSurfaceFrame();
-		int h = rect.height();
-		int w = rect.width();
-		Log.e(_toString() + _Const.TAG_LYRIC, "init() " + w + "," + h);
-
-		//Display display = getWindowManager().getDefaultDisplay();
-		//Point size = new Point();
-        //
-		//display.getSize(size);
-		//if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-		//	display.getRealSize(size);
-		//}
-		//w = size.x;
-		//h = size.y;
+		DisplayMetrics metrics = getDisplayMetrics();
 
 		String text = "" + metrics;
-		text += "\n[RECT]" + "(" + w + "," + h + ")" + rect;
 		text += "\n[RECT]" + "metrics.densityDpi:" + metrics.densityDpi;
 		text += "\n[RECT]" + "metrics.density:" + metrics.density;
 		text += "\n[RECT]" + "metrics.scaledDensity:" + metrics.scaledDensity;

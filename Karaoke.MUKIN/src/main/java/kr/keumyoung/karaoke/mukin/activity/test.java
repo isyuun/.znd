@@ -14,12 +14,12 @@ import android.view.WindowManager;
 import kr.keumyoung.karaoke.mukin.R;
 import kr.keumyoung.karaoke.app.AppCompatActivity;
 
-public class play extends AppCompatActivity {
+public class test extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play);
+        setContentView(R.layout.activity_test);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

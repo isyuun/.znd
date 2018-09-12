@@ -84,9 +84,6 @@ class LyricsPlay4X extends LyricsPlay3 {
 		this.song = song;
 	}
 
-	/**
-	 * @see kr.kymedia.kykaraoke.tv.play.LyricsPlay2#isPlaying()
-	 */
 	@Override
 	public boolean isPlaying() {
 		if (song != null) {
@@ -96,9 +93,6 @@ class LyricsPlay4X extends LyricsPlay3 {
 		}
 	}
 
-	/**
-	 * @see kr.kymedia.kykaraoke.tv.play.LyricsPlay2#getCurrentPosition()
-	 */
 	@Override
 	public int getCurrentPosition() {
 
@@ -112,9 +106,6 @@ class LyricsPlay4X extends LyricsPlay3 {
 		return ret;
 	}
 
-	/**
-	 * @see kr.kymedia.kykaraoke.tv.play.LyricsPlay2#getDuration()
-	 */
 	@Override
 	public int getDuration() {
 

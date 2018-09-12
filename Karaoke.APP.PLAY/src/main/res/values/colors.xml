@@ -2,7 +2,7 @@
 <resources>
 
     <!-- background color -->
-    <color name="bg_title">#C870608F</color>
+    <color name="bg_title">#C990608F</color>
     <color name="bg_name">#C84D4379</color>
     <color name="bg_main">#CC5041A4</color>
     <color name="bg_main_menu_dark">#FF5041A4</color>

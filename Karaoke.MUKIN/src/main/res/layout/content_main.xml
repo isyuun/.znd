@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:imeOptions="actionSend"
         android:inputType="number"
+        android:maxLength="5"
         android:maxLines="1"
         android:text="6112"
         android:visibility="visible"

@@ -1,14 +1,10 @@
 package kr.keumyoung.karaoke.mukin.activity;
 
-import android.graphics.Point;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
-import android.view.Display;
-import android.view.KeyEvent;
 import android.view.View;
 
 import kr.keumyoung.karaoke.mukin.BuildConfig;
@@ -16,7 +12,6 @@ import kr.keumyoung.karaoke.mukin.R;
 import kr.keumyoung.karaoke.play._Listener;
 import kr.keumyoung.karaoke.play._PlayView;
 import kr.kymedia.karaoke.api.KPItem;
-import kr.kymedia.karaoke.widget.util.WidgetUtils;
 
 public class play2 extends play {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
@@ -42,7 +37,7 @@ public class play2 extends play {
         //String artist = item.getValue("artist");
         //String composer = item.getValue("composer");
         //String lyricist = item.getValue("lyricist");
-        song_id = String.format("%05d", Integer.parseInt(item.getValue("number")));
+        this.song_id = String.format("%05d", Integer.parseInt(item.getValue("number")));
 
         this.fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -171,6 +166,8 @@ public class play2 extends play {
                 return true;
             }
         });
+
+        player.song_id = this.song_id;
     }
 
     private void  start() {

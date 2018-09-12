@@ -129,7 +129,7 @@ class LyricsPlay3 extends LyricsPlay2 {
 		////Log.e(_toString() + _Const.TAG_LYRIC, "init() " + w + "," + h + ":" + rect);
 		//Log.e(_toString() + _Const.TAG_LYRIC, "init() " + w + "," + h);
 
-		mLyricsMarginBottom = h / 5;
+		mLyricsMarginBottom = h / 8;
 
 		int iSongInfoPosition = w / 2;
 		int iTitleFontSize = h / 13;

@@ -1,8 +1,10 @@
 package kr.keumyoung.karaoke.mukin.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,11 +14,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import kr.keumyoung.karaoke.mukin.app.AppCompatActivity;
+import kr.keumyoung.karaoke.app.AppCompatActivity;
+import kr.keumyoung.karaoke.mukin.BuildConfig;
 import kr.keumyoung.karaoke.mukin.R;
+import kr.keumyoung.karaoke.mukin.coupon.activity._preference;
 
-public class main extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
+
+    private String _toString() {
+        return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +66,14 @@ public class main extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        //startActivity(new Intent(this, _preference.class));
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Log.e(__CLASSNAME__, getMethodName() + item);
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -70,6 +81,7 @@ public class main extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(this, _preference.class));
             return true;
         }
 

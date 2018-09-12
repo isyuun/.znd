@@ -6,19 +6,20 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activity.play"
+    tools:ignore="HardcodedText"
     tools:showIn="@layout/activity_play">
 
     <ImageView
         android:id="@+id/back_ground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/bg"
         android:scaleType="centerCrop"
+        android:src="@drawable/bg"
         android:visibility="visible" />
 
     <include
         layout="@layout/player"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="428"/>
+        android:layout_weight="428" />
 </android.support.constraint.ConstraintLayout>

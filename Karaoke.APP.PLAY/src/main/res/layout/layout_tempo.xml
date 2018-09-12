@@ -27,7 +27,6 @@
         android:text="@string/label_tempo"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/solid_white_choco"
-        android:textSize="@dimen/text_size_large"
         android:textStyle="bold"
         android:visibility="visible"/>
 
@@ -46,7 +45,6 @@
         android:text="@string/example_tempo"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/solid_white_choco"
-        android:textSize="@dimen/text_size_large"
         android:textStyle="bold"
         android:visibility="visible"/>
 

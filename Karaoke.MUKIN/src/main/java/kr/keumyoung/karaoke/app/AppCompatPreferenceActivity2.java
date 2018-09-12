@@ -1,4 +1,4 @@
-package kr.keumyoung.karaoke.mukin.app;
+package kr.keumyoung.karaoke.app;
 
 import kr.keumyoung.karaoke.mukin.BuildConfig;
 

@@ -76,6 +76,9 @@ public class PlayView7 extends PlayView6 {
 
             @Override
             public void onCenterClick(View v) {
+                if (!isPrepared()) {
+                    open(PlayView7.this.song_id);
+                }
                 setPitch(0);
                 setTempoPercent(0);
                 clearPitchTempoText();
@@ -231,6 +234,4 @@ public class PlayView7 extends PlayView6 {
         seek_pitch_tempo.stopLoading();
         return ret;
     }
-
-
 }

@@ -1,4 +1,4 @@
-package kr.keumyoung.karaoke.mukin.app;
+package kr.keumyoung.karaoke.app;
 
 import android.accounts.Account;
 import android.os.Build;
@@ -8,7 +8,7 @@ import android.view.View;
 import kr.keumyoung.karaoke.mukin.BuildConfig;
 import kr.kymedia.karaoke.util.EnvironmentUtils;
 
-public class PreferenceFragment extends android.preference.PreferenceFragment {
+public class Fragment2 extends Fragment {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
     private String _toString() {

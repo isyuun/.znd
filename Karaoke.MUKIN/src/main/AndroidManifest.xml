@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon,android:theme">
         <activity
-            android:name="kr.keumyoung.karaoke.mukin.activity._main"
+            android:name=".activity._main"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
@@ -23,10 +23,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="kr.keumyoung.karaoke.mukin.activity._play"
+            android:name=".activity._play"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_play"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.test"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_test"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".coupon.activity._preference"
+            android:label="@string/title_activity_settings" />
     </application>
 
 </manifest>

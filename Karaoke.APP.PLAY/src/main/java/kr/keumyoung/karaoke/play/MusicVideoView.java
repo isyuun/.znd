@@ -101,7 +101,7 @@ public class MusicVideoView extends android.widget.VideoView {
 	protected void onAttachedToWindow() {
 		super.onAttachedToWindow();
 		if (!isInEditMode()) {
-			getDisPlaySize();
+			//getDisPlaySize();
 		}
 	}
 
@@ -112,36 +112,36 @@ public class MusicVideoView extends android.widget.VideoView {
 		return ((Activity) this.context).getWindowManager();
 	}
 
-	Point displaySize = new Point();
-
-	private void getDisPlaySize() {
-		DisplayMetrics outMetrics = getResources().getDisplayMetrics();
-
-		Display display = null;
-		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
-			display = ((Activity) this.context).getWindow().getDecorView().getDisplay();
-			//Display display = getWindowManager().getDefaultDisplay();
-
-			if (display != null) {
-				//display.getRealMetrics(outMetrics);
-				display.getRealSize(displaySize);
-			}
-		}
-
-		Log.e(_toString() + _Const.TAG_VIDEO, "getDisPlaySize() " + displaySize);
-	}
+	//Point displaySize = new Point();
+    //
+	//private void getDisPlaySize() {
+	//	DisplayMetrics outMetrics = getResources().getDisplayMetrics();
+    //
+	//	Display display = null;
+	//	if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
+	//		display = ((Activity) this.context).getWindow().getDecorView().getDisplay();
+	//		//Display display = getWindowManager().getDefaultDisplay();
+    //
+	//		if (display != null) {
+	//			//display.getRealMetrics(outMetrics);
+	//			display.getRealSize(displaySize);
+	//		}
+	//	}
+    //
+	//	Log.e(_toString() + _Const.TAG_VIDEO, "getDisPlaySize() " + displaySize);
+	//}
 
 	// 븅신...어디선본건있어가지구...쓸데없는짓은...
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		int x = widthMeasureSpec;
-		int y = heightMeasureSpec;
+		//int x = widthMeasureSpec;
+		//int y = heightMeasureSpec;
 		// 븅신...이렇게 하면 어찌될까~~~
 		// if (displaySize != null) {
 		// 	x = displaySize.x;
 		// 	y = displaySize.y;
 		// }
-		setMeasuredDimension(x, y);
-		if (BuildConfig.DEBUG) Log.wtf(_toString() + _Const.TAG_VIDEO, "onMeasure() " + "(" + widthMeasureSpec + "," + heightMeasureSpec + ")" + "->" + "(" + x + "," + y + ")" + ":" + displaySize);
+		setMeasuredDimension(widthMeasureSpec, heightMeasureSpec);
+		if (BuildConfig.DEBUG) Log.wtf(_toString() + _Const.TAG_VIDEO, "onMeasure() " + "(" + widthMeasureSpec + "," + heightMeasureSpec + ")"/* + "->" + "(" + x + "," + y + ")" + ":" + displaySize*/);
 	}
 }

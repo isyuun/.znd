@@ -4,8 +4,6 @@ android {
     useLibrary 'org.apache.http.legacy'
     compileSdkVersion 27
 
-
-
     defaultConfig {
         applicationId "kr.keumyoung.karaoke.mukin"
         minSdkVersion 15
@@ -43,6 +41,7 @@ dependencies {
     implementation project(':Karaoke.APP.PLAY3')
     implementation project(':Karaoke.APP.PLAY4')
     implementation project(':Karaoke.APP.WIDGET')
+    implementation project(':Karaoke.MUKIN.COUPON')
 
     implementation 'com.android.support:multidex:1.0.3'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
