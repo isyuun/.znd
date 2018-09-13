@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 
-import kr.keumyoung.karaoke.mukin.coupon.Fragment2;
+import kr.keumyoung.karaoke.app.Fragment2;
 import kr.keumyoung.karaoke.mukin.coupon.R;
 
 

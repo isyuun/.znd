@@ -1,4 +1,4 @@
-include ':AndroidJaudiotagger'
+include ':AndroidJaudiotagger', ':Karaoke.KEUMYOUNG'
 include ':Karaoke'
 include ':Karaoke.API'
 include ':Karaoke.APP.PLAY'

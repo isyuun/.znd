@@ -31,7 +31,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.keumyoung.karaoke.mukin.coupon.PreferenceFragment;
+import kr.keumyoung.karaoke.app.PreferenceFragment;
 import kr.keumyoung.karaoke.mukin.coupon.R;
 
 import static android.Manifest.permission.READ_CONTACTS;

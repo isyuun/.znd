@@ -28,6 +28,9 @@ repositories {
 }
 
 dependencies {
+    implementation project(':Karaoke')
+    implementation project(':Karaoke.KEUMYOUNG')
+
     implementation 'com.loopj.android:android-async-http:1.4.9'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'
