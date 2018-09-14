@@ -10,6 +10,9 @@
 apply plugin: 'com.android.library'
 
 dependencies {
+    implementation 'cz.msebera.android:httpclient:4.3.6'
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+
     implementation project(':Karaoke')
     //debugimplementation project(path:':Karaoke', configuration: 'debug')
     //releaseimplementation project(path:':Karaoke', configuration: 'release')
@@ -18,7 +21,6 @@ dependencies {
     //debugimplementation project(path:':RoundedImageView', configuration: 'debug')
     //releaseimplementation project(path:':RoundedImageView', configuration: 'release')
 
-    implementation 'cz.msebera.android:httpclient:4.3.6'
     implementation fileTree(dir: 'libs', include: '*.jar')
     implementation 'com.google.android.gms:play-services-base:15.0.1'
 }

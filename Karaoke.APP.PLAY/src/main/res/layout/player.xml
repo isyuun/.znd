@@ -35,13 +35,12 @@
         android:id="@+id/txt_lyric_sleep_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
         android:text="0"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#FF0000"
-        android:textSize="30sp"
         android:textStyle="bold"
-        android:visibility="invisible" />
+        android:visibility="visible" />
 
 </kr.keumyoung.karaoke.play._PlayView>

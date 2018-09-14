@@ -38,6 +38,7 @@ import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.View;
+import android.widget.TextView;
 
 import kr.keumyoung.karaoke.api._Const;
 import kr.keumyoung.karaoke.data._SongData;
@@ -168,35 +169,36 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const , SurfaceHolder.Callback
 		super(context);
 	}
 
-	private _KPLyrics mLyricsPlayThread;
+	private _KPLyrics mKPLyrics;
 
-	public _KPLyrics getLyricsPlayThread() {
-		return mLyricsPlayThread;
+	public _KPLyrics getKPLyrics() {
+		return mKPLyrics;
 	}
 
-	/**
-	 * 가사처리슬립추가
-	 */
-	private long mThreadSleepTime = 0;
-
-	/**
-	 * 가사처리슬립추가
-	 */
-	public long getThreadSleepTime() {
-		return mThreadSleepTime;
-	}
-
-	/**
-	 * 가사처리슬립추가
-	 */
-	public void setThreadSleepTime(long time) {
-
-		Log.wtf(_toString() + _Const.TAG_LYRIC, getMethodName() + time);
-		this.mThreadSleepTime = time;
-		if (mLyricsPlayThread != null) {
-			mLyricsPlayThread.setThreadSleepTime(time);
-		}
-	}
+	///**
+	// * 가사처리슬립추가
+	// */
+	//private long mThreadSleepTime = 0;
+    //
+	///**
+	// * 가사처리슬립추가
+	// */
+	//public long getSleepTime() {
+	//	return mThreadSleepTime;
+	//}
+    //
+	///**
+	// * 가사처리슬립추가
+	// */
+	//public void setSleepTime(long time) {
+    //
+	//	Log.wtf(_toString() + _Const.TAG_LYRIC, getMethodName() + time);
+	//	this.mThreadSleepTime = time;
+	//	if (mKPLyrics != null) {
+	//		mKPLyrics.setSleepTime(time);
+	//	}
+	//	((TextView) findViewById(R.id.txt_lyric_sleep_info)).setText("" + time);
+	//}
 
 	private boolean hasSurface;
 
@@ -214,19 +216,19 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const , SurfaceHolder.Callback
 	}
 
 	private void start() {
-		Log.w(_toString(), getMethodName() + "[ST]" + mLyricsPlayThread + ":" + getHolder());
+		Log.w(_toString(), getMethodName() + "[ST]" + mKPLyrics + ":" + getHolder());
 		try {
-			if (mLyricsPlayThread != null) {
-				mLyricsPlayThread.interrupt();
-				mLyricsPlayThread = null;
+			if (mKPLyrics != null) {
+				mKPLyrics.interrupt();
+				mKPLyrics = null;
 			}
 
-			// if (mLyricsPlayThread == null)
+			// if (mKPLyrics == null)
 			{
-				mLyricsPlayThread = new _KPLyrics((_LyricsPlay) this);
+				mKPLyrics = new _KPLyrics((_LyricsPlay) this);
 			}
 
-			mLyricsPlayThread.start();
+			mKPLyrics.start();
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -234,7 +236,7 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const , SurfaceHolder.Callback
 	}
 
 	public void play() throws Exception {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + "[ST]" + ":" + mThreadSleepTime + ":" + mLyricsPlayThread + ":" + getHolder());
+		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + "[ST]"/* + ":" + mThreadSleepTime*/ + ":" + mKPLyrics + ":" + getHolder());
 
 		try {
 			setVisibility(View.VISIBLE);
@@ -244,34 +246,38 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const , SurfaceHolder.Callback
 			start();
 
 			// 재생전설정값박기
-			Log.w(_toString(), getMethodName() + ":" + mThreadSleepTime + ":" + mLyricsPlayThread + ":" + getHolder());
-			setThreadSleepTime(mThreadSleepTime);
+			Log.e(_toString(), getMethodName()/* + ":" + mThreadSleepTime*/ + ":" + mKPLyrics + ":" + getHolder());
+			//setSleepTime(mThreadSleepTime);
+			if (mKPLyrics != null) {
+				mKPLyrics.setSleepTime(0);
+				((TextView) findViewById(R.id.txt_lyric_sleep_info)).setText("" + mKPLyrics.getSleepTime());
+			}
 
 		} catch (Exception e) {
 
-			Log.wtf(_toString(), getMethodName() + "[NG]" + ":" + mThreadSleepTime + mLyricsPlayThread + ":" + getHolder() + "\n" + Log.getStackTraceString(e));
+			Log.wtf(_toString(), getMethodName() + "[NG]"/* + ":" + mThreadSleepTime*/ + ":" + mKPLyrics + ":" + getHolder() + "\n" + Log.getStackTraceString(e));
 			//e.printStackTrace();
 			throw (e);
 		}
 
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + "[ED]" + ":" + mThreadSleepTime + mLyricsPlayThread + ":" + getHolder());
+		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + "[ED]"/* + ":" + mThreadSleepTime*/ + ":" + mKPLyrics + ":" + getHolder());
 	}
 
 	public void stop() throws Exception {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + mLyricsPlayThread + ":" + getHolder());
+		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + mKPLyrics + ":" + getHolder());
 
 		try {
 			setVisibility(View.INVISIBLE);
 
 			setRedraw(true);
 
-			if (mLyricsPlayThread != null) {
-				mLyricsPlayThread.requestExitAndWait();
-				mLyricsPlayThread = null;
+			if (mKPLyrics != null) {
+				mKPLyrics.requestExitAndWait();
+				mKPLyrics = null;
 			}
 		} catch (Exception e) {
 
-			if (BuildConfig.DEBUG) Log.w(_toString() + TAG_ERR, "[NG]" + getMethodName() + mLyricsPlayThread + ":" + getHolder());
+			if (BuildConfig.DEBUG) Log.w(_toString() + TAG_ERR, "[NG]" + getMethodName() + mKPLyrics + ":" + getHolder());
 			e.printStackTrace();
 			throw (e);
 		}
@@ -305,8 +311,8 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const , SurfaceHolder.Callback
 		if (BuildConfig.DEBUG) Log.e(_toString(), getMethodName() + holder + ":" + format + ", " + w + ", " + h);
 		this.holder = holder;
 		hasSurface = true;
-		//if (mLyricsPlayThread != null) {
-		//	mLyricsPlayThread.onWindowResize(w, h);
+		//if (mKPLyrics != null) {
+		//	mKPLyrics.onWindowResize(w, h);
 		//}
 	 }
 

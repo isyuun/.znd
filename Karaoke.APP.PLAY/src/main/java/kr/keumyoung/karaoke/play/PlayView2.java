@@ -211,7 +211,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 	}
 
 	public boolean getReady() {
-		return mLyricsPlay.getLyricsPlayThread().m_bReady;
+		return mLyricsPlay.getKPLyrics().m_bReady;
 	}
 
 	public String getSongTitle() {
@@ -405,7 +405,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 	private final Runnable songTime = new Runnable() {
 		@Override
 		public void run() {
-			mLyricsPlay.getLyricsPlayThread().rePaint((int) m_time);
+			mLyricsPlay.getKPLyrics().rePaint((int) m_time);
 			seek((int) m_time);
 			setRedraw(false);
 		}
@@ -515,8 +515,8 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 		// boolean ret = super.stop();
 
 		try {
-			if (mLyricsPlay != null && mLyricsPlay.getLyricsPlayThread() != null) {
-				mLyricsPlay.getLyricsPlayThread().init();
+			if (mLyricsPlay != null && mLyricsPlay.getKPLyrics() != null) {
+				mLyricsPlay.getKPLyrics().init();
 			}
 
 			if (m_state != PLAY_ENGAGE.PLAY_STOP) {

@@ -326,8 +326,8 @@ class PlayView4X extends PlayView4 implements ISongPlay {
 			if (type == TYPE.SOUNDTOUCHPLAY) {
 				setPlayState(PLAY_ENGAGE.PLAY_STOP);
 
-				if (getLyricsPlay() != null && getLyricsPlay().getLyricsPlayThread() != null) {
-					getLyricsPlay().getLyricsPlayThread().init();
+				if (getLyricsPlay() != null && getLyricsPlay().getKPLyrics() != null) {
+					getLyricsPlay().getKPLyrics().init();
 				}
 
 				getLyricsPlay().stop();

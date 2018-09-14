@@ -36,13 +36,10 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
-import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.SurfaceHolder;
 import android.view.WindowManager;
 
@@ -336,13 +333,17 @@ class KPLyricsX extends KPLyrics {
 	/**
 	 * 가사처리슬립추가
 	 */
-	private long mThreadSleepTime = 0;
+	private long mSleepTime = 0;
 
 	/**
 	 * 가사처리슬립추가
 	 */
-	public void setThreadSleepTime(long time) {
-		this.mThreadSleepTime = time;
+	public void setSleepTime(long time) {
+		this.mSleepTime = time;
+	}
+
+	public long getSleepTime() {
+		return this.mSleepTime;
 	}
 
 	@Override
@@ -386,8 +387,8 @@ class KPLyricsX extends KPLyrics {
 				e.printStackTrace();
 			}
 			try {
-				if (!isInterrupted()) {
-					sleep(mThreadSleepTime);
+				if (mSleepTime > 100 && !isInterrupted()) {
+					sleep(mSleepTime);
 				}
 			} catch (Exception e) {
 				//Log.wtf(toString(), "runDraw() " + "sleep()" + "[NG]" + "\n" + Log.getStackTraceString(e));

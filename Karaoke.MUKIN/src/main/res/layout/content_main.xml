@@ -26,7 +26,7 @@
         android:inputType="number"
         android:maxLength="5"
         android:maxLines="1"
-        android:text="6112"
+        android:text="8888"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
