@@ -41,6 +41,7 @@ import cz.msebera.android.httpclient.HttpEntity;
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.HttpStatus;
 import cz.msebera.android.httpclient.client.methods.HttpGet;
+import kr.kymedia.karaoke.net.AndroidHttpClient;
 
 /**
  * This helper class download images from the Internet and binds those with the provided ImageView.

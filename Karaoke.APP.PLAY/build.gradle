@@ -25,6 +25,8 @@ android {
 }
 
 dependencies {
+    implementation 'cz.msebera.android:httpclient:4.3.6'
+
     implementation project(':Karaoke')
     implementation project(':Karaoke.API')
     implementation project(':Karaoke.APP.PLAY3')
