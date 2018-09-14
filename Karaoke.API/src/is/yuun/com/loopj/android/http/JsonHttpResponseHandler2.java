@@ -15,99 +15,44 @@
  */
 /**
  * 2014 All rights (c)KYGroup Co.,Ltd. reserved.
- * 
+ * <p>
  * This software is the confidential and proprietary information
- *  of (c)KYGroup Co.,Ltd. ("Confidential Information").
- * 
+ * of (c)KYGroup Co.,Ltd. ("Confidential Information").
+ * <p>
  * project	:	Karaoke
  * filename	:	JsonHttpResponseHandler2.java
  * author	:	isyoon
- *
+ * <p>
  * <pre>
  * isyoon.com.loopj.android.http
  *    |_ JsonHttpResponseHandler2.java
  * </pre>
- * 
  */
 
 package is.yuun.com.loopj.android.http;
 
-import org.apache.http.Header;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- *
- * TODO<br>
- * 
+ * <p>
  * <pre></pre>
  *
  * @author isyoon
- * @since 2014. 4. 15.
  * @version 1.0
+ * @since 2014. 4. 15.
  */
 public class JsonHttpResponseHandler2 extends JsonHttpResponseHandler {
 
-	@Override
-	public void onSuccess(int statusCode, JSONObject response) {
-		super.onSuccess(statusCode, response);
-		onSuccess(statusCode, null, response);
-	}
-
-	public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-	}
-
-	@Override
-	public void onSuccess(int statusCode, JSONArray response) {
-		super.onSuccess(statusCode, response);
-		onSuccess(statusCode, null, response);
-	}
-
-	public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-
-	}
-
-	@Override
-	public void onFailure(Throwable e, JSONObject errorResponse) {
-		super.onFailure(e, errorResponse);
-		onFailure(0, null, e, errorResponse);
-	}
-
-	public void onFailure(int statusCode, Header[] headers, Throwable throwable,
-			JSONObject errorResponse) {
-
-	}
-
-	@Override
-	public void onFailure(Throwable e, JSONArray errorResponse) {
-		super.onFailure(e, errorResponse);
-		onFailure(0, null, e, errorResponse);
-	}
-
-	public void onFailure(int statusCode, Header[] headers, Throwable throwable,
-			JSONArray errorResponse) {
-
-	}
-
-	public void onFailure(int statusCode, Header[] headers, String responseString,
-			Throwable throwable) {
-
-	}
-
-	public void onSuccess(int statusCode, Header[] headers, String responseString) {
-
-	}
-
-	public void onProgress(int bytesWritten, int totalSize) {
-
-	}
-
-	public void onRetry(int retryNo) {
-
-	}
-
-	public void onCancel() {
-
-	}
+    //public void onSuccess(int statusCode, JSONObject response) {
+    //    //super.onSuccess(statusCode, response);
+    //    super.onSuccess(statusCode, null, response);
+    //}
+    //
+    //public void onSuccess(int statusCode, JSONArray response) {
+    //    //super.onSuccess(statusCode, response);
+    //    super.onSuccess(statusCode, null, response);
+    //}
 }

@@ -43,8 +43,7 @@ import android.view.View.OnLongClickListener;
 
 /**
  *
- * TODO<br>
- * 
+ *
  * <pre></pre>
  *
  * @author isyoon

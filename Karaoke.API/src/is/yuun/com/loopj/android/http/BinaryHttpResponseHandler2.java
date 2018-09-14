@@ -32,12 +32,13 @@
 
 package is.yuun.com.loopj.android.http;
 
-import org.apache.http.Header;
+import com.loopj.android.http.BinaryHttpResponseHandler;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  *
- * TODO<br>
- * 
+ *
  * <pre></pre>
  *
  * @author isyoon
@@ -51,35 +52,21 @@ public class BinaryHttpResponseHandler2 extends BinaryHttpResponseHandler {
 	}
 
 	@Override
-	public void onSuccess(int statusCode, byte[] binaryData) {
-		super.onSuccess(statusCode, binaryData);
-		onSuccess(statusCode, null, binaryData);
-	}
-
 	public void onSuccess(int statusCode, Header[] headers, byte[] binaryData) {
-
 	}
 
 	@Override
-	public void onFailure(Throwable error, byte[] binaryData) {
-		super.onFailure(error, binaryData);
-		onFailure(0, null, binaryData, error);
-	}
-
 	public void onFailure(int statusCode, Header[] headers, byte[] binaryData, Throwable error) {
-
 	}
 
-	public void onProgress(int bytesWritten, int totalSize) {
-
+	public void onSuccess(int statusCode, byte[] binaryData) {
+		//super.onSuccess(statusCode, binaryData);
+		onSuccess(statusCode, null, binaryData);
 	}
 
-	public void onRetry(int retryNo) {
-
-	}
-
-	public void onCancel() {
-
+	public void onFailure(Throwable error, byte[] binaryData) {
+		//super.onFailure(error, binaryData);
+		onFailure(0, null, binaryData, error);
 	}
 
 }

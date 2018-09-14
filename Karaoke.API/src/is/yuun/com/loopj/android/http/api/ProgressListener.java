@@ -1,6 +1,7 @@
 package is.yuun.com.loopj.android.http.api;
 
-public interface ProgressListener {
-	// public abstract void onPercent(int val);
-	public abstract void onProgress(long size, long total);
+import com.loopj.android.http.ResponseHandlerInterface;
+
+public interface ProgressListener extends ResponseHandlerInterface {
+	void onProgress(long size, long total);
 }

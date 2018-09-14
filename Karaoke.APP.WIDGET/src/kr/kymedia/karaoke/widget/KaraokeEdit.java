@@ -51,8 +51,7 @@ import android.widget.TextView.OnEditorActionListener;
 
 /**
  *
- * TODO<br>
- * 
+ *
  * <pre></pre>
  *
  * @author isyoon

@@ -15,13 +15,9 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.security.KeyStore;
 import java.util.HashMap;
 
 import cz.msebera.android.httpclient.Header;
-import kr.keumyoung.karaoke.api.MyCustomSSLFactory;
 import kr.keumyoung.karaoke.mukin.coupon.BuildConfig;
 import kr.keumyoung.karaoke.mukin.coupon.R;
 
@@ -216,7 +212,8 @@ public class user2 extends user {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String response) {
                 // called when response HTTP status is "200 OK"
-                if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, "onSuccess(...)" + statusCode + "," + convertHeadersToHashMap(headers) + "." + response);
+                if (BuildConfig.DEBUG)
+                    Log.w(__CLASSNAME__, "onSuccess(...)" + statusCode + "," + convertHeadersToHashMap(headers) + "." + response);
                 Log.e(__CLASSNAME__, "[text]" + response);
                 showProgress(false);
                 if (response.equalsIgnoreCase("no data")) {
@@ -227,7 +224,8 @@ public class user2 extends user {
             @Override
             public void onFailure(int statusCode, Header[] headers, String response, Throwable e) {
                 // called when response HTTP status is "4XX" (eg. 401, 403, 404)
-                if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "onFailure(...)" + statusCode + "," + convertHeadersToHashMap(headers) + "." + response + ",'" + e.getMessage());
+                if (BuildConfig.DEBUG)
+                    Log.e(__CLASSNAME__, "onFailure(...)" + statusCode + "," + convertHeadersToHashMap(headers) + "." + response + ",'" + e.getMessage());
                 Log.e(__CLASSNAME__, "[text]" + response);
                 showProgress(false);
             }

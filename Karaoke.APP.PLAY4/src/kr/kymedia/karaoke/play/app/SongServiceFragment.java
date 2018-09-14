@@ -43,8 +43,7 @@ import android.util.Log;
 
 /**
  * 
- * TODO<br>
- * 
+ *
  * <pre>
  * 재생용백그라운드서비스
  * </pre>

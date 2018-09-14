@@ -34,7 +34,6 @@ package kr.kymedia.karaoke.play;
 import android.content.Context;
 
 /**
- * TODO<br>
  * <p/>
  * <pre></pre>
  *

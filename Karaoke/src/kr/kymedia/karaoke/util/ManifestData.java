@@ -40,8 +40,7 @@ import android.os.Bundle;
 
 /**
  *
- * TODO<br>
- * 
+ *
  * <pre></pre>
  *
  * @author Rodrigo N. Carreras

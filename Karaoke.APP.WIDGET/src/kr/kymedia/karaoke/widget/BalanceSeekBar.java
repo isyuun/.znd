@@ -38,8 +38,7 @@ import android.widget.SeekBar;
 
 /**
  * 
- * TODO<br>
- * 
+ *
  * <pre></pre>
  * 
  * @author isyoon

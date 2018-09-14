@@ -13,7 +13,6 @@ import android.util.Log;
 import kr.keumyoung.karaoke.api._Const;
 
 /**
- * TODO<br>
  * <p/>
  * <pre></pre>
  * <p/>

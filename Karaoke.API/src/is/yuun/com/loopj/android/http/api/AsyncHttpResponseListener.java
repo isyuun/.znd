@@ -34,13 +34,12 @@ package is.yuun.com.loopj.android.http.api;
 
 /**
  *
- * TODO<br>
  * NOTE:<br>
  *
  * @author isyoon
  * @since 2013. 4. 5.
  * @version 1.0
- * @see AsyncHttpResponseListener.java
+ * @see AsyncHttpResponseListener
  */
 public interface AsyncHttpResponseListener {
 

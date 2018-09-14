@@ -42,8 +42,7 @@ import android.widget.RelativeLayout;
 
 /**
  *
- * TODO<br>
- * 
+ *
  * <pre></pre>
  *
  * @author isyoon

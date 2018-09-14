@@ -51,7 +51,6 @@ import kr.kymedia.karaoke.play3.SongPlayListener;
 import kr.kymedia.karaoke.util.TextUtil;
 
 /**
- * TODO<br>
  * <p/>
  * <p/>
  * <pre></pre>

@@ -37,12 +37,17 @@ import android.os.Handler;
 import android.os.Message;
 import android.webkit.URLUtil;
 
+import com.loopj.android.http.ResponseHandlerInterface;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.net.URLEncoder;
 import java.util.Map;
 
+import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.HttpResponse;
 import is.yuun.com.loopj.android.http.api.ProgressListener;
 import kr.kymedia.karaoke._IKaraoke;
 import kr.kymedia.karaoke.data.SongUtil;
@@ -221,8 +226,7 @@ public class KPnnnn extends KPjson {
 
 	/**
 	 * 
-	 * TODO<br>
-	 * NOTE:<br>
+		 * NOTE:<br>
 	 * 
 	 * @author isyoon
 	 * @since 2013. 10. 23.
@@ -621,6 +625,106 @@ public class KPnnnn extends KPjson {
 		// }
 		// });
 		setProgressListener(new ProgressListener() {
+
+			@Override
+			public void sendResponseMessage(HttpResponse response) throws IOException {
+
+			}
+
+			@Override
+			public void sendStartMessage() {
+
+			}
+
+			@Override
+			public void sendFinishMessage() {
+
+			}
+
+			@Override
+			public void sendProgressMessage(long bytesWritten, long bytesTotal) {
+
+			}
+
+			@Override
+			public void sendCancelMessage() {
+
+			}
+
+			@Override
+			public void sendSuccessMessage(int statusCode, Header[] headers, byte[] responseBody) {
+
+			}
+
+			@Override
+			public void sendFailureMessage(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+			}
+
+			@Override
+			public void sendRetryMessage(int retryNo) {
+
+			}
+
+			@Override
+			public URI getRequestURI() {
+				return null;
+			}
+
+			@Override
+			public void setRequestURI(URI requestURI) {
+
+			}
+
+			@Override
+			public Header[] getRequestHeaders() {
+				return new Header[0];
+			}
+
+			@Override
+			public void setRequestHeaders(Header[] requestHeaders) {
+
+			}
+
+			@Override
+			public boolean getUseSynchronousMode() {
+				return false;
+			}
+
+			@Override
+			public void setUseSynchronousMode(boolean useSynchronousMode) {
+
+			}
+
+			@Override
+			public boolean getUsePoolThread() {
+				return false;
+			}
+
+			@Override
+			public void setUsePoolThread(boolean usePoolThread) {
+
+			}
+
+			@Override
+			public void onPreProcessResponse(ResponseHandlerInterface instance, HttpResponse response) {
+
+			}
+
+			@Override
+			public void onPostProcessResponse(ResponseHandlerInterface instance, HttpResponse response) {
+
+			}
+
+			@Override
+			public Object getTag() {
+				return null;
+			}
+
+			@Override
+			public void setTag(Object TAG) {
+
+			}
 
 			@Override
 			public void onProgress(long size, long total) {

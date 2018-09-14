@@ -40,7 +40,6 @@ import android.os.AsyncTask;
 
 /**
  *
- * TODO<br>
  * NOTE:<br>
  *
  * @author isyoon

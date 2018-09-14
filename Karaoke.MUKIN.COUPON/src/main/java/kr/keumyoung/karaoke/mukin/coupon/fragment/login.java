@@ -1,27 +1,10 @@
 package kr.keumyoung.karaoke.mukin.coupon.fragment;
 
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.RequestParams;
-import com.loopj.android.http.TextHttpResponseHandler;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.security.KeyStore;
-import java.util.HashMap;
-
-import cz.msebera.android.httpclient.Header;
-import kr.keumyoung.karaoke.api.MyCustomSSLFactory;
 import kr.keumyoung.karaoke.mukin.coupon.BuildConfig;
 import kr.keumyoung.karaoke.mukin.coupon.R;
 

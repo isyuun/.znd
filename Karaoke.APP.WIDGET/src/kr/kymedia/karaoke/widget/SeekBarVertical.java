@@ -40,8 +40,7 @@ import android.widget.SeekBar;
 
 /**
  *
- * TODO<br>
- * 
+ *
  * <pre>
  * 	자막위치
  * 자막싱크

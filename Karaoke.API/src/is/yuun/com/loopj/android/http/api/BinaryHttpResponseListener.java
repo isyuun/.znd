@@ -32,17 +32,16 @@
 
 package is.yuun.com.loopj.android.http.api;
 
-import org.apache.http.Header;
+import cz.msebera.android.httpclient.Header;
 
 /**
  *
- * TODO<br>
  * NOTE:<br>
  *
  * @author isyoon
  * @since 2013. 4. 5.
  * @version 1.0
- * @see BinaryHttpResponseListener.java
+ * @see BinaryHttpResponseListener
  */
 public interface BinaryHttpResponseListener extends AsyncHttpResponseListener {
 
@@ -62,18 +61,16 @@ public interface BinaryHttpResponseListener extends AsyncHttpResponseListener {
 	 * @param binaryData
 	 *          the body of the HTTP response from the server
 	 */
-	// public void onSuccess(int statusCode, byte[] binaryData);
-	public void onSuccess(int statusCode, Header[] headers, byte[] binaryData);
+	void onSuccess(int statusCode, Header[] headers, byte[] binaryData);
 
 	/**
 	 * Fired when a request fails to complete, override to handle in your own code
 	 * 
-	 * @param e
+	 * @param headers
 	 *          the underlying cause of the failure
 	 * @param binaryData
 	 *          the response body, if any
 	 */
-	// public void onFailure(Throwable e, byte[] binaryData);
-	public void onFailure(int statusCode, Header[] headers, byte[] binaryData, Throwable error);
+	void onFailure(int statusCode, Header[] headers, byte[] binaryData, Throwable error);
 
 }

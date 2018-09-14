@@ -16,17 +16,11 @@
 
 package kr.kymedia.karaoke.widget.util;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.methods.HttpGet;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
@@ -42,6 +36,11 @@ import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.concurrent.ConcurrentHashMap;
+
+import cz.msebera.android.httpclient.HttpEntity;
+import cz.msebera.android.httpclient.HttpResponse;
+import cz.msebera.android.httpclient.HttpStatus;
+import cz.msebera.android.httpclient.client.methods.HttpGet;
 
 /**
  * This helper class download images from the Internet and binds those with the provided ImageView.

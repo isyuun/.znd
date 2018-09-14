@@ -34,8 +34,6 @@ package kr.kymedia.karaoke.api;
 
 import android.os.Handler;
 
-import org.apache.http.Header;
-import org.apache.http.client.HttpResponseException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,6 +47,8 @@ import java.net.UnknownServiceException;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
+import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.client.HttpResponseException;
 import is.yuun.com.loopj.android.http.api.AsyncHttpAgent;
 import is.yuun.com.loopj.android.http.api.JsonHttpResponseListener;
 import is.yuun.com.loopj.android.http.api.RequestParams3;
@@ -63,7 +63,7 @@ import kr.kymedia.karaoke.util.TextUtil;
  * @author isyoon
  * @since 2012. 2. 29.
  * @version 1.0
- * @see KPjson.java
+ * @see KPjson
  */
 public class KPjson extends AsyncHttpAgent implements _IKaraoke, JsonHttpResponseListener {
 	protected String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();

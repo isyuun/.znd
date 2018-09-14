@@ -54,7 +54,6 @@ import com.nostra13.universalimageloader.utils.StorageUtils;
 
 /**
  *
- * TODO<br>
  * NOTE:<br>
  * Android-universal-image-loader-1.9.2
  *

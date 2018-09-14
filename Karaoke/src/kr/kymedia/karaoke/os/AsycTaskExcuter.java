@@ -38,8 +38,7 @@ import android.os.Build;
 
 /**
  *
- * TODO<br>
- * 
+ *
  * <pre></pre>
  *
  * @author isyoon

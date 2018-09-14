@@ -44,8 +44,7 @@ import kr.kymedia.karaoke.util.TextUtil;
 
 /**
  *
- * TODO<br>
- * 
+ *
  * <pre></pre>
  *
  * @author isyoon

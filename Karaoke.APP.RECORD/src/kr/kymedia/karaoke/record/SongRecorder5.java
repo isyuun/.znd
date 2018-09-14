@@ -40,8 +40,7 @@ import android.util.Log;
 
 /**
  * 
- * TODO<br>
- * 
+ *
  * <pre>
  * 녹화기능추가 - 현재릴리스
  * </pre>

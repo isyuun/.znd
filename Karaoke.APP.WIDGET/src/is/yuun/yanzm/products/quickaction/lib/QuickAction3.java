@@ -43,7 +43,6 @@ import android.widget.TextView;
 
 /**
  *
- * TODO<br>
  * NOTE:<br>
  *
  * @author isyoon

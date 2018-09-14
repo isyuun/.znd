@@ -32,13 +32,13 @@
 
 package is.yuun.com.loopj.android.http.api;
 
-import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import cz.msebera.android.httpclient.Header;
+
 /**
  *
- * TODO<br>
  * NOTE:<br>
  *
  * @author isyoon
@@ -58,7 +58,7 @@ public interface JsonHttpResponseListener extends AsyncHttpResponseListener {
 	 * @param response
 	 *          parsed response if any
 	 */
-	public void onSuccess(int statusCode, Header[] headers, JSONObject response);
+	void onSuccess(int statusCode, Header[] headers, JSONObject response);
 
 	/**
 	 * Returns when request succeeds
@@ -70,7 +70,7 @@ public interface JsonHttpResponseListener extends AsyncHttpResponseListener {
 	 * @param response
 	 *          parsed response if any
 	 */
-	public void onSuccess(int statusCode, Header[] headers, JSONArray response);
+	void onSuccess(int statusCode, Header[] headers, JSONArray response);
 
 	/**
 	 * Returns when request failed
@@ -84,7 +84,7 @@ public interface JsonHttpResponseListener extends AsyncHttpResponseListener {
 	 * @param errorResponse
 	 *          parsed response if any
 	 */
-	public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse);
+	void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse);
 
 	/**
 	 * Returns when request failed
@@ -98,10 +98,10 @@ public interface JsonHttpResponseListener extends AsyncHttpResponseListener {
 	 * @param errorResponse
 	 *          parsed response if any
 	 */
-	public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse);
+	void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse);
 
-	public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable);
+	void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable);
 
-	public void onSuccess(int statusCode, Header[] headers, String responseString);
+	void onSuccess(int statusCode, Header[] headers, String responseString);
 
 }

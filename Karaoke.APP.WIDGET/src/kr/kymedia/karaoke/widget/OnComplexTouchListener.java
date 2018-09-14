@@ -41,7 +41,6 @@ import android.view.View.OnTouchListener;
 
 /**
  * 
- * TODO<br>
  * NOTE:<br>
  * 
  * @author isyoon

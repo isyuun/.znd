@@ -41,8 +41,7 @@ import android.view.MotionEvent;
 
 /**
  *
- * TODO<br>
- * 
+ *
  * <pre></pre>
  *
  * @author isyoon

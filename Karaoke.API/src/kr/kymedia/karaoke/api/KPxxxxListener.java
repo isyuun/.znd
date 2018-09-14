@@ -36,7 +36,6 @@ import kr.kymedia.karaoke.api.KPnnnn.KPnnnnListener;
 
 /**
  *
- * TODO<br>
  * NOTE:<br>
  * 외부배포라이브러리 인터페이스
  *

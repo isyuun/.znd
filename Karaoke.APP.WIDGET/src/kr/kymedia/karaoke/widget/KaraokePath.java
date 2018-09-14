@@ -42,8 +42,7 @@ import android.widget.EditText;
 
 /**
  *
- * TODO<br>
- * 
+ *
  * <pre></pre>
  *
  * @author isyoon

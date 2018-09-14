@@ -43,8 +43,7 @@ import android.os.Handler;
 
 /**
  *
- * TODO<br>
- * 
+ *
  * <pre></pre>
  *
  * @author isyoon

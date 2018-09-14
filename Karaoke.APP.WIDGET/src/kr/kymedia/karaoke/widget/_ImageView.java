@@ -39,8 +39,7 @@ import android.widget.ImageView;
 
 /**
  *
- * TODO<br>
- * 
+ *
  * <pre>
  * 비트맵리사이클용이미지뷰
  * </pre>

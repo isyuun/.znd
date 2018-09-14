@@ -44,7 +44,6 @@ import kr.kymedia.karaoke.play.impl.ISongPlay;
 import kr.kymedia.karaoke.play3.SongPlayListener;
 
 /**
- * TODO<br>
  * <p/>
  * <pre></pre>
  *

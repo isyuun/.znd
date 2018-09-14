@@ -49,7 +49,6 @@ import android.os.Build;
 
 /**
  *
- * TODO<br>
  * NOTE: 녹음기본클래스<br>
  * 유틸리티정의<br>
  * 기본함수정의<br>

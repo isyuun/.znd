@@ -37,8 +37,7 @@ import android.widget.ImageView;
 
 /**
  * 
- * TODO<br>
- * 
+ *
  * <pre></pre>
  * 
  * @author isyoon
