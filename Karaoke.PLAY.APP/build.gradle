@@ -1,0 +1,64 @@
+//buildscript {
+//    repositories {
+//        jcenter()
+//        google()
+//    }
+//    dependencies {
+//        classpath 'com.android.tools.build:gradle:3.1.4'
+//    }
+//}
+apply plugin: 'com.android.library'
+
+dependencies {
+    implementation project(':AndroidJaudiotagger')
+    implementation project(':AndroidSlidingUpPanel.library')
+    implementation project(':Karaoke')
+    implementation project(':Karaoke.APP')
+    implementation project(':Karaoke.APP.FILEEX')
+    implementation project(':Karaoke.APP.WIDGET')
+    implementation project(':Karaoke.APP.PLAY3')
+    implementation project(':Karaoke.APP.PLAY4')
+    implementation project(':SoundTouch-Android.1.0')
+
+    implementation fileTree(dir: 'libs', include: '*.jar')
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:gridlayout-v7:27.1.1'
+    implementation 'com.android.support:mediarouter-v7:27.1.1'
+    implementation 'com.google.android.gms:play-services-cast:15.0.1'
+}
+
+android {
+    //<a href="http://stackoverflow.com/questions/7607165/how-to-write-build-time-stamp-into-apk">How to write build time stamp into apk</a>
+    defaultConfig {
+        buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
+    }
+
+    publishNonDefault true
+
+    compileSdkVersion 27
+    //buildToolsVersion"27.0.3"
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+
+        // Move the tests to tests/java, tests/res, etc...
+        androidTest.setRoot('tests')
+
+        // Move the build types to build-types/<type>
+        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
+        // This moves them out of them default location under src/<type>/... which would
+        // conflict with src/ being used by the main source set.
+        // Adding new build types or product flavors should be accompanied
+        // by a similar customization.
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+    }
+}

@@ -13,11 +13,7 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation project(':AndroidJaudiotagger')
     implementation project(':Karaoke')
-    //debugimplementation project(path:':Karaoke', configuration: 'debug')
-    //releaseimplementation project(path:':Karaoke', configuration: 'release')
     implementation project(':Karaoke.APP.PLAY3')
-    //debugimplementation project(path:':Karaoke.APP.PLAY3.1', configuration: 'debug')
-    //releaseimplementation project(path:':Karaoke.APP.PLAY3.1', configuration: 'release')
     implementation project(':SoundTouch-Android.2.0')
     api fileTree(dir: 'libs', include: '*.jar')
 }

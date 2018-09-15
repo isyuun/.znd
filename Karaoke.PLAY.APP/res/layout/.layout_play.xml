@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kr.kymedia.karaoke.play.app.view._PlayView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/merge_stream_control"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/merge_stream_control"
+        android:visibility="visible" />
+
+    <include
+        android:id="@+id/merge_play_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/merge_play_info"
+        android:visibility="visible" />
+
+    <include
+        android:id="@+id/merge_play_control"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/merge_play_control"
+        android:visibility="visible" />
+
+    <include
+        android:id="@+id/merge_song_control"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/merge_song_control"
+        android:visibility="visible" />
+
+    <include
+        android:id="@+id/line_play_control"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/line_solid_orange"
+        android:visibility="visible" />
+
+</kr.kymedia.karaoke.play.app.view._PlayView>

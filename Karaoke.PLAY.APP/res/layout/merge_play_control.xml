@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText" >
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/line_solid_orange"
+        android:visibility="invisible" />
+
+    <include
+        android:id="@+id/merge_play_path"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/merge_play_path"
+        android:visibility="visible" />
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:visibility="invisible" />
+
+    <include
+        android:id="@+id/merge_play_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/merge_play_bar"
+        android:visibility="visible" />
+
+    <include
+        android:id="@+id/merge_play_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/mserge_play_error"
+        android:visibility="gone" />
+
+</LinearLayout>

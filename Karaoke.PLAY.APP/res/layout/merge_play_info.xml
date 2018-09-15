@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText" >
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/line_solid_orange"
+        android:visibility="visible" />
+
+    <!-- <include -->
+    <!-- android:id="@+id/line_play_type" -->
+    <!-- android:layout_width="wrap_content" -->
+    <!-- android:layout_height="wrap_content" -->
+    <!-- layout="@layout/line_solid_orange" -->
+    <!-- android:visibility="visible" /> -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageButton
+            android:id="@+id/buttonHide"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:contentDescription="숨기기"
+            android:src="@drawable/ic_action_collapse"
+            android:text="숨기기"
+            android:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/buttonShow"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:contentDescription="보이기"
+            android:src="@drawable/ic_action_expand"
+            android:text="보이기"
+            android:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/buttonReset"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/buttonHide"
+            android:contentDescription="0"
+            android:src="@drawable/ic_action_replay"
+            android:text="0"
+            android:visibility="visible" />
+
+        <CheckBox
+            android:id="@+id/checkMute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/buttonReset"
+            android:checked="false"
+            android:text="Mute"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/textInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/checkMute"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/buttonReset"
+            android:ellipsize="end"
+            android:gravity="center_vertical|end"
+            android:maxLines="1"
+            android:text="T:0.0-P:0(G5)-C:0.0"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="16sp"
+            android:visibility="visible" />
+
+        <kr.kymedia.karaoke.view.EnabledRadioGroup
+            android:id="@+id/radioPitchFM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkMute"
+            android:layout_toEndOf="@id/buttonReset"
+            android:orientation="horizontal" >
+
+            <!-- <TextView -->
+            <!-- android:layout_width="wrap_content" -->
+            <!-- android:layout_height="wrap_content" -->
+            <!-- android:text="P:" -->
+            <!-- android:textAppearance="?android:attr/textAppearanceSmall" -->
+            <!-- android:textSize="14sp" -->
+            <!-- android:textStyle="bold" /> -->
+
+            <RadioButton
+                android:id="@+id/radioPitchM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:enabled="true"
+                android:text="M"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/radioPitchN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:enabled="true"
+                android:text="N"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/radioPitchF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:enabled="true"
+                android:text="F"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </kr.kymedia.karaoke.view.EnabledRadioGroup>
+
+        <kr.kymedia.karaoke.view.EnabledRadioGroup
+            android:id="@+id/radioValance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/textInfo"
+            android:orientation="horizontal" >
+
+            <!-- <TextView -->
+            <!-- android:layout_width="wrap_content" -->
+            <!-- android:layout_height="wrap_content" -->
+            <!-- android:text="B:" -->
+            <!-- android:textAppearance="?android:attr/textAppearanceSmall" -->
+            <!-- android:textSize="14sp" -->
+            <!-- android:textStyle="bold" /> -->
+
+            <RadioButton
+                android:id="@+id/radioValanceL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:enabled="true"
+                android:text="L"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/radioValanceC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:enabled="true"
+                android:text="C"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/radioValanceR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:enabled="true"
+                android:text="R"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </kr.kymedia.karaoke.view.EnabledRadioGroup>
+    </RelativeLayout>
+
+</LinearLayout>

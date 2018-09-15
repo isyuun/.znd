@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="songs">
+        <item>..</item>
+        <item>아름다운세상 - 서연</item>
+        <item>참좋은말 - 서연</item>
+        <item>로보트태권V - 지호</item>
+        <item>루돌프사슴코 - 지호</item>
+        <item>마징가Z - 지호 (2)</item>
+        <item>마징가Z - 지호</item>
+        <item>렛잇꼬</item>
+        <item>Streets of Fire</item>
+    </string-array>
+    <string-array name="paths">
+        <item>..</item>
+        <item>121010DU8YN5654.m4a</item>
+        <item>http://resource.kymedia.kr/record/kpop/20120518/53/120518T5K42KH53.m4a</item>
+        <item>http://resource.kymedia.kr/record/kpop/20130508/26/130508328CG3326.m4a</item>
+        <item>http://resource.kymedia.kr/record/kpop/20120512/74/120512HT1MHC074.m4a</item>
+        <item>http://resource.kymedia.kr/record/kpop/20140819/65/140819QI0BCF365.m4a</item>
+        <item>http://resource.kymedia.kr/record/kpop/20130508/48/130508ZPSR9S048.m4a</item>
+        <item>Let it Go.mp3</item>
+        <item>Streets of Fire - Soundtrack - 01 - Fire Inc - Nowhere Fast.mp3</item>
+    </string-array>
+
+</resources>

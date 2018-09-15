@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:id="@+id/layout_play_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/buttonPrev"
+            android:layout_alignTop="@+id/buttonPrev"
+            android:layout_toStartOf="@+id/buttonPrev"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textStart"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.0"
+                android:gravity="bottom"
+                android:maxLines="1"
+                android:text="ST(0) - 0000/00/00 00:00.00"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/textPlay"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.0"
+                android:gravity="top"
+                android:maxLines="1"
+                android:text="00:00.00(00:00.00)/00:00.00-0"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/buttonAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="추가"
+            android:src="@drawable/ic_action_copy"
+            android:text="▼"
+            android:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/buttonDel"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="삭제"
+            android:src="@drawable/close"
+            android:text="X"
+            android:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/buttonPrev"
+            android:layout_width="50dp"
+            android:layout_height="45dp"
+            android:layout_toStartOf="@+id/buttonNext"
+            android:contentDescription="이전"
+            android:gravity="center"
+            android:src="@drawable/ic_action_previous"
+            android:text="◀◀" />
+
+        <ImageButton
+            android:id="@+id/buttonNext"
+            android:layout_width="50dp"
+            android:layout_height="45dp"
+            android:layout_toStartOf="@id/buttonAdd"
+            android:contentDescription="다음"
+            android:enabled="false"
+            android:gravity="center"
+            android:src="@drawable/ic_action_next"
+            android:text="▶▶" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textCurTime"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="00:00"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <SeekBar
+            android:id="@+id/seekPlay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8.0"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/textTotTime"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="00:00"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -37,10 +37,12 @@ android {
 dependencies {
     implementation project(':Karaoke')
     implementation project(':Karaoke.API')
+    implementation project(':Karaoke.APP.WIDGET')
     implementation project(':Karaoke.APP.PLAY')
     implementation project(':Karaoke.APP.PLAY3')
     implementation project(':Karaoke.APP.PLAY4')
-    implementation project(':Karaoke.APP.WIDGET')
+    implementation project(':SoundTouch-Android.1.0')
+
     implementation project(':Karaoke.KEUMYOUNG')
     implementation project(':Karaoke.MUKIN.COUPON')
 

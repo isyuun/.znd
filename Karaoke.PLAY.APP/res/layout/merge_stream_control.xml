@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText" >
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/line_solid_orange"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/layout_play_control"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="visible" >
+
+        <EditText
+            android:id="@+id/editSong"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:inputType="number"
+            android:maxLength="5"
+            android:visibility="visible" >
+
+            <requestFocus />
+        </EditText>
+
+        <ImageButton
+            android:id="@+id/buttonStream"
+            style="?android:attr/buttonStyle"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:contentDescription="스트리밍"
+            android:src="@android:drawable/ic_media_play"
+            android:text="▶" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_play_repeat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="visible" >
+
+        <CheckBox
+            android:id="@+id/checkKYmedia"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:text="KYGroup"
+            android:visibility="gone" />
+
+        <kr.kymedia.karaoke.view.EnabledRadioGroup
+            android:id="@+id/radioServer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="left"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SVR:"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/radioServerKYS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:enabled="true"
+                android:text="@string/KYS"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/radioServerKYM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:enabled="true"
+                android:text="@string/KYM"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/radioServerCYW"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:enabled="true"
+                android:text="@string/CYW"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </kr.kymedia.karaoke.view.EnabledRadioGroup>
+
+        <TextView
+            android:id="@+id/textPlayType"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="TYP:S"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <kr.kymedia.karaoke.view.EnabledRadioGroup
+            android:id="@+id/radioRepeatRestart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <CheckBox
+                android:id="@+id/checkRepeatRestart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="반복"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <RadioButton
+                android:id="@+id/radioRestart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:enabled="true"
+                android:text="시작"
+                android:visibility="gone" />
+
+            <RadioButton
+                android:id="@+id/radioRepeat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:enabled="true"
+                android:text="반복"
+                android:visibility="gone" />
+        </kr.kymedia.karaoke.view.EnabledRadioGroup>
+    </LinearLayout>
+
+</LinearLayout>

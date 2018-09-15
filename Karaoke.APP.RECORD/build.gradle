@@ -11,11 +11,7 @@ apply plugin: 'com.android.library'
 
 dependencies {
     implementation project(':Karaoke')
-    //debugimplementation project(path:':Karaoke', configuration: 'debug')
-    //releaseimplementation project(path:':Karaoke', configuration: 'release')
     implementation project(':Karaoke.API')
-    //debugimplementation project(path:':Karaoke.API', configuration: 'debug')
-    //releaseimplementation project(path:':Karaoke.API', configuration: 'release')
     implementation project(':liblame')
     api fileTree(dir: 'libs', include: '*.jar')
 }

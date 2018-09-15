@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText" >
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/line_solid_orange"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/layout_blance_control"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <kr.kymedia.karaoke.widget.AutoRepeatImageButton
+            android:id="@+id/buttonValanceDn"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="-"
+            android:src="@drawable/ic_minus"
+            android:text="-"
+            android:visibility="visible" />
+
+        <kr.kymedia.karaoke.widget.AutoRepeatImageButton
+            android:id="@+id/buttonValanceUp"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="+"
+            android:src="@drawable/ic_plus"
+            android:text="+"
+            android:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/buttonValance"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="0"
+            android:src="@drawable/ic_action_undo"
+            android:text="0"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/textValance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="center_vertical"
+            android:text="LR:0.00"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textMinValance"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="0.0"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <kr.kymedia.karaoke.widget.BalanceSeekBar
+            android:id="@+id/seekValance"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8.0"
+            android:gravity="center"
+            android:max="2"
+            android:progress="1"
+            android:progressDrawable="@drawable/bg_balace_progress"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/textMaxValance"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="0.0"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </LinearLayout>
+
+</LinearLayout>

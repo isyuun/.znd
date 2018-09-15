@@ -14,12 +14,8 @@ dependencies {
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 
     implementation project(':Karaoke')
-    //debugimplementation project(path:':Karaoke', configuration: 'debug')
-    //releaseimplementation project(path:':Karaoke', configuration: 'release')
     implementation project(':QuickActionLib')
     implementation project(':RoundedImageView')
-    //debugimplementation project(path:':RoundedImageView', configuration: 'debug')
-    //releaseimplementation project(path:':RoundedImageView', configuration: 'release')
 
     implementation fileTree(dir: 'libs', include: '*.jar')
     implementation 'com.google.android.gms:play-services-base:15.0.1'
