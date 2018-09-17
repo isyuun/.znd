@@ -8,15 +8,9 @@ import android.view.View;
 import kr.keumyoung.karaoke.mukin.coupon.BuildConfig;
 import kr.keumyoung.karaoke.mukin.coupon.R;
 
-public class login extends user2 {
+public class login extends _user {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-    /**
-     * 쿠폰등록시(http)  :http://www.keumyoung.kr:80/mukinapp/coupon.asp?kind=i&email=test@kymedia.kr&coupon=75UA7TV4US612Y41
-     * 쿠폰등록시(https) :https://www.keumyoung.kr:444/mukinapp/coupon.asp?kind=i&email=test@kymedia.kr&coupon=75UA7TV4US612Y41
-     * 쿠폰조회시(http)  :http://www.keumyoung.kr:80/mukinapp/coupon.asp?kind=q&email=test@kymedia.kr&coupon=75UA7TV4US612Y41
-     * 쿠폰조회시(https) :https://www.keumyoung.kr:444/mukinapp/coupon.asp?kind=q&email=test@kymedia.kr&coupon=75UA7TV4US612Y41
-     */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName());
@@ -26,13 +20,14 @@ public class login extends user2 {
         findViewById(R.id.form_email).setVisibility(View.VISIBLE);
         findViewById(R.id.form_password).setVisibility(View.GONE);
 
-        //test
-        mCouponView.setText("75UA-7TV4-US61-2Y41"); //정상:75UA-7TV4-US61-2Y41
-        //mCouponView.setText("6N69-FJTV-7JWA-WH5F"); //오류:6N69-FJTV-7JWA-WH5F
+    }
+
+    @Override
+    protected void attemptLogin() {
+        super.attemptLogin();
     }
 
     @Override
     protected void sendUser() {
-        super.sendUser();
     }
 }

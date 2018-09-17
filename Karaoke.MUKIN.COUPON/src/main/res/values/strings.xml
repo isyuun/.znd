@@ -99,7 +99,7 @@
         completions."
     </string>
     <!--쿠폰입력화면-->
-    <string name="text_coupon_input">쿠폰번호를 입력해 주세요.</string>
+    <string name="text_coupon_input">이용권 쿠폰번호를 입력해 주세요.\n\n분실시 책임지지 않습니다.\n</string>
     <string name="text_coupon_info">-쿠폰은 등록한 시점부터 바로 적용됩니다.\n\n-사용기간이 지난 쿠폰은 등록이 불가합니다.\n\n-쿠폰번호 입력시 (-)는 제외하고 입력해 주세요.</string>
 
     <!-- TODO: Remove or change this placeholder text -->

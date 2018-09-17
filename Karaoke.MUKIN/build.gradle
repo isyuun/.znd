@@ -18,7 +18,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('../Karaoke/kr.keumyoung.karaoke.jks')
+            storeFile file('../Karaoke/kr.kygroup.karaoke.jks')
             storePassword 'rmadudrmfnq1'
             keyAlias 'keumyoung'
             keyPassword 'rmadudrmfnq1'
