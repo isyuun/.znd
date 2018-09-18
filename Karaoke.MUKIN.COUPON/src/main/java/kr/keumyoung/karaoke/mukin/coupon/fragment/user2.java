@@ -53,26 +53,7 @@ public class user2 extends user {
         //    }
         //});
 
-        getGoogleAccount();
-    }
 
-    @Override
-    protected String getGoogleAccount() {
-        String email = super.getGoogleAccount();
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + "[ACCOUNT]" + email);
-        mEmailView.setText(email);
-        return email;
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + requestCode + permissions + grantResults);
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_READ_CONTACTS) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getGoogleAccount();
-            }
-        }
     }
 
     protected AutoCompleteTextView mCouponView;

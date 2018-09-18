@@ -40,7 +40,7 @@ public class user extends PreferenceFragment implements LoaderCallbacks<Cursor> 
     /**
      * Id to identity READ_CONTACTS permission request.
      */
-    protected static final int REQUEST_READ_CONTACTS = 0;
+    private static final int REQUEST_READ_CONTACTS = 0;
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -72,7 +72,7 @@ public class user extends PreferenceFragment implements LoaderCallbacks<Cursor> 
         super.onActivityCreated(savedInstanceState);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        populateAutoComplete();
+        //populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -99,14 +99,14 @@ public class user extends PreferenceFragment implements LoaderCallbacks<Cursor> 
     }
 
     private void populateAutoComplete() {
-        if (!mayRequestContacts()) {
+        if (!mayRequestPermissions()) {
             return;
         }
 
         getLoaderManager().initLoader(0, null, this);
     }
 
-    private boolean mayRequestContacts() {
+    protected boolean mayRequestPermissions() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
         }
@@ -133,8 +133,7 @@ public class user extends PreferenceFragment implements LoaderCallbacks<Cursor> 
      * Callback received when a permissions request has been completed.
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_READ_CONTACTS) {
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 populateAutoComplete();

@@ -1,4 +1,16 @@
 <resources>
+    <string name="kind">kind</string>
+    <string name="email">email</string>
+    <string name="coupon">coupon</string>
+    <string name="device">device</string>
+    <string name="code">code</string>
+    <string name="message">message</string>
+    <string name="sdate">sdate</string>
+    <string name="edate">edate</string>
+    <string name="JSN">JSN</string>
+    <string name="ERR">ERR</string>
+    <string name="DAT">DAT</string>
+
     <!-- Strings related to Settings -->
     <string name="title_activity_settings">설정</string>
     <string name="action_settings">설정</string>
@@ -104,4 +116,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="message_already_coupon">사용인 쿠폰:%s이 있습니다. 기간을 확인해주세요.</string>
+    <string name="message_already_coupon_1">사용인 쿠폰이 있습니다. 기간을 확인해주세요.</string>
 </resources>

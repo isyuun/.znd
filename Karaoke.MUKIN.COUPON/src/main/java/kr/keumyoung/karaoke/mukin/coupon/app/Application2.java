@@ -16,6 +16,8 @@ import java.util.HashMap;
 
 import cz.msebera.android.httpclient.Header;
 import kr.keumyoung.karaoke.mukin.coupon.BuildConfig;
+import kr.keumyoung.karaoke.mukin.coupon.R;
+import kr.kymedia.karaoke.util.DeviceUuidFactory;
 
 public class Application2 extends Application {
     public String email;
@@ -23,24 +25,24 @@ public class Application2 extends Application {
     public String sdate;
     public String edate;
 
+    DeviceUuidFactory device;
+
     @Override
     public void onCreate() {
+        Log.i(__CLASSNAME__, getMethodName() + "[email]" + this.email + "[coupon]" + this.coupon);
         super.onCreate();
-        sharedPref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
+        device = new DeviceUuidFactory(this);
         sendUser();
     }
 
     @Override
     public void onTerminate() {
+        Log.i(__CLASSNAME__, getMethodName() + "[email]" + this.email + "[coupon]" + this.coupon);
         super.onTerminate();
     }
 
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-    TextHttpResponseHandler responsHandler;
-    public void setResponsHandler(TextHttpResponseHandler responsHandler) {
-        this.responsHandler = responsHandler;
-    }
     /**
      * 쿠폰등록시(https) :https://www.keumyoung.kr:444/mukinapp/coupon.2.asp?kind=i&email=test@kymedia.kr&coupon=75UA7TV4US612Y41
      * 쿠폰조회시(https) :https://www.keumyoung.kr:444/mukinapp/coupon.2.asp?kind=q&email=test@kymedia.kr&coupon=75UA7TV4US612Y41
@@ -49,27 +51,29 @@ public class Application2 extends Application {
      */
     protected void sendUser() {
         SharedPreferences sharedPref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
-        this.email = sharedPref.getString("email", "");
-        this.coupon = sharedPref.getString("coupon", "");
-        String kind = "Q".toUpperCase();
-
-        if (!this.email.isEmpty() && !this.coupon.isEmpty()) sendQuery(kind, this.email, this.coupon);
+        this.email = sharedPref.getString(getString(R.string.email), "");
+        //this.coupon = sharedPref.getString(getString(R.string.coupon), "");
+        Log.e(__CLASSNAME__, getMethodName() + "[email]" + email + "[coupon]" + coupon);
+        if (!this.email.isEmpty()) send("Q", this.email, this.coupon);
     }
 
-    public void sendQuery(String kind, String email, String coupon) {
+    public void send(String kind, String email, String coupon) {
         //String url = "https://www.keumyoung.kr:444/mukinapp/coupon.2.asp";
         String url = "http://www.keumyoung.kr:80/mukinapp/coupon.2.asp";
         //url += "?kind=i";
         //url += "&email=" + email;
         //url += "&coupon=" + coupon;
 
+        String device = this.device.getDeviceUuid().toString();
+
         /**
          * Create empty RequestParams and immediately add some parameters:
          */
         RequestParams params = new RequestParams();
-        params.put("kind", kind);
-        params.put("email", email);
-        params.put("coupon", coupon);
+        params.put(getString(R.string.kind), kind);
+        params.put(getString(R.string.email), email);
+        params.put(getString(R.string.coupon), coupon);
+        params.put(getString(R.string.device), device);
 
         if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, getMethodName() + url + "?" + params);
         url = url + "?" + params;
@@ -110,11 +114,26 @@ public class Application2 extends Application {
         });
     }
 
-    public SimpleDateFormat f1 = new SimpleDateFormat("yyyyMMddhhmm");
-    //SimpleDateFormat f2 = new SimpleDateFormat("yyyy년MM월dd일 hh시mm분");
-    public SimpleDateFormat f2 = new SimpleDateFormat("yyyy/MM/dd-hh:mm");
+    TextHttpResponseHandler responsHandler;
+    public void setResponsHandler(TextHttpResponseHandler responsHandler) {
+        this.responsHandler = responsHandler;
+    }
 
-    SharedPreferences sharedPref;
+    public String checkDate() {
+        //2018-09-18 13:52:47.067
+        SimpleDateFormat f1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        //2018/09/18-13:52
+        SimpleDateFormat f2 = new SimpleDateFormat("yyyy/MM/dd-HH:mm");
+        String date = "기간:";
+        try {
+            if (sdate != null && !sdate.isEmpty()) date += f2.format(f1.parse(sdate));
+            if (edate != null && !edate.isEmpty()) date += "~" + f2.format(f1.parse(edate));
+            //Toast.makeText(getBaseContext(), date, Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
 
     //@Override
     public void onSuccess(int statusCode, Header[] headers, String response) {
@@ -123,31 +142,39 @@ public class Application2 extends Application {
         //Log.e(__CLASSNAME__, "[text]" + response);
         //showProgress(false);
         //Toast.makeText(getActivity(), response, Toast.LENGTH_LONG).show();
+        SharedPreferences sharedPref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
+        String code = "";
+        String message = "";
+        String date = "";
         try {
-            JSONObject json = new JSONObject(response).getJSONObject("JSN");
-            Log.e(__CLASSNAME__, "[JSN]" + json.toString(2));
-            JSONObject err = json.getJSONObject("ERR");
-            Log.e(__CLASSNAME__, "[ERR]" + err.toString(2));
-            JSONObject dat = json.getJSONArray("DAT").getJSONObject(0);
-            Log.e(__CLASSNAME__, "[DAT]" + dat.toString(2));
-            String code = err.getString("code");
-            String message = err.getString("message");
-            this.email = (dat.has("email") ? dat.getString("email") : null);
-            editor.putString("email", this.email);
+            JSONObject json = new JSONObject(response).getJSONObject(getString(R.string.JSN));
+            //Log.e(__CLASSNAME__, "[JSN]" + json.toString(2));
+            JSONObject err = json.getJSONObject(getString(R.string.ERR));
+            code = err.getString(getString(R.string.code));
+            message = err.getString(getString(R.string.message));
+            //Log.e(__CLASSNAME__, "[ERR]" + err.toString(2));
+            JSONObject dat = json.getJSONArray(getString(R.string.DAT)).getJSONObject(0);
+            //Log.e(__CLASSNAME__, "[DAT]" + dat.toString(2));
+            this.email = (dat.has(getString(R.string.email)) ? dat.getString(getString(R.string.email)) : null);
+            editor.putString(getString(R.string.email), this.email);
             this.coupon = (dat.has("coupon_num") ? dat.getString("coupon_num") : null);
-            editor.putString("coupon", this.coupon);
-            this.sdate = (dat.has("limit_sdate") ? dat.getString("limit_sdate") : null);
-            this.edate = (dat.has("limit_edate") ? dat.getString("limit_edate") : null);
-            String date = "기간:" + f2.format(f1.parse(sdate)) + "~" + f2.format(f1.parse(edate));
-            Log.e(__CLASSNAME__, "[date]" + date);
-            String msg = "[" + code +"]";
-            msg += message;
-            msg += "\n" + date;
-            Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+            editor.putString(getString(R.string.coupon), this.coupon);
+            this.sdate = (dat.has(getString(R.string.sdate)) ? dat.getString(getString(R.string.sdate)) : null);
+            this.edate = (dat.has(getString(R.string.edate)) ? dat.getString(getString(R.string.edate)) : null);
+            date = checkDate();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Log.e(__CLASSNAME__, "[date]" + date);
+        if (!code.equalsIgnoreCase("000")) {
+            editor.remove(getString(R.string.coupon));
+            editor.remove(getString(R.string.email));
+        }
+        String msg = "[" + code +"]";
+        msg += message;
+        msg += "\n" + date;
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
         editor.commit();
         if (this.responsHandler != null) this.responsHandler.onSuccess(statusCode, headers, response);
     }
