@@ -23,21 +23,16 @@
             <!--android:data="http://www.android.com" />-->
     <!--</header>-->
 
-    <!--<header android:title="Another Preference Activity">-->
-        <!--<intent android:action="Open Settings"-->
-            <!--android:targetClass="kr.keumyoung.karaoke.mukin.coupon.apps._preference"/>-->
-    <!--</header>-->
-
     <header
         android:title="@string/pref_header_login_coupon" />
 
-    <!--<header-->
-        <!--android:fragment="kr.keumyoung.karaoke.mukin.coupon.fragment._login"-->
-        <!--android:title="@string/pref_login" />-->
-    <header android:title="@string/pref_login">
-        <intent android:action="Open Login Acitivity"
-        android:targetClass="kr.keumyoung.karaoke.mukin.coupon.apps._preference"/>
-    </header>
+    <header
+        android:fragment="kr.keumyoung.karaoke.mukin.coupon.fragment._login"
+        android:title="@string/pref_login" />
+    <!--<header android:title="@string/pref_login">-->
+        <!--<intent android:action="intent.open.keumyoung.karaoke.Login.Acitivity"-->
+        <!--android:targetClass="kr.keumyoung.karaoke.mukin.coupon.apps._preference"/>-->
+    <!--</header>-->
 
 
     <header

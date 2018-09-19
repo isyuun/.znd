@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.andexert.library.RippleView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/play_anchor_ripple"
+    android:layout_height="match_parent"
+    app:rv_centered="true"
+    app:rv_color="@android:color/white"
+    app:rv_rippleDuration="100"
+    app:rv_type="simpleRipple">
+
+    <LinearLayout
+        android:id="@+id/play_anchor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <FrameLayout
+            android:id="@+id/play_base"
+            android:layout_width="64dp"
+            android:layout_height="64dp">
+
+            <ImageView
+                android:id="@+id/play_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/play_stroke_02_icon" />
+
+            <ImageView
+                android:id="@+id/play_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="2dp"
+                android:src="@drawable/play_icon" />
+        </FrameLayout>
+
+
+    </LinearLayout>
+</com.andexert.library.RippleView>

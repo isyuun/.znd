@@ -1,0 +1,56 @@
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- These preference headers are only used on tablets. -->
+
+    <!--<header-->
+    <!--android:fragment="kr.keumyoung.karaoke.mukin.coupon.activity.preference$GeneralPreferenceFragment"-->
+    <!--android:icon="@drawable/ic_info_black_24dp"-->
+    <!--android:title="@string/pref_header_general" />-->
+
+    <!--<header-->
+    <!--android:fragment="kr.keumyoung.karaoke.mukin.coupon.activity.preference$NotificationPreferenceFragment"-->
+    <!--android:icon="@drawable/ic_notifications_black_24dp"-->
+    <!--android:title="@string/pref_header_notifications" />-->
+
+    <!--<header-->
+    <!--android:fragment="kr.keumyoung.karaoke.mukin.coupon.activity.preference$DataSyncPreferenceFragment"-->
+    <!--android:icon="@drawable/ic_sync_black_24dp"-->
+    <!--android:title="@string/pref_header_data_sync" />-->
+
+    <!--<header android:title="Intent"-->
+    <!--android:summary="Launches an Intent.">-->
+    <!--<intent android:action="android.intent.action.VIEW"-->
+    <!--android:data="http://www.android.com" />-->
+    <!--</header>-->
+
+    <header android:title="@string/pref_header_login_coupon" />
+
+    <!--<header-->
+    <!--android:fragment="kr.keumyoung.karaoke.mukin.coupon.fragment._login"-->
+    <!--android:title="@string/pref_login" />-->
+    <header android:title="@string/pref_login">
+        <intent
+            android:action="intent.open.keumyoung.karaoke.Login.Acitivity"
+            android:targetClass="kr.keumyoung.mukin.activity._LoginActivity" />
+    </header>
+
+
+    <header
+        android:fragment="kr.keumyoung.karaoke.mukin.coupon.fragment._coupon"
+        android:title="@string/pref_coupon" />
+
+    <header android:title="@string/pref_header_app_infomation" />
+
+    <header
+        android:fragment="kr.keumyoung.karaoke.mukin.coupon.fragment._notice"
+        android:title="@string/pref_notice" />
+
+    <header
+        android:fragment="kr.keumyoung.karaoke.mukin.coupon.fragment._privacy"
+        android:title="@string/pref_privacy_policy" />
+
+    <header
+        android:fragment="kr.keumyoung.karaoke.mukin.coupon.fragment._version"
+        android:title="@string/pref_app_version" />
+
+</preference-headers>

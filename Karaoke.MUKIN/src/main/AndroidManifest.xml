@@ -4,7 +4,6 @@
     package="kr.keumyoung.karaoke.mukin">
 
     <application
-        android:name=".coupon.app._Application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -52,7 +51,7 @@
             android:name="kr.keumyoung.karaoke.mukin.coupon.apps._preference"
             android:label="@string/title_activity_settings" >
             <intent-filter>
-                <action android:name="Login Preference Activity" />
+                <action android:name="Open Preference Activity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

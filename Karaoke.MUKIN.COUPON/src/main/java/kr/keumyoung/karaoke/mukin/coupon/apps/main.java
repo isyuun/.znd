@@ -31,8 +31,6 @@ public class main extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
-        startActivity(new Intent(this, _preference.class));
     }
 
     @Override
@@ -52,7 +50,7 @@ public class main extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            startActivity(new Intent(this, _preference.class));
+            startActivity(new Intent(this, _preference.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP));
             return true;
         }
 
