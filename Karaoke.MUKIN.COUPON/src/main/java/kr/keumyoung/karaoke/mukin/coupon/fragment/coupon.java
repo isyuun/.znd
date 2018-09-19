@@ -8,8 +8,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import cz.msebera.android.httpclient.Header;
 import kr.keumyoung.karaoke.mukin.coupon.BuildConfig;
 import kr.keumyoung.karaoke.mukin.coupon.R;
 
@@ -22,7 +24,7 @@ public class coupon extends _user {
         super.onActivityCreated(savedInstanceState);
 
         findViewById(R.id.form_coupon).setVisibility(View.VISIBLE);
-        findViewById(R.id.form_email).setVisibility(View.GONE);
+        findViewById(R.id.form_email).setVisibility(View.VISIBLE);
         findViewById(R.id.form_password).setVisibility(View.GONE);
 
         //test
@@ -71,4 +73,20 @@ public class coupon extends _user {
         getApplication().send("I", email, coupon);
     }
 
+    @Override
+    public void onSuccess(int status, Header[] headers, String response) {
+        super.onSuccess(status, headers, response);
+        if (getCoupon() != null && !getCoupon().isEmpty()) {
+            Log.e(__CLASSNAME__, getMethodName() + ":" + mCouponView + ":" + getCoupon() + ":" + getApplication().checkDate());
+            ((TextView)findViewById(R.id.coupon_date)).setText(getApplication().checkDate() + "\n");
+            findViewById(R.id.coupon_date).setVisibility(View.VISIBLE);
+            mEmailView.setEnabled(false);
+            mCouponView.setEnabled(false);
+        } else {
+            ((TextView)findViewById(R.id.coupon_date)).setText("\n");
+            findViewById(R.id.coupon_date).setVisibility(View.GONE);
+            mEmailView.setEnabled(true);
+            mCouponView.setEnabled(true);
+        }
+    }
 }

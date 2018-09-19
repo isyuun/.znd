@@ -16,7 +16,7 @@ public class login extends _user {
         if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName());
         super.onActivityCreated(savedInstanceState);
 
-        findViewById(R.id.form_coupon).setVisibility(View.GONE);
+        findViewById(R.id.form_coupon).setVisibility(View.VISIBLE);
         findViewById(R.id.form_email).setVisibility(View.VISIBLE);
         findViewById(R.id.form_password).setVisibility(View.GONE);
 

@@ -17,12 +17,28 @@
         <!--android:icon="@drawable/ic_sync_black_24dp"-->
         <!--android:title="@string/pref_header_data_sync" />-->
 
+    <!--<header android:title="Intent"-->
+        <!--android:summary="Launches an Intent.">-->
+        <!--<intent android:action="android.intent.action.VIEW"-->
+            <!--android:data="http://www.android.com" />-->
+    <!--</header>-->
+
+    <!--<header android:title="Another Preference Activity">-->
+        <!--<intent android:action="Open Settings"-->
+            <!--android:targetClass="kr.keumyoung.karaoke.mukin.coupon.apps._preference"/>-->
+    <!--</header>-->
+
     <header
         android:title="@string/pref_header_login_coupon" />
 
-    <header
-        android:fragment="kr.keumyoung.karaoke.mukin.coupon.fragment._login"
-        android:title="@string/pref_login" />
+    <!--<header-->
+        <!--android:fragment="kr.keumyoung.karaoke.mukin.coupon.fragment._login"-->
+        <!--android:title="@string/pref_login" />-->
+    <header android:title="@string/pref_login">
+        <intent android:action="Open Login Acitivity"
+        android:targetClass="kr.keumyoung.karaoke.mukin.coupon.apps._preference"/>
+    </header>
+
 
     <header
         android:fragment="kr.keumyoung.karaoke.mukin.coupon.fragment._coupon"

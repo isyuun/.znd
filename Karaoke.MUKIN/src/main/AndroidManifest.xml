@@ -34,9 +34,6 @@
             android:label="@string/title_activity_test"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".coupon.apps._preference"
-            android:label="@string/title_activity_settings" />
-        <activity
             android:name=".apps.scroll"
             android:label="@string/title_activity_scroll"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -47,7 +44,18 @@
         <activity
             android:name=".apps.songs"
             android:label="@string/title_activity_songs"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!--<activity-->
+            <!--android:name=".coupon.apps._preference"-->
+            <!--android:label="@string/title_activity_settings" />-->
+        <activity
+            android:name="kr.keumyoung.karaoke.mukin.coupon.apps._preference"
+            android:label="@string/title_activity_settings" >
+            <intent-filter>
+                <action android:name="Login Preference Activity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

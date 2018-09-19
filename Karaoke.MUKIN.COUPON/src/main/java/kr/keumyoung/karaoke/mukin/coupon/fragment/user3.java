@@ -98,13 +98,13 @@ public class user3 extends user2 {
 
 
     //@Override
-    public void onFailure(int statusCode, Header[] headers, String response, Throwable e) {
+    public void onFailure(int status, Header[] headers, String response, Throwable e) {
         showProgress(false);
         getCoupon();
     }
 
     //@Override
-    public void onSuccess(int statusCode, Header[] headers, String response) {
+    public void onSuccess(int status, Header[] headers, String response) {
         showProgress(false);
         getCoupon();
     }
@@ -133,7 +133,6 @@ public class user3 extends user2 {
             return true;
         }
         if (checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-            getUserInfo();
             return true;
         }
         ArrayList<String> permissions = new ArrayList<>();

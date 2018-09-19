@@ -9,7 +9,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".fragment.user">
+    tools:context=".fragment._user"
+    tools:ignore="SmallSp">
 
     <!-- Login progress -->
     <ProgressBar
@@ -32,43 +33,6 @@
             android:orientation="vertical">
 
             <android.support.v7.widget.LinearLayoutCompat
-                android:id="@+id/form_coupon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="visible">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_coupon_input" />
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/coupon"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-                        android:hint="@string/prompt_coupon"
-                        android:inputType="textCapSentences"
-                        android:maxLength="16"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:textAllCaps="true" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/text_coupon_info"
-                        android:textSize="10sp" />
-
-                </android.support.design.widget.TextInputLayout>
-            </android.support.v7.widget.LinearLayoutCompat>
-
-            <android.support.v7.widget.LinearLayoutCompat
                 android:id="@+id/form_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -84,15 +48,15 @@
                     android:layout_height="wrap_content">
 
                     <!--<AutoCompleteTextView-->
-                        <!--android:id="@+id/email"-->
-                        <!--android:enabled="false"-->
-                        <!--android:focusable="false"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:hint="@string/prompt_email"-->
-                        <!--android:inputType="textEmailAddress"-->
-                        <!--android:maxLines="1"-->
-                        <!--android:singleLine="true" />-->
+                    <!--android:id="@+id/email"-->
+                    <!--android:enabled="false"-->
+                    <!--android:focusable="false"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="@string/prompt_email"-->
+                    <!--android:inputType="textEmailAddress"-->
+                    <!--android:maxLines="1"-->
+                    <!--android:singleLine="true" />-->
                     <AutoCompleteTextView
                         android:id="@+id/email"
                         android:layout_width="match_parent"
@@ -131,6 +95,50 @@
                         android:inputType="textPassword"
                         android:maxLines="1"
                         android:singleLine="true" />
+
+                </android.support.design.widget.TextInputLayout>
+            </android.support.v7.widget.LinearLayoutCompat>
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:id="@+id/form_coupon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_coupon_input" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/coupon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+                        android:hint="@string/prompt_coupon"
+                        android:inputType="textCapSentences"
+                        android:maxLength="16"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textAllCaps="true" />
+
+                    <TextView
+                        android:id="@+id/coupon_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_coupon_info"
+                        android:textColor="@android:color/holo_red_dark" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_coupon_info"
+                        android:textSize="10sp" />
 
                 </android.support.design.widget.TextInputLayout>
             </android.support.v7.widget.LinearLayoutCompat>
