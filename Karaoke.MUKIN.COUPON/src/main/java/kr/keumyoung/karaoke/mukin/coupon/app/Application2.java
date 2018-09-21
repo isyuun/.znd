@@ -75,7 +75,7 @@ public class Application2 extends Application {
         params.put(getString(R.string.coupon), coupon);
         params.put(getString(R.string.device), device);
 
-        if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, getMethodName() + url + "?" + params);
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + url + "?" + params);
         url = url + "?" + params;
 
         AsyncHttpClient client = new AsyncHttpClient(80, 444);
@@ -169,7 +169,6 @@ public class Application2 extends Application {
         Log.e(__CLASSNAME__, "[date]" + date);
         if (!code.equalsIgnoreCase("000")) {
             editor.remove(getString(R.string.coupon));
-            editor.remove(getString(R.string.email));
         }
         String msg = "[" + code +"]";
         msg += message;

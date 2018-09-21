@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/top_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/play_bg_02" />
+
+    <com.andexert.library.RippleView
+        android:id="@+id/profile_image_ripple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/top_bg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-56dp"
+        app:rv_centered="true"
+        app:rv_color="@android:color/black"
+        app:rv_rippleDuration="200"
+        app:rv_type="simpleRipple">
+
+        <FrameLayout
+            android:id="@+id/profile_image"
+            android:layout_width="112dp"
+            android:layout_height="112dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/add_profile_pic_circle">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="+"
+                    android:typeface="sans"
+                    android:textColor="@android:color/white"
+                    android:textSize="32sp" />
+            </FrameLayout>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
+    </com.andexert.library.RippleView>
+
+    <LinearLayout
+        android:id="@+id/login_section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/already_have_account"
+            android:typeface="sans"
+            android:textColor="@color/text_color" />
+
+        <TextView
+            android:id="@+id/login_anchor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="@string/login"
+            android:typeface="sans"
+            android:textColor="@color/colorAccent" />
+    </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/signup_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/login_section"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        app:cardCornerRadius="4dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/primary_button_bg"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="@string/signup"
+            android:typeface="sans"
+            android:textColor="@android:color/white" />
+
+    </android.support.v7.widget.CardView>
+
+    <EditText
+        android:id="@+id/password_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/signup_button"
+        android:layout_margin="12dp"
+        android:background="@drawable/edit_text_bg"
+        android:drawableLeft="@drawable/password_icon"
+        android:drawablePadding="8dp"
+        android:hint="@string/password_hint"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:padding="12dp"
+        android:textColor="@color/text_color"
+        android:textColorHint="@color/text_color_hint"
+        android:textSize="14sp"
+        android:typeface="sans" />
+
+    <EditText
+        android:id="@+id/email_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/password_et"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/edit_text_bg"
+        android:drawableLeft="@drawable/email_icon"
+        android:drawablePadding="8dp"
+        android:hint="@string/email_hint"
+        android:imeOptions="actionNext"
+        android:inputType="textEmailAddress"
+        android:padding="12dp"
+        android:textColor="@color/text_color"
+        android:textColorHint="@color/text_color_hint"
+        android:textSize="14sp"
+        android:typeface="sans" />
+
+    <EditText
+        android:id="@+id/nickname_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/email_et"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/edit_text_bg"
+        android:drawableLeft="@drawable/profile_name_icon"
+        android:drawablePadding="8dp"
+        android:hint="@string/name_hint"
+        android:imeOptions="actionNext"
+        android:inputType="textEmailAddress"
+        android:padding="12dp"
+        android:textColor="@color/text_color"
+        android:textColorHint="@color/text_color_hint"
+        android:textSize="14sp"
+        android:typeface="sans">
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/nickname_et"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="12dp"
+        android:text="@string/create_new_account"
+        android:typeface="sans"
+        android:textColor="@color/text_color" />
+
+</RelativeLayout>

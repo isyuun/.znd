@@ -73,8 +73,8 @@ public class user3 extends user2 {
     @Override
     protected String getGoogleAccount() {
         String email = super.getGoogleAccount();
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + "[ACCOUNT]" + email);
-        mEmailView.setText(email);
+        //if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + "[ACCOUNT]" + email);
+        //mEmailView.setText(email);
         return email;
     }
 
@@ -113,15 +113,24 @@ public class user3 extends user2 {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         Log.e(__CLASSNAME__, getMethodName());
         super.onActivityCreated(savedInstanceState);
-        populateAutoComplete();
+
+        SharedPreferences sharedPref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
+        String email = sharedPref.getString(getString(R.string.email), ""/*mEmailView.getText().toString()*/);
+        /*if (!email.isEmpty()) */mEmailView.setText(email);
+
         showProgress(true);
+        populateAutoComplete();
     }
 
     private void populateAutoComplete() {
-        if (mayRequestPermissions()) {
-            getLoaderManager().initLoader(0, null, this);
-            getUserInfo();
+        if (!mayRequestPermissions()) {
+            //showProgress(false);
+            return;
         }
+
+        getLoaderManager().initLoader(0, null, this);
+        showProgress(true);
+        getUserInfo();
     }
 
     protected static final int REQUEST_PERMISSIONS = 0;
@@ -171,7 +180,7 @@ public class user3 extends user2 {
         if (code == REQUEST_PERMISSIONS) {
             if (grants.length == 2 && grants[0] == PackageManager.PERMISSION_GRANTED && grants[1] == PackageManager.PERMISSION_GRANTED) {
                 Log.e(__CLASSNAME__, getMethodName() + code + "," + permissions + "," + grants);
-                getUserInfo();
+                populateAutoComplete();
             }
         }
     }

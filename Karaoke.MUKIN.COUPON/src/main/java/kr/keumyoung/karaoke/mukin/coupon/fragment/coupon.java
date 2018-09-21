@@ -27,16 +27,13 @@ public class coupon extends _user {
         findViewById(R.id.form_email).setVisibility(View.VISIBLE);
         findViewById(R.id.form_password).setVisibility(View.GONE);
 
-        //test
-        //mCouponView.setText("75UA7TV4US612Y41"); //정상:75UA7TV4US612Y41
-        //mCouponView.setText("6N69FJTV7JWAWH5F"); //오류:6N69FJTV7JWAWH5F
-        //
+        /**
+         * mCouponView.setText("75UA7TV4US612Y41"); //정상:75UA7TV4US612Y41
+         * mCouponView.setText("6N69FJTV7JWAWH5F"); //오류:6N69FJTV7JWAWH5F
+         */
         SharedPreferences sharedPref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
-        String email = sharedPref.getString(getString(R.string.email), mEmailView.getText().toString());
-        String coupon = sharedPref.getString(getString(R.string.coupon), mCouponView.getText().toString());
-        //
-        if (!email.isEmpty()) mEmailView.setText(email);
-        if (!coupon.isEmpty()) mCouponView.setText(coupon);
+        String coupon = sharedPref.getString(getString(R.string.coupon), ""/*mCouponView.getText().toString()*/);
+        /*if (!coupon.isEmpty()) */mCouponView.setText(coupon);
 
     }
 
@@ -80,12 +77,10 @@ public class coupon extends _user {
             Log.e(__CLASSNAME__, getMethodName() + ":" + mCouponView + ":" + getCoupon() + ":" + getApplication().checkDate());
             ((TextView)findViewById(R.id.coupon_date)).setText(getApplication().checkDate() + "\n");
             findViewById(R.id.coupon_date).setVisibility(View.VISIBLE);
-            mEmailView.setEnabled(false);
             mCouponView.setEnabled(false);
         } else {
             ((TextView)findViewById(R.id.coupon_date)).setText("\n");
             findViewById(R.id.coupon_date).setVisibility(View.GONE);
-            mEmailView.setEnabled(true);
             mCouponView.setEnabled(true);
         }
     }
