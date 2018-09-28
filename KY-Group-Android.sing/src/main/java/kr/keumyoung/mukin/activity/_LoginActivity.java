@@ -1,4 +1,4 @@
 package kr.keumyoung.mukin.activity;
 
-public class _LoginActivity extends LoginActivity2 {
+public final class _LoginActivity extends LoginActivity3 {
 }

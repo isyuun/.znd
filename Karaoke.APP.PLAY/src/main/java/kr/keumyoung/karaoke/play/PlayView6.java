@@ -15,10 +15,6 @@ import kr.kymedia.karaoke.util.TextUtil;
 public class PlayView6 extends PlayView5 {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-    private String _toString() {
-        return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-    }
-
     public PlayView6(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
@@ -92,7 +88,7 @@ public class PlayView6 extends PlayView5 {
         this.song_id = song_id;
         this.url_skym = "http://www.keumyoung.kr/api/.skym.asp?song_id=" + this.song_id;
         this.url_mmp3 = "http://www.keumyoung.kr/api/.mmp3.asp?song_id=" + this.song_id;
-        if (BuildConfig.DEBUG) Log.e(_toString(), getMethodName() + "[ST]" + this.song_id + ":" + this.url_skym + ":" + this.url_mmp3);
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + "[ST]" + this.song_id + ":" + this.url_skym + ":" + this.url_mmp3);
 
         //if (_KP_1016 == null) {
         //    ShowMessageNotResponse(getString(kr.kymedia.kykaraoke.tv.R.string.common_info), getString(kr.kymedia.kykaraoke.tv.R.string.message_error_network_timeout));
@@ -127,13 +123,13 @@ public class PlayView6 extends PlayView5 {
     final Handler handlerKP = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if (BuildConfig.DEBUG) Log.e(_toString(), "handleMessage()" + msg);
+            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "handleMessage()" + msg);
             KP(msg);
         }
     };
 
     protected void KP(Message msg) {
-        if (BuildConfig.DEBUG) Log.e(_toString(), getMethodName() + _Const.COMPLETE_KP.get(msg.getData().getInt("state")) + ":" + msg);
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + _Const.COMPLETE_KP.get(msg.getData().getInt("state")) + ":" + msg);
 
         int state = msg.getData().getInt("state");
 
@@ -169,7 +165,7 @@ public class PlayView6 extends PlayView5 {
 
     @Override
     public void open() {
-        if (BuildConfig.DEBUG) Log.e(_toString(), getMethodName() + "[ST]" + this.song_id + "\n" + this.url_skym + "\n" + this.url_mmp3);
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + "[ST]" + this.song_id + "\n" + this.url_skym + "\n" + this.url_mmp3);
         if (TextUtil.isEmpty(url_skym)) {
             return;
         }
@@ -184,7 +180,7 @@ public class PlayView6 extends PlayView5 {
             e.printStackTrace();
         }
 
-        if (BuildConfig.DEBUG) Log.e(_toString(), getMethodName() + "[ED]" + this.song_id + "\n" + this.url_skym + "\n" + this.url_mmp3);
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + "[ED]" + this.song_id + "\n" + this.url_skym + "\n" + this.url_mmp3);
     }
 
     protected String getString(int resId) {

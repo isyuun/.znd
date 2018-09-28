@@ -47,10 +47,6 @@ import android.widget.TextView;
 class ListenTempo extends ListenPitch {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	private String _toString() {
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	@Override
 	protected String getMethodName() {
 		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
@@ -63,12 +59,12 @@ class ListenTempo extends ListenPitch {
 	public ListenTempo(Context context) {
 		super(context);
 		txt_tempo = (TextView) ((Activity) context).findViewById(R.id.txt_tempo);
-		Log.wtf(_toString(), getMethodName() + ":" + txt_tempo);
+		Log.wtf(__CLASSNAME__, getMethodName() + ":" + txt_tempo);
 	}
 
 	@Override
 	public boolean play() {
-		Log.i(_toString(), getMethodName() + ":" + getTempoPercent() + "+" + getTempoPercentMargin());
+		Log.i(__CLASSNAME__, getMethodName() + ":" + getTempoPercent() + "+" + getTempoPercentMargin());
 		boolean ret = super.play();
 		if (ret) {
 			setTempoPercent(TEMPO_NORMAL);
@@ -78,7 +74,7 @@ class ListenTempo extends ListenPitch {
 
 	@Override
 	public void stop() {
-		Log.i(_toString(), getMethodName() + ":" + getTempoPercent() + "+" + getTempoPercentMargin());
+		Log.i(__CLASSNAME__, getMethodName() + ":" + getTempoPercent() + "+" + getTempoPercentMargin());
 		//setTempoPercent(TEMPO_NORMAL);
 		super.stop();
 	}
@@ -112,7 +108,7 @@ class ListenTempo extends ListenPitch {
 
 	@Override
 	void setListen() {
-		Log.e(_toString(), getMethodName());
+		Log.e(__CLASSNAME__, getMethodName());
 		super.setListen();
 
 		txt_tempo = (TextView) ((Activity) context).findViewById(R.id.txt_tempo);
@@ -158,7 +154,7 @@ class ListenTempo extends ListenPitch {
 
 	@Override
 	protected void init(boolean init) {
-		Log.w(_toString(), getMethodName() + init);
+		Log.w(__CLASSNAME__, getMethodName() + init);
 		super.init(init);
 	}
 
@@ -176,7 +172,7 @@ class ListenTempo extends ListenPitch {
 			if (percent > 0) {
 				percent -= untTEMPO;
 			}
-			Log.wtf(_toString(), getMethodName() + getTempo() + ":" + getTempoPercent() + "->" + percent);
+			Log.wtf(__CLASSNAME__, getMethodName() + getTempo() + ":" + getTempoPercent() + "->" + percent);
 			setTempoPercent(percent);
 		}
 	}
@@ -193,7 +189,7 @@ class ListenTempo extends ListenPitch {
 			if (percent > 0) {
 				percent += untTEMPO;
 			}
-			Log.wtf(_toString(), getMethodName() + getTempo() + ":" + getTempoPercent() + "->" + percent);
+			Log.wtf(__CLASSNAME__, getMethodName() + getTempo() + ":" + getTempoPercent() + "->" + percent);
 			setTempoPercent(percent);
 		}
 	}
@@ -206,11 +202,11 @@ class ListenTempo extends ListenPitch {
 	 */
 	@Override
 	public void setTempoPercent(int percent) {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + percent + ":" + TEMPO_PERCENT_MARGIN);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + percent + ":" + TEMPO_PERCENT_MARGIN);
 
 		percent += TEMPO_PERCENT_MARGIN;
 		if (TEMPO_PERCENT_MARGIN != 0) {
-			Log.wtf(_toString(), getMethodName() + percent + ":" + TEMPO_PERCENT_MARGIN);
+			Log.wtf(__CLASSNAME__, getMethodName() + percent + ":" + TEMPO_PERCENT_MARGIN);
 		}
 
 		super.setTempoPercent(percent);
@@ -254,7 +250,7 @@ class ListenTempo extends ListenPitch {
 			txt_tempo.setText(text);
 		}
 
-		// _LOG.e(_toString(), getMethodName() + "balance:" + balance + " - " + min + "~" + max);
+		// _LOG.e(__CLASSNAME__, getMethodName() + "balance:" + balance + " - " + min + "~" + max);
 
 		//setInfo();
 	}

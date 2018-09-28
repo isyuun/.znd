@@ -55,11 +55,6 @@ import kr.kymedia.karaoke.play.impl.ISongPlay.Listener;
 abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	private String _toString() {
-
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	@Override
 	protected String getMethodName() {
 		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
@@ -129,11 +124,11 @@ abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 			RetryTask retryTask = new RetryTask();
 			retryTimer.schedule(retryTask, TIMER_RETRY, TIMER_RETRY);
 		}
-		Log.wtf(_toString(), "startTry() " + method + ":" + isRetry + ":" + count + ":" + retryTimer);
+		Log.wtf(__CLASSNAME__, "startTry() " + method + ":" + isRetry + ":" + count + ":" + retryTimer);
 	}
 
 	protected void stopTry(String method) {
-		Log.wtf(_toString(), "stopTry() " + method + ":" + isRetry + ":" + count + ":" + retryTimer);
+		Log.wtf(__CLASSNAME__, "stopTry() " + method + ":" + isRetry + ":" + count + ":" + retryTimer);
 		try {
 			if (retryTimer != null) {
 				retryTimer.cancel();
@@ -145,11 +140,11 @@ abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 
 			e.printStackTrace();
 		}
-		Log.wtf(_toString(), getMethodName() + retryTimer);
+		Log.wtf(__CLASSNAME__, getMethodName() + retryTimer);
 	}
 
 	public void cancel() {
-		if (BuildConfig.DEBUG) Log.wtf(_toString(), getMethodName() + count);
+		if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + count);
 		stopTry(getMethodName());
 	}
 
@@ -174,7 +169,7 @@ abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 	int count = 0;
 
 	private void retry(String method) {
-		Log.wtf(_toString(), "retry() " + method + ":" + isRetry + ":" + count + ":" + isPlaying() + ":" + retryTimer);
+		Log.wtf(__CLASSNAME__, "retry() " + method + ":" + isRetry + ":" + count + ":" + isPlaying() + ":" + retryTimer);
 
 		if (!isRetry) {
 			stopTry(getMethodName());
@@ -193,14 +188,14 @@ abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 				release();
 				load(path);
 				count++;
-				Log.wtf(_toString() + TAG_SING, "onRetry() " + "(" + count + ")");
+				Log.wtf(__CLASSNAME__ + TAG_SING, "onRetry() " + "(" + count + ")");
 				onRetry(count);
 				onTimeout(TIMER_RETRY);
 			} else {
-				//if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[RO]" + count);
+				//if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[RO]" + count);
 				ISongPlay.ERROR t = ISongPlay.ERROR.TRYOUT;
 				Exception e = new Exception("RETRY OUT ERROR(" + count + ")");
-				Log.wtf(_toString() + TAG_SING, "onError() " + "(" + t + ", " + e + ")"/* + player.getPath() */ + "\n" + Log.getStackTraceString(e));
+				Log.wtf(__CLASSNAME__ + TAG_SING, "onError() " + "(" + t + ", " + e + ")"/* + player.getPath() */ + "\n" + Log.getStackTraceString(e));
 				onError(t, e);
 				stop();
 				cancel();
@@ -208,22 +203,22 @@ abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 			}
 		} catch (Exception e) {
 
-			if (BuildConfig.DEBUG) Log.w(_toString() + TAG_ERR, "[NG]" + getMethodName() + count);
+			if (BuildConfig.DEBUG) Log.w(__CLASSNAME__ + TAG_ERR, "[NG]" + getMethodName() + count);
 			e.printStackTrace();
 			stop();
 			cancel();
 			stopTry(getMethodName());
 		}
-		// if (BuildConfig.DEBUG) _LOG.e(_toString(), getMethodName() + "[ED]" + count);
+		// if (BuildConfig.DEBUG) _LOG.e(__CLASSNAME__, getMethodName() + "[ED]" + count);
 	}
 
 	@Override
 	public void open() throws Exception {
-		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ST]");
-		Log.wtf(_toString(), "load() " + count);
+		if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[ST]");
+		Log.wtf(__CLASSNAME__, "load() " + count);
 		//super.load();
 		(new open()).execute();
-		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ED]");
+		if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[ED]");
 	}
 
 	//private class load extends AsyncTask<Void, Void, Void> {
@@ -247,18 +242,18 @@ abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 	private final Runnable open = new Runnable() {
 		@Override
 		public void run() {
-			if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ST]");
+			if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[ST]");
 			try {
 				load(url);
 				cancel();
 				startTry(getMethodName());
 			} catch (Exception e) {
 				//e.printStackTrace();
-				if (BuildConfig.DEBUG) Log.w(_toString() + TAG_ERR, "[NG]" + getMethodName() + url);
+				if (BuildConfig.DEBUG) Log.w(__CLASSNAME__ + TAG_ERR, "[NG]" + getMethodName() + url);
 				e.printStackTrace();
 				onError(ISongPlay.ERROR.MEDIAPLAYERPLAY, e);
 			}
-			if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ED]");
+			if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[ED]");
 		}
 	};
 
@@ -266,33 +261,33 @@ abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 	public boolean play() {
 		boolean ret = false;
 
-		Log.d(_toString(), getMethodName() + "[ST]" + ret);
+		Log.d(__CLASSNAME__, getMethodName() + "[ST]" + ret);
 
-		Log.wtf(_toString(), getMethodName() + count);
+		Log.wtf(__CLASSNAME__, getMethodName() + count);
 		try {
 			ret = super.play();
 			stopTry(getMethodName());
 		} catch (Exception e) {
 
-			if (BuildConfig.DEBUG) Log.w(_toString() + TAG_ERR, "[NG]" + getMethodName());
+			if (BuildConfig.DEBUG) Log.w(__CLASSNAME__ + TAG_ERR, "[NG]" + getMethodName());
 			e.printStackTrace();
 			onError(ISongPlay.ERROR.MEDIAPLAYERPLAY, e);
 		}
 
-		Log.d(_toString(), getMethodName() + "[ED]" + ret);
+		Log.d(__CLASSNAME__, getMethodName() + "[ED]" + ret);
 		return ret;
 	}
 
 	private _Listener listener;
 
 	public void setOnListener(Listener listener) {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + (listener instanceof Listener) + ":" + listener);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + (listener instanceof Listener) + ":" + listener);
 		this.listener = (_Listener) listener;
 	}
 
 	@Override
 	public void onPrepared() {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + listener);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + listener);
 		stopTry(getMethodName());
 		if (listener != null) {
 			listener.onPrepared();
@@ -301,7 +296,7 @@ abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 
 	@Override
 	public void onTime(int t) {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + ":" + t + ":" + listener);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + ":" + t + ":" + listener);
 		if (listener != null) {
 			listener.onTime(t);
 		}
@@ -309,7 +304,7 @@ abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 
 	@Override
 	public void onCompletion() {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + listener);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + listener);
 		if (listener != null) {
 			listener.onCompletion();
 		}
@@ -317,7 +312,7 @@ abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 
 	@Override
 	public void onError() {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + listener);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + listener);
 		if (listener != null) {
 			listener.onError();
 		}
@@ -325,7 +320,7 @@ abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 
 	@Override
 	public void onError(ISongPlay.ERROR t, Exception e) {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + t + ":" + e + ":" + listener);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + t + ":" + e + ":" + listener);
 		if (listener != null) {
 			listener.onError(t, e);
 		}
@@ -333,7 +328,7 @@ abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 
 	@Override
 	public void onBufferingUpdate(int percent) {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + percent + ":" + listener);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + percent + ":" + listener);
 		if (listener != null) {
 			listener.onBufferingUpdate(percent);
 		}
@@ -341,7 +336,7 @@ abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 
 	@Override
 	public void onRelease() {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + listener);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + listener);
 		if (listener != null) {
 			listener.onRelease();
 		}
@@ -349,7 +344,7 @@ abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 
 	@Override
 	public void onSeekComplete() {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + listener);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + listener);
 		if (listener != null) {
 			listener.onSeekComplete();
 		}
@@ -357,7 +352,7 @@ abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 
 	@Override
 	public void onReady(int count) {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + count + ":" + listener);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + count + ":" + listener);
 		if (listener != null) {
 			listener.onReady(count);
 		}
@@ -365,7 +360,7 @@ abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 
 	@Override
 	public void onRetry(int count) {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + count + ":" + listener);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + count + ":" + listener);
 		if (listener != null) {
 			listener.onRetry(count);
 		}
@@ -373,7 +368,7 @@ abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 
 	@Override
 	public void onTimeout(long timeout) {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + timeout + ":" + listener);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + timeout + ":" + listener);
 		if (listener != null) {
 			listener.onTimeout(timeout);
 		}

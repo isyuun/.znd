@@ -65,11 +65,6 @@ import kr.kymedia.karaoke.util.TextUtil;
 class Download2 extends Download implements _Const {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-    private String _toString() {
-
-        return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-    }
-
     protected String getMethodName() {
         String name = Thread.currentThread().getStackTrace()[3].getMethodName();
         // int line = Thread.currentThread().getStackTrace()[3].getLineNumber();
@@ -164,17 +159,17 @@ class Download2 extends Download implements _Const {
         final int type = mType;
 
         if (BuildConfig.DEBUG)
-            Log.w(_toString(), getMethodName() + "[ST]" + type + ":" + url + "->" + path);
+            Log.w(__CLASSNAME__, getMethodName() + "[ST]" + type + ":" + url + "->" + path);
 
         // super.run();
         try {
 
             if (TextUtil.isNetworkUrl(mMp3)) {
                 if (BuildConfig.DEBUG)
-                    Log.i(_toString(), "lyric.down() " + "[ST]" + type + ":" + url + "->" + path);
+                    Log.i(__CLASSNAME__, "lyric.down() " + "[ST]" + type + ":" + url + "->" + path);
                 LyricsUtil.down(url, path);
                 if (BuildConfig.DEBUG)
-                    Log.i(_toString(), "lyric.down() " + "[ED]" + type + ":" + url + "->" + path);
+                    Log.i(__CLASSNAME__, "lyric.down() " + "[ED]" + type + ":" + url + "->" + path);
             } else {
                 down();
             }
@@ -187,19 +182,19 @@ class Download2 extends Download implements _Const {
             } else {
                 switch (type) {
                     case REQUEST_FILE_ARTIST_IMAGE:
-                        if (BuildConfig.DEBUG) Log.i(_toString(), "_COMPLETE_ARTIST_IMAGE");
+                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "_COMPLETE_ARTIST_IMAGE");
                         sendMessage(COMPLETE_DOWN_ARTIST_IMAGE);
                         break;
                     case REQUEST_FILE_SONG:
-                        if (BuildConfig.DEBUG) Log.i(_toString(), "_COMPLETE_SONG");
+                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "_COMPLETE_SONG");
                         sendMessage(COMPLETE_DOWN_SONG);
                         break;
                     case REQUEST_FILE_LISTEN:
-                        if (BuildConfig.DEBUG) Log.i(_toString(), "_COMPLETE_LISTEN");
+                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "_COMPLETE_LISTEN");
                         sendMessage(COMPLETE_DOWN_LISTEN);
                         break;
                     case REQUEST_FILE_LISTEN_OTHER:
-                        if (BuildConfig.DEBUG) Log.i(_toString(), "_COMPLETE_LISTEN_OTHER_DOWN");
+                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "_COMPLETE_LISTEN_OTHER_DOWN");
                         sendMessage(COMPLETE_DOWN_LISTEN_OTHER);
                         break;
                 }
@@ -207,7 +202,7 @@ class Download2 extends Download implements _Const {
 
         } catch (final Exception e) {
             if (BuildConfig.DEBUG)
-                Log.w(_toString() + TAG_ERR, "[NG]" + getMethodName() + type + ":" + url + "->" + path);
+                Log.w(__CLASSNAME__ + TAG_ERR, "[NG]" + getMethodName() + type + ":" + url + "->" + path);
 
             e.printStackTrace();
             post(new Runnable() {
@@ -222,11 +217,11 @@ class Download2 extends Download implements _Const {
         }
 
         if (BuildConfig.DEBUG)
-            Log.w(_toString(), getMethodName() + "[ED]" + type + ":" + url + "->" + path);
+            Log.w(__CLASSNAME__, getMethodName() + "[ED]" + type + ":" + url + "->" + path);
     }
 
     public void down() {
-        if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ST]" + mLyc);
+        if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[ST]" + mLyc);
 
         // int fileType = mType;
 
@@ -234,58 +229,58 @@ class Download2 extends Download implements _Const {
 
         HttpClient downClient = new DefaultHttpClient();
         HttpGet testHttpGet = new HttpGet(mLyc);
-        if (BuildConfig.DEBUG) Log.i(_toString(), "httpget mUrl = " + mLyc);
+        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "httpget mUrl = " + mLyc);
 
         try {
             HttpResponse testResponse = downClient.execute(testHttpGet);
-            if (BuildConfig.DEBUG) Log.i(_toString(), "excute");
+            if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "excute");
 
             HttpEntity downEntity = testResponse.getEntity();
             if (downEntity != null) {
-                if (BuildConfig.DEBUG) Log.i(_toString(), "entity not null");
+                if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "entity not null");
 
                 int BUFFER_SIZE = 1024 * 10;
                 byte[] buffer = new byte[BUFFER_SIZE];
 
                 InputStream testInputStream = null;
                 testInputStream = downEntity.getContent();
-                if (BuildConfig.DEBUG) Log.i(_toString(), "getcontent");
+                if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "getcontent");
                 BufferedInputStream testInputBuf = new BufferedInputStream(testInputStream, BUFFER_SIZE);
 
                 File file = null;
                 file = new File(sdpath + File.separator + mFileName);
                 file.createNewFile();
-                if (BuildConfig.DEBUG) Log.i(_toString(), "createnewfile");
+                if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "createnewfile");
                 FileOutputStream testFileOutputStream = new FileOutputStream(file, false);
                 BufferedOutputStream testOutputBuf = new BufferedOutputStream(testFileOutputStream, BUFFER_SIZE);
 
                 int readSize = -1;
 
                 while ((readSize = testInputBuf.read(buffer)) != -1) {
-                    // if (BuildConfig.DEBUG) _LOG.i(_toString(), "readSize = " + String.valueOf(readSize));
+                    // if (BuildConfig.DEBUG) _LOG.i(__CLASSNAME__, "readSize = " + String.valueOf(readSize));
                     testOutputBuf.write(buffer, 0, readSize);
                 }
 
                 // switch (fileType) {
                 // case FILE_ARTIST_IMAGE:
-                // if (BuildConfig.DEBUG) _LOG.i(_toString(), "_COMPLETE_ARTIST_IMAGE");
+                // if (BuildConfig.DEBUG) _LOG.i(__CLASSNAME__, "_COMPLETE_ARTIST_IMAGE");
                 // sendMessage(_COMPLETE_ARTIST_IMAGE);
                 // break;
                 // case FILE_SONG:
-                // if (BuildConfig.DEBUG) _LOG.i(_toString(), "_COMPLETE_SONG");
+                // if (BuildConfig.DEBUG) _LOG.i(__CLASSNAME__, "_COMPLETE_SONG");
                 // sendMessage(_COMPLETE_SONG);
                 // break;
                 // case FILE_LISTEN:
-                // if (BuildConfig.DEBUG) _LOG.i(_toString(), "_COMPLETE_LISTEN");
+                // if (BuildConfig.DEBUG) _LOG.i(__CLASSNAME__, "_COMPLETE_LISTEN");
                 // sendMessage(_COMPLETE_LISTEN);
                 // break;
                 // case FILE_LISTEN_OTHER:
-                // if (BuildConfig.DEBUG) _LOG.i(_toString(), "_COMPLETE_LISTEN_OTHER_DOWN");
+                // if (BuildConfig.DEBUG) _LOG.i(__CLASSNAME__, "_COMPLETE_LISTEN_OTHER_DOWN");
                 // sendMessage(_COMPLETE_LISTEN_OTHER_DOWN);
                 // break;
                 // }
 
-                if (BuildConfig.DEBUG) Log.i(_toString(), "write end");
+                if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "write end");
                 testOutputBuf.flush();
 
                 testInputBuf.close();
@@ -294,10 +289,10 @@ class Download2 extends Download implements _Const {
             }
         } catch (Exception e) {
             testHttpGet.abort();
-            if (BuildConfig.DEBUG) Log.i(_toString(), "execute fail");
+            if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "execute fail");
         }
 
-        if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ED]" + mLyc);
+        if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[ED]" + mLyc);
     }
 
 }

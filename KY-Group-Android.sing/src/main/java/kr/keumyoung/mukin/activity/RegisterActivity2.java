@@ -22,15 +22,6 @@ public class RegisterActivity2 extends RegisterActivity {
         populateAutoComplete();
     }
 
-    protected String getGoogleAccount() {
-        String email = null;
-        Account accounts[] = EnvironmentUtils.getGoogleAccount(this);
-        if (accounts.length > 0) {
-            email = accounts[0].name;
-        }
-        return email;
-    }
-
     private static final int REQUEST_READ_CONTACTS = 0;
 
     private void populateAutoComplete() {

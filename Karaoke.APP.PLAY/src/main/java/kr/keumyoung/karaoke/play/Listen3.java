@@ -53,11 +53,6 @@ import java.io.IOException;
 class Listen3 extends Listen2 {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	private String _toString() {
-
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	@Override
 	protected String getMethodName() {
 		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
@@ -74,20 +69,20 @@ class Listen3 extends Listen2 {
 	private PLAY_ENGAGE m_state = PLAY_ENGAGE.PLAY_STOP;
 
 	public void setPlayState(PLAY_ENGAGE state) {
-		if (BuildConfig.DEBUG) Log.d(_toString(), getMethodName() + state);
+		if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, getMethodName() + state);
 		this.m_state = state;
 	}
 
 	public PLAY_ENGAGE getPlayState() {
-		if (BuildConfig.DEBUG) Log.d(_toString(), getMethodName() + m_state);
+		if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, getMethodName() + m_state);
 		return m_state;
 	}
 
 	public void open() throws Exception {
 
-		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ST]");
+		if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[ST]");
 		load(this.url);
-		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ED]");
+		if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[ED]");
 	}
 
 	String path;
@@ -95,15 +90,15 @@ class Listen3 extends Listen2 {
 	@Override
 	protected void setFile(String path) {
 
-		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ST]");
+		if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[ST]");
 		// super.setFile(load);
-		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ED]");
+		if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[ED]");
 	}
 
 	@Override
 	protected boolean load(String path) throws Exception {
 
-		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + path);
+		if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + path);
 		this.path = path;
 
 		try {
@@ -116,11 +111,11 @@ class Listen3 extends Listen2 {
 			// FileDescriptor fd = fs.getFD();
 			// m_mp.setDataSource(fd);
 			// fs.close();
-			Log.w(_toString(), "load()" + "[setAudioStreamType]");
+			Log.w(__CLASSNAME__, "load()" + "[setAudioStreamType]");
 			m_mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
-			Log.w(_toString(), "load()" + "[setDataSource]");
+			Log.w(__CLASSNAME__, "load()" + "[setDataSource]");
 			m_mp.setDataSource(path);
-			Log.w(_toString(), "load()" + "[prepareAsync]");
+			Log.w(__CLASSNAME__, "load()" + "[prepareAsync]");
 			m_mp.prepareAsync();
 
 			m_mp.setOnPreparedListener(new OnPreparedListener() {
@@ -128,7 +123,7 @@ class Listen3 extends Listen2 {
 				@Override
 				public void onPrepared(MediaPlayer mp) {
 
-					if (BuildConfig.DEBUG) Log.d(_toString(), getMethodName() + mp);
+					if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, getMethodName() + mp);
 					if (mOnPreparedListener != null) {
 						mOnPreparedListener.onPrepared(mp);
 					}
@@ -141,7 +136,7 @@ class Listen3 extends Listen2 {
 				@Override
 				public void onCompletion(MediaPlayer mp) {
 
-					if (BuildConfig.DEBUG) Log.d(_toString(), getMethodName() + mp);
+					if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, getMethodName() + mp);
 					if (mOnCompletionListener != null) {
 						mOnCompletionListener.onCompletion(mp);
 					}
@@ -153,7 +148,7 @@ class Listen3 extends Listen2 {
 				@Override
 				public boolean onError(MediaPlayer mp, int what, int extra) {
 
-					if (BuildConfig.DEBUG) Log.d(_toString(), getMethodName() + mp + "(" + what + ", " + extra + ")");
+					if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, getMethodName() + mp + "(" + what + ", " + extra + ")");
 					if (mOnErrorListener != null) {
 						mOnErrorListener.onError(mp, what, extra);
 					}

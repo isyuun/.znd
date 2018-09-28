@@ -16,11 +16,6 @@ public class ContCircularSeekBar extends RelativeLayout {
 
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-    private String _toString() {
-
-        return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-    }
-
     protected String getMethodName() {
         String name = Thread.currentThread().getStackTrace()[3].getMethodName();
         // int line = Thread.currentThread().getStackTrace()[3].getLineNumber();

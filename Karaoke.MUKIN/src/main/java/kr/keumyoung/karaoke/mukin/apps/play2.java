@@ -16,10 +16,6 @@ import kr.kymedia.karaoke.api.KPItem;
 public class play2 extends play {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-    private String _toString() {
-        return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-    }
-
     FloatingActionButton fab;
 
     _PlayView player;
@@ -85,7 +81,7 @@ public class play2 extends play {
     //    }
     //};
     protected void player() {
-        if (BuildConfig.DEBUG) Log.d(_toString(), getMethodName() + findViewById(R.id.player));
+        if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, getMethodName() + findViewById(R.id.player));
 
         player = findViewById(R.id.player);
         //player.setType(TYPE.MEDIAPLAYERPLAY);

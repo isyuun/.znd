@@ -56,11 +56,6 @@ import kr.kymedia.karaoke.util.TextUtil;
 class PlayView3 extends PlayView2X {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	private String _toString() {
-
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	@Override
 	protected String getMethodName() {
 		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
@@ -177,7 +172,7 @@ class PlayView3 extends PlayView2X {
 
 		ret = String.format(host + path + form, number);
 
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + server + "-" + number + "-" + ret);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + server + "-" + number + "-" + ret);
 
 		return ret;
 	}
@@ -210,7 +205,7 @@ class PlayView3 extends PlayView2X {
 		// load = getLyricList().get(getLyricIdx()).toString();
 		// }
 		String path = getLyric();
-		if (BuildConfig.DEBUG) Log.e(_toString(), getMethodName() + path);
+		if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + path);
 		load(path);
 	}
 
@@ -223,17 +218,17 @@ class PlayView3 extends PlayView2X {
 	@Override
 	protected boolean load(String path) throws Exception {
 
-		Log.w(_toString(), "load() " + "[ST]");
+		Log.w(__CLASSNAME__, "load() " + "[ST]");
 
-		if (BuildConfig.DEBUG) Log.e(_toString(), getMethodName() + path);
+		if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + path);
 		this.path = path;
 
 		try {
-			Log.i(_toString(), "load() " + "[getSongData]");
+			Log.i(__CLASSNAME__, "load() " + "[getSongData]");
 			getSongData().release();
 			getSongData().load(path);
 
-			Log.i(_toString(), "load() " + "[load]");
+			Log.i(__CLASSNAME__, "load() " + "[load]");
 			// (new load()).execute();
 			if (TextUtil.isNetworkUrl(mp3)) {
 				stream();
@@ -242,14 +237,14 @@ class PlayView3 extends PlayView2X {
 			}
 
 		} catch (Exception e) {
-			Log.e(_toString(), "load() " + "[NG]" + "\n" + Log.getStackTraceString(e));
+			Log.e(__CLASSNAME__, "load() " + "[NG]" + "\n" + Log.getStackTraceString(e));
 			e.printStackTrace();
 			stop();
 			throw (e);
 		}
 
-		// if (BuildConfig.DEBUG) _LOG.e(_toString(), getMethodName() + "[ED]" + load);
-		Log.w(_toString(), "load() " + "[ED]");
+		// if (BuildConfig.DEBUG) _LOG.e(__CLASSNAME__, getMethodName() + "[ED]" + load);
+		Log.w(__CLASSNAME__, "load() " + "[ED]");
 
 		return true;
 	}
@@ -267,7 +262,7 @@ class PlayView3 extends PlayView2X {
 	// @Override
 	// protected String doInBackground(Void... params) {
 	//
-	// _LOG.i(_toString(), "load() " + "[doInBackground]");
+	// _LOG.i(__CLASSNAME__, "load() " + "[doInBackground]");
 	// try {
 	// if (TextUtil.isNetworkUrl(mp3)) {
 	// stream();
@@ -276,7 +271,7 @@ class PlayView3 extends PlayView2X {
 	// }
 	// } catch (Exception e) {
 	//
-	// _LOG.e(_toString(), "load() " + "[doInBackground]" + "[NG]" + "\n" + _LOG.getStackTraceString(e));
+	// _LOG.e(__CLASSNAME__, "load() " + "[doInBackground]" + "[NG]" + "\n" + _LOG.getStackTraceString(e));
 	// e.printStackTrace();
 	// }
 	// return null;
@@ -284,35 +279,35 @@ class PlayView3 extends PlayView2X {
 	// }
 
 	protected void stream() throws Exception {
-		Log.w(_toString(), "stream() " + "[ST]");
+		Log.w(__CLASSNAME__, "stream() " + "[ST]");
 
 		if (!TextUtil.isNetworkUrl(mp3)) {
-			Log.i(_toString(), "stream() " + "[getKaraokeMP3]");
+			Log.i(__CLASSNAME__, "stream() " + "[getKaraokeMP3]");
 			int number = Integer.parseInt(song_id);
 			mp3 = getKaraokeMP3(number);
 		}
 
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + mp3);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + mp3);
 
-		Log.i(_toString(), "stream() " + "[MediaPlayer]");
+		Log.i(__CLASSNAME__, "stream() " + "[MediaPlayer]");
 		init();
 
-		Log.i(_toString(), "stream() " + "[setAudioStreamType]");
+		Log.i(__CLASSNAME__, "stream() " + "[setAudioStreamType]");
 		getMediaPlayer().setAudioStreamType(AudioManager.STREAM_MUSIC);
 
-		Log.i(_toString(), "stream() " + "[setDataSource]");
+		Log.i(__CLASSNAME__, "stream() " + "[setDataSource]");
 		getMediaPlayer().setDataSource(mp3);
 
-		Log.i(_toString(), "stream() " + "[prepareAsync]");
+		Log.i(__CLASSNAME__, "stream() " + "[prepareAsync]");
 		getMediaPlayer().prepareAsync();
 
-		Log.w(_toString(), "stream() " + "[ED]");
+		Log.w(__CLASSNAME__, "stream() " + "[ED]");
 	}
 
 	protected void local() throws Exception {
-		Log.w(_toString(), "local() " + "[ST]");
+		Log.w(__CLASSNAME__, "local() " + "[ST]");
 
-		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ST]" + path);
+		if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[ST]" + path);
 		File sourceFile = new File(path);
 
 		if (sourceFile.exists()) {
@@ -323,20 +318,20 @@ class PlayView3 extends PlayView2X {
 			getMediaPlayer().prepare();
 		}
 
-		Log.e(_toString(), "local() " + "[ED]");
+		Log.e(__CLASSNAME__, "local() " + "[ED]");
 	}
 
 	public void playLyrics() throws Exception {
-		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ST]");
+		if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[ST]");
 		try {
 			getLyricsPlay().play();
 		} catch (Exception e) {
 
-			if (BuildConfig.DEBUG) Log.w(_toString() + TAG_ERR,  "[NG]" + getMethodName());
+			if (BuildConfig.DEBUG) Log.w(__CLASSNAME__ + TAG_ERR,  "[NG]" + getMethodName());
 			// e.printStackTrace();
 			throw (e);
 		}
-		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ED]");
+		if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[ED]");
 	}
 
 	/**
@@ -351,7 +346,7 @@ class PlayView3 extends PlayView2X {
 	@Override
 	public void setVisibility(int visibility) {
 
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + visibility);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + visibility);
 		super.setVisibility(visibility);
 		if (getLyricsPlay() != null) {
 			getLyricsPlay().setVisibility(visibility);
@@ -364,7 +359,7 @@ class PlayView3 extends PlayView2X {
 	@Override
 	public void stop() {
 		super.stop();
-		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[RESET]" + isPlaying() + ":" + getPlayState());
+		if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[RESET]" + isPlaying() + ":" + getPlayState());
 		reset();
 	}
 
@@ -378,7 +373,7 @@ class PlayView3 extends PlayView2X {
 
 	@Override
 	protected void resume() {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName());
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName());
 		super.resume();
 	}
 
@@ -387,7 +382,7 @@ class PlayView3 extends PlayView2X {
 	 */
 	@Override
 	protected void close() {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName());
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName());
 		super.close();
 		stop();
 	}

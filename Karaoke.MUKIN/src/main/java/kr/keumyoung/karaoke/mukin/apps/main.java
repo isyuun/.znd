@@ -18,10 +18,6 @@ import kr.kymedia.karaoke.api.KPItem;
 public class main extends __base {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-    private String _toString() {
-        return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentViewID(R.layout.activity_main);

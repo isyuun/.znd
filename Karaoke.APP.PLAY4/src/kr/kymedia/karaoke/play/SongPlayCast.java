@@ -69,12 +69,6 @@ public class SongPlayCast extends SongPlay implements ISongPlayCast {
 		return name;
 	}
 
-	protected String _toString() {
-
-		// return super.toString();
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	// public SongPlayCast(String name) {
 	// super(name);
 	// // TODO Auto-generated constructor stub
@@ -91,14 +85,14 @@ public class SongPlayCast extends SongPlay implements ISongPlayCast {
 		if (TextUtil.isNetworkUrl(path)) {
 			return null;
 		}
-		// Log.e(_toString(), getMethodName() + "[MP3Info]");
+		// Log.e(__CLASSNAME__, getMethodName() + "[MP3Info]");
 		try {
 			File file = new File(path);
 			TagOptionSingleton.getInstance().setAndroid(true);
 			AudioFile f = AudioFileIO.read(file);
 			Tag tag = f.getTag();
 
-			Log.e(_toString(), getMethodName() + "[MP3Info]");
+			Log.e(__CLASSNAME__, getMethodName() + "[MP3Info]");
 			Log.i("[MP3Info]ARTIST:", tag.getFirst(FieldKey.ARTIST));
 			Log.i("[MP3Info]ALBUM:", tag.getFirst(FieldKey.ALBUM));
 			Log.i("[MP3Info]TITLE:", tag.getFirst(FieldKey.TITLE));
@@ -123,7 +117,7 @@ public class SongPlayCast extends SongPlay implements ISongPlayCast {
 
 			return tag;
 		} catch (Exception e) {
-			Log.e(_toString(), getMethodName() + "\n" + Log.getStackTraceString(e));
+			Log.e(__CLASSNAME__, getMethodName() + "\n" + Log.getStackTraceString(e));
 			return null;
 		}
 	}
@@ -132,7 +126,7 @@ public class SongPlayCast extends SongPlay implements ISongPlayCast {
 
 	@Override
 	public void setPath(String path) {
-		Log.e(_toString(), getMethodName() + "path:" + path);
+		Log.e(__CLASSNAME__, getMethodName() + "path:" + path);
 		super.setPath(path);
 
 		if (TextUtil.isNetworkUrl(path)) {
@@ -158,7 +152,7 @@ public class SongPlayCast extends SongPlay implements ISongPlayCast {
 
 			this.url = "http://" + ip + port + "/nnnn.mp3";
 		}
-		Log.e(_toString(), getMethodName() + "url:" + url);
+		Log.e(__CLASSNAME__, getMethodName() + "url:" + url);
 
 	}
 
@@ -177,12 +171,12 @@ public class SongPlayCast extends SongPlay implements ISongPlayCast {
 
 		path = url;
 
-		Log.e(_toString(), getMethodName() + path);
+		Log.e(__CLASSNAME__, getMethodName() + path);
 		return path;
 	}
 
 	public void onStop() {
-		Log.e(_toString(), getMethodName() + mLocalMp3Server);
+		Log.e(__CLASSNAME__, getMethodName() + mLocalMp3Server);
 
 
 		try {

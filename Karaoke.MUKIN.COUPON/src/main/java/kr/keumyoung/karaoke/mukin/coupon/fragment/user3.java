@@ -21,6 +21,7 @@ import kr.keumyoung.karaoke.mukin.coupon.BuildConfig;
 import kr.keumyoung.karaoke.mukin.coupon.R;
 import kr.keumyoung.karaoke.mukin.coupon.app._Application;
 
+import static android.Manifest.permission.PACKAGE_USAGE_STATS;
 import static android.Manifest.permission.READ_CONTACTS;
 import static android.Manifest.permission.READ_PHONE_STATE;
 
@@ -81,8 +82,12 @@ public class user3 extends user2 {
     private void getUserInfo() {
         getGoogleAccount();
         String email = putEmail();
-        Log.e(__CLASSNAME__, getMethodName() + email);
-        if (!email.isEmpty()) getApplication().send("Q", email, "");
+        Log.e(__CLASSNAME__, getMethodName() + ":" + email);
+        if (!email.isEmpty()) {
+            getApplication().send("Q", email, "");
+        } else {
+            showProgress(false);
+        }
         getApplication().setResponsHandler(new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String response, Throwable e) {

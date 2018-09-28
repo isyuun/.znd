@@ -63,11 +63,6 @@ import kr.kymedia.karaoke.widget.BalanceSeekBar;
 public class PlayViewPitch extends PlayViewValance2 {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	protected String _toString() {
-
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName() + '@' + Integer.toHexString(hashCode()));
-	}
-
 	@Override
 	protected String getMethodName() {
 		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
@@ -220,7 +215,7 @@ public class PlayViewPitch extends PlayViewValance2 {
 				break;
 			}
 		}
-		Log.e(_toString(), getMethodName() + pitch + ":" + noteIndex);
+		Log.e(__CLASSNAME__, getMethodName() + pitch + ":" + noteIndex);
 	}
 
 	@Override
@@ -233,7 +228,7 @@ public class PlayViewPitch extends PlayViewValance2 {
 	@Override
 	void setPlayView() {
 
-		Log.e(_toString(), getMethodName());
+		Log.e(__CLASSNAME__, getMethodName());
 		super.setPlayView();
 
 		seekPitch = (BalanceSeekBar) findViewById(R.id.seekPitch);
@@ -268,7 +263,7 @@ public class PlayViewPitch extends PlayViewValance2 {
 	@Override
 	protected void init(boolean init) {
 
-		// Log.e(_toString(), getMethodName() + init);
+		// Log.e(__CLASSNAME__, getMethodName() + init);
 		super.init(init);
 
 		try {
@@ -304,7 +299,7 @@ public class PlayViewPitch extends PlayViewValance2 {
 					pitch = noteDNs[noteIndex];
 				}
 
-				Log.e(_toString(), getMethodName() + noteIndex + ":" + pitch);
+				Log.e(__CLASSNAME__, getMethodName() + noteIndex + ":" + pitch);
 
 				noteIndex++;
 
@@ -328,7 +323,7 @@ public class PlayViewPitch extends PlayViewValance2 {
 		float balance = seekPitch.getDisBalance();
 		float min = seekPitch.getDisMinBalance();
 		float max = seekPitch.getDisMaxBalance();
-		Log.i(_toString(), getMethodName() + init + " - balance:" + balance + " - " + min + "~" + max);
+		Log.i(__CLASSNAME__, getMethodName() + init + " - balance:" + balance + " - " + min + "~" + max);
 
 		seekPitch.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
@@ -452,7 +447,7 @@ public class PlayViewPitch extends PlayViewValance2 {
 
 	@Override
 	public void setPitch(final int pitch) {
-		Log.e(_toString(), getMethodName() + pitch);
+		Log.e(__CLASSNAME__, getMethodName() + pitch);
 
 
 		super.setPitch(pitch);
@@ -486,14 +481,14 @@ public class PlayViewPitch extends PlayViewValance2 {
 		// float balance = seekPitch.getDisBalance();
 		// float min = seekPitch.getDisMinBalance();
 		// float max = seekPitch.getDisMaxBalance();
-		// Log.w(_toString(), getMethodName() + "balance:" + balance + " - " + min + "~" + max);
+		// Log.w(__CLASSNAME__, getMethodName() + "balance:" + balance + " - " + min + "~" + max);
 
 		String label = "PITCH:";
 		String text = String.format(label + "%d(%s)", pitch, pitchSTs(seekPitch.getProgress()));
 		checkPitch.setText(text);
-		// Log.e(_toString(), getMethodName() + text);
+		// Log.e(__CLASSNAME__, getMethodName() + text);
 
-		// Log.e(_toString(), getMethodName() + "balance:" + balance + " - " + min + "~" + max);
+		// Log.e(__CLASSNAME__, getMethodName() + "balance:" + balance + " - " + min + "~" + max);
 		int id = 0;
 
 		if (pitch == PITCH_NORMAL) {

@@ -62,12 +62,6 @@ public class SongPlay /* extends SongService */ implements ISongPlay, ISongPlay.
 		return name;
 	}
 
-	protected String _toString() {
-
-		// return super.toString();
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	// public SongPlay(String name) {
 	// super(name);
 	// }
@@ -226,7 +220,7 @@ public class SongPlay /* extends SongService */ implements ISongPlay, ISongPlay.
 
 	@Override
 	public void setPath(String path) {
-		// Log.e(_toString(), getMethodName() + " - " + path);
+		// Log.e(__CLASSNAME__, getMethodName() + " - " + path);
 
 		this.path = path;
 	}
@@ -327,7 +321,7 @@ public class SongPlay /* extends SongService */ implements ISongPlay, ISongPlay.
 
 	@Override
 	public void setOnListener(Listener listener) {
-		// Log.e(_toString(), getMethodName() + (listener instanceof Listener) + ":" + listener);
+		// Log.e(__CLASSNAME__, getMethodName() + (listener instanceof Listener) + ":" + listener);
 
 		this.listener = listener;
 	}
@@ -430,7 +424,7 @@ public class SongPlay /* extends SongService */ implements ISongPlay, ISongPlay.
 	@Override
 	public void onPrepared() {
 
-		Log.e(_toString(), getMethodName() + listener);
+		Log.e(__CLASSNAME__, getMethodName() + listener);
 		isPrepared = true;
 		postDelayed(new Runnable() {
 
@@ -447,7 +441,7 @@ public class SongPlay /* extends SongService */ implements ISongPlay, ISongPlay.
 	@Override
 	public void onCompletion() {
 
-		Log.e(_toString(), getMethodName() + listener);
+		Log.e(__CLASSNAME__, getMethodName() + listener);
 		postDelayed(new Runnable() {
 
 			@Override
@@ -463,14 +457,14 @@ public class SongPlay /* extends SongService */ implements ISongPlay, ISongPlay.
 	@Override
 	public void onError() {
 
-		Log.e(_toString(), getMethodName() + listener);
+		Log.e(__CLASSNAME__, getMethodName() + listener);
 
 	}
 
 	@Override
 	public void onBufferingUpdate(final int percent) {
 
-		Log.e(_toString(), getMethodName() + listener);
+		Log.e(__CLASSNAME__, getMethodName() + listener);
 		post(new Runnable() {
 
 			@Override
@@ -486,7 +480,7 @@ public class SongPlay /* extends SongService */ implements ISongPlay, ISongPlay.
 	@Override
 	public void onRelease() {
 
-		Log.e(_toString(), getMethodName() + listener);
+		Log.e(__CLASSNAME__, getMethodName() + listener);
 		post(new Runnable() {
 
 			@Override
@@ -502,7 +496,7 @@ public class SongPlay /* extends SongService */ implements ISongPlay, ISongPlay.
 	@Override
 	public void onSeekComplete() {
 
-		Log.e(_toString(), getMethodName() + listener);
+		Log.e(__CLASSNAME__, getMethodName() + listener);
 		post(new Runnable() {
 
 			@Override
@@ -518,7 +512,7 @@ public class SongPlay /* extends SongService */ implements ISongPlay, ISongPlay.
 	@Override
 	public void onReady(int count) {
 
-		Log.e(_toString(), getMethodName() + listener);
+		Log.e(__CLASSNAME__, getMethodName() + listener);
 		if (this.listener != null) {
 			listener.onReady(count);
 		}
@@ -527,8 +521,8 @@ public class SongPlay /* extends SongService */ implements ISongPlay, ISongPlay.
 	@Override
 	public void onError(final ERROR t, final Exception e) {
 
-		Log.e(_toString(), getMethodName() + listener);
-		Log.i(_toString(), "" + t + Log.getStackTraceString(e));
+		Log.e(__CLASSNAME__, getMethodName() + listener);
+		Log.i(__CLASSNAME__, "" + t + Log.getStackTraceString(e));
 
 		final String err = e.getMessage();
 		// if (listener != null) {
@@ -538,7 +532,7 @@ public class SongPlay /* extends SongService */ implements ISongPlay, ISongPlay.
 
 			@Override
 			public void run() {
-				Log.d(_toString(), getMethodName() + listener);
+				Log.d(__CLASSNAME__, getMethodName() + listener);
 
 				if (listener != null) {
 					listener.onError(t, new Exception(SongPlay.this.toString() + "\n" + err));
@@ -550,7 +544,7 @@ public class SongPlay /* extends SongService */ implements ISongPlay, ISongPlay.
 	@Override
 	public void onRetry(final int count) {
 
-		Log.e(_toString(), getMethodName() + listener);
+		Log.e(__CLASSNAME__, getMethodName() + listener);
 		post(new Runnable() {
 
 			@Override
@@ -566,7 +560,7 @@ public class SongPlay /* extends SongService */ implements ISongPlay, ISongPlay.
 
 	@Override
 	public void onTimeout(final long timeout) {
-		Log.e(_toString(), getMethodName() + timeout + ":" + listener);
+		Log.e(__CLASSNAME__, getMethodName() + timeout + ":" + listener);
 
 
 		// if (listener != null) {
@@ -576,7 +570,7 @@ public class SongPlay /* extends SongService */ implements ISongPlay, ISongPlay.
 
 			@Override
 			public void run() {
-				Log.d(_toString(), getMethodName() + listener);
+				Log.d(__CLASSNAME__, getMethodName() + listener);
 
 				if (listener != null) {
 					listener.onTimeout(timeout);

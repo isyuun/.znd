@@ -70,12 +70,6 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 		return name;
 	}
 
-	protected String _toString() {
-
-		// return super.toString();
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : /*getClass().getSimpleName()*/"SoundTouchPlay") + '@' + Integer.toHexString(hashCode()) + ":id:" + id;
-	}
-
 	private final Context context;
 
 	private volatile SoundTouchPlayer st;
@@ -89,7 +83,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	private static SparseBooleanArray tracks = new SparseBooleanArray();
 
 	private int putID() {
-		// Log.i(_toString(), getMethodName() + tracks);
+		// Log.i(__CLASSNAME__, getMethodName() + tracks);
 		int id = 0;
 		while (tracks.get(id)) {
 			id++;
@@ -99,7 +93,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 		} else {
 			id = -1;
 		}
-		Log.i(_toString(), getMethodName() + "id:" + id + tracks);
+		Log.i(__CLASSNAME__, getMethodName() + "id:" + id + tracks);
 		return id;
 	}
 
@@ -110,7 +104,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 		if (tracks.get(id)) {
 			tracks.delete(id);
 		}
-		Log.i(_toString(), getMethodName() + "id:" + id + tracks);
+		Log.i(__CLASSNAME__, getMethodName() + "id:" + id + tracks);
 		return id;
 	}
 
@@ -119,7 +113,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 
 	public SoundTouchPlay(Context context) {
 		super();
-		Log.i(_toString(), getMethodName());
+		Log.i(__CLASSNAME__, getMethodName());
 		this.context = context;
 		id = putID();
 	}
@@ -127,7 +121,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	@Override
 	protected void finalize() throws Throwable {
 
-		Log.wtf(_toString(), getMethodName());
+		Log.wtf(__CLASSNAME__, getMethodName());
 		super.finalize();
 
 	}
@@ -135,7 +129,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	@Override
 	public void reset() {
 
-		Log.wtf(_toString(), getMethodName());
+		Log.wtf(__CLASSNAME__, getMethodName());
 		super.reset();
 		if (open != null) {
 			open.interrupt();
@@ -158,7 +152,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	@Override
 	public void release() {
 
-		Log.wtf(_toString(), getMethodName());
+		Log.wtf(__CLASSNAME__, getMethodName());
 		super.release();
 
 		reset();
@@ -174,25 +168,25 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 
 	@Override
 	public void setPath(String path) {
-		Log.i(_toString(), getMethodName());
+		Log.i(__CLASSNAME__, getMethodName());
 		super.setPath(path);
 	}
 
 	@Override
 	public void setOnListener(Listener listener) {
-		Log.i(_toString(), getMethodName() + listener);
+		Log.i(__CLASSNAME__, getMethodName() + listener);
 		super.setOnListener(listener);
 	}
 
 	@Override
 	public Handler getHandler() {
-		Log.i(_toString(), getMethodName());
+		Log.i(__CLASSNAME__, getMethodName());
 		return super.getHandler();
 	}
 
 	@Override
 	public void setHandler(Handler handler) {
-		Log.i(_toString(), getMethodName() + handler);
+		Log.i(__CLASSNAME__, getMethodName() + handler);
 		super.setHandler(handler);
 	}
 
@@ -206,16 +200,16 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	 */
 	@Override
 	public boolean load(String path) {
-		Log.wtf(_toString(), getMethodName());
+		Log.wtf(__CLASSNAME__, getMethodName());
 
 		if (isOpening || (open != null && open.isAlive())) {
-			Log.wtf(_toString(), getMethodName() + "[OK]");
+			Log.wtf(__CLASSNAME__, getMethodName() + "[OK]");
 			//onError(ERROR.OPENING, new Exception("Opening... Please Wait..."));
 			return true;
 		}
 
 		if (TextUtils.isEmpty(path)) {
-			Log.wtf(_toString(), getMethodName() + "[NG]");
+			Log.wtf(__CLASSNAME__, getMethodName() + "[NG]");
 			onError(ERROR.OPENING, new Exception("Opening... Path Error!!!" + path));
 			return false;
 		}
@@ -242,7 +236,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	//
 	// @Override
 	// protected Void doInBackground(Void... params) {
-	// Log.e(SoundTouchPlay.this._toString(), getMethodName());
+	// Log.e(SoundTouchPlay.this.__CLASSNAME__, getMethodName());
 	//
 	// load();
 	// return null;
@@ -252,7 +246,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	private class open extends Thread {
 		@Override
 		public void run() {
-			Log.e(SoundTouchPlay.this._toString(), getMethodName());
+			Log.e(SoundTouchPlay.this.__CLASSNAME__, getMethodName());
 			super.run();
 			open();
 		}
@@ -268,7 +262,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	 * </pre>
 	 */
 	private void startTry(String method) {
-		Log.wtf(_toString(), "startTry() " + method + ":" + isRetry + ":" + count);
+		Log.wtf(__CLASSNAME__, "startTry() " + method + ":" + isRetry + ":" + count);
 
 		count++;
 
@@ -286,7 +280,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	}
 
 	private void stopTry(String method) {
-		Log.wtf(_toString(), "stopTry() " + method + ":" + isRetry + ":" + count);
+		Log.wtf(__CLASSNAME__, "stopTry() " + method + ":" + isRetry + ":" + count);
 		count = 0;
 	}
 
@@ -315,7 +309,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	 * 재시도:시도
 	 */
 	private void tryout(final boolean repeat, final Exception e) {
-		Log.wtf(_toString(), getMethodName() + isOpening + ":" + isPlaying + ":" + isRetry + ":" + count + "-" + repeat + "," + e);
+		Log.wtf(__CLASSNAME__, getMethodName() + isOpening + ":" + isPlaying + ":" + isRetry + ":" + count + "-" + repeat + "," + e);
 		stopTimeout();
 
 		// 재생중인데?
@@ -325,13 +319,13 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 
 		// Exception확인
 		if (!(e instanceof IOException)) {
-			Log.wtf(_toString(), getMethodName() + "[NG][IO]" + isOpening + ":" + isPlaying + ":" + isRetry + ":" + count + "-" + repeat + "," + e);
+			Log.wtf(__CLASSNAME__, getMethodName() + "[NG][IO]" + isOpening + ":" + isPlaying + ":" + isRetry + ":" + count + "-" + repeat + "," + e);
 			onError(ERROR.SOUNDTOUCHPLAY, e);
 			stopTry(getMethodName());
 		}
 
 		if (!isRetry) {
-			Log.wtf(_toString(), getMethodName() + "[NG][RT]" + isOpening + ":" + isPlaying + ":" + isRetry + ":" + count + "-" + repeat + "," + e);
+			Log.wtf(__CLASSNAME__, getMethodName() + "[NG][RT]" + isOpening + ":" + isPlaying + ":" + isRetry + ":" + count + "-" + repeat + "," + e);
 			onError(ERROR.IOEXCEPTION, e);
 			stopTry(getMethodName());
 			return;
@@ -342,7 +336,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 		if (count < TIME_TRYOUT) {
 			postDelayed(tryout, 1000);
 		} else {
-			Log.wtf(_toString(), getMethodName() + "[NG][TR]" + isOpening + ":" + isPlaying + ":" + isRetry + ":" + count + "-" + repeat + "," + e);
+			Log.wtf(__CLASSNAME__, getMethodName() + "[NG][TR]" + isOpening + ":" + isPlaying + ":" + isRetry + ":" + count + "-" + repeat + "," + e);
 			String msg = ("Opening... Tryout Error!!!");
 			if (isPlaying) {
 				msg = ("Playing... Tryout Error!!!");
@@ -370,7 +364,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	// private class restart extends Thread {
 	// @Override
 	// public void run() {
-	// Log.i(_toString(), getMethodName());
+	// Log.i(__CLASSNAME__, getMethodName());
 	// super.run();
 	// restart();
 	// }
@@ -382,7 +376,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 
 	@Override
 	public void restart() {
-		Log.wtf(_toString(), getMethodName() + isOpening + ":" + isPlaying + ":" + isRetry + ":" + count + "-" + this);
+		Log.wtf(__CLASSNAME__, getMethodName() + isOpening + ":" + isPlaying + ":" + isRetry + ":" + count + "-" + this);
 
 
 		super.restart();
@@ -402,7 +396,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	// private class repeat extends Thread {
 	// @Override
 	// public void run() {
-	// Log.i(_toString(), getMethodName());
+	// Log.i(__CLASSNAME__, getMethodName());
 	// super.run();
 	// repeat();
 	// }
@@ -414,14 +408,14 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 
 	@Override
 	public void repeat() {
-		Log.wtf(_toString(), getMethodName() + isOpening + ":" + isPlaying + ":" + isRetry + ":" + count + "-" + this);
+		Log.wtf(__CLASSNAME__, getMethodName() + isOpening + ":" + isPlaying + ":" + isRetry + ":" + count + "-" + this);
 
 
 		super.repeat();
 	}
 
 	private void startTimeout(long delay, boolean retry) {
-		Log.d(_toString(), getMethodName() + delay + "," + retry + ":" + timeout);
+		Log.d(__CLASSNAME__, getMethodName() + delay + "," + retry + ":" + timeout);
 		try {
 			removeCallbacks(onTimeout);
 			this.timeout = new Timer();
@@ -436,7 +430,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	private void stopTimeout() {
 		try {
 			if (timeout != null) {
-				Log.d(_toString(), getMethodName() + delay + ":" + timeout);
+				Log.d(__CLASSNAME__, getMethodName() + delay + ":" + timeout);
 				timeout.cancel();
 				timeout.purge();
 				timeout = null;
@@ -465,7 +459,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 
 		@Override
 		public void run() {
-			Log.wtf(_toString(), "onTimeout.run()" + ":" + retry);
+			Log.wtf(__CLASSNAME__, "onTimeout.run()" + ":" + retry);
 
 			cancel();
 			stopTimeout();
@@ -515,7 +509,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 
 	@Override
 	public void onPrepared() {
-		Log.e(_toString(), getMethodName() + "id:" + id + tracks);
+		Log.e(__CLASSNAME__, getMethodName() + "id:" + id + tracks);
 		super.onPrepared();
 	}
 
@@ -535,11 +529,11 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	 * </a>
 	 */
 	private void get(String path) throws Exception {
-		//Log.wtf(_toString(), getMethodName() + path);
+		//Log.wtf(__CLASSNAME__, getMethodName() + path);
 		if (BuildConfig.DEBUG) {
-			Log.wtf(_toString(), getMethodName() + path);
+			Log.wtf(__CLASSNAME__, getMethodName() + path);
 		} else {
-			Log.wtf(_toString(), getMethodName());
+			Log.wtf(__CLASSNAME__, getMethodName());
 		}
 
 		if (TextUtil.isEmpty(path)) {
@@ -560,7 +554,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 			}
 		}
 
-		// Log.i(_toString(), getMethodName() + st);
+		// Log.i(__CLASSNAME__, getMethodName() + st);
 
 		// test
 		// throw (new IOException("SoundTouchPlay get() TEST...ERROR..."));
@@ -571,7 +565,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	@Override
 	public void onTrackEnd(int track) {
 
-		Log.w(_toString(), getMethodName());
+		Log.w(__CLASSNAME__, getMethodName());
 		postDelayed(new Runnable() {
 			@Override
 			public void run() {
@@ -582,14 +576,14 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 
 	@Override
 	public void onExceptionThrown(String string) {
-		Log.w(_toString(), getMethodName());
+		Log.w(__CLASSNAME__, getMethodName());
 		onError(ERROR.SOUNDTOUCHPLAY, new Exception(string));
 	}
 
 	@Override
 	public void onProgressChanged(int track, double currentPercentage, long position) {
 
-		// Log.e(_toString(), getMethodName() + track + "," + currentPercentage + "," + position);
+		// Log.e(__CLASSNAME__, getMethodName() + track + "," + currentPercentage + "," + position);
 
 		isOpening = false;
 		isPlaying = true;
@@ -597,7 +591,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 		//stopTry(getMethodName());
 
 		if (timeout != null) {
-			Log.e(_toString(), getMethodName() + track + "," + currentPercentage + "," + position);
+			Log.e(__CLASSNAME__, getMethodName() + track + "," + currentPercentage + "," + position);
 			stopTimeout();
 		}
 	}
@@ -605,7 +599,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	@Override
 	protected void onTime() {
 		// if (timeout != null) {
-		// Log.e(_toString(), getMethodName());
+		// Log.e(__CLASSNAME__, getMethodName());
 		// stopTimeout();
 		// }
 		super.onTime();
@@ -614,7 +608,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	@Override
 	public void onTime(int t) {
 		// if (timeout != null) {
-		// Log.e(_toString(), getMethodName() + t);
+		// Log.e(__CLASSNAME__, getMethodName() + t);
 		// stopTimeout();
 		// }
 		super.onTime(t);
@@ -640,7 +634,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	}
 
 	private void open() {
-		Log.wtf(_toString(), getMethodName() + "id:" + id + tracks);
+		Log.wtf(__CLASSNAME__, getMethodName() + "id:" + id + tracks);
 
 		String path = getPath();
 
@@ -655,7 +649,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 				}
 			}
 		} catch (final Exception e) {
-			Log.wtf(_toString(), getMethodName() + "[NG]" + Log.getStackTraceString(e));
+			Log.wtf(__CLASSNAME__, getMethodName() + "[NG]" + Log.getStackTraceString(e));
 			stopTimeout();
 			tryout(false, e);
 		}
@@ -681,7 +675,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	@Override
 	public boolean play() {
 
-		Log.wtf(_toString(), getMethodName() + (st != null ? st.isFinished() : false) + ":" + st);
+		Log.wtf(__CLASSNAME__, getMethodName() + (st != null ? st.isFinished() : false) + ":" + st);
 
 		try {
 			synchronized (st) {
@@ -702,7 +696,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 				}
 			}
 		} catch (final Exception e) {
-			Log.wtf(_toString(), getMethodName() + "[NG]" + Log.getStackTraceString(e));
+			Log.wtf(__CLASSNAME__, getMethodName() + "[NG]" + Log.getStackTraceString(e));
 			stopTimeout();
 			tryout(false, e);
 		}
@@ -712,7 +706,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 
 	@Override
 	public void stop() {
-		Log.wtf(_toString(), getMethodName());
+		Log.wtf(__CLASSNAME__, getMethodName());
 
 		stopOnTime();
 
@@ -735,7 +729,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	 */
 	@Override
 	public void close() {
-		Log.i(_toString(), getMethodName());
+		Log.i(__CLASSNAME__, getMethodName());
 		release();
 	}
 
@@ -755,10 +749,10 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	 */
 	@Override
 	public void setTempo(float tempo) {
-		Log.wtf(_toString(), getMethodName() + tempo);
+		Log.wtf(__CLASSNAME__, getMethodName() + tempo);
 		if (st != null && isPrepared()) {
 			//if (tempo < 0.5f || tempo > 2.0f) {
-			//	Log.wtf(_toString(), "Tempo must be between 0.5f and 2.0f");
+			//	Log.wtf(__CLASSNAME__, "Tempo must be between 0.5f and 2.0f");
 			//	return;
 			//}
 			st.setTempo(tempo);
@@ -793,12 +787,12 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	public void setTempoPercent(int percent) {
 		if (st != null && isPrepared()) {
 			//if (percent < -50 || percent > 100) {
-			//	Log.wtf(_toString(), "Tempo percentage must be between -50 and 100");
+			//	Log.wtf(__CLASSNAME__, "Tempo percentage must be between -50 and 100");
 			//	return;
 			//}
 			float temp = Math.round((0.01f * percent) * 100.0f) / 100.0f;
 			float tempo = (1.00f + temp);
-			Log.wtf(_toString(), getMethodName() + percent + "->" + tempo + ":" + temp);
+			Log.wtf(__CLASSNAME__, getMethodName() + percent + "->" + tempo + ":" + temp);
 			setTempo(tempo);
 		}
 	}
@@ -814,7 +808,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	public int getTempoPercent() {
 		if (st != null) {
 			float percent = st.getTempo() * 100f - 100f;
-			// Log.wtf(_toString(), getMethodName() + percent + ":" + (int) percent + ":" + st.getTempo());
+			// Log.wtf(__CLASSNAME__, getMethodName() + percent + ":" + (int) percent + ":" + st.getTempo());
 			int ret = Math.round(percent);
 			return ret;
 		} else {
@@ -833,7 +827,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	@Override
 	public void setPitch(int pitch) {
 
-		Log.wtf(_toString(), getMethodName() + pitch);
+		Log.wtf(__CLASSNAME__, getMethodName() + pitch);
 		setPitchSemi(pitch);
 	}
 
@@ -916,7 +910,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	 */
 	@Override
 	public int getCurrentTime() {
-		// Log.i(_toString(), getMethodName() + st.getPlayedDuration() + "-" + st.getPlayedDuration() / USEC2MSEC);
+		// Log.i(__CLASSNAME__, getMethodName() + st.getPlayedDuration() + "-" + st.getPlayedDuration() / USEC2MSEC);
 
 		try {
 			if (st != null) {

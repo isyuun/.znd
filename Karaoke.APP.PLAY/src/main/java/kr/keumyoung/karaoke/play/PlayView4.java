@@ -62,10 +62,6 @@ import kr.kymedia.karaoke.play.impl.ISongPlay;
 class PlayView4 extends PlayView3 {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	private String _toString() {
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	@Override
 	protected String getMethodName() {
 		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
@@ -123,11 +119,11 @@ class PlayView4 extends PlayView3 {
 			RetryTask retryTask = new RetryTask();
 			retryTimer.schedule(retryTask, TIMER_RETRY, TIMER_RETRY);
 		}
-		Log.wtf(_toString(), "startTry() " + method + ":" + isRetry + ":" + count + ":" + retryTimer);
+		Log.wtf(__CLASSNAME__, "startTry() " + method + ":" + isRetry + ":" + count + ":" + retryTimer);
 	}
 
 	protected void stopTry(String method) {
-		Log.wtf(_toString(), "stopTry() " + method + ":" + isRetry + ":" + count + ":" + retryTimer);
+		Log.wtf(__CLASSNAME__, "stopTry() " + method + ":" + isRetry + ":" + count + ":" + retryTimer);
 		try {
 			if (retryTimer != null) {
 				retryTimer.cancel();
@@ -139,11 +135,11 @@ class PlayView4 extends PlayView3 {
 
 			e.printStackTrace();
 		}
-		Log.wtf(_toString(), getMethodName() + retryTimer);
+		Log.wtf(__CLASSNAME__, getMethodName() + retryTimer);
 	}
 
 	public void cancel() {
-		if (BuildConfig.DEBUG) Log.wtf(_toString(), getMethodName() + count);
+		if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + count);
 		stopTry(getMethodName());
 	}
 
@@ -168,7 +164,7 @@ class PlayView4 extends PlayView3 {
 	int count = 0;
 
 	private void retry(String method) {
-		Log.wtf(_toString(), "retry() " + method + ":" + isRetry + ":" + count + ":" + isPlaying() + ":" + retryTimer);
+		Log.wtf(__CLASSNAME__, "retry() " + method + ":" + isRetry + ":" + count + ":" + isPlaying() + ":" + retryTimer);
 
 		if (!isRetry) {
 			stopTry(getMethodName());
@@ -187,14 +183,14 @@ class PlayView4 extends PlayView3 {
 				release();
 				load(path);
 				count++;
-				Log.wtf(_toString() + TAG_SING, "onRetry() " + "(" + count + ")");
+				Log.wtf(__CLASSNAME__ + TAG_SING, "onRetry() " + "(" + count + ")");
 				onRetry(count);
 				onTimeout(TIMER_RETRY);
 			} else {
-				//if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[RO]" + count);
+				//if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[RO]" + count);
 				ISongPlay.ERROR t = ISongPlay.ERROR.TRYOUT;
 				Exception e = new Exception("RETRY OUT ERROR(" + count + ")");
-				Log.wtf(_toString() + TAG_SING, "onError() " + "(" + t + ", " + e + ")"/* + player.getPath() */ + "\n" + Log.getStackTraceString(e));
+				Log.wtf(__CLASSNAME__ + TAG_SING, "onError() " + "(" + t + ", " + e + ")"/* + player.getPath() */ + "\n" + Log.getStackTraceString(e));
 				onError(t, e);
 				stop();
 				cancel();
@@ -202,66 +198,66 @@ class PlayView4 extends PlayView3 {
 			}
 		} catch (Exception e) {
 
-			if (BuildConfig.DEBUG) Log.w(_toString() + TAG_ERR, "[NG]" + getMethodName() + count);
+			if (BuildConfig.DEBUG) Log.w(__CLASSNAME__ + TAG_ERR, "[NG]" + getMethodName() + count);
 			e.printStackTrace();
 			stop();
 			cancel();
 			stopTry(getMethodName());
 		}
-		// if (BuildConfig.DEBUG) _LOG.e(_toString(), getMethodName() + "[ED]" + count);
+		// if (BuildConfig.DEBUG) _LOG.e(__CLASSNAME__, getMethodName() + "[ED]" + count);
 	}
 
 	@Override
 	public void open() throws Exception {
 
-		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ST]");
-		Log.wtf(_toString(), "load() " + count);
+		if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[ST]");
+		Log.wtf(__CLASSNAME__, "load() " + count);
 
 		super.open();
 		cancel();
 		startTry(getMethodName());
 
-		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ED]");
+		if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[ED]");
 	}
 
 	@Override
 	protected void stream() throws Exception {
 
-		Log.d(_toString(), "stream() " + "[ST]" + count);
+		Log.d(__CLASSNAME__, "stream() " + "[ST]" + count);
 
 		super.stream();
 
-		Log.d(_toString(), "stream() " + "[ED]" + count);
+		Log.d(__CLASSNAME__, "stream() " + "[ED]" + count);
 	}
 
 	@Override
 	protected void local() throws Exception {
 
-		Log.d(_toString(), "local() " + "[ST]" + count);
+		Log.d(__CLASSNAME__, "local() " + "[ST]" + count);
 
 		super.local();
 
-		Log.d(_toString(), "local() " + "[ED]" + count);
+		Log.d(__CLASSNAME__, "local() " + "[ED]" + count);
 	}
 
 	@Override
 	public boolean play() {
 		boolean ret = false;
 
-		Log.d(_toString(), getMethodName() + "[ST]" + ret);
+		Log.d(__CLASSNAME__, getMethodName() + "[ST]" + ret);
 
-		Log.wtf(_toString(), getMethodName() + count);
+		Log.wtf(__CLASSNAME__, getMethodName() + count);
 		try {
 			ret = super.play();
 			stopTry(getMethodName());
 		} catch (Exception e) {
 
-			if (BuildConfig.DEBUG) Log.w(_toString() + TAG_ERR, "[NG]" + getMethodName());
+			if (BuildConfig.DEBUG) Log.w(__CLASSNAME__ + TAG_ERR, "[NG]" + getMethodName());
 			e.printStackTrace();
 			onError(ISongPlay.ERROR.MEDIAPLAYERPLAY, e);
 		}
 
-		Log.d(_toString(), getMethodName() + "[ED]" + ret);
+		Log.d(__CLASSNAME__, getMethodName() + "[ED]" + ret);
 		return ret;
 	}
 

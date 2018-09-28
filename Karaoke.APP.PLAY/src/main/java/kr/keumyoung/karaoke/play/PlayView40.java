@@ -52,11 +52,6 @@ import android.view.View.OnTouchListener;
 class PlayView40 extends PlayView4 implements OnTouchListener {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	private String _toString() {
-
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	@Override
 	protected String getMethodName() {
 		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
@@ -93,7 +88,7 @@ class PlayView40 extends PlayView4 implements OnTouchListener {
 
 		String vn = v.getContext().getResources().getResourceEntryName(v.getId());
 		String cn = v.getClass().getSimpleName();
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + vn + ", " + cn + "\n" + event);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + vn + ", " + cn + "\n" + event);
 		return false;
 	}
 

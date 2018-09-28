@@ -50,11 +50,6 @@ import kr.keumyoung.karaoke.play.R;
 class PlayViewTempo extends PlayViewPitch {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	private String _toString() {
-
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	@Override
 	protected String getMethodName() {
 		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
@@ -91,14 +86,14 @@ class PlayViewTempo extends PlayViewPitch {
 		//if (ret) {
 		//	setTempoPercent(TEMPO_NORMAL);
 		//}
-		Log.d(_toString(), getMethodName() + ":" + getTempo());
+		Log.d(__CLASSNAME__, getMethodName() + ":" + getTempo());
 		return ret;
 	}
 
 	@Override
 	public void stop() {
 		setTempoPercent(TEMPO_NORMAL);
-		Log.d(_toString(), getMethodName() + ":" + getTempo());
+		Log.d(__CLASSNAME__, getMethodName() + ":" + getTempo());
 		super.stop();
 	}
 
@@ -140,7 +135,7 @@ class PlayViewTempo extends PlayViewPitch {
 	@Override
 	protected void setPlayView() {
 
-		Log.e(_toString(), getMethodName());
+		Log.e(__CLASSNAME__, getMethodName());
 		super.setPlayView();
 
 		txt_tempo = (TextView) findViewById(R.id.txt_tempo);
@@ -172,7 +167,7 @@ class PlayViewTempo extends PlayViewPitch {
 	@Override
 	protected void init(boolean init) {
 
-		Log.w(_toString(), getMethodName() + init);
+		Log.w(__CLASSNAME__, getMethodName() + init);
 		super.init(init);
 	}
 
@@ -191,7 +186,7 @@ class PlayViewTempo extends PlayViewPitch {
 			if (percent > 0) {
 				percent -= untTEMPO;
 			}
-			//_LOG.wtf(_toString(), getMethodName() + this.percent + "->" + percent);
+			//_LOG.wtf(__CLASSNAME__, getMethodName() + this.percent + "->" + percent);
 			setTempoPercent(percent);
 		}
 	}
@@ -208,7 +203,7 @@ class PlayViewTempo extends PlayViewPitch {
 			if (percent > 0) {
 				percent += untTEMPO;
 			}
-			Log.wtf(_toString(), getMethodName() + getTempo() + ":" + getTempoPercent() + "->" + percent);
+			Log.wtf(__CLASSNAME__, getMethodName() + getTempo() + ":" + getTempoPercent() + "->" + percent);
 			setTempoPercent(percent);
 		}
 	}
@@ -219,7 +214,7 @@ class PlayViewTempo extends PlayViewPitch {
 	 */
 	@Override
 	public void setTempoPercent(final int percent) {
-		///_LOG.e(_toString(), getMethodName() + percent);
+		///_LOG.e(__CLASSNAME__, getMethodName() + percent);
 		if (isPrepared())
 		{
 			super.setTempoPercent(percent);
@@ -250,7 +245,7 @@ class PlayViewTempo extends PlayViewPitch {
 			txt_tempo.setText(text);
 		}
 
-		// _LOG.e(_toString(), getMethodName() + "balance:" + balance + " - " + min + "~" + max);
+		// _LOG.e(__CLASSNAME__, getMethodName() + "balance:" + balance + " - " + min + "~" + max);
 
 		//setInfo();
 	}

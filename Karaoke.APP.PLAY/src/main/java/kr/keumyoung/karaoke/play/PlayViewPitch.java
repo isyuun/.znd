@@ -50,11 +50,6 @@ import kr.keumyoung.karaoke.play.R;
 class PlayViewPitch extends PlayView4X {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	private String _toString() {
-
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	@Override
 	protected String getMethodName() {
 		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
@@ -92,14 +87,14 @@ class PlayViewPitch extends PlayView4X {
 		//if (ret) {
 		//	setPitch(0);
 		//}
-		Log.d(_toString(), getMethodName() + ":" + getPitch());
+		Log.d(__CLASSNAME__, getMethodName() + ":" + getPitch());
 		return ret;
 	}
 
 	@Override
 	public void stop() {
 		setPitch(PITCH_NORMAL);
-		Log.d(_toString(), getMethodName() + ":" + getPitch());
+		Log.d(__CLASSNAME__, getMethodName() + ":" + getPitch());
 		super.stop();
 	}
 
@@ -218,7 +213,7 @@ class PlayViewPitch extends PlayView4X {
 				break;
 			}
 		}
-		Log.e(_toString(), getMethodName() + pitch + ":" + noteIndex);
+		Log.e(__CLASSNAME__, getMethodName() + pitch + ":" + noteIndex);
 	}
 
 	TextView txt_pitch;
@@ -235,7 +230,7 @@ class PlayViewPitch extends PlayView4X {
 	@Override
 	protected void setPlayView() {
 
-		Log.e(_toString(), getMethodName());
+		Log.e(__CLASSNAME__, getMethodName());
 		super.setPlayView();
 
 		txt_pitch = (TextView) findViewById(R.id.txt_pitch);
@@ -267,7 +262,7 @@ class PlayViewPitch extends PlayView4X {
 	@Override
 	protected void init(boolean init) {
 
-		Log.w(_toString(), getMethodName() + init);
+		Log.w(__CLASSNAME__, getMethodName() + init);
 		super.init(init);
 	}
 
@@ -299,7 +294,7 @@ class PlayViewPitch extends PlayView4X {
 	 */
 	@Override
 	public void setPitch(final int pitch) {
-		//_LOG.e(_toString(), getMethodName() + pitch);
+		//_LOG.e(__CLASSNAME__, getMethodName() + pitch);
 		if (isPrepared())
 		{
 			super.setPitch(pitch);

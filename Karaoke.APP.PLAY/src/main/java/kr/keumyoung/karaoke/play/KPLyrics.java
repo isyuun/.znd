@@ -53,11 +53,6 @@ import kr.keumyoung.karaoke.data.SongUtil;
 class KPLyrics extends Thread {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	private String _toString() {
-
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	protected String getMethodName() {
 		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
 		// int line = Thread.currentThread().getStackTrace()[3].getLineNumber();
@@ -164,7 +159,7 @@ class KPLyrics extends Thread {
 	@Override
 	public synchronized void start() {
 
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName());
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName());
 		super.start();
 	}
 
@@ -172,7 +167,7 @@ class KPLyrics extends Thread {
 
 	@Override
 	public void run() {
-		if (BuildConfig.DEBUG) Log.e(_toString(), getMethodName() + mLyricsPlay.m_redraw + ":" + mLyricsPlay.getHolder() + ":" + mLyricsPlay.getHolder().getSurfaceFrame());
+		if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + mLyricsPlay.m_redraw + ":" + mLyricsPlay.getHolder() + ":" + mLyricsPlay.getHolder().getSurfaceFrame());
 
 		mSurfaceHolder = mLyricsPlay.getHolder();
 
@@ -207,13 +202,13 @@ class KPLyrics extends Thread {
 		try {
 			join();
 		} catch (Exception e) {
-			Log.wtf(_toString() + _Const.TAG_LYRIC, "requestExitAndWait()" + Log.getStackTraceString(e));
+			Log.wtf(__CLASSNAME__ + _Const.TAG_LYRIC, "requestExitAndWait()" + Log.getStackTraceString(e));
 			e.printStackTrace();
 		}
 	}
 
 	public void onWindowResize(int w, int h) {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + w + ", " + h);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + w + ", " + h);
 
 		m_width = w;
 		m_height = h;

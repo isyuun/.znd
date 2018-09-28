@@ -21,11 +21,6 @@ import kr.keumyoung.karaoke.data._SongData;
 class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpdateListener,  MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnInfoListener, MediaPlayer.OnErrorListener {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	private String _toString() {
-
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	public PlayView2(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 		// if (isInEditMode()) {
@@ -58,7 +53,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 	private MediaPlayer m_mp = null;
 
 	protected void init() {
-        if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName());
+        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName());
 
         reset();
 
@@ -111,7 +106,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
     }
 
     protected void reset() {
-        if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName());
+        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName());
 
         if (m_mp != null) {
             m_mp.setOnBufferingUpdateListener(null);
@@ -135,7 +130,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 
     @Override
     public void onBufferingUpdate(MediaPlayer mp, int percent) {
-        // if (BuildConfig.DEBUG) _LOG.e(_toString(), getMethodName() + mp + "(" + percent + "%)");
+        // if (BuildConfig.DEBUG) _LOG.e(__CLASSNAME__, getMethodName() + mp + "(" + percent + "%)");
         if (mOnBufferingUpdateListener != null) {
             mOnBufferingUpdateListener.onBufferingUpdate(mp, percent);
         }
@@ -143,7 +138,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 
     @Override
     public void onPrepared(MediaPlayer mp) {
-        if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + mp);
+        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + mp);
         if (mOnPreparedListener != null) {
             mOnPreparedListener.onPrepared(mp);
         }
@@ -151,7 +146,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 
     @Override
     public void onCompletion(MediaPlayer mp) {
-        if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + mp);
+        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + mp);
         if (mOnPreparedListener != null) {
             mOnPreparedListener.onPrepared(mp);
         }
@@ -159,7 +154,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 
     @Override
     public boolean onInfo(MediaPlayer mp, int what, int extra) {
-        // if (BuildConfig.DEBUG) _LOG.e(_toString(), getMethodName() + mp + "(" + what + ", " + extra + ")");
+        // if (BuildConfig.DEBUG) _LOG.e(__CLASSNAME__, getMethodName() + mp + "(" + what + ", " + extra + ")");
         if (mOnInfoListener != null) {
             mOnInfoListener.onInfo(mp, what, extra);
         }
@@ -168,7 +163,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 
     @Override
     public boolean onError(MediaPlayer mp, int what, int extra) {
-        if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + mp + "(" + what + ", " + extra + ")");
+        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + mp + "(" + what + ", " + extra + ")");
         if (mOnErrorListener != null) {
             mOnErrorListener.onError(mp, what, extra);
         }
@@ -189,12 +184,12 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 	private PLAY_ENGAGE m_state = PLAY_ENGAGE.PLAY_STOP;
 
 	public void setPlayState(PLAY_ENGAGE state) {
-		if (BuildConfig.DEBUG) Log.d(_toString(), getMethodName() + state);
+		if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, getMethodName() + state);
 		this.m_state = state;
 	}
 
 	public PLAY_ENGAGE getPlayState() {
-		if (BuildConfig.DEBUG) Log.d(_toString(), getMethodName() + m_state);
+		if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, getMethodName() + m_state);
 		return m_state;
 	}
 
@@ -223,7 +218,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 	//public void setLyric(ArrayList<String> lyrics) {
 	//	this.m_lyrics = lyrics;
 	//	for (int i = 0; i < m_lyrics.size(); i++) {
-	//		if (BuildConfig.DEBUG) Log.wtf(_toString() + TAG_PLAY, getMethodName() + m_lyrics.get(i));
+	//		if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__ + TAG_PLAY, getMethodName() + m_lyrics.get(i));
 	//	}
 	//}
 
@@ -246,7 +241,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 	//	if (m_lyrics != null && m_songIdx > -1 && m_songIdx < m_lyrics.size()) {
 	//		ret = m_lyrics.get(m_songIdx);
 	//	}
-	//	if (BuildConfig.DEBUG) Log.wtf(_toString() + TAG_PLAY, getMethodName() + ":" + ret + ":" + m_songIdx + ":" + m_lyrics);
+	//	if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__ + TAG_PLAY, getMethodName() + ":" + ret + ":" + m_songIdx + ":" + m_lyrics);
 	//	return ret;
 	//}
 
@@ -331,7 +326,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 	/**
 	 */
 	private void create() {
-		if (BuildConfig.DEBUG) Log.wtf(_toString(), getMethodName() + "[ST]");
+		if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + "[ST]");
 		mLyricsPlay = new _LyricsPlay(context);
 
 		setSongData(new _SongData());
@@ -341,7 +336,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 		mLyricsPlay.setVisibility(View.INVISIBLE);
 
 		setRedraw(true);
-		if (BuildConfig.DEBUG) Log.wtf(_toString(), getMethodName() + "[ED]");
+		if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + "[ED]");
 	}
 
 	@Override
@@ -412,7 +407,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 	};
 
 	protected boolean load(String path) throws Exception {
-		if (BuildConfig.DEBUG) Log.i(_toString(), "load()" + path + "()");
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "load()" + path + "()");
 
 		try {
 			m_data.release();
@@ -427,7 +422,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 				m_mp.prepare();
 			}
 		} catch (Exception e) {
-			if (BuildConfig.DEBUG) Log.i(_toString(), e.getLocalizedMessage());
+			if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, e.getLocalizedMessage());
 			e.printStackTrace();
 			close();
 			return false;
@@ -452,7 +447,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 	MediaPlayer.OnCompletionListener onMediaPlayerComplete = new MediaPlayer.OnCompletionListener() {
 		@Override
 		public void onCompletion(MediaPlayer mp) {
-			if (BuildConfig.DEBUG) Log.i(_toString(), "onCompletion()" + mp);
+			if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "onCompletion()" + mp);
 			close();
 		}
 	};
@@ -461,13 +456,13 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 	MediaPlayer.OnErrorListener onMediaPlayerError = new MediaPlayer.OnErrorListener() {
 		@Override
 		public boolean onError(MediaPlayer mp, int what, int extra) {
-			if (BuildConfig.DEBUG) Log.i(_toString(), "onMediaPlayerError()" + m_songIdx + "()" + mp + "" + what + "()" + extra + "()");
+			if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "onMediaPlayerError()" + m_songIdx + "()" + mp + "" + what + "()" + extra + "()");
 			return true;
 		}
 	};
 
 	public boolean isPlaying() {
-		//if (BuildConfig.DEBUG) Log.i(_toString() + "MediaPlayer", getMethodName() + m_mp);
+		//if (BuildConfig.DEBUG) Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + m_mp);
 		if (m_mp != null && m_mp.isPlaying()) {
 			return true;
 		}
@@ -475,7 +470,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 	}
 
 	public boolean isPause() {
-		//if (BuildConfig.DEBUG) Log.i(_toString() + "MediaPlayer", getMethodName() + m_mp);
+		//if (BuildConfig.DEBUG) Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + m_mp);
 		if (m_mp != null && !m_mp.isPlaying()) {
 			return true;
 		}
@@ -483,7 +478,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 	}
 
 	public boolean play() throws Exception {
-		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ST]");
+		if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[ST]");
 
 		boolean ret;
 
@@ -500,18 +495,18 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 			ret = true;
 		} catch (Exception e) {
 
-			if (BuildConfig.DEBUG) Log.w(_toString() + TAG_ERR,  "[NG]" + getMethodName());
+			if (BuildConfig.DEBUG) Log.w(__CLASSNAME__ + TAG_ERR,  "[NG]" + getMethodName());
 			// e.printStackTrace();
 			throw (e);
 		}
 
-		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ED]");
+		if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[ED]");
 
 		return ret;
 	}
 
 	public void stop() {
-		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ST]" + isPlaying() + ":" + m_state);
+		if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[ST]" + isPlaying() + ":" + m_state);
 		// boolean ret = super.stop();
 
 		try {
@@ -522,11 +517,11 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 			if (m_state != PLAY_ENGAGE.PLAY_STOP) {
 				// if (isPlaying())
 				if (m_mp != null) {
-					if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[STOP]" + isPlaying() + ":" + m_state);
+					if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[STOP]" + isPlaying() + ":" + m_state);
 					m_mp.stop();
 				}
 
-				//if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[RESET]" + isPlaying() + ":" + m_state);
+				//if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[RESET]" + isPlaying() + ":" + m_state);
 				//reset();
 
 				mLyricsPlay.stop();
@@ -536,11 +531,11 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 				this.m_state = (PLAY_ENGAGE.PLAY_STOP);
 			}
 		} catch (Exception e) {
-			if (BuildConfig.DEBUG) Log.w(_toString() + TAG_ERR,  "[NG]" + getMethodName() + isPlaying() + ":" + m_state);
+			if (BuildConfig.DEBUG) Log.w(__CLASSNAME__ + TAG_ERR,  "[NG]" + getMethodName() + isPlaying() + ":" + m_state);
 			e.printStackTrace();
 		}
 
-		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[ED]" + isPlaying() + ":" + m_state);
+		if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[ED]" + isPlaying() + ":" + m_state);
 	}
 
 	protected void pause() {
@@ -551,18 +546,18 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 			}
 		} catch (Exception e) {
 		}
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + isPlaying() + ":" + m_state);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + isPlaying() + ":" + m_state);
 
 		try {
 			if (m_state == PLAY_ENGAGE.PLAY_PLAY) {
 				if (isPlaying()) {
-					if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[PAUSE]" + isPlaying() + ":" + m_state);
+					if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[PAUSE]" + isPlaying() + ":" + m_state);
 					m_mp.pause();
 				}
 				this.m_state = (PLAY_ENGAGE.PLAY_PAUSE);
 			}
 		} catch (Exception e) {
-			if (BuildConfig.DEBUG) Log.w(_toString() + TAG_ERR,  "[NG]" + getMethodName() + isPlaying() + ":" + m_state);
+			if (BuildConfig.DEBUG) Log.w(__CLASSNAME__ + TAG_ERR,  "[NG]" + getMethodName() + isPlaying() + ":" + m_state);
 			e.printStackTrace();
 		}
 

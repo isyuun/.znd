@@ -15,14 +15,12 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.adapter.SongAdapter;
 import kr.keumyoung.mukin.data.model.Song;
 import kr.keumyoung.mukin.helper.DateHelper;
 import kr.keumyoung.mukin.helper.MediaManager;
-import kr.kymedia.karaoke.util.Log;
 
 /**
  * on 12/01/18.
@@ -96,7 +94,6 @@ public class SongViewHolder extends RecyclerView.ViewHolder {
 
     //    @OnClick(R.id.sing_button)
     public void onViewClicked() {
-        if (BuildConfig.DEBUG) Log.e("SongViewHolder", "onViewClicked()" + ":" + bus + ":" + song);
         bus.post(song);
     }
 }

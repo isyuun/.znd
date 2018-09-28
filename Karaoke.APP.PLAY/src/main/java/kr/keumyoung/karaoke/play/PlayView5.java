@@ -48,11 +48,6 @@ import android.widget.SeekBar;
 class PlayView5 extends PlayView4XX {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	private String _toString() {
-
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	@Override
 	protected String getMethodName() {
 		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
@@ -82,7 +77,7 @@ class PlayView5 extends PlayView4XX {
 
 	@Override
 	protected void setPlayView() {
-		Log.e(_toString(), getMethodName());
+		Log.e(__CLASSNAME__, getMethodName());
 		super.setPlayView();
 
 		seekBar = (SeekBar) findViewById(R.id.seek_bar);
@@ -131,7 +126,7 @@ class PlayView5 extends PlayView4XX {
 
 	@Override
 	public void onTime(int t) {
-		//Log.e(_toString(), getMethodName() + t + "/" + getTotalTime() + ":" + seekBar);
+		//Log.e(__CLASSNAME__, getMethodName() + t + "/" + getTotalTime() + ":" + seekBar);
 		super.onTime(t);
 
 		if (seekBar != null) {

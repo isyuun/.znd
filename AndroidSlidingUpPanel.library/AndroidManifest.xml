@@ -4,9 +4,6 @@
     android:versionCode="13"
     android:versionName="3.2.0">
 
-    <uses-sdk
-        android:minSdkVersion="8" />
-
     <application />
 
 </manifest>

@@ -24,11 +24,6 @@ import kr.keumyoung.karaoke.api._Const;
 class Listen2 implements _Const {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	private String _toString() {
-
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	protected String getMethodName() {
 		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
 		// int line = Thread.currentThread().getStackTrace()[3].getLineNumber();
@@ -94,7 +89,7 @@ class Listen2 implements _Const {
 
 	@Deprecated
 	protected void setFile(String path) {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName());
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName());
 		// m_mp = new MediaPlayer();
 		//
 		// try {
@@ -110,7 +105,7 @@ class Listen2 implements _Const {
 		// @Override
 		// public void onPrepared(MediaPlayer mp) {
 		//
-		// if (BuildConfig.DEBUG) _LOG.d(_toString(), getMethodName() + mp);
+		// if (BuildConfig.DEBUG) _LOG.d(__CLASSNAME__, getMethodName() + mp);
 		// m_mp.start();
 		// if (mOnPreparedListener != null) {
 		// mOnPreparedListener.onPrepared(mp);
@@ -123,7 +118,7 @@ class Listen2 implements _Const {
 		// @Override
 		// public void onCompletion(MediaPlayer mp) {
 		//
-		// if (BuildConfig.DEBUG) _LOG.d(_toString(), getMethodName() + mp);
+		// if (BuildConfig.DEBUG) _LOG.d(__CLASSNAME__, getMethodName() + mp);
 		// if (mOnCompletionListener != null) {
 		// mOnCompletionListener.onCompletion(mp);
 		// }
@@ -134,7 +129,7 @@ class Listen2 implements _Const {
 		// @Override
 		// public boolean onError(MediaPlayer mp, int what, int extra) {
 		//
-		// if (BuildConfig.DEBUG) _LOG.d(_toString(), getMethodName() + mp + "(" + what + ", " + extra + ")");
+		// if (BuildConfig.DEBUG) _LOG.d(__CLASSNAME__, getMethodName() + mp + "(" + what + ", " + extra + ")");
 		// if (mOnErrorListener != null) {
 		// mOnErrorListener.onError(mp, what, extra);
 		// }
@@ -159,7 +154,7 @@ class Listen2 implements _Const {
 	}
 
 	public boolean isPlaying() {
-		//if (BuildConfig.DEBUG) Log.i(_toString() + "MediaPlayer", getMethodName() + m_mp);
+		//if (BuildConfig.DEBUG) Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + m_mp);
 		if (m_mp != null && m_mp.isPlaying()) {
 			return true;
 		}
@@ -167,7 +162,7 @@ class Listen2 implements _Const {
 	}
 
 	public boolean isPausing() {
-		//if (BuildConfig.DEBUG) Log.i(_toString() + "MediaPlayer", getMethodName() + m_mp);
+		//if (BuildConfig.DEBUG) Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + m_mp);
 		if (m_mp != null && !m_mp.isPlaying()) {
 			return true;
 		}

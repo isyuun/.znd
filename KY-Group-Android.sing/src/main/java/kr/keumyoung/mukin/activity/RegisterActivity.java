@@ -52,7 +52,7 @@ import retrofit2.Response;
  * Project: KyGroup
  */
 
-public class RegisterActivity extends BaseActivity {
+public class RegisterActivity extends _BaseActivity {
 
     @Inject
     NavigationHelper navigationHelper;

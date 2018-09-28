@@ -52,11 +52,6 @@ import kr.keumyoung.karaoke.api._Const;
 class LyricsPlay3 extends LyricsPlay2 {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	private String _toString() {
-
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	@Override
 	protected String getMethodName() {
 		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
@@ -103,7 +98,7 @@ class LyricsPlay3 extends LyricsPlay2 {
 	@Override
 	protected void init() {
 
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName());
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName());
 		super.init();
 
 		// bgkim 각각의 폰트 사이즈는 비율로 조절
@@ -112,7 +107,7 @@ class LyricsPlay3 extends LyricsPlay2 {
 		Rect rect = getHolder().getSurfaceFrame();
 		int h = rect.height();
 		int w = rect.width();
-		Log.e(_toString() + _Const.TAG_LYRIC, "init() " + w + "," + h);
+		Log.e(__CLASSNAME__ + _Const.TAG_LYRIC, "init() " + w + "," + h);
 
         //Display display = getWindowManager().getDefaultDisplay();
         //Point size = new Point();
@@ -123,11 +118,11 @@ class LyricsPlay3 extends LyricsPlay2 {
         //}
         //w = size.x;
         //h = size.y;
-		//Log.e(_toString() + _Const.TAG_LYRIC, "init() " + w + "," + h + ":" + size);
+		//Log.e(__CLASSNAME__ + _Const.TAG_LYRIC, "init() " + w + "," + h + ":" + size);
 		//w = getWidth();
 		//h = getHeight();
-		////Log.e(_toString() + _Const.TAG_LYRIC, "init() " + w + "," + h + ":" + rect);
-		//Log.e(_toString() + _Const.TAG_LYRIC, "init() " + w + "," + h);
+		////Log.e(__CLASSNAME__ + _Const.TAG_LYRIC, "init() " + w + "," + h + ":" + rect);
+		//Log.e(__CLASSNAME__ + _Const.TAG_LYRIC, "init() " + w + "," + h);
 
 		mLyricsMarginBottom = h / 8;
 
@@ -155,7 +150,7 @@ class LyricsPlay3 extends LyricsPlay2 {
 
 	@Override
 	protected void onAttachedToWindow() {
-		if (BuildConfig.DEBUG) Log.wtf(_toString(), getMethodName());
+		if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName());
 		super.onAttachedToWindow();
 		setZOrderOnTop(true);    // necessary
 		getHolder().setFormat(PixelFormat.TRANSLUCENT);
@@ -164,21 +159,21 @@ class LyricsPlay3 extends LyricsPlay2 {
 
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
-		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + holder);
+		if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + holder);
 		//super.surfaceCreated(holder);
 		init();
 	}
 
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
-		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + holder + ":" + format + ", " + w + ", " + h);
+		if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + holder + ":" + format + ", " + w + ", " + h);
 		//super.surfaceChanged(holder, format, w, h);
 		init();
 	}
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
-		if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + holder);
+		if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + holder);
 		//super.surfaceDestroyed(holder);
 	}
 

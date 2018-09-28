@@ -56,11 +56,6 @@ import kr.keumyoung.karaoke.api._Const;
 public class MusicVideoView extends android.widget.VideoView {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	private String _toString() {
-
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	protected String getMethodName() {
 		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
 		// int line = Thread.currentThread().getStackTrace()[3].getLineNumber();
@@ -128,7 +123,7 @@ public class MusicVideoView extends android.widget.VideoView {
 	//		}
 	//	}
     //
-	//	Log.e(_toString() + _Const.TAG_VIDEO, "getDisPlaySize() " + displaySize);
+	//	Log.e(__CLASSNAME__ + _Const.TAG_VIDEO, "getDisPlaySize() " + displaySize);
 	//}
 
 	// 븅신...어디선본건있어가지구...쓸데없는짓은...
@@ -142,6 +137,6 @@ public class MusicVideoView extends android.widget.VideoView {
 		// 	y = displaySize.y;
 		// }
 		setMeasuredDimension(widthMeasureSpec, heightMeasureSpec);
-		if (BuildConfig.DEBUG) Log.wtf(_toString() + _Const.TAG_VIDEO, "onMeasure() " + "(" + widthMeasureSpec + "," + heightMeasureSpec + ")"/* + "->" + "(" + x + "," + y + ")" + ":" + displaySize*/);
+		if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__ + _Const.TAG_VIDEO, "onMeasure() " + "(" + widthMeasureSpec + "," + heightMeasureSpec + ")"/* + "->" + "(" + x + "," + y + ")" + ":" + displaySize*/);
 	}
 }

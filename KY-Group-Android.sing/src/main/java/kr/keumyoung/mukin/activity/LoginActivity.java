@@ -179,7 +179,7 @@ public class LoginActivity extends _BaseActivity {
         });
     }
 
-    private void fetchUserData(String dfid) {
+    protected void fetchUserData(String dfid) {
         // fetch the table data from the user table using the dfid
         String filter = "dfid=" + dfid;
         restApi.tableGetRequestWithFilter(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), TableNames.USER, filter).enqueue(new Callback<ResponseBody>() {
@@ -203,12 +203,14 @@ public class LoginActivity extends _BaseActivity {
                             preferenceHelper.saveString(PreferenceKeys.PROFILE_IMAGE, profileImage);
 
                             // login process completed. proceed to home activity
-                            hideProgress();
+                            //hideProgress();
+                            //toastHelper.showError(getString(R.string.login));
                             //navigationHelper.navigate(LoginActivity.this, HomeActivity.class);
+                            hideProgress();
                             toastHelper.showError(getString(R.string.login) + " " + nickName + ":" + userId);
                             preferenceHelper.saveString(getString(R.string.email), emailEt.getText().toString());
                             if (!preferenceHelper.getString(getString(R.string.coupon), "").isEmpty()) {
-                                finish();
+                                navigationHelper.navigate(LoginActivity.this, HomeActivity.class);
                             } else {
                                 openPreferenceCoupon();
                             }

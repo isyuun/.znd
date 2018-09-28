@@ -43,7 +43,7 @@ import android.util.Log;
  * @since 2015-10-13
  */
 public class SoundTouchPlayer extends SoundTouchPlayable {
-	boolean DEBUG = false;
+
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
 	protected static String getMethodName() {
@@ -52,11 +52,6 @@ public class SoundTouchPlayer extends SoundTouchPlayable {
 		// name = String.format("line:%d - %s() ", line, name);
 		name += "() ";
 		return name;
-	}
-
-	protected String _toString() {
-		// return super.toString();
-		return (DEBUG ? __CLASSNAME__ : /*getClass().getSimpleName()*/"SoundTouchPlayer") + '@' + Integer.toHexString(hashCode());
 	}
 
 	public SoundTouchPlayer(Context context, OnProgressChangedListener progressListener,
@@ -73,11 +68,11 @@ public class SoundTouchPlayer extends SoundTouchPlayable {
 	@Override
 	public void play() {
 		if (!isFinished()) {
-			Log.wtf(_toString(), getMethodName() + isFinished() + ":" + this);
+			Log.wtf(__CLASSNAME__, getMethodName() + isFinished() + ":" + this);
 			new Thread(this).start();
 			super.play();
 		} else {
-			Log.wtf(_toString(), "[NG]" + getMethodName() + isFinished() + ":" + this);
+			Log.wtf(__CLASSNAME__, "[NG]" + getMethodName() + isFinished() + ":" + this);
 		}
 	}
 

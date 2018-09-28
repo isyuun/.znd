@@ -62,12 +62,6 @@ public class SongService extends IntentService {
 		return name;
 	}
 
-	protected String _toString() {
-
-		// return super.toString();
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	/**
 	 * <pre>
 	 * TODO
@@ -128,7 +122,7 @@ public class SongService extends IntentService {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		Log.i(_toString(), getMethodName() + intent + "," + flags + "," + startId);
+		Log.i(__CLASSNAME__, getMethodName() + intent + "," + flags + "," + startId);
 
 		// For each start request, send a message to start a job and deliver the
 		// start ID so we know which request we're stopping when we finish the job
@@ -147,7 +141,7 @@ public class SongService extends IntentService {
 	 */
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		Log.i(_toString(), getMethodName() + intent);
+		Log.i(__CLASSNAME__, getMethodName() + intent);
 
 
 
@@ -163,7 +157,7 @@ public class SongService extends IntentService {
 
 	@Override
 	public IBinder onBind(Intent intent) {
-		Log.i(_toString(), getMethodName() + intent);
+		Log.i(__CLASSNAME__, getMethodName() + intent);
 
 
 		return localBinder;
@@ -171,7 +165,7 @@ public class SongService extends IntentService {
 
 	@Override
 	public void onDestroy() {
-		Log.i(_toString(), getMethodName());
+		Log.i(__CLASSNAME__, getMethodName());
 
 
 		super.onDestroy();

@@ -50,11 +50,6 @@ import kr.keumyoung.karaoke.play.BuildConfig;
 public class _PlayView extends PlayView7 {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	private String _toString() {
-
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	@Override
 	protected String getMethodName() {
 		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
@@ -84,7 +79,7 @@ public class _PlayView extends PlayView7 {
 	@Override
 	public void onPrepared() {
 
-		Log.wtf(_toString(), getMethodName() + song);
+		Log.wtf(__CLASSNAME__, getMethodName() + song);
 		super.onPrepared();
 	}
 }

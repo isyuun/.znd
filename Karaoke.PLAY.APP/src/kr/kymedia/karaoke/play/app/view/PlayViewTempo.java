@@ -58,11 +58,6 @@ import kr.kymedia.karaoke.widget.BalanceSeekBar;
 public class PlayViewTempo extends PlayViewPitch {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	protected String _toString() {
-
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName() + '@' + Integer.toHexString(hashCode()));
-	}
-
 	@Override
 	protected String getMethodName() {
 		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
@@ -123,7 +118,7 @@ public class PlayViewTempo extends PlayViewPitch {
 	@Override
 	void setPlayView() {
 
-		Log.e(_toString(), getMethodName());
+		Log.e(__CLASSNAME__, getMethodName());
 		super.setPlayView();
 
 		seekTempo = (BalanceSeekBar) findViewById(R.id.seekTempo);
@@ -158,7 +153,7 @@ public class PlayViewTempo extends PlayViewPitch {
 	@Override
 	protected void init(boolean init) {
 
-		Log.wtf(_toString(), getMethodName() + init);
+		Log.wtf(__CLASSNAME__, getMethodName() + init);
 		super.init(init);
 
 		try {
@@ -183,7 +178,7 @@ public class PlayViewTempo extends PlayViewPitch {
 		float balance = seekTempo.getDisBalance();
 		float min = seekTempo.getDisMinBalance();
 		float max = seekTempo.getDisMaxBalance();
-		Log.wtf(_toString(), getMethodName() + init + " - balance:" + balance + " - " + min + "~" + max);
+		Log.wtf(__CLASSNAME__, getMethodName() + init + " - balance:" + balance + " - " + min + "~" + max);
 
 		seekTempo.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
@@ -252,7 +247,7 @@ public class PlayViewTempo extends PlayViewPitch {
 
 	@Override
 	public void setTempoPercent(final int percent) {
-		Log.wtf(_toString(), getMethodName() + percent);
+		Log.wtf(__CLASSNAME__, getMethodName() + percent);
 
 
 		int temp = percent;
@@ -292,7 +287,7 @@ public class PlayViewTempo extends PlayViewPitch {
 		// float balance = seekTempo.getDisBalance();
 		// float min = seekTempo.getDisMinBalance();
 		// float max = seekTempo.getDisMaxBalance();
-		// Log.w(_toString(), getMethodName() + "balance:" + balance + " - " + min + "~" + max);
+		// Log.w(__CLASSNAME__, getMethodName() + "balance:" + balance + " - " + min + "~" + max);
 
 		float abs = seekTempo.getAbs();
 		float dabs = seekTempo.getDabs();
@@ -301,9 +296,9 @@ public class PlayViewTempo extends PlayViewPitch {
 		String label = "TEMPO:";
 		String text = String.format(label + "%.1f", temp);
 		textTempo.setText(text);
-		// Log.e(_toString(), getMethodName() + text);
+		// Log.e(__CLASSNAME__, getMethodName() + text);
 
-		// Log.e(_toString(), getMethodName() + "balance:" + balance + " - " + min + "~" + max);
+		// Log.e(__CLASSNAME__, getMethodName() + "balance:" + balance + " - " + min + "~" + max);
 
 		setInfo();
 	}

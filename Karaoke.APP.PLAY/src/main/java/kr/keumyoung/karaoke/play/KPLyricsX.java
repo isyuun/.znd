@@ -62,11 +62,6 @@ import kr.kymedia.karaoke.util.TextUtil;
 class KPLyricsX extends KPLyrics {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	private String _toString() {
-
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	@Override
 	protected String getMethodName() {
 		String name = currentThread().getStackTrace()[3].getMethodName();
@@ -127,7 +122,7 @@ class KPLyricsX extends KPLyrics {
 		text += "\n[RECT]" + "metrics.density:" + metrics.density;
 		text += "\n[RECT]" + "metrics.scaledDensity:" + metrics.scaledDensity;
 
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + text);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + text);
 	}
 
 	@Override
@@ -184,7 +179,7 @@ class KPLyricsX extends KPLyrics {
 		Rect r1 = new Rect(l, y - mLyricsPlay.m_iSingerFontSize, c, y + (mLyricsPlay.m_iSingerFontSize / 3));
 		Rect r2 = new Rect(c, y - mLyricsPlay.m_iSingerFontSize, r, y + (mLyricsPlay.m_iSingerFontSize / 3));
 
-		// if (BuildConfig.DEBUG) _LOG.i(_toString(), getMethodName() + mLyricsPlay.m_iSongInfoPosition + ":" + r1 + ":" + r2);
+		// if (BuildConfig.DEBUG) _LOG.i(__CLASSNAME__, getMethodName() + mLyricsPlay.m_iSongInfoPosition + ":" + r1 + ":" + r2);
 
 		paint.setColor(colorTitle);
 		paint.setAlpha(200);
@@ -230,9 +225,9 @@ class KPLyricsX extends KPLyrics {
 		Rect r2 = outSize(paint, getString(R.string.hint_song_composer));
 		Rect r3 = outSize(paint, getString(R.string.hint_song_lyricist));
 
-		//if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + strSinger + ":" + r1);
-		//if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + strComposer + ":" + r2);
-		//if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + strLyricist + ":" + r3);
+		//if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + strSinger + ":" + r1);
+		//if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + strComposer + ":" + r2);
+		//if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + strLyricist + ":" + r3);
 
 		int w = r1.width();
 		Rect rect = r1;
@@ -241,15 +236,15 @@ class KPLyricsX extends KPLyrics {
 		// if (r1.width() > r2.width() && r1.width() > r3.width()) {
 		// w = r1.width();
 		// rect = r1;
-		// if (BuildConfig.DEBUG) _LOG.e(_toString(), getMethodName() + ":" + metrics.density + ":" + metrics.densityDpi + ":" + w + ":" + rect);
+		// if (BuildConfig.DEBUG) _LOG.e(__CLASSNAME__, getMethodName() + ":" + metrics.density + ":" + metrics.densityDpi + ":" + w + ":" + rect);
 		// } else if (r2.width() > r1.width() && r2.width() > r3.width()) {
 		// w = r2.width();
 		// rect = r2;
-		// if (BuildConfig.DEBUG) _LOG.e(_toString(), getMethodName() + ":" + metrics.density + ":" + metrics.densityDpi + ":" + w + ":" + rect);
+		// if (BuildConfig.DEBUG) _LOG.e(__CLASSNAME__, getMethodName() + ":" + metrics.density + ":" + metrics.densityDpi + ":" + w + ":" + rect);
 		// } else if (r3.width() > r1.width() && r3.width() > r2.width()) {
 		// w = r3.width();
 		// rect = r3;
-		// if (BuildConfig.DEBUG) _LOG.e(_toString(), getMethodName() + ":" + metrics.density + ":" + metrics.densityDpi + ":" + w + ":" + rect);
+		// if (BuildConfig.DEBUG) _LOG.e(__CLASSNAME__, getMethodName() + ":" + metrics.density + ":" + metrics.densityDpi + ":" + w + ":" + rect);
 		// }
 
 		if (r2 != null && r2.width() > w) {
@@ -264,7 +259,7 @@ class KPLyricsX extends KPLyrics {
 
 		w += m + m / 2;
 
-		// if (BuildConfig.DEBUG) _LOG.e(_toString(), getMethodName() + w + ":" + rect + "\n" + strSinger + "\n" + strComposer + "\n" + strLyricist);
+		// if (BuildConfig.DEBUG) _LOG.e(__CLASSNAME__, getMethodName() + w + ":" + rect + "\n" + strSinger + "\n" + strComposer + "\n" + strLyricist);
 
 		int iSingerY = m_height - (r1.height() * 3 + 150);
 		int iAuthorY = m_height - (r1.height() * 2 + 110);
@@ -312,7 +307,7 @@ class KPLyricsX extends KPLyrics {
 		 */
 		int l = rect.height();
 
-		// if (BuildConfig.DEBUG) _LOG.w(_toString(), getMethodName() + "아주잘~~~헌다이븅신!!!" + "(" + "h:" + h + ", l:" + l + ")" + "-" + str);
+		// if (BuildConfig.DEBUG) _LOG.w(__CLASSNAME__, getMethodName() + "아주잘~~~헌다이븅신!!!" + "(" + "h:" + h + ", l:" + l + ")" + "-" + str);
 
 		if (type == 0) {
 			// isyoon지랄:1줄
@@ -363,7 +358,7 @@ class KPLyricsX extends KPLyrics {
 			super.interrupt();
 		} catch (Exception e) {
 
-			Log.wtf(_toString() + _Const.TAG_LYRIC, "interrupt()" + Log.getStackTraceString(e));
+			Log.wtf(__CLASSNAME__ + _Const.TAG_LYRIC, "interrupt()" + Log.getStackTraceString(e));
 			e.printStackTrace();
 		}
 	}
@@ -403,7 +398,7 @@ class KPLyricsX extends KPLyrics {
 
 		try {
 			if (!mLyricsPlay.m_redraw) {
-				// if (BuildConfig.DEBUG) _LOG.i(_toString(), "run()" + surfaceHolder);
+				// if (BuildConfig.DEBUG) _LOG.i(__CLASSNAME__, "run()" + surfaceHolder);
 				canvas = mSurfaceHolder.lockCanvas();
 				if (canvas != null) {
 					// bgkim 투명 배경이라서 뭘 그리기 전에 한번 지워줌

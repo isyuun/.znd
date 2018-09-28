@@ -45,7 +45,7 @@ import com.smp.soundtouchandroid.OnProgressChangedListener;
  * @since 2015-10-13
  */
 public class SoundTouchPlayer extends SoundStreamAudioPlayer {
-	boolean DEBUG = false;
+
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
 	protected static String getMethodName() {
@@ -54,11 +54,6 @@ public class SoundTouchPlayer extends SoundStreamAudioPlayer {
 		// name = String.format("line:%d - %s() ", line, name);
 		name += "() ";
 		return name;
-	}
-
-	protected String _toString() {
-		// return super.toString();
-		return (DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
 	}
 
 	private Context context;
@@ -77,7 +72,7 @@ public class SoundTouchPlayer extends SoundStreamAudioPlayer {
 	//}
 
 	public void play() {
-		Log.d(_toString(), getMethodName());
+		Log.d(__CLASSNAME__, getMethodName());
 		new Thread(this).start();
 		start();
 	}

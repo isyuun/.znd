@@ -23,10 +23,6 @@ import kr.keumyoung.karaoke.mukin.coupon.apps._preference;
 public class __base extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-    private String _toString() {
-        return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-    }
-
     int layoutResID;
 
     public void setContentViewID(@LayoutRes int layoutResID) {

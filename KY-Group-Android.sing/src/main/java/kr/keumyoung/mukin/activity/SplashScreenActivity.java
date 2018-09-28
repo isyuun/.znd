@@ -42,21 +42,8 @@ import io.reactivex.schedulers.Schedulers;
  *  on 11/01/18.
  */
 
-public class SplashScreenActivity extends BaseActivity {
+public class SplashScreenActivity extends _BaseActivity {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
-
-    private String _toString() {
-        return (kr.keumyoung.karaoke.BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-    }
-
-    protected String getMethodName() {
-        String name = Thread.currentThread().getStackTrace()[3].getMethodName();
-        String text = String.format("%s()", name);
-        // int line = Thread.currentThread().getStackTrace()[3].getLineNumber();
-        // text = String.format("line:%d - %s() ", line, name);
-        return text;
-    }
-
 
     private static final int REQUEST_PERMISSION = 10001;
 
@@ -91,13 +78,15 @@ public class SplashScreenActivity extends BaseActivity {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED ||
                     ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED ||
                     ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED ||
-                    ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED) {
+                    ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED
+                    || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_DENIED) {
                 ActivityCompat.requestPermissions(this,
                         new String[]{
                                 Manifest.permission.READ_EXTERNAL_STORAGE,
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                                 Manifest.permission.CAMERA,
                                 Manifest.permission.RECORD_AUDIO
+                                , Manifest.permission.READ_CONTACTS
                         }, REQUEST_PERMISSION);
             } else {
                 proceedToNextActivity();
@@ -126,7 +115,7 @@ public class SplashScreenActivity extends BaseActivity {
     }
 
     // planning for checking whether the session is active or not here before going to the next activity when already logged in
-    private void proceedToNextActivity() {
+    protected void proceedToNextActivity() {
         new Handler().postDelayed(() -> {
             showProgress();
             copyFilesToLocal()
@@ -136,6 +125,7 @@ public class SplashScreenActivity extends BaseActivity {
                         hideProgress();
                         throwable.printStackTrace();
                     }, () -> {
+                        ////회원가입/로그인/자동처리
                         //String userId = preferenceHelper.getString(PreferenceKeys.USER_ID);
                         //String sessionToken = preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN);
                         //hideProgress();
@@ -146,8 +136,6 @@ public class SplashScreenActivity extends BaseActivity {
                         //    // user is logged in
                         //    navigationHelper.navigate(this, HomeActivity.class);
                         //}
-                        hideProgress();
-                        navigationHelper.navigate(this, HomeActivity.class);
                     });
 
 //            throw new RuntimeException("Intentional crash test");
@@ -166,10 +154,10 @@ public class SplashScreenActivity extends BaseActivity {
 //            if (BuildConfig.DEBUG)
                 obbDir = ImageUtils.getBaseFolder();
             //System.out.println("OBB DIR: " + obbDir.getAbsolutePath());
-            Log.e(__CLASSNAME__, getMethodName() + "OBB DIR: " + obbDir.getAbsolutePath());
+            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + "OBB DIR: " + obbDir.getAbsolutePath());
             if (obbDir.exists()) {
                 String obbFileName = String.format("main.%s.%s.obb", AppConstants.OBB_VERSION, getPackageName());
-                Log.e(__CLASSNAME__, getMethodName() + "OBB FILE: " + obbFileName);
+                if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + "OBB FILE: " + obbFileName);
                 File obbFile = new File(obbDir, obbFileName);
 
                 try {

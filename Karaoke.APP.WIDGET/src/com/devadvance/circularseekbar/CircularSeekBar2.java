@@ -52,11 +52,6 @@ import kr.kymedia.karaoke.app.widget.R;
 public class CircularSeekBar2 extends CircularSeekBar {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	private String _toString() {
-
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	protected String getMethodName() {
 		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
 		// int line = Thread.currentThread().getStackTrace()[3].getLineNumber();
@@ -171,7 +166,7 @@ public class CircularSeekBar2 extends CircularSeekBar {
 			//post(startRotateAnimation);
 			while (isLoading) {
 				try {
-					//_LOG.e(_toString(), getMethodName() + (long) (Math.abs(Math.sin(Math.toRadians(tick++))) * 100.0f + 10.0f));
+					//_LOG.e(__CLASSNAME__, getMethodName() + (long) (Math.abs(Math.sin(Math.toRadians(tick++))) * 100.0f + 10.0f));
 					if (getMax() > getProgress()) {
 						post(increaseProgress);
 					} else {

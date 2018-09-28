@@ -1,7 +1,6 @@
 package kr.keumyoung.mukin.activity;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -11,7 +10,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,8 +27,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import kr.keumyoung.karaoke.mukin.coupon.apps._preference;
-import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.api.RequestModel;
@@ -45,9 +41,7 @@ import kr.keumyoung.mukin.helper.ToastHelper;
 import kr.keumyoung.mukin.interfaces.SessionRefreshListener;
 import kr.keumyoung.mukin.util.CommonHelper;
 import kr.keumyoung.mukin.util.Constants;
-import kr.keumyoung.mukin.util.MicChecker;
 import kr.keumyoung.mukin.util.PreferenceKeys;
-import kr.keumyoung.mukin.util.RandromAlbumImage;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -62,32 +56,6 @@ import retrofit2.Response;
 // DF ==> Dream Factory
 
 public class HomeActivity extends _BaseActivity {
-    private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
-
-    private String _toString() {
-        return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-    }
-
-    protected String getMethodName() {
-        String name = Thread.currentThread().getStackTrace()[3].getMethodName();
-        String text = String.format("%s()", name);
-        // int line = Thread.currentThread().getStackTrace()[3].getLineNumber();
-        // text = String.format("line:%d - %s() ", line, name);
-        return text;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //로그인
-        if (preferenceHelper.getString(PreferenceKeys.USER_ID).isEmpty() && preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN).isEmpty()) {
-            // user is not logged in
-            navigationHelper.navigate(this, _LoginActivity.class, false, null);
-        } else if (preferenceHelper.getString(getString(R.string.coupon), "").isEmpty()) {
-            openPreferenceCoupon();
-        }
-
-    }
 
     // view injections by butterknife
     @BindView(R.id.nav_icon)
@@ -204,23 +172,21 @@ public class HomeActivity extends _BaseActivity {
         return result;
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        bus.register(this);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        bus.unregister(this);
-    }
+    //@Override
+    //protected void onStart() {
+    //    super.onStart();
+    //    bus.register(this);
+    //}
+    //
+    //@Override
+    //protected void onStop() {
+    //    super.onStop();
+    //    bus.unregister(this);
+    //}
 
     // on song selection, open the player activity after registering the user hit
     @Subscribe
     public void onSongSelected(Song song) {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + song + ":" + preferenceHelper.getString(PreferenceKeys.USER_ID) + ":" + song.getSongId());
-
         this.song = song;
         CommonHelper.hideSoftKeyboard(this);
 
@@ -294,14 +260,13 @@ public class HomeActivity extends _BaseActivity {
 //        preferenceHelper.saveString(PreferenceKeys.USER_ID, "");
         preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, "");
         preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, "");
-        navigationHelper.navigateWithReverseAnim(this, _LoginActivity.class);
+        navigationHelper.navigateWithReverseAnim(this, LoginChoiceActivity.class);
     }
 
-    private void onMenuClick() {
+    protected void onMenuClick() {
         if (currentFragment != null && currentFragment.onMenuClick()) return;
 
-        //callLogout();
-        startActivity(new Intent(this, _preference.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        callLogout();
     }
 
     private void callLogout() {
@@ -316,7 +281,7 @@ public class HomeActivity extends _BaseActivity {
                             hideProgress();
                             preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, "");
                             preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, "");
-                            navigationHelper.navigateWithClearTask(HomeActivity.this, _LoginActivity.class);
+                            navigationHelper.navigateWithClearTask(HomeActivity.this, LoginChoiceActivity.class);
                         }
 
                         @Override

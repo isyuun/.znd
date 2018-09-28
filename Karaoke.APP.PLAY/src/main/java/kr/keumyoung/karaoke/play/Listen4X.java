@@ -53,10 +53,6 @@ import kr.kymedia.karaoke.play.impl.ISongPlay;
 class Listen4X extends Listen4 implements ISongPlay {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	private String _toString() {
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	@Override
 	protected String getMethodName() {
 		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
@@ -68,7 +64,7 @@ class Listen4X extends Listen4 implements ISongPlay {
 
 	public Listen4X(Context context) {
 		super(context);
-		Log.e(_toString(), getMethodName() + ":" + type + ":" + isPitchTempo + ":" + song);
+		Log.e(__CLASSNAME__, getMethodName() + ":" + type + ":" + isPitchTempo + ":" + song);
 		start();
 	}
 
@@ -91,7 +87,7 @@ class Listen4X extends Listen4 implements ISongPlay {
 			isPitchTempo = false;
 		}
 
-		Log.e(_toString(), getMethodName() + ":" + type + ":" + isPitchTempo + ":" + song);
+		Log.e(__CLASSNAME__, getMethodName() + ":" + type + ":" + isPitchTempo + ":" + song);
 	}
 
 	/**
@@ -156,14 +152,14 @@ class Listen4X extends Listen4 implements ISongPlay {
 
 	@Override
 	public boolean load(String path) throws Exception {
-		Log.w(_toString(), getMethodName() + "[ST]" + ":" + type + ":" + isPitchTempo + ":" + song);
+		Log.w(__CLASSNAME__, getMethodName() + "[ST]" + ":" + type + ":" + isPitchTempo + ":" + song);
 		//load = "http://211.236.190.103:8080/svc_media/mmp3/78535.mp3";
 		//load = "http://resource.kymedia.kr/record/kpop/20120712/89/120712BSJM92K89.m4a";
 		this.path = path;
 
 		try {
 			if (type == TYPE.SOUNDTOUCHPLAY) {
-				if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + path);
+				if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + path);
 
 				reset();
 
@@ -175,13 +171,13 @@ class Listen4X extends Listen4 implements ISongPlay {
 				boolean ret = false;
 
 				if (song != null) {
-					Log.i(_toString(), getMethodName() + "[setHandler]" + song);
+					Log.i(__CLASSNAME__, getMethodName() + "[setHandler]" + song);
 					song.setHandler(this.handler);
-					Log.i(_toString(), getMethodName() + "[setOnListener]" + song);
+					Log.i(__CLASSNAME__, getMethodName() + "[setOnListener]" + song);
 					song.setOnListener(this);
-					Log.i(_toString(), getMethodName() + "[load]" + song);
+					Log.i(__CLASSNAME__, getMethodName() + "[load]" + song);
 					ret = song.load(path);
-					Log.i(_toString(), getMethodName() + "[setIsRetry]");
+					Log.i(__CLASSNAME__, getMethodName() + "[setIsRetry]");
 					setIsRetry(!song.isRetry());
 				}
 
@@ -193,12 +189,12 @@ class Listen4X extends Listen4 implements ISongPlay {
 		} catch (Exception e) {
 
 			onError(ERROR.SOUNDTOUCHPLAY, e);
-			Log.e(_toString() + TAG_ERR, "[NG]" + getMethodName() + "\n" + Log.getStackTraceString(e));
+			Log.e(__CLASSNAME__ + TAG_ERR, "[NG]" + getMethodName() + "\n" + Log.getStackTraceString(e));
 			// e.printStackTrace();
 			stop();
 		}
 
-		Log.w(_toString(), getMethodName() + "[ED]" + ":" + type + ":" + isPitchTempo + ":" + song);
+		Log.w(__CLASSNAME__, getMethodName() + "[ED]" + ":" + type + ":" + isPitchTempo + ":" + song);
 
 		return true;
 	}
@@ -219,7 +215,7 @@ class Listen4X extends Listen4 implements ISongPlay {
 	@Override
 	public boolean play() {
 		boolean ret = false;
-		Log.w(_toString(), getMethodName() + "[ST]" + ":" + ret + ":" + getPlayState() + ":" + type + ":" + isPitchTempo + ":" + song);
+		Log.w(__CLASSNAME__, getMethodName() + "[ST]" + ":" + ret + ":" + getPlayState() + ":" + type + ":" + isPitchTempo + ":" + song);
 
 		try {
 			if (type == TYPE.SOUNDTOUCHPLAY) {
@@ -234,28 +230,28 @@ class Listen4X extends Listen4 implements ISongPlay {
 				ret = super.play();
 			}
 		} catch (Exception e) {
-			Log.wtf(_toString() + TAG_ERR, "[NG]" + getMethodName() + "\n" + Log.getStackTraceString(e));
+			Log.wtf(__CLASSNAME__ + TAG_ERR, "[NG]" + getMethodName() + "\n" + Log.getStackTraceString(e));
 			// e.printStackTrace();
 		}
 
-		Log.w(_toString(), getMethodName() + "[ED]" + ":" + ret + ":" + getPlayState() + ":" + type + ":" + isPitchTempo + ":" + song);
+		Log.w(__CLASSNAME__, getMethodName() + "[ED]" + ":" + ret + ":" + getPlayState() + ":" + type + ":" + isPitchTempo + ":" + song);
 
 		return ret;
 	}
 
 	@Override
 	public void stop() {
-		Log.w(_toString(), getMethodName() + "[ST]" + isPlaying() + ":" + getPlayState() + ":" + type + ":" + isPitchTempo + ":" + song);
+		Log.w(__CLASSNAME__, getMethodName() + "[ST]" + isPlaying() + ":" + getPlayState() + ":" + type + ":" + isPitchTempo + ":" + song);
 		try {
 			if (type == TYPE.SOUNDTOUCHPLAY) {
 				setPlayState(PLAY_ENGAGE.PLAY_STOP);
 
 				if (song != null/* && song.isPlaying() */) {
-					if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[STOP]" + isPlaying() + ":" + getPlayState());
+					if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[STOP]" + isPlaying() + ":" + getPlayState());
 					song.stop();
 				}
 
-				if (BuildConfig.DEBUG) Log.w(_toString(), getMethodName() + "[RESET]" + isPlaying() + ":" + getPlayState());
+				if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[RESET]" + isPlaying() + ":" + getPlayState());
 				reset();
 				release();
 			} else {
@@ -264,10 +260,10 @@ class Listen4X extends Listen4 implements ISongPlay {
 			cancel();
 		} catch (Exception e) {
 			//onError(ERROR.SOUNDTOUCHPLAY, e);
-			Log.e(_toString() + TAG_ERR, "[NG]" + getMethodName() + "\n" + Log.getStackTraceString(e));
+			Log.e(__CLASSNAME__ + TAG_ERR, "[NG]" + getMethodName() + "\n" + Log.getStackTraceString(e));
 			//e.printStackTrace();
 		}
-		Log.w(_toString(), getMethodName() + "[ED]" + isPlaying() + ":" + getPlayState() + ":" + type + ":" + isPitchTempo + ":" + song);
+		Log.w(__CLASSNAME__, getMethodName() + "[ED]" + isPlaying() + ":" + getPlayState() + ":" + type + ":" + isPitchTempo + ":" + song);
 	}
 
 	@Override
@@ -289,7 +285,7 @@ class Listen4X extends Listen4 implements ISongPlay {
 		} catch (Exception e) {
 
 			onError(ERROR.SOUNDTOUCHPLAY, e);
-			Log.e(_toString() + TAG_ERR, "[NG]" + getMethodName() + "\n" + Log.getStackTraceString(e));
+			Log.e(__CLASSNAME__ + TAG_ERR, "[NG]" + getMethodName() + "\n" + Log.getStackTraceString(e));
 			e.printStackTrace();
 		}
 	}
@@ -308,7 +304,7 @@ class Listen4X extends Listen4 implements ISongPlay {
 		} catch (Exception e) {
 
 			onError(ERROR.SOUNDTOUCHPLAY, e);
-			Log.e(_toString() + TAG_ERR, "[NG]" + getMethodName() + "\n" + Log.getStackTraceString(e));
+			Log.e(__CLASSNAME__ + TAG_ERR, "[NG]" + getMethodName() + "\n" + Log.getStackTraceString(e));
 			e.printStackTrace();
 		}
 	}
@@ -316,7 +312,7 @@ class Listen4X extends Listen4 implements ISongPlay {
 	@Override
 	public boolean isPlaying() {
 		if (type == TYPE.SOUNDTOUCHPLAY) {
-			//if (BuildConfig.DEBUG) Log.i(_toString() + "MediaPlayer", getMethodName() + song);
+			//if (BuildConfig.DEBUG) Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + song);
 			if (song != null) {
 				return song.isPlaying();
 			} else {
@@ -351,7 +347,7 @@ class Listen4X extends Listen4 implements ISongPlay {
 	@Override
 	public void setOnListener(Listener listener) {
 
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + (listener instanceof Listener) + ":" + listener);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + (listener instanceof Listener) + ":" + listener);
 		super.setOnListener(listener);
 		if (song != null) {
 			song.setOnListener(this);
@@ -368,7 +364,7 @@ class Listen4X extends Listen4 implements ISongPlay {
 	 */
 	@Override
 	protected void reset() {
-		Log.w(_toString(), getMethodName());
+		Log.w(__CLASSNAME__, getMethodName());
 		if (type == TYPE.SOUNDTOUCHPLAY) {
 			if (song != null) {
 				song.reset();
@@ -383,7 +379,7 @@ class Listen4X extends Listen4 implements ISongPlay {
 	 */
 	@Override
 	public void release() {
-		Log.w(_toString(), getMethodName());
+		Log.w(__CLASSNAME__, getMethodName());
 		super.release();
 		if (type == TYPE.SOUNDTOUCHPLAY) {
 			if (song != null) {
@@ -395,7 +391,7 @@ class Listen4X extends Listen4 implements ISongPlay {
 
 	@Override
 	public void close() {
-		Log.w(_toString(), getMethodName());
+		Log.w(__CLASSNAME__, getMethodName());
 		stop();
 
 		if (song != null) {
@@ -472,7 +468,7 @@ class Listen4X extends Listen4 implements ISongPlay {
 
 	@Override
 	public void restart() {
-		Log.w(_toString(), getMethodName());
+		Log.w(__CLASSNAME__, getMethodName());
 		if (song != null) {
 			//if (song instanceof ISongPlay) {
 			//	song.setPath(load);
@@ -488,7 +484,7 @@ class Listen4X extends Listen4 implements ISongPlay {
 
 	@Override
 	public void repeat() {
-		Log.w(_toString(), getMethodName());
+		Log.w(__CLASSNAME__, getMethodName());
 		if (song != null) {
 			//if (song instanceof ISongPlay) {
 			//	song.setPath(load);
@@ -519,7 +515,7 @@ class Listen4X extends Listen4 implements ISongPlay {
 	@Override
 	public void setPitch(int value) {
 		if (song != null) {
-			//Log.w(_toString(), getMethodName() + value + ":" + song);
+			//Log.w(__CLASSNAME__, getMethodName() + value + ":" + song);
 			song.setPitch(value);
 		}
 	}
@@ -543,7 +539,7 @@ class Listen4X extends Listen4 implements ISongPlay {
 	@Override
 	public void setTempo(float tempo) {
 		if (song != null) {
-			// _LOG.wtf(_toString(), getMethodName() + tempo + ":" + song);
+			// _LOG.wtf(__CLASSNAME__, getMethodName() + tempo + ":" + song);
 			song.setTempo(tempo);
 		}
 	}
@@ -551,7 +547,7 @@ class Listen4X extends Listen4 implements ISongPlay {
 	@Override
 	public float getTempo() {
 		if (song != null) {
-			// _LOG.wtf(_toString(), getMethodName() + song.getTempo() + ":" + song);
+			// _LOG.wtf(__CLASSNAME__, getMethodName() + song.getTempo() + ":" + song);
 			return song.getTempo();
 		}
 		return 0;
@@ -560,7 +556,7 @@ class Listen4X extends Listen4 implements ISongPlay {
 	@Override
 	public void setTempoPercent(int percent) {
 		if (song != null) {
-			// _LOG.wtf(_toString(), getMethodName() + percent + ":" + song);
+			// _LOG.wtf(__CLASSNAME__, getMethodName() + percent + ":" + song);
 			song.setTempoPercent(percent);
 		}
 	}
@@ -568,7 +564,7 @@ class Listen4X extends Listen4 implements ISongPlay {
 	@Override
 	public int getTempoPercent() {
 		if (song != null) {
-			// _LOG.wtf(_toString(), getMethodName() + song.getTempoPercent() + ":" + song);
+			// _LOG.wtf(__CLASSNAME__, getMethodName() + song.getTempoPercent() + ":" + song);
 			return song.getTempoPercent();
 		}
 		return 0;

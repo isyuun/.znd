@@ -47,10 +47,6 @@ import android.widget.TextView;
 class ListenPitch extends Listen4X {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	private String _toString() {
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	@Override
 	protected String getMethodName() {
 		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
@@ -63,12 +59,12 @@ class ListenPitch extends Listen4X {
 	public ListenPitch(Context context) {
 		super(context);
 		txt_pitch = (TextView) ((Activity) context).findViewById(R.id.txt_pitch);
-		Log.wtf(_toString(), getMethodName() + ":" + txt_pitch);
+		Log.wtf(__CLASSNAME__, getMethodName() + ":" + txt_pitch);
 	}
 
 	@Override
 	public boolean play() {
-		Log.i(_toString(), getMethodName() + ":" + getPitch() + "+" + getPitchMargin());
+		Log.i(__CLASSNAME__, getMethodName() + ":" + getPitch() + "+" + getPitchMargin());
 		boolean ret = super.play();
 		if (ret) {
 			setPitch(PITCH_NORMAL);
@@ -78,7 +74,7 @@ class ListenPitch extends Listen4X {
 
 	@Override
 	public void stop() {
-		Log.i(_toString(), getMethodName() + ":" + getPitch() + "+" + getPitchMargin());
+		Log.i(__CLASSNAME__, getMethodName() + ":" + getPitch() + "+" + getPitchMargin());
 		//setPitch(PITCH_NORMAL);
 		super.stop();
 	}
@@ -187,7 +183,7 @@ class ListenPitch extends Listen4X {
 				break;
 			}
 		}
-		Log.e(_toString(), getMethodName() + pitch + ":" + noteIndex);
+		Log.e(__CLASSNAME__, getMethodName() + pitch + ":" + noteIndex);
 	}
 
 	TextView txt_pitch;
@@ -203,7 +199,7 @@ class ListenPitch extends Listen4X {
 
 	@Override
 	void setListen() {
-		Log.e(_toString(), getMethodName());
+		Log.e(__CLASSNAME__, getMethodName());
 		super.setListen();
 
 		txt_pitch = (TextView) ((Activity) context).findViewById(R.id.txt_pitch);
@@ -249,7 +245,7 @@ class ListenPitch extends Listen4X {
 
 	@Override
 	protected void init(boolean init) {
-		Log.w(_toString(), getMethodName() + init);
+		Log.w(__CLASSNAME__, getMethodName() + init);
 		super.init(init);
 	}
 
@@ -282,11 +278,11 @@ class ListenPitch extends Listen4X {
 	 */
 	@Override
 	public void setPitch(int pitch) {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + pitch);
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + pitch);
 
 		pitch += PITCH_MARGIN;
 		if (PITCH_MARGIN != 0) {
-			Log.wtf(_toString(), getMethodName() + pitch);
+			Log.wtf(__CLASSNAME__, getMethodName() + pitch);
 		}
 
 		super.setPitch(pitch);

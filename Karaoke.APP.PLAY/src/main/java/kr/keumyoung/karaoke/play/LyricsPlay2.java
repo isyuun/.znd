@@ -52,11 +52,6 @@ import kr.keumyoung.karaoke.data._SongData;
 class LyricsPlay2 extends LyricsPlay1 implements _Const , SurfaceHolder.Callback  {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	private String _toString() {
-
-		return (BuildConfig.DEBUG ? __CLASSNAME__ : getClass().getSimpleName()) + '@' + Integer.toHexString(hashCode());
-	}
-
 	protected String getMethodName() {
 		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
 		// int line = Thread.currentThread().getStackTrace()[3].getLineNumber();
@@ -78,7 +73,7 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const , SurfaceHolder.Callback
 	}
 
 	public boolean isPlaying() {
-		//if (BuildConfig.DEBUG) Log.i(_toString() + "MediaPlayer", getMethodName() + m_mp);
+		//if (BuildConfig.DEBUG) Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + m_mp);
 		if (m_mp != null && m_mp.isPlaying()) {
 			return true;
 		} else {
@@ -192,7 +187,7 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const , SurfaceHolder.Callback
 	// */
 	//public void setSleepTime(long time) {
     //
-	//	Log.wtf(_toString() + _Const.TAG_LYRIC, getMethodName() + time);
+	//	Log.wtf(__CLASSNAME__ + _Const.TAG_LYRIC, getMethodName() + time);
 	//	this.mThreadSleepTime = time;
 	//	if (mKPLyrics != null) {
 	//		mKPLyrics.setSleepTime(time);
@@ -204,7 +199,7 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const , SurfaceHolder.Callback
 
 	SurfaceHolder holder;
 	protected void init() {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName());
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName());
 		 this.holder = getHolder();
 		 //bgkim 배경을 투명하게
 		 setZOrderOnTop(true);    // necessary
@@ -216,7 +211,7 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const , SurfaceHolder.Callback
 	}
 
 	private void start() {
-		Log.w(_toString(), getMethodName() + "[ST]" + mKPLyrics + ":" + getHolder());
+		Log.w(__CLASSNAME__, getMethodName() + "[ST]" + mKPLyrics + ":" + getHolder());
 		try {
 			if (mKPLyrics != null) {
 				mKPLyrics.interrupt();
@@ -236,7 +231,7 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const , SurfaceHolder.Callback
 	}
 
 	public void play() throws Exception {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + "[ST]"/* + ":" + mThreadSleepTime*/ + ":" + mKPLyrics + ":" + getHolder());
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + "[ST]"/* + ":" + mThreadSleepTime*/ + ":" + mKPLyrics + ":" + getHolder());
 
 		try {
 			setVisibility(View.VISIBLE);
@@ -246,7 +241,7 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const , SurfaceHolder.Callback
 			start();
 
 			// 재생전설정값박기
-			Log.e(_toString(), getMethodName()/* + ":" + mThreadSleepTime*/ + ":" + mKPLyrics + ":" + getHolder());
+			Log.e(__CLASSNAME__, getMethodName()/* + ":" + mThreadSleepTime*/ + ":" + mKPLyrics + ":" + getHolder());
 			//setSleepTime(mThreadSleepTime);
 			if (mKPLyrics != null) {
 				mKPLyrics.setSleepTime(0);
@@ -255,16 +250,16 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const , SurfaceHolder.Callback
 
 		} catch (Exception e) {
 
-			Log.wtf(_toString(), getMethodName() + "[NG]"/* + ":" + mThreadSleepTime*/ + ":" + mKPLyrics + ":" + getHolder() + "\n" + Log.getStackTraceString(e));
+			Log.wtf(__CLASSNAME__, getMethodName() + "[NG]"/* + ":" + mThreadSleepTime*/ + ":" + mKPLyrics + ":" + getHolder() + "\n" + Log.getStackTraceString(e));
 			//e.printStackTrace();
 			throw (e);
 		}
 
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + "[ED]"/* + ":" + mThreadSleepTime*/ + ":" + mKPLyrics + ":" + getHolder());
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + "[ED]"/* + ":" + mThreadSleepTime*/ + ":" + mKPLyrics + ":" + getHolder());
 	}
 
 	public void stop() throws Exception {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName() + mKPLyrics + ":" + getHolder());
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + mKPLyrics + ":" + getHolder());
 
 		try {
 			setVisibility(View.INVISIBLE);
@@ -277,7 +272,7 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const , SurfaceHolder.Callback
 			}
 		} catch (Exception e) {
 
-			if (BuildConfig.DEBUG) Log.w(_toString() + TAG_ERR, "[NG]" + getMethodName() + mKPLyrics + ":" + getHolder());
+			if (BuildConfig.DEBUG) Log.w(__CLASSNAME__ + TAG_ERR, "[NG]" + getMethodName() + mKPLyrics + ":" + getHolder());
 			e.printStackTrace();
 			throw (e);
 		}
@@ -285,20 +280,20 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const , SurfaceHolder.Callback
 	}
 
 	public void pause() {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName());
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName());
 		setVisibility(View.VISIBLE);
 		setRedraw(false);
 	}
 
 	public void resume() {
-		if (BuildConfig.DEBUG) Log.i(_toString(), getMethodName());
+		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName());
 		setVisibility(View.VISIBLE);
 		setRedraw(false);
 	}
 
 	 @Override
 	 public void surfaceCreated(SurfaceHolder holder) {
-		 if (BuildConfig.DEBUG) Log.e(_toString(), getMethodName() + holder);
+		 if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + holder);
 		 this.holder = holder;
 		 hasSurface = true;
 		 //if (mLyricsViewThread == null) {
@@ -308,7 +303,7 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const , SurfaceHolder.Callback
 
 	 @Override
 	 public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
-		if (BuildConfig.DEBUG) Log.e(_toString(), getMethodName() + holder + ":" + format + ", " + w + ", " + h);
+		if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + holder + ":" + format + ", " + w + ", " + h);
 		this.holder = holder;
 		hasSurface = true;
 		//if (mKPLyrics != null) {
@@ -318,7 +313,7 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const , SurfaceHolder.Callback
 
 	 @Override
 	 public void surfaceDestroyed(SurfaceHolder holder) {
-		 if (BuildConfig.DEBUG) Log.e(_toString(), getMethodName() + holder);
+		 if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + holder);
 		 //this.holder = holder;
 		 hasSurface = false;
 	 }
