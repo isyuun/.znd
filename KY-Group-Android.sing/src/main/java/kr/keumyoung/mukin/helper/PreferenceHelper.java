@@ -24,7 +24,7 @@ public class PreferenceHelper {
     @Inject
     public PreferenceHelper() {
         MainApplication.getInstance().getMainComponent().inject(this);
-        preferences = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
+        preferences = context.getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
     }
 
     public void saveString(String key, String value) {

@@ -345,14 +345,14 @@ public class PlayerActivity extends BaseActivity {
 
         if (song != null) {
             headerSongName.setText(song.getSongTitle());
-            headerSongSubText.setText(song.getArtistName());
+            headerSongSubText.setText(song.getSongSubTitle());
             //mediaManager.loadImageIntoView(song.getAlbumImage(), albumCoverImage);
             //mediaManager.loadImageIntoViewBlur(song.getAlbumImage(), BgImage);
             mediaManager.setPlayerImages(song.getAlbumImage(), albumCoverImage, BgImage);
             BgImage.setColorFilter(Color.parseColor("#5D5D5D"), PorterDuff.Mode.MULTIPLY);
 
             songName.setText(song.getSongTitle());
-            songDesc.setText(song.getArtistName());
+            songDesc.setText(song.getSongSubTitle());
             songDuration.setText(dateHelper.getDuration(song.getDuration()));
             durationText.setText(dateHelper.getDuration(song.getDuration()));
 
@@ -429,8 +429,8 @@ public class PlayerActivity extends BaseActivity {
 
             initializeError =
                     playerJNI.Initialize(preferenceHelper.getString(PreferenceKeys.LIBRARY_PATH));
-            if (playerJNI != null)
-                playerJNI.SetPortSelectionMethod(5); // Type K
+        //    if (playerJNI != null)
+        //        playerJNI.SetPortSelectionMethod(5); // Type K
 
             String midPath = ImageUtils.BASE_PATH + Integer.parseInt(song.getIdentifier()) + ".mid";
             setFileError = playerJNI.SetFile(midPath);
@@ -914,15 +914,27 @@ public class PlayerActivity extends BaseActivity {
                     //		lyricsTimingHelper.parseSokLineArray(SokPath);
                     playerKyUnpackJNI.LyricSokParse(lyricsTimingHelper.GetLyricsLineString());
 
-                    File ky3File = new File(ky3Path);
-                    ky3File.delete();
+					try{
+	                    File ky3File = new File(ky3Path);
+	                    ky3File.delete();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 
-                    String midPath = ImageUtils.BASE_PATH + Integer.parseInt(song.getIdentifier()) + ".mid";
-                    File midiFile = new File(midPath);
-                    midiFile.delete();
+					try{
+	                    String midPath = ImageUtils.BASE_PATH + Integer.parseInt(song.getIdentifier()) + ".mid";
+	                    File midiFile = new File(midPath);
+	                    midiFile.delete();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 
-                    File sokFile = new File(SokPath);
-                    sokFile.delete();
+					try{
+	                   File sokFile = new File(SokPath);
+                 	   sokFile.delete();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
                 }
                 break;
                 case Constants.API_ERROR_CODE:

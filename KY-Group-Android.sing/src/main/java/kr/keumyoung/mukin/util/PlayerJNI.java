@@ -55,4 +55,8 @@ public class PlayerJNI {
     public native int GetSpeedControl();
 
     public native long GetTimePerClock();
+
+	public native float GetCurrentTime();
+
+	public native float GetTotalTime();	
 }

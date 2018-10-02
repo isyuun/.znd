@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import kr.keumyoung.mukin.AppConstants;
 import kr.keumyoung.mukin.MainApplication;
+import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.api.RestApi;
 import kr.keumyoung.mukin.util.BlurTransformation;
 import kr.keumyoung.mukin.util.Constants;
@@ -93,14 +94,19 @@ public class MediaManager {
         if(res != 0 && url.compareToIgnoreCase("images/album/albumart.jpg") == 0) {
             imageViewAlbum.setImageResource(res);
             //blur
+//            Picasso.get()
+//                    .load(res)
+//                    .transform(new BlurTransformation(context, 2)).into(imageViewBackgrounf);
+
             Picasso.get()
-                    .load(res)
+                    .load(res).placeholder(R.drawable.images_album_albumart_01)
                     .transform(new BlurTransformation(context, 2)).into(imageViewBackgrounf);
+
         }
         else {
-            Picasso.get().load(formattedUrl).into(imageViewAlbum);
+            Picasso.get().load(formattedUrl).placeholder(R.drawable.images_album_albumart_01).into(imageViewAlbum);
             Picasso.get()
-                    .load(formattedUrl)
+                    .load(formattedUrl).placeholder(R.drawable.images_album_albumart_01)
                     .transform(new BlurTransformation(context, 2)).into(imageViewBackgrounf);
         }
     }

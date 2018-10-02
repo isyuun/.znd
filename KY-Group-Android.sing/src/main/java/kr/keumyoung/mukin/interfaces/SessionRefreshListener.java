@@ -2,18 +2,18 @@ package kr.keumyoung.mukin.interfaces;
 
 import android.content.Intent;
 
+import javax.inject.Inject;
+
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.activity.BaseActivity;
-import kr.keumyoung.mukin.activity.LoginChoiceActivity;
+import kr.keumyoung.mukin.activity._LoginActivity;
 import kr.keumyoung.mukin.helper.PreferenceHelper;
 import kr.keumyoung.mukin.helper.ToastHelper;
 import kr.keumyoung.mukin.util.PreferenceKeys;
 
-import javax.inject.Inject;
-
 /**
- *  on 29/01/18.
+ * on 29/01/18.
  * Project: KyGroup
  */
 
@@ -40,7 +40,7 @@ public abstract class SessionRefreshListener {
 
         toastHelper.showError(R.string.session_expired_error);
 
-        Intent i = new Intent(activity, LoginChoiceActivity.class);
+        Intent i = new Intent(activity, _LoginActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         activity.startActivity(i);
         activity.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);

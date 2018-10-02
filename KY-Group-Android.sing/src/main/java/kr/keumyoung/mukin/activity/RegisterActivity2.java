@@ -19,27 +19,21 @@ public class RegisterActivity2 extends RegisterActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        this.email = emailEt.getText().toString();
+        this.pass = passwordEt.getText().toString();
         populateAutoComplete();
     }
 
-    private static final int REQUEST_READ_CONTACTS = 0;
-
-    private void populateAutoComplete() {
-        if (!mayRequestPermissions()) {
-            return;
-        }
-
+    @Override
+    protected void populateAutoComplete() {
+        super.populateAutoComplete();
         emailEt.setText(getGoogleAccount());
     }
 
+    @Override
     protected boolean mayRequestPermissions() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            return true;
-        }
-        if (checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        }
-        if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
+        boolean ret = super.mayRequestPermissions();
+        if (!ret) {
             Snackbar.make(emailEt, kr.keumyoung.karaoke.mukin.coupon.R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
                     .setAction(android.R.string.ok, new View.OnClickListener() {
                         @Override
@@ -48,23 +42,8 @@ public class RegisterActivity2 extends RegisterActivity {
                             requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
                         }
                     });
-        } else {
-            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
         }
-        return false;
-    }
-
-
-    /**
-     * Callback received when a permissions request has been completed.
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_READ_CONTACTS) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                populateAutoComplete();
-            }
-        }
+        return ret;
     }
 
 }

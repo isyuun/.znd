@@ -24,7 +24,7 @@ public class NetworkServiceGenerator {
 
     static {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE);
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         httpClient = new OkHttpClient.Builder()
                 .readTimeout(40, TimeUnit.SECONDS)
                 .writeTimeout(60, TimeUnit.SECONDS)

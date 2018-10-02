@@ -1,6 +1,7 @@
 package kr.keumyoung.mukin.util;
 
 import android.content.Context;
+import android.util.Log;
 
 import kr.keumyoung.mukin.R;
 
@@ -22,12 +23,9 @@ public class RandromAlbumImage {
 
     public int getAlbumResourceID()
     {
-        int resId = 0;
-        if(start_idx > 22)
+        if(start_idx >= 22)
             start_idx = 1;
-        String packName = mContext.getPackageName(); // 패키지명
-        resId = mContext.getResources().getIdentifier( String.format("images_album_albumart_%02d", start_idx++), "drawable" , packName);
-        return resId;
+        return mContext.getResources().getIdentifier( String.format("images_album_albumart_%02d", start_idx++), "drawable" ,  mContext.getPackageName());
     }
 
 

@@ -29,7 +29,6 @@ import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.api.RequestModel;
 import kr.keumyoung.mukin.api.RestApi;
-import kr.keumyoung.mukin.data.model.UserRoleModel;
 import kr.keumyoung.mukin.data.request.LoginRequest;
 import kr.keumyoung.mukin.data.request.RegisterUserCustomRequest;
 import kr.keumyoung.mukin.data.request.RegisterUserRequest;
@@ -48,7 +47,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- *  on 11/01/18.
+ * on 11/01/18.
  * Project: KyGroup
  */
 
@@ -173,7 +172,7 @@ public class RegisterActivity extends _BaseActivity {
         }
     }
 
-    private void registerUserToDF(String email, String nickName, String password, String profileImagePath) {
+    protected void registerUserToDF(String email, String nickName, String password, String profileImagePath) {
         restApi.registerUser(new RegisterUserRequest(email, nickName, "", password)).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -188,7 +187,8 @@ public class RegisterActivity extends _BaseActivity {
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();
                         // TODO: 29/01/18 handle DF registration error
-                        JSONObject errorObject = new JSONObject(errorString).getJSONObject(Constants.ERROR).getJSONObject(Constants.CONTEXT);;
+                        JSONObject errorObject = new JSONObject(errorString).getJSONObject(Constants.ERROR).getJSONObject(Constants.CONTEXT);
+                        ;
                         if (errorObject.has(Constants.EMAIL)) {
                             hideProgress();
                             toastHelper.showError(R.string.email_already_exists);
@@ -226,7 +226,8 @@ public class RegisterActivity extends _BaseActivity {
                             String dfid = object.getString(Constants.ID);
                             preferenceHelper.saveString(PreferenceKeys.DF_ID, dfid);
 
-                            updateRoleToUser(dfid, nickName, profileImagePath, email);
+                            //updateRoleToUser(dfid, nickName, profileImagePath, email);
+                            registerUserCustom(dfid, nickName, profileImagePath, email);
                         }
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();
@@ -247,37 +248,37 @@ public class RegisterActivity extends _BaseActivity {
         });
     }
 
-    private void updateRoleToUser(String dfid, String nickName, String profileImagePath, String email) {
-        restApi.updateUserRole(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), dfid, new UserRoleModel(dfid))
-                .enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        try {
-                            ResponseBody responseBody = response.body();
-                            ResponseBody errorBody = response.errorBody();
-                            if (responseBody != null) {
-                                String responseString = responseBody.string();
-                                JSONObject object = new JSONObject(responseString);
-                                if (!object.has(Constants.ERROR))
-                                    registerUserCustom(dfid, nickName, profileImagePath, email);
-                            } else if (errorBody != null) {
-                                String errorString = errorBody.string();
-                                JSONObject errorObject = new JSONObject(errorString);
-                                // TODO: 29/01/18 handle error response during registration
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            hideProgress();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        t.printStackTrace();
-                        hideProgress();
-                    }
-                });
-    }
+    //private void updateRoleToUser(String dfid, String nickName, String profileImagePath, String email) {
+    //    restApi.updateUserRole(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), dfid, new UserRoleModel(dfid))
+    //            .enqueue(new Callback<ResponseBody>() {
+    //                @Override
+    //                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+    //                    try {
+    //                        ResponseBody responseBody = response.body();
+    //                        ResponseBody errorBody = response.errorBody();
+    //                        if (responseBody != null) {
+    //                            String responseString = responseBody.string();
+    //                            JSONObject object = new JSONObject(responseString);
+    //                            if (!object.has(Constants.ERROR))
+    //                                registerUserCustom(dfid, nickName, profileImagePath, email);
+    //                        } else if (errorBody != null) {
+    //                            String errorString = errorBody.string();
+    //                            JSONObject errorObject = new JSONObject(errorString);
+    //                            // TODO: 29/01/18 handle error response during registration
+    //                        }
+    //                    } catch (Exception e) {
+    //                        e.printStackTrace();
+    //                        hideProgress();
+    //                    }
+    //                }
+    //
+    //                @Override
+    //                public void onFailure(Call<ResponseBody> call, Throwable t) {
+    //                    t.printStackTrace();
+    //                    hideProgress();
+    //                }
+    //            });
+    //}
 
     private void registerUserCustom(String dfid, String nickName, String profileImagePath, String email) {
         restApi.registerCustom(new RequestModel<>(new RegisterUserCustomRequest(dfid, nickName, profileImagePath, email)),
@@ -297,7 +298,8 @@ public class RegisterActivity extends _BaseActivity {
                             hideProgress();
                             navigationHelper.navigate(RegisterActivity.this, HomeActivity.class);
                         } else {
-                            JSONObject errorObject = new JSONObject(responseString).getJSONObject(Constants.ERROR).getJSONObject(Constants.CONTEXT);;
+                            JSONObject errorObject = new JSONObject(responseString).getJSONObject(Constants.ERROR).getJSONObject(Constants.CONTEXT);
+                            ;
                             if (errorObject.has(Constants.EMAIL)) {
                                 hideProgress();
                                 toastHelper.showError(R.string.email_already_exists);
@@ -305,7 +307,8 @@ public class RegisterActivity extends _BaseActivity {
                         }
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();
-                        JSONObject errorObject = new JSONObject(errorString).getJSONObject(Constants.ERROR).getJSONObject(Constants.CONTEXT);;
+                        JSONObject errorObject = new JSONObject(errorString).getJSONObject(Constants.ERROR).getJSONObject(Constants.CONTEXT);
+                        ;
                         if (errorObject.has(Constants.EMAIL)) {
                             hideProgress();
                             toastHelper.showError(R.string.email_already_exists);

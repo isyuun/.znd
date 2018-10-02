@@ -31,6 +31,7 @@ import kr.keumyoung.mukin.data.lyrics.LyricsTime;
 import kr.keumyoung.mukin.data.lyrics.LyricsTimes;
 import kr.keumyoung.mukin.elements.TwoLineLyricsView;
 import kr.keumyoung.mukin.util.Constants;
+import kr.keumyoung.mukin.util.MicChecker;
 
 /**
  * on 02/04/18.
@@ -333,22 +334,24 @@ public class LyricsTimingHelper {
 
         int originalTick = currentTick;
 //        int skipTick = 120;
-        int skipTick = 80;
+//       int skipTick = 80;
+        int skipTick = 0;
 
         // initialization to sync tick as per their code
         currentTick = currentTick - skipTick;
 		if(currentTick < 0)
 			currentTick = 0;
 
-//        System.out.println("syncTick: " + currentTick);
+     //   System.out.println("syncTick: " + currentTick);
 
-        int currentIndex = lyricsTimes.getWithMillis(currentTick);
+        int currentIndex = lyricsTimes.getWithMillis(currentTick, MicChecker.getInstance().getStates());
 
         if (currentIndex != -1) {
             LyricsTime currentLyricsTime = lyricsTimes.get(currentIndex);
             if (!currentLyricsTime.isShown()) {
                 long endMillis = Calendar.getInstance().getTimeInMillis();
            //     System.out.println("matched CHECK: currenttick" + originalTick + " | synctick: " + currentTick + " | lyricstick: " + currentLyricsTime.getStartTick() + " | word: " + currentLyricsTime.getCurrentWord() + " | time: " + (endMillis - startMillis));
+	            //System.out.println("MicChecker.getInstance().getStates() " + MicChecker.getInstance().getStates());
                 lyricsView.update(currentLyricsTime);
                 lyricsTimes.remove(currentIndex);
                 currentLyricsTime.setShown();

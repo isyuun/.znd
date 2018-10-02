@@ -12,6 +12,7 @@ import android.widget.AutoCompleteTextView;
 import java.util.HashMap;
 
 import cz.msebera.android.httpclient.Header;
+import kr.keumyoung.KEUMYOUNG;
 import kr.keumyoung.karaoke.mukin.coupon.BuildConfig;
 import kr.keumyoung.karaoke.mukin.coupon.R;
 
@@ -23,7 +24,7 @@ public class user2 extends user {
         super.onActivityCreated(savedInstanceState);
 
         //기본패스워드
-        mPasswordView.setText("user1234");
+        mPasswordView.setText(KEUMYOUNG.DEFAULT_PASS);
 
         mCouponView = (AutoCompleteTextView) findViewById(R.id.coupon);
 

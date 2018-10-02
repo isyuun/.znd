@@ -4,5 +4,5 @@
     android:versionCode="54"
     android:versionName="2.54">
 
-    <uses-sdk android:minSdkVersion="14"/>
+    <!--<uses-sdk android:minSdkVersion="14"/>-->
 </manifest>

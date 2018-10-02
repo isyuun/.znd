@@ -15,6 +15,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
+
 import kr.keumyoung.mukin.R;
 
 public class MicChecker {
@@ -29,13 +30,17 @@ public class MicChecker {
     private boolean isEarphoneON;
     private boolean isBlueToothON;
     private String mukin_mic_name;
+    private String last_bluetooth_device_name;
 
-
-    //블루투스 마이크, 헤드셋, NONE
     public enum MIC_CONNECTION_STATES {
-        BLUETOOTH_MUKIN, HEADSET, NONE
+        BLUETOOTH_MUKIN,    //블루투스 뮤젠 마이크
+        BLUETOOTH_OTHERS,   //블루투스 뮤젠 외 다른 마이크
+        HEADSET,            //유선 헤드셋
+        NONE                //NONE
     }
 
+    String preDeviceAddress = new String();
+    int preDeviceStates = -1;
 
     public MicChecker(Context context) {
         mContext = context;
@@ -55,6 +60,12 @@ public class MicChecker {
                     Log.d(TAG, "onServiceConnected" + " | " + device.getName() + " | " + device.getAddress() + " | " + proxy.getConnectionState(device) + "(connected = "
                             + BluetoothProfile.STATE_CONNECTED + ")");
 
+                    //왜 두번들어와
+                    if(preDeviceAddress.compareToIgnoreCase(device.getAddress()) == 0)
+                        return;
+
+                    preDeviceAddress = device.getAddress();
+
                     //HEADSET 타입이거나
                     //A2DP는 보통 마이크가 안달린넘인데 특별히 뮤즐만 예외로 체크 한다.
                     if (profile == BluetoothProfile.HEADSET
@@ -70,13 +81,13 @@ public class MicChecker {
         //A2DP = 보통 헤드폰
         //그런데 뮤즐 마이크는 A2DP로 검색이됨. 마이크 입력을 안받기 때문인듯.
         //따라서 2가지 다 체크해야함
+        //try{}... - isyuun@keumyoung.kr
         try {
             mBlueToothAdapter.getProfileProxy(mContext, mProfileListener, BluetoothProfile.A2DP);
             mBlueToothAdapter.getProfileProxy(mContext, mProfileListener, BluetoothProfile.HEADSET);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public static synchronized MicChecker createInstance(Context context) {
@@ -96,11 +107,27 @@ public class MicChecker {
     }
 
     private boolean switchBlueToothStates(String devicename, boolean bStates) {
+
+        boolean bPreBlueToothStates = isBlueToothON;
+
         isBlueToothON = bStates;
 
         Log.d(TAG, devicename + " Is connected = " + Boolean.toString(isBlueToothON));
 
-        states = isBlueToothON ? MIC_CONNECTION_STATES.BLUETOOTH_MUKIN : MIC_CONNECTION_STATES.NONE;
+        //states = isBlueToothON ? MIC_CONNECTION_STATES.BLUETOOTH_MUKIN : MIC_CONNECTION_STATES.NONE;
+
+        if (bPreBlueToothStates == false && isBlueToothON) {
+            //뮤젠 마이크인경우
+            if (devicename.compareToIgnoreCase(mukin_mic_name) == 0)
+                states = MIC_CONNECTION_STATES.BLUETOOTH_MUKIN;
+            else
+                states = MIC_CONNECTION_STATES.BLUETOOTH_OTHERS;
+
+            last_bluetooth_device_name = devicename;
+        } else {
+            if(last_bluetooth_device_name.compareToIgnoreCase(devicename) == 0)
+                states = MIC_CONNECTION_STATES.NONE;
+        }
 
         //이어폰은 우선
         if (isEarphoneON)
@@ -108,6 +135,9 @@ public class MicChecker {
 
         if (micCheckEventListener != null)
             micCheckEventListener.onStateChangedEvent(states);
+
+
+        Log.d(TAG, "states = " + states);
 
         return true;
     }
@@ -120,8 +150,13 @@ public class MicChecker {
         states = isEarphoneON ? MIC_CONNECTION_STATES.HEADSET : MIC_CONNECTION_STATES.NONE;
 
         //이어폰 OFF / 블루투스 ON 인 경우
-        if(isEarphoneON == false && isBlueToothON)
-            states = MIC_CONNECTION_STATES.BLUETOOTH_MUKIN;
+        if (isEarphoneON == false && isBlueToothON) {
+
+            if (last_bluetooth_device_name.compareToIgnoreCase(mukin_mic_name) == 0)
+                states = MIC_CONNECTION_STATES.BLUETOOTH_MUKIN;
+            else
+                states = MIC_CONNECTION_STATES.BLUETOOTH_OTHERS;
+        }
 
         if (micCheckEventListener != null)
             micCheckEventListener.onStateChangedEvent(states);
@@ -168,13 +203,10 @@ public class MicChecker {
             filter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
             mContext.registerReceiver(broadcastReceiver, filter);
             Log.d(TAG, "MicChecker regist");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             Log.d(TAG, "MicChecker regist erroe");
             e.printStackTrace();
         }
-
 
 
     }
