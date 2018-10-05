@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="net.sourceforge.lame"
-          xmlns:android="http://schemas.android.com/apk/res/android"
-          android:versionCode="1"
-          android:versionName="0.01">
-
-    <!--<uses-sdk android:minSdkVersion="4" />-->
-
-</manifest> 
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="net.sourceforge.lame"
+    android:versionCode="1"
+    android:versionName="0.01" />

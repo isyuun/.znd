@@ -25,13 +25,13 @@ public class Application2 extends Application {
     public String sdate;
     public String edate;
 
-    DeviceUuidFactory device;
+    //DeviceUuidFactory device;
 
     @Override
     public void onCreate() {
         Log.i(__CLASSNAME__, getMethodName() + "[email]" + this.email + "[coupon]" + this.coupon);
         super.onCreate();
-        device = new DeviceUuidFactory(this);
+        //device = new DeviceUuidFactory(this);
         sendUser();
     }
 
@@ -64,7 +64,7 @@ public class Application2 extends Application {
         //url += "&email=" + email;
         //url += "&coupon=" + coupon;
 
-        String device = this.device.getDeviceUuid().toString();
+        //String device = this.device.getDeviceUuid().toString();
 
         /**
          * Create empty RequestParams and immediately add some parameters:
@@ -73,7 +73,7 @@ public class Application2 extends Application {
         params.put(getString(R.string.kind), kind);
         params.put(getString(R.string.email), email);
         params.put(getString(R.string.coupon), coupon);
-        params.put(getString(R.string.device), device);
+        //params.put(getString(R.string.device), device);
 
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + url + "?" + params);
         url = url + "?" + params;

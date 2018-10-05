@@ -2,7 +2,7 @@
     <string name="kind">kind</string>
     <string name="email">email</string>
     <string name="coupon">coupon</string>
-    <string name="device">device</string>
+    <!--<string name="device">device</string>-->
     <string name="code">code</string>
     <string name="message">message</string>
     <string name="sdate">sdate</string>

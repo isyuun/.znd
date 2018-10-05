@@ -50,7 +50,7 @@ import android.widget.ViewFlipper;
  * @since 2014. 2. 24.
  * @version 1.0
  */
-public class BaseFullActivity2 extends BaseFullActivity implements OnGestureListener {
+public class BaseFullActivity2 extends BaseFullActivity_ implements OnGestureListener {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
 	@Override
