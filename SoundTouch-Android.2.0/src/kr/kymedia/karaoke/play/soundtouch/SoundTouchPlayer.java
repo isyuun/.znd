@@ -86,4 +86,7 @@ public class SoundTouchPlayer extends SoundStreamAudioPlayer {
 			return 0;
 		}
 	}
+
+	public void reset() {
+	}
 }

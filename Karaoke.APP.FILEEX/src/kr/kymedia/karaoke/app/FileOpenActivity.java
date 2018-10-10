@@ -65,15 +65,6 @@ public class FileOpenActivity extends AppCompatFragmentActivity implements FileD
 		return getClass().getSimpleName() + '@' + Integer.toHexString(hashCode());
 	}
 
-	@Override
-	protected String getMethodName() {
-		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
-		// int line = Thread.currentThread().getStackTrace()[3].getLineNumber();
-		// name = String.format("line:%d - %s() ", line, name);
-		name += "() ";
-		return name;
-	}
-
 	public ArrayList<File> getListFiles(File root) {
 		ArrayList<File> inFiles = new ArrayList<File>();
 		File[] files = root.listFiles();

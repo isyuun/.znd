@@ -67,14 +67,11 @@ public class PlayActivity extends _Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
-		setFullScreen(false);
 	}
 
 	@Override
 	protected void onStart() {
-
 		if (getCurrentFragment() != null && getCurrentFragment() instanceof _PlayFragment) {
 			((_PlayFragment) getCurrentFragment()).getRootView().setOnTouchListener(this);
 		}
@@ -83,7 +80,6 @@ public class PlayActivity extends _Activity {
 
 	@Override
 	public void onBackPressed() {
-
 		super.onBackPressed();
 
 		openMain(null, null);
@@ -96,14 +92,5 @@ public class PlayActivity extends _Activity {
 		Log.e(__CLASSNAME__, getMethodName() + item);
 
 		return super.onOptionsItemSelected(item);
-		// if (item.getItemId() == R.id.full_screen_enable) {
-		// setFullScreen(true);
-		// return true;
-		// } else if (item.getItemId() == R.id.full_screen_unable) {
-		// setFullScreen(false);
-		// return true;
-		// } else {
-		// return super.onOptionsItemSelected(item);
-		// }
 	}
 }

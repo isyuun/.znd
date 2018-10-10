@@ -34,6 +34,7 @@ package kr.kymedia.karaoke.play.apps;
 
 import java.io.File;
 
+import kr.kymedia.karaoke.play.app.BaseFullActivity;
 import kr.kymedia.karaoke.play.app.R;
 import kr.kymedia.karaoke.play.app.view.PlayViewPitch;
 import kr.kymedia.karaoke.play.app.view._PlayView;
@@ -75,16 +76,13 @@ public class PlayFragment6 extends PlayFragment5 {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
 		Log.e(__CLASSNAME__, getMethodName() + menu + "," + inflater);
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 
-	@Override
+    @Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-
 		Log.e(__CLASSNAME__, getMethodName() + item);
-
 		if (item.getItemId() == R.id.pitch_test_1) {
 			pitch_test_1();
 			return true;

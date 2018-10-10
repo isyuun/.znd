@@ -42,5 +42,5 @@ package kr.kymedia.karaoke.play.apps;
  * @since 2014. 9. 12.
  * @version 1.0
  */
-public class _PlayFragment extends PlayFragment6 {
+public class _PlayFragment extends PlayFragment7 {
 }

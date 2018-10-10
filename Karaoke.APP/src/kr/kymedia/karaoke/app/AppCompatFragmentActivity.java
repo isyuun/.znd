@@ -54,15 +54,6 @@ public class AppCompatFragmentActivity extends AppCompatActivity {
 		return getClass().getSimpleName() + '@' + Integer.toHexString(hashCode());
 	}
 
-	@Override
-	protected String getMethodName() {
-		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
-		// int line = Thread.currentThread().getStackTrace()[3].getLineNumber();
-		// name = String.format("line:%d - %s() ", line, name);
-		name += "() ";
-		return name;
-	}
-
 	protected void addFragment(int containerViewId, Fragment fragment, String tag) {
 	}
 

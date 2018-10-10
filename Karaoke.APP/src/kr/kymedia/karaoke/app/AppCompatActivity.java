@@ -195,9 +195,7 @@ public class AppCompatActivity extends android.support.v7.app.AppCompatActivity 
 	@Deprecated
 	@Override
 	public ActionBar getActionBar() {
-
-		// return super.getActionBar();
-		return null;
+		return super.getActionBar();
 	}
 
 }

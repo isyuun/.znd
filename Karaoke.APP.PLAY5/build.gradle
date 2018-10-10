@@ -14,7 +14,7 @@ dependencies {
     implementation project(':AndroidJaudiotagger')
     implementation project(':Karaoke')
     implementation project(':Karaoke.APP.PLAY3')
-    implementation project(':SoundTouch-Android.2.0')
+    implementation project(':SoundTouch-Android.1.0')
     api fileTree(dir: 'libs', include: '*.jar')
 }
 

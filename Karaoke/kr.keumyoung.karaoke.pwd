@@ -1,4 +1,0 @@
-storeFile file('../Karaoke/kr.keumyoung.karaoke.jks')
-storePassword 'rmadudrmfnq1'
-keyAlias 'keumyoung'
-keyPassword 'rmadudrmfnq1'

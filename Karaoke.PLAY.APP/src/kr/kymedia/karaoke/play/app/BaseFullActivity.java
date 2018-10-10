@@ -1,473 +1,196 @@
-/*
- * Copyright 2011 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-/**
- * 2014 All rights (c)KYGroup Co.,Ltd. reserved.
- * 
- * This software is the confidential and proprietary information
- *  of (c)KYGroup Co.,Ltd. ("Confidential Information").
- * 
- * project	:	Karaoke.PLAY4.APP
- * filename	:	FullScreenActivity.java
- * author	:	isyoon
- *
- * <pre>
- * kr.kymedia.karaoke.play4.app
- *    |_ FullScreenActivity.java
- * </pre>
- * 
- */
-
 package kr.kymedia.karaoke.play.app;
 
-import kr.kymedia.karaoke.app.FileOpenActivity;
-import kr.kymedia.karaoke.util.Log;
-import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.annotation.TargetApi;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.view.WindowCompat;
+import android.support.annotation.Nullable;
+import android.support.v4.view.GestureDetectorCompat;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnSystemUiVisibilityChangeListener;
-import android.view.View.OnTouchListener;
-import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
-
-/**
- * <pre>
- * 풀스크린처리
- * </pre>
- *
- * @author isyoon
- * @since 2014. 10. 2.
- * @version 1.0
- */
-public class BaseFullActivity extends FileOpenActivity implements OnTouchListener, GestureDetector.OnDoubleTapListener {
-	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
-
-	static int TIMER_SYSTEM_UI_REFRESH = 5000;
-
-	@SuppressLint("InlinedApi")
-	public void setTranslucentSystemUI(boolean enabled) {
-		Log.i(__CLASSNAME__, getMethodName() + enabled);
-
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			if (enabled) {
-				Window w = getWindow(); // in Activity's onCreate() for instance
-				w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-				w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-			} else {
-				final WindowManager.LayoutParams attrs = getWindow().getAttributes();
-				attrs.flags &= (~WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-				attrs.flags &= (~WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-				getWindow().setAttributes(attrs);
-				getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-			}
-		}
-	}
-
-	int defVisibility;
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-
-		super.onCreate(savedInstanceState);
-		defVisibility = getDecorView().getSystemUiVisibility();
-	}
-
-	private View getDecorView() {
-		return getWindow().getDecorView();
-	}
-
-	boolean show = false;
-
-	public boolean isShowSystemUI() {
-		return show;
-	}
-
-	boolean enabledFullScreen = false;
-
-	public boolean isEnabledFullScreen() {
-		return enabledFullScreen;
-	}
-
-	void enableFullScreen() {
-		this.enabledFullScreen = !this.enabledFullScreen;
-		enableFullScreen(this.enabledFullScreen);
-	}
-
-	void enableFullScreen(boolean enabled) {
-		this.enabledFullScreen = enabled;
-		enableFullScreenImmersive(enabled);
-		// enableFullScreenLeanback(enabled);
-		// enableFullScreenStickyImmersive(enabled);
-		if (enabled) {
-			hideActionBar();
-		} else {
-			showActionBar();
-		}
-	}
-
-	@SuppressLint({ "InlinedApi", "NewApi" })
-	void enableFullScreenImmersive(boolean enabled) {
-		// Log.i(__CLASSNAME__, getMethodName() + enabled);
-
-		this.enabledFullScreen = enabled;
-
-		// int newVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
-		int newVisibility = defVisibility;
-
-		getDecorView().setOnSystemUiVisibilityChangeListener(new OnSystemUiVisibilityChangeListener() {
-
-			@Override
-			public void onSystemUiVisibilityChange(int visibility) {
-				show = ((visibility & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0);
-				// Log.e(__CLASSNAME__, getMethodName() + visibility + ":" + show);
-
-				if (show) {
-					// in show
-					showActionBar();
-					BaseFullActivity.this.postDelayed(new Runnable() {
-
-						@Override
-						public void run() {
-
-							enableFullScreenImmersive(true);
-						}
-					}, TIMER_SYSTEM_UI_REFRESH);
-				} else {
-					// in hide
-					hideActionBar();
-				}
-			}
-		});
-
-		if (enabled) {
-			newVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
-			newVisibility |= View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE;
-		}
-
-		getDecorView().setSystemUiVisibility(newVisibility);
-	}
-
-	@SuppressLint({ "InlinedApi", "NewApi" })
-	void enableFullScreenStickyImmersive(boolean enabled) {
-		// Log.i(__CLASSNAME__, getMethodName() + enabled);
-
-		this.enabledFullScreen = enabled;
-
-		// int newVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
-		int newVisibility = defVisibility;
-
-		getDecorView().setOnSystemUiVisibilityChangeListener(new OnSystemUiVisibilityChangeListener() {
-
-			@Override
-			public void onSystemUiVisibilityChange(int visibility) {
-				show = ((visibility & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0);
-				// Log.e(__CLASSNAME__, getMethodName() + visibility + ":" + show);
-
-				if (show) {
-					// in show
-					showActionBar();
-					BaseFullActivity.this.postDelayed(new Runnable() {
-
-						@Override
-						public void run() {
-
-							enableFullScreenStickyImmersive(true);
-						}
-					}, TIMER_SYSTEM_UI_REFRESH);
-				} else {
-					// in hide
-					hideActionBar();
-				}
-			}
-		});
-
-		if (enabled) {
-			newVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
-			newVisibility |= View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-		}
-
-		getDecorView().setSystemUiVisibility(newVisibility);
-	}
-
-	int mLastSystemUIVisibility;
-
-	@SuppressLint({ "InlinedApi", "NewApi" })
-	void enableFullScreenLeanback(boolean enabled) {
-		// Log.i(__CLASSNAME__, getMethodName() + enabled);
-
-		this.enabledFullScreen = enabled;
-
-		// int newVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
-		int newVisibility = defVisibility;
-
-		getDecorView().setOnSystemUiVisibilityChangeListener(null);
-
-		if (enabled) {
-			newVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
-			newVisibility |= View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-
-			getDecorView().setOnSystemUiVisibilityChangeListener(new OnSystemUiVisibilityChangeListener() {
-
-				@Override
-				public void onSystemUiVisibilityChange(int visibility) {
-					show = ((mLastSystemUIVisibility & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) != 0 && (visibility & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0);
-					// Log.e(__CLASSNAME__, getMethodName() + visibility + ":" + show);
-
-					if (show) {
-						// in show
-						showActionBar();
-						resetHideTimer();
-					} else {
-						// in hide
-						hideActionBar();
-					}
-					mLastSystemUIVisibility = visibility;
-				}
-			});
-		}
-
-		// Set the visibility
-		getDecorView().setSystemUiVisibility(newVisibility);
-	}
-
-	private void resetHideTimer() {
-		// First cancel any queued events - i.e. resetting the countdown clock
-		mLeanBackHandler.removeCallbacks(mEnterLeanback);
-		// And fire the event in 3s time
-		mLeanBackHandler.postDelayed(mEnterLeanback, TIMER_SYSTEM_UI_REFRESH);
-	}
-
-	private final Handler mLeanBackHandler = new Handler();
-	private final Runnable mEnterLeanback = new Runnable() {
-		@Override
-		public void run() {
-			enableFullScreenLeanback(true);
-		}
-	};
-
-	private boolean isFullScreen = false;
-
-	protected void setFullScreen(boolean enabled) {
-		Log.i(__CLASSNAME__, getMethodName() + enabled);
-
-		isFullScreen = enabled;
-
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			enableFullScreen(enabled);
-		} else {
-			if (enabled) {
-				getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-			} else {
-				getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-			}
-		}
-	}
-
-	private boolean isNoTitle = false;
-
-	@SuppressLint("NewApi")
-	protected void setNoTitle() {
-		Log.i(__CLASSNAME__, getMethodName());
-
-		isNoTitle = true;
-		try {
-			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-				requestWindowFeature(Window.FEATURE_NO_TITLE);
-			}
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-	}
-
-	private boolean isShowActionBar = true;
-
-	@SuppressLint("NewApi")
-	protected void hideActionBar() {
-		// Log.i(__CLASSNAME__, getMethodName());
-
-		isShowActionBar = false;
-		try {
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-				getSupportActionBar().hide();
-			}
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-	}
-
-	boolean isActionBarOverlay = false;
-
-	@SuppressLint("InlinedApi")
-	protected void setActionBarOverlay(boolean enabled) {
-		Log.i(__CLASSNAME__, getMethodName() + enabled);
-
-		isActionBarOverlay = enabled;
-
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			if (enabled) {
-				getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-			} else {
-				getWindow().clearFlags(Window.FEATURE_ACTION_BAR_OVERLAY);
-			}
-		} else {
-			getWindow().requestFeature(WindowCompat.FEATURE_ACTION_BAR_OVERLAY);
-		}
-
-	}
-
-	@Override
-	public void setContentView(int layoutResID) {
 
-		super.setContentView(layoutResID);
-
-		if (isActionBarOverlay) {
-			getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#00212121")));
-		}
-	}
-
-	@SuppressLint("NewApi")
-	protected void showActionBar() {
-		// Log.i(__CLASSNAME__, getMethodName());
-
-		isShowActionBar = true;
-		try {
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-				getSupportActionBar().show();
-			}
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-	}
-
-	void setResume() {
-		setFullScreen(isFullScreen);
-
-		if (isNoTitle) {
-
-		}
-
-		if (isShowActionBar) {
-			showActionBar();
-		} else {
-			hideActionBar();
-		}
-	}
-
-	@Override
-	protected void onResume() {
-
-		super.onResume();
-
-		setResume();
-	}
-
-	public GestureDetector gestureDetector;
-
-	@Override
-	protected void onStart() {
-		Log.e(__CLASSNAME__, getMethodName());
-
-		super.onStart();
-
-		ViewGroup g = (ViewGroup) getWindow().getDecorView().findViewById(android.R.id.content);
-		g = (ViewGroup) getWindow().getDecorView().getRootView();
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-			g = (ViewGroup) getWindow().getDecorView().getRootView();
-		}
-		g.setOnTouchListener(this);
-
-		// WidgetUtils.setOnTouchListener(getApplicationContext(), g, this);
-		gestureDetector = new GestureDetector(this, new GestureListener());
-	}
-
-	@SuppressLint("ClickableViewAccessibility")
-	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-		// Log.e(__CLASSNAME__, getMethodName() + v + event);
-
-
-		// if (v == mRootView && event.getAction() == MotionEvent.ACTION_DOWN) {
-		// ((_Activity) getActivity()).enableFullScreen();
-		// }
-
-		return gestureDetector.onTouchEvent(event);
-	}
-
-	public class GestureListener extends GestureDetector.SimpleOnGestureListener {
-
-		@Override
-		public boolean onDoubleTap(MotionEvent e) {
-
-			BaseFullActivity.this.onDoubleTap(e);
-			return super.onDoubleTap(e);
-		}
-
-		@Override
-		public boolean onSingleTapConfirmed(MotionEvent e) {
-
-			BaseFullActivity.this.onSingleTapConfirmed(e);
-			return super.onSingleTapConfirmed(e);
-		}
-
-	}
-
-	@Override
-	public boolean onSingleTapConfirmed(MotionEvent e) {
-
-		// Log.e(__CLASSNAME__, getMethodName() + isShowSystemUI());
-
-		// if (isShowSystemUI()) {
-		// enableFullScreen(true);
-		// }
-		enableFullScreen();
-
-		return false;
-	}
-
-	@Override
-	public boolean onDoubleTap(MotionEvent e) {
-
-		// Log.e(__CLASSNAME__, getMethodName() + isShowSystemUI());
-
-		// if (!isShowSystemUI()) {
-		// enableFullScreen();
-		// }
-		// else
-		// {
-		// return super.onDoubleTap(e);
-		// }
-		enableFullScreen();
-
-		return false;
-	}
-
-	@Override
-	public boolean onDoubleTapEvent(MotionEvent e) {
-
-		return false;
-	}
+import kr.kymedia.karaoke.app.FileOpenActivity;
+import kr.kymedia.karaoke.util.Log;
+
+@TargetApi(Build.VERSION_CODES.CUPCAKE)
+public class BaseFullActivity extends FileOpenActivity implements View.OnTouchListener, GestureDetector.OnDoubleTapListener {
+    private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
+
+    /**
+     * Detects and toggles immersive mode.
+     */
+    public void toggleHideyBar() {
+        // BEGIN_INCLUDE (get_current_ui_flags)
+        // The UI options currently enabled are represented by a bitfield.
+        // getSystemUiVisibility() gives us that bitfield.
+        int uiOptions = getWindow().getDecorView().getSystemUiVisibility();
+        int newUiOptions = uiOptions;
+        // END_INCLUDE (get_current_ui_flags)
+        // BEGIN_INCLUDE (toggle_ui_flags)
+        boolean isImmersiveModeEnabled =
+                ((uiOptions | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY) == uiOptions);
+        if (isImmersiveModeEnabled) {
+            Log.e(__CLASSNAME__, getMethodName() + "Turning immersive mode mode off. " + isImmersiveModeEnabled);
+        } else {
+            Log.e(__CLASSNAME__, getMethodName() + "Turning immersive mode mode on." + isImmersiveModeEnabled);
+        }
+
+        // Immersive mode: Backward compatible to KitKat (API 19).
+        // Note that this flag doesn't do anything by itself, it only augments the behavior
+        // of HIDE_NAVIGATION and FLAG_FULLSCREEN.  For the purposes of this sample
+        // all three flags are being toggled together.
+        // This sample uses the "sticky" form of immersive mode, which will let the user swipe
+        // the bars back in again, but will automatically make them disappear a few seconds later.
+        newUiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        newUiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
+        newUiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
+        //END_INCLUDE (set_ui_flags)
+        //
+        post(showActionBar);
+    }
+
+    public void toggleFullScreen() {
+        toggleHideyBar();
+        post(hideActionBar);
+    }
+
+
+    private Runnable showActionBar = new Runnable() {
+        @Override
+        public void run() {
+            getSupportActionBar().show();
+        }
+    };
+
+    private Runnable hideActionBar = new Runnable() {
+        @Override
+        public void run() {
+            getSupportActionBar().hide();
+        }
+    };
+
+    // This is the gesture detector compat instance.
+    private GestureDetectorCompat mDetector = null;
+
+    public GestureDetectorCompat getGestureDetector() {
+        return this.mDetector;
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.e(__CLASSNAME__, getMethodName());
+
+        View decorView = getWindow().getDecorView();
+        decorView.setOnSystemUiVisibilityChangeListener
+                (new View.OnSystemUiVisibilityChangeListener() {
+                    @Override
+                    public void onSystemUiVisibilityChange(int visibility) {
+                        //Log.e(__CLASSNAME__, "onSystemUiVisibilityChange()" + visibility + ":" + (visibility & View.SYSTEM_UI_FLAG_FULLSCREEN));
+                        //// Note that system bars will only be "visible" if none of the
+                        //// LOW_PROFILE, HIDE_NAVIGATION, or FULLSCREEN flags are set.
+                        //if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+                        //    // TODO: The system bars are visible. Make any desired
+                        //    // adjustments to your UI, such as showing the action bar or
+                        //    // other navigational controls.
+                        //} else {
+                        //    // TODO: The system bars are NOT visible. Make any desired
+                        //    // adjustments to your UI, such as hiding the action bar or
+                        //    // other navigational controls.
+                        //}
+                    }
+                });
+
+        //// Create a common gesture listener object.
+        //DetectSwipeGestureListener gestureListener = new DetectSwipeGestureListener();
+        //
+        //// Set activity in the listener.
+        //gestureListener.setActivity(this);
+
+        // Create the gesture detector with the gesture listener.
+        mDetector = new GestureDetectorCompat(this,
+            new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onDoubleTap(MotionEvent e) {
+                    Log.e(__CLASSNAME__, "onDoubleTap()");
+                    toggleHideyBar();
+                    return super.onDoubleTap(e);
+                }
+
+                //@Override
+                //public boolean onDown(MotionEvent e) {
+                //    return true;
+                //}
+                //
+                //@Override
+                //public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                //    //Log.e(__CLASSNAME__, "onFling()");
+                //    //toggleHideyBar();
+                //    return super.onFling(e1, e2, velocityX, velocityY);
+                //}
+            });
+
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //Log.i(__CLASSNAME__, getMethodName() + " event:" + event);
+        // Pass activity on touch event to the gesture detector.
+        mDetector.onTouchEvent(event);
+        // Return true to tell android OS that event has been consumed, do not pass it to other event listeners.
+        return true;
+    }
+
+    public int getStatusBarHeight() {
+        //int result = 0;
+        //int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        //if (resourceId > 0) {
+        //    result = getResources().getDimensionPixelSize(resourceId);
+        //}
+        //return result;
+        Rect rectangle = new Rect();
+        Window window = getWindow();
+        window.getDecorView().getWindowVisibleDisplayFrame(rectangle);
+        int statusBarHeight = rectangle.top;
+        int contentViewTop = window.findViewById(Window.ID_ANDROID_CONTENT).getTop();
+        int titleBarHeight = contentViewTop - statusBarHeight;
+
+        Log.i("*** Elenasys :: ", "StatusBar Height= " + statusBarHeight + " , TitleBar Height = " + titleBarHeight);
+        return statusBarHeight;
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        Log.i(__CLASSNAME__, getMethodName() + " hasCapture:" + hasCapture);
+
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        Log.i(__CLASSNAME__, getMethodName() + " view:" + view + " motionEven:" + motionEvent);
+        return false;
+    }
+
+    @Override
+    public boolean onSingleTapConfirmed(MotionEvent motionEvent) {
+        Log.i(__CLASSNAME__, getMethodName() + " motionEven:" + motionEvent);
+        return false;
+    }
+
+    @Override
+    public boolean onDoubleTap(MotionEvent motionEvent) {
+        Log.i(__CLASSNAME__, getMethodName() + " motionEven:" + motionEvent);
+        return false;
+    }
+
+    @Override
+    public boolean onDoubleTapEvent(MotionEvent motionEvent) {
+        Log.i(__CLASSNAME__, getMethodName() + " motionEven:" + motionEvent);
+        return false;
+    }
 
 }

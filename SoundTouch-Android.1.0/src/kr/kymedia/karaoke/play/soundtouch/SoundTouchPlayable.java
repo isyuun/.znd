@@ -304,7 +304,7 @@ public class SoundTouchPlayable implements Runnable {
 	}
 
 	public void play() {
-		Log.wtf("[SoundTouchPlayable][MediaDecoder]", "play() " + "\n" + decoder.toString() + "\n" + track.toString() + "\n" + soundTouch.toString());
+		Log.e("[SoundTouchPlayable][MediaDecoder]", "play() " + "\n" + decoder.toString() + "\n" + track.toString() + "\n" + soundTouch.toString());
 		synchronized (pauseLock) {
 			synchronized (trackLock) {
 				track.play();

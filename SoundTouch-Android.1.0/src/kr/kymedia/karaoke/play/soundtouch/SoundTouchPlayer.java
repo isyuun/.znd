@@ -66,13 +66,18 @@ public class SoundTouchPlayer extends SoundTouchPlayable {
 	}
 
 	@Override
+	public void run() {
+		super.run();
+	}
+
+	@Override
 	public void play() {
 		if (!isFinished()) {
-			Log.wtf(__CLASSNAME__, getMethodName() + isFinished() + ":" + this);
+			Log.e(__CLASSNAME__, getMethodName() + isFinished() + ":" + this);
 			new Thread(this).start();
 			super.play();
 		} else {
-			Log.wtf(__CLASSNAME__, "[NG]" + getMethodName() + isFinished() + ":" + this);
+			Log.e(__CLASSNAME__, "[NG]" + getMethodName() + isFinished() + ":" + this);
 		}
 	}
 

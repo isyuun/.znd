@@ -372,7 +372,7 @@ public class PlayFragment extends ChoirPlayFragment {
 
 				if (isPlaying()) {
 					if (isPause()) {
-						play();
+						resume();
 					} else {
 						pause();
 					}
@@ -400,6 +400,13 @@ public class PlayFragment extends ChoirPlayFragment {
 			}
 		});
 
+	}
+
+	private void resume() {
+		if (isPause()) {
+			play();
+            //seek(getCurrentTime());
+		}
 	}
 
 	public void stop(boolean progress) {

@@ -278,13 +278,13 @@ public class MediaCodecAudioDecoder implements AudioDecoder
 		if (inputBufIndex >= 0)
 		{
 			//isyoon
-			//ByteBuffer dstBuf = codecInputBuffers[inputBufIndex];
-			ByteBuffer dstBuf;
-			if (Build.VERSION.SDK_INT >= 21) {
-				dstBuf = codec.getInputBuffer(inputBufIndex);
-			} else {
-				dstBuf = codecInputBuffers[inputBufIndex];
-			}
+			ByteBuffer dstBuf = codecInputBuffers[inputBufIndex];
+			//ByteBuffer dstBuf;
+			//if (Build.VERSION.SDK_INT >= 21) {
+			//	dstBuf = codec.getInputBuffer(inputBufIndex);
+			//} else {
+			//	dstBuf = codecInputBuffers[inputBufIndex];
+			//}
 
 			int sampleSize = extractor.readSampleData(dstBuf, 0);
 			long presentationTimeUs = 0;

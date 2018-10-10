@@ -12,7 +12,7 @@ apply plugin: 'com.android.application'
 dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     implementation project(':Karaoke.PLAY.APP')
-    api fileTree(dir: 'libs', include: '*.jar')
+    implementation fileTree(dir: 'libs', include: '*.jar')
 }
 
 android {
