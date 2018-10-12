@@ -59,7 +59,6 @@ import com.lamerman.isyoon.SelectionMode;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.TimeZone;
 
 import kr.kymedia.karaoke.play.app.BuildConfig;
 import kr.kymedia.karaoke.play.app.R;
@@ -231,7 +230,7 @@ public class MainActivity extends _Activity implements OnClickListener, OnLongCl
 	 */
 	protected void showVersion() {
 		// if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, getMethodName());
-		findViewById(R.id.txt_setting_version).setVisibility(View.VISIBLE);
+		findViewById(R.id.version).setVisibility(View.VISIBLE);
 	}
 
 	/**
@@ -239,7 +238,7 @@ public class MainActivity extends _Activity implements OnClickListener, OnLongCl
 	 */
 	protected void hideVersion() {
 		// if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, getMethodName());
-		findViewById(R.id.txt_setting_version).setVisibility(View.INVISIBLE);
+		findViewById(R.id.version).setVisibility(View.INVISIBLE);
 	}
 
 	/**
@@ -263,7 +262,7 @@ public class MainActivity extends _Activity implements OnClickListener, OnLongCl
 						if (pkgInfo != null) {
 							int versionNumber = pkgInfo.versionCode;
 							String versionName = pkgInfo.versionName;
-							String version = getString(R.string.category_setting_version);
+							String version = getString(R.string.app_version);
 							version += ":" + versionName + "(" + versionNumber + ")";
 							if (BuildConfig.DEBUG) {
 								version += ":" + "DEBUG";
@@ -272,7 +271,7 @@ public class MainActivity extends _Activity implements OnClickListener, OnLongCl
 							//String buildDate = BuildUtils.getDate("yyyy/MM/dd HH:mm", BuildUtils.getBuildDate(getApplicationContext()));
 							String buildDate = (new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.KOREA)).format(new Date(BuildConfig.TIMESTAMP/* + TimeZone.getTimeZone("Asia/Seoul").getRawOffset()*/));
 							version += "-" + buildDate;
-							TextView tv = (TextView) findViewById(R.id.txt_setting_version);
+							TextView tv = (TextView) findViewById(R.id.version);
 							if (tv != null) {
 								tv.setText(version);
 								tv.setSingleLine();

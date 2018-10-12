@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Karaoke.KEUMYOUNG</string>
+    <string name="app_version">버전</string>
 </resources>

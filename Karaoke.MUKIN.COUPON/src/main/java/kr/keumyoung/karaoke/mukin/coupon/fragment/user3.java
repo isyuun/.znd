@@ -49,15 +49,6 @@ public class user3 extends user2 {
         super.onCreate(savedInstanceState);
     }
 
-    protected String putEmail() {
-        SharedPreferences sharedPref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(getString(R.string.email), mEmailView.getText().toString());
-        editor.commit();
-        String email = sharedPref.getString(getString(R.string.email), "");
-        return email;
-    }
-
     protected String getCoupon() {
         SharedPreferences sharedPref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
         String coupon = sharedPref.getString(getString(R.string.coupon), "");
@@ -80,8 +71,10 @@ public class user3 extends user2 {
     }
 
     private void getUserInfo() {
-        getGoogleAccount();
-        String email = putEmail();
+        //getGoogleAccount();
+        SharedPreferences sharedPref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
+        String email = sharedPref.getString(getString(R.string.email), "");
+        mEmailView.setText(email);
         Log.e(__CLASSNAME__, getMethodName() + ":" + email);
         if (!email.isEmpty()) {
             getApplication().send("Q", email, "");

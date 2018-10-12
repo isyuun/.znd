@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6b48f8</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#c345e9</color>
+    <color name="kakao_yellow">#f9e000</color>
+    <color name="fb_blue">#4764a4</color>
+    <color name="text_color">#565f67</color>
+    <color name="text_color_hint">#cccfd2</color>
+    <color name="border_color">#bac7d3</color>
+    <color name="kakao_text_color">#3b1e1e</color>
+    <color name="sub_text_color">#8e939f</color>
+    <color name="semi_white_text_color">#99ffffff</color>
+    <color name="list_text_color">#404045</color>
+    <color name="list_semi_text_color">#c9c9c9</color>
+    <color name="list_sub_text_color">#848484</color>
+    <color name="divider_color">#e7e7e7</color>
+    <color name="list_bottom_text_color">#bfbfbf</color>
+    <color name="name_tag_color">#7f8b8f</color>
+    <color name="scroll_bar_color">#cccfd2</color>
+    <color name="progress_off">#27062f</color>
+    <color name="progress_on">#e601ff</color>
+    <color name="controls_panel_bg">#160b2f</color>
+    <color name="fifty_white">#80ffffff</color>
+    <color name="block_off_color">#9f88d2</color>
+    <color name="thirty_white">#4cffffff</color>
+
+    <color name="play_bar_grey">#d2c6ef</color>
+    <color name="play_bar_purple">#694297</color>
+    <color name="play_bar_text">#9f88d2</color>
+
+ <!--   <color name="song_lyrics_color_prev">#723585</color> -->
+    <color name="song_lyrics_color_prev">#1783ef</color>
+    <color name="song_lyrics_color_current">#ffffff</color>
+    <color name="song_lyrics_color_next">#ab80fb</color>
+
+    <color name="control_panel_off_icon_tint">#8E8C96</color>
+    <color name="control_panel_disable_icon_tint">#558E8C96</color>
+    <color name="recording_red">#ff0036</color>
+    <color name="recording_blue">#3600ff</color>
+    <color name="kakao_yellow_active">#b2f9e000</color>
+    <color name="fb_blue_active">#5E7FC9</color>
+    <color name="thirty_black">#1e000000</color>
+    <color name="empty_color">#806b48f8</color>
+    <color name="semi_primary">#80c345e9</color>
+
+
+    <color name="seek_color_track1">#694297</color>
+    <color name="seek_color_track2">#ffffff</color>
+    <color name="seek_color_bubble_text">#000000</color>
+
+    <color name="cardboarder_main">#99ffffff</color>
+
+
+    <color name="boarder_popup_item_stroke_off">#80ffffff</color>
+    <color name="boarder_popup_item_stroke_on">#e601ff</color>
+    <color name="boarder_popup_item_shape">#32e601ff</color>
+
+
+</resources>

@@ -2,10 +2,9 @@
 <resources>
 
     <string name="app_name">Karaoke.PLAY</string>
+    <string name="app_version">버전</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <!-- 버전정보 -->
-    <string name="category_setting_version">버전</string>
 
     <!-- 서버목록 -->
     <string name="KYS">KYS</string>
