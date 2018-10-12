@@ -296,7 +296,7 @@ public class RegisterActivity extends _BaseActivity {
                             String userid = resourceArray.getJSONObject(0).getString(Constants.USER_ID);
                             preferenceHelper.saveString(PreferenceKeys.USER_ID, userid);
                             hideProgress();
-                            navigationHelper.navigate(RegisterActivity.this, HomeActivity.class);
+                            navigationHelper.navigate(RegisterActivity.this, _HomeActivity.class);
                         } else {
                             JSONObject errorObject = new JSONObject(responseString).getJSONObject(Constants.ERROR).getJSONObject(Constants.CONTEXT);
                             ;

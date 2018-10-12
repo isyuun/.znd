@@ -19,12 +19,12 @@ public class PreferenceHelper {
 
     private static SharedPreferences preferences;
 
-    private static final String MY_PREFS = "KY_GROUP";
+    //private static final String MY_PREFS = "KY_GROUP";
 
     @Inject
     public PreferenceHelper() {
         MainApplication.getInstance().getMainComponent().inject(this);
-        preferences = context.getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
+        preferences = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
     }
 
     public void saveString(String key, String value) {

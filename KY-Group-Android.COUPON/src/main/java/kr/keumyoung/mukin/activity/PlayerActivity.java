@@ -93,7 +93,7 @@ import static android.media.AudioManager.MODE_NORMAL;
  * on 13/01/18.
  */
 
-public class PlayerActivity extends BaseActivity {
+public class PlayerActivity extends _BaseActivity {
 
     private static final int SAMPLE_RATE = 44100;
     private static final int BUFFER_SIZE = 480;
@@ -859,7 +859,7 @@ public class PlayerActivity extends BaseActivity {
                         lyricsTimingHelper.stop();
 
                         navigationHelper.finish(this);
-                        //navigationHelper.navigate(PlayerActivity.this, HomeActivity.class);
+                        //navigationHelper.navigate(PlayerActivity.this, _HomeActivity.class);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

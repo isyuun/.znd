@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:paddingTop="24dp"
     android:layout_height="match_parent"
-    android:background="@drawable/splash_img">
+    android:background="@drawable/splash_img"
+    android:paddingTop="24dp">
 
     <ImageView
         android:id="@+id/logo_image"
@@ -23,7 +23,8 @@
         android:layout_marginBottom="231dp"
         android:text="Ver1.3"
         android:textColor="@color/semi_white_text_color"
-        android:textSize="10dp" />
+        android:textSize="10dp"
+        android:visibility="invisible" />
 
 
     <TextView
@@ -33,10 +34,10 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="63dp"
-        android:textColor="@color/semi_white_text_color"
-        android:textSize="14sp"
         android:paddingBottom="8dp"
-        android:text="@string/logo_bottom_text_01" />
+        android:text="@string/logo_bottom_text_01"
+        android:textColor="@color/semi_white_text_color"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/logo_bottom_text2"
@@ -45,19 +46,33 @@
         android:layout_below="@+id/logo_bottom_text"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="-63dp"
+        android:text="@string/logo_bottom_text_02"
         android:textColor="@color/semi_white_text_color"
-        android:textSize="12sp"
-        android:text="@string/logo_bottom_text_02" />
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/logo_image"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="158dp"
-        android:layout_toEndOf="@+id/version_text"
+        android:layout_marginTop="166dp"
+        android:layout_marginEnd="21dp"
         android:text="노래하는 즐거움"
         android:textColor="@color/semi_white_text_color" />
 
+
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="end"
+        android:text="버전:DEBUG:99.99(99-1.00)-yyyy/MM/dd HH:mm"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#FF0000"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:visibility="visible" />
 
 </RelativeLayout>

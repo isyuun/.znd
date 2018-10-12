@@ -205,12 +205,12 @@ public class LoginActivity extends _BaseActivity {
                             // login process completed. proceed to home activity
                             //hideProgress();
                             //toastHelper.showError(getString(R.string.login));
-                            //navigationHelper.navigate(LoginActivity.this, HomeActivity.class);
+                            //navigationHelper.navigate(LoginActivity.this, _HomeActivity.class);
                             hideProgress();
                             toastHelper.showError(getString(R.string.login) + " " + nickName + ":" + userId);
                             preferenceHelper.saveString(getString(R.string.email), emailEt.getText().toString());
                             if (!preferenceHelper.getString(getString(R.string.coupon), "").isEmpty()) {
-                                navigationHelper.navigate(LoginActivity.this, HomeActivity.class);
+                                navigationHelper.navigate(LoginActivity.this, _HomeActivity.class);
                             } else {
                                 openPreferenceCoupon();
                             }

@@ -7,22 +7,24 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
+import kr.keumyoung.mukin.util.PreferenceKeys;
+
 import static android.Manifest.permission.READ_CONTACTS;
 
 public class LoginActivity2 extends LoginActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        this.email = emailEt.getText().toString();
-        this.pass = passwordEt.getText().toString();
-        populateAutoComplete();
     }
 
     @Override
     protected void populateAutoComplete() {
         super.populateAutoComplete();
-        emailEt.setText(getGoogleAccount());
+
+        String savedEmail = preferenceHelper.getString(PreferenceKeys.LOGIN_EMAIL);
+        if (savedEmail == null || savedEmail.isEmpty()) {
+            emailEt.setText(getGoogleAccount());
+        }
     }
 
     @Override
@@ -39,5 +41,11 @@ public class LoginActivity2 extends LoginActivity {
                     });
         }
         return ret;
+    }
+
+    @Override
+    protected void onLoginSuccess(String email, String nickName) {
+        super.onLoginSuccess(email, nickName);
+        finish();
     }
 }

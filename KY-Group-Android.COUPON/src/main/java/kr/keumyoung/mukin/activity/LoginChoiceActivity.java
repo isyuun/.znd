@@ -270,7 +270,7 @@ public class LoginChoiceActivity extends BaseActivity {
 
                             // login process completed. proceed to home activity
                             hideProgress();
-                            navigationHelper.navigate(LoginChoiceActivity.this, HomeActivity.class);
+                            navigationHelper.navigate(LoginChoiceActivity.this, _HomeActivity.class);
                         } else {
                             // user is not active. lets stop here
                             hideProgress();
@@ -387,7 +387,7 @@ public class LoginChoiceActivity extends BaseActivity {
                             String userid = resourceArray.getJSONObject(0).getString(Constants.USER_ID);
                             preferenceHelper.saveString(PreferenceKeys.USER_ID, userid);
                             hideProgress();
-                            navigationHelper.navigate(LoginChoiceActivity.this, HomeActivity.class);
+                            navigationHelper.navigate(LoginChoiceActivity.this, _HomeActivity.class);
                         }
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();

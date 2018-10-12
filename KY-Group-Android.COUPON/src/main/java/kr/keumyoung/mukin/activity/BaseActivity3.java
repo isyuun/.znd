@@ -26,14 +26,26 @@ import retrofit2.Response;
 public class BaseActivity3 extends BaseActivity2 {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-    String email;
-    String pass;
-
     @Inject
     NavigationHelper navigationHelper;
 
     @Inject
     ToastHelper toastHelper;
+
+    String email;
+    String pass;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (this instanceof PlayerActivity)
+        {
+            if (preferenceHelper.getString(getString(R.string.coupon), "").isEmpty())
+            {
+                openPreferenceCoupon();
+            }
+        }
+    }
 
     protected void loginUser(String email, String password) {
         showProgress();
@@ -108,6 +120,7 @@ public class BaseActivity3 extends BaseActivity2 {
                         String nickName = userObject.getString(Constants.NICK_NAME);
                         String profileImage = userObject.getString(Constants.PROFILE_IMAGE);
                         String active = userObject.getString(Constants.ACTIVE);
+                        String email = userObject.getString(Constants.EMAIL);
                         if (active.equalsIgnoreCase(Constants.TRUE)) {
                             preferenceHelper.saveString(PreferenceKeys.USER_ID, userId);
                             preferenceHelper.saveString(PreferenceKeys.NICK_NAME, nickName);
@@ -116,15 +129,16 @@ public class BaseActivity3 extends BaseActivity2 {
                             // login process completed. proceed to home activity
                             //hideProgress();
                             //toastHelper.showError(getString(R.string.login));
-                            //navigationHelper.navigate(LoginActivity.this, HomeActivity.class);
+                            //navigationHelper.navigate(LoginActivity.this, _HomeActivity.class);
                             hideProgress();
                             toastHelper.showError(getString(R.string.login) + " " + nickName + ":" + userId);
                             preferenceHelper.saveString(getString(R.string.email), email);
                             if (!preferenceHelper.getString(getString(R.string.coupon), "").isEmpty()) {
-                                navigationHelper.navigate(BaseActivity3.this, HomeActivity.class);
+                                navigationHelper.navigate(BaseActivity3.this, _HomeActivity.class);
                             } else {
                                 openPreferenceCoupon();
                             }
+                            onLoginSuccess(email, nickName);
                         } else {
                             // user is not active. lets stop here
                             hideProgress();
@@ -150,6 +164,9 @@ public class BaseActivity3 extends BaseActivity2 {
                 hideProgress();
             }
         });
+    }
+
+    protected void onLoginSuccess(String email, String nickName) {
     }
 
     protected void registerUserToDF(String email, String nickName, String password, String profileImagePath) {
@@ -308,15 +325,16 @@ public class BaseActivity3 extends BaseActivity2 {
                             preferenceHelper.saveString(PreferenceKeys.USER_ID, userId);
                             // login process completed. proceed to home activity
                             //hideProgress();
-                            //navigationHelper.navigate(SplashScreenActivity2.this, HomeActivity.class);
+                            //navigationHelper.navigate(SplashScreenActivity2.this, _HomeActivity.class);
                             hideProgress();
                             toastHelper.showError(getString(R.string.login) + " " + nickName + ":" + userId);
                             preferenceHelper.saveString(getString(R.string.email), email);
                             if (!preferenceHelper.getString(getString(R.string.coupon), "").isEmpty()) {
-                                navigationHelper.navigate(BaseActivity3.this, HomeActivity.class);
+                                navigationHelper.navigate(BaseActivity3.this, _HomeActivity.class);
                             } else {
                                 openPreferenceCoupon();
                             }
+                            onRegisterSuccess(email, nickName);
                         } else {
                             JSONObject errorObject = new JSONObject(responseString).getJSONObject(Constants.ERROR).getJSONObject(Constants.CONTEXT);
                             if (errorObject.has(Constants.EMAIL)) {
@@ -349,5 +367,8 @@ public class BaseActivity3 extends BaseActivity2 {
                 hideProgress();
             }
         });
+    }
+
+    protected void onRegisterSuccess(String email, String nickName) {
     }
 }

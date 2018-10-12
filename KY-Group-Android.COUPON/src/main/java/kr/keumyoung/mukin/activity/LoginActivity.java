@@ -205,12 +205,12 @@ public class LoginActivity extends _BaseActivity {
     //                        // login process completed. proceed to home activity
     //                        //hideProgress();
     //                        //toastHelper.showError(getString(R.string.login));
-    //                        //navigationHelper.navigate(LoginActivity.this, HomeActivity.class);
+    //                        //navigationHelper.navigate(LoginActivity.this, _HomeActivity.class);
     //                        hideProgress();
     //                        toastHelper.showError(getString(R.string.login) + " " + nickName + ":" + userId);
     //                        preferenceHelper.saveString(getString(R.string.email), emailEt.getText().toString());
     //                        if (!preferenceHelper.getString(getString(R.string.coupon), "").isEmpty()) {
-    //                            navigationHelper.navigate(LoginActivity.this, HomeActivity.class);
+    //                            navigationHelper.navigate(LoginActivity.this, _HomeActivity.class);
     //                        } else {
     //                            openPreferenceCoupon();
     //                        }
@@ -245,27 +245,27 @@ public class LoginActivity extends _BaseActivity {
         //navigationHelper.navigateWithReverseAnim(this, _LoginActivity.class);
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        attachKeyboardListeners();
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        detachKeyboardListener();
-//    }
-//
-//    @Override
-//    protected void onHideKeyboard() {
-//        signupSection.setVisibility(View.VISIBLE);
-//        middleSpacer.setVisibility(View.VISIBLE);
-//    }
-//
-//    @Override
-//    protected void onShowKeyboard() {
-//        signupSection.setVisibility(View.GONE);
-//        middleSpacer.setVisibility(View.GONE);
-//    }
+    //@Override
+    //protected void onStart() {
+    //    super.onStart();
+    //    attachKeyboardListeners();
+    //}
+    //
+    //@Override
+    //protected void onStop() {
+    //    super.onStop();
+    //    detachKeyboardListener();
+    //}
+    //
+    //@Override
+    //protected void onHideKeyboard() {
+    //    signupSection.setVisibility(View.VISIBLE);
+    //    middleSpacer.setVisibility(View.VISIBLE);
+    //}
+    //
+    //@Override
+    //protected void onShowKeyboard() {
+    //    signupSection.setVisibility(View.GONE);
+    //    middleSpacer.setVisibility(View.GONE);
+    //}
 }
