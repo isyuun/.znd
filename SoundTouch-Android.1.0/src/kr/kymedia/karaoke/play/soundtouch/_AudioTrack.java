@@ -44,10 +44,12 @@ import android.media.AudioTrack;
  * @version 1.0
  */
 public class _AudioTrack extends AudioTrack {
+	@Deprecated
 	public _AudioTrack(int streamType, int sampleRateInHz, int channelConfig, int audioFormat, int bufferSizeInBytes, int mode) throws IllegalArgumentException {
 		super(streamType, sampleRateInHz, channelConfig, audioFormat, bufferSizeInBytes, mode);
 	}
 
+	@Deprecated
 	public _AudioTrack(int streamType, int sampleRateInHz, int channelConfig, int audioFormat, int bufferSizeInBytes, int mode, int sessionId) throws IllegalArgumentException {
 		super(streamType, sampleRateInHz, channelConfig, audioFormat, bufferSizeInBytes, mode, sessionId);
 	}

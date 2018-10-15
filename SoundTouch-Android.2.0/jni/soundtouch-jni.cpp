@@ -9,7 +9,7 @@
 //#include <stdio.h>
 //#include <dlfcn.h>
 
-#include "../../soundtouch/include/SoundTouch.h"
+#include "./soundtouch/include/SoundTouch.h"
 //#include "TimeShiftEffect.h"
 
 #define LOGV(...)   __android_log_print((int)ANDROID_LOG_INFO, "SOUNDTOUCH", __VA_ARGS__)

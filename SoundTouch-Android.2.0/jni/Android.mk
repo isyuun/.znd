@@ -21,13 +21,13 @@ include $(CLEAR_VARS)
 # *** Remember: Change -O0 into -O2 in add-applications.mk ***
 
 LOCAL_MODULE    := soundtouch
-LOCAL_SRC_FILES := soundtouch-jni.cpp ../../soundtouch/source/SoundTouch/AAFilter.cpp  ../../soundtouch/source/SoundTouch/FIFOSampleBuffer.cpp \
-                ../../soundtouch/source/SoundTouch/FIRFilter.cpp ../../soundtouch/source/SoundTouch/cpu_detect_x86.cpp \
-                ../../soundtouch/source/SoundTouch/sse_optimized.cpp ../../soundtouch/source/SoundStretch/WavFile.cpp \
-                ../../soundtouch/source/SoundTouch/RateTransposer.cpp ../../soundtouch/source/SoundTouch/SoundTouch.cpp \
-                ../../soundtouch/source/SoundTouch/InterpolateCubic.cpp ../../soundtouch/source/SoundTouch/InterpolateLinear.cpp \
-                ../../soundtouch/source/SoundTouch/InterpolateShannon.cpp ../../soundtouch/source/SoundTouch/TDStretch.cpp \
-                ../../soundtouch/source/SoundTouch/BPMDetect.cpp ../../soundtouch/source/SoundTouch/PeakFinder.cpp
+LOCAL_SRC_FILES := soundtouch-jni.cpp ./soundtouch/source/SoundTouch/AAFilter.cpp  ./soundtouch/source/SoundTouch/FIFOSampleBuffer.cpp \
+                ./soundtouch/source/SoundTouch/FIRFilter.cpp ./soundtouch/source/SoundTouch/cpu_detect_x86.cpp \
+                ./soundtouch/source/SoundTouch/sse_optimized.cpp ./soundtouch/source/SoundStretch/WavFile.cpp \
+                ./soundtouch/source/SoundTouch/RateTransposer.cpp ./soundtouch/source/SoundTouch/SoundTouch.cpp \
+                ./soundtouch/source/SoundTouch/InterpolateCubic.cpp ./soundtouch/source/SoundTouch/InterpolateLinear.cpp \
+                ./soundtouch/source/SoundTouch/InterpolateShannon.cpp ./soundtouch/source/SoundTouch/TDStretch.cpp \
+                ./soundtouch/source/SoundTouch/BPMDetect.cpp ./soundtouch/source/SoundTouch/PeakFinder.cpp
 
 # for native audio
 #LOCAL_SHARED_LIBRARIES += -lgcc
@@ -39,7 +39,7 @@ LOCAL_LDLIBS    += -llog
 
 # Custom Flags:
 # -fvisibility=hidden : don't export all symbols
-LOCAL_CFLAGS += -fvisibility=hidden -I ../../soundtouch/source/../include -fdata-sections -ffunction-sections
+LOCAL_CFLAGS += -fvisibility=hidden -I ./soundtouch/source/../include -fdata-sections -ffunction-sections
 
 # OpenMP mode : enable these flags to enable using OpenMP for parallel computation
 #LOCAL_CFLAGS += -fopenmp

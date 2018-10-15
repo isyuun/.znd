@@ -71,10 +71,36 @@ public class SoundTouchPlayer extends SoundStreamAudioPlayer {
 	//	super(id, fileName, tempo, pitchSemi);
 	//}
 
+	Thread thread = null;
+
+	//@Override
 	public void play() {
-		Log.d(__CLASSNAME__, getMethodName());
-		new Thread(this).start();
+		Log.e(__CLASSNAME__, getMethodName() + isFinished() + ":" + this);
+		if (thread == null) {
+			(thread = new Thread(this)).start();
+		} else {
+		}
 		start();
+	}
+
+	@Override
+	public void pause() {
+		Log.e(__CLASSNAME__, getMethodName() + isPaused() + ":" + this);
+		super.pause();
+	}
+
+	@Override
+	public void stop() {
+		super.stop();
+		finished = true;
+		if (thread != null && !thread.isInterrupted()) thread.interrupt();
+		thread = null;
+	}
+
+	public void reset() {
+		finished = true;
+		if (thread != null && !thread.isInterrupted()) thread.interrupt();
+		thread = null;
 	}
 
 	@Override
@@ -85,8 +111,5 @@ public class SoundTouchPlayer extends SoundStreamAudioPlayer {
 			//e.printStackTrace();
 			return 0;
 		}
-	}
-
-	public void reset() {
 	}
 }

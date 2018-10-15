@@ -7,6 +7,6 @@
 APP_ABI := all
 APP_OPTIM := release
 #APP_STL := stlport_static
-APP_STL := c++_static
+APP_STL := c++_shared
 APP_CPPFLAGS := -fexceptions # -D SOUNDTOUCH_DISABLE_X86_OPTIMIZATIONS
 

@@ -1,7 +1,10 @@
 package kr.kymedia.karaoke.play.soundtouch;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
+import android.media.AudioAttributes;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
@@ -205,7 +208,6 @@ public class SoundTouchPlayable implements Runnable {
 		this.fileName = fileName;
 		this.id = id;
 
-		// handler = new Handler();
 		handler = new Handler(Looper.getMainLooper());
 
 		pauseLock = new Object();
@@ -405,7 +407,7 @@ public class SoundTouchPlayable implements Runnable {
 			} else {
 				if (putBytes)
 					soundTouch.putBytes(input);
-				// Log.d("bytes", String.valueOf(input.length));
+				Log.d("bytes", String.valueOf(input.length));
 				bytesReceived = soundTouch.getBytes(input);
 			}
 			synchronized (trackLock) {
@@ -434,6 +436,23 @@ public class SoundTouchPlayable implements Runnable {
 		soundTouch = new _SoundTouch(id, channels, samplingRate,
 				DEFAULT_BYTES_PER_SAMPLE, tempo, pitchSemi);
 
+		//if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+		//	track = new _AudioTrack(
+		//			new AudioAttributes.Builder()
+		//					.setUsage(AudioAttributes.USAGE_MEDIA)
+		//					.setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+		//					.build(),
+		//			new AudioFormat.Builder()
+		//					.setChannelMask(channelFormat)
+		//					.setEncoding(AudioFormat.ENCODING_PCM_16BIT)
+		//					.setSampleRate(samplingRate)
+		//					.build(),
+		//			BUFFER_SIZE_TRACK, AudioTrack.MODE_STREAM, 0);
+		//} else {
+		//	track = new _AudioTrack(AudioManager.STREAM_MUSIC, samplingRate,
+		//			channelFormat, AudioFormat.ENCODING_PCM_16BIT,
+		//			BUFFER_SIZE_TRACK, AudioTrack.MODE_STREAM);
+		//}
 		track = new _AudioTrack(AudioManager.STREAM_MUSIC, samplingRate,
 				channelFormat, AudioFormat.ENCODING_PCM_16BIT,
 				BUFFER_SIZE_TRACK, AudioTrack.MODE_STREAM);

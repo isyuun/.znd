@@ -70,25 +70,36 @@ public class SoundTouchPlayer extends SoundTouchPlayable {
 		super.run();
 	}
 
+	Thread thread = null;
+
 	@Override
 	public void play() {
-		if (!isFinished()) {
-			Log.e(__CLASSNAME__, getMethodName() + isFinished() + ":" + this);
-			new Thread(this).start();
-			super.play();
+		Log.e(__CLASSNAME__, getMethodName() + isFinished() + ":" + this);
+		if (thread == null) {
+			(thread = new Thread(this)).start();
 		} else {
-			Log.e(__CLASSNAME__, "[NG]" + getMethodName() + isFinished() + ":" + this);
 		}
+		super.play();
+	}
+
+	@Override
+	public void pause() {
+		Log.e(__CLASSNAME__, getMethodName() + isPaused() + ":" + this);
+		super.pause();
 	}
 
 	@Override
 	public void stop() {
 		super.stop();
 		finished = true;
+		if (thread != null && !thread.isInterrupted()) thread.interrupt();
+		thread = null;
 	}
 
 	public void reset() {
 		finished = true;
+		if (thread != null && !thread.isInterrupted()) thread.interrupt();
+		thread = null;
 	}
 
 	@Override
