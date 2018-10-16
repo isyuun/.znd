@@ -1,6 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
+    //<a href="http://stackoverflow.com/questions/7607165/how-to-write-build-time-stamp-into-apk">How to write build time stamp into apk</a>
+    defaultConfig {
+        buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
+    }
+
     signingConfigs {
         release {
             storeFile file('../Karaoke/kr.keumyoung.karaoke.jks')
@@ -10,12 +15,14 @@ android {
         }
     }
 
-    //<a href="http://stackoverflow.com/questions/7607165/how-to-write-build-time-stamp-into-apk">How to write build time stamp into apk</a>
-    defaultConfig {
-        buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), './proguard-project.txt'
+            signingConfig signingConfigs.release
+        }
     }
 
-    //useLibrary 'org.apache.http.legacy'
     compileSdkVersion 27
 
     defaultConfig {
@@ -28,13 +35,6 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), '../Karaoke.APP.PLAY/proguard-rules.pro', 'proguard-rules.pro'
-        }
     }
 
 }

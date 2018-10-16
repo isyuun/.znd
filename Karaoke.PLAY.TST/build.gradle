@@ -16,15 +16,9 @@ dependencies {
 }
 
 android {
-    compileSdkVersion 27
-    //buildToolsVersion"27.0.3"
-
+    //<a href="http://stackoverflow.com/questions/7607165/how-to-write-build-time-stamp-into-apk">How to write build time stamp into apk</a>
     defaultConfig {
-        applicationId "kr.kymedia.karaoke.play.apps.test"
-        minSdkVersion 14 //lower than 14 doesn't support multidex
-        targetSdkVersion 22
-        // Enabling multidex support.
-        multiDexEnabled true
+        buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
     }
 
     signingConfigs {
@@ -39,9 +33,19 @@ android {
     buildTypes {
         release {
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), '../Karaoke.PLAY.APP/proguard-project.txt', './proguard-project.txt'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), './proguard-project.txt', '../Karaoke.PLAY.APP/proguard-project.txt'
             signingConfig signingConfigs.release
         }
+    }
+
+    compileSdkVersion 27
+
+    defaultConfig {
+        applicationId "kr.kymedia.karaoke.play.apps.test"
+        minSdkVersion 14 //lower than 14 doesn't support multidex
+        targetSdkVersion 22
+        // Enabling multidex support.
+        multiDexEnabled true
     }
 
     sourceSets {

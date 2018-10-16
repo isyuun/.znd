@@ -33,10 +33,26 @@ android {
         buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
     }
 
-    publishNonDefault true
+    signingConfigs {
+        release {
+            storeFile file('../Karaoke/kr.kymedia.karaoke.keystore')
+            storePassword 'is110315'
+            keyAlias 'kymedia'
+            keyPassword 'is110315'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), './proguard-project.txt', '../Karaoke.PLAY.APP/proguard-project.txt'
+            signingConfig signingConfigs.release
+        }
+    }
 
     compileSdkVersion 27
-    //buildToolsVersion"27.0.3"
+
+    publishNonDefault true
 
     sourceSets {
         main {
