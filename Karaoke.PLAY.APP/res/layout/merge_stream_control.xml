@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:ignore="HardcodedText" >
+    tools:ignore="HardcodedText">
 
     <include
+        layout="@layout/line_solid_orange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        layout="@layout/line_solid_orange"
         android:visibility="visible" />
 
     <LinearLayout
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:visibility="visible" >
+        android:visibility="visible">
 
         <EditText
             android:id="@+id/editSong"
@@ -26,7 +26,7 @@
             android:layout_weight="1.0"
             android:inputType="number"
             android:maxLength="5"
-            android:visibility="visible" >
+            android:visibility="visible">
 
             <requestFocus />
         </EditText>
@@ -46,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:visibility="visible" >
+        android:visibility="visible">
 
         <CheckBox
             android:id="@+id/checkKYmedia"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.0"
             android:gravity="left"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -80,7 +80,8 @@
                 android:enabled="true"
                 android:text="@string/KYS"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="visible" />
 
             <RadioButton
                 android:id="@+id/radioServerKYM"
@@ -90,7 +91,8 @@
                 android:enabled="true"
                 android:text="@string/KYM"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="visible" />
 
             <RadioButton
                 android:id="@+id/radioServerCYW"
@@ -100,7 +102,19 @@
                 android:enabled="true"
                 android:text="@string/CYW"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <RadioButton
+                android:id="@+id/radioServerKYG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:enabled="true"
+                android:text="@string/KYG"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
         </kr.kymedia.karaoke.view.EnabledRadioGroup>
 
         <TextView
@@ -117,7 +131,7 @@
             android:id="@+id/radioRepeatRestart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <CheckBox
                 android:id="@+id/checkRepeatRestart"

@@ -106,9 +106,21 @@ public class KaraokePath extends EditText {
 		return true;
 	}
 
-	// 211.236.190.103
-	private final static String hosts[] = { ("211.236.190.103"), ("resource.kymedia.kr"), ("cyms.chorus.co.kr"), };
-
+	/**
+	 * <pre>
+	 (구)KYMedia 서버
+	 * mp3 : http://resource.kymedia.kr/ky/mp/01/00101.mp3
+	 * 가사 : http://resource.kymedia.kr/ky/md/01/00101.mid
+	 * skym : http://resource.kymedia.kr/ky/skym/01/00101.skym
+	 (현) 금영그룹서버
+	 * 211.236.190.103
+	 * 금영서버: http://211.236.190.103:8080/svc_media/mmp3/08888.mp3
+	 * 사이월드: http://cyms.chorus.co.kr/cykara_dl2.asp?song_id=08888
+	 * 신규서버(가사): http://www.keumyoung.kr/api/.skym.asp?song_id=08888
+	 * 신규서버(음원): http://www.keumyoung.kr/api/.mmp3.asp?song_id=08888
+	 * </pre>
+	 */
+	private final static String hosts[] = { ("211.236.190.103"), ("resource.kymedia.kr"), ("cyms.chorus.co.kr"), ("www.keumyoung.kr/api")};
 	public static String[] getHosts() {
 		return hosts;
 	}

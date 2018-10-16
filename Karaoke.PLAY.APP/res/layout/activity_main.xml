@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity"
-    tools:ignore="ContentDescription,HardcodedText" >
+    tools:ignore="ContentDescription,HardcodedText">
 
     <LinearLayout
         android:layout_width="86dp"
@@ -13,7 +13,7 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingBottom="?android:attr/actionBarSize" >
+        android:paddingBottom="?android:attr/actionBarSize">
 
         <EditText
             android:id="@+id/editSong"
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
@@ -84,7 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
@@ -102,7 +102,8 @@
                 android:enabled="true"
                 android:text="@string/KYS"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="visible" />
 
             <RadioButton
                 android:id="@+id/radioServerKYM"
@@ -112,7 +113,8 @@
                 android:enabled="true"
                 android:text="@string/KYM"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="visible" />
 
             <RadioButton
                 android:id="@+id/radioServerCYW"
@@ -122,7 +124,19 @@
                 android:enabled="true"
                 android:text="@string/CYW"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <RadioButton
+                android:id="@+id/radioServerKYG"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:enabled="true"
+                android:text="@string/KYG"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
         </kr.kymedia.karaoke.view.EnabledRadioGroup>
 
         <Button

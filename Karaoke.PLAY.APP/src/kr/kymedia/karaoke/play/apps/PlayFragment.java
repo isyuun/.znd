@@ -501,6 +501,12 @@ public class PlayFragment extends ChoirPlayFragment {
 			//path = "cykara_dl2.asp?song_id=";
 			path = ".skym.asp?song_id=";
 			form = "%05d";
+		} else if (server == R.id.radioServerKYG) {
+			 //* 신규서버(가사): http://www.keumyoung.kr/api/.skym.asp?song_id=08888
+			 //* 신규서버(음원): http://www.keumyoung.kr/api/.mmp3.asp?song_id=08888
+			host = "http://" + KaraokePath.getHosts()[3] + "/";
+			path = ".mmp3.asp?song_id=";
+			form = "%05d";
 		}
 
 		ret = String.format(host + path + form, number);
