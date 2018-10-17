@@ -129,7 +129,7 @@ public class LyricsTimingHelper {
                 wordList.add(words.getString(wIndex));
             int type = 1; //Integer.parseInt(timeObject.getString(Constants.TYPE));
 
-            LyricsTime lyricsTime = new LyricsTime(previousLine, nextLine, currentLine, word, startTime, endTime, wordLength, lineNumber, wordIndex, type, 0, wordList);
+            LyricsTime lyricsTime = new LyricsTime(previousLine, nextLine, currentLine, word, startTime, endTime, wordLength, lineNumber, wordIndex, type, 0, 0, wordList);
 
             lyricsTimes.add(lyricsTime);
         }
@@ -251,7 +251,11 @@ public class LyricsTimingHelper {
        
         int type = 1; //Integer.parseInt(timeObject.getString(Constants.TYPE));
 
-        LyricsTime lyricsTime = new LyricsTime(pre_line, next_line, cur_line, word, start_time, end_time, word_len, line_num, word_idx, type, bpm, wordList);
+		int bpm_time = (int)((60.0f / (bpm * 120.0f)) * 1000);
+		//System.out.println("~~~~ getBpm : " + lyricsTime.getBpm() + " / time_offset : " + time_offset);
+		int time_offset =(word_len * bpm_time);
+
+        LyricsTime lyricsTime = new LyricsTime(pre_line, next_line, cur_line, word, start_time, end_time, word_len, line_num, word_idx, type, bpm, time_offset, wordList);
 
         lyricsTimes.add(lyricsTime);
 	}
@@ -351,7 +355,7 @@ public class LyricsTimingHelper {
             if (!currentLyricsTime.isShown()) {
                 long endMillis = Calendar.getInstance().getTimeInMillis();
            //     System.out.println("matched CHECK: currenttick" + originalTick + " | synctick: " + currentTick + " | lyricstick: " + currentLyricsTime.getStartTick() + " | word: " + currentLyricsTime.getCurrentWord() + " | time: " + (endMillis - startMillis));
-	            //System.out.println("MicChecker.getInstance().getStates() " + MicChecker.getInstance().getStates());
+	       //     System.out.println("MicChecker.getInstance().getStates() " + MicChecker.getInstance().getStates());
                 lyricsView.update(currentLyricsTime);
                 lyricsTimes.remove(currentIndex);
                 currentLyricsTime.setShown();

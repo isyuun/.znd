@@ -15,6 +15,7 @@ public class LyricsTime {
     private ArrayList<String> words;
     private int type = 1;
 	private int bpm = 0;
+	private int timeOffset = 0;
 
     private boolean isShown = false, isCountDownItem = false;
 
@@ -22,7 +23,7 @@ public class LyricsTime {
     }
 
     public LyricsTime(String previousLine, String nextLine, String currentLine, String currentWord,
-    				long startMillis, long endMillis, long length, int lineNumber, int wordIndex, int type, int bpm, ArrayList<String> words) {
+    				long startMillis, long endMillis, long length, int lineNumber, int wordIndex, int type, int bpm, int time_offset, ArrayList<String> words) {
         this.previousLine = previousLine;
         this.nextLine = nextLine;
         this.currentLine = currentLine;
@@ -37,6 +38,7 @@ public class LyricsTime {
 		this.bpm = bpm;
         this.isCountDownItem = false;
 		this.countDelayTime = 0;
+		this.timeOffset = time_offset;
     }
 
     public String getPreviousLine() {
@@ -161,5 +163,13 @@ public class LyricsTime {
 
 	public int getBpm() {
         return bpm;
+    }
+
+	public void setTimeOffset(int offset_value) {
+        this.timeOffset = offset_value;
+    }
+
+	public int getTimeOffset() {
+        return timeOffset;
     }
 }

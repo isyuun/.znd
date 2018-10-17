@@ -78,19 +78,19 @@ public class LyricView extends FrameLayout {
         if (lyricsTime != null && state != null) {
             switch (state) {
                 case NEXT:
-                    songLyricsCurrentOverlay.setVisibility(INVISIBLE);
+                    songLyricsCurrentOverlay.setVisibility(GONE);
                     songLyricsCurrent.setText(word);
                     songLyricsCurrent.setTextColor(nextColor);
                     break;
                 case CURRENT:
-                    songLyricsCurrentOverlay.setVisibility(INVISIBLE);
+                    songLyricsCurrentOverlay.setVisibility(GONE);
                     songLyricsCurrent.setText(word);
                     songLyricsCurrentOverlay.setText(word);
                     songLyricsCurrent.setTextColor(nextColor);
                     songLyricsCurrentOverlay.setTextColor(previousColor);
                     break;
                 case PREVIOUS:
-                    songLyricsCurrentOverlay.setVisibility(INVISIBLE);
+                    songLyricsCurrentOverlay.setVisibility(GONE);
                     songLyricsCurrent.setText(word);
                     songLyricsCurrent.setTextColor(previousColor);
                     break;
@@ -108,16 +108,18 @@ public class LyricView extends FrameLayout {
             if (state == State.CURRENT) {
                 final ValueAnimator anim = ValueAnimator.ofInt(0, songLyricsCurrent.getMeasuredWidth());
                 anim.addUpdateListener(valueAnimator -> {
-                    songLyricsCurrentOverlay.setVisibility(View.VISIBLE);
+	                songLyricsCurrentOverlay.setVisibility(View.VISIBLE);
                     int val = (Integer) anim.getAnimatedValue();
                     ViewGroup.LayoutParams layoutParams = songLyricsCurrentOverlay.getLayoutParams();
                     layoutParams.width = val;
                     songLyricsCurrentOverlay.setLayoutParams(layoutParams);
                 });
              //   anim.setDuration(lyricsTime.getLength() * 4);
- 			 	int time_offset = (int)((60.0f / (lyricsTime.getBpm() * 120.0f)) * 1000);
+ 			  //	int time_offset = (int)((60.0f / (lyricsTime.getBpm() * 120.0f)) * 1000);
              	//System.out.println("~~~~ getBpm : " + lyricsTime.getBpm() + " / time_offset : " + time_offset);
-				anim.setDuration(lyricsTime.getLength() * time_offset);
+			//	anim.setDuration(lyricsTime.getLength() * time_offset);
+			//	System.out.println("~~~~ lyricsTime.getTimeOffset() : " + lyricsTime.getTimeOffset());
+			 	anim.setDuration(lyricsTime.getTimeOffset());
                 anim.start();
             }
             animationStarted = true;

@@ -27,7 +27,7 @@ public class LyricsTimes extends ArrayList<LyricsTime> {
             else
                 startTick += 100;
 
-            if ((startTick >= currentTick - 5) && (startTick <= currentTick + 5)) {
+            if ((startTick >= currentTick - 15) && (startTick <= currentTick + 15)) {
                 return index;
             }
         }
