@@ -3,6 +3,7 @@ package kr.keumyoung.mukin.activity;
 import android.util.Log;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.inject.Inject;
@@ -15,6 +16,7 @@ import kr.keumyoung.mukin.data.request.RegisterUserCustomRequest;
 import kr.keumyoung.mukin.data.request.RegisterUserRequest;
 import kr.keumyoung.mukin.helper.NavigationHelper;
 import kr.keumyoung.mukin.helper.ToastHelper;
+import kr.keumyoung.mukin.interfaces.SessionRefreshListener;
 import kr.keumyoung.mukin.util.Constants;
 import kr.keumyoung.mukin.util.PreferenceKeys;
 import kr.keumyoung.mukin.util.TableNames;
@@ -45,6 +47,10 @@ public class BaseActivity3 extends BaseActivity2 {
                 openPreferenceCoupon();
             }
         }
+    }
+
+    public void login(String email, String password) {
+        loginUser(email, password);
     }
 
     protected void loginUser(String email, String password) {
@@ -370,5 +376,42 @@ public class BaseActivity3 extends BaseActivity2 {
     }
 
     protected void onRegisterSuccess(String email, String nickName) {
+    }
+
+    @Override
+    public boolean handleDFError(JSONObject errorObject, SessionRefreshListener listener) throws JSONException {
+        String errorCode = errorObject.getJSONObject("error").getString("code");
+        if (errorCode.equalsIgnoreCase("401")) { // session has expired. need to refresh the session_token
+            restApi.refreshSessionToken(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN),
+                    preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN)).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    try {
+                        ResponseBody responseBody = response.body();
+                        ResponseBody errorBody = response.errorBody();
+                        if (responseBody != null) {
+                            String responseString = responseBody.string();
+                            JSONObject responseObject = new JSONObject(responseString);
+                            String sessionToken = responseObject.getString("session_token");
+                            preferenceHelper.saveString(PreferenceKeys.SESSION_TOKEN, sessionToken);
+                            listener.onSessionRefresh();
+                        } else if (errorBody != null) {
+                            listener.logout(BaseActivity3.this);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        listener.logout(BaseActivity3.this);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    t.printStackTrace();
+                    listener.logout(BaseActivity3.this);
+                }
+            });
+            return true;
+        }
+        return false;
     }
 }

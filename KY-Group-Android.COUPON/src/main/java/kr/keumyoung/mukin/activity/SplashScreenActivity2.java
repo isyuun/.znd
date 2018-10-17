@@ -54,6 +54,6 @@ public class SplashScreenActivity2 extends SplashScreenActivity {
         handler.postDelayed(() -> {
             //registerUserToDF(this.email, this.email, this.pass, "");
             navigationHelper.navigate(this, _HomeActivity.class);
-        }, 2000);
+        }, 3000);
     }
 }

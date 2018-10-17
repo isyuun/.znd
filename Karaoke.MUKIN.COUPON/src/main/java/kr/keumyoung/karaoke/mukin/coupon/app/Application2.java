@@ -123,7 +123,7 @@ public class Application2 extends Application {
         //2018-09-18 13:52:47.067
         SimpleDateFormat f1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         //2018/09/18-13:52
-        SimpleDateFormat f2 = new SimpleDateFormat("yyyy/MM/dd-HH:mm");
+        SimpleDateFormat f2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String date = "기간:";
         try {
             if (sdate != null && !sdate.isEmpty()) date += f2.format(f1.parse(sdate));
