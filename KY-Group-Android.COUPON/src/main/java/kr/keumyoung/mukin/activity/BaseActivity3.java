@@ -142,9 +142,10 @@ public class BaseActivity3 extends BaseActivity2 {
                             //화면이동...
                             if (preferenceHelper.getString(getString(R.string.coupon), "").isEmpty()) {
                                 openPreferenceCoupon();
+                                finish();
+                            } else {
+                                onBackPressed();
                             }
-                            //navigationHelper.navigate(BaseActivity3.this, _HomeActivity.class);
-                            onBackPressed();    //finishActivity();
                             onLoginSuccess(email, nickName);
                         } else {
                             // user is not active. lets stop here

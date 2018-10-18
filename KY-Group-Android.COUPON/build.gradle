@@ -12,6 +12,22 @@ apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
 android {
+    defaultConfig {
+        applicationId "kr.keumyoung.mukin"
+        minSdkVersion 16
+        targetSdkVersion 27
+        renderscriptTargetApi 19
+        renderscriptSupportModeEnabled true
+        versionCode 3 //propVersionCode.toInteger()
+        versionName "0.0"
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters "x86", "armeabi-v7a"
+        }
+    }
+
     //<a href="http://stackoverflow.com/questions/7607165/how-to-write-build-time-stamp-into-apk">How to write build time stamp into apk</a>
     defaultConfig {
         buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
@@ -38,22 +54,6 @@ android {
 
     compileSdkVersion = 27
     //buildtoolsversion = "27.0.3"
-
-    defaultConfig {
-        applicationId "kr.keumyoung.mukin"
-        minSdkVersion 16
-        targetSdkVersion 27
-        renderscriptTargetApi 19
-        renderscriptSupportModeEnabled true
-        versionCode 1 //propVersionCode.toInteger()
-        versionName "0.0"
-        multiDexEnabled true
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-        ndk {
-            abiFilters "x86", "armeabi-v7a"
-        }
-    }
 
     lintOptions {
         checkReleaseBuilds false

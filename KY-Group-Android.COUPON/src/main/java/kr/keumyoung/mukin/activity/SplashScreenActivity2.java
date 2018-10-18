@@ -122,15 +122,19 @@ public class SplashScreenActivity2 extends SplashScreenActivity {
     private Observable<String> copyFilesToLocal() {
         return Observable.create(subscriber -> {
             File obbDir = getObbDir();
-            if (Boolean.parseBoolean(AppConstants.DEVELOPMENT))
-                //if (BuildConfig.DEBUG)
+            //if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName()+ "[OBB.DIR]" + obbDir.getAbsolutePath());
+            if (Boolean.parseBoolean(AppConstants.DEVELOPMENT)) {
                 obbDir = ImageUtils.getBaseFolder();
-            //System.out.println("OBB DIR: " + obbDir.getAbsolutePath());
-            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + "OBB DIR: " + obbDir.getAbsolutePath());
+                if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName()+ "[OBB][OBB.DIR]" + obbDir.getAbsolutePath());
+            }
             if (obbDir.exists()) {
-                String obbFileName = "main" + "." + pkgInfo.versionCode + "." + getPackageName() + "." + "obb";
-                if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + "OBB FILE: " + obbFileName);
+                String obbFileName = "main" + "." + AppConstants.OBB_VERSION + "." + getPackageName() + "." + "obb";
+                //if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName()+ "[OBB.FILE]" + obbFileName);
                 File obbFile = new File(obbDir, obbFileName);
+                if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName()+ "[OBB][OBB.PATH]" + obbFile.exists() + ":" + obbFile.getAbsolutePath());
+                if (!obbFile.exists()) {
+                    Log.wtf(__CLASSNAME__, getMethodName()+ "[OBB][OBB.PATH][NG]" + obbFile.exists() + ":" + obbFile.getAbsolutePath());
+                }
 
                 try {
                     final String libraryName = "Soundlib-20161010.dlgse";
@@ -150,6 +154,11 @@ public class SplashScreenActivity2 extends SplashScreenActivity {
 
 
                         subscriber.onNext("Library copied...");
+                    }
+
+                    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName()+ "[OBB][LIB.PATH]" + library.exists() + ":" + library.getAbsolutePath());
+                    if (!library.exists()) {
+                        Log.wtf(__CLASSNAME__, getMethodName()+ "[OBB][LIB.PATH][NG]" + library.exists() + ":" + library.getAbsolutePath());
                     }
 
                     subscriber.onComplete();
