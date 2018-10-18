@@ -39,20 +39,18 @@ public abstract class SessionRefreshListener {
         preferenceHelper.saveString(PreferenceKeys.NICK_NAME, "");
         preferenceHelper.saveString(PreferenceKeys.PROFILE_IMAGE, "");
 
-        //toastHelper.showError(R.string.session_expired_error);
-        toastHelper.showError("세션 업데이트 합니다.");
-
         String email = preferenceHelper.getString(PreferenceKeys.LOGIN_EMAIL);
         String password = preferenceHelper.getString(PreferenceKeys.LOGIN_PASSWORD);
 
-        if (!email.isEmpty() && !password.isEmpty() && activity instanceof BaseActivity3) {
+        if ((!email.isEmpty() && !password.isEmpty()) && activity instanceof BaseActivity3) {
             ((BaseActivity3)activity).login(email, password);
+            toastHelper.showError("세션 업데이트 합니다.");
         } else {
             Intent i = new Intent(activity, _LoginActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             activity.startActivity(i);
             activity.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
-
+            toastHelper.showError(R.string.session_expired_error);
         }
     }
 }

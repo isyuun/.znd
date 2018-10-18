@@ -46,6 +46,6 @@ public class LoginActivity2 extends LoginActivity {
     @Override
     protected void onLoginSuccess(String email, String nickName) {
         super.onLoginSuccess(email, nickName);
-        finish();
+        getFragmentManager().popBackStack();
     }
 }

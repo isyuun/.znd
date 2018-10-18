@@ -7,6 +7,6 @@ public class _privacy extends html {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        myWebView.loadUrl("https://www.keumyoung.kr:444/mukinapp/_privacy.asp");
+        myWebView.loadUrl("https://www.keumyoung.kr:444/mukinapp/_privacy.html");
     }
 }

@@ -10,7 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -43,9 +42,8 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class SplashScreenActivity extends _BaseActivity {
-    private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-    private static final int REQUEST_PERMISSION = 10001;
+    protected static final int REQUEST_PERMISSION = 10001;
 
     @Inject
     PreferenceHelper preferenceHelper;
@@ -73,20 +71,18 @@ public class SplashScreenActivity extends _BaseActivity {
         }
     }
 
-    private void checkPermissions() {
+    protected void checkPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED ||
                     ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED ||
                     ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED ||
-                    ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED
-                    || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_DENIED) {
+                    ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED) {
                 ActivityCompat.requestPermissions(this,
                         new String[]{
                                 Manifest.permission.READ_EXTERNAL_STORAGE,
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                                 Manifest.permission.CAMERA,
                                 Manifest.permission.RECORD_AUDIO
-                                , Manifest.permission.READ_CONTACTS
                         }, REQUEST_PERMISSION);
             } else {
                 proceedToNextActivity();
@@ -125,17 +121,16 @@ public class SplashScreenActivity extends _BaseActivity {
                         hideProgress();
                         throwable.printStackTrace();
                     }, () -> {
-                        ////회원가입/로그인/자동처리
-                        //String userId = preferenceHelper.getString(PreferenceKeys.USER_ID);
-                        //String sessionToken = preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN);
-                        //hideProgress();
-                        //if (userId.isEmpty() && sessionToken.isEmpty()) {
-                        //    // user is not logged in
-                        //    navigationHelper.navigate(this, _LoginActivity.class);
-                        //} else {
-                        //    // user is logged in
-                        //    navigationHelper.navigate(this, _HomeActivity.class);
-                        //}
+                        String userId = preferenceHelper.getString(PreferenceKeys.USER_ID);
+                        String sessionToken = preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN);
+                        hideProgress();
+                        if (userId.isEmpty() && sessionToken.isEmpty()) {
+                            // user is not logged in
+                            navigationHelper.navigate(this, LoginChoiceActivity.class);
+                        } else {
+                            // user is logged in
+                            navigationHelper.navigate(this, HomeActivity.class);
+                        }
                     });
 
 //            throw new RuntimeException("Intentional crash test");
@@ -153,11 +148,9 @@ public class SplashScreenActivity extends _BaseActivity {
             if (Boolean.parseBoolean(AppConstants.DEVELOPMENT))
 //            if (BuildConfig.DEBUG)
                 obbDir = ImageUtils.getBaseFolder();
-            //System.out.println("OBB DIR: " + obbDir.getAbsolutePath());
-            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + "OBB DIR: " + obbDir.getAbsolutePath());
+            System.out.println("OBB DIR: " + obbDir.getAbsolutePath());
             if (obbDir.exists()) {
                 String obbFileName = String.format("main.%s.%s.obb", AppConstants.OBB_VERSION, getPackageName());
-                if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + "OBB FILE: " + obbFileName);
                 File obbFile = new File(obbDir, obbFileName);
 
                 try {

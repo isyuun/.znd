@@ -35,6 +35,7 @@ public class coupon extends _user {
         String coupon = sharedPref.getString(getString(R.string.coupon), ""/*mCouponView.getText().toString()*/);
         /*if (!coupon.isEmpty()) */mCouponView.setText(coupon);
 
+        getActivity().setTitle(R.string.pref_coupon);
     }
 
     @Override
@@ -62,6 +63,7 @@ public class coupon extends _user {
             text += "\n" + getApplication().checkDate();
             Toast.makeText(getBaseContext(), text, Toast.LENGTH_LONG).show();
             showProgress(false);
+            getActivity().onBackPressed();
             return;
         }
         String email = mEmailView.getText().toString();

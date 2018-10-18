@@ -7,6 +7,6 @@ public class _version extends html {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        myWebView.loadUrl("https://www.keumyoung.kr:444/mukinapp/_version.asp");
+        myWebView.loadUrl("https://www.keumyoung.kr:444/mukinapp/_version.html");
     }
 }
