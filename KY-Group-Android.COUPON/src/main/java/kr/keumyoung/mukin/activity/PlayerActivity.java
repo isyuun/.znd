@@ -1,18 +1,15 @@
 package kr.keumyoung.mukin.activity;
 
 import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.media.AudioManager;
-import android.media.audiofx.NoiseSuppressor;
-import android.media.effect.Effect;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -24,13 +21,11 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.os.Handler;
 
 import com.andexert.library.RippleView;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -75,19 +70,11 @@ import kr.keumyoung.mukin.helper.MediaManager;
 import kr.keumyoung.mukin.helper.NavigationHelper;
 import kr.keumyoung.mukin.helper.ToastHelper;
 import kr.keumyoung.mukin.util.AudioJNI;
-import kr.keumyoung.mukin.util.BlurTransformation;
-import kr.keumyoung.mukin.util.CommonHelper;
 import kr.keumyoung.mukin.util.Constants;
 import kr.keumyoung.mukin.util.MicChecker;
 import kr.keumyoung.mukin.util.PlayerJNI;
 import kr.keumyoung.mukin.util.PlayerKyUnpackJNI;
 import kr.keumyoung.mukin.util.PreferenceKeys;
-
-import kr.keumyoung.mukin.activity.SongSearchApi;
-
-import static kr.keumyoung.mukin.util.Constants.API_KY3_DOWNLOAD;
-import static android.media.AudioManager.MODE_IN_CALL;
-import static android.media.AudioManager.MODE_NORMAL;
 
 /**
  * on 13/01/18.
@@ -345,14 +332,15 @@ public class PlayerActivity extends _BaseActivity {
 
         if (song != null) {
             headerSongName.setText(song.getSongTitle());
-            headerSongSubText.setText(song.getSongSubTitle());
+            headerSongSubText.setText(song.getArtistName());
+
             //mediaManager.loadImageIntoView(song.getAlbumImage(), albumCoverImage);
             //mediaManager.loadImageIntoViewBlur(song.getAlbumImage(), BgImage);
             mediaManager.setPlayerImages(song.getAlbumImage(), albumCoverImage, BgImage);
             BgImage.setColorFilter(Color.parseColor("#5D5D5D"), PorterDuff.Mode.MULTIPLY);
 
             songName.setText(song.getSongTitle());
-            songDesc.setText(song.getSongSubTitle());
+            songDesc.setText(song.getArtistName());
             songDuration.setText(dateHelper.getDuration(song.getDuration()));
             durationText.setText(dateHelper.getDuration(song.getDuration()));
 
@@ -429,8 +417,8 @@ public class PlayerActivity extends _BaseActivity {
 
             initializeError =
                     playerJNI.Initialize(preferenceHelper.getString(PreferenceKeys.LIBRARY_PATH));
-        //    if (playerJNI != null)
-        //        playerJNI.SetPortSelectionMethod(5); // Type K
+            //    if (playerJNI != null)
+            //        playerJNI.SetPortSelectionMethod(5); // Type K
 
             String midPath = ImageUtils.BASE_PATH + Integer.parseInt(song.getIdentifier()) + ".mid";
             setFileError = playerJNI.SetFile(midPath);
@@ -859,7 +847,7 @@ public class PlayerActivity extends _BaseActivity {
                         lyricsTimingHelper.stop();
 
                         navigationHelper.finish(this);
-                        //navigationHelper.navigate(PlayerActivity.this, _HomeActivity.class);
+                        //navigationHelper.navigate(PlayerActivity.this, HomeActivity.class);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -914,27 +902,27 @@ public class PlayerActivity extends _BaseActivity {
                     //		lyricsTimingHelper.parseSokLineArray(SokPath);
                     playerKyUnpackJNI.LyricSokParse(lyricsTimingHelper.GetLyricsLineString());
 
-					try{
-	                    File ky3File = new File(ky3Path);
-	                    ky3File.delete();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+                    try {
+                        File ky3File = new File(ky3Path);
+                        ky3File.delete();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
-					try{
-	                    String midPath = ImageUtils.BASE_PATH + Integer.parseInt(song.getIdentifier()) + ".mid";
-	                    File midiFile = new File(midPath);
-	                    midiFile.delete();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+                    try {
+                        String midPath = ImageUtils.BASE_PATH + Integer.parseInt(song.getIdentifier()) + ".mid";
+                        File midiFile = new File(midPath);
+                        midiFile.delete();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
-					try{
-	                   File sokFile = new File(SokPath);
-                 	   sokFile.delete();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+                    try {
+                        File sokFile = new File(SokPath);
+                        sokFile.delete();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 break;
                 case Constants.API_ERROR_CODE:

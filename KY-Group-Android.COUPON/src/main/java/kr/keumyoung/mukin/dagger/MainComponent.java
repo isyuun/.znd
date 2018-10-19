@@ -3,7 +3,7 @@ package kr.keumyoung.mukin.dagger;
 import kr.keumyoung.mukin.activity.BaseActivity;
 import kr.keumyoung.mukin.activity.HomeActivity;
 import kr.keumyoung.mukin.activity.LoginActivity;
-import kr.keumyoung.mukin.activity.LoginChoiceActivity;
+//import kr.keumyoung.mukin.activity.LoginChoiceActivity;
 import kr.keumyoung.mukin.activity.PlayerActivity;
 import kr.keumyoung.mukin.activity.PreviewActivity;
 import kr.keumyoung.mukin.activity.RegisterActivity;
@@ -81,7 +81,7 @@ public interface MainComponent {
 
     void inject(LoginActivity baseActivity);
 
-    void inject(LoginChoiceActivity baseActivity);
+    //void inject(LoginChoiceActivity baseActivity);
 
     void inject(SplashScreenActivity baseActivity);
 

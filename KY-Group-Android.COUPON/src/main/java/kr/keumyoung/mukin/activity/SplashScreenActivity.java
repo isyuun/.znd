@@ -126,7 +126,7 @@ public class SplashScreenActivity extends _BaseActivity {
                         hideProgress();
                         if (userId.isEmpty() && sessionToken.isEmpty()) {
                             // user is not logged in
-                            navigationHelper.navigate(this, LoginChoiceActivity.class);
+                            //navigationHelper.navigate(this, LoginChoiceActivity.class);
                         } else {
                             // user is logged in
                             navigationHelper.navigate(this, HomeActivity.class);

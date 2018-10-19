@@ -260,7 +260,7 @@ public class HomeActivity extends _BaseActivity {
 //        preferenceHelper.saveString(PreferenceKeys.USER_ID, "");
         preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, "");
         preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, "");
-        navigationHelper.navigateWithReverseAnim(this, LoginChoiceActivity.class);
+        //navigationHelper.navigateWithReverseAnim(this, LoginChoiceActivity.class);
     }
 
     protected void onMenuClick() {
@@ -281,7 +281,7 @@ public class HomeActivity extends _BaseActivity {
                             hideProgress();
                             preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, "");
                             preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, "");
-                            navigationHelper.navigateWithClearTask(HomeActivity.this, LoginChoiceActivity.class);
+                            //navigationHelper.navigateWithClearTask(HomeActivity.this, LoginChoiceActivity.class);
                         }
 
                         @Override

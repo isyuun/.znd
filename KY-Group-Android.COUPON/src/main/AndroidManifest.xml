@@ -77,6 +77,7 @@
         <!--android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />-->
         <activity
             android:name=".activity._LoginActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
             <intent-filter>
