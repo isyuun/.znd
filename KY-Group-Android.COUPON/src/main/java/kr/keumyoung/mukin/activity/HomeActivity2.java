@@ -135,4 +135,11 @@ public class HomeActivity2 extends HomeActivity {
                     }
                 });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.e(__CLASSNAME__, getMethodName() + isShowingProgress());
+        hideProgress();
+    }
 }

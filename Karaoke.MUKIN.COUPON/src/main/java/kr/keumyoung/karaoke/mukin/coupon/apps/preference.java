@@ -17,6 +17,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 
 import java.util.List;
@@ -36,6 +37,7 @@ import kr.keumyoung.karaoke.mukin.coupon.R;
  * API Guide</a> for more information on developing a Settings UI.
  */
 public class preference extends AppCompatPreferenceActivity2 {
+    private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
     /**
      * A preference value change listener that updates the preference's summary
@@ -45,6 +47,7 @@ public class preference extends AppCompatPreferenceActivity2 {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
             String stringValue = value.toString();
+            Log.e("preference", "onPreferenceChange(...)" + preference + stringValue);
 
             if (preference instanceof ListPreference) {
                 // For list preferences, look up the correct display value in
@@ -94,6 +97,7 @@ public class preference extends AppCompatPreferenceActivity2 {
      * example, 10" tablets are extra-large.
      */
     private static boolean isXLargeTablet(Context context) {
+        Log.e("preference", "isXLargeTablet(...)" + context);
         return (context.getResources().getConfiguration().screenLayout
                 & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_XLARGE;
     }
@@ -108,6 +112,7 @@ public class preference extends AppCompatPreferenceActivity2 {
      * @see #sBindPreferenceSummaryToValueListener
      */
     private static void bindPreferenceSummaryToValue(Preference preference) {
+        Log.e("preference", "bindPreferenceSummaryToValue(...)" + preference);
         // Set the listener to watch for value changes.
         preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
 

@@ -41,7 +41,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.api.RestApi;
@@ -259,24 +258,22 @@ public class PlayerActivity extends _BaseActivity {
         @Override
         public void onStateChangedEvent(MicChecker.MIC_CONNECTION_STATES states) {
             Log.d(TAG, "onStateChangedEvent " + states);
-            //if (preStatas == MicChecker.MIC_CONNECTION_STATES.HEADSET
-            //        && states != MicChecker.MIC_CONNECTION_STATES.HEADSET) {
-            //    if (audioJNI != null && isPlayed) {
-            //        songFinishWithMic = false;
-            //        audioJNI.StopAudio();
-            //        Log.d(TAG, "StopAudio");
-            //        alertMessageBox(getResources().getString(R.string.error_headset_eject));
-            //        enableRecordUI(false);
-            //    }
-            //}
-            //
-            //if (states == MicChecker.MIC_CONNECTION_STATES.HEADSET)
-            //    enableMicEffectUI(true);
-            //else
-            //    enableMicEffectUI(false);
-            //preStatas = states;
-            enableRecordUI(false);
-            enableMicEffectUI(true);
+            if (preStatas == MicChecker.MIC_CONNECTION_STATES.HEADSET
+                    && states != MicChecker.MIC_CONNECTION_STATES.HEADSET) {
+                if (audioJNI != null && isPlayed) {
+                    songFinishWithMic = false;
+                    audioJNI.StopAudio();
+                    Log.d(TAG, "StopAudio");
+                    alertMessageBox(getResources().getString(R.string.error_headset_eject));
+                    enableRecordUI(false);
+                }
+            }
+
+            if (states == MicChecker.MIC_CONNECTION_STATES.HEADSET)
+                enableMicEffectUI(true);
+            else
+                enableMicEffectUI(false);
+            preStatas = states;
         }
     };
 
@@ -460,7 +457,7 @@ public class PlayerActivity extends _BaseActivity {
                 onSelectionModeItem(modePopupAction);
             }
 
-            //setupRecorder();
+            setupRecorder();
 
             //dsjung 초기화면에 song total time 쓰레기 값으로 나오던 문제 수정
             songDuration.setText(dateHelper.getDuration(Math.round(playerJNI.GetTotalClocks() * microTimePerClock / 1000000)));
@@ -472,7 +469,6 @@ public class PlayerActivity extends _BaseActivity {
         }
     }
 
-    @Deprecated
     private void setupRecorder() {
         try {
             if (audioJNI == null) audioJNI = new AudioJNI();
@@ -614,23 +610,21 @@ public class PlayerActivity extends _BaseActivity {
             lyricsTimingHelper.start();
 
             //dsjung 헤드셋일 때만 녹음 모드 지원하도록
-            //if (isPossibleRecord()) {
-            //    if (audioJNI != null) {
-            //        audioJNI.StartAudio(sampleRate, bufferSize, tempPath, destinationPath);
-            //        Log.d(TAG, "StartAudio " + MicChecker.getInstance().getStates());
-            //        enableRecordUI(true);
-            //        enableMicEffectUI(true);
-            //    }
-            //    songFinishWithMic = true;
-            //} else {
-            //    toastHelper.showError(R.string.error_record_support);
-            //    enableRecordUI(false);
-            //    enableMicEffectUI(false);
-            //    //alertRecordCancel();
-            //    songFinishWithMic = false;
-            //}
-            enableRecordUI(false);
-            enableMicEffectUI(true);
+            if (isPossibleRecord()) {
+                if (audioJNI != null) {
+                    audioJNI.StartAudio(sampleRate, bufferSize, tempPath, destinationPath);
+                    Log.d(TAG, "StartAudio " + MicChecker.getInstance().getStates());
+                    enableRecordUI(true);
+                    enableMicEffectUI(true);
+                }
+                songFinishWithMic = true;
+            } else {
+                toastHelper.showError(R.string.error_record_support);
+                enableRecordUI(false);
+                enableMicEffectUI(false);
+                //alertRecordCancel();
+                songFinishWithMic = false;
+            }
         }
 
         if (playerJNI != null) playerJNI.Start();
@@ -726,45 +720,37 @@ public class PlayerActivity extends _BaseActivity {
                 || controlPanelComponent.getPlayState() == ControlPanelPlay.PlayButtonState.PAUSE)
             return;
 
-        int visibility = View.VISIBLE;
-        boolean hide = (lastAction.getPanelOption() == action.getPanelOption() && controlsPanel.getVisibility() == View.VISIBLE);
-        if (hide) {
-            visibility = View.INVISIBLE;
-        }
-        if (BuildConfig.DEBUG) Log.e(TAG, "updateViewWithPanelOptions(...)" + hide + ":" + visibility);
-
         lastAction = action;
 
         switch (action.getPanelOption()) {
             case EFFECT:
-                toastHelper.showError(R.string.mic_not_working);
-                //if (isPossibleRecord() == false) {
-                //    toastHelper.showError(R.string.error_miceffect_support);
-                //    break;
-                //}
-                //if (effectsPopup == null) effectsPopup = new EffectsPopup(this);
-                //controlsPopup.setVisibility(visibility);
-                //controlsPopup.removeAllViews();
-                //controlsPopup.addView(effectsPopup.getView());
+                if (isPossibleRecord() == false) {
+                    toastHelper.showError(R.string.error_miceffect_support);
+                    break;
+                }
+                if (effectsPopup == null) effectsPopup = new EffectsPopup(this);
+                controlsPopup.setVisibility(View.VISIBLE);
+                controlsPopup.removeAllViews();
+                controlsPopup.addView(effectsPopup.getView());
                 break;
 
             case MODE:
                 if (modePopup == null) modePopup = new ModePopup(this);
-                controlsPopup.setVisibility(visibility);
+                controlsPopup.setVisibility(View.VISIBLE);
                 controlsPopup.removeAllViews();
                 controlsPopup.addView(modePopup.getView());
                 break;
 
             case PITCH:
                 if (pitchPopup == null) pitchPopup = new PitchPopup(this);
-                controlsPopup.setVisibility(visibility);
+                controlsPopup.setVisibility(View.VISIBLE);
                 controlsPopup.removeAllViews();
                 controlsPopup.addView(pitchPopup.getView());
                 break;
 
             case TEMPO:
                 if (tempoPopup == null) tempoPopup = new TempoPopup(this);
-                controlsPopup.setVisibility(visibility);
+                controlsPopup.setVisibility(View.VISIBLE);
                 controlsPopup.removeAllViews();
                 controlsPopup.addView(tempoPopup.getView());
                 break;

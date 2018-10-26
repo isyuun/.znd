@@ -123,7 +123,8 @@ public class ArtistFragment extends BaseFragment {
     private void populateArtists() {
         activity.showProgress();
         String order = Constants.ARTIST_NAME + " ASC";
-        restApi.tableGetRequestWithOrder(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), TableNames.ARTIST, order).enqueue(new Callback<ResponseBody>() {
+        //restApi.tableGetRequestWithOrder(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), TableNames.ARTIST, order).enqueue(new Callback<ResponseBody>() {
+        restApi.tableGetRequestWithOrder(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), TableNames.ARTISTS, order).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

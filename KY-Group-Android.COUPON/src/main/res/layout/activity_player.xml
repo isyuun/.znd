@@ -47,11 +47,11 @@
                 android:src="@drawable/cross_02_icon" />
 
             <View
-                android:layout_alignRight="@+id/close_icon"
                 android:layout_width="1dp"
                 android:layout_height="30dp"
+                android:layout_alignRight="@+id/close_icon"
                 android:layout_centerInParent="true"
-                android:background="#FFFFFF"/>
+                android:background="#FFFFFF" />
 
         </com.andexert.library.RippleView>
 
@@ -67,22 +67,22 @@
                 android:id="@+id/header_song_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
                 android:ellipsize="end"
-                android:typeface="sans"
+                android:maxLines="1"
                 android:textColor="@android:color/white"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:typeface="sans" />
 
             <TextView
                 android:id="@+id/header_song_sub_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:maxLines="1"
                 android:ellipsize="end"
-                android:typeface="sans"
+                android:maxLines="1"
                 android:textColor="@color/semi_white_text_color"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="sans" />
         </LinearLayout>
 
     </LinearLayout>
@@ -130,42 +130,42 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:maxLines="1"
                 android:ellipsize="end"
-                android:typeface="sans"
+                android:maxLines="1"
                 android:textColor="@android:color/white"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:typeface="sans" />
 
             <TextView
                 android:id="@+id/song_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:maxLines="1"
                 android:ellipsize="end"
-                android:typeface="sans"
+                android:maxLines="1"
                 android:textColor="@color/semi_white_text_color"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="sans" />
 
             <TextView
                 android:id="@+id/song_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:maxLines="1"
                 android:ellipsize="end"
-                android:typeface="sans"
+                android:maxLines="1"
                 android:textColor="@color/semi_white_text_color"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="sans" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
-                android:typeface="sans"
                 android:background="@drawable/rounded_pink"
                 android:orientation="horizontal"
-                android:padding="6dp">
+                android:padding="6dp"
+                android:typeface="sans">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -176,12 +176,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:maxLines="1"
                     android:ellipsize="end"
-                    android:typeface="sans"
-                    android:text="@string/works_best_with_headphone"
+                    android:maxLines="1"
+                    android:text="@string/play_hit_button"
                     android:textColor="@android:color/white"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:typeface="sans"
+                    android:visibility="visible" />
             </LinearLayout>
 
         </LinearLayout>
@@ -220,12 +221,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
-                    android:maxLines="1"
                     android:ellipsize="end"
-                    android:typeface="sans"
+                    android:maxLines="1"
                     android:text="@string/paused"
                     android:textColor="@android:color/white"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:typeface="sans" />
             </LinearLayout>
 
             <TextView
@@ -233,11 +234,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:maxLines="1"
                 android:ellipsize="end"
-                android:typeface="sans"
+                android:maxLines="1"
                 android:textColor="@android:color/white"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="sans" />
         </RelativeLayout>
 
         <FrameLayout
@@ -245,9 +246,9 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/status_bar"
             android:layout_centerInParent="true"
-            android:layout_marginBottom="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp">
 
             <!--<kr.keumyoung.mukin.elements.LyricsView-->
             <kr.keumyoung.mukin.elements.TwoLineLyricsView

@@ -1,7 +1,5 @@
 package kr.keumyoung.karaoke.app;
 
-import kr.keumyoung.karaoke.BuildConfig;
-
 public class AppCompatPreferenceActivity2 extends AppCompatPreferenceActivity {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 

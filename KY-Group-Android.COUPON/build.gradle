@@ -18,7 +18,7 @@ android {
         targetSdkVersion 27
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
-        versionCode 3 //propVersionCode.toInteger()
+        versionCode 5
         versionName "0.0"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

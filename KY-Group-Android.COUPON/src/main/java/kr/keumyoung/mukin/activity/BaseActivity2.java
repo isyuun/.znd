@@ -8,6 +8,7 @@ import android.os.Build;
 import android.preference.PreferenceActivity;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 
 import kr.keumyoung.karaoke.mukin.coupon.apps._preference;
@@ -18,7 +19,7 @@ import kr.kymedia.karaoke.util.EnvironmentUtils;
 import static android.Manifest.permission.READ_CONTACTS;
 
 public class BaseActivity2 extends BaseActivity {
-    //private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
+    private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
     protected String getMethodName() {
         String name = Thread.currentThread().getStackTrace()[3].getMethodName();
@@ -87,7 +88,7 @@ public class BaseActivity2 extends BaseActivity {
     }
 
     protected void openPreference() {
-        postDelayed(openPreference, 500);
+        postDelayed(openPreference, 1000);
     }
 
     Runnable openPreference = () -> {
@@ -107,4 +108,16 @@ public class BaseActivity2 extends BaseActivity {
         i.putExtra(PreferenceActivity.EXTRA_NO_HEADERS, true);
         startActivity(i);
     };
+
+    @Deprecated
+    @Override
+    public void showProgress() {
+        //super.showProgress();
+    }
+
+    @Deprecated
+    @Override
+    public void hideProgress() {
+        //super.hideProgress();
+    }
 }

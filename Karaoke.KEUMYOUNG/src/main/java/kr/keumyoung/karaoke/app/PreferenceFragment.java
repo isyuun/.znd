@@ -2,10 +2,11 @@ package kr.keumyoung.karaoke.app;
 
 import android.accounts.Account;
 import android.os.Build;
+import android.preference.Preference;
+import android.preference.PreferenceScreen;
 import android.support.annotation.IdRes;
 import android.view.View;
 
-import kr.keumyoung.karaoke.BuildConfig;
 import kr.kymedia.karaoke.util.EnvironmentUtils;
 
 public class PreferenceFragment extends android.preference.PreferenceFragment {
@@ -42,6 +43,11 @@ public class PreferenceFragment extends android.preference.PreferenceFragment {
 
     public void finish() {
         getActivity().finish();
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 }
 
