@@ -726,14 +726,14 @@ public class PlayerActivity extends _BaseActivity {
                 || controlPanelComponent.getPlayState() == ControlPanelPlay.PlayButtonState.PAUSE)
             return;
 
-        int visibility = View.VISIBLE;
-        boolean hide = (lastAction.getPanelOption() == action.getPanelOption() && controlsPanel.getVisibility() == View.VISIBLE);
-        if (hide) {
-            visibility = View.INVISIBLE;
-        }
-        if (BuildConfig.DEBUG) Log.e(TAG, "updateViewWithPanelOptions(...)" + hide + ":" + visibility);
-
+        boolean hide = (lastAction != null && lastAction.getPanelOption() == action.getPanelOption() && controlsPopup.getVisibility() == View.VISIBLE);
         lastAction = action;
+
+        if (BuildConfig.DEBUG) Log.e(TAG, "updateViewWithPanelOptions(...)" + ":" + hide + ":" + controlsPopup.getVisibility());
+        if (hide) {
+            controlsPopup.setVisibility(View.GONE);
+            return;
+        }
 
         switch (action.getPanelOption()) {
             case EFFECT:
@@ -743,30 +743,30 @@ public class PlayerActivity extends _BaseActivity {
                 //    break;
                 //}
                 //if (effectsPopup == null) effectsPopup = new EffectsPopup(this);
-                //controlsPopup.setVisibility(visibility);
                 //controlsPopup.removeAllViews();
                 //controlsPopup.addView(effectsPopup.getView());
+                //controlsPopup.setVisibility(visibility);
                 break;
 
             case MODE:
                 if (modePopup == null) modePopup = new ModePopup(this);
-                controlsPopup.setVisibility(visibility);
                 controlsPopup.removeAllViews();
                 controlsPopup.addView(modePopup.getView());
+                controlsPopup.setVisibility(View.VISIBLE);
                 break;
 
             case PITCH:
                 if (pitchPopup == null) pitchPopup = new PitchPopup(this);
-                controlsPopup.setVisibility(visibility);
                 controlsPopup.removeAllViews();
                 controlsPopup.addView(pitchPopup.getView());
+                controlsPopup.setVisibility(View.VISIBLE);
                 break;
 
             case TEMPO:
                 if (tempoPopup == null) tempoPopup = new TempoPopup(this);
-                controlsPopup.setVisibility(visibility);
                 controlsPopup.removeAllViews();
                 controlsPopup.addView(tempoPopup.getView());
+                controlsPopup.setVisibility(View.VISIBLE);
                 break;
         }
     }

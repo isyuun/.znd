@@ -193,7 +193,7 @@
         android:id="@+id/player_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/controls_popup"
+        android:layout_above="@+id/controls_panel"
         android:layout_below="@+id/time_progress_bar"
         android:visibility="visible">
 
@@ -214,7 +214,7 @@
                     android:layout_width="8dp"
                     android:layout_height="8dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/recording_circle" />
+                    android:src="@drawable/rounded_theme" />
 
                 <TextView
                     android:id="@+id/status_text"
