@@ -6,11 +6,21 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.adapter.SongAdapter;
@@ -26,15 +36,6 @@ import kr.keumyoung.mukin.util.Constants;
 import kr.keumyoung.mukin.util.PaginationScrollListener;
 import kr.keumyoung.mukin.util.PreferenceKeys;
 import kr.keumyoung.mukin.util.TableNames;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,7 +45,7 @@ import retrofit2.Response;
  *  on 12/01/18.
  */
 
-public class RecommendedFragment extends _BaseFragment {
+public class TopHitsFragment extends BaseFragment {
 
     @Inject
     RestApi restApi;
@@ -55,12 +56,15 @@ public class RecommendedFragment extends _BaseFragment {
     @Inject
     AnimationHelper animationHelper;
 
-    @BindView(R.id.recommended_recycler)
-    RecyclerView recommendedRecycler;
+    @BindView(R.id.featured_recycler)
+    RecyclerView featuredRecycler;
+    Unbinder unbinder;
+    @BindView(R.id.featured_swipe_refresh)
+    SwipeRefreshLayout featuredSwipeRefresh;
     @BindView(R.id.empty_frame)
     LinearLayout emptyFrame;
-    @BindView(R.id.recommended_swipe_refresh)
-    SwipeRefreshLayout recommendedSwipeRefresh;
+
+    HomeFragment parentFragment;
 
     SongAdapter songAdapter;
 
@@ -69,27 +73,26 @@ public class RecommendedFragment extends _BaseFragment {
     SessionRefreshListener sessionRefreshListener = new SessionRefreshListener() {
         @Override
         public void onSessionRefresh() {
-            populateSongs(offset);
+            populateSongs();
         }
     };
 
-    Unbinder unbinder;
+    TextWatcher textWatcher;
 
     int offset = 0;
     boolean isLoading = false, isLastPage = false;
-
-    LinearLayoutManager layoutManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MainApplication.getInstance().getMainComponent().inject(this);
+        parentFragment = (HomeFragment) getParentFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_recommended, container, false);
+        View view = inflater.inflate(R.layout.fragment_featured, container, false);
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
@@ -97,27 +100,89 @@ public class RecommendedFragment extends _BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recommendedSwipeRefresh.setOnRefreshListener(() -> populateSongs(0));
+        featuredSwipeRefresh.setOnRefreshListener(this::populateSongs);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        activity.showHeaderImage();
-        activity.hideNavigationIcon();
-        activity.showMenuIcon();
+        activity.changeNavigationIcon(R.drawable.back_icon);
+        activity.setHeaderText(R.string.top_hits);
+        activity.hideMenuIcon();
+
+        parentFragment.hideIcons();
+//        parentFragment.activateSearch();
+
+//        initiateTextWatcher();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        //CommonHelper.hideSoftKeyboard(activity);
-        activity.hideNavigationIcon();
+    private void initiateTextWatcher() {
+        textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String keyword = editable.toString().trim();
+                if (keyword.isEmpty()) populateSongs();
+                else performSearch(keyword);
+            }
+        };
+
+        parentFragment.addTextWatcher(textWatcher);
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
+    private void performSearch(String keyword) {
+        restApi.searchCustomScript(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), TableNames.TOP_HITS, keyword)
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        try {
+                            ResponseBody responseBody = response.body();
+                            ResponseBody errorBody = response.errorBody();
+
+                            if (responseBody != null) {
+                                String responseString = responseBody.string();
+                                JSONObject responseObject = new JSONObject(responseString);
+
+                                JSONArray resultArray = responseObject.getJSONArray(Constants.RESULT);
+                                int length = resultArray.length();
+                                songs.clear();
+                                for (int index = 0; index < length; index++) {
+                                    JSONObject songObject = resultArray.getJSONObject(index);
+                                    Song song = SongParser.convertToSongFromJson(songObject);
+                                    songs.add(song);
+                                }
+                                songAdapter.notifyDataSetChanged();
+                                updateEmptyVisibility();
+                            } else if (errorBody != null) {
+                                String errorString = errorBody.string();
+                                JSONObject errorObject = new JSONObject(errorString);
+                                if (activity.handleDFError(errorObject, sessionRefreshListener)) {
+                                    // error is handled in base activity. nothing to do here
+                                } else {
+                                    // TODO: 02/02/18 handle more errors here related to search
+                                }
+
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
     }
 
     @Override
@@ -127,17 +192,14 @@ public class RecommendedFragment extends _BaseFragment {
     }
 
     private void setupRecyclerView() {
-        songAdapter = new SongAdapter(songs);
+        if (songAdapter == null) songAdapter = new SongAdapter(songs);
+        LinearLayoutManager manager = new LinearLayoutManager(activity);
+        featuredRecycler.setLayoutManager(manager);
+        featuredRecycler.setAdapter(songAdapter);
 
-        layoutManager = new LinearLayoutManager(activity);
+        if (songs.isEmpty()) populateSongs();
 
-        recommendedRecycler.setLayoutManager(layoutManager);
-        recommendedRecycler.setAdapter(songAdapter);
-
-        if (songs.isEmpty())
-            populateSongs(0);
-
-        recommendedRecycler.addOnScrollListener(new PaginationScrollListener(layoutManager) {
+        featuredRecycler.addOnScrollListener(new PaginationScrollListener(manager) {
             @Override
             public boolean isLoading() {
                 return isLoading;
@@ -156,24 +218,29 @@ public class RecommendedFragment extends _BaseFragment {
         });
     }
 
+    private void populateSongs() {
+        populateSongs(0);
+    }
+
     private void populateSongs(int offset) {
+        activity.showProgress();
+        CommonHelper.hideSoftKeyboard(activity);
+
         this.offset = offset;
 
         if (offset == 0) {
             activity.showProgress();
-            recommendedSwipeRefresh.setRefreshing(true);
         } else {
             songAdapter.setLoading(true);
-            //songAdapter.notifyDataSetChanged();
+            songAdapter.notifyDataSetChanged();
         }
 
         isLoading = true;
 
-        restApi.tableGetRequestWithLimitOffset(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), TableNames.RECOMMENDED, Constants.LIMIT, offset)
+        restApi.tableNameWithOrdering(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), Constants.LIMIT, offset)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        isLoading = false;
                         try {
                             ResponseBody responseBody = response.body();
                             ResponseBody errorBody = response.errorBody();
@@ -183,8 +250,7 @@ public class RecommendedFragment extends _BaseFragment {
 
                                 JSONArray songArray = responseObject.getJSONArray(Constants.RESOURCE);
                                 int length = songArray.length();
-                                if (length > 0 && offset == 0) songs.clear();
-                                isLastPage = length == 0;
+                                songs.clear();
                                 for (int index = 0; index < length; index++) {
                                     JSONObject songObject = songArray.getJSONObject(index);
                                     Song song = SongParser.convertToSongFromJson(songObject);
@@ -218,7 +284,6 @@ public class RecommendedFragment extends _BaseFragment {
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
                         t.printStackTrace();
                         if (activity.isShowingProgress()) activity.hideProgress();
-                        isLoading = false;
                         if (songAdapter.isLoading()) songAdapter.setLoading(false);
                         songAdapter.notifyDataSetChanged();
                         updateEmptyVisibility();
@@ -226,22 +291,46 @@ public class RecommendedFragment extends _BaseFragment {
                 });
     }
 
+    protected String getTableName() {
+        return TableNames.FEATURED;
+    }
+
     private void updateEmptyVisibility() {
         try {
-            if (recommendedSwipeRefresh != null && recommendedSwipeRefresh.isRefreshing())
-                recommendedSwipeRefresh.setRefreshing(false);
+            if (featuredSwipeRefresh != null && featuredSwipeRefresh.isRefreshing())
+                featuredSwipeRefresh.setRefreshing(false);
             if (songs.isEmpty() && emptyFrame.getVisibility() != View.VISIBLE) {
-                animationHelper.hideViewWithZoomAnim(recommendedRecycler);
+                animationHelper.hideViewWithZoomAnim(featuredRecycler);
                 animationHelper.showWithZoomAnim(emptyFrame);
-            } else if (recommendedRecycler != null && recommendedRecycler.getVisibility() != View.VISIBLE) {
-                animationHelper.showWithZoomAnim(recommendedRecycler);
+            } else if (featuredRecycler.getVisibility() != View.VISIBLE) {
+                animationHelper.showWithZoomAnim(featuredRecycler);
                 animationHelper.hideViewWithZoomAnim(emptyFrame);
-            } else if (emptyFrame != null && emptyFrame.getVisibility() == View.VISIBLE) {
+            } else if (emptyFrame.getVisibility() == View.VISIBLE) {
                 animationHelper.hideViewWithZoomAnim(emptyFrame);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+//        activity.showHeaderImage();
+//        activity.changeNavigationIcon(R.drawable.menu_icon);
+//        activity.showMenuIcon();
+//
+        parentFragment.showIcons();
+        parentFragment.deactivateSearch();
+
+        parentFragment.removeTextWatcher(textWatcher);
+    }
+
+    @Override
+    public boolean onNavigationClick() {
+        parentFragment.popFragment();
+        return true;
     }
 
     @Override

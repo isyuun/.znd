@@ -16,12 +16,13 @@
     <string name="create_new_account">새계정 만들기</string>
     <string name="search_hint">노래검색(노래제목/가수/번호)</string>
     <!--<string name="featured">뮤즐추천곡</string>-->
-    <string name="featured">최신곡</string>
+    <string name="newsongs">최신곡</string>
     <!--<string name="top_hits">인기노래</string>-->
     <string name="top_hits">인기곡</string>
     <!--<string name="genre">장르</string>-->
     <string name="genre">장르곡</string>
     <!--<string name="artists">아티스트</string>-->
+    <string name="favorites">애창곡</string>
     <string name="artists">가수별</string>
     <string name="recommended">추천곡</string>
     <string name="sing">노래하기</string>

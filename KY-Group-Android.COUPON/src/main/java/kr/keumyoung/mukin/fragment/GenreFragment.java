@@ -44,7 +44,7 @@ import retrofit2.Response;
  *  on 12/01/18.
  */
 
-public class GenreFragment extends BaseFragment {
+public class GenreFragment extends _BaseFragment {
 
     @Inject
     PreferenceHelper preferenceHelper;
@@ -98,7 +98,6 @@ public class GenreFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         genreSwipeRefresh.setOnRefreshListener(this::populateGenres);
     }
 
@@ -159,6 +158,7 @@ public class GenreFragment extends BaseFragment {
 
         if (offset == 0) {
             activity.showProgress();
+            genreSwipeRefresh.setRefreshing(true);
         } else {
             genreAdapter.setLoading(true);
             genreAdapter.notifyDataSetChanged();

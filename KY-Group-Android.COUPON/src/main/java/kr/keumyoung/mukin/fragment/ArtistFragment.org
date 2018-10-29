@@ -41,7 +41,7 @@ import retrofit2.Response;
  *  on 12/01/18.
  */
 
-public class ArtistFragment extends _BaseFragment {
+public class ArtistFragment extends BaseFragment {
 
     @Inject
     RestApi restApi;
@@ -99,7 +99,7 @@ public class ArtistFragment extends _BaseFragment {
     public void onStart() {
         super.onStart();
         activity.changeNavigationIcon(R.drawable.back_icon);
-        activity.setHeaderText(R.string.favorites);
+        activity.setHeaderText(R.string.artists);
         activity.hideMenuIcon();
 
         parentFragment.hideIcons();
@@ -121,7 +121,6 @@ public class ArtistFragment extends _BaseFragment {
     }
 
     private void populateArtists() {
-        artistSwipeRefresh.setRefreshing(true);
         activity.showProgress();
         String order = Constants.ARTIST_NAME + " ASC";
         //restApi.tableGetRequestWithOrder(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), TableNames.ARTIST, order).enqueue(new Callback<ResponseBody>() {

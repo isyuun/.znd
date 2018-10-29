@@ -28,6 +28,7 @@ import kr.keumyoung.mukin.elements.ModePopupItem;
 import kr.keumyoung.mukin.elements.OperationPopupItem;
 import kr.keumyoung.mukin.elements.TempoPopup;
 import kr.keumyoung.mukin.fragment.ArtistFragment;
+import kr.keumyoung.mukin.fragment.FavoritesFragment;
 import kr.keumyoung.mukin.fragment.FeaturedFragment;
 import kr.keumyoung.mukin.fragment.GenreFragment;
 import kr.keumyoung.mukin.fragment.HomeFragment;
@@ -162,4 +163,6 @@ public interface MainComponent {
     void inject(LyricsTimingHelper lyricsTimingHelper);
 
     void inject(TopHitsFragment topHitsFragment);
+
+    void inject(FavoritesFragment favoritesFragment);
 }

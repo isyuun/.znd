@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -40,7 +39,7 @@ import kr.keumyoung.mukin.util.Constants;
  * on 12/01/18.
  */
 
-public class HomeFragment extends _BaseFragment {
+public class HomeFragment extends BaseFragment {
 
     @Inject
     Bus bus;
@@ -50,23 +49,21 @@ public class HomeFragment extends _BaseFragment {
 
     @BindView(R.id.search_edit_frame)
     CardView searchEditFrame;
-    @BindView(R.id.newsongs_item)
+    @BindView(R.id.featured_item)
     LinearLayout featuredItem;
     @BindView(R.id.tophits_item)
     LinearLayout tophitsItem;
     @BindView(R.id.genres_item)
     LinearLayout genresItem;
-    @BindView(R.id.favorites_item)
+    @BindView(R.id.artists_item)
     LinearLayout artistsItem;
     @BindView(R.id.list_section)
     LinearLayout listSection;
     @BindView(R.id.search_et)
     EditText searchEt;
-    @BindView(R.id.search_btn)
-    ImageButton searchBTN;
     @BindView(R.id.search_close)
     ImageView searchClose;
-    @BindView(R.id.newsongs_ripple)
+    @BindView(R.id.featured_ripple)
     RippleView featuredRipple;
     @BindView(R.id.child_fragment_container)
     FrameLayout childFragmentContainer;
@@ -76,17 +73,16 @@ public class HomeFragment extends _BaseFragment {
     RippleView topHitRipple;
     @BindView(R.id.genre_ripple)
     RippleView genreRipple;
-    @BindView(R.id.favorite_ripple)
-    RippleView favoriteRipple;
+    @BindView(R.id.artist_ripple)
+    RippleView artistRipple;
 
     RecommendedFragment recommendedFragment;
     FeaturedFragment featuredFragment;
     TopHitsFragment topHitsFragment;
     GenreFragment genreFragment;
+    ArtistFragment artistFragment;
     SearchFragment searchFragment;
     SongsFragment songsFragment;
-    ArtistFragment artistFragment;
-    FavoritesFragment favoritesFragment;
 
     Unbinder unbinder;
 
@@ -186,7 +182,7 @@ public class HomeFragment extends _BaseFragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.search_edit_ripple, R.id.newsongs_item, R.id.tophits_item, R.id.genres_item, R.id.favorites_item, R.id.search_close})
+    @OnClick({R.id.search_edit_ripple, R.id.featured_item, R.id.tophits_item, R.id.genres_item, R.id.artists_item, R.id.search_close})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.search_edit_ripple:
@@ -204,7 +200,7 @@ public class HomeFragment extends _BaseFragment {
                     });
                 }
                 break;
-            case R.id.newsongs_item:
+            case R.id.featured_item:
                 featuredRipple.setOnRippleCompleteListener(rippleView -> {
                     if (featuredFragment == null) featuredFragment = new FeaturedFragment();
                     replaceChildFragment(featuredFragment);
@@ -222,12 +218,10 @@ public class HomeFragment extends _BaseFragment {
                     replaceChildFragment(genreFragment);
                 });
                 break;
-            case R.id.favorites_item:
-                favoriteRipple.setOnRippleCompleteListener(rippleView -> {
-                    //if (artistFragment == null) artistFragment = new ArtistFragment();
-                    //replaceChildFragment(artistFragment);
-                    if (favoritesFragment == null) favoritesFragment = new FavoritesFragment();
-                    replaceChildFragment(favoritesFragment);
+            case R.id.artists_item:
+                artistRipple.setOnRippleCompleteListener(rippleView -> {
+                    if (artistFragment == null) artistFragment = new ArtistFragment();
+                    replaceChildFragment(artistFragment);
                 });
                 break;
             case R.id.search_close:

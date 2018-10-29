@@ -136,6 +136,18 @@ public interface RestApi {
             @Body RequestModel<SongHitRequest> request
     );
 
+    @POST("kymedia/_table/usersongs")
+    Call<ResponseBody> addFavoriteSong(
+            @Header("X-DreamFactory-Session-Token") String sessionToken,
+            @Body RequestModel<UserSongRequest> request
+    );
+
+    @DELETE("kymedia/_table/usersongs")
+    Call<ResponseBody> delFavoriteSong(
+            @Header("X-DreamFactory-Session-Token") String sessionToken,
+            @Body RequestModel<UserSongRequest> request
+    );
+
     @PUT("system/user/{userid}")
     Call<ResponseBody> updateUserRole(
             @Header("X-DreamFactory-Session-Token") String sessionToken,

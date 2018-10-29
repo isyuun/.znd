@@ -85,13 +85,14 @@ public class HomeActivity2 extends HomeActivity {
     private SessionRefreshListener sessionRefreshListener = new SessionRefreshListener() {
         @Override
         public void onSessionRefresh() {
-            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + song + ":" + preferenceHelper.getString(PreferenceKeys.USER_ID) + ":" + song.getSongId()  + ":" + song.getSongTitle() + ":");
+            //if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + song + ":" + preferenceHelper.getString(PreferenceKeys.USER_ID) + ":" + song.getSongId()  + ":" + song.getSongTitle() + ":");
             if (song != null) onSongSelected(song);
         }
     };
 
+    @Override
     public void onSongSelected(Song song) {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + song + ":" + preferenceHelper.getString(PreferenceKeys.USER_ID) + ":" + song.getSongId()  + ":" + song.getSongTitle() + ":");
+        //if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + song + ":" + preferenceHelper.getString(PreferenceKeys.USER_ID) + ":" + song.getSongId()  + ":" + song.getSongTitle() + ":");
         this.song = song;
         CommonHelper.hideSoftKeyboard(this);
 
@@ -105,7 +106,7 @@ public class HomeActivity2 extends HomeActivity {
                         try {
                             ResponseBody responseBody = response.body();
                             ResponseBody errorBody = response.errorBody();
-                            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "updateSongHits:updateSongHits:onResponse()" + "\n" + errorBody + "\n" + responseBody);
+                            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[OK]" + "updateSongHits:updateSongHits:onResponse()" + "\n" + errorBody + "\n" + responseBody);
                             if (responseBody != null) {
                                 hideProgress();
                                 Bundle bundle = new Bundle();
@@ -114,7 +115,7 @@ public class HomeActivity2 extends HomeActivity {
                                 navigationHelper.navigate(HomeActivity2.this, PlayerActivity.class, false, bundle);
                             } else if (errorBody != null) {
                                 String errorString = errorBody.string();
-                                if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "updateSongHits:updateSongHits:onResponse()" + "\n" + errorString);
+                                if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[NG]" + "updateSongHits:updateSongHits:onResponse()" + "\n" + errorString);
                                 JSONObject errorObject = new JSONObject(errorString);
                                 if (!handleDFError(errorObject, sessionRefreshListener)) {
                                     hideProgress();

@@ -51,7 +51,7 @@
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:typeface="sans"
-                    android:text="@string/featured"
+                    android:text="@string/newsongs"
                     android:textColor="@android:color/white"
                     android:textSize="18sp"
                     android:visibility="gone" />

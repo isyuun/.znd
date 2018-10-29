@@ -44,7 +44,7 @@ import retrofit2.Response;
  * on 13/01/18.
  */
 
-public class SongsFragment extends _BaseFragment {
+public class SongsFragment extends BaseFragment {
 
     @Inject
     PreferenceHelper preferenceHelper;
@@ -125,36 +125,36 @@ public class SongsFragment extends _BaseFragment {
         activity.hideMenuIcon();
 
         parentFragment.hideIcons();
-        //parentFragment.activateSearch();
-        //initiateTextWatcher();
+//        parentFragment.activateSearch();
+//        initiateTextWatcher();
     }
 
-    //private void initiateTextWatcher() {
-    //    textWatcher = new TextWatcher() {
-    //        @Override
-    //        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-    //
-    //        }
-    //
-    //        @Override
-    //        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-    //
-    //        }
-    //
-    //        @Override
-    //        public void afterTextChanged(Editable editable) {
-    //            String keyword = editable.toString().trim();
-    //            if (keyword.isEmpty()) populateSongs();
-    //            else processSearch(keyword);
-    //        }
-    //    };
-    //    parentFragment.addTextWatcher(textWatcher);
-    //}
-    //
-    //private void processSearch(String keyword) {
-    //    String filter = String.format("((%s) and (songtitle like %%%s%%) or (songsubtitle like %%%s%%))", this.filter, keyword, keyword);
-    //    populateSongs(filter, false, 0);
-    //}
+    private void initiateTextWatcher() {
+        textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String keyword = editable.toString().trim();
+                if (keyword.isEmpty()) populateSongs();
+                else processSearch(keyword);
+            }
+        };
+        parentFragment.addTextWatcher(textWatcher);
+    }
+
+    private void processSearch(String keyword) {
+        String filter = String.format("((%s) and (songtitle like %%%s%%) or (songsubtitle like %%%s%%))", this.filter, keyword, keyword);
+        populateSongs(filter, false, 0);
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -197,8 +197,6 @@ public class SongsFragment extends _BaseFragment {
     }
 
     private void populateSongs(String filter, boolean showProgress, int offset) {
-        if (songAdapter.getItemCount() == 0) songsSwipeRefresh.setRefreshing(true);
-        else songAdapter.setLoading(true);
         try {
             if (showProgress) activity.showProgress();
             System.out.println("FILTER: " + filter);

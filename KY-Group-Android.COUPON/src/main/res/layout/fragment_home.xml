@@ -16,7 +16,7 @@
         android:orientation="horizontal">
 
         <com.andexert.library.RippleView
-            android:id="@+id/featured_ripple"
+            android:id="@+id/newsongs_ripple"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -26,7 +26,7 @@
             app:rv_rippleDuration="100">
 
             <LinearLayout
-                android:id="@+id/featured_item"
+                android:id="@+id/newsongs_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -35,12 +35,12 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/featured_icon" />
+                    android:src="@drawable/newsongs_icon" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/featured"
+                    android:text="@string/newsongs"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:typeface="sans"
@@ -121,7 +121,7 @@
         </com.andexert.library.RippleView>
 
         <com.andexert.library.RippleView
-            android:id="@+id/artist_ripple"
+            android:id="@+id/favorite_ripple"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -131,7 +131,7 @@
             app:rv_rippleDuration="100">
 
             <LinearLayout
-                android:id="@+id/artists_item"
+                android:id="@+id/favorites_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -140,12 +140,12 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/artists_icon" />
+                    android:src="@drawable/favorite_icon" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/artists"
+                    android:text="@string/favorites"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:typeface="sans"
@@ -164,7 +164,7 @@
         android:layout_margin="12dp"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
-        app:rv_centered="false"
+        app:rv_centered="true"
         app:rv_color="@android:color/black"
         app:rv_rippleDuration="100">
 
@@ -182,11 +182,13 @@
                 android:background="@drawable/cardboarder_edit"
                 android:orientation="horizontal">
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/search_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="12dp"
+                    android:background="@android:color/transparent"
                     android:src="@drawable/search_icon" />
 
                 <EditText
@@ -199,7 +201,7 @@
                     android:background="@null"
                     android:focusableInTouchMode="false"
                     android:hint="@string/search_hint"
-                    android:imeOptions="actionDone"
+                    android:imeOptions="actionSearch"
                     android:inputType="text"
                     android:padding="12dp"
                     android:textColor="@android:color/white"
@@ -213,7 +215,8 @@
                 android:id="@+id/search_close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:layout_gravity="right|center"
+                android:layout_marginRight="12dp"
                 android:src="@drawable/cross_02_icon"
                 android:visibility="gone" />
 

@@ -7,13 +7,14 @@
         android:id="@+id/songs_swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"/>
+        android:visibility="visible">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/songs_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layoutAnimation="@anim/layout_animation_fall_down" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <LinearLayout
         android:id="@+id/empty_frame"

@@ -13,6 +13,7 @@ public class TableNames {
     public static final String SONGS = "songs";
     public static final String RECOMMENDED = "recommended";
     public static final String FEATURED = "featured";
+    public static final String FAVORITE = "usersongs";
     public static final String TOP_HITS = "tophits";
     public static final String SONG_ARTIST = "songartist";
 }

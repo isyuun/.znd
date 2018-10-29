@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +44,7 @@ import retrofit2.Response;
  *  on 12/01/18.
  */
 
-public class FeaturedFragment extends BaseFragment {
+public class FeaturedFragment extends _BaseFragment {
 
     @Inject
     RestApi restApi;
@@ -107,83 +106,83 @@ public class FeaturedFragment extends BaseFragment {
     public void onStart() {
         super.onStart();
         activity.changeNavigationIcon(R.drawable.back_icon);
-        activity.setHeaderText(R.string.featured);
+        activity.setHeaderText(R.string.newsongs);
         activity.hideMenuIcon();
 
         parentFragment.hideIcons();
 
-//        parentFragment.activateSearch();
-//        initiateTextWatcher();
+        //parentFragment.activateSearch();
+        //initiateTextWatcher();
     }
 
-    private void initiateTextWatcher() {
-        textWatcher = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                String keyword = editable.toString().trim();
-                if (keyword.isEmpty()) populateSongs();
-                else performSearch(keyword);
-            }
-        };
-
-        parentFragment.addTextWatcher(textWatcher);
-    }
-
-    private void performSearch(String keyword) {
-        restApi.searchCustomScript(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), getTableName(), keyword)
-                .enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        try {
-                            ResponseBody responseBody = response.body();
-                            ResponseBody errorBody = response.errorBody();
-
-                            if (responseBody != null) {
-                                String responseString = responseBody.string();
-                                JSONObject responseObject = new JSONObject(responseString);
-
-                                JSONArray resultArray = responseObject.getJSONArray(Constants.RESULT);
-                                int length = resultArray.length();
-                                songs.clear();
-                                for (int index = 0; index < length; index++) {
-                                    JSONObject songObject = resultArray.getJSONObject(index);
-                                    Song song = SongParser.convertToSongFromJson(songObject);
-                                    songs.add(song);
-                                }
-                                songAdapter.notifyDataSetChanged();
-                                updateEmptyVisibility();
-                            } else if (errorBody != null) {
-                                String errorString = errorBody.string();
-                                JSONObject errorObject = new JSONObject(errorString);
-                                if (activity.handleDFError(errorObject, sessionRefreshListener)) {
-                                    // error is handled in base activity. nothing to do here
-                                } else {
-                                    // TODO: 02/02/18 handle more errors here related to search
-                                }
-
-                            }
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                    }
-                });
-    }
+    //private void initiateTextWatcher() {
+    //    textWatcher = new TextWatcher() {
+    //        @Override
+    //        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+    //
+    //        }
+    //
+    //        @Override
+    //        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+    //
+    //        }
+    //
+    //        @Override
+    //        public void afterTextChanged(Editable editable) {
+    //            String keyword = editable.toString().trim();
+    //            if (keyword.isEmpty()) populateSongs();
+    //            else performSearch(keyword);
+    //        }
+    //    };
+    //
+    //    parentFragment.addTextWatcher(textWatcher);
+    //}
+    //
+    //private void performSearch(String keyword) {
+    //    restApi.searchCustomScript(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), getTableName(), keyword)
+    //            .enqueue(new Callback<ResponseBody>() {
+    //                @Override
+    //                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+    //                    try {
+    //                        ResponseBody responseBody = response.body();
+    //                        ResponseBody errorBody = response.errorBody();
+    //
+    //                        if (responseBody != null) {
+    //                            String responseString = responseBody.string();
+    //                            JSONObject responseObject = new JSONObject(responseString);
+    //
+    //                            JSONArray resultArray = responseObject.getJSONArray(Constants.RESULT);
+    //                            int length = resultArray.length();
+    //                            songs.clear();
+    //                            for (int index = 0; index < length; index++) {
+    //                                JSONObject songObject = resultArray.getJSONObject(index);
+    //                                Song song = SongParser.convertToSongFromJson(songObject);
+    //                                songs.add(song);
+    //                            }
+    //                            songAdapter.notifyDataSetChanged();
+    //                            updateEmptyVisibility();
+    //                        } else if (errorBody != null) {
+    //                            String errorString = errorBody.string();
+    //                            JSONObject errorObject = new JSONObject(errorString);
+    //                            if (activity.handleDFError(errorObject, sessionRefreshListener)) {
+    //                                // error is handled in base activity. nothing to do here
+    //                            } else {
+    //                                // TODO: 02/02/18 handle more errors here related to search
+    //                            }
+    //
+    //                        }
+    //
+    //                    } catch (Exception e) {
+    //                        e.printStackTrace();
+    //                    }
+    //                }
+    //
+    //                @Override
+    //                public void onFailure(Call<ResponseBody> call, Throwable t) {
+    //
+    //                }
+    //            });
+    //}
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -230,6 +229,7 @@ public class FeaturedFragment extends BaseFragment {
 
         if (offset == 0) {
             activity.showProgress();
+            featuredSwipeRefresh.setRefreshing(true);
         } else {
             songAdapter.setLoading(true);
             songAdapter.notifyDataSetChanged();
@@ -237,7 +237,7 @@ public class FeaturedFragment extends BaseFragment {
 
         isLoading = true;
 
-        restApi.tableGetRequestWithRelated(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), getTableName(), Constants.ALL)
+        restApi.tableGetRequestWithRelated(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), TableNames.FEATURED, Constants.ALL)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -291,9 +291,9 @@ public class FeaturedFragment extends BaseFragment {
                 });
     }
 
-    protected String getTableName() {
-        return TableNames.FEATURED;
-    }
+    //protected String getTableName() {
+    //    return TableNames.FEATURED;
+    //}
 
     private void updateEmptyVisibility() {
         try {

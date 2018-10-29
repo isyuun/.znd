@@ -33,10 +33,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingBottom="8dp"
                 android:paddingLeft="16dp"
+                android:paddingTop="8dp"
                 android:paddingRight="16dp"
-                android:paddingTop="8dp">
+                android:paddingBottom="8dp">
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/album_image"
@@ -49,41 +49,41 @@
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_weight="1">
 
                     <TextView
                         android:id="@+id/song_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:maxLines="1"
                         android:ellipsize="end"
-                        android:typeface="sans"
+                        android:maxLines="1"
                         android:textColor="@color/list_text_color"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:typeface="sans" />
 
                     <TextView
                         android:id="@+id/artist_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/song_name"
-                        android:maxLines="1"
                         android:ellipsize="end"
-                        android:typeface="sans"
+                        android:maxLines="1"
                         android:textColor="@color/list_sub_text_color"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:typeface="sans" />
 
                     <TextView
                         android:id="@+id/hits_count_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:maxLines="1"
                         android:ellipsize="end"
-                        android:typeface="sans"
+                        android:maxLines="1"
                         android:textColor="@color/list_bottom_text_color"
-                        android:textSize="10sp" />
+                        android:textSize="10sp"
+                        android:typeface="sans" />
 
                 </RelativeLayout>
 
@@ -92,21 +92,29 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="16dp"
                     android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
                     android:background="@drawable/blank_button_bg"
-                    android:paddingBottom="6dp"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:paddingTop="6dp"
-                    android:maxLines="1"
                     android:ellipsize="end"
-                    android:typeface="sans"
+                    android:maxLines="1"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="6dp"
                     android:text="@string/sing"
                     android:textColor="@color/colorAccent"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:typeface="sans"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_favorite_off"
+                    android:visibility="visible" />
             </LinearLayout>
         </com.andexert.library.RippleView>
     </RelativeLayout>

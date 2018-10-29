@@ -23,7 +23,7 @@
     <!--android:data="http://www.android.com" />-->
     <!--</header>-->
 
-    <header android:title="@string/pref_header_login_coupon" />
+    <!--<header android:title="@string/pref_header_login_coupon" />-->
 
     <!--<header-->
     <!--android:fragment="kr.keumyoung.karaoke.mukin.coupon.fragment._login"-->
@@ -38,7 +38,7 @@
         android:fragment="kr.keumyoung.karaoke.mukin.coupon.fragment._coupon"
         android:title="@string/pref_coupon" />
 
-    <header android:title="@string/pref_header_app_infomation" />
+    <!--<header android:title="@string/pref_header_app_infomation" />-->
 
     <header
         android:fragment="kr.keumyoung.karaoke.mukin.coupon.fragment._notice"
