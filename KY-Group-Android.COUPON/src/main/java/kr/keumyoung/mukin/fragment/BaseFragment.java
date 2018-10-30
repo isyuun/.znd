@@ -4,20 +4,20 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-import kr.keumyoung.mukin.activity.HomeActivity;
+import kr.keumyoung.mukin.activity._HomeActivity;
 
 /**
- *  on 12/01/18.
+ * on 12/01/18.
  */
 
 public class BaseFragment extends Fragment {
 
-    public HomeActivity activity;
+    public _HomeActivity activity;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = (HomeActivity) getActivity();
+        activity = (_HomeActivity) getActivity();
     }
 
     public boolean onNavigationClick() {

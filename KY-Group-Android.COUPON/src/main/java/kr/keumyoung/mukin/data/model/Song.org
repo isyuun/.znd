@@ -157,14 +157,4 @@ public class Song extends SongModel implements Serializable {
     public void setGender(String gender) {
         this.gender = gender;
     }
-
-    private boolean favorite = false;
-
-    public boolean getFavorite() {
-        return favorite;
-    }
-
-    public void setFavorite(boolean favorite) {
-        this.favorite = favorite;
-    }
 }

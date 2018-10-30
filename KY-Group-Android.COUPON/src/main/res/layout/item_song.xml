@@ -14,110 +14,130 @@
         android:layout_margin="8dp"
         android:visibility="gone" />
 
-    <RelativeLayout
+    <com.andexert.library.RippleView
         android:id="@+id/parent_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible">
+        android:visibility="visible"
+        app:rv_centered="false"
+        app:rv_color="@android:color/black"
+        app:rv_rippleDuration="100"
+        app:rv_type="simpleRipple">
 
-        <com.andexert.library.RippleView
-            android:id="@+id/ripple_view"
+        <!--<RelativeLayout-->
+        <!--android:id="@+id/ripple_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_toLeftOf="@+id/favorite_ripple"-->
+        <!--android:visibility="visible">-->
+
+        <LinearLayout
+            android:id="@+id/song_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:rv_centered="false"
-            app:rv_color="@android:color/black"
-            app:rv_rippleDuration="200"
-            app:rv_type="simpleRipple">
+            android:layout_toLeftOf="@+id/favorite_ripple"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:visibility="visible">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="16dp"
-                android:paddingTop="8dp"
-                android:paddingRight="16dp"
-                android:paddingBottom="8dp">
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/album_image"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/dummy"
+                app:riv_corner_radius="4dp" />
 
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/album_image"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/dummy"
-                    app:riv_corner_radius="4dp" />
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/song_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:textColor="@color/list_text_color"
-                        android:textSize="14sp"
-                        android:typeface="sans" />
-
-                    <TextView
-                        android:id="@+id/artist_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/song_name"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:textColor="@color/list_sub_text_color"
-                        android:textSize="12sp"
-                        android:typeface="sans" />
-
-                    <TextView
-                        android:id="@+id/hits_count_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:textColor="@color/list_bottom_text_color"
-                        android:textSize="10sp"
-                        android:typeface="sans" />
-
-                </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/sing_button"
+                    android:id="@+id/song_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
-                    android:background="@drawable/blank_button_bg"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:paddingLeft="12dp"
-                    android:paddingTop="6dp"
-                    android:paddingRight="12dp"
-                    android:paddingBottom="6dp"
-                    android:text="@string/sing"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="12sp"
-                    android:typeface="sans"
-                    android:visibility="gone" />
+                    android:textColor="@color/list_text_color"
+                    android:textSize="14sp"
+                    android:typeface="sans" />
 
-                <ImageView
+                <TextView
+                    android:id="@+id/artist_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_favorite_off"
-                    android:visibility="visible" />
-            </LinearLayout>
+                    android:layout_below="@+id/song_name"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/list_sub_text_color"
+                    android:textSize="12sp"
+                    android:typeface="sans" />
+
+                <TextView
+                    android:id="@+id/hits_count_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/list_bottom_text_color"
+                    android:textSize="10sp"
+                    android:typeface="sans" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/sing_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/blank_button_bg"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingLeft="12dp"
+                android:paddingTop="6dp"
+                android:paddingRight="12dp"
+                android:paddingBottom="6dp"
+                android:text="@string/sing"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"
+                android:typeface="sans"
+                android:visibility="gone" />
+
+        </LinearLayout>
+        <!--</RelativeLayout>-->
+
+        <com.andexert.library.RippleView
+            android:id="@+id/favorite_ripple"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="12dp"
+            android:layout_marginRight="12dp"
+            app:rv_centered="true"
+            app:rv_color="@android:color/black"
+            app:rv_rippleDuration="100">
+
+            <CheckBox
+                android:id="@+id/favorite_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_favorite"
+                android:button="@null"
+                android:scaleType="center"
+                android:src="@drawable/ic_favorite"
+                android:visibility="visible" />
         </com.andexert.library.RippleView>
-    </RelativeLayout>
+    </com.andexert.library.RippleView>
 
     <View
         android:layout_width="match_parent"

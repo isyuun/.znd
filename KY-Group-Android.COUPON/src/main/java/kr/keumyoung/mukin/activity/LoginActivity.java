@@ -91,7 +91,7 @@ public class LoginActivity extends _BaseActivity {
                 // email is saved but password is not. nothing to do
             } else {
                 passwordEt.setText(savedPassword);
-                //onViewClicked(loginButton);
+                //onSongSelected(loginButton);
             }
         }
     }

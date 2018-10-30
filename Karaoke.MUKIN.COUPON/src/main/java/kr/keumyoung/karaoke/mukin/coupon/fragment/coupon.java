@@ -60,7 +60,7 @@ public class coupon extends _user {
         if (getCoupon() != null && !getCoupon().isEmpty()) {
             //String text = getString(R.string.message_already_coupon, getCoupon());
             String text = getString(R.string.message_already_coupon_1);
-            text += "\n" + getApplication().checkDate();
+            text += "\n" + getApplication().getCouponDate(true);
             Toast.makeText(getBaseContext(), text, Toast.LENGTH_LONG).show();
             showProgress(false);
             getActivity().onBackPressed();
@@ -76,8 +76,9 @@ public class coupon extends _user {
     public void onSuccess(int status, Header[] headers, String response) {
         super.onSuccess(status, headers, response);
         if (getCoupon() != null && !getCoupon().isEmpty()) {
-            Log.e(__CLASSNAME__, getMethodName() + ":" + mCouponView + ":" + getCoupon() + ":" + getApplication().checkDate());
-            ((TextView)findViewById(R.id.coupon_date)).setText(getApplication().checkDate() + "\n");
+            String couponDate = getApplication().getCouponDate(false);
+            Log.e(__CLASSNAME__, getMethodName() + ":" + mCouponView + ":" + getCoupon() + ":" + couponDate);
+            ((TextView)findViewById(R.id.coupon_date)).setText(couponDate + "\n");
             findViewById(R.id.coupon_date).setVisibility(View.VISIBLE);
             mCouponView.setEnabled(false);
         } else {

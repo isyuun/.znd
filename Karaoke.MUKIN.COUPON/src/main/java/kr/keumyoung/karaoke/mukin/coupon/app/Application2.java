@@ -17,7 +17,6 @@ import java.util.HashMap;
 import cz.msebera.android.httpclient.Header;
 import kr.keumyoung.karaoke.mukin.coupon.BuildConfig;
 import kr.keumyoung.karaoke.mukin.coupon.R;
-import kr.kymedia.karaoke.util.DeviceUuidFactory;
 
 public class Application2 extends Application {
     public String email;
@@ -119,11 +118,12 @@ public class Application2 extends Application {
         this.responsHandler = responsHandler;
     }
 
-    public String checkDate() {
+    public String getCouponDate(boolean simple) {
         //2018-09-18 13:52:47.067
         SimpleDateFormat f1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         //2018/09/18-13:52
         SimpleDateFormat f2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        if (simple) f2 = new SimpleDateFormat("yyyy-MM-dd");
         String date = "기간:";
         try {
             if (sdate != null && !sdate.isEmpty()) date += f2.format(f1.parse(sdate));
@@ -162,7 +162,7 @@ public class Application2 extends Application {
             editor.putString(getString(R.string.coupon), this.coupon);
             this.sdate = (dat.has(getString(R.string.sdate)) ? dat.getString(getString(R.string.sdate)) : null);
             this.edate = (dat.has(getString(R.string.edate)) ? dat.getString(getString(R.string.edate)) : null);
-            date = checkDate();
+            date = getCouponDate(true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -170,8 +170,9 @@ public class Application2 extends Application {
         if (!code.equalsIgnoreCase("000")) {
             editor.remove(getString(R.string.coupon));
         }
-        String msg = "[" + code +"]";
+        String msg = "";
         msg += message;
+        msg += "[" + code +"]";
         msg += "\n" + date;
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
         editor.commit();

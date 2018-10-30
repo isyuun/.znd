@@ -232,6 +232,7 @@ public class SearchFragment extends _BaseFragment {
                                 for (int index = 0; index < length; index++) {
                                     JSONObject songObject = resultArray.getJSONObject(index);
                                     Song song = SongParser.convertToSongFromJson(songObject);
+                                    song.setFavorite(activity.isFavorites(song.getSongId()));
                                     songs.add(song);
                                 }
                                 countText.setText(String.format("%s %s", Integer.toString(length),

@@ -20,6 +20,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.adapter.SongAdapter;
@@ -35,6 +36,7 @@ import kr.keumyoung.mukin.util.Constants;
 import kr.keumyoung.mukin.util.PaginationScrollListener;
 import kr.keumyoung.mukin.util.PreferenceKeys;
 import kr.keumyoung.mukin.util.TableNames;
+import kr.kymedia.karaoke.util.Log;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,6 +47,7 @@ import retrofit2.Response;
  */
 
 public class FavoritesFragment extends _BaseFragment {
+    private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
     @Inject
     RestApi restApi;
@@ -196,8 +199,6 @@ public class FavoritesFragment extends _BaseFragment {
         featuredRecycler.setLayoutManager(manager);
         featuredRecycler.setAdapter(songAdapter);
 
-        if (songs.isEmpty()) populateSongs();
-
         featuredRecycler.addOnScrollListener(new PaginationScrollListener(manager) {
             @Override
             public boolean isLoading() {
@@ -217,7 +218,15 @@ public class FavoritesFragment extends _BaseFragment {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (songs.isEmpty() || (songs.size() != activity.getFavorites().size())) populateSongs();
+    }
+
     private void populateSongs() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
         populateSongs(0);
     }
 
@@ -255,6 +264,7 @@ public class FavoritesFragment extends _BaseFragment {
                                 for (int index = 0; index < length; index++) {
                                     JSONObject songObject = songArray.getJSONObject(index);
                                     Song song = SongParser.convertToSongFromJson(songObject);
+                                    song.setFavorite(activity.isFavorites(song.getSongId()));
                                     songs.add(song);
                                 }
                                 if (activity.isShowingProgress()) activity.hideProgress();

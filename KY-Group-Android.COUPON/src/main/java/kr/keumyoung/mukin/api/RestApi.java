@@ -139,13 +139,13 @@ public interface RestApi {
     @POST("kymedia/_table/usersongs")
     Call<ResponseBody> addFavoriteSong(
             @Header("X-DreamFactory-Session-Token") String sessionToken,
-            @Body RequestModel<UserSongRequest> request
+            @Body RequestModel<SongHitRequest> request
     );
 
     @DELETE("kymedia/_table/usersongs")
     Call<ResponseBody> delFavoriteSong(
             @Header("X-DreamFactory-Session-Token") String sessionToken,
-            @Body RequestModel<UserSongRequest> request
+            @Query("filter") String filter
     );
 
     @PUT("system/user/{userid}")

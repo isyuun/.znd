@@ -2,11 +2,17 @@ package kr.keumyoung.mukin.fragment;
 
 import android.os.Handler;
 
-import kr.keumyoung.mukin.api.RequestModel;
-import kr.keumyoung.mukin.data.request.SongHitRequest;
-import kr.keumyoung.mukin.util.PreferenceKeys;
-
 public class BaseFragment2 extends BaseFragment {
+    private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
+
+    protected String getMethodName() {
+        String name = Thread.currentThread().getStackTrace()[3].getMethodName();
+        String text = String.format("%s()", name);
+        // int line = Thread.currentThread().getStackTrace()[3].getLineNumber();
+        // text = String.format("line:%d - %s() ", line, name);
+        return text;
+    }
+
     Handler handler = new Handler();
 
     public final boolean post(Runnable r) {
@@ -17,13 +23,5 @@ public class BaseFragment2 extends BaseFragment {
     public final boolean postDelayed(Runnable r, long delayMillis) {
         handler.removeCallbacks(r);
         return handler.postDelayed(r, delayMillis);
-    }
-
-    protected  void addFavoriteSong(String userid, String songid) {
-        RequestModel<SongHitRequest> model = new RequestModel<>(new SongHitRequest(userid, songid));
-    }
-
-    protected  void delFavoriteSong(String userid, String songid) {
-        RequestModel<SongHitRequest> model = new RequestModel<>(new SongHitRequest(userid, songid));
     }
 }

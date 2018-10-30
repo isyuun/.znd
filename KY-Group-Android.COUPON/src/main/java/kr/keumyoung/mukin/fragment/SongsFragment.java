@@ -225,6 +225,7 @@ public class SongsFragment extends _BaseFragment {
                                         for (int index = 0; index < length; index++) {
                                             JSONObject songObject = songsArray.getJSONObject(index);
                                             Song song = SongParser.convertToSongFromJson(songObject);
+                                            song.setFavorite(activity.isFavorites(song.getSongId()));
                                             songs.add(song);
                                         }
                                         if (showProgress) activity.hideProgress();

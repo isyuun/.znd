@@ -258,6 +258,7 @@ public class TopHitsFragment extends _BaseFragment {
                                 for (int index = 0; index < length; index++) {
                                     JSONObject songObject = songArray.getJSONObject(index);
                                     Song song = SongParser.convertToSongFromJson(songObject);
+                                    song.setFavorite(activity.isFavorites(song.getSongId()));
                                     songs.add(song);
                                 }
                                 if (activity.isShowingProgress()) activity.hideProgress();
