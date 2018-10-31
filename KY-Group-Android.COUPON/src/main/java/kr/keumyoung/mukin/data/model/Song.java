@@ -160,11 +160,22 @@ public class Song extends SongModel implements Serializable {
 
     private boolean favorite = false;
 
-    public boolean getFavorite() {
+    public boolean isFavorite() {
         return favorite;
     }
 
     public void setFavorite(boolean favorite) {
         this.favorite = favorite;
     }
+
+    private boolean free = false;
+
+    public boolean isFree() {
+        return free;
+    }
+
+    public void setFree(boolean free) {
+        this.free = free;
+    }
+
 }

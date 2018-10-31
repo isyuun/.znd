@@ -3,15 +3,12 @@ package kr.keumyoung.mukin.viewholder;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.andexert.library.RippleView;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.otto.Bus;
 
@@ -23,19 +20,10 @@ import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.adapter.SongAdapter;
-import kr.keumyoung.mukin.api.RequestModel;
-import kr.keumyoung.mukin.api.RestApi;
 import kr.keumyoung.mukin.data.model.Song;
 import kr.keumyoung.mukin.data.model.SongView;
-import kr.keumyoung.mukin.data.request.SongHitRequest;
 import kr.keumyoung.mukin.helper.DateHelper;
 import kr.keumyoung.mukin.helper.MediaManager;
-import kr.keumyoung.mukin.helper.PreferenceHelper;
-import kr.keumyoung.mukin.util.PreferenceKeys;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * on 12/01/18.
@@ -76,8 +64,8 @@ public class SongViewHolder extends RecyclerView.ViewHolder {
     TextView artistName;
     @BindView(R.id.hits_count_text)
     TextView hitsCountText;
-    @BindView(R.id.sing_button)
-    TextView singButton;
+    @BindView(R.id.free_button)
+    TextView freeButton;
     @BindView(R.id.loading)
     ProgressBar loading;
     @BindView(R.id.parent_item)
@@ -133,6 +121,12 @@ public class SongViewHolder extends RecyclerView.ViewHolder {
 
         hitsCountText.setText(String.format("%s", hitsText));
 
-        favoriteButton.setChecked(song.getFavorite());
+        favoriteButton.setChecked(song.isFavorite());
+
+        if (song.isFree()) {
+            freeButton.setVisibility(View.VISIBLE);
+        } else {
+            freeButton.setVisibility(View.GONE);
+        }
     }
 }

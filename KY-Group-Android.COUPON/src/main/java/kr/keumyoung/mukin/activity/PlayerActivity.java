@@ -82,6 +82,8 @@ import kr.keumyoung.mukin.util.PreferenceKeys;
  */
 
 public class PlayerActivity extends _BaseActivity {
+    private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
+
     private static final int SAMPLE_RATE = 44100;
     private static final int BUFFER_SIZE = 480;
     private static final String TAG = PlayerActivity.class.getName();
@@ -783,6 +785,11 @@ public class PlayerActivity extends _BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + song.isFree() + ":" + preferenceHelper.getString(getString(R.string.coupon), "").isEmpty());
+        if (!song.isFree() && preferenceHelper.getString(getString(R.string.coupon), "").isEmpty()) {
+            openPreferenceCoupon();
+            finish();
+        }
         getFavoriteSongs();
     }
 

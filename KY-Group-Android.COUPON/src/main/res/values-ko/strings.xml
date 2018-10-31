@@ -26,6 +26,7 @@
     <string name="artists">가수별</string>
     <string name="recommended">추천곡</string>
     <string name="sing">노래하기</string>
+    <string name="free">공짜</string>
     <string name="songs">노래</string>
     <string name="search">검색</string>
     <string name="works_best_with_headphone">헤드폰 사용시 녹음 음질이 좋습니다.</string>

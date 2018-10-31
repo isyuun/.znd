@@ -11,6 +11,12 @@ import kr.keumyoung.mukin.util.Constants;
 
 public class SongParser {
 
+    private static ArrayList<String> FREE_SONG = new ArrayList<String>() {{
+        //add("A");
+        //add("B");
+        //add("C");
+    }};
+
     public static Song convertToSongFromJson(JSONObject object) throws JSONException {
         Song song = new Song();
         JSONObject songObject = object.getJSONObject(Constants.SONG);
@@ -46,6 +52,8 @@ public class SongParser {
             genreNames.add(genreObject.getString(Constants.GENRE_NAME));
         }
         song.setGenreName(genreNames);
+
+        song.setFree(FREE_SONG.contains(song.getSongId()));
 
         return song;
     }
