@@ -4,8 +4,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.SeekBar;
-import android.widget.TextView;
 
 import com.andexert.library.RippleView;
 import com.squareup.otto.Bus;
@@ -19,7 +17,6 @@ import kr.keumyoung.bubbleseekbar.BubbleSeekBar;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.activity.PlayerActivity;
-import kr.keumyoung.mukin.data.PlayerLog;
 import kr.keumyoung.mukin.util.PreferenceKeys;
 
 /**
@@ -91,7 +88,7 @@ public class PitchPopup extends ControlsPopup implements BubbleSeekBar.OnProgres
     public void getProgressOnFinally(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat, boolean fromUser) {
         if (fromUser) {
             int paramValue = progress;
-            if(instance!= null && instance.getPlayerJNI() != null) {
+            if (instance != null && instance.getPlayerJNI() != null) {
                 instance.getPlayerJNI().SetKeyControl(paramValue);
                 instance.getPreferenceHelper().saveInt(PreferenceKeys.PITCH_VALUE, paramValue);
             }

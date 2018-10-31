@@ -109,13 +109,6 @@ public class RecommendedFragment extends _BaseFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        //CommonHelper.hideSoftKeyboard(activity);
-        activity.hideNavigationIcon();
-    }
-
-    @Override
     public void onStop() {
         super.onStop();
     }
@@ -249,5 +242,13 @@ public class RecommendedFragment extends _BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //CommonHelper.hideSoftKeyboard(activity);
+        activity.hideNavigationIcon();
+        activity.updateFavoriteSongs(songs, songAdapter);
     }
 }

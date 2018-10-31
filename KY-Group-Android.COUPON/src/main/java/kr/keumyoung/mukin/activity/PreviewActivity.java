@@ -72,8 +72,9 @@ import kr.keumyoung.mukin.activity.SongSearchApi;
 
 /**
  * on 15/01/18.
+ * 0.0(5) isyuun:녹음기능제거
  */
-
+@Deprecated
 public class PreviewActivity extends BaseActivity implements MediaPlayer.OnCompletionListener, SeekBar.OnSeekBarChangeListener {
 
     private static final int SAMPLE_RATE = 44100;

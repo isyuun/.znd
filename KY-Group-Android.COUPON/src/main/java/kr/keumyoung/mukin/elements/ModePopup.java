@@ -22,7 +22,7 @@ import kr.keumyoung.mukin.activity.PlayerActivity;
 import kr.keumyoung.mukin.data.bus.ModePopupAction;
 
 /**
- *  on 16/01/18.
+ * on 16/01/18.
  */
 
 public class ModePopup extends ControlsPopup {

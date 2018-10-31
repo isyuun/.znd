@@ -343,4 +343,10 @@ public class TopHitsFragment extends _BaseFragment {
         super.onDestroyView();
         unbinder.unbind();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        activity.updateFavoriteSongs(songs, songAdapter);
+    }
 }

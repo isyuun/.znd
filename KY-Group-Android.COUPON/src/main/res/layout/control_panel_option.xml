@@ -18,13 +18,13 @@
             android:id="@+id/item_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/effect_off_icon" />
+            android:src="@drawable/favorite_off_icon" />
 
         <TextView
             android:id="@+id/item_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/effects"
+            android:text="@string/favorites"
             android:typeface="sans"
             android:textColor="@color/fifty_white"
             android:textSize="10sp" />

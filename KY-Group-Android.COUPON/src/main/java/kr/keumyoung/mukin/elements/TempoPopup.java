@@ -4,7 +4,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.andexert.library.RippleView;
@@ -19,7 +18,7 @@ import kr.keumyoung.bubbleseekbar.BubbleSeekBar;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.activity.PlayerActivity;
-import kr.keumyoung.mukin.data.PlayerLog;
+import kr.keumyoung.mukin.activity.PlayerActivity;
 import kr.keumyoung.mukin.util.PreferenceKeys;
 
 /**
@@ -104,7 +103,7 @@ public class TempoPopup extends ControlsPopup implements BubbleSeekBar.OnProgres
         if (fromUser) {
             int paramValue = progress;
             //seekValue.setText(String.format("%sx", String.valueOf(paramValue)));
-            if(instance!= null && instance.getPlayerJNI() != null) {
+            if (instance != null && instance.getPlayerJNI() != null) {
                 instance.getPlayerJNI().SetSpeedControl(paramValue * 2);
                 instance.getPreferenceHelper().saveInt(PreferenceKeys.TEMPO_VALUE, paramValue);
             }

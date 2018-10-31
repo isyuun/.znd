@@ -102,12 +102,6 @@ public class SongsFragment extends _BaseFragment {
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        //CommonHelper.hideSoftKeyboard(activity);
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -375,5 +369,12 @@ public class SongsFragment extends _BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //CommonHelper.hideSoftKeyboard(activity);
+        activity.updateFavoriteSongs(songs, songAdapter);
     }
 }

@@ -183,52 +183,52 @@ public class HomeActivity extends _BaseActivity {
     //    super.onStop();
     //    bus.unregister(this);
     //}
-
-    // on song selection, open the player activity after registering the user hit
-    @Subscribe
-    public void onSongSelected(Song song) {
-        this.song = song;
-        CommonHelper.hideSoftKeyboard(this);
-
-        showProgress();
-        setProgressMessage();
-        RequestModel<SongHitRequest> model = new RequestModel<>(new SongHitRequest(preferenceHelper.getString(PreferenceKeys.USER_ID), song.getSongId()));
-        restApi.updateSongHits(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), model)
-                .enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
-                        try {
-                            ResponseBody responseBody = response.body();
-                            ResponseBody errorBody = response.errorBody();
-
-                            if (responseBody != null) {
-                                hideProgress();
-                                Bundle bundle = new Bundle();
-                                bundle.putSerializable(Constants.SONG, song);
-                                // navigate to player activity for playing the media and processing
-                                navigationHelper.navigate(HomeActivity.this, PlayerActivity.class, false, bundle);
-                            } else if (errorBody != null) {
-                                String errorString = errorBody.string();
-                                JSONObject errorObject = new JSONObject(errorString);
-                                if (!handleDFError(errorObject, sessionRefreshListener)) {
-                                    hideProgress();
-                                    toastHelper.showError(R.string.common_api_error);
-                                }
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            hideProgress();
-                            toastHelper.showError(R.string.common_api_error);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        hideProgress();
-                        toastHelper.showError(R.string.common_api_error);
-                    }
-                });
-    }
+    //
+    //// on song selection, open the player activity after registering the user hit
+    //@Subscribe
+    //public void onSongSelected(Song song) {
+    //    this.song = song;
+    //    CommonHelper.hideSoftKeyboard(this);
+    //
+    //    showProgress();
+    //    setProgressMessage();
+    //    RequestModel<SongHitRequest> model = new RequestModel<>(new SongHitRequest(preferenceHelper.getString(PreferenceKeys.USER_ID), song.getSongId()));
+    //    restApi.updateSongHits(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), model)
+    //            .enqueue(new Callback<ResponseBody>() {
+    //                @Override
+    //                public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+    //                    try {
+    //                        ResponseBody responseBody = response.body();
+    //                        ResponseBody errorBody = response.errorBody();
+    //
+    //                        if (responseBody != null) {
+    //                            hideProgress();
+    //                            Bundle bundle = new Bundle();
+    //                            bundle.putSerializable(Constants.SONG, song);
+    //                            // navigate to player activity for playing the media and processing
+    //                            navigationHelper.navigate(HomeActivity.this, PlayerActivity.class, false, bundle);
+    //                        } else if (errorBody != null) {
+    //                            String errorString = errorBody.string();
+    //                            JSONObject errorObject = new JSONObject(errorString);
+    //                            if (!handleDFError(errorObject, sessionRefreshListener)) {
+    //                                hideProgress();
+    //                                toastHelper.showError(R.string.common_api_error);
+    //                            }
+    //                        }
+    //                    } catch (Exception e) {
+    //                        e.printStackTrace();
+    //                        hideProgress();
+    //                        toastHelper.showError(R.string.common_api_error);
+    //                    }
+    //                }
+    //
+    //                @Override
+    //                public void onFailure(Call<ResponseBody> call, Throwable t) {
+    //                    hideProgress();
+    //                    toastHelper.showError(R.string.common_api_error);
+    //                }
+    //            });
+    //}
 
     protected void openDrawer() {
         mainDrawer.openDrawer(menuContainer, true);

@@ -130,12 +130,6 @@ public class SearchFragment extends _BaseFragment {
         prepareTextWatcher();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        //CommonHelper.hideSoftKeyboard(activity);
-    }
-
     private void prepareTextWatcher() {
         textWatcher = new TextWatcher() {
             @Override
@@ -187,6 +181,7 @@ public class SearchFragment extends _BaseFragment {
     void searchSong() {
         this.editable = parentFragment.searchEt.getText();
         post(searchSong);
+        CommonHelper.hideSoftKeyboard(activity);
     }
 
     Runnable searchSong = () -> {
@@ -371,5 +366,11 @@ public class SearchFragment extends _BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //CommonHelper.hideSoftKeyboard(activity);
     }
 }

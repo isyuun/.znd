@@ -18,7 +18,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import static kr.keumyoung.mukin.elements.ControlPanel.ControlPanelOption.EFFECT;
+import static kr.keumyoung.mukin.elements.ControlPanel.ControlPanelOption.FAVORITE;
 
 /**
  *  on 15/01/18.
@@ -28,7 +28,7 @@ public class ControlPanel extends LinearLayout {
 
 
     public enum ControlPanelOption {
-        EFFECT, TEMPO, PITCH, MODE
+        FAVORITE, TEMPO, PITCH, MODE
     }
 
     ControlPanelOption controlPanelOption;
@@ -69,7 +69,7 @@ public class ControlPanel extends LinearLayout {
 
         removeAllViews();
 
-        createOptionForItem(EFFECT);
+        createOptionForItem(FAVORITE);
         createOptionForItem(ControlPanelOption.TEMPO);
         createPlayButton();
         createOptionForItem(ControlPanelOption.PITCH);
@@ -148,8 +148,30 @@ public class ControlPanel extends LinearLayout {
     public void updateEffectButtonWithState(ControlPanelItem.SelectionState buttonState) {
 
         for (ControlPanelOption option : optionMap.keySet()) {
-            if (option.equals(EFFECT))
+            if (option.equals(FAVORITE))
                 optionMap.get(option).updateSelectionWithState(buttonState);
         }
     }
+
+    /**
+     * isyuun:애창곡
+     */
+    public void updateFavoriteButtonWithState(ControlPanelItem.SelectionState buttonState) {
+
+        for (ControlPanelOption option : optionMap.keySet()) {
+            if (option.equals(FAVORITE)) {
+                optionMap.get(option).updateSelectionWithState(buttonState);
+            }
+        }
+    }
+
+    public void updateFavoriteButtonWithIcon(int resId) {
+
+        for (ControlPanelOption option : optionMap.keySet()) {
+            if (option.equals(FAVORITE)) {
+                optionMap.get(option).setImageResource(resId);
+            }
+        }
+    }
+
 }

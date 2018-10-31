@@ -15,6 +15,8 @@ import android.widget.LinearLayout;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -218,13 +220,6 @@ public class FavoritesFragment extends _BaseFragment {
         });
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        if (songs.isEmpty() || (songs.size() != activity.getFavorites().size())) populateSongs();
-    }
-
     private void populateSongs() {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
         populateSongs(0);
@@ -344,5 +339,27 @@ public class FavoritesFragment extends _BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    ArrayList<String> favorites = new ArrayList<>();
+
+    public int favorites() {
+        int ret = 0;
+        for (String song: this.favorites) {
+            if (activity.isFavorites(song)) ret++;
+        }
+        return ret;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        this.favorites.clear();
+        for (Song song : songs) {
+            this.favorites.add(song.getSongId());
+        }
+
+        if (songs.isEmpty() || favorites() > 0) populateSongs();
     }
 }

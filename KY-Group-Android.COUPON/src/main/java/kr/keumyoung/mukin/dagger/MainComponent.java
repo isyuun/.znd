@@ -5,6 +5,7 @@ import kr.keumyoung.mukin.activity.HomeActivity;
 import kr.keumyoung.mukin.activity.LoginActivity;
 //import kr.keumyoung.mukin.activity.LoginChoiceActivity;
 import kr.keumyoung.mukin.activity.PlayerActivity;
+import kr.keumyoung.mukin.activity.PlayerActivity;
 import kr.keumyoung.mukin.activity.PreviewActivity;
 import kr.keumyoung.mukin.activity.RegisterActivity;
 import kr.keumyoung.mukin.activity.ShareActivity;

@@ -16,10 +16,11 @@ import butterknife.OnClick;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.activity.PlayerActivity;
+import kr.keumyoung.mukin.activity.PlayerActivity;
 import kr.keumyoung.mukin.helper.AnimationHelper;
 
 /**
- *  on 16/01/18.
+ * on 16/01/18.
  */
 
 public abstract class ControlsPopup {

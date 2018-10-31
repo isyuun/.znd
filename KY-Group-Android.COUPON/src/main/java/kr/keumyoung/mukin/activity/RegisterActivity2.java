@@ -1,16 +1,11 @@
 package kr.keumyoung.mukin.activity;
 
-import android.accounts.Account;
 import android.annotation.TargetApi;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.view.View;
-
-import kr.kymedia.karaoke.util.EnvironmentUtils;
 
 import static android.Manifest.permission.READ_CONTACTS;
 

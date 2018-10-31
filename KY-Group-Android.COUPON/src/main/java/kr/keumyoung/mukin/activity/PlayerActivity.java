@@ -82,7 +82,6 @@ import kr.keumyoung.mukin.util.PreferenceKeys;
  */
 
 public class PlayerActivity extends _BaseActivity {
-
     private static final int SAMPLE_RATE = 44100;
     private static final int BUFFER_SIZE = 480;
     private static final String TAG = PlayerActivity.class.getName();
@@ -324,7 +323,7 @@ public class PlayerActivity extends _BaseActivity {
     }
 
     // initiate player. take song from the intent. download bitmap, song midi and song json
-    private void initiatePlayer() {
+    protected void initiatePlayer() {
         showProgress();
         Intent intent = getIntent();
         if (intent.hasExtra(Constants.DATA)) {
@@ -414,7 +413,7 @@ public class PlayerActivity extends _BaseActivity {
                         }, this::prepareMediaPlayer));
     }
 
-    private void prepareMediaPlayer() {
+    protected void prepareMediaPlayer() {
         try {
             if (playerJNI == null) playerJNI = new PlayerJNI();
 
@@ -460,11 +459,12 @@ public class PlayerActivity extends _BaseActivity {
                 onSelectionModeItem(modePopupAction);
             }
 
+            if (playerJNI != null) playerJNI.SetKeyControl(0);
+            if (playerJNI != null) playerJNI.SetSpeedControl(0);
             //setupRecorder();
 
             //dsjung 초기화면에 song total time 쓰레기 값으로 나오던 문제 수정
             songDuration.setText(dateHelper.getDuration(Math.round(playerJNI.GetTotalClocks() * microTimePerClock / 1000000)));
-
         } catch (Exception e) {
             e.printStackTrace();
             hideProgress();
@@ -641,9 +641,9 @@ public class PlayerActivity extends _BaseActivity {
         //마이크 이펙트가 팝업된 상황 + 재생중 마이크를 뺀 상황에서는
         //라스트 엑션인 마이크 이펙트를 활성화 시키면 안됨.
         if (lastAction != null
-                && lastAction.getPanelOption() == ControlPanel.ControlPanelOption.EFFECT
+                && lastAction.getPanelOption() == ControlPanel.ControlPanelOption.FAVORITE
                 && isPossibleRecord() == false) {
-            Log.d(TAG, "hideAndRestoreOperationPopup last action = EFFECT and can't record now, lastaction will be null ");
+            Log.d(TAG, "hideAndRestoreOperationPopup last action = FAVORITE and can't record now, lastaction will be null ");
             lastAction = null;
         }
 
@@ -722,9 +722,9 @@ public class PlayerActivity extends _BaseActivity {
 
     @Subscribe
     public void updateViewWithPanelOptions(ControlPanelItemAction action) {
-        if (controlPanelComponent.getPlayState() == ControlPanelPlay.PlayButtonState.INIT
-                || controlPanelComponent.getPlayState() == ControlPanelPlay.PlayButtonState.PAUSE)
-            return;
+        //if (controlPanelComponent.getPlayState() == ControlPanelPlay.PlayButtonState.INIT
+        //        || controlPanelComponent.getPlayState() == ControlPanelPlay.PlayButtonState.PAUSE)
+        //    return;
 
         boolean hide = (lastAction != null && lastAction.getPanelOption() == action.getPanelOption() && controlsPopup.getVisibility() == View.VISIBLE);
         lastAction = action;
@@ -736,8 +736,9 @@ public class PlayerActivity extends _BaseActivity {
         }
 
         switch (action.getPanelOption()) {
-            case EFFECT:
-                toastHelper.showError(R.string.mic_not_working);
+            case FAVORITE:
+                //마이크
+                //toastHelper.showError(R.string.mic_not_working);
                 //if (isPossibleRecord() == false) {
                 //    toastHelper.showError(R.string.error_miceffect_support);
                 //    break;
@@ -746,6 +747,14 @@ public class PlayerActivity extends _BaseActivity {
                 //controlsPopup.removeAllViews();
                 //controlsPopup.addView(effectsPopup.getView());
                 //controlsPopup.setVisibility(visibility);
+                /**
+                 * 애창곡
+                 */
+                if (!isFavorites(song.getSongId())) {
+                    addFavoriteSong(song);
+                } else {
+                    delFavoriteSong(song);
+                }
                 break;
 
             case MODE:
@@ -769,6 +778,33 @@ public class PlayerActivity extends _BaseActivity {
                 controlsPopup.setVisibility(View.VISIBLE);
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getFavoriteSongs();
+    }
+
+    @Override
+    protected void onFavoriteSongs() {
+        super.onFavoriteSongs();
+        enableFavoriteSong(isFavorites(song.getSongId()));
+    }
+
+    private void enableFavoriteSong(boolean bEnable) {
+        //if (bEnable)
+        //    controlPanelComponent.updateFavoriteButtonWithState(ControlPanelItem.SelectionState.NOT_SELECTED);
+        //else
+        //    controlPanelComponent.updateFavoriteButtonWithState(ControlPanelItem.SelectionState.DISABLE);
+        if (bEnable) {
+            controlPanelComponent.updateFavoriteButtonWithIcon(R.drawable.favorite_on_icon);
+            controlPanelComponent.updateFavoriteButtonWithState(ControlPanelItem.SelectionState.SELECTED);
+        } else {
+            controlPanelComponent.updateFavoriteButtonWithIcon(R.drawable.favorite_off_icon);
+            controlPanelComponent.updateFavoriteButtonWithState(ControlPanelItem.SelectionState.NOT_SELECTED);
+        }
+
     }
 
     @Override

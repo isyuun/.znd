@@ -10,6 +10,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.activity.PlayerActivity;
+import kr.keumyoung.mukin.activity.PlayerActivity;
 
 /**
  *  on 16/01/18.

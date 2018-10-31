@@ -79,9 +79,11 @@ public class ControlPanelItem extends LinearLayout {
     public void initiate(ControlPanel.ControlPanelOption option) {
         panelOption = option;
         switch (option) {
-            case EFFECT:
-                icon = R.drawable.effect_off_icon;
-                text = R.string.effects;
+            case FAVORITE:
+                //icon = R.drawable.effect_off_icon;
+                //text = R.string.effects;
+                icon = R.drawable.favorite_off_icon;
+                text = R.string.favorites;
                 break;
             case TEMPO:
                 icon = R.drawable.tempo_off_icon;
@@ -128,6 +130,10 @@ public class ControlPanelItem extends LinearLayout {
                 itemIcon.setAlpha(0.2f);
                 break;
         }
+    }
+
+    public void setImageResource(int resId) {
+        itemIcon.setImageResource(resId);
     }
 
     @OnClick(R.id.item_anchor_ripple)
