@@ -6,7 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.view.View;
+import android.widget.TextView;
 
+import butterknife.BindView;
+import kr.keumyoung.mukin.BuildConfig;
+import kr.keumyoung.mukin.R;
+import kr.keumyoung.mukin.util.CommonHelper;
 import kr.keumyoung.mukin.util.PreferenceKeys;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -47,5 +52,79 @@ public class LoginActivity2 extends LoginActivity {
     protected void onLoginSuccess(String email, String nickName) {
         super.onLoginSuccess(email, nickName);
         getFragmentManager().popBackStack();
+    }
+
+    boolean isLogin() {
+        return (!preferenceHelper.getString(getString(R.string.email)).isEmpty());
+    }
+
+    @BindView(R.id.login_text)
+    TextView loginText;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setLoginText();
+    }
+
+    private void setLoginText() {
+        if (isLogin()) {
+            loginText.setText(R.string.logout);
+        } else {
+            loginText.setText(R.string.login);
+        }
+    }
+
+    @Override
+    protected void onLogoutSuccess() {
+        super.onLogoutSuccess();
+        if (!BuildConfig.DEBUG) {
+            emailEt.setText("");
+            passwordEt.setText("");
+        }
+        setLoginText();
+    }
+
+    @Override
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.signup_anchor:
+                navigationHelper.navigate(this, _RegisterActivity.class);
+                break;
+            case R.id.login_button:
+                //로그아웃
+                if (isLogin()) {
+                    callLogout();
+                    return;
+                }
+                //로그인
+                String email = emailEt.getText().toString();
+                String password = passwordEt.getText().toString();
+
+                if (email.isEmpty()) {
+                    toastHelper.showError(R.string.email_blank_error);
+                    emailEt.requestFocus();
+                    return;
+                }
+
+                if (!CommonHelper.EmailValidator(email)) {
+                    toastHelper.showError(R.string.email_not_valid_error);
+                    emailEt.requestFocus();
+                    return;
+                }
+
+                if (password.isEmpty()) {
+                    toastHelper.showError(R.string.password_blank_error);
+                    passwordEt.requestFocus();
+                    return;
+                }
+
+                preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, email);
+                preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, password);
+
+                loginUser(email, password);
+
+                break;
+        }
     }
 }

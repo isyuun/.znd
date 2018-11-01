@@ -1,5 +1,6 @@
 package kr.keumyoung.mukin.activity;
 
+import android.app.AlertDialog;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -121,7 +122,6 @@ public class BaseActivity3 extends BaseActivity2 {
                             //navigationHelper.navigate(LoginActivity.this, _HomeActivity.class);
                             hideProgress();
                             toastHelper.showError(getString(R.string.login) + " " + nickName + ":" + userId);
-                            preferenceHelper.saveString(getString(R.string.email), email);
                             //화면이동...
                             if (preferenceHelper.getString(getString(R.string.coupon), "").isEmpty()) {
                                 openPreferenceCoupon();
@@ -157,6 +157,48 @@ public class BaseActivity3 extends BaseActivity2 {
     }
 
     protected void onLoginSuccess(String email, String nickName) {
+        preferenceHelper.saveString(getString(R.string.email), email);
+        getMainApplication().send("Q", email, "");
+    }
+
+    protected void callLogout() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage(getResources().getString(R.string.do_you_want_to_logout));
+        alertDialogBuilder.setPositiveButton(getResources().getString(R.string.yes),
+                (arg0, arg1) -> {
+                    showProgress();
+                    restApi.logout(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN)).enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            hideProgress();
+                            //preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, "");
+                            //preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, "");
+                            //navigationHelper.navigateWithClearTask(HomeActivity.this, LoginChoiceActivity.class);
+                            onLogoutSuccess();
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            hideProgress();
+                        }
+                    });
+                }
+        );
+
+        alertDialogBuilder.setNegativeButton(getResources().getString(R.string.no), (dialog, which) -> {
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    protected void onLogoutSuccess() {
+        if (!BuildConfig.DEBUG) {
+            preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, "");
+            preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, "");
+        }
+        preferenceHelper.saveString(getString(R.string.email), "");
+        preferenceHelper.saveString(getString(R.string.coupon), "");
     }
 
     protected void registerUserToDF(String email, String nickName, String password, String profileImagePath) {
@@ -304,7 +346,6 @@ public class BaseActivity3 extends BaseActivity2 {
                             //navigationHelper.navigate(SplashScreenActivity2.this, _HomeActivity.class);
                             hideProgress();
                             toastHelper.showError(getString(R.string.login) + " " + nickName + ":" + userId);
-                            preferenceHelper.saveString(getString(R.string.email), email);
                             if (!preferenceHelper.getString(getString(R.string.coupon), "").isEmpty()) {
                                 navigationHelper.navigate(BaseActivity3.this, _HomeActivity.class);
                             } else {
@@ -345,6 +386,8 @@ public class BaseActivity3 extends BaseActivity2 {
     }
 
     protected void onRegisterSuccess(String email, String nickName) {
+        preferenceHelper.saveString(getString(R.string.email), email);
+        getMainApplication().send("Q", email, "");
     }
 
     @Override

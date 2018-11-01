@@ -2,6 +2,7 @@ package kr.keumyoung.karaoke.mukin.coupon.app;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import java.util.HashMap;
 import cz.msebera.android.httpclient.Header;
 import kr.keumyoung.karaoke.mukin.coupon.BuildConfig;
 import kr.keumyoung.karaoke.mukin.coupon.R;
+import kr.kymedia.karaoke.util.DeviceUuidFactory;
 
 public class Application2 extends Application {
     public String email;
@@ -25,12 +27,13 @@ public class Application2 extends Application {
     public String edate;
 
     //DeviceUuidFactory device;
-
+    TelephonyManager telephonyManager;
     @Override
     public void onCreate() {
         Log.i(__CLASSNAME__, getMethodName() + "[email]" + this.email + "[coupon]" + this.coupon);
         super.onCreate();
         //device = new DeviceUuidFactory(this);
+        telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
         sendUser();
     }
 
@@ -43,10 +46,10 @@ public class Application2 extends Application {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
     /**
-     * 쿠폰등록시(https) :https://www.keumyoung.kr:444/mukinapp/coupon.2.asp?kind=i&email=test@kymedia.kr&coupon=75UA7TV4US612Y41
-     * 쿠폰조회시(https) :https://www.keumyoung.kr:444/mukinapp/coupon.2.asp?kind=q&email=test@kymedia.kr&coupon=75UA7TV4US612Y41
-     * 쿠폰등록시(http)  :http://www.keumyoung.kr:80/mukinapp/coupon.2.asp?kind=i&email=test@kymedia.kr&coupon=75UA7TV4US612Y41
-     * 쿠폰조회시(http)  :http://www.keumyoung.kr:80/mukinapp/coupon.2.asp?kind=q&email=test@kymedia.kr&coupon=75UA7TV4US612Y41
+     * 쿠폰등록시(https) :https://www.keumyoung.kr:444/mukinapp/coupon.2.asp?kind=i&email=test@keumyoung.kr&coupon=20GD5RI7MT466I40
+     * 쿠폰조회시(https) :https://www.keumyoung.kr:444/mukinapp/coupon.2.asp?kind=q&email=test@keumyoung.kr&coupon=20GD5RI7MT466I40
+     * 쿠폰등록시(http)  :http://www.keumyoung.kr:80/mukinapp/coupon.2.asp?kind=i&email=test@keumyoung.kr&coupon=20GD5RI7MT466I40
+     * 쿠폰조회시(http)  :http://www.keumyoung.kr:80/mukinapp/coupon.2.asp?kind=q&email=test@keumyoung.kr&coupon=20GD5RI7MT466I40
      */
     protected void sendUser() {
         SharedPreferences sharedPref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
@@ -64,15 +67,16 @@ public class Application2 extends Application {
         //url += "&coupon=" + coupon;
 
         //String device = this.device.getDeviceUuid().toString();
+        String device = telephonyManager.getDeviceId();
 
         /**
          * Create empty RequestParams and immediately add some parameters:
          */
         RequestParams params = new RequestParams();
         params.put(getString(R.string.kind), kind);
+        params.put(getString(R.string.device), device);
         params.put(getString(R.string.email), email);
         params.put(getString(R.string.coupon), coupon);
-        //params.put(getString(R.string.device), device);
 
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + url + "?" + params);
         url = url + "?" + params;

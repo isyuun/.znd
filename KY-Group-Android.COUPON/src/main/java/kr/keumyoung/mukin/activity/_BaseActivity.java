@@ -1,4 +1,4 @@
 package kr.keumyoung.mukin.activity;
 
-public class _BaseActivity extends BaseActivity5 {
+public class _BaseActivity extends BaseActivity7 {
 }

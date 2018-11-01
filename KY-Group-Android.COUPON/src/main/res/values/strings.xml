@@ -12,6 +12,7 @@
     <string name="no_account_yet">No account yet? </string>
     <string name="signup">Sign up</string>
     <string name="login">Login</string>
+    <string name="logout">Logout</string>
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
     <string name="alread_have_account">Already have an account?</string>

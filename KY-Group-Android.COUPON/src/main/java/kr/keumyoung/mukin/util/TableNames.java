@@ -16,4 +16,5 @@ public class TableNames {
     public static final String FAVORITE = "usersongs";
     public static final String TOP_HITS = "tophits";
     public static final String SONG_ARTIST = "songartist";
+    public static final String FREES = "frees";
 }

@@ -83,6 +83,7 @@ public class HomeActivity2 extends HomeActivity {
         }
 
         getFavoriteSongs();
+        getFreeSongs();
     }
 
 

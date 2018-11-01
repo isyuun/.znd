@@ -269,35 +269,35 @@ public class HomeActivity extends _BaseActivity {
         callLogout();
     }
 
-    private void callLogout() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage(getResources().getString(R.string.do_you_want_to_logout));
-        alertDialogBuilder.setPositiveButton(getResources().getString(R.string.yes),
-                (arg0, arg1) -> {
-                    showProgress();
-                    restApi.logout(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN)).enqueue(new Callback<ResponseBody>() {
-                        @Override
-                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                            hideProgress();
-                            preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, "");
-                            preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, "");
-                            //navigationHelper.navigateWithClearTask(HomeActivity.this, LoginChoiceActivity.class);
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            hideProgress();
-                        }
-                    });
-                }
-        );
-
-        alertDialogBuilder.setNegativeButton(getResources().getString(R.string.no), (dialog, which) -> {
-        });
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-    }
+    //private void callLogout() {
+    //    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+    //    alertDialogBuilder.setMessage(getResources().getString(R.string.do_you_want_to_logout));
+    //    alertDialogBuilder.setPositiveButton(getResources().getString(R.string.yes),
+    //            (arg0, arg1) -> {
+    //                showProgress();
+    //                restApi.logout(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN)).enqueue(new Callback<ResponseBody>() {
+    //                    @Override
+    //                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+    //                        hideProgress();
+    //                        preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, "");
+    //                        preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, "");
+    //                        //navigationHelper.navigateWithClearTask(HomeActivity.this, LoginChoiceActivity.class);
+    //                    }
+    //
+    //                    @Override
+    //                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+    //                        hideProgress();
+    //                    }
+    //                });
+    //            }
+    //    );
+    //
+    //    alertDialogBuilder.setNegativeButton(getResources().getString(R.string.no), (dialog, which) -> {
+    //    });
+    //
+    //    AlertDialog alertDialog = alertDialogBuilder.create();
+    //    alertDialog.show();
+    //}
 
     private void onNavigationClick() {
         // first check for the navigation click listener in fragment. if handled, do nothing else toggle navigation drawer

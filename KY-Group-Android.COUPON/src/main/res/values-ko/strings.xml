@@ -8,6 +8,7 @@
     <string name="no_account_yet">계정이 없으신가요?</string>
     <string name="signup">계정만들기</string>
     <string name="login">로그인</string>
+    <string name="logout">로그아웃</string>
     <string name="email_hint">이메일</string>
     <string name="password_hint">비밀번호</string>
     <string name="alread_have_account">이미 계정이 있으신가요?</string>
@@ -26,7 +27,7 @@
     <string name="artists">가수별</string>
     <string name="recommended">추천곡</string>
     <string name="sing">노래하기</string>
-    <string name="free">공짜</string>
+    <string name="free">무료</string>
     <string name="songs">노래</string>
     <string name="search">검색</string>
     <string name="works_best_with_headphone">헤드폰 사용시 녹음 음질이 좋습니다.</string>

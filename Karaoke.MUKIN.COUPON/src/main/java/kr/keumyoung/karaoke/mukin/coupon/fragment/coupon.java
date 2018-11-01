@@ -27,13 +27,12 @@ public class coupon extends _user {
         findViewById(R.id.form_email).setVisibility(View.VISIBLE);
         findViewById(R.id.form_password).setVisibility(View.GONE);
 
-        /**
-         * mCouponView.setText("75UA7TV4US612Y41"); //정상:75UA7TV4US612Y41
-         * mCouponView.setText("6N69FJTV7JWAWH5F"); //오류:6N69FJTV7JWAWH5F
-         */
+        //mCouponView.setText("20GD5RI7MT466I40"); //test //정상:20GD5RI7MT466I40//정상:92FH1NP4UB286B82
+        //mCouponView.setText("6N69FJTV7JWAWH5F"); //test //오류:6N69FJTV7JWAWH5F
         SharedPreferences sharedPref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
         String coupon = sharedPref.getString(getString(R.string.coupon), ""/*mCouponView.getText().toString()*/);
         /*if (!coupon.isEmpty()) */mCouponView.setText(coupon);
+        mCouponView.requestFocus();
 
         getActivity().setTitle(R.string.pref_coupon);
     }
@@ -49,10 +48,10 @@ public class coupon extends _user {
     }
 
     /**
-     * 쿠폰등록시(https) :https://www.keumyoung.kr:444/mukinapp/coupon.2.asp?kind=i&email=test@kymedia.kr&coupon=75UA7TV4US612Y41
-     * 쿠폰조회시(https) :https://www.keumyoung.kr:444/mukinapp/coupon.2.asp?kind=q&email=test@kymedia.kr&coupon=75UA7TV4US612Y41
-     * 쿠폰등록시(http)  :http://www.keumyoung.kr:80/mukinapp/coupon.2.asp?kind=i&email=test@kymedia.kr&coupon=75UA7TV4US612Y41
-     * 쿠폰조회시(http)  :http://www.keumyoung.kr:80/mukinapp/coupon.2.asp?kind=q&email=test@kymedia.kr&coupon=75UA7TV4US612Y41
+     * 쿠폰등록시(https) :https://www.keumyoung.kr:444/mukinapp/coupon.2.asp?kind=i&email=test@keumyoung.kr&coupon=20GD5RI7MT466I40
+     * 쿠폰조회시(https) :https://www.keumyoung.kr:444/mukinapp/coupon.2.asp?kind=q&email=test@keumyoung.kr&coupon=20GD5RI7MT466I40
+     * 쿠폰등록시(http)  :http://www.keumyoung.kr:80/mukinapp/coupon.2.asp?kind=i&email=test@keumyoung.kr&coupon=20GD5RI7MT466I40
+     * 쿠폰조회시(http)  :http://www.keumyoung.kr:80/mukinapp/coupon.2.asp?kind=q&email=test@keumyoung.kr&coupon=20GD5RI7MT466I40
      */
     @SuppressLint("StringFormatInvalid")
     @Override

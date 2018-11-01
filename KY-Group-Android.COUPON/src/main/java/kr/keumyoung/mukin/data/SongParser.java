@@ -11,10 +11,7 @@ import kr.keumyoung.mukin.util.Constants;
 
 public class SongParser {
 
-    private static ArrayList<String> FREE_SONG = new ArrayList<String>() {{
-        //add("A");
-        //add("B");
-        //add("C");
+    public static ArrayList<String> FREE_SONG = new ArrayList<String>() {{
     }};
 
     public static Song convertToSongFromJson(JSONObject object) throws JSONException {

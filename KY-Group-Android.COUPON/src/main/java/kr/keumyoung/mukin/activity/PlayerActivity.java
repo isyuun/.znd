@@ -791,6 +791,7 @@ public class PlayerActivity extends _BaseActivity {
             finish();
         }
         getFavoriteSongs();
+        getFreeSongs();
     }
 
     @Override
