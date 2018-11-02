@@ -82,6 +82,8 @@ public class HomeActivity2 extends HomeActivity {
             navigationHelper.navigate(this, _LoginActivity.class, false, null);
         }
 
+        getMainApplication().sendUser();
+
         getFavoriteSongs();
         getFreeSongs();
     }

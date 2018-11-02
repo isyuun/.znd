@@ -34,7 +34,7 @@ public class Application2 extends Application {
         super.onCreate();
         //device = new DeviceUuidFactory(this);
         telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-        sendUser();
+        //sendUser();
     }
 
     @Override
@@ -51,7 +51,7 @@ public class Application2 extends Application {
      * 쿠폰등록시(http)  :http://www.keumyoung.kr:80/mukinapp/coupon.2.asp?kind=i&email=test@keumyoung.kr&coupon=20GD5RI7MT466I40
      * 쿠폰조회시(http)  :http://www.keumyoung.kr:80/mukinapp/coupon.2.asp?kind=q&email=test@keumyoung.kr&coupon=20GD5RI7MT466I40
      */
-    protected void sendUser() {
+    public void sendUser() {
         SharedPreferences sharedPref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
         this.email = sharedPref.getString(getString(R.string.email), "");
         //this.coupon = sharedPref.getString(getString(R.string.coupon), "");

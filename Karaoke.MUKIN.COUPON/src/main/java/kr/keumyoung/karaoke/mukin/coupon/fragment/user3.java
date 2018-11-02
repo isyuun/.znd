@@ -94,14 +94,17 @@ public class user3 extends user2 {
         });
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        getApplication().setResponsHandler(null);
+    }
 
-    //@Override
     public void onFailure(int status, Header[] headers, String response, Throwable e) {
         showProgress(false);
         getCoupon();
     }
 
-    //@Override
     public void onSuccess(int status, Header[] headers, String response) {
         showProgress(false);
         getCoupon();
