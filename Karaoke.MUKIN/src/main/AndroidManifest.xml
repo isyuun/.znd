@@ -5,6 +5,7 @@
     tools:ignore="GoogleAppIndexingWarning">
 
     <application
+        android:name=".apps.app"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -50,9 +51,10 @@
         <!--android:label="@string/title_activity_settings" />-->
         <activity
             android:name="kr.keumyoung.karaoke.mukin.coupon.apps._preference"
-            android:label="@string/title_activity_settings">
+            android:label="@string/title_activity_settings"
+            android:theme="@style/AppTheme.DarkActionBar">
             <intent-filter>
-                <action android:name="Open Preference Activity" />
+                <action android:name="intent.open.keumyoung.karaoke.Preference.Acitivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

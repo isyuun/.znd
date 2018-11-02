@@ -34,8 +34,12 @@
         <activity
             android:name="kr.keumyoung.karaoke.mukin.coupon.apps._preference"
             android:label="@string/title_activity_settings"
-            android:launchMode="singleTask"
-            android:theme="@style/AppTheme.DarkActionBar" />
+            android:theme="@style/AppTheme.DarkActionBar">
+            <intent-filter>
+                <action android:name="intent.open.keumyoung.karaoke.Preference.Acitivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".activity._SplashScreenActivity"

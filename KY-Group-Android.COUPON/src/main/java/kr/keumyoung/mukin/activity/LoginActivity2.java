@@ -70,8 +70,32 @@ public class LoginActivity2 extends LoginActivity {
     private void setLoginText() {
         if (isLogin()) {
             loginText.setText(R.string.logout);
+            emailEt.setEnabled(false);
+            passwordEt.setEnabled(false);
+            loginText.setBackgroundColor(R.drawable.primary_button_bg);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                emailEt.setTextColor(getColor(android.R.color.darker_gray));
+                emailEt.setTextColor(getColor(android.R.color.darker_gray));
+            } else {
+                emailEt.setTextColor(getResources().getColor(android.R.color.darker_gray));
+                emailEt.setTextColor(getResources().getColor(android.R.color.darker_gray));
+            }
         } else {
             loginText.setText(R.string.login);
+            emailEt.setEnabled(true);
+            passwordEt.setEnabled(true);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                loginText.setBackground(getDrawable(R.drawable.primary_button_bg));
+            } else {
+                loginText.setBackground(getResources().getDrawable(R.drawable.primary_button_bg));
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                emailEt.setTextColor(getColor(android.R.color.black));
+                emailEt.setTextColor(getColor(android.R.color.black));
+            } else {
+                emailEt.setTextColor(getResources().getColor(android.R.color.black));
+                emailEt.setTextColor(getResources().getColor(android.R.color.black));
+            }
         }
     }
 
