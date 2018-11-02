@@ -1,7 +1,12 @@
 package kr.keumyoung.karaoke.mukin.coupon.app;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -21,6 +26,8 @@ import kr.keumyoung.karaoke.mukin.coupon.R;
 import kr.kymedia.karaoke.util.DeviceUuidFactory;
 
 public class Application2 extends Application {
+    private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
+
     public String email;
     public String coupon;
     public String sdate;
@@ -43,7 +50,14 @@ public class Application2 extends Application {
         super.onTerminate();
     }
 
-    private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
+    private Activity mCurrentActivity = null;
+    public Activity getCurrentActivity(){
+        return mCurrentActivity;
+    }
+
+    public void setCurrentActivity(Activity mCurrentActivity){
+        this.mCurrentActivity = mCurrentActivity;
+    }
 
     /**
      * 쿠폰등록시(https) :https://www.keumyoung.kr:444/mukinapp/coupon.2.asp?kind=i&email=test@keumyoung.kr&coupon=20GD5RI7MT466I40
@@ -65,9 +79,24 @@ public class Application2 extends Application {
         //url += "?kind=i";
         //url += "&email=" + email;
         //url += "&coupon=" + coupon;
+        String device = null;
 
-        //String device = this.device.getDeviceUuid().toString();
-        String device = telephonyManager.getDeviceId();
+        final int REQUEST_PERMISSION = 10001;
+
+        try {
+            //String device = this.device.getDeviceUuid().toString();
+            device = telephonyManager.getDeviceId();
+        } catch (Exception e) {
+            e.printStackTrace();
+            //ActivityManager am = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+            //ComponentName cn = am.getRunningTasks(1).get(0).topActivity;
+            ActivityCompat.requestPermissions(mCurrentActivity,
+                    new String[]{
+                            //Manifest.permission.READ_CONTACTS
+                            Manifest.permission.READ_PHONE_STATE
+                    }, REQUEST_PERMISSION);
+            return;
+        }
 
         /**
          * Create empty RequestParams and immediately add some parameters:

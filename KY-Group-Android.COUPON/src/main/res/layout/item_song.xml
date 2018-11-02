@@ -101,9 +101,10 @@
                 android:maxLines="1"
                 android:text="@string/free"
                 android:textColor="@color/colorAccent"
+                android:padding="3dp"
                 android:textSize="12sp"
                 android:typeface="sans"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
         </LinearLayout>
         <!--</RelativeLayout>-->

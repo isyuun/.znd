@@ -70,7 +70,8 @@ public class SplashScreenActivity2 extends SplashScreenActivity {
                     ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED ||
                     ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED ||
                     ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED
-                    || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_DENIED) {
+                    || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_DENIED
+                    || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_DENIED) {
                 ActivityCompat.requestPermissions(this,
                         new String[]{
                                 Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -78,6 +79,7 @@ public class SplashScreenActivity2 extends SplashScreenActivity {
                                 Manifest.permission.CAMERA,
                                 Manifest.permission.RECORD_AUDIO
                                 , Manifest.permission.READ_CONTACTS
+                                , Manifest.permission.READ_PHONE_STATE
                         }, REQUEST_PERMISSION);
             } else {
                 proceedToNextActivity();

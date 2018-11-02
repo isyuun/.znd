@@ -87,6 +87,7 @@ public class LoginActivity2 extends LoginActivity {
 
     @Override
     public void onViewClicked(View view) {
+        hideKeyboard(this);
         switch (view.getId()) {
             case R.id.signup_anchor:
                 navigationHelper.navigate(this, _RegisterActivity.class);

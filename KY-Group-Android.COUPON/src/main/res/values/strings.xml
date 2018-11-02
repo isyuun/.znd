@@ -20,11 +20,11 @@
     <string name="name_hint">Nick name</string>
     <string name="create_new_account">CREATE A NEW ACCOUNT</string>
     <string name="search_hint">Search song by name, artist, initials</string>
-    <string name="newsongs">New Songs</string>
-    <string name="top_hits">Top Hits</string>
-    <string name="genre">Genres</string>
-    <string name="favorites">Favorites</string>
-    <string name="artists">Artists</string>
+    <string name="newsongs">NEW</string>
+    <string name="top_hits">TOP</string>
+    <string name="genre">GENRE</string>
+    <string name="favorites">FAVORITE</string>
+    <string name="artists">ARTISTS</string>
     <string name="recommended">RECOMMENDED</string>
     <string name="sing">SING</string>
     <string name="free">FREE</string>

@@ -17,11 +17,9 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
-import kr.keumyoung.karaoke.mukin.coupon.BuildConfig;
 import kr.keumyoung.karaoke.mukin.coupon.R;
 import kr.keumyoung.karaoke.mukin.coupon.app._Application;
 
-import static android.Manifest.permission.PACKAGE_USAGE_STATS;
 import static android.Manifest.permission.READ_CONTACTS;
 import static android.Manifest.permission.READ_PHONE_STATE;
 
@@ -117,7 +115,8 @@ public class user3 extends user2 {
 
         SharedPreferences sharedPref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
         String email = sharedPref.getString(getString(R.string.email), ""/*mEmailView.getText().toString()*/);
-        /*if (!email.isEmpty()) */mEmailView.setText(email);
+        /*if (!email.isEmpty()) */
+        mEmailView.setText(email);
 
         showProgress(true);
         populateAutoComplete();
