@@ -1,14 +1,18 @@
 package kr.keumyoung.karaoke.mukin.coupon.apps;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
+
 import java.util.List;
 
 import kr.keumyoung.karaoke.mukin.coupon.BuildConfig;
+import kr.keumyoung.karaoke.mukin.coupon.R;
 import kr.keumyoung.karaoke.mukin.coupon.fragment._coupon;
 import kr.keumyoung.karaoke.mukin.coupon.fragment._login;
 import kr.keumyoung.karaoke.mukin.coupon.fragment._notice;
@@ -59,8 +63,15 @@ public class preference2 extends preference {
 
     @Override
     public void onHeaderClick(Header header, int position) {
-        super.onHeaderClick(header, position);
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[PREF]" + getMethodName() + header.fragment + ":" + position);
+        if (header.titleRes == R.string.pref_app_opensource) {
+            Intent intent = new Intent(this, OssLicensesMenuActivity.class);
+            String title = getString(R.string.pref_app_opensource);
+            intent.putExtra("title", title);
+            startActivity(intent);
+        } else {
+            super.onHeaderClick(header, position);
+        }
     }
 }
 

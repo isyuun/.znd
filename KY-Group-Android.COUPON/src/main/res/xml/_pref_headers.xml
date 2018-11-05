@@ -52,4 +52,6 @@
         android:fragment="kr.keumyoung.karaoke.mukin.coupon.fragment._version"
         android:title="@string/pref_app_version" />
 
+    <header android:title="@string/pref_app_opensource" />
+
 </preference-headers>
