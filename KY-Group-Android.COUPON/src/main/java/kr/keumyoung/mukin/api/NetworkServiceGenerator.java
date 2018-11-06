@@ -25,7 +25,7 @@ public class NetworkServiceGenerator {
 
     static {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        HttpLoggingInterceptor.Level level =  HttpLoggingInterceptor.Level.BODY;
+        HttpLoggingInterceptor.Level level =  HttpLoggingInterceptor.Level.NONE;
         if (BuildConfig.DEBUG) level =  HttpLoggingInterceptor.Level.BODY;
         loggingInterceptor.setLevel(level);
         httpClient = new OkHttpClient.Builder()
