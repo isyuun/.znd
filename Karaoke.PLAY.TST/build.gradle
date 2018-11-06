@@ -43,7 +43,7 @@ android {
     defaultConfig {
         applicationId "kr.kymedia.karaoke.play.apps.test"
         minSdkVersion 14 //lower than 14 doesn't support multidex
-        targetSdkVersion 22
+        targetSdkVersion 27
         // Enabling multidex support.
         multiDexEnabled true
     }
