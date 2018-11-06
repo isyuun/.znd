@@ -84,6 +84,7 @@
     <string name="type_your_desired_search">Type your desired search</string>
     <string name="upload_error">Song couldn\'t be uploaded. Please retry.</string>
     <string name="file_not_found">Song file could not be found</string>
+    <string name="file_liven_not_found">라이븐 파일을 찾을 수 없습니다.</string>
     <string name="loading">Loading…</string>
     <string name="fetching_file">Fetching song…</string>
     <string name="fetching_lyrics">Fetching lyrics…</string>

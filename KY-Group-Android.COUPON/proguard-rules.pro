@@ -61,15 +61,15 @@
 ##...JNI...###
 -keepclasseswithmembernames class * { native <methods>; }
 
-###...kr.keumyoung.mukin.util...###
--dontwarn kr.keumyoung.mukin.util.**
--keep class kr.keumyoung.mukin.util.** { *; }
--keep interface kr.keumyoung.mukin.util.** { *; }
-
 ###...kr.keumyoung.mukin.helper...###
 -dontwarn kr.keumyoung.mukin.helper.**
 -keep class kr.keumyoung.mukin.helper.** { *; }
 -keep interface kr.keumyoung.mukin.helper.** { *; }
+
+###...kr.keumyoung.mukin.util...###
+-dontwarn kr.keumyoung.mukin.util.**
+-keep class kr.keumyoung.mukin.util.** { *; }
+-keep interface kr.keumyoung.mukin.util.** { *; }
 
 ###...kr.keumyoung.mukin.util.AudioJNI...###
 -dontwarn kr.keumyoung.mukin.util.AudioJNI.**

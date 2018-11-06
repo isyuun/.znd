@@ -164,6 +164,7 @@ public class SplashScreenActivity2 extends SplashScreenActivity {
                     if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName()+ "[OBB][LIB.PATH]" + library.exists() + ":" + library.getAbsolutePath());
                     if (!library.exists()) {
                         Log.wtf(__CLASSNAME__, getMethodName()+ "[OBB][LIB.PATH][NG]" + library.exists() + ":" + library.getAbsolutePath());
+                        toastHelper.showError(R.string.file_liven_not_found);
                     }
 
                     subscriber.onComplete();
