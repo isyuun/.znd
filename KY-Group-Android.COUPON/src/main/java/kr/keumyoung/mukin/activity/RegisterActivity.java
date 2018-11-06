@@ -14,9 +14,6 @@ import android.widget.TextView;
 
 import com.andexert.library.RippleView;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.io.File;
 
 import javax.inject.Inject;
@@ -27,11 +24,7 @@ import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
-import kr.keumyoung.mukin.api.RequestModel;
 import kr.keumyoung.mukin.api.RestApi;
-import kr.keumyoung.mukin.data.request.LoginRequest;
-import kr.keumyoung.mukin.data.request.RegisterUserCustomRequest;
-import kr.keumyoung.mukin.data.request.RegisterUserRequest;
 import kr.keumyoung.mukin.helper.ImageUtils;
 import kr.keumyoung.mukin.helper.MediaManager;
 import kr.keumyoung.mukin.helper.NavigationHelper;
@@ -39,12 +32,7 @@ import kr.keumyoung.mukin.helper.PreferenceHelper;
 import kr.keumyoung.mukin.helper.ToastHelper;
 import kr.keumyoung.mukin.popup.ImageOptionChooserPopup;
 import kr.keumyoung.mukin.util.CommonHelper;
-import kr.keumyoung.mukin.util.Constants;
 import kr.keumyoung.mukin.util.PreferenceKeys;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * on 11/01/18.

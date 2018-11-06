@@ -43,6 +43,7 @@ public class BaseActivity3 extends BaseActivity2 {
     }
 
     protected void loginUser(String email, String password) {
+        Log.e(__CLASSNAME__, "loginUser(...)");
         showProgress();
         // first generate DF session and save the session token and the dfid
         restApi.login(new LoginRequest(email, password, 0)).enqueue(new Callback<ResponseBody>() {
@@ -87,11 +88,12 @@ public class BaseActivity3 extends BaseActivity2 {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 t.printStackTrace();
                 hideProgress();
+                toastHelper.showError(R.string.common_api_error);
             }
         });
     }
 
-    protected void fetchUserData(String dfid) {
+    private void fetchUserData(String dfid) {
         // fetch the table data from the user table using the dfid
         String filter = "dfid=" + dfid;
         restApi.tableGetRequestWithFilter(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), TableNames.USER, filter).enqueue(new Callback<ResponseBody>() {
@@ -180,6 +182,7 @@ public class BaseActivity3 extends BaseActivity2 {
                         @Override
                         public void onFailure(Call<ResponseBody> call, Throwable t) {
                             hideProgress();
+                            toastHelper.showError(R.string.common_api_error);
                         }
                     });
                 }
@@ -202,6 +205,7 @@ public class BaseActivity3 extends BaseActivity2 {
     }
 
     protected void registerUserToDF(String email, String nickName, String password, String profileImagePath) {
+        Log.e(__CLASSNAME__, "loginUser(...)");
         restApi.registerUser(new RegisterUserRequest(email, nickName, "", password)).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -238,6 +242,7 @@ public class BaseActivity3 extends BaseActivity2 {
                 if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "registerUserToDF:onFailure()");
                 t.printStackTrace();
                 hideProgress();
+                toastHelper.showError(R.string.common_api_error);
             }
         });
     }

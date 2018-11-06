@@ -8,6 +8,7 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import java.util.concurrent.TimeUnit;
 
 import kr.keumyoung.mukin.AppConstants;
+import kr.keumyoung.mukin.BuildConfig;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -24,7 +25,9 @@ public class NetworkServiceGenerator {
 
     static {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        HttpLoggingInterceptor.Level level =  HttpLoggingInterceptor.Level.BODY;
+        if (BuildConfig.DEBUG) level =  HttpLoggingInterceptor.Level.BODY;
+        loggingInterceptor.setLevel(level);
         httpClient = new OkHttpClient.Builder()
                 .readTimeout(40, TimeUnit.SECONDS)
                 .writeTimeout(60, TimeUnit.SECONDS)

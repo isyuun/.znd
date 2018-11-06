@@ -1,8 +1,6 @@
 package kr.keumyoung.mukin.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -11,30 +9,19 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.json.JSONObject;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import kr.keumyoung.karaoke.mukin.coupon.apps._preference;
-import kr.keumyoung.karaoke.mukin.coupon.fragment._coupon;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.api.RestApi;
-import kr.keumyoung.mukin.data.request.LoginRequest;
 import kr.keumyoung.mukin.helper.NavigationHelper;
 import kr.keumyoung.mukin.helper.PreferenceHelper;
 import kr.keumyoung.mukin.helper.ToastHelper;
 import kr.keumyoung.mukin.util.CommonHelper;
-import kr.keumyoung.mukin.util.Constants;
 import kr.keumyoung.mukin.util.PreferenceKeys;
-import kr.keumyoung.mukin.util.TableNames;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * on 11/01/18.
@@ -98,39 +85,39 @@ public class LoginActivity extends _BaseActivity {
 
     @OnClick({R.id.signup_anchor, R.id.login_button})
     public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.signup_anchor:
-                navigationHelper.navigate(this, _RegisterActivity.class);
-                break;
-            case R.id.login_button:
-                String email = emailEt.getText().toString();
-                String password = passwordEt.getText().toString();
-
-                if (email.isEmpty()) {
-                    toastHelper.showError(R.string.email_blank_error);
-                    emailEt.requestFocus();
-                    return;
-                }
-
-                if (!CommonHelper.EmailValidator(email)) {
-                    toastHelper.showError(R.string.email_not_valid_error);
-                    emailEt.requestFocus();
-                    return;
-                }
-
-                if (password.isEmpty()) {
-                    toastHelper.showError(R.string.password_blank_error);
-                    passwordEt.requestFocus();
-                    return;
-                }
-
-                preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, email);
-                preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, password);
-
-                loginUser(email, password);
-
-                break;
-        }
+        //switch (view.getId()) {
+        //    case R.id.signup_anchor:
+        //        navigationHelper.navigate(this, _RegisterActivity.class);
+        //        break;
+        //    case R.id.login_button:
+        //        String email = emailEt.getText().toString();
+        //        String password = passwordEt.getText().toString();
+        //
+        //        if (email.isEmpty()) {
+        //            toastHelper.showError(R.string.email_blank_error);
+        //            emailEt.requestFocus();
+        //            return;
+        //        }
+        //
+        //        if (!CommonHelper.EmailValidator(email)) {
+        //            toastHelper.showError(R.string.email_not_valid_error);
+        //            emailEt.requestFocus();
+        //            return;
+        //        }
+        //
+        //        if (password.isEmpty()) {
+        //            toastHelper.showError(R.string.password_blank_error);
+        //            passwordEt.requestFocus();
+        //            return;
+        //        }
+        //
+        //        preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, email);
+        //        preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, password);
+        //
+        //        loginUser(email, password);
+        //
+        //        break;
+        //}
     }
 
     //protected void loginUser(String email, String password) {

@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,6 +18,8 @@ import kr.keumyoung.mukin.util.PreferenceKeys;
 import static android.Manifest.permission.READ_CONTACTS;
 
 public class LoginActivity2 extends LoginActivity {
+    private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +114,7 @@ public class LoginActivity2 extends LoginActivity {
 
     @Override
     public void onViewClicked(View view) {
+        Log.e(__CLASSNAME__, "onViewClicked(...)" + ":" + view);
         hideKeyboard(this);
         switch (view.getId()) {
             case R.id.signup_anchor:

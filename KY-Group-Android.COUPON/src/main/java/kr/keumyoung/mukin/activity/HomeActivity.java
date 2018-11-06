@@ -1,9 +1,7 @@
 package kr.keumyoung.mukin.activity;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -18,9 +16,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.otto.Bus;
-import com.squareup.otto.Subscribe;
-
-import org.json.JSONObject;
 
 import javax.inject.Inject;
 
@@ -29,23 +24,15 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
-import kr.keumyoung.mukin.api.RequestModel;
 import kr.keumyoung.mukin.api.RestApi;
 import kr.keumyoung.mukin.data.model.Song;
-import kr.keumyoung.mukin.data.request.SongHitRequest;
 import kr.keumyoung.mukin.fragment.BaseFragment;
 import kr.keumyoung.mukin.fragment.HomeFragment;
 import kr.keumyoung.mukin.helper.AnimationHelper;
 import kr.keumyoung.mukin.helper.NavigationHelper;
 import kr.keumyoung.mukin.helper.ToastHelper;
 import kr.keumyoung.mukin.interfaces.SessionRefreshListener;
-import kr.keumyoung.mukin.util.CommonHelper;
-import kr.keumyoung.mukin.util.Constants;
 import kr.keumyoung.mukin.util.PreferenceKeys;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * on 11/01/18.
