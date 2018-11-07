@@ -61,7 +61,7 @@ public class MicChecker {
                             + BluetoothProfile.STATE_CONNECTED + ")");
 
                     //왜 두번들어와
-                    if(preDeviceAddress.compareToIgnoreCase(device.getAddress()) == 0)
+                    if (preDeviceAddress.compareToIgnoreCase(device.getAddress()) == 0)
                         return;
 
                     preDeviceAddress = device.getAddress();
@@ -125,7 +125,7 @@ public class MicChecker {
 
             last_bluetooth_device_name = devicename;
         } else {
-            if(last_bluetooth_device_name.compareToIgnoreCase(devicename) == 0)
+            if (devicename.compareToIgnoreCase(last_bluetooth_device_name) == 0)
                 states = MIC_CONNECTION_STATES.NONE;
         }
 

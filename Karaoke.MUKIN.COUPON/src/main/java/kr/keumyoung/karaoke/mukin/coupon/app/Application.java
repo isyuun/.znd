@@ -1,11 +1,12 @@
 package kr.keumyoung.karaoke.mukin.coupon.app;
 
 import android.accounts.Account;
+import android.content.Context;
 
 import kr.keumyoung.karaoke.BuildConfig;
 import kr.kymedia.karaoke.util.EnvironmentUtils;
 
-public class Application extends android.app.Application {
+public class Application extends kr.keumyoung.karaoke.app.Application {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
     protected String getMethodName() {

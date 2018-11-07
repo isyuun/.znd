@@ -1,7 +1,13 @@
-<manifest
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="kr.kymedia.karaoke.api"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:versionCode="54"
     android:versionName="2.54">
+
+    <application>
+        <!-- TODO: Replace with your real AdMob app ID -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-1359298878505697~1420124857" />
+    </application>
 
 </manifest>
