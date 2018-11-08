@@ -1,8 +1,10 @@
 package kr.keumyoung.mukin.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,7 +29,6 @@ import io.reactivex.schedulers.Schedulers;
 import kr.keumyoung.mukin.AppConstants;
 import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.R;
-import kr.keumyoung.mukin.helper.ImageUtils;
 import kr.keumyoung.mukin.util.PreferenceKeys;
 import kr.kymedia.karaoke.util.BuildUtils;
 
@@ -91,35 +92,64 @@ public class SplashScreenActivity2 extends SplashScreenActivity {
 
     @Override
     protected void proceedToNextActivity() {
+        Log.e(__CLASSNAME__, getMethodName());
+
         new Handler().postDelayed(() -> {
             showProgress();
             copyFilesToLocal()
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
-                    .subscribe(s -> System.out.println("FILE COPY: " + s), throwable -> {
-                        hideProgress();
-                        throwable.printStackTrace();
-                    }, () -> {
-                        /**
-                         * {@link HomeActivity2#onResume()}에서 알아서 한다 오바지랄 하지마
-                         */
-                        //String userId = preferenceHelper.getString(PreferenceKeys.USER_ID);
-                        //String sessionToken = preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN);
-                        //hideProgress();
-                        //if (userId.isEmpty() && sessionToken.isEmpty()) {
-                        //    // user is not logged in
-                        //    navigationHelper.navigate(this, _LoginActivity.class);
-                        //} else {
-                        //    // user is logged in
-                        //    navigationHelper.navigate(this, _HomeActivity.class);
-                        //}
-                    });
+                    //.subscribe(s -> System.out.println("FILE COPY: " + s), throwable -> {
+                    //    hideProgress();
+                    //    throwable.printStackTrace();
+                    .subscribe(
+                            message -> {
+                                onNextCopyFilesToLocal(message);
+                            },
+                            throwable -> {
+                                onFailureCopyFilesToLocal(throwable.getMessage());
+                                hideProgress();
+                                throwable.printStackTrace();
+                            },
+                            () -> {
+                                onCompleteCopyFilesToLocal();
+                                /**
+                                 * {@link HomeActivity2#onResume()}에서 알아서 한다 오바지랄 하지마
+                                 */
+                                //String userId = preferenceHelper.getString(PreferenceKeys.USER_ID);
+                                //String sessionToken = preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN);
+                                //hideProgress();
+                                //if (userId.isEmpty() && sessionToken.isEmpty()) {
+                                //    // user is not logged in
+                                //    navigationHelper.navigate(this, _LoginActivity.class);
+                                //} else {
+                                //    // user is logged in
+                                //    navigationHelper.navigate(this, _HomeActivity.class);
+                                //}
+                            });
 
             //throw new RuntimeException("Intentional crash test");
-        }, 1000);
+        }, 100);
 
-        handler.postDelayed(() -> {
-            //registerUserToDF(this.email, this.email, this.pass, "");
+    }
+
+    private void onNextCopyFilesToLocal(final String message) {
+        Log.e(__CLASSNAME__, getMethodName() + ":" + message);
+    }
+
+    private void onFailureCopyFilesToLocal(final String message) {
+        Log.e(__CLASSNAME__, getMethodName() + ":" + message);
+        post(() -> {
+            showAlertDialog(message, (dialogInterface, i) -> {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + getPackageName())));
+                finish();
+            });
+        });
+    }
+
+    private void onCompleteCopyFilesToLocal() {
+        Log.e(__CLASSNAME__, getMethodName());
+        postDelayed(() -> {
             navigationHelper.navigate(this, _HomeActivity.class);
         }, 3000);
     }
@@ -128,17 +158,19 @@ public class SplashScreenActivity2 extends SplashScreenActivity {
         return Observable.create(subscriber -> {
             File obbDir = getObbDir();
             //if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName()+ "[OBB.DIR]" + obbDir.getAbsolutePath());
-            if (Boolean.parseBoolean(AppConstants.DEVELOPMENT)) {
-                obbDir = ImageUtils.getBaseFolder();
-                if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName()+ "[OBB][OBB.DIR]" + obbDir.getAbsolutePath());
-            }
+            //if (Boolean.parseBoolean(AppConstants.DEVELOPMENT)) {
+            //    obbDir = ImageUtils.getBaseFolder();
+            //    if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + "[OBB][OBB.DIR][DEV]" + obbDir.getAbsolutePath());
+            //}
             if (obbDir.exists()) {
                 String obbFileName = "main" + "." + AppConstants.OBB_VERSION + "." + getPackageName() + "." + "obb";
                 //if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName()+ "[OBB.FILE]" + obbFileName);
                 File obbFile = new File(obbDir, obbFileName);
-                if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName()+ "[OBB][OBB.PATH]" + obbFile.exists() + ":" + obbFile.getAbsolutePath());
+                if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + "[OBB][OBB.PATH]" + obbFile.exists() + ":" + obbFile.getAbsolutePath());
                 if (!obbFile.exists()) {
-                    Log.wtf(__CLASSNAME__, getMethodName()+ "[OBB][OBB.PATH][NG]" + obbFile.exists() + ":" + obbFile.getAbsolutePath());
+                    Log.e(__CLASSNAME__, getMethodName() + "[OBB][OBB.PATH][NG]" + obbFile.exists() + ":" + obbFile.getAbsolutePath());
+                    subscriber.onError(new Exception(getResources().getString(R.string.file_obb_not_found) + "\n" + getResources().getString(R.string.please_install_again)));
+                    return;
                 }
 
                 try {
@@ -154,17 +186,20 @@ public class SplashScreenActivity2 extends SplashScreenActivity {
                         try {
                             copyFile(obbFile, library);
                         } catch (IOException e) {
+                            Log.e(__CLASSNAME__, getMethodName() + "[OBB][OBB.LIB][COPY][NG]" + library.exists() + ":" + library.getAbsolutePath());
                             e.printStackTrace();
+                            subscriber.onError(new Exception(getResources().getString(R.string.file_lib_not_found) + "\n" + getResources().getString(R.string.please_install_again)));
+                            return;
                         }
 
-
-                        subscriber.onNext("Library copied...");
+                        subscriber.onNext("[OBB][OBB.PATH]Library COPIED...");
                     }
 
-                    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName()+ "[OBB][LIB.PATH]" + library.exists() + ":" + library.getAbsolutePath());
+                    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + "[OBB][LIB.PATH]" + library.exists() + ":" + library.getAbsolutePath());
                     if (!library.exists()) {
-                        Log.wtf(__CLASSNAME__, getMethodName()+ "[OBB][LIB.PATH][NG]" + library.exists() + ":" + library.getAbsolutePath());
-                        toastHelper.showError(R.string.file_liven_not_found);
+                        Log.e(__CLASSNAME__, getMethodName() + "[OBB][LIB.PATH][NG]" + library.exists() + ":" + library.getAbsolutePath());
+                        subscriber.onError(new Exception(getResources().getString(R.string.file_lib_not_found) + "\n" + getResources().getString(R.string.please_install_again)));
+                        return;
                     }
 
                     subscriber.onComplete();

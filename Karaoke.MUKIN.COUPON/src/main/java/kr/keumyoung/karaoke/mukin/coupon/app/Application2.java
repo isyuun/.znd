@@ -206,7 +206,7 @@ public class Application2 extends Application {
         String msg = "";
         msg += message;
         msg += "[" + code +"]";
-        msg += "\n" + date;
+        msg += (!date.isEmpty() ? "\n" + date : "");
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
         editor.commit();
         if (this.responsHandler != null) this.responsHandler.onSuccess(statusCode, headers, response);

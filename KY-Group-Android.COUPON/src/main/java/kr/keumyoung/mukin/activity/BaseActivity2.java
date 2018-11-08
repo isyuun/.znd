@@ -91,7 +91,7 @@ public class BaseActivity2 extends BaseActivity {
         postDelayed(openPreference, 1000);
     }
 
-    Runnable openPreference = () -> {
+    private Runnable openPreference = () -> {
         Intent i = new Intent(BaseActivity2.this, _preference.class);
         i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -102,7 +102,7 @@ public class BaseActivity2 extends BaseActivity {
         postDelayed(openPreferenceCoupen, 500);
     }
 
-    Runnable openPreferenceCoupen = () -> {
+    private Runnable openPreferenceCoupen = () -> {
         Intent i = new Intent(BaseActivity2.this, _preference.class);
         i.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT, _coupon.class.getName());
         i.putExtra(PreferenceActivity.EXTRA_NO_HEADERS, true);
