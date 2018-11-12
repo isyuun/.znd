@@ -3,10 +3,8 @@ package kr.keumyoung.mukin.activity;
 import android.util.Log;
 
 import kr.keumyoung.mukin.BuildConfig;
-import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.util.PreferenceKeys;
 
-@Deprecated
 public class PlayerActivity2 extends PlayerActivity {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
@@ -32,10 +30,5 @@ public class PlayerActivity2 extends PlayerActivity {
         int pitch = preferenceHelper.getInt(PreferenceKeys.PITCH_VALUE);
         int sex = preferenceHelper.getInt(PreferenceKeys.SONG_GENDER, -1);
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":tempo:" + tempo + ":pitch:" + pitch + ":sex:" + sex);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 }

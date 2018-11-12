@@ -41,32 +41,6 @@ public class HomeActivity2 extends HomeActivity {
         openPreference();
     }
 
-    private Object busEventListener;
-
-    @Override
-    public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        busEventListener = new Object() {
-            @Subscribe
-            public void post(SongView song) {
-                if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + song + ":" + preferenceHelper.getString(PreferenceKeys.USER_ID) + ":" + song.getSong().getSongId()  + ":" + song.getSong().getSongTitle() + ":");
-
-                if (song.getView().getId() == R.id.favorite_button) {
-                    if (!isFavorites(song.getSong().getSongId())) {
-                        addFavoriteSong(song.getSong());
-                    } else {
-                        delFavoriteSong(song.getSong());
-                    }
-                } else {
-                    onSongSelected(song.getSong());
-                }
-            }
-        };
-
-    }
-
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -86,21 +60,18 @@ public class HomeActivity2 extends HomeActivity {
         getFreeSongs();
     }
 
+    protected void onSongSelected(SongView song) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + song + ":" + preferenceHelper.getString(PreferenceKeys.USER_ID) + ":" + song.getSong().getSongId()  + ":" + song.getSong().getSongTitle() + ":");
 
-    @Override
-    protected void onStart() {
-        Log.e(__CLASSNAME__, getMethodName() + ":" + bus);
-        super.onStart();
-        //bus.register(this);
-        bus.register(busEventListener);
-    }
-
-    @Override
-    protected void onStop() {
-        Log.e(__CLASSNAME__, getMethodName() + ":" + bus);
-        super.onStop();
-        //bus.unregister(this);
-        bus.unregister(busEventListener);
+        if (song.getView().getId() == R.id.favorite_button) {
+            if (!isFavorites(song.getSong().getSongId())) {
+                addFavoriteSong(song.getSong());
+            } else {
+                delFavoriteSong(song.getSong());
+            }
+        } else {
+            onSongSelected(song.getSong());
+        }
     }
 
     @Override
@@ -109,5 +80,4 @@ public class HomeActivity2 extends HomeActivity {
         Log.e(__CLASSNAME__, getMethodName() + isShowingProgress());
         hideProgress();
     }
-
 }

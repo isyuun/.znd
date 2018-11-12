@@ -4,24 +4,17 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.R;
-import kr.keumyoung.mukin.adapter.SongAdapter;
 import kr.keumyoung.mukin.api.RequestModel;
-import kr.keumyoung.mukin.data.SongParser;
 import kr.keumyoung.mukin.data.model.Song;
-import kr.keumyoung.mukin.data.model.Songs;
 import kr.keumyoung.mukin.data.request.SongHitRequest;
 import kr.keumyoung.mukin.interfaces.SessionRefreshListener;
 import kr.keumyoung.mukin.util.CommonHelper;
 import kr.keumyoung.mukin.util.Constants;
 import kr.keumyoung.mukin.util.PreferenceKeys;
-import kr.keumyoung.mukin.util.TableNames;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,7 +58,7 @@ public class BaseActivity4 extends BaseActivity3 {
                                 Bundle bundle = new Bundle();
                                 bundle.putSerializable(Constants.SONG, song);
                                 // navigate to player activity for playing the media and processing
-                                navigate(PlayerActivity.class, false, bundle);
+                                navigate(_PlayerActivity.class, false, bundle);
                             } else if (errorBody != null) {
                                 String errorString = errorBody.string();
                                 if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[NG]" + "updateSongHits:onResponse()" + "\n" + errorString);
