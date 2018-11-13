@@ -127,9 +127,10 @@ public class BaseActivity3 extends BaseActivity2 {
                             //화면이동...
                             if (preferenceHelper.getString(getString(R.string.coupon), "").isEmpty()) {
                                 openPreferenceCoupon();
-                                finish();
-                            } else {
-                                onBackPressed();
+                                //로그인창에서만
+                                if (BaseActivity3.this instanceof _LoginActivity) {
+                                    finish();
+                                }
                             }
                             onLoginSuccess(email, nickName);
                         } else {
@@ -395,10 +396,10 @@ public class BaseActivity3 extends BaseActivity2 {
         getMainApplication().send("Q", email, "");
     }
 
-    @Override
     public boolean handleDFError(JSONObject errorObject, SessionRefreshListener listener) throws JSONException {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + errorObject + ":" + listener + ":" + preferenceHelper.getString(PreferenceKeys.USER_ID));
         String errorCode = errorObject.getJSONObject("error").getString("code");
-        if (errorCode.equalsIgnoreCase("401")) { // session has expired. need to refresh the session_token
+        if (!errorCode.equalsIgnoreCase("200")) { // session has expired. need to refresh the session_token
             restApi.refreshSessionToken(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN),
                     preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN)).enqueue(new Callback<ResponseBody>() {
                 @Override

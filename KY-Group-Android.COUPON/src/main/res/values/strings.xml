@@ -73,6 +73,7 @@
     <string name="nick_name_blank_error">Nick name cannot be blank</string>
     <string name="empty_genre_message">Genre list is empty</string>
     <string name="session_expired_error">Session has expired. Please login again.</string>
+    <string name="session_expired_update">Session has expired. Please wait update.</string>
     <string name="empty_artist_message">No artist found</string>
     <string name="empty_songs_message">No songs found</string>
     <string name="song_not_playable">Song is not playable</string>

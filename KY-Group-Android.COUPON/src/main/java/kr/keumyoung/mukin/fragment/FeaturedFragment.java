@@ -57,10 +57,6 @@ public class FeaturedFragment extends _BaseFragment {
 
     HomeFragment parentFragment;
 
-    SongAdapter songAdapter;
-
-    Songs songs = new Songs();
-
     SessionRefreshListener sessionRefreshListener = new SessionRefreshListener() {
         @Override
         public void onSessionRefresh() {
@@ -76,7 +72,7 @@ public class FeaturedFragment extends _BaseFragment {
     @BindView(R.id.featured_recycler)
     RecyclerView featuredRecycler;
     Unbinder unbinder;
-    @BindView(R.id.featured_swipe_refresh)
+    @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout featuredSwipeRefresh;
     @BindView(R.id.empty_frame)
     LinearLayout emptyFrame;
@@ -217,11 +213,7 @@ public class FeaturedFragment extends _BaseFragment {
         });
     }
 
-    private void populateSongs() {
-        populateSongs(0);
-    }
-
-    private void populateSongs(int offset) {
+    public void populateSongs(int offset) {
         activity.showProgress();
         CommonHelper.hideSoftKeyboard(activity);
 
@@ -261,6 +253,8 @@ public class FeaturedFragment extends _BaseFragment {
 
                                 if (songAdapter.isLoading()) songAdapter.setLoading(false);
                                 songAdapter.notifyDataSetChanged();
+
+                                onPopulateSongs();
 
                                 updateEmptyVisibility();
                             } else if (errorBody != null) {
@@ -339,6 +333,5 @@ public class FeaturedFragment extends _BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        activity.updateFavoriteSongs(songs, songAdapter);
     }
 }

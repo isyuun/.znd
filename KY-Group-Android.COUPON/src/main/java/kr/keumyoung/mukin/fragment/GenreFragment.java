@@ -57,7 +57,7 @@ public class GenreFragment extends _BaseFragment {
 
     @BindView(R.id.genre_recycler)
     RecyclerView genreRecycler;
-    @BindView(R.id.genre_swipe_refresh)
+    @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout genreSwipeRefresh;
     @BindView(R.id.empty_frame)
     LinearLayout emptyFrame;

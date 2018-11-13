@@ -1,11 +1,13 @@
 package kr.keumyoung.karaoke.app;
 
 import android.accounts.Account;
+import android.app.Activity;
 import android.os.Build;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.support.annotation.IdRes;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import kr.kymedia.karaoke.util.EnvironmentUtils;
 
@@ -48,6 +50,23 @@ public class PreferenceFragment extends android.preference.PreferenceFragment {
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         return super.onPreferenceTreeClick(preferenceScreen, preference);
+    }
+
+    public void showKeyboard(final boolean visible) {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = getActivity().getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(getActivity());
+        }
+        if (imm != null) {
+            if (visible) {
+                imm.showSoftInput(view, 0);
+            } else {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        }
     }
 }
 

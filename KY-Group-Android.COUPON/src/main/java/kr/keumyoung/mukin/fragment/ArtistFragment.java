@@ -54,7 +54,7 @@ public class ArtistFragment extends _BaseFragment {
 
     @BindView(R.id.artist_recycler)
     RecyclerView artistRecycler;
-    @BindView(R.id.artist_swipe_refresh)
+    @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout artistSwipeRefresh;
     @BindView(R.id.empty_frame)
     LinearLayout emptyFrame;

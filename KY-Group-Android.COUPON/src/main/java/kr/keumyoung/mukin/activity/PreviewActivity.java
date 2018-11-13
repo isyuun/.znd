@@ -58,6 +58,7 @@ import kr.keumyoung.mukin.helper.ToastHelper;
 import kr.keumyoung.mukin.interfaces.SessionRefreshListener;
 import kr.keumyoung.mukin.util.Constants;
 import kr.keumyoung.mukin.util.PlayerJNI;
+import kr.keumyoung.mukin.util.PlayerKyUnpackJNI;
 import kr.keumyoung.mukin.util.PreferenceKeys;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -66,16 +67,13 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import kr.keumyoung.mukin.util.PlayerKyUnpackJNI;
-
-import kr.keumyoung.mukin.activity.SongSearchApi;
 
 /**
  * on 15/01/18.
  * 0.0(5) isyuun:녹음기능제거
  */
 @Deprecated
-public class PreviewActivity extends BaseActivity implements MediaPlayer.OnCompletionListener, SeekBar.OnSeekBarChangeListener {
+public class PreviewActivity extends _BaseActivity implements MediaPlayer.OnCompletionListener, SeekBar.OnSeekBarChangeListener {
 
     private static final int SAMPLE_RATE = 44100;
     @Inject
@@ -149,8 +147,8 @@ public class PreviewActivity extends BaseActivity implements MediaPlayer.OnCompl
     boolean isPlaying = false;
     String fileName;
     PlayerJNI playerJNI;
-	PlayerKyUnpackJNI playerKyUnpackJNI;
-	 
+    PlayerKyUnpackJNI playerKyUnpackJNI;
+
     SessionRefreshListener sessionRefreshListener = new SessionRefreshListener() {
         @Override
         public void onSessionRefresh() {
@@ -180,7 +178,7 @@ public class PreviewActivity extends BaseActivity implements MediaPlayer.OnCompl
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         playerJNI = new PlayerJNI();
-		playerKyUnpackJNI = new PlayerKyUnpackJNI();
+        playerKyUnpackJNI = new PlayerKyUnpackJNI();
     }
 
     @Override
@@ -230,16 +228,16 @@ public class PreviewActivity extends BaseActivity implements MediaPlayer.OnCompl
                     }, this::initiatePlayer);
 		*/
 
-			String filename = String.format("%05d", Integer.parseInt(song.getIdentifier()))+".KY3";
-			File ky3Path = new File(ImageUtils.BASE_PATH + filename);
-			System.out.println("#### SongDownload ky3Path : " + ky3Path + " filename " + filename);
-		//	if(!ky3Path.isFile())
-			{
-				int temp = (int)Math.floor(Integer.parseInt(song.getIdentifier()) /(double)100);
-				String dir = String.format("%03d", temp);
-				String downUrl = Constants.BASE_HOST_URL+"/ky3/"+dir+File.separator+filename;
-				SongSearchApi.downloadFile(downUrl, ImageUtils.BASE_PATH, song.getIdentifier() +".KY3", mHandler, Constants.API_KY3_DOWNLOAD);
-			}
+            String filename = String.format("%05d", Integer.parseInt(song.getIdentifier())) + ".KY3";
+            File ky3Path = new File(ImageUtils.BASE_PATH + filename);
+            System.out.println("#### SongDownload ky3Path : " + ky3Path + " filename " + filename);
+            //	if(!ky3Path.isFile())
+            {
+                int temp = (int) Math.floor(Integer.parseInt(song.getIdentifier()) / (double) 100);
+                String dir = String.format("%03d", temp);
+                String downUrl = Constants.BASE_HOST_URL + "/ky3/" + dir + File.separator + filename;
+                SongSearchApi.downloadFile(downUrl, ImageUtils.BASE_PATH, song.getIdentifier() + ".KY3", mHandler, Constants.API_KY3_DOWNLOAD);
+            }
         }
     }
 
@@ -250,24 +248,23 @@ public class PreviewActivity extends BaseActivity implements MediaPlayer.OnCompl
             if (playerJNI == null) playerJNI = new PlayerJNI();
 
             playerJNI.Initialize(preferenceHelper.getString(PreferenceKeys.LIBRARY_PATH));
-         //   String filePath = ImageUtils.BASE_PATH + song.getIdentifier() + ".mid";
-			String midPath = ImageUtils.BASE_PATH + Integer.parseInt(song.getIdentifier()) +".mid";
+            //   String filePath = ImageUtils.BASE_PATH + song.getIdentifier() + ".mid";
+            String midPath = ImageUtils.BASE_PATH + Integer.parseInt(song.getIdentifier()) + ".mid";
             if (playerJNI != null) playerJNI.SetPortSelectionMethod(5); // Type K
-			if (playerJNI != null) playerJNI.SetSpeedControl(0);
-            if (playerJNI != null) 
-			{
-		//		System.out.println("#### initiatePlayer midPath : " + midPath);
-				playerJNI.SetFile(midPath);
-				File midiFile = new File(midPath);
-				midiFile.delete();
+            if (playerJNI != null) playerJNI.SetSpeedControl(0);
+            if (playerJNI != null) {
+                //		System.out.println("#### initiatePlayer midPath : " + midPath);
+                playerJNI.SetFile(midPath);
+                File midiFile = new File(midPath);
+                midiFile.delete();
             }
-			if (playerJNI != null) playerJNI.Seek(0);
+            if (playerJNI != null) playerJNI.Seek(0);
 
             try {
                 String pathAudio = ImageUtils.BASE_PATH + song.getIdentifier() + ".wav";
                 audioFile = new File(pathAudio);
                 Uri uri = Uri.fromFile(audioFile);
-				
+
                 mediaPlayer = new MediaPlayer();
                 mediaPlayer.setDataSource(PreviewActivity.this, uri);
                 mediaPlayer.prepare();
@@ -288,7 +285,7 @@ public class PreviewActivity extends BaseActivity implements MediaPlayer.OnCompl
 
     private Runnable getRunnable() {
         return () -> runOnUiThread(() -> {
-        //    if (playerJNI != null) System.out.println("TICK: " + playerJNI.GetCurrentClocks());
+            //    if (playerJNI != null) System.out.println("TICK: " + playerJNI.GetCurrentClocks());
 
             if (isPlaying && playerJNI != null && mediaPlayer != null) {
                 songProgress.setProgress(mediaPlayer.getCurrentPosition());
@@ -659,38 +656,37 @@ public class PreviewActivity extends BaseActivity implements MediaPlayer.OnCompl
         return playerJNI;
     }
 
-	public Handler mHandler = new Handler() {
-		@Override
-		 public void handleMessage(Message msg) {
-			super.handleMessage(msg);
-			switch (msg.what) {
-				case Constants.API_KY3_DOWNLOAD:
-					{
-						System.out.println("#### API_KY3_DOWNLOAD!!!");
-						String ky3Path = ImageUtils.BASE_PATH + song.getIdentifier() +".KY3";
-						
-						playerKyUnpackJNI.Init(ky3Path, ImageUtils.BASE_PATH, Integer.parseInt(song.getIdentifier()));
-						initiatePlayer();
+    public Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case Constants.API_KY3_DOWNLOAD: {
+                    System.out.println("#### API_KY3_DOWNLOAD!!!");
+                    String ky3Path = ImageUtils.BASE_PATH + song.getIdentifier() + ".KY3";
 
-						String SokPath = ImageUtils.BASE_PATH + Integer.parseInt(song.getIdentifier()) +".sok";
-						System.out.println("#### ky3Path : " + ky3Path + " || SokPath : " + SokPath);
-						lyricsTimingHelper.initiateWithLyrics(PreviewActivity.this, lyricsView, SokPath);
-				//		lyricsTimingHelper.parseSokLineArray(SokPath);
-						playerKyUnpackJNI.LyricSokParse(lyricsTimingHelper.GetLyricsLineString());
+                    playerKyUnpackJNI.Init(ky3Path, ImageUtils.BASE_PATH, Integer.parseInt(song.getIdentifier()));
+                    initiatePlayer();
 
-						File ky3File = new File(ky3Path);
-						ky3File.delete();
+                    String SokPath = ImageUtils.BASE_PATH + Integer.parseInt(song.getIdentifier()) + ".sok";
+                    System.out.println("#### ky3Path : " + ky3Path + " || SokPath : " + SokPath);
+                    lyricsTimingHelper.initiateWithLyrics(PreviewActivity.this, lyricsView, SokPath);
+                    //		lyricsTimingHelper.parseSokLineArray(SokPath);
+                    playerKyUnpackJNI.LyricSokParse(lyricsTimingHelper.GetLyricsLineString());
 
-						File sokFile = new File(SokPath);
-						sokFile.delete();
-					}
-					break;
-				case Constants.API_ERROR_CODE:
-					toastHelper.showError(R.string.file_not_found);
+                    File ky3File = new File(ky3Path);
+                    ky3File.delete();
+
+                    File sokFile = new File(SokPath);
+                    sokFile.delete();
+                }
+                break;
+                case Constants.API_ERROR_CODE:
+                    toastHelper.showError(R.string.file_not_found);
                     preferenceHelper.clearSavedSettings();
                     navigationHelper.finish(PreviewActivity.this);
-					break;
-			}
-		 }
-	};
+                    break;
+            }
+        }
+    };
 }

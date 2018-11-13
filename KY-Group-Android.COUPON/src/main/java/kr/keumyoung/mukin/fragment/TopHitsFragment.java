@@ -6,14 +6,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.LinearLayout;
 
 import org.json.JSONArray;
@@ -45,7 +41,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- *  on 12/01/18.
+ * on 12/01/18.
  */
 
 public class TopHitsFragment extends _BaseFragment {
@@ -62,16 +58,12 @@ public class TopHitsFragment extends _BaseFragment {
     @BindView(R.id.featured_recycler)
     RecyclerView featuredRecycler;
     Unbinder unbinder;
-    @BindView(R.id.featured_swipe_refresh)
+    @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout featuredSwipeRefresh;
     @BindView(R.id.empty_frame)
     LinearLayout emptyFrame;
 
     HomeFragment parentFragment;
-
-    SongAdapter songAdapter;
-
-    Songs songs = new Songs();
 
     SessionRefreshListener sessionRefreshListener = new SessionRefreshListener() {
         @Override
@@ -221,11 +213,7 @@ public class TopHitsFragment extends _BaseFragment {
         });
     }
 
-    private void populateSongs() {
-        populateSongs(0);
-    }
-
-    private void populateSongs(int offset) {
+    public void populateSongs(int offset) {
         activity.showProgress();
         CommonHelper.hideSoftKeyboard(activity);
 
@@ -265,6 +253,8 @@ public class TopHitsFragment extends _BaseFragment {
 
                                 if (songAdapter.isLoading()) songAdapter.setLoading(false);
                                 songAdapter.notifyDataSetChanged();
+
+                                onPopulateSongs();
 
                                 updateEmptyVisibility();
                             } else if (errorBody != null) {
@@ -347,6 +337,5 @@ public class TopHitsFragment extends _BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        activity.updateFavoriteSongs(songs, songAdapter);
     }
 }

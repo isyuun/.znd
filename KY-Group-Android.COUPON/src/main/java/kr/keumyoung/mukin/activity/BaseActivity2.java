@@ -1,19 +1,17 @@
 package kr.keumyoung.mukin.activity;
 
 import android.accounts.Account;
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.preference.PreferenceActivity;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
-import android.view.View;
 
 import kr.keumyoung.karaoke.mukin.coupon.apps._preference;
 import kr.keumyoung.karaoke.mukin.coupon.fragment._coupon;
 import kr.keumyoung.mukin.MainApplication;
+import kr.keumyoung.mukin.R;
+import kr.keumyoung.mukin.fragment._BaseFragment;
 import kr.kymedia.karaoke.util.EnvironmentUtils;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -31,6 +29,10 @@ public class BaseActivity2 extends BaseActivity {
 
     public MainApplication getMainApplication() {
         return (MainApplication) super.getApplication();
+    }
+
+    public _BaseFragment getCurrentFragment() {
+        return ((_BaseFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container));
     }
 
     protected String getGoogleAccount() {

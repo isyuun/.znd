@@ -254,44 +254,44 @@ public class BaseActivity extends AppCompatActivity {
         animationHelper.hideViewWithZoomAnim(viewHolder.popupFrameLayout);
     }
 
-    // common instance for checking session expiration error for all DF API calls.
-    // if the session is expired, try to refresh the session and continue with session refresh listener
-    // else logout the internal session and land the user to the login screen
-    public boolean handleDFError(JSONObject errorObject, SessionRefreshListener listener) throws JSONException {
-        String errorCode = errorObject.getJSONObject("error").getString("code");
-        if (errorCode.equalsIgnoreCase("401")) { // session has expired. need to refresh the session_token
-            restApi.refreshSessionToken(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN),
-                    preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN)).enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    try {
-                        ResponseBody responseBody = response.body();
-                        ResponseBody errorBody = response.errorBody();
-                        if (responseBody != null) {
-                            String responseString = responseBody.string();
-                            JSONObject responseObject = new JSONObject(responseString);
-                            String sessionToken = responseObject.getString("session_token");
-                            preferenceHelper.saveString(PreferenceKeys.SESSION_TOKEN, sessionToken);
-                            listener.onSessionRefresh();
-                        } else if (errorBody != null) {
-                            listener.logout(BaseActivity.this);
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        listener.logout(BaseActivity.this);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    t.printStackTrace();
-                    listener.logout(BaseActivity.this);
-                }
-            });
-            return true;
-        }
-        return false;
-    }
+    //// common instance for checking session expiration error for all DF API calls.
+    //// if the session is expired, try to refresh the session and continue with session refresh listener
+    //// else logout the internal session and land the user to the login screen
+    //public boolean handleDFError(JSONObject errorObject, SessionRefreshListener listener) throws JSONException {
+    //    String errorCode = errorObject.getJSONObject("error").getString("code");
+    //    if (errorCode.equalsIgnoreCase("401")) { // session has expired. need to refresh the session_token
+    //        restApi.refreshSessionToken(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN),
+    //                preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN)).enqueue(new Callback<ResponseBody>() {
+    //            @Override
+    //            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+    //                try {
+    //                    ResponseBody responseBody = response.body();
+    //                    ResponseBody errorBody = response.errorBody();
+    //                    if (responseBody != null) {
+    //                        String responseString = responseBody.string();
+    //                        JSONObject responseObject = new JSONObject(responseString);
+    //                        String sessionToken = responseObject.getString("session_token");
+    //                        preferenceHelper.saveString(PreferenceKeys.SESSION_TOKEN, sessionToken);
+    //                        listener.onSessionRefresh();
+    //                    } else if (errorBody != null) {
+    //                        listener.logout(BaseActivity.this);
+    //                    }
+    //                } catch (Exception e) {
+    //                    e.printStackTrace();
+    //                    listener.logout(BaseActivity.this);
+    //                }
+    //            }
+    //
+    //            @Override
+    //            public void onFailure(Call<ResponseBody> call, Throwable t) {
+    //                t.printStackTrace();
+    //                listener.logout(BaseActivity.this);
+    //            }
+    //        });
+    //        return true;
+    //    }
+    //    return false;
+    //}
 
 
     static class ViewHolder implements View.OnTouchListener, View.OnClickListener {

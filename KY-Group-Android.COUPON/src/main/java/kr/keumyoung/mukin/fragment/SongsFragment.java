@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,18 +56,14 @@ public class SongsFragment extends _BaseFragment {
 
     @BindView(R.id.songs_recycler)
     RecyclerView songsRecycler;
-    @BindView(R.id.songs_swipe_refresh)
+    @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout songsSwipeRefresh;
     @BindView(R.id.empty_frame)
     LinearLayout emptyFrame;
 
     HomeFragment parentFragment;
 
-    SongAdapter songAdapter;
-
     String filter, id;
-
-    Songs songs = new Songs();
 
     TextWatcher textWatcher;
 
@@ -185,7 +180,7 @@ public class SongsFragment extends _BaseFragment {
         });
     }
 
-    private void populateSongs() {
+    public void populateSongs() {
         CommonHelper.hideSoftKeyboard(activity);
         populateSongs(filter, true, 0);
     }
@@ -223,6 +218,7 @@ public class SongsFragment extends _BaseFragment {
                                             songs.add(song);
                                         }
                                         if (showProgress) activity.hideProgress();
+                                        onPopulateSongs();
                                         if (songAdapter.isLoading()) songAdapter.setLoading(false);
                                         songAdapter.notifyDataSetChanged();
                                         updateEmptyVisibility();
@@ -375,6 +371,5 @@ public class SongsFragment extends _BaseFragment {
     public void onResume() {
         super.onResume();
         //CommonHelper.hideSoftKeyboard(activity);
-        activity.updateFavoriteSongs(songs, songAdapter);
     }
 }

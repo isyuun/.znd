@@ -8,6 +8,7 @@ import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.activity.BaseActivity;
 import kr.keumyoung.mukin.activity.BaseActivity3;
+import kr.keumyoung.mukin.activity._BaseActivity;
 import kr.keumyoung.mukin.activity._LoginActivity;
 import kr.keumyoung.mukin.helper.PreferenceHelper;
 import kr.keumyoung.mukin.helper.ToastHelper;
@@ -43,8 +44,8 @@ public abstract class SessionRefreshListener {
         String password = preferenceHelper.getString(PreferenceKeys.LOGIN_PASSWORD);
 
         if ((!email.isEmpty() && !password.isEmpty()) && activity instanceof BaseActivity3) {
-            ((BaseActivity3)activity).login(email, password);
-            toastHelper.showError("세션 업데이트 합니다.");
+            ((_BaseActivity) activity).login(email, password);
+            toastHelper.showError(R.string.session_expired_update);
         } else {
             Intent i = new Intent(activity, _LoginActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

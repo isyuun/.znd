@@ -1,6 +1,13 @@
 package kr.keumyoung.mukin.fragment;
 
 import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
+
+import kr.keumyoung.mukin.BuildConfig;
+import kr.keumyoung.mukin.R;
+import kr.keumyoung.mukin.adapter.SongAdapter;
+import kr.keumyoung.mukin.data.model.Songs;
 
 public class BaseFragment2 extends BaseFragment {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
@@ -23,5 +30,48 @@ public class BaseFragment2 extends BaseFragment {
     public final boolean postDelayed(Runnable r, long delayMillis) {
         handler.removeCallbacks(r);
         return handler.postDelayed(r, delayMillis);
+    }
+
+    public void populateSongs() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
+        populateSongs(0);
+    }
+
+    public void populateSongs(int offset) {
+    }
+
+    public void onBackPressed() {
+        if (getActivity().findViewById(R.id.swipe_refresh) != null) {
+            ((SwipeRefreshLayout)getActivity().findViewById(R.id.swipe_refresh)).setRefreshing(false);
+        }
+    }
+
+    public void refresh() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
+        if (getActivity().findViewById(R.id.swipe_refresh) != null) {
+            ((SwipeRefreshLayout)getActivity().findViewById(R.id.swipe_refresh)).setRefreshing(false);
+        }
+        populateSongs();
+    }
+
+    SongAdapter songAdapter;
+
+    Songs songs = new Songs();
+
+    @Override
+    public void onResume() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
+        super.onResume();
+        updateFavoriteSongs();
+    }
+
+    protected void onPopulateSongs() {
+        updateFavoriteSongs();
+    }
+
+
+    public void updateFavoriteSongs() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + activity.getFavorites() + ":" + songs + ":" + songAdapter);
+        activity.updateFavoriteSongs(songs, songAdapter);
     }
 }

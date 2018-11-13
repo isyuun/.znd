@@ -73,6 +73,7 @@
     <string name="nick_name_blank_error">닉네임 입력은 필수입니다.</string>
     <string name="empty_genre_message">장르리스트가 비어있습니다.</string>
     <string name="session_expired_error">세션이 만기되었습니다. 다시 로그인해주세요.</string>
+    <string name="session_expired_update">세션이 만기되었습니다. 다시 업데이트 합니다.</string>
     <string name="empty_artist_message">가수를 찾지 못했습니다.</string>
     <string name="empty_songs_message">노래를 찾지 못했습니다.</string>
     <string name="song_not_playable">노래를 플레이 할 수 없습니다.</string>

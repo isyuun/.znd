@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,8 +27,8 @@ import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.api.RestApi;
 import kr.keumyoung.mukin.data.model.Song;
-import kr.keumyoung.mukin.fragment.BaseFragment;
 import kr.keumyoung.mukin.fragment.HomeFragment;
+import kr.keumyoung.mukin.fragment._BaseFragment;
 import kr.keumyoung.mukin.helper.AnimationHelper;
 import kr.keumyoung.mukin.helper.NavigationHelper;
 import kr.keumyoung.mukin.helper.ToastHelper;
@@ -83,7 +84,7 @@ public class HomeActivity extends _BaseActivity {
     ToastHelper toastHelper;
 
     // current fragment always holds the currently added fragment to the container
-    BaseFragment currentFragment;
+    _BaseFragment currentFragment;
 
     HomeFragment homeFragment;
     boolean backPressed = false;
@@ -125,16 +126,16 @@ public class HomeActivity extends _BaseActivity {
         // nothing to do with the side menu now
     }
 
-    public void replaceFragment(BaseFragment fragment) {
+    public void replaceFragment(_BaseFragment fragment) {
         replaceFragment(fragment, true, R.id.fragment_container);
     }
 
     // method made specifically for side menu. now unused
-    public void replaceFragment(BaseFragment fragment, int containerId) {
+    public void replaceFragment(_BaseFragment fragment, int containerId) {
         replaceFragment(fragment, true, containerId);
     }
 
-    public void replaceFragment(BaseFragment fragment, boolean addToStack, int containerId) {
+    public void replaceFragment(_BaseFragment fragment, boolean addToStack, int containerId) {
         currentFragment = fragment;
         String fragmentTag = fragment.getClass().getSimpleName();
         FragmentManager manager = getSupportFragmentManager();
@@ -154,7 +155,7 @@ public class HomeActivity extends _BaseActivity {
         boolean result = false;
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             result = getSupportFragmentManager().popBackStackImmediate();
-            currentFragment = (BaseFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            currentFragment = (_BaseFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         }
         return result;
     }

@@ -1,35 +1,11 @@
 package kr.keumyoung.mukin.activity;
 
-import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
-
-import com.squareup.otto.Subscribe;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.R;
-import kr.keumyoung.mukin.adapter.SongAdapter;
-import kr.keumyoung.mukin.api.RequestModel;
-import kr.keumyoung.mukin.data.SongParser;
-import kr.keumyoung.mukin.data.model.Song;
 import kr.keumyoung.mukin.data.model.SongView;
-import kr.keumyoung.mukin.data.model.Songs;
-import kr.keumyoung.mukin.data.request.SongHitRequest;
-import kr.keumyoung.mukin.interfaces.SessionRefreshListener;
-import kr.keumyoung.mukin.util.CommonHelper;
-import kr.keumyoung.mukin.util.Constants;
 import kr.keumyoung.mukin.util.PreferenceKeys;
-import kr.keumyoung.mukin.util.TableNames;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class HomeActivity2 extends HomeActivity {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
@@ -61,7 +37,7 @@ public class HomeActivity2 extends HomeActivity {
     }
 
     protected void onSongSelected(SongView song) {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + song + ":" + preferenceHelper.getString(PreferenceKeys.USER_ID) + ":" + song.getSong().getSongId()  + ":" + song.getSong().getSongTitle() + ":");
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + song + ":" + preferenceHelper.getString(PreferenceKeys.USER_ID) + ":" + song.getSong().getSongId() + ":" + song.getSong().getSongTitle() + ":");
 
         if (song.getView().getId() == R.id.favorite_button) {
             if (!isFavorites(song.getSong().getSongId())) {
@@ -76,8 +52,8 @@ public class HomeActivity2 extends HomeActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         Log.e(__CLASSNAME__, getMethodName() + isShowingProgress());
+        super.onBackPressed();
         hideProgress();
     }
 }

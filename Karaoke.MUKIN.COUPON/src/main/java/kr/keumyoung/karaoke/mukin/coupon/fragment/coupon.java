@@ -31,8 +31,8 @@ public class coupon extends _user {
         //mCouponView.setText("6N69FJTV7JWAWH5F"); //test //오류:6N69FJTV7JWAWH5F
         SharedPreferences sharedPref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
         String coupon = sharedPref.getString(getString(R.string.coupon), ""/*mCouponView.getText().toString()*/);
-        /*if (!coupon.isEmpty()) */mCouponView.setText(coupon);
-        mCouponView.requestFocus();
+        if (!coupon.isEmpty()) mCouponView.setText(coupon);
+        if (coupon.isEmpty()) mCouponView.requestFocus();
 
         getActivity().setTitle(R.string.pref_coupon);
     }
@@ -74,16 +74,20 @@ public class coupon extends _user {
     @Override
     public void onSuccess(int status, Header[] headers, String response) {
         super.onSuccess(status, headers, response);
-        if (getCoupon() != null && !getCoupon().isEmpty()) {
+        String coupon = getCoupon();
+        if (coupon != null && !coupon.isEmpty()) {
             String couponDate = getApplication().getCouponDate(false);
             Log.e(__CLASSNAME__, getMethodName() + ":" + mCouponView + ":" + getCoupon() + ":" + couponDate);
-            ((TextView)findViewById(R.id.coupon_date)).setText(couponDate + "\n");
+            ((TextView) findViewById(R.id.coupon_date)).setText(couponDate + "\n");
             findViewById(R.id.coupon_date).setVisibility(View.VISIBLE);
             mCouponView.setEnabled(false);
+            showKeyboard(false);
         } else {
-            ((TextView)findViewById(R.id.coupon_date)).setText("\n");
+            ((TextView) findViewById(R.id.coupon_date)).setText("\n");
             findViewById(R.id.coupon_date).setVisibility(View.GONE);
             mCouponView.setEnabled(true);
+            mCouponView.requestFocus();
+            showKeyboard(true);
         }
     }
 }

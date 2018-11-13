@@ -36,6 +36,10 @@ public class BaseActivity5 extends BaseActivity4 {
         return favorites;
     }
 
+    protected void clearFavorites() {
+        favorites.clear();
+    }
+
     protected void addFavoriteSong(Song song) {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + song + ":" + preferenceHelper.getString(PreferenceKeys.USER_ID) + ":" + song.getSongId() + ":" + song.getSongTitle());
         song.setFavorite(true);
@@ -124,14 +128,43 @@ public class BaseActivity5 extends BaseActivity4 {
         });
     }
 
+    @Override
+    protected void onLoginSuccess(String email, String nickName) {
+        super.onLoginSuccess(email, nickName);
+        getFavoriteSongs();
+    }
+
+    @Override
+    protected void onLogoutSuccess() {
+        super.onLogoutSuccess();
+        clearFavorites();
+        updateFavoriteSongs();
+    }
+
     protected void onFavoriteSongs() {
+        updateFavoriteSongs();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateFavoriteSongs();
+    }
+
+    private void updateFavoriteSongs() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + favorites);
+        if (getCurrentFragment() != null) {
+            getCurrentFragment().updateFavoriteSongs();
+        }
     }
 
     public void updateFavoriteSongs(Songs songs, SongAdapter adapter) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + getFavorites() + ":" + songs + ":" + adapter);
         for (Song song : songs) {
             song.setFavorite(isFavorites(song.getSongId()));
         }
-        adapter.notifyDataSetChanged();
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
     }
-
 }

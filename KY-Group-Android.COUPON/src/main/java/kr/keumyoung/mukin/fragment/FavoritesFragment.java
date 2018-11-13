@@ -62,10 +62,6 @@ public class FavoritesFragment extends _BaseFragment {
 
     HomeFragment parentFragment;
 
-    SongAdapter songAdapter;
-
-    Songs songs = new Songs();
-
     SessionRefreshListener sessionRefreshListener = new SessionRefreshListener() {
         @Override
         public void onSessionRefresh() {
@@ -81,7 +77,7 @@ public class FavoritesFragment extends _BaseFragment {
     @BindView(R.id.featured_recycler)
     RecyclerView featuredRecycler;
     Unbinder unbinder;
-    @BindView(R.id.featured_swipe_refresh)
+    @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout featuredSwipeRefresh;
     @BindView(R.id.empty_frame)
     LinearLayout emptyFrame;
@@ -220,12 +216,7 @@ public class FavoritesFragment extends _BaseFragment {
         });
     }
 
-    private void populateSongs() {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
-        populateSongs(0);
-    }
-
-    private void populateSongs(int offset) {
+    public void populateSongs(int offset) {
         activity.showProgress();
         CommonHelper.hideSoftKeyboard(activity);
 

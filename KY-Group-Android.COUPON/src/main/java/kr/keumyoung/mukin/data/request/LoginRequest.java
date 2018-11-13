@@ -7,6 +7,7 @@ package kr.keumyoung.mukin.data.request;
 public class LoginRequest {
     private String email, password;
     private int duration = 0;
+    private boolean remember_me = true;
 
     public LoginRequest(String email, String password, int duration) {
         this.email = email;

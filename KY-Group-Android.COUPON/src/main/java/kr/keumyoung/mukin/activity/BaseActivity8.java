@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.util.Log;
 
 import kr.keumyoung.mukin.R;
+import kr.keumyoung.mukin.fragment._BaseFragment;
 
 public class BaseActivity8 extends BaseActivity7 {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
@@ -36,5 +37,29 @@ public class BaseActivity8 extends BaseActivity7 {
 
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (getCurrentFragment() != null) {
+            getCurrentFragment().onBackPressed();
+        }
+    }
+
+    @Override
+    protected void onLoginSuccess(String email, String nickName) {
+        super.onLoginSuccess(email, nickName);
+        if (getCurrentFragment() != null) {
+            getCurrentFragment().refresh();
+        }
+    }
+
+    @Override
+    protected void onLogoutSuccess() {
+        super.onLogoutSuccess();
+        if (getCurrentFragment() != null) {
+            getCurrentFragment().refresh();
+        }
     }
 }

@@ -21,7 +21,6 @@ import kr.keumyoung.mukin.data.model.Songs;
 import kr.keumyoung.mukin.helper.AnimationHelper;
 import kr.keumyoung.mukin.helper.PreferenceHelper;
 import kr.keumyoung.mukin.interfaces.SessionRefreshListener;
-import kr.keumyoung.mukin.util.CommonHelper;
 import kr.keumyoung.mukin.util.Constants;
 import kr.keumyoung.mukin.util.PaginationScrollListener;
 import kr.keumyoung.mukin.util.PreferenceKeys;
@@ -59,12 +58,8 @@ public class RecommendedFragment extends _BaseFragment {
     RecyclerView recommendedRecycler;
     @BindView(R.id.empty_frame)
     LinearLayout emptyFrame;
-    @BindView(R.id.recommended_swipe_refresh)
+    @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout recommendedSwipeRefresh;
-
-    SongAdapter songAdapter;
-
-    Songs songs = new Songs();
 
     SessionRefreshListener sessionRefreshListener = new SessionRefreshListener() {
         @Override
@@ -97,7 +92,7 @@ public class RecommendedFragment extends _BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recommendedSwipeRefresh.setOnRefreshListener(() -> populateSongs(0));
+        recommendedSwipeRefresh.setOnRefreshListener(() -> populateSongs());
     }
 
     @Override
@@ -119,6 +114,17 @@ public class RecommendedFragment extends _BaseFragment {
         setupRecyclerView();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (songs.isEmpty())
+            populateSongs();
+
+        //CommonHelper.hideSoftKeyboard(activity);
+        activity.hideNavigationIcon();
+    }
+
     private void setupRecyclerView() {
         songAdapter = new SongAdapter(songs);
 
@@ -126,9 +132,6 @@ public class RecommendedFragment extends _BaseFragment {
 
         recommendedRecycler.setLayoutManager(layoutManager);
         recommendedRecycler.setAdapter(songAdapter);
-
-        if (songs.isEmpty())
-            populateSongs(0);
 
         recommendedRecycler.addOnScrollListener(new PaginationScrollListener(layoutManager) {
             @Override
@@ -149,7 +152,7 @@ public class RecommendedFragment extends _BaseFragment {
         });
     }
 
-    private void populateSongs(int offset) {
+    public void populateSongs(int offset) {
         this.offset = offset;
 
         if (offset == 0) {
@@ -188,6 +191,8 @@ public class RecommendedFragment extends _BaseFragment {
 
                                 if (songAdapter.isLoading()) songAdapter.setLoading(false);
                                 songAdapter.notifyDataSetChanged();
+
+                                onPopulateSongs();
 
                                 updateEmptyVisibility();
                             } else if (errorBody != null) {
@@ -242,13 +247,5 @@ public class RecommendedFragment extends _BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        //CommonHelper.hideSoftKeyboard(activity);
-        activity.hideNavigationIcon();
-        activity.updateFavoriteSongs(songs, songAdapter);
     }
 }

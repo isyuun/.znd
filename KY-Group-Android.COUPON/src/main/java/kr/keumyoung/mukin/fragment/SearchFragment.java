@@ -75,8 +75,6 @@ public class SearchFragment extends _BaseFragment {
     Unbinder unbinder;
 
     HomeFragment parentFragment;
-    Songs songs = new Songs();
-    SongAdapter songAdapter;
     TextWatcher textWatcher;
 
     SessionRefreshListener sessionRefreshListener = new SessionRefreshListener() {
