@@ -18,7 +18,7 @@ import kr.keumyoung.karaoke.mukin.coupon.fragment._login;
 import kr.keumyoung.karaoke.mukin.coupon.fragment._notice;
 import kr.keumyoung.karaoke.mukin.coupon.fragment._privacy;
 import kr.keumyoung.karaoke.mukin.coupon.fragment._user;
-import kr.keumyoung.karaoke.mukin.coupon.fragment._version;
+import kr.keumyoung.karaoke.mukin.coupon.fragment._release;
 
 public class preference2 extends preference {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
@@ -50,7 +50,7 @@ public class preference2 extends preference {
         ret |= _notice.class.getName().equals(fragmentName);
         ret |= _privacy.class.getName().equals(fragmentName);
         ret |= _user.class.getName().equals(fragmentName);
-        ret |= _version.class.getName().equals(fragmentName);
+        ret |= _release.class.getName().equals(fragmentName);
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[PREF]" + getMethodName() + fragmentName + ":" + ret);
         return ret;
     }
