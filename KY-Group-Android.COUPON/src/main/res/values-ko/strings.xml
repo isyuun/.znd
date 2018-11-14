@@ -15,7 +15,7 @@
     <string name="already_have_account">이미 계정이 있으신가요?</string>
     <string name="name_hint">닉네임</string>
     <string name="create_new_account">새계정 만들기</string>
-    <string name="search_hint">노래검색(노래제목/가수/번호)</string>
+    <string name="search_hint">노래검색(제목/가수/번호)</string>
     <!--<string name="featured">뮤즐추천곡</string>-->
     <string name="newsongs">최신곡</string>
     <!--<string name="top_hits">인기노래</string>-->

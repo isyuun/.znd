@@ -49,9 +49,11 @@
         android:title="@string/pref_privacy_policy" />
 
     <header
-        android:fragment="kr.keumyoung.karaoke.mukin.coupon.fragment._version"
+        android:fragment="kr.keumyoung.karaoke.mukin.coupon.fragment._release"
         android:title="@string/pref_app_version" />
 
-    <header android:title="@string/pref_app_opensource" />
+    <header
+        android:fragment="kr.keumyoung.karaoke.mukin.coupon.fragment._license"
+        android:title="@string/pref_app_opensource" />
 
 </preference-headers>
