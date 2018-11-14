@@ -90,8 +90,6 @@ public class HomeFragment extends _BaseFragment {
 
     Unbinder unbinder;
 
-    BaseFragment currentChildFragment;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,7 +116,7 @@ public class HomeFragment extends _BaseFragment {
         replaceChildFragment(recommendedFragment);
     }
 
-    private void replaceChildFragment(BaseFragment fragment) {
+    private void replaceChildFragment(_BaseFragment fragment) {
         if (currentChildFragment != null &&
                 fragment.getClass().getSimpleName().equalsIgnoreCase(
                         currentChildFragment.getClass().getSimpleName()))
@@ -252,7 +250,7 @@ public class HomeFragment extends _BaseFragment {
         FragmentManager fragmentManager = getChildFragmentManager();
         if (fragmentManager.getBackStackEntryCount() > 0) {
             fragmentManager.popBackStackImmediate();
-            currentChildFragment = (BaseFragment) fragmentManager.findFragmentById(R.id.child_fragment_container);
+            currentChildFragment = (_BaseFragment) fragmentManager.findFragmentById(R.id.child_fragment_container);
         }
     }
 

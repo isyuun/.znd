@@ -216,7 +216,7 @@ public class FavoritesFragment extends _BaseFragment {
         });
     }
 
-    public void populateSongs(int offset) {
+    protected void populateSongs(int offset) {
         activity.showProgress();
         CommonHelper.hideSoftKeyboard(activity);
 

@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,9 +82,6 @@ public class HomeActivity extends _BaseActivity {
     @Inject
     ToastHelper toastHelper;
 
-    // current fragment always holds the currently added fragment to the container
-    _BaseFragment currentFragment;
-
     HomeFragment homeFragment;
     boolean backPressed = false;
     private Song song;
@@ -135,31 +131,31 @@ public class HomeActivity extends _BaseActivity {
         replaceFragment(fragment, true, containerId);
     }
 
-    public void replaceFragment(_BaseFragment fragment, boolean addToStack, int containerId) {
-        currentFragment = fragment;
-        String fragmentTag = fragment.getClass().getSimpleName();
-        FragmentManager manager = getSupportFragmentManager();
-
-        boolean fragmentPopped = manager.popBackStackImmediate(fragmentTag, 0);
-
-        if (!fragmentPopped) {
-            FragmentTransaction transaction = manager.beginTransaction();
-            if (addToStack) transaction.addToBackStack(fragmentTag);
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            transaction.replace(containerId, fragment);
-            transaction.commit();
-        }
-    }
-
-    public boolean popFragment() {
-        boolean result = false;
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            result = getSupportFragmentManager().popBackStackImmediate();
-            currentFragment = (_BaseFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-        }
-        return result;
-    }
-
+    //public void replaceFragment(_BaseFragment fragment, boolean addToStack, int containerId) {
+    //    currentFragment = fragment;
+    //    String fragmentTag = fragment.getClass().getSimpleName();
+    //    FragmentManager manager = getSupportFragmentManager();
+    //
+    //    boolean fragmentPopped = manager.popBackStackImmediate(fragmentTag, 0);
+    //
+    //    if (!fragmentPopped) {
+    //        FragmentTransaction transaction = manager.beginTransaction();
+    //        if (addToStack) transaction.addToBackStack(fragmentTag);
+    //        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+    //        transaction.replace(containerId, fragment);
+    //        transaction.commit();
+    //    }
+    //}
+    //
+    //public boolean popFragment() {
+    //    boolean result = false;
+    //    if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+    //        result = getSupportFragmentManager().popBackStackImmediate();
+    //        currentFragment = (_BaseFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+    //    }
+    //    return result;
+    //}
+    //
     //@Override
     //protected void onStart() {
     //    super.onStart();

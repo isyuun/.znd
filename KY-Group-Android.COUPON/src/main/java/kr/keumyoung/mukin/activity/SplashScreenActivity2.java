@@ -116,16 +116,6 @@ public class SplashScreenActivity2 extends SplashScreenActivity {
                                 /**
                                  * {@link HomeActivity2#onResume()}에서 알아서 한다 오바지랄 하지마
                                  */
-                                //String userId = preferenceHelper.getString(PreferenceKeys.USER_ID);
-                                //String sessionToken = preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN);
-                                //hideProgress();
-                                //if (userId.isEmpty() && sessionToken.isEmpty()) {
-                                //    // user is not logged in
-                                //    navigationHelper.navigate(this, _LoginActivity.class);
-                                //} else {
-                                //    // user is logged in
-                                //    navigationHelper.navigate(this, _HomeActivity.class);
-                                //}
                             });
 
             //throw new RuntimeException("Intentional crash test");

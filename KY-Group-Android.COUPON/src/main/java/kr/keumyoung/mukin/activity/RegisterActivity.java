@@ -97,7 +97,7 @@ public class RegisterActivity extends _BaseActivity {
                 profileImageRipple.setOnRippleCompleteListener(rippleView -> openImageChoosePopup());
                 break;
             case R.id.login_anchor:
-                navigationHelper.navigateWithReverseAnim(this, _LoginActivity.class);
+                openPreferenceLogin();
                 break;
             case R.id.signup_button:
                 signupUser();
@@ -324,7 +324,7 @@ public class RegisterActivity extends _BaseActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        navigationHelper.navigateWithReverseAnim(this, _LoginActivity.class);
+        openPreferenceLogin();
     }
 
     @Override

@@ -155,6 +155,7 @@ public class BaseActivity3 extends BaseActivity2 {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 t.printStackTrace();
                 hideProgress();
+                toastHelper.showError(R.string.common_api_error);
             }
         });
     }
@@ -197,10 +198,8 @@ public class BaseActivity3 extends BaseActivity2 {
     }
 
     protected void onLogoutSuccess() {
-        if (!BuildConfig.DEBUG) {
-            preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, "");
-            preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, "");
-        }
+        preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, "");
+        preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, "");
         preferenceHelper.saveString(getString(R.string.email), "");
         preferenceHelper.saveString(getString(R.string.coupon), "");
     }
@@ -289,6 +288,7 @@ public class BaseActivity3 extends BaseActivity2 {
                 if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "loginUserAndAcquireSession:onFailure()");
                 t.printStackTrace();
                 hideProgress();
+                toastHelper.showError(R.string.common_api_error);
             }
         });
     }
@@ -387,6 +387,7 @@ public class BaseActivity3 extends BaseActivity2 {
                 if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "registerUserCustom:onFailure()");
                 t.printStackTrace();
                 hideProgress();
+                toastHelper.showError(R.string.common_api_error);
             }
         });
     }
@@ -426,6 +427,7 @@ public class BaseActivity3 extends BaseActivity2 {
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
                     t.printStackTrace();
                     listener.logout(BaseActivity3.this);
+                    toastHelper.showError(R.string.common_api_error);
                 }
             });
             return true;

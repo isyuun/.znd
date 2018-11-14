@@ -1,6 +1,7 @@
 package kr.keumyoung.mukin.interfaces;
 
 import android.content.Intent;
+import android.util.Log;
 
 import javax.inject.Inject;
 
@@ -43,15 +44,15 @@ public abstract class SessionRefreshListener {
         String email = preferenceHelper.getString(PreferenceKeys.LOGIN_EMAIL);
         String password = preferenceHelper.getString(PreferenceKeys.LOGIN_PASSWORD);
 
-        if ((!email.isEmpty() && !password.isEmpty()) && activity instanceof BaseActivity3) {
-            ((_BaseActivity) activity).login(email, password);
-            toastHelper.showError(R.string.session_expired_update);
-        } else {
-            Intent i = new Intent(activity, _LoginActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            activity.startActivity(i);
-            activity.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
-            toastHelper.showError(R.string.session_expired_error);
+        if (activity instanceof _BaseActivity) {
+            if ((!email.isEmpty() && !password.isEmpty())) {
+                ((_BaseActivity) activity).login(email, password);
+                //toastHelper.showError(R.string.session_expired_update);
+                Log.e("SessionRefreshListener", "" + activity.getResources().getString(R.string.session_expired_update));
+            } else {
+                ((_BaseActivity) activity).openPreferenceLogin();
+                toastHelper.showError(R.string.session_expired_error);
+            }
         }
     }
 }

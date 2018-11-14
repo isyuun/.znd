@@ -1,12 +1,15 @@
 package kr.keumyoung.mukin.fragment;
 
+import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 
 import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.adapter.SongAdapter;
+import kr.keumyoung.mukin.data.model.Song;
 import kr.keumyoung.mukin.data.model.Songs;
 
 public class BaseFragment2 extends BaseFragment {
@@ -32,12 +35,18 @@ public class BaseFragment2 extends BaseFragment {
         return handler.postDelayed(r, delayMillis);
     }
 
+    _BaseFragment currentChildFragment;
+
+    public _BaseFragment getChildCurrentFragment() {
+        return currentChildFragment;
+    }
+
     public void populateSongs() {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
         populateSongs(0);
     }
 
-    public void populateSongs(int offset) {
+    protected void populateSongs(int offset) {
     }
 
     public void onBackPressed() {
@@ -54,24 +63,28 @@ public class BaseFragment2 extends BaseFragment {
         populateSongs();
     }
 
-    SongAdapter songAdapter;
+    protected void onPopulateSongs() {
+        updateFavoriteSongs();
+    }
+
 
     Songs songs = new Songs();
+    SongAdapter songAdapter;
+
+    public void updateFavoriteSongs() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + activity.getFavorites() + ":" + songs + ":" + songAdapter);
+        for (Song song : songs) {
+            song.setFavorite(activity.isFavorites(song.getSongId()));
+        }
+        if (songAdapter != null) {
+            songAdapter.notifyDataSetChanged();
+        }
+    }
 
     @Override
     public void onResume() {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
         super.onResume();
         updateFavoriteSongs();
-    }
-
-    protected void onPopulateSongs() {
-        updateFavoriteSongs();
-    }
-
-
-    public void updateFavoriteSongs() {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + activity.getFavorites() + ":" + songs + ":" + songAdapter);
-        activity.updateFavoriteSongs(songs, songAdapter);
     }
 }

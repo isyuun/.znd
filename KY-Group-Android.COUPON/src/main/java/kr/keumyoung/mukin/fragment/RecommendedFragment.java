@@ -152,7 +152,7 @@ public class RecommendedFragment extends _BaseFragment {
         });
     }
 
-    public void populateSongs(int offset) {
+    protected void populateSongs(int offset) {
         this.offset = offset;
 
         if (offset == 0) {

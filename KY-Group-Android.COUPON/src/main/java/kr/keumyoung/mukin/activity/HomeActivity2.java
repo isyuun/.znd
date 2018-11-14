@@ -29,7 +29,7 @@ public class HomeActivity2 extends HomeActivity {
         if (preferenceHelper.getString(PreferenceKeys.LOGIN_EMAIL).isEmpty() || preferenceHelper.getString(PreferenceKeys.LOGIN_PASSWORD).isEmpty() ||
                 preferenceHelper.getString(PreferenceKeys.USER_ID).isEmpty() || preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN).isEmpty()) {
             // user is not logged in
-            navigationHelper.navigate(this, _LoginActivity.class, false, null);
+            openPreferenceLogin();
         }
 
         getFavoriteSongs();

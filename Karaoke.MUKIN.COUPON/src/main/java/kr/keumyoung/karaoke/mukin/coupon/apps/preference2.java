@@ -73,5 +73,12 @@ public class preference2 extends preference {
             super.onHeaderClick(header, position);
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[PREF]" + getMethodName() + ":" + requestCode + ":" + resultCode + ":" + data);
+        super.onActivityResult(requestCode, resultCode, data);
+        setResult(resultCode, data);
+    }
 }
 

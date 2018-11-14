@@ -53,7 +53,7 @@ public class BaseActivity5 extends BaseActivity4 {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                toastHelper.showError(R.string.common_api_error);
             }
         });
     }
@@ -77,7 +77,7 @@ public class BaseActivity5 extends BaseActivity4 {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                toastHelper.showError(R.string.common_api_error);
             }
         });
     }
@@ -108,22 +108,22 @@ public class BaseActivity5 extends BaseActivity4 {
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();
                         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "getFavoriteSongs:onResponse()" + "\n" + errorString);
-                        //JSONObject errorObject = new JSONObject(errorString);
-                        //if (!handleDFError(errorObject, sessionRefreshListener)) {
-                        //    hideProgress();
-                        //    toastHelper.showError(R.string.common_api_error);
-                        //}
+                        JSONObject errorObject = new JSONObject(errorString);
+                        if (!handleDFError(errorObject, sessionRefreshListener)) {
+                            hideProgress();
+                            toastHelper.showError(R.string.common_api_error);
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
                 if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[RT]" + "getFavoriteSongs:onResponse()" + ":" + favorites);
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 t.printStackTrace();
+                toastHelper.showError(R.string.common_api_error);
             }
         });
     }
@@ -145,26 +145,10 @@ public class BaseActivity5 extends BaseActivity4 {
         updateFavoriteSongs();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        updateFavoriteSongs();
-    }
-
     private void updateFavoriteSongs() {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + favorites);
-        if (getCurrentFragment() != null) {
-            getCurrentFragment().updateFavoriteSongs();
-        }
-    }
-
-    public void updateFavoriteSongs(Songs songs, SongAdapter adapter) {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + getFavorites() + ":" + songs + ":" + adapter);
-        for (Song song : songs) {
-            song.setFavorite(isFavorites(song.getSongId()));
-        }
-        if (adapter != null) {
-            adapter.notifyDataSetChanged();
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + getCurrentFragment() + ":" + getChildCurrentFragment());
+        if (getChildCurrentFragment() != null) {
+            getChildCurrentFragment().updateFavoriteSongs();
         }
     }
 }

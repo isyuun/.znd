@@ -3,8 +3,10 @@ package kr.keumyoung.mukin.activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 
+import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.fragment._BaseFragment;
 
@@ -39,6 +41,13 @@ public class BaseActivity8 extends BaseActivity7 {
         alertDialog.show();
     }
 
+    private void refresh() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + getCurrentFragment() + ":" + getChildCurrentFragment());
+        if (getChildCurrentFragment() != null) {
+            getChildCurrentFragment().refresh();
+        }
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -50,16 +59,21 @@ public class BaseActivity8 extends BaseActivity7 {
     @Override
     protected void onLoginSuccess(String email, String nickName) {
         super.onLoginSuccess(email, nickName);
-        if (getCurrentFragment() != null) {
-            getCurrentFragment().refresh();
-        }
+        refresh();
+        setResult(KARAOKE_RESULT_REFRESH);
     }
 
     @Override
     protected void onLogoutSuccess() {
         super.onLogoutSuccess();
-        if (getCurrentFragment() != null) {
-            getCurrentFragment().refresh();
-        }
+        refresh();
+        setResult(KARAOKE_RESULT_REFRESH);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + (requestCode == KARAOKE_INTENT_ACTION_LOGIN)  + ":" + (resultCode == KARAOKE_RESULT_REFRESH) + ":" + requestCode + ":" + resultCode + ":" + data);
+        super.onActivityResult(requestCode, resultCode, data);
+        setResult(resultCode, data);
     }
 }

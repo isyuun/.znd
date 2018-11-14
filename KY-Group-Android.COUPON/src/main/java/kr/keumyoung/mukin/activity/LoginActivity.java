@@ -229,7 +229,6 @@ public class LoginActivity extends _BaseActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        //navigationHelper.navigateWithReverseAnim(this, _LoginActivity.class);
     }
 
     //@Override

@@ -57,11 +57,6 @@ public class BaseActivity6 extends BaseActivity5 {
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();
                         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "getFreeSongs:onResponse()" + "\n" + errorString);
-                        //JSONObject errorObject = new JSONObject(errorString);
-                        //if (!handleDFError(errorObject, sessionRefreshListener)) {
-                        //    hideProgress();
-                        //    toastHelper.showError(R.string.common_api_error);
-                        //}
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -75,6 +70,7 @@ public class BaseActivity6 extends BaseActivity5 {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 t.printStackTrace();
+                toastHelper.showError(R.string.common_api_error);
             }
         });
     }

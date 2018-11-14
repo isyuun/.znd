@@ -105,8 +105,9 @@ public class LoginActivity2 extends LoginActivity {
     @Override
     protected void onLogoutSuccess() {
         super.onLogoutSuccess();
-        if (!BuildConfig.DEBUG) {
-            emailEt.setText("");
+        //if (!BuildConfig.DEBUG)
+        {
+            //emailEt.setText("");
             passwordEt.setText("");
         }
         setLoginText();

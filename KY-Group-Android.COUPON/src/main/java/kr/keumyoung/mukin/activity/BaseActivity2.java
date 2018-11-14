@@ -1,14 +1,20 @@
 package kr.keumyoung.mukin.activity;
 
 import android.accounts.Account;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.preference.PreferenceActivity;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
 import kr.keumyoung.karaoke.mukin.coupon.apps._preference;
 import kr.keumyoung.karaoke.mukin.coupon.fragment._coupon;
+import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.fragment._BaseFragment;
@@ -31,8 +37,45 @@ public class BaseActivity2 extends BaseActivity {
         return (MainApplication) super.getApplication();
     }
 
+    // current fragment always holds the currently added fragment to the container
+    _BaseFragment currentFragment;
+
+    public void replaceFragment(_BaseFragment fragment, boolean addToStack, int containerId) {
+        currentFragment = fragment;
+        String fragmentTag = fragment.getClass().getSimpleName();
+        FragmentManager manager = getSupportFragmentManager();
+
+        boolean fragmentPopped = manager.popBackStackImmediate(fragmentTag, 0);
+
+        if (!fragmentPopped) {
+            FragmentTransaction transaction = manager.beginTransaction();
+            if (addToStack) transaction.addToBackStack(fragmentTag);
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            transaction.replace(containerId, fragment);
+            transaction.commit();
+        }
+    }
+
+    public boolean popFragment() {
+        boolean result = false;
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            result = getSupportFragmentManager().popBackStackImmediate();
+            currentFragment = (_BaseFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        }
+        return result;
+    }
+
     public _BaseFragment getCurrentFragment() {
-        return ((_BaseFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container));
+        //return ((_BaseFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container));
+        return currentFragment;
+    }
+
+    public _BaseFragment getChildCurrentFragment() {
+        //return ((_BaseFragment) getSupportFragmentManager().findFragmentById(R.id.child_fragment_container));
+        if (currentFragment != null) {
+            return currentFragment.getChildCurrentFragment();
+        }
+        return null;
     }
 
     protected String getGoogleAccount() {
@@ -89,15 +132,35 @@ public class BaseActivity2 extends BaseActivity {
         return handler.postDelayed(r, delayMillis);
     }
 
+    //REQUEST
+    int KARAOKE_INTENT_ACTION_DEFAULT = 0x01;
+    int KARAOKE_INTENT_ACTION_PREFERENCE = 0x02;
+    int KARAOKE_INTENT_ACTION_LOGIN = 0x03;
+    int KARAOKE_INTENT_ACTION_COUPON = 0x04;
+    //RESULT
+    int KARAOKE_RESULT_CANCEL = Activity.RESULT_CANCELED;
+    int KARAOKE_RESULT_OK = Activity.RESULT_OK;
+    int KARAOKE_RESULT_DEFAULT = Activity.RESULT_FIRST_USER;
+    int KARAOKE_RESULT_REFRESH = Activity.RESULT_FIRST_USER + 1;
+
+    public void openPreferenceLogin() {
+        post(openPreferenceLogin);
+    }
+
+    private Runnable openPreferenceLogin = () -> {
+        Intent i = new Intent(this, _LoginActivity.class);
+        ActivityCompat.startActivityForResult(this, i, KARAOKE_INTENT_ACTION_LOGIN, null);
+    };
+
     protected void openPreference() {
         postDelayed(openPreference, 1000);
     }
 
     private Runnable openPreference = () -> {
-        Intent i = new Intent(BaseActivity2.this, _preference.class);
+        Intent i = new Intent(this, _preference.class);
         i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(i);
+        ActivityCompat.startActivityForResult(this, i, KARAOKE_INTENT_ACTION_PREFERENCE, null);
     };
 
     protected void openPreferenceCoupon() {
@@ -105,10 +168,10 @@ public class BaseActivity2 extends BaseActivity {
     }
 
     private Runnable openPreferenceCoupen = () -> {
-        Intent i = new Intent(BaseActivity2.this, _preference.class);
+        Intent i = new Intent(this, _preference.class);
         i.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT, _coupon.class.getName());
         i.putExtra(PreferenceActivity.EXTRA_NO_HEADERS, true);
-        startActivity(i);
+        ActivityCompat.startActivityForResult(this, i, KARAOKE_INTENT_ACTION_COUPON, null);
     };
 
     @Deprecated
