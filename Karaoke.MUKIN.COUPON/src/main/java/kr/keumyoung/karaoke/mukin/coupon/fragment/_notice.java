@@ -7,6 +7,6 @@ public class _notice extends html {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        myWebView.loadUrl("https://www.keumyoung.kr:444/mukinapp/_notice.asp");
+        mWebView.loadUrl("https://www.keumyoung.kr:444/mukinapp/_notice.asp");
     }
 }

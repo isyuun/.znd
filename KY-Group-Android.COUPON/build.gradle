@@ -14,8 +14,8 @@ apply plugin: 'io.fabric'
 
 android {
     defaultConfig {
-        versionCode 15
-        versionName "1.5"
+        versionCode 16
+        versionName "1.6"
         applicationId "kr.keumyoung.mukin"
         minSdkVersion 16
         targetSdkVersion 27
@@ -54,8 +54,8 @@ android {
         }
     }
 
-    compileSdkVersion = 27
-    //buildtoolsversion = "27.0.3"
+    compileSdkVersion 27
+    //buildtoolsversion "27.0.3"
 
     lintOptions {
         checkReleaseBuilds false

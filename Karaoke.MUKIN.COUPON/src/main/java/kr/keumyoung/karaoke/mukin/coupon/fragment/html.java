@@ -20,11 +20,13 @@ public class html extends Fragment2 {
         return inflater.inflate(R.layout.fragment_html, container, false);
     }
 
-    WebView myWebView;
+    WebView mWebView;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        myWebView = (WebView) findViewById(R.id.webview);
+        mWebView = (WebView) findViewById(R.id.webview);
+        mWebView.getSettings().setAppCacheEnabled(false);
+        mWebView.clearCache(true);
     }
 }
