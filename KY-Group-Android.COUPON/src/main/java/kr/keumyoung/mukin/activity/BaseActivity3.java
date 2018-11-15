@@ -353,7 +353,7 @@ public class BaseActivity3 extends BaseActivity2 {
                             hideProgress();
                             toastHelper.showError(getString(R.string.login) + " " + nickName + ":" + userId);
                             if (!preferenceHelper.getString(getString(R.string.coupon), "").isEmpty()) {
-                                navigationHelper.navigate(BaseActivity3.this, _HomeActivity.class);
+                                openHomeActivity();
                             } else {
                                 openPreferenceCoupon();
                             }

@@ -171,7 +171,7 @@ public class Application2 extends Application {
     //@Override
     public void onSuccess(int statusCode, Header[] headers, String response) {
         // called when response HTTP status is "200 OK"
-        if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, "onSuccess(...)" + statusCode + "," + convertHeadersToHashMap(headers) + "." + response);
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "onSuccess(...)" + statusCode + "," + convertHeadersToHashMap(headers) + "." + response);
         //Log.e(__CLASSNAME__, "[text]" + response);
         //showProgress(false);
         //Toast.makeText(getActivity(), response, Toast.LENGTH_LONG).show();

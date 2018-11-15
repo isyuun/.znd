@@ -129,7 +129,7 @@ public class SplashScreenActivity extends _BaseActivity {
                             //navigationHelper.navigate(this, LoginChoiceActivity.class);
                         } else {
                             // user is logged in
-                            navigationHelper.navigate(this, HomeActivity.class);
+                            openHomeActivity();
                         }
                     });
 

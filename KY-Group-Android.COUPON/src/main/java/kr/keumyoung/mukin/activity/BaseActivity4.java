@@ -23,10 +23,6 @@ import retrofit2.Response;
 public class BaseActivity4 extends BaseActivity3 {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-    public void navigate(Class<? extends BaseActivity> to, boolean finish, Bundle data) {
-        navigationHelper.navigate(this, to, finish, data);
-    }
-
     private Song song;
     protected SessionRefreshListener sessionRefreshListener = new SessionRefreshListener() {
         @Override
@@ -58,7 +54,7 @@ public class BaseActivity4 extends BaseActivity3 {
                                 Bundle bundle = new Bundle();
                                 bundle.putSerializable(Constants.SONG, song);
                                 // navigate to player activity for playing the media and processing
-                                navigate(_PlayerActivity.class, false, bundle);
+                                navigationHelper.navigate(BaseActivity4.this, _PlayerActivity.class, false, bundle);
                             } else if (errorBody != null) {
                                 String errorString = errorBody.string();
                                 if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[NG]" + "updateSongHits:onResponse()" + "\n" + errorString);

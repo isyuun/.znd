@@ -322,12 +322,6 @@ public class RegisterActivity extends _BaseActivity {
     //}
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        openPreferenceLogin();
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == ImageUtils.REQUEST_CAPTURE || requestCode == ImageUtils.REQUEST_GALLERY)
             imageOptionChooserPopup.onActivityResult(requestCode, resultCode, data);

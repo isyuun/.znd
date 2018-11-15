@@ -18,9 +18,6 @@ import android.widget.TextView;
 import com.github.ybq.android.spinkit.SpinKitView;
 import com.squareup.otto.Bus;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -31,13 +28,7 @@ import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.api.RestApi;
 import kr.keumyoung.mukin.helper.AnimationHelper;
 import kr.keumyoung.mukin.helper.PreferenceHelper;
-import kr.keumyoung.mukin.interfaces.SessionRefreshListener;
 import kr.keumyoung.mukin.util.CommonHelper;
-import kr.keumyoung.mukin.util.PreferenceKeys;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * on 11/01/18.
@@ -165,7 +156,7 @@ public class BaseActivity extends AppCompatActivity {
         handler.postDelayed(checkSystemUiRunnable, SYSTEM_UI_HIDE_DELAY);
     }
 
-    private void setFlags() {
+    protected void setFlags() {
         // update the system UI.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE

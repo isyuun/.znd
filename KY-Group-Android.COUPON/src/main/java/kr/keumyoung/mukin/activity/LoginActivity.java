@@ -225,12 +225,7 @@ public class LoginActivity extends _BaseActivity {
     //        }
     //    });
     //}
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
-
+    //
     //@Override
     //protected void onStart() {
     //    super.onStart();

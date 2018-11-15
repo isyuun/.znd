@@ -20,6 +20,11 @@ public class RegisterActivity2 extends RegisterActivity {
     }
 
     @Override
+    protected void setFlags() {
+        //super.setFlags();
+    }
+
+    @Override
     protected void populateAutoComplete() {
         super.populateAutoComplete();
         emailEt.setText(getGoogleAccount());

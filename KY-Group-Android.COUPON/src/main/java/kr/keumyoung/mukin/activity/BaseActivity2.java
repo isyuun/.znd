@@ -135,21 +135,25 @@ public class BaseActivity2 extends BaseActivity {
     //REQUEST
     int KARAOKE_INTENT_ACTION_DEFAULT = 0x01;
     int KARAOKE_INTENT_ACTION_PREFERENCE = 0x02;
-    int KARAOKE_INTENT_ACTION_LOGIN = 0x03;
-    int KARAOKE_INTENT_ACTION_COUPON = 0x04;
+    int KARAOKE_INTENT_ACTION_REGISTER = 0x03;
+    int KARAOKE_INTENT_ACTION_LOGIN = 0x04;
+    int KARAOKE_INTENT_ACTION_COUPON = 0x05;
     //RESULT
     int KARAOKE_RESULT_CANCEL = Activity.RESULT_CANCELED;
     int KARAOKE_RESULT_OK = Activity.RESULT_OK;
     int KARAOKE_RESULT_DEFAULT = Activity.RESULT_FIRST_USER;
     int KARAOKE_RESULT_REFRESH = Activity.RESULT_FIRST_USER + 1;
 
-    public void openPreferenceLogin() {
-        post(openPreferenceLogin);
+    protected void openHomeActivity() {
+        post(openHomeActivity);
     }
 
-    private Runnable openPreferenceLogin = () -> {
-        Intent i = new Intent(this, _LoginActivity.class);
-        ActivityCompat.startActivityForResult(this, i, KARAOKE_INTENT_ACTION_LOGIN, null);
+    private Runnable openHomeActivity = () -> {
+        Intent i = new Intent(this, _HomeActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        ActivityCompat.startActivity(this, i, null);
+        finish();
     };
 
     protected void openPreference() {
@@ -161,6 +165,28 @@ public class BaseActivity2 extends BaseActivity {
         i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         ActivityCompat.startActivityForResult(this, i, KARAOKE_INTENT_ACTION_PREFERENCE, null);
+    };
+
+    public void openPreferenceRegister() {
+        post(openPreferenceRegister);
+    }
+
+    private Runnable openPreferenceRegister = () -> {
+        Intent i = new Intent(this, _RegisterActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        ActivityCompat.startActivityForResult(this, i, KARAOKE_INTENT_ACTION_REGISTER, null);
+    };
+
+    public void openPreferenceLogin() {
+        post(openPreferenceLogin);
+    }
+
+    private Runnable openPreferenceLogin = () -> {
+        Intent i = new Intent(this, _LoginActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        ActivityCompat.startActivityForResult(this, i, KARAOKE_INTENT_ACTION_LOGIN, null);
     };
 
     protected void openPreferenceCoupon() {

@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import butterknife.BindView;
-import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.util.CommonHelper;
 import kr.keumyoung.mukin.util.PreferenceKeys;
@@ -23,6 +22,11 @@ public class LoginActivity2 extends LoginActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void setFlags() {
+        //super.setFlags();
     }
 
     @Override
@@ -119,7 +123,7 @@ public class LoginActivity2 extends LoginActivity {
         hideKeyboard(this);
         switch (view.getId()) {
             case R.id.signup_anchor:
-                navigationHelper.navigate(this, _RegisterActivity.class);
+                openPreferenceRegister();
                 break;
             case R.id.login_button:
                 //로그아웃

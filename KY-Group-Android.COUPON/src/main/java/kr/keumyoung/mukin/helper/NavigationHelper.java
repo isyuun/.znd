@@ -20,9 +20,9 @@ public class NavigationHelper {
         // nothing to initialize
     }
 
-    public void navigate(BaseActivity from, Class<? extends BaseActivity> to) {
-        navigate(from, to, true, null);
-    }
+    //public void navigate(BaseActivity from, Class<? extends BaseActivity> to) {
+    //    navigate(from, to, true, null);
+    //}
 
     public void navigate(BaseActivity from, Class<? extends BaseActivity> to, boolean finish, Bundle data) {
         Intent intent = new Intent(from, to);
@@ -32,9 +32,9 @@ public class NavigationHelper {
         if (finish) from.finish();
     }
 
-    public void navigateWithReverseAnim(BaseActivity from, Class<? extends BaseActivity> to) {
-        navigateWithReverseAnim(from, to, true, null);
-    }
+    //public void navigateWithReverseAnim(BaseActivity from, Class<? extends BaseActivity> to) {
+    //    navigateWithReverseAnim(from, to, true, null);
+    //}
 
     public void navigateWithReverseAnim(BaseActivity from, Class<? extends BaseActivity> to, boolean finish, Bundle data) {
         Intent intent = new Intent(from, to);
@@ -49,11 +49,11 @@ public class NavigationHelper {
         from.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
     }
 
-    public void navigateWithClearTask(BaseActivity from, Class<? extends BaseActivity> to) {
-        Intent intent = new Intent(from, to);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        from.startActivity(intent);
-        from.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
-        from.finish();
-    }
+    //public void navigateWithClearTask(BaseActivity from, Class<? extends BaseActivity> to) {
+    //    Intent intent = new Intent(from, to);
+    //    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    //    from.startActivity(intent);
+    //    from.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
+    //    from.finish();
+    //}
 }

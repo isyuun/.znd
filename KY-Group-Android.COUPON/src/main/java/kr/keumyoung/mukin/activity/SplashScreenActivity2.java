@@ -140,7 +140,7 @@ public class SplashScreenActivity2 extends SplashScreenActivity {
     private void onCompleteCopyFilesToLocal() {
         Log.e(__CLASSNAME__, getMethodName());
         postDelayed(() -> {
-            navigationHelper.navigate(this, _HomeActivity.class);
+            openHomeActivity();
         }, 3000);
     }
 
