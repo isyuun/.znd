@@ -146,23 +146,27 @@ class PlayView3 extends PlayView2X {
 		switch (server) {
 		case 0:
 			// 금영서버: http://211.236.190.103:8080/svc_media/mmp3/08888.mp3
-			host = "http://" + KaraokePath.getHosts()[0] + ":8080/svc_media/";
+			//host = "http://" + KaraokePath.getHosts()[0] + ":8080/svc_media/";
+			host = "http://211.236.190.103:8080/svc_media/";
 			path = "mmp3";
 			form = "/%05d.mp3";
 			break;
 
 		case 1:
 			// KYM서버: http://resource.kymedia.kr/ky/mp/88/08888.mp3
-			host = "http://" + KaraokePath.getHosts()[1] + "/ky/mp/";
+			//host = "http://" + KaraokePath.getHosts()[1] + "/ky/mp/";
+			host = "http://resource.kymedia.kr/ky/mp/";
 			path = String.format(getResources().getConfiguration().locale, "%05d", number).substring(3);
 			form = "/%05d.mp3";
 			break;
 
 		case 2:
 			// 싸이월드: http://cyms.chorus.co.kr/cykara_dl2.asp?song_id=08888
-			host = "http://" + KaraokePath.getHosts()[2] + "/";
-			//load = "cykara_dl2.asp?song_id=";
-			path = ".skym.asp?song_id=";
+			//host = "http://" + KaraokePath.getHosts()[2] + "/";
+			//path = "cykara_dl2.asp?song_id=";
+			//* 신규서버(음원): http://www.keumyoung.kr/.api/.mmp3.asp?song_id=08888
+			host = "http://www.keumyoung.kr/.api/";
+			path = ".mmp3.asp?song_id=";
 			form = "%05d";
 			break;
 
@@ -172,7 +176,7 @@ class PlayView3 extends PlayView2X {
 
 		ret = String.format(host + path + form, number);
 
-		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + server + "-" + number + "-" + ret);
+		/*if (BuildConfig.DEBUG)*/ Log.e(__CLASSNAME__, getMethodName() + server + "-" + number + "-" + ret);
 
 		return ret;
 	}

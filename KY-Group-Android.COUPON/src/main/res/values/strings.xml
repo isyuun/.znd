@@ -116,7 +116,7 @@
     <string name="mic_insert">Basic microphones may cause noise.\nIt is recommended that you use a microphone.</string>
     <string name="tempo_default">default</string>
     <string name="pitch_default">default</string>
-    <string name="mukin_bluetooth_mic_device_name">KY Mukin K200</string>
+    <!--<string name="mukin_bluetooth_mic_device_name">KY Mukin K200</string>-->
     <string name="error_headset_eject">The wired headset has been disconnected.\nThe recording function is supported only when using a wired headset.</string>
     <string name="error_record_support">The recording function is supported only when using a wired headset.</string>
     <string name="error_miceffect_support">The mic effect function is supported only when using a wired headset.</string>

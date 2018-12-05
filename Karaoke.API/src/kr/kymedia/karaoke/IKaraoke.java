@@ -106,7 +106,7 @@ interface IKaraoke {
 
 	// final static String SKYMDOWN_URL = "http://cyms.chorus.co.kr/cykara_dl.asp?song_id=";
 	//final static String SKYMDOWN_URL = "http://cyms.chorus.co.kr/cykara_dl2.asp?song_id=";
-	final static String SKYMDOWN_URL = "http://cyms.chorus.co.kr/.skym.asp?song_id=";
+	final static String SKYMDOWN_URL = "http://www.keumyoung.kr/.api/.skym.asp?song_id=";
 	final static String MP3DOWN_URL = "http://www.ikaraoke.kr/common/sound.asp?song_id=";
 	final static String LYCDOWN_URL = "http://www.ikaraoke.kr/common/lyrics.asp?song_id=";
 	/**

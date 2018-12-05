@@ -487,26 +487,31 @@ public class PlayFragment extends ChoirPlayFragment {
 
 		if (server == R.id.radioServerKYS) {
 			// 금영서버: http://211.236.190.103:8080/svc_media/mmp3/08888.mp3
-			host = "http://" + KaraokePath.getHosts()[0] + ":8080/svc_media/";
+			//host = "http://" + KaraokePath.getHosts()[0] + ":8080/svc_media/";
+			host = "http://211.236.190.103:8080/svc_media/";
 			path = "mmp3";
 			form = "/%05d.mp3";
 		} else if (server == R.id.radioServerKYM) {
 			// KYM서버: http://resource.kymedia.kr/ky/mp/88/08888.mp3
-			host = "http://" + KaraokePath.getHosts()[1] + "/ky/mp/";
+			//host = "http://" + KaraokePath.getHosts()[1] + "/ky/mp/";
+			host = "http://resource.kymedia.kr/ky/mp/";
 			path = String.format(getResources().getConfiguration().locale, "%05d", number).substring(3);
 			form = "/%05d.mp3";
 		} else if (server == R.id.radioServerCYW) {
 			// 싸이월드: http://cyms.chorus.co.kr/cykara_dl2.asp?song_id=08888
-			host = "http://" + KaraokePath.getHosts()[2] + "/";
-			//path = "cykara_dl2.asp?song_id=";
-			path = ".skym.asp?song_id=";
+			//host = "http://" + KaraokePath.getHosts()[2] + "/";
+			host = "http://cyms.chorus.co.kr/";
+			path = "cykara_dl2.asp?song_id=";
 			form = "%05d";
 		} else if (server == R.id.radioServerKYG) {
-			 //* 신규서버(가사): http://www.keumyoung.kr/api/.skym.asp?song_id=08888
-			 //* 신규서버(음원): http://www.keumyoung.kr/api/.mmp3.asp?song_id=08888
-			host = "http://" + KaraokePath.getHosts()[3] + "/";
+			 //* 신규서버(음원): http://www.keumyoung.kr/.api/.mmp3.asp?song_id=08888
+			//host = "http://" + KaraokePath.getHosts()[3] + "/";
+			host = "http://www.keumyoung.kr/.api/";
 			path = ".mmp3.asp?song_id=";
 			form = "%05d";
+			//host = "http://www.keumyoung.kr/.api/";	//test
+			//path = "";	//test
+			//form = "%05d.mp3";	//test
 		}
 
 		ret = String.format(host + path + form, number);

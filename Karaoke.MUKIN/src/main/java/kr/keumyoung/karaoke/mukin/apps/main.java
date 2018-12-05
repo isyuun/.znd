@@ -68,7 +68,7 @@ public class main extends __base {
         });
 
         //startActivity(new Intent(main.this, list.class));  //test
-        startActivity(new Intent(main.this, songs.class));  //test
+        //startActivity(new Intent(main.this, songs.class));  //test
     }
 
     private void play() {

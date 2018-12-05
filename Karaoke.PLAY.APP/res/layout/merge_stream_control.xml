@@ -137,7 +137,7 @@
                 android:id="@+id/checkRepeatRestart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
+                android:checked="false"
                 android:text="반복"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -155,7 +155,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:enabled="true"
+                android:enabled="false"
                 android:text="반복"
                 android:visibility="gone" />
         </kr.kymedia.karaoke.view.EnabledRadioGroup>

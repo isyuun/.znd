@@ -80,15 +80,17 @@ public class PlayView6 extends PlayView5 {
      * 211.236.190.103
      * 금영서버: http://211.236.190.103:8080/svc_media/mmp3/08888.mp3
      * 사이월드: http://cyms.chorus.co.kr/cykara_dl2.asp?song_id=08888
-     * 신규서버(가사): http://www.keumyoung.kr/api/.skym.asp?song_id=08888
-     * 신규서버(음원): http://www.keumyoung.kr/api/.mmp3.asp?song_id=08888
+     * 신규서버(가사): http://www.keumyoung.kr/.api/.skym.asp?song_id=08888
+     * 신규서버(음원): http://www.keumyoung.kr/.api/.mmp3.asp?song_id=08888
      * </pre>
      */
     private void down(String song_id) {
         this.song_id = song_id;
-        this.url_skym = "http://www.keumyoung.kr/api/.skym.asp?song_id=" + this.song_id;
-        this.url_mmp3 = "http://www.keumyoung.kr/api/.mmp3.asp?song_id=" + this.song_id;
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + "[ST]" + this.song_id + ":" + this.url_skym + ":" + this.url_mmp3);
+        this.url_skym = "http://www.keumyoung.kr/.api/.skym.asp?song_id=" + this.song_id;
+        this.url_mmp3 = "http://www.keumyoung.kr/.api/.mmp3.asp?song_id=" + this.song_id;
+        //this.url_mmp3 = "http://cyms.chorus.co.kr/cykara_dl2.asp?song_id=" + this.song_id;  //test
+        //this.url_mmp3 = "http://211.236.190.103:8080/svc_media/mmp3/" + this.song_id + ".mp3";    //test
+        /*if (BuildConfig.DEBUG) */Log.e(__CLASSNAME__, getMethodName() + "[ST]" + this.song_id + "\t" + this.url_skym + "\t" + this.url_mmp3);
 
         //if (_KP_1016 == null) {
         //    ShowMessageNotResponse(getString(kr.kymedia.kykaraoke.tv.R.string.common_info), getString(kr.kymedia.kykaraoke.tv.R.string.message_error_network_timeout));

@@ -17,7 +17,7 @@ android {
         versionCode 16
         versionName "1.6"
         applicationId "kr.keumyoung.mukin"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 27
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
@@ -26,7 +26,6 @@ android {
 
         ndk {
             abiFilters 'armeabi-v7a', 'x86'
-            //abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
         }
     }
 

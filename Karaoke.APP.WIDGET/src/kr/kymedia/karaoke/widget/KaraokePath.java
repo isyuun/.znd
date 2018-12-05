@@ -116,11 +116,11 @@ public class KaraokePath extends EditText {
 	 * 211.236.190.103
 	 * 금영서버: http://211.236.190.103:8080/svc_media/mmp3/08888.mp3
 	 * 사이월드: http://cyms.chorus.co.kr/cykara_dl2.asp?song_id=08888
-	 * 신규서버(가사): http://www.keumyoung.kr/api/.skym.asp?song_id=08888
-	 * 신규서버(음원): http://www.keumyoung.kr/api/.mmp3.asp?song_id=08888
+	 * 신규서버(가사): http://www.keumyoung.kr/.api/.skym.asp?song_id=08888
+	 * 신규서버(음원): http://www.keumyoung.kr/.api/.mmp3.asp?song_id=08888
 	 * </pre>
 	 */
-	private final static String hosts[] = { ("211.236.190.103"), ("resource.kymedia.kr"), ("cyms.chorus.co.kr"), ("www.keumyoung.kr/api")};
+	private final static String hosts[] = { ("211.236.190.103"), ("resource.kymedia.kr"), ("cyms.chorus.co.kr"), ("www.keumyoung.kr/.api")};
 	public static String[] getHosts() {
 		return hosts;
 	}

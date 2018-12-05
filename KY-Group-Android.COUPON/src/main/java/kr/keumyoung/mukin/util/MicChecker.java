@@ -29,11 +29,15 @@ public class MicChecker {
     private MIC_CONNECTION_STATES states;
     private boolean isEarphoneON;
     private boolean isBlueToothON;
-    private String mukin_mic_name;
+    //private String mukin_mic_name;
     private String last_bluetooth_device_name;
 
+    private static String BLUETOOTH_MUKIN_K200 = ("KY Mukin K200");
+    private static String BLUETOOTH_MUKIN_K200S = ("KY Mukin K200S");
+
     public enum MIC_CONNECTION_STATES {
-        BLUETOOTH_MUKIN,    //블루투스 뮤젠 마이크
+        BLUETOOTH_MUKIN_K200,    //KY Mukin K200
+        BLUETOOTH_MUKIN_K200S,    //KY Mukin K200S
         BLUETOOTH_OTHERS,   //블루투스 뮤젠 외 다른 마이크
         HEADSET,            //유선 헤드셋
         NONE                //NONE
@@ -44,7 +48,7 @@ public class MicChecker {
 
     public MicChecker(Context context) {
         mContext = context;
-        mukin_mic_name = mContext.getResources().getString(R.string.mukin_bluetooth_mic_device_name);
+        //mukin_mic_name = mContext.getResources().getString(R.string.mukin_bluetooth_mic_device_name);
         states = MIC_CONNECTION_STATES.NONE;
         BluetoothAdapter mBlueToothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -68,9 +72,10 @@ public class MicChecker {
 
                     //HEADSET 타입이거나
                     //A2DP는 보통 마이크가 안달린넘인데 특별히 뮤즐만 예외로 체크 한다.
-                    if (profile == BluetoothProfile.HEADSET
-                            || profile == BluetoothProfile.A2DP && device.getName().compareToIgnoreCase(mukin_mic_name) == 0) {
-                        switchBlueToothStates(device.getName(), true);
+                    if ((profile == BluetoothProfile.HEADSET || profile == BluetoothProfile.A2DP) /*&& BLUETOOTH_MUKIN_K200.compareToIgnoreCase(device.getName()) == 0*/) {
+                        if (BLUETOOTH_MUKIN_K200.equalsIgnoreCase(device.getName()) || BLUETOOTH_MUKIN_K200S.equalsIgnoreCase(device.getName())) {
+                            switchBlueToothStates(device.getName(), true);
+                        }
                     }
                 }
                 BluetoothAdapter.getDefaultAdapter().closeProfileProxy(profile, proxy);
@@ -107,19 +112,20 @@ public class MicChecker {
     }
 
     private boolean switchBlueToothStates(String devicename, boolean bStates) {
-
         boolean bPreBlueToothStates = isBlueToothON;
 
         isBlueToothON = bStates;
 
         Log.d(TAG, devicename + " Is connected = " + Boolean.toString(isBlueToothON));
 
-        //states = isBlueToothON ? MIC_CONNECTION_STATES.BLUETOOTH_MUKIN : MIC_CONNECTION_STATES.NONE;
+        //states = isBlueToothON ? MIC_CONNECTION_STATES.BLUETOOTH_MUKIN_K200 : MIC_CONNECTION_STATES.NONE;
 
         if (bPreBlueToothStates == false && isBlueToothON) {
             //뮤젠 마이크인경우
-            if (devicename.compareToIgnoreCase(mukin_mic_name) == 0)
-                states = MIC_CONNECTION_STATES.BLUETOOTH_MUKIN;
+            if (BLUETOOTH_MUKIN_K200.compareToIgnoreCase(devicename) == 0)
+                states = MIC_CONNECTION_STATES.BLUETOOTH_MUKIN_K200;
+            else if (BLUETOOTH_MUKIN_K200S.compareToIgnoreCase(devicename) == 0)
+                states = MIC_CONNECTION_STATES.BLUETOOTH_MUKIN_K200S;
             else
                 states = MIC_CONNECTION_STATES.BLUETOOTH_OTHERS;
 
@@ -137,12 +143,15 @@ public class MicChecker {
             micCheckEventListener.onStateChangedEvent(states);
 
 
-        Log.d(TAG, "states = " + states);
+        //Log.d(TAG, "states = " + states);
+        Log.e("MicChecker", "switchBlueToothStates()" + ":" + devicename + ":" + bStates + ":" + states);
 
         return true;
     }
 
     private boolean switchHeadSetStates(boolean bStates) {
+        Log.e("MicChecker", "switchHeadSetStates()" + ":" + last_bluetooth_device_name + ":" + bStates);
+
         isEarphoneON = bStates;
 
         Log.d(TAG, "HeadSet = " + Boolean.toString(isEarphoneON));
@@ -152,8 +161,10 @@ public class MicChecker {
         //이어폰 OFF / 블루투스 ON 인 경우
         if (isEarphoneON == false && isBlueToothON) {
 
-            if (last_bluetooth_device_name.compareToIgnoreCase(mukin_mic_name) == 0)
-                states = MIC_CONNECTION_STATES.BLUETOOTH_MUKIN;
+            if (BLUETOOTH_MUKIN_K200.compareToIgnoreCase(last_bluetooth_device_name) == 0)
+                states = MIC_CONNECTION_STATES.BLUETOOTH_MUKIN_K200;
+            if (BLUETOOTH_MUKIN_K200S.compareToIgnoreCase(last_bluetooth_device_name) == 0)
+                states = MIC_CONNECTION_STATES.BLUETOOTH_MUKIN_K200S;
             else
                 states = MIC_CONNECTION_STATES.BLUETOOTH_OTHERS;
         }
