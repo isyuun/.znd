@@ -53,19 +53,19 @@ interface Const2 extends Const {
 	// final static String TEST_BG = "http://wp.kymedia.kr/class.php?class=Folder&action=down&data_id=20150612181520b50c";
 
 	/**
-	 * 동영상재시작(시간:10초)
+	 * 동영상재시작
 	 */
 	final static int TIMER_MP4_RETRY = 10000;
 	/**
-	 * 동영상재시작(횟수:3회)
+	 * 동영상재시작
 	 */
 	final static int COUNT_MP4_RETRY = 3;
 	/**
-	 * 반주곡재시작(시간:10초)
+	 * 반주곡재시작
 	 */
 	final static int TIMER_MP3_RETRY = 10000;
 	/**
-	 * 반주곡재시작(횟수:3회)
+	 * 반주곡재시작
 	 */
 	final static int COUNT_MP3_RETRY = 3;
 	/**
