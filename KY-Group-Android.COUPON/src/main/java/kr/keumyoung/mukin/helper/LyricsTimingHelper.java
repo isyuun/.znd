@@ -181,7 +181,9 @@ public class LyricsTimingHelper {
 	
 				line = line.replace("\r", "");
 				line = line.replace("\n", "");
-				
+                line = line.replace("  ", " ");
+                line = line.replace("   ", " ");
+                line = line.replace("    ", " ");
 			//	encodedString = URLEncoder.encode(line, "euc-kr");
 			//	System.out.println("##### line str : " + line + " | len : " + line.length());
 				if(line.length() != 0)
