@@ -57,7 +57,7 @@ public class BaseActivity4 extends BaseActivity3 {
                                 navigationHelper.navigate(BaseActivity4.this, _PlayerActivity.class, false, bundle);
                             } else if (errorBody != null) {
                                 String errorString = errorBody.string();
-                                if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[NG]" + "updateSongHits:onResponse()" + "\n" + errorString);
+                                if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "updateSongHits:onResponse()" + "\n" + errorString);
                                 JSONObject errorObject = new JSONObject(errorString);
                                 if (!handleDFError(errorObject, sessionRefreshListener)) {
                                     hideProgress();

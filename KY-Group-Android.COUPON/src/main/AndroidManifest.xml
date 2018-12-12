@@ -62,8 +62,31 @@
         </activity>
         <!--<activity-->
         <!--android:name=".activity.LoginChoiceActivity"-->
+        <!--android:launchMode="singleTask"-->
         <!--android:screenOrientation="portrait" />-->
-        <!--<activity-->
+        <activity
+            android:name=".activity._LoginChoiceActivity"
+            android:label="@string/login"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
+            <intent-filter>
+                <action android:name="intent.open.keumyoung.karaoke.Login.Acitivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity._LoginActivity"
+            android:label="@string/login"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.DarkActionBar"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
+            <!--<intent-filter>-->
+            <!--<action android:name="intent.open.keumyoung.karaoke.Login.Acitivity" />-->
+            <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
+        </activity>
         <activity
             android:name=".activity._HomeActivity"
             android:launchMode="singleTask"
@@ -75,18 +98,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.DarkActionBar"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
-        <activity
-            android:name=".activity._LoginActivity"
-            android:label="@string/login"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.DarkActionBar"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
-            <intent-filter>
-                <action android:name="intent.open.keumyoung.karaoke.Login.Acitivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".activity._PlayerActivity"
             android:configChanges="orientation|screenSize"
@@ -128,9 +139,9 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
-        <meta-data
-            android:name="com.kakao.sdk.ClientSecret"
-            android:value="@string/kakao_app_secret" />
+        <!--<meta-data-->
+        <!--android:name="com.kakao.sdk.ClientSecret"-->
+        <!--android:value="@string/kakao_app_secret" />-->
 
         <meta-data
             android:name="io.fabric.ApiKey"

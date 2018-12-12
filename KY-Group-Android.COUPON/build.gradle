@@ -14,8 +14,8 @@ apply plugin: 'io.fabric'
 
 android {
     defaultConfig {
-        versionCode 16
-        versionName "1.6"
+        versionCode 17
+        versionName "1.7"
         applicationId "kr.keumyoung.mukin"
         minSdkVersion 21
         targetSdkVersion 27
@@ -46,7 +46,24 @@ android {
     }
 
     buildTypes {
+        //출처: http://gun0912.tistory.com/33 [박상권의 삽질블로그]
+        debug {
+            // 개발용 KEY
+            resValue "string", "facebook_app_id", "1493750310723328"
+            resValue "string", "fb_login_protocol_scheme", "fb1493750310723328"
+            resValue "string", "kakao_app_key", "93d7274cb52ef14f486d9eed46e29104"
+            resValue "string", "kakao_scheme", "/oi7vzyazAd5sN8KyvQzigQo3zM="
+        }
+
         release {
+            // 배포용 KEY
+            resValue "string", "facebook_app_id", "1493750310723328"
+            resValue "string", "fb_login_protocol_scheme", "fb1493750310723328"
+            resValue "string", "kakao_app_key", "93d7274cb52ef14f486d9eed46e29104"
+            resValue "string", "kakao_scheme", "cVI4Cm99wGxUyXxdXhO0BI2HgUo="
+        }
+
+         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release

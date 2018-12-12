@@ -55,7 +55,7 @@ public class BaseActivity3 extends BaseActivity2 {
                     if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "loginUser:onResponse()" + "\n" + errorBody + "\n" + responseBody);
                     if (responseBody != null) {
                         String responseString = responseBody.string();
-                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "loginUser:onResponse()" + "\n" + responseString);
+                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[OK]" + "loginUser:onResponse()" + "\n" + responseString);
                         JSONObject object = new JSONObject(responseString);
                         if (object.has(Constants.ERROR)) {
                             // need to handle the error response
@@ -69,7 +69,7 @@ public class BaseActivity3 extends BaseActivity2 {
                         }
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();
-                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "loginUser:onResponse()" + "\n" + errorString);
+                        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "loginUser:onResponse()" + "\n" + errorString);
                         JSONObject errorObject = new JSONObject(errorString).getJSONObject(Constants.ERROR);
                         String code = errorObject.getString(Constants.CODE);
                         if (code.equalsIgnoreCase(Constants.INVALID_SESSION)) {
@@ -105,7 +105,7 @@ public class BaseActivity3 extends BaseActivity2 {
                     if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "fetchUserData:onResponse()" + "\n" + errorBody + "\n" + responseBody);
                     if (responseBody != null) {
                         String responseString = responseBody.string();
-                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "fetchUserData:onResponse()" + "\n" + responseString);
+                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[OK]" + "fetchUserData:onResponse()" + "\n" + responseString);
                         JSONObject responseObject = new JSONObject(responseString);
                         JSONObject userObject = responseObject.getJSONArray(Constants.RESOURCE).getJSONObject(0);
                         String userId = userObject.getString(Constants.USER_ID);
@@ -140,7 +140,7 @@ public class BaseActivity3 extends BaseActivity2 {
                         }
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();
-                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "fetchUserData:onResponse()" + "\n" + errorString);
+                        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "fetchUserData:onResponse()" + "\n" + errorString);
                         JSONObject errorObject = new JSONObject(errorString);
                         // TODO: 29/01/18 handle login error
                         hideProgress();
@@ -215,13 +215,13 @@ public class BaseActivity3 extends BaseActivity2 {
                     if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "registerUserToDF:onResponse()" + "\n" + errorBody + "\n" + responseBody);
                     if (responseBody != null) {
                         String responseString = responseBody.string();
-                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "registerUserToDF:onResponse()" + "\n" + responseString);
+                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[OK]" + "registerUserToDF:onResponse()" + "\n" + responseString);
                         JSONObject object = new JSONObject(responseString);
                         if (object.has(Constants.SUCCESS))
                             loginUserAndAcquireSession(email, password, nickName, profileImagePath);
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();
-                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "registerUserToDF:onResponse()" + "\n" + errorString);
+                        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "registerUserToDF:onResponse()" + "\n" + errorString);
                         // TODO: 29/01/18 handle DF registration error
                         JSONObject errorObject = new JSONObject(errorString).getJSONObject(Constants.ERROR).getJSONObject(Constants.CONTEXT);
                         if (errorObject.has(Constants.EMAIL)) {
@@ -257,7 +257,7 @@ public class BaseActivity3 extends BaseActivity2 {
                     if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "loginUserAndAcquireSession:onResponse()" + "\n" + errorBody + "\n" + responseBody);
                     if (responseBody != null) {
                         String responseString = responseBody.string();
-                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "loginUserAndAcquireSession:onResponse()" + "\n" + responseString);
+                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[OK]" + "loginUserAndAcquireSession:onResponse()" + "\n" + responseString);
                         JSONObject object = new JSONObject(responseString);
                         if (object.has(Constants.ERROR)) {
                             // need to handle the error response
@@ -272,7 +272,7 @@ public class BaseActivity3 extends BaseActivity2 {
                         }
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();
-                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "loginUserAndAcquireSession:onResponse()" + "\n" + errorString);
+                        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "loginUserAndAcquireSession:onResponse()" + "\n" + errorString);
                         JSONObject errorObject = new JSONObject(errorString);
                         // TODO: 29/01/18 handle error response during registration
                     }
@@ -304,13 +304,13 @@ public class BaseActivity3 extends BaseActivity2 {
     //                        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "updateRoleToUser:onResponse()" + "\n" + errorBody + "\n" + responseBody);
     //                        if (responseBody != null) {
     //                            String responseString = responseBody.string();
-    //                            if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "updateRoleToUser:onResponse()" + "\n" + responseString);
+    //                            if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[OK]" + "updateRoleToUser:onResponse()" + "\n" + responseString);
     //                            JSONObject object = new JSONObject(responseString);
     //                            if (!object.has(Constants.ERROR))
     //                                registerUserCustom(dfid, nickName, profileImagePath, email);
     //                        } else if (errorBody != null) {
     //                            String errorString = errorBody.string();
-    //                            if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "updateRoleToUser:onResponse()" + "\n" + errorString);
+    //                            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "updateRoleToUser:onResponse()" + "\n" + errorString);
     //                            JSONObject errorObject = new JSONObject(errorString);
     //                            // TODO: 29/01/18 handle error response during registration
     //                        }
@@ -341,7 +341,7 @@ public class BaseActivity3 extends BaseActivity2 {
                     if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "registerUserCustom:onResponse()" + "\n" + errorBody + "\n" + responseBody);
                     if (responseBody != null) {
                         String responseString = responseBody.string();
-                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "registerUserCustom:onResponse()" + "\n" + responseString);
+                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[OK]" + "registerUserCustom:onResponse()" + "\n" + responseString);
                         JSONObject jsonObject = new JSONObject(responseString);
                         if (jsonObject.has(Constants.RESOURCE)) {
                             JSONArray resourceArray = jsonObject.getJSONArray(Constants.RESOURCE);
@@ -367,7 +367,7 @@ public class BaseActivity3 extends BaseActivity2 {
                         }
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();
-                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "registerUserCustom:onResponse()" + "\n" + errorString);
+                        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "registerUserCustom:onResponse()" + "\n" + errorString);
                         JSONObject errorObject = new JSONObject(errorString).getJSONObject(Constants.ERROR).getJSONObject(Constants.CONTEXT);
                         if (errorObject.has(Constants.EMAIL)) {
                             hideProgress();

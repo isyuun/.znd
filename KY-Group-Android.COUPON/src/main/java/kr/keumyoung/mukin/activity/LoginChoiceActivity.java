@@ -49,10 +49,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- *  on 11/01/18.
+ * on 11/01/18.
  */
 
-public class LoginChoiceActivity extends BaseActivity {
+public class LoginChoiceActivity extends _BaseActivity {
 
     @BindView(R.id.alternative_sign_in_button)
     CardView alternativeSignInButton;
@@ -270,7 +270,8 @@ public class LoginChoiceActivity extends BaseActivity {
 
                             // login process completed. proceed to home activity
                             hideProgress();
-                            navigationHelper.navigate(LoginChoiceActivity.this, _HomeActivity.class);
+                            //navigationHelper.navigate(LoginChoiceActivity.this, _HomeActivity.class, true, null);
+                            finish();
                         } else {
                             // user is not active. lets stop here
                             hideProgress();
@@ -387,7 +388,8 @@ public class LoginChoiceActivity extends BaseActivity {
                             String userid = resourceArray.getJSONObject(0).getString(Constants.USER_ID);
                             preferenceHelper.saveString(PreferenceKeys.USER_ID, userid);
                             hideProgress();
-                            navigationHelper.navigate(LoginChoiceActivity.this, _HomeActivity.class);
+                            //navigationHelper.navigate(LoginChoiceActivity.this, _HomeActivity.class, true, null);
+                            finish();
                         }
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();
@@ -412,7 +414,7 @@ public class LoginChoiceActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.alternative_sign_in_button:
-                navigationHelper.navigate(this, _LoginActivity.class);
+                navigationHelper.navigate(this, _LoginActivity.class, true, null);
                 break;
             case R.id.kakao_button:
                 // handle kakao login
@@ -424,7 +426,7 @@ public class LoginChoiceActivity extends BaseActivity {
         }
     }
 
-    private void kakaoLogin() {
+    protected void kakaoLogin() {
         kakaoApi.userMeRequest(String.format("Bearer %s", Session.getCurrentSession().getAccessToken()))
                 .enqueue(new Callback<ResponseBody>() {
                     @Override

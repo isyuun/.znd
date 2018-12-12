@@ -189,6 +189,17 @@ public class BaseActivity2 extends BaseActivity {
         ActivityCompat.startActivityForResult(this, i, KARAOKE_INTENT_ACTION_LOGIN, null);
     };
 
+    public void openPreferenceLoginChoice() {
+        post(openPreferenceLoginChoice);
+    }
+
+    private Runnable openPreferenceLoginChoice = () -> {
+        Intent i = new Intent(this, _LoginChoiceActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        ActivityCompat.startActivityForResult(this, i, KARAOKE_INTENT_ACTION_LOGIN, null);
+    };
+
     protected void openPreferenceCoupon() {
         postDelayed(openPreferenceCoupen, 500);
     }

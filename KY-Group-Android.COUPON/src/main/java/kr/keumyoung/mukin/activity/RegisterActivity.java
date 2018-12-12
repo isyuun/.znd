@@ -97,7 +97,8 @@ public class RegisterActivity extends _BaseActivity {
                 profileImageRipple.setOnRippleCompleteListener(rippleView -> openImageChoosePopup());
                 break;
             case R.id.login_anchor:
-                openPreferenceLogin();
+                //openPreferenceLogin();
+                openPreferenceLoginChoice();
                 break;
             case R.id.signup_button:
                 signupUser();

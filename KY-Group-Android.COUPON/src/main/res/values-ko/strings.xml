@@ -4,6 +4,7 @@
     <string name="facebook">페이스북으로 로그인하기</string>
     <string name="of_sign_in_using_email">또는 이메일로 로그인하기</string>
     <string name="kakao_talk">카카오톡으로 로그인하기</string>
+    <string name="kakao_talk_email_check" >&quot;[선택] 카카오계정(이메일)&quot; 동의항목을 체크해주세요</string>
     <string name="sign_in_with">연동로그인</string>
     <string name="no_account_yet">계정이 없으신가요?</string>
     <string name="signup">계정만들기</string>
@@ -16,13 +17,9 @@
     <string name="name_hint">닉네임</string>
     <string name="create_new_account">새계정 만들기</string>
     <string name="search_hint">노래검색(제목/가수/번호)</string>
-    <!--<string name="featured">뮤즐추천곡</string>-->
     <string name="newsongs">최신곡</string>
-    <!--<string name="top_hits">인기노래</string>-->
     <string name="top_hits">인기곡</string>
-    <!--<string name="genre">장르</string>-->
     <string name="genre">장르곡</string>
-    <!--<string name="artists">아티스트</string>-->
     <string name="favorites">애창곡</string>
     <string name="artists">가수별</string>
     <string name="recommended">추천곡</string>
@@ -123,7 +120,7 @@
     <string name="playing">재생중</string>
     <string name="confirm">확인</string>
     <string name="logo_bottom_text_01">최고의 음질, 최고의 반주 금영노래방</string>
-    <string name="logo_bottom_text_02">Copyright © 2018 Keumyoung Group</string>
+    <string name="logo_bottom_text_02">Copyright © 2018 Kyentertainment</string>
     <string name="do_you_want_to_stop_playing">재생을 중단하시겠습니까?</string>
     <string name="function_not_support">해당기능은 현재 지원하지 않습니다.</string>
     <string name="upload">업로드</string>

@@ -1,0 +1,11 @@
+뮤즐=금영엔터테인먼트노래방
+애플리케이션을 생성하였습니다
+
+네이티브 앱 키
+93d7274cb52ef14f486d9eed46e29104
+REST API 키
+1f81231b2a33d153298cb55753e67a04
+JavaScript 키
+ea0d6670fda9809b163a52a41f3f313a
+Admin 키
+35dc87450208b46d11bbf08dfb1e2852

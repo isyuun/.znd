@@ -50,7 +50,8 @@ public abstract class SessionRefreshListener {
                 //toastHelper.showError(R.string.session_expired_update);
                 Log.e("SessionRefreshListener", "" + activity.getResources().getString(R.string.session_expired_update));
             } else {
-                ((_BaseActivity) activity).openPreferenceLogin();
+                //((_BaseActivity) activity).openPreferenceLogin();
+                ((_BaseActivity) activity).openPreferenceLoginChoice();
                 toastHelper.showError(R.string.session_expired_error);
             }
         }
