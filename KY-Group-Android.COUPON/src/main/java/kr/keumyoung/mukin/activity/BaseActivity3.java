@@ -302,7 +302,7 @@ public class BaseActivity3 extends BaseActivity2 {
                         JSONObject error = json.getJSONObject("error");
                         String code = error.getString("code");
                         String message = error.getString("message");
-                        toastHelper.showError(message + "[" + code + "]");
+                        toastHelper.showError("오류:" + message + "[" + code + "]");
                         onLoginFailure();
                         hideProgress();
                     }
