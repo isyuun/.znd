@@ -234,18 +234,18 @@ public class HomeActivity extends _BaseActivity {
                 break;
             case R.id.side_menu_logo:
                 // now invalid
-                logout();
+                //logout();
                 break;
         }
     }
 
-    private void logout() {
-//        preferenceHelper.saveString(PreferenceKeys.SESSION_TOKEN, "");
-//        preferenceHelper.saveString(PreferenceKeys.USER_ID, "");
-        preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, "");
-        preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, "");
-        //navigationHelper.navigateWithReverseAnim(this, LoginChoiceActivity.class);
-    }
+    //private void logout() {
+    //    //preferenceHelper.saveString(PreferenceKeys.SESSION_TOKEN, "");
+    //    //preferenceHelper.saveString(PreferenceKeys.USER_ID, "");
+    //    preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, "");
+    //    preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, "");
+    //    //navigationHelper.navigateWithReverseAnim(this, LoginChoiceActivity.class);
+    //}
 
     protected void onMenuClick() {
         if (currentFragment != null && currentFragment.onMenuClick()) return;

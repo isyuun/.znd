@@ -23,8 +23,8 @@
             android:gravity="center"
             android:padding="16dp"
             android:text="@string/of_sign_in_using_email"
-            android:typeface="sans"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:typeface="sans" />
     </android.support.v7.widget.CardView>
 
     <LinearLayout
@@ -37,18 +37,18 @@
         android:paddingRight="12dp">
 
         <!--<com.kakao.widget.LoginButton-->
-            <!--android:id="@+id/kakao_button"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_marginRight="12dp"/>-->
+        <!--android:id="@+id/kakao_button"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_marginRight="12dp"/>-->
 
         <kr.keumyoung.mukin.util.KakaoLoginButton
             android:id="@+id/kakao_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginRight="12dp"/>
+            android:layout_marginRight="12dp"
+            android:layout_weight="1" />
 
         <FrameLayout
             android:id="@+id/facebook_button"
@@ -68,8 +68,8 @@
                 android:maxLines="1"
                 android:padding="16dp"
                 android:text="@string/facebook"
-                android:typeface="sans"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:typeface="sans" />
         </FrameLayout>
 
     </LinearLayout>

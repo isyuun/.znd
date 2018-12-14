@@ -48,8 +48,9 @@ public class BaseActivity4 extends BaseActivity3 {
                         try {
                             ResponseBody responseBody = response.body();
                             ResponseBody errorBody = response.errorBody();
-                            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[OK]" + "updateSongHits:onResponse()" + "\n" + errorBody + "\n" + responseBody);
+                            if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, "updateSongHits:onResponse()" + "\n" + errorBody + "\n" + responseBody);
                             if (responseBody != null) {
+                                if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[OK]" + "updateSongHits:onResponse()" + "\n" + errorBody + "\n" + responseBody);
                                 hideProgress();
                                 Bundle bundle = new Bundle();
                                 bundle.putSerializable(Constants.SONG, song);

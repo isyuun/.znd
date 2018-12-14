@@ -6,6 +6,7 @@ import kr.keumyoung.mukin.data.request.LoginRequest;
 import kr.keumyoung.mukin.data.request.RegisterUserCustomRequest;
 import kr.keumyoung.mukin.data.request.RegisterUserRequest;
 import kr.keumyoung.mukin.data.request.SongHitRequest;
+import kr.keumyoung.mukin.data.request.UpdateUserCustomRequest;
 import kr.keumyoung.mukin.data.request.UserSongRequest;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
@@ -35,9 +36,22 @@ public interface RestApi {
             @Body RegisterUserRequest request
     );
 
+    @PUT("system/user/{userid}")
+    Call<ResponseBody> updateUserRole(
+            @Header("X-DreamFactory-Session-Token") String sessionToken,
+            @Path("userid") String userid,
+            @Body UserRoleModel request
+    );
+
     @POST("kymedia/_table/user")
-    Call<ResponseBody> registerCustom(
+    Call<ResponseBody> registerUserCustom(
             @Body RequestModel<RegisterUserCustomRequest> request,
+            @Header("X-DreamFactory-Session-Token") String sessionToken
+    );
+
+    @PUT("kymedia/_table/user")
+    Call<ResponseBody> updateUserCustom(
+            @Body RequestModel<UpdateUserCustomRequest> request,
             @Header("X-DreamFactory-Session-Token") String sessionToken
     );
 
@@ -146,13 +160,6 @@ public interface RestApi {
     Call<ResponseBody> delFavoriteSong(
             @Header("X-DreamFactory-Session-Token") String sessionToken,
             @Query("filter") String filter
-    );
-
-    @PUT("system/user/{userid}")
-    Call<ResponseBody> updateUserRole(
-            @Header("X-DreamFactory-Session-Token") String sessionToken,
-            @Path("userid") String userid,
-            @Body UserRoleModel request
     );
 
     @DELETE("user/session")

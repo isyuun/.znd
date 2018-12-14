@@ -3,7 +3,6 @@ package kr.keumyoung.mukin.activity;
 import android.app.AlertDialog;
 import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,6 +14,7 @@ import kr.keumyoung.mukin.api.RequestModel;
 import kr.keumyoung.mukin.data.request.LoginRequest;
 import kr.keumyoung.mukin.data.request.RegisterUserCustomRequest;
 import kr.keumyoung.mukin.data.request.RegisterUserRequest;
+import kr.keumyoung.mukin.data.request.UpdateUserCustomRequest;
 import kr.keumyoung.mukin.helper.NavigationHelper;
 import kr.keumyoung.mukin.helper.ToastHelper;
 import kr.keumyoung.mukin.interfaces.SessionRefreshListener;
@@ -39,11 +39,11 @@ public class BaseActivity3 extends BaseActivity2 {
     String pass;
 
     public void login(String email, String password) {
-        loginUser(email, password);
+        loginUser(email, password, "", "", "", "");
     }
 
-    protected void loginUser(String email, String password) {
-        Log.e(__CLASSNAME__, "loginUser(...)");
+    private void loginUser(String email, String password, String name, String profileImage, String sociallogin, String socialid) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
         showProgress();
         // first generate DF session and save the session token and the dfid
         restApi.login(new LoginRequest(email, password, 0)).enqueue(new Callback<ResponseBody>() {
@@ -52,26 +52,29 @@ public class BaseActivity3 extends BaseActivity2 {
                 try {
                     ResponseBody responseBody = response.body();
                     ResponseBody errorBody = response.errorBody();
-                    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "loginUser:onResponse()" + "\n" + errorBody + "\n" + responseBody);
+                    if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, "loginUser:onResponse()" + "\n" + errorBody + "\n" + responseBody);
                     if (responseBody != null) {
                         String responseString = responseBody.string();
                         if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[OK]" + "loginUser:onResponse()" + "\n" + responseString);
-                        JSONObject object = new JSONObject(responseString);
-                        if (object.has(Constants.ERROR)) {
+                        JSONObject json = new JSONObject(responseString);
+                        if (json.has(Constants.ERROR)) {
                             // need to handle the error response
                         } else {
-                            String sessionToken = object.getString(Constants.SESSION_TOKEN);
+                            String sessionToken = json.getString(Constants.SESSION_TOKEN);
                             preferenceHelper.saveString(PreferenceKeys.SESSION_TOKEN, sessionToken);
-                            String dfid = object.getString(Constants.ID);
+                            String dfid = json.getString(Constants.ID);
                             preferenceHelper.saveString(PreferenceKeys.DF_ID, dfid);
+
+                            preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, email);
+                            preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, password);
 
                             fetchUserData(dfid);
                         }
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();
                         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "loginUser:onResponse()" + "\n" + errorString);
-                        JSONObject errorObject = new JSONObject(errorString).getJSONObject(Constants.ERROR);
-                        String code = errorObject.getString(Constants.CODE);
+                        JSONObject json = new JSONObject(errorString).getJSONObject(Constants.ERROR);
+                        String code = json.getString(Constants.CODE);
                         if (code.equalsIgnoreCase(Constants.INVALID_SESSION)) {
                             toastHelper.showError(R.string.invalid_credential);
                         }
@@ -94,6 +97,7 @@ public class BaseActivity3 extends BaseActivity2 {
     }
 
     private void fetchUserData(String dfid) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
         // fetch the table data from the user table using the dfid
         String filter = "dfid=" + dfid;
         restApi.tableGetRequestWithFilter(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), TableNames.USER, filter).enqueue(new Callback<ResponseBody>() {
@@ -102,7 +106,7 @@ public class BaseActivity3 extends BaseActivity2 {
                 try {
                     ResponseBody responseBody = response.body();
                     ResponseBody errorBody = response.errorBody();
-                    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "fetchUserData:onResponse()" + "\n" + errorBody + "\n" + responseBody);
+                    if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, "fetchUserData:onResponse()" + "\n" + errorBody + "\n" + responseBody);
                     if (responseBody != null) {
                         String responseString = responseBody.string();
                         if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[OK]" + "fetchUserData:onResponse()" + "\n" + responseString);
@@ -123,7 +127,7 @@ public class BaseActivity3 extends BaseActivity2 {
                             //toastHelper.showError(getString(R.string.login));
                             //navigationHelper.navigate(LoginActivity.this, _HomeActivity.class);
                             hideProgress();
-                            toastHelper.showError(getString(R.string.login) + " " + nickName + ":" + userId);
+                            toastHelper.showError(getString(R.string.login) /*+ " " + nickName*/ + ":" + userId);
                             //화면이동...
                             if (preferenceHelper.getString(getString(R.string.coupon), "").isEmpty()) {
                                 openPreferenceCoupon();
@@ -141,12 +145,16 @@ public class BaseActivity3 extends BaseActivity2 {
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();
                         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "fetchUserData:onResponse()" + "\n" + errorString);
-                        JSONObject errorObject = new JSONObject(errorString);
-                        // TODO: 29/01/18 handle login error
+                        JSONObject json = new JSONObject(errorString);
+                        toastHelper.showError(getString(R.string.common_api_error));
+                        onLoginFailure();
                         hideProgress();
                     }
                 } catch (Exception e) {
+                    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NO]" + "fetchUserData:onResponse()");
                     e.printStackTrace();
+                    toastHelper.showError(getString(R.string.common_api_error));
+                    onLoginFailure();
                     hideProgress();
                 }
             }
@@ -161,11 +169,21 @@ public class BaseActivity3 extends BaseActivity2 {
     }
 
     protected void onLoginSuccess(String email, String nickName) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
         preferenceHelper.saveString(getString(R.string.email), email);
         getMainApplication().send("Q", email, "");
     }
 
+    protected void onLoginFailure() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
+        preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, "");
+        preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, "");
+        preferenceHelper.saveString(getString(R.string.email), "");
+        preferenceHelper.saveString(getString(R.string.coupon), "");
+    }
+
     protected void callLogout() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage(getResources().getString(R.string.do_you_want_to_logout));
         alertDialogBuilder.setPositiveButton(getResources().getString(R.string.yes),
@@ -198,40 +216,42 @@ public class BaseActivity3 extends BaseActivity2 {
     }
 
     protected void onLogoutSuccess() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
         preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, "");
         preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, "");
         preferenceHelper.saveString(getString(R.string.email), "");
         preferenceHelper.saveString(getString(R.string.coupon), "");
     }
 
-    protected void registerUserToDF(String email, String nickName, String password, String profileImagePath) {
-        Log.e(__CLASSNAME__, "loginUser(...)");
-        restApi.registerUser(new RegisterUserRequest(email, nickName, "", password)).enqueue(new Callback<ResponseBody>() {
+    protected void registerUserToDF(String email, String name, String password, String profileImage, String sociallogin, String socialid) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
+        restApi.registerUser(new RegisterUserRequest(email, name, "", password)).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
                     ResponseBody responseBody = response.body();
                     ResponseBody errorBody = response.errorBody();
-                    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "registerUserToDF:onResponse()" + "\n" + errorBody + "\n" + responseBody);
+                    if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, "registerUserToDF:onResponse()" + "\n" + errorBody + "\n" + responseBody);
                     if (responseBody != null) {
                         String responseString = responseBody.string();
                         if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[OK]" + "registerUserToDF:onResponse()" + "\n" + responseString);
-                        JSONObject object = new JSONObject(responseString);
-                        if (object.has(Constants.SUCCESS))
-                            loginUserAndAcquireSession(email, password, nickName, profileImagePath);
+                        JSONObject json = new JSONObject(responseString);
+                        if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, "\n" + (json != null ? json.toString(2) : ""));
+                        if (json.has(Constants.SUCCESS))
+                            loginUserAndAcquireSession(email, password, name, profileImage, sociallogin, socialid);
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();
                         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "registerUserToDF:onResponse()" + "\n" + errorString);
-                        // TODO: 29/01/18 handle DF registration error
-                        JSONObject errorObject = new JSONObject(errorString).getJSONObject(Constants.ERROR).getJSONObject(Constants.CONTEXT);
-                        if (errorObject.has(Constants.EMAIL)) {
+                        JSONObject json = new JSONObject(errorString).getJSONObject(Constants.ERROR).getJSONObject(Constants.CONTEXT);
+                        if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, "\n" + (json != null ? json.toString(2) : ""));
+                        if (json.has(Constants.EMAIL)) {
                             //hideProgress();
                             //toastHelper.showError(R.string.email_already_exists);
-                            loginUserAndAcquireSession(email, password, nickName, profileImagePath);
+                            loginUserAndAcquireSession(email, password, name, profileImage, sociallogin, socialid);
                         }
                     }
                 } catch (Exception e) {
-                    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "registerUserToDF:onResponse()");
+                    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NO]" + "registerUserToDF:onResponse()");
                     e.printStackTrace();
                     hideProgress();
                 }
@@ -247,38 +267,50 @@ public class BaseActivity3 extends BaseActivity2 {
         });
     }
 
-    private void loginUserAndAcquireSession(String email, String password, String nickName, String profileImagePath) {
+    private void loginUserAndAcquireSession(String email, String password, String name, String profileImage, String sociallogin, String socialid) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
         restApi.login(new LoginRequest(email, password, 0)).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
                     ResponseBody responseBody = response.body();
                     ResponseBody errorBody = response.errorBody();
-                    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "loginUserAndAcquireSession:onResponse()" + "\n" + errorBody + "\n" + responseBody);
+                    if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, "loginUserAndAcquireSession:onResponse()" + "\n" + errorBody + "\n" + responseBody);
                     if (responseBody != null) {
                         String responseString = responseBody.string();
                         if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[OK]" + "loginUserAndAcquireSession:onResponse()" + "\n" + responseString);
-                        JSONObject object = new JSONObject(responseString);
-                        if (object.has(Constants.ERROR)) {
+                        JSONObject json = new JSONObject(responseString);
+                        if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, "\n" + (json != null ? json.toString(2) : ""));
+                        if (json.has(Constants.ERROR)) {
                             // need to handle the error response
                         } else {
-                            String sessionToken = object.getString(Constants.SESSION_TOKEN);
+                            String sessionToken = json.getString(Constants.SESSION_TOKEN);
                             preferenceHelper.saveString(PreferenceKeys.SESSION_TOKEN, sessionToken);
-                            String dfid = object.getString(Constants.ID);
+                            String dfid = json.getString(Constants.ID);
                             preferenceHelper.saveString(PreferenceKeys.DF_ID, dfid);
 
-                            //updateRoleToUser(dfid, nickName, profileImagePath, email);
-                            registerUserCustom(dfid, nickName, profileImagePath, email);
+                            preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, email);
+                            preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, password);
+
+                            registerUpdateUserCustom(dfid, name, profileImage, email, sociallogin, socialid);
                         }
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();
                         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "loginUserAndAcquireSession:onResponse()" + "\n" + errorString);
-                        JSONObject errorObject = new JSONObject(errorString);
-                        // TODO: 29/01/18 handle error response during registration
+                        JSONObject json = new JSONObject(errorString);
+                        if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, "\n" + (json != null ? json.toString(2) : ""));
+                        JSONObject error = json.getJSONObject("error");
+                        String code = error.getString("code");
+                        String message = error.getString("message");
+                        toastHelper.showError(message + "[" + code + "]");
+                        onLoginFailure();
+                        hideProgress();
                     }
                 } catch (Exception e) {
-                    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "loginUserAndAcquireSession:onResponse()");
+                    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NO]" + "loginUserAndAcquireSession:onResponse()");
                     e.printStackTrace();
+                    toastHelper.showError(getString(R.string.common_api_error));
+                    onLoginFailure();
                     hideProgress();
                 }
             }
@@ -293,74 +325,126 @@ public class BaseActivity3 extends BaseActivity2 {
         });
     }
 
-    //private void updateRoleToUser(String dfid, String nickName, String profileImagePath, String email) {
-    //    restApi.updateUserRole(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), dfid, new UserRoleModel(dfid))
-    //            .enqueue(new Callback<ResponseBody>() {
-    //                @Override
-    //                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-    //                    try {
-    //                        ResponseBody responseBody = response.body();
-    //                        ResponseBody errorBody = response.errorBody();
-    //                        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "updateRoleToUser:onResponse()" + "\n" + errorBody + "\n" + responseBody);
-    //                        if (responseBody != null) {
-    //                            String responseString = responseBody.string();
-    //                            if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[OK]" + "updateRoleToUser:onResponse()" + "\n" + responseString);
-    //                            JSONObject object = new JSONObject(responseString);
-    //                            if (!object.has(Constants.ERROR))
-    //                                registerUserCustom(dfid, nickName, profileImagePath, email);
-    //                        } else if (errorBody != null) {
-    //                            String errorString = errorBody.string();
-    //                            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "updateRoleToUser:onResponse()" + "\n" + errorString);
-    //                            JSONObject errorObject = new JSONObject(errorString);
-    //                            // TODO: 29/01/18 handle error response during registration
-    //                        }
-    //                    } catch (Exception e) {
-    //                        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "updateRoleToUser:onResponse()");
-    //                        e.printStackTrace();
-    //                        hideProgress();
-    //                    }
-    //                }
-    //
-    //                @Override
-    //                public void onFailure(Call<ResponseBody> call, Throwable t) {
-    //                    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "updateRoleToUser:onFailure()");
-    //                    t.printStackTrace();
-    //                    hideProgress();
-    //                }
-    //            });
-    //}
+    private void registerUpdateUserCustom(String dfid, String name, String profileImage, String email, String sociallogin, String socialid) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
+        // fetch the table data from the user table using the dfid
+        String filter = "dfid=" + dfid;
+        restApi.tableGetRequestWithFilter(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), TableNames.USER, filter).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    ResponseBody responseBody = response.body();
+                    ResponseBody errorBody = response.errorBody();
+                    if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, "registerUpdateUserCustom:onResponse()" + "\n" + errorBody + "\n" + responseBody);
+                    if (responseBody != null) {
+                        String responseString = responseBody.string();
+                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[OK]" + "registerUpdateUserCustom:onResponse()" + "\n" + responseString);
+                        JSONObject json = new JSONObject(responseString);
+                        if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, "\n" + (json != null ? json.toString(2) : ""));
+                        if (json.has(Constants.RESOURCE)) {
+                            if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, "[UP]" + json.getJSONArray(Constants.RESOURCE).isNull(0));
+                            if (!json.getJSONArray(Constants.RESOURCE).isNull(0)) {
+                                JSONObject user = json.getJSONArray(Constants.RESOURCE).getJSONObject(0);
+                                String userId = user.getString(Constants.USER_ID);
+                                updateUserCustom(userId, dfid, name, profileImage, email, sociallogin, socialid);
+                            } else {
+                                registerUserCustom(dfid, name, profileImage, email, sociallogin, socialid);
+                            }
+                        }
+                    } else if (errorBody != null) {
+                        String errorString = errorBody.string();
+                        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "registerUpdateUserCustom:onResponse()" + "\n" + errorString);
+                        JSONObject json = new JSONObject(errorString);
+                        if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, "\n" + (json != null ? json.toString(2) : ""));
+                        if (json.has(Constants.RESOURCE)) {
+                            registerUserCustom(dfid, name, profileImage, email, sociallogin, socialid);
+                        }
+                    }
+                } catch (Exception e) {
+                    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NO]" + "registerUpdateUserCustom:onResponse()");
+                    e.printStackTrace();
+                    hideProgress();
+                }
+            }
 
-    private void registerUserCustom(String dfid, String nickName, String profileImagePath, String email) {
-        restApi.registerCustom(new RequestModel<>(new RegisterUserCustomRequest(dfid, nickName, profileImagePath, email)),
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+                hideProgress();
+                toastHelper.showError(R.string.common_api_error);
+            }
+        });
+    }
+
+    private void updateUserCustom(String userid, String dfid, String name, String profileImage, String email, String sociallogin, String socialid) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
+        restApi.updateUserCustom(new RequestModel<>(new UpdateUserCustomRequest(userid, dfid, name, profileImage, email, sociallogin, socialid)),
                 preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN)).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
                     ResponseBody responseBody = response.body();
                     ResponseBody errorBody = response.errorBody();
-                    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "registerUserCustom:onResponse()" + "\n" + errorBody + "\n" + responseBody);
+                    if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, "updateUserCustom:onResponse()" + "\n" + errorBody + "\n" + responseBody);
+                    if (responseBody != null) {
+                        String responseString = responseBody.string();
+                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[OK]" + "updateUserCustom:onResponse()" + "\n" + responseString);
+                        JSONObject json = new JSONObject(responseString);
+                        if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, "\n" + (json != null ? json.toString(2) : ""));
+                        if (json.has(Constants.RESOURCE)) {
+                            fetchUserData(dfid);
+                        } else {
+                            json = new JSONObject(responseString).getJSONObject(Constants.ERROR).getJSONObject(Constants.CONTEXT);
+                            if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, "\n" + (json != null ? json.toString(2) : ""));
+                            if (json.has(Constants.EMAIL)) {
+                                hideProgress();
+                                toastHelper.showError(R.string.email_already_exists);
+                            }
+                        }
+                    } else if (errorBody != null) {
+                        String errorString = errorBody.string();
+                        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "updateUserCustom:onResponse()" + "\n" + errorString);
+                        JSONObject json = new JSONObject(errorString);
+                        if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, "\n" + (json != null ? json.toString(2) : ""));
+                    }
+                } catch (Exception e) {
+                    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NO]" + "updateUserCustom:onResponse()");
+                    e.printStackTrace();
+                    hideProgress();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "updateUserCustom:onFailure()");
+                t.printStackTrace();
+                hideProgress();
+            }
+        });
+    }
+
+    private void registerUserCustom(String dfid, String name, String profileImage, String email, String sociallogin, String socialid) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
+        //restApi.registerUserCustom(new RequestModel<>(new RegisterUserCustomRequest(dfid, name, profileImage, email)),
+        restApi.registerUserCustom(new RequestModel<>(new RegisterUserCustomRequest(dfid, name, profileImage, email, sociallogin, socialid)),
+                preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN)).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    ResponseBody responseBody = response.body();
+                    ResponseBody errorBody = response.errorBody();
+                    if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, "registerUserCustom:onResponse()" + "\n" + errorBody + "\n" + responseBody);
                     if (responseBody != null) {
                         String responseString = responseBody.string();
                         if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[OK]" + "registerUserCustom:onResponse()" + "\n" + responseString);
-                        JSONObject jsonObject = new JSONObject(responseString);
-                        if (jsonObject.has(Constants.RESOURCE)) {
-                            JSONArray resourceArray = jsonObject.getJSONArray(Constants.RESOURCE);
-                            String userId = resourceArray.getJSONObject(0).getString(Constants.USER_ID);
-                            preferenceHelper.saveString(PreferenceKeys.USER_ID, userId);
-                            // login process completed. proceed to home activity
-                            //hideProgress();
-                            //navigationHelper.navigate(SplashScreenActivity2.this, _HomeActivity.class);
-                            hideProgress();
-                            toastHelper.showError(getString(R.string.login) + " " + nickName + ":" + userId);
-                            if (!preferenceHelper.getString(getString(R.string.coupon), "").isEmpty()) {
-                                openHomeActivity();
-                            } else {
-                                openPreferenceCoupon();
-                            }
-                            onRegisterSuccess(email, nickName);
+                        JSONObject json = new JSONObject(responseString);
+                        if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, "\n" + (json != null ? json.toString(2) : ""));
+                        if (json.has(Constants.RESOURCE)) {
+                            fetchUserData(dfid);
                         } else {
-                            JSONObject errorObject = new JSONObject(responseString).getJSONObject(Constants.ERROR).getJSONObject(Constants.CONTEXT);
-                            if (errorObject.has(Constants.EMAIL)) {
+                            json = new JSONObject(responseString).getJSONObject(Constants.ERROR).getJSONObject(Constants.CONTEXT);
+                            if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, "\n" + (json != null ? json.toString(2) : ""));
+                            if (json.has(Constants.EMAIL)) {
                                 hideProgress();
                                 toastHelper.showError(R.string.email_already_exists);
                             }
@@ -368,8 +452,8 @@ public class BaseActivity3 extends BaseActivity2 {
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();
                         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "registerUserCustom:onResponse()" + "\n" + errorString);
-                        JSONObject errorObject = new JSONObject(errorString).getJSONObject(Constants.ERROR).getJSONObject(Constants.CONTEXT);
-                        if (errorObject.has(Constants.EMAIL)) {
+                        JSONObject json = new JSONObject(errorString).getJSONObject(Constants.ERROR).getJSONObject(Constants.CONTEXT);
+                        if (json.has(Constants.EMAIL)) {
                             hideProgress();
                             toastHelper.showError(R.string.email_already_exists);
                         }
@@ -393,6 +477,7 @@ public class BaseActivity3 extends BaseActivity2 {
     }
 
     protected void onRegisterSuccess(String email, String nickName) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
         preferenceHelper.saveString(getString(R.string.email), email);
         getMainApplication().send("Q", email, "");
     }

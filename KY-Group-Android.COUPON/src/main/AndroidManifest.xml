@@ -69,6 +69,7 @@
             android:label="@string/login"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.DarkActionBar"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
             <intent-filter>
                 <action android:name="intent.open.keumyoung.karaoke.Login.Acitivity" />
@@ -139,9 +140,22 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
-        <!--<meta-data-->
-        <!--android:name="com.kakao.sdk.ClientSecret"-->
-        <!--android:value="@string/kakao_app_secret" />-->
+
+        <meta-data
+        android:name="com.kakao.sdk.ClientSecret"
+        android:value="@string/kakao_app_secret" />
+
+        <activity
+            android:name="com.kakao.auth.authorization.authcode.KakaoWebViewActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.DarkActionBar"
+            android:windowSoftInputMode="adjustResize">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="io.fabric.ApiKey"

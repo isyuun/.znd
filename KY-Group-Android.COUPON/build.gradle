@@ -32,6 +32,13 @@ android {
     //<a href="http://stackoverflow.com/questions/7607165/how-to-write-build-time-stamp-into-apk">How to write build time stamp into apk</a>
     defaultConfig {
         buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
+
+        //FACEBOOK
+        resValue "string", "facebook_app_id", "2262981153970579"
+        resValue "string", "fb_login_protocol_scheme", "fb2262981153970579"
+        //KAKAO
+        resValue "string", "kakao_app_key", "93d7274cb52ef14f486d9eed46e29104"
+        resValue "string", "kakao_app_secret", "qCvzNBTT5KUsymyGUAOm3EgQRqRau7dX"
     }
 
     signingConfigs {
@@ -46,24 +53,7 @@ android {
     }
 
     buildTypes {
-        //출처: http://gun0912.tistory.com/33 [박상권의 삽질블로그]
-        debug {
-            // 개발용 KEY
-            resValue "string", "facebook_app_id", "1493750310723328"
-            resValue "string", "fb_login_protocol_scheme", "fb1493750310723328"
-            resValue "string", "kakao_app_key", "93d7274cb52ef14f486d9eed46e29104"
-            resValue "string", "kakao_scheme", "/oi7vzyazAd5sN8KyvQzigQo3zM="
-        }
-
         release {
-            // 배포용 KEY
-            resValue "string", "facebook_app_id", "1493750310723328"
-            resValue "string", "fb_login_protocol_scheme", "fb1493750310723328"
-            resValue "string", "kakao_app_key", "93d7274cb52ef14f486d9eed46e29104"
-            resValue "string", "kakao_scheme", "cVI4Cm99wGxUyXxdXhO0BI2HgUo="
-        }
-
-         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
@@ -151,7 +141,8 @@ dependencies {
 
     implementation 'com.facebook.android:facebook-android-sdk:4.35.0'
 
-    implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.0.52'
+    //implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.0.52'
+    implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.15.1'
 
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'de.hdodenhof:circleimageview:2.2.0'

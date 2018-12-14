@@ -146,9 +146,6 @@ public class RegisterActivity extends _BaseActivity {
             return;
         }
 
-        preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, email);
-        preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, password);
-
         showProgress();
         //if (profileImageFile != null) {
         //    //restApi.saveUploadedSong(imageOptionChooserPopup.getFilePart(profileImageFile))
@@ -162,7 +159,7 @@ public class RegisterActivity extends _BaseActivity {
         //} else {
         //    registerUserToDF(email, nickName, password, "");
         //}
-        registerUserToDF(email, nickName, password, "");
+        registerUserToDF(email, nickName, password, "", "", "");
     }
 
     //protected void registerUserToDF(String email, String nickName, String password, String profileImagePath) {
@@ -274,7 +271,7 @@ public class RegisterActivity extends _BaseActivity {
     //}
 
     //private void registerUserCustom(String dfid, String nickName, String profileImagePath, String email) {
-    //    restApi.registerCustom(new RequestModel<>(new RegisterUserCustomRequest(dfid, nickName, profileImagePath, email)),
+    //    restApi.registerUserCustom(new RequestModel<>(new RegisterUserCustomRequest(dfid, nickName, profileImagePath, email)),
     //            preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN)).enqueue(new Callback<ResponseBody>() {
     //        @Override
     //        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

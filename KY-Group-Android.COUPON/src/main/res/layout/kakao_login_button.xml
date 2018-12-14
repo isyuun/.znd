@@ -11,10 +11,11 @@
         android:layout_gravity="center"
         android:drawableLeft="@drawable/kako_talk_02_icon"
         android:drawablePadding="8dp"
-        android:maxLines="1"
         android:ellipsize="end"
-        android:typeface="sans"
         android:gravity="center_vertical"
+        android:maxLines="1"
+        android:padding="16dp"
         android:text="@string/kakao_talk"
-        android:textColor="@color/kakao_text_color" />
+        android:textColor="@color/kakao_text_color"
+        android:typeface="sans" />
 </FrameLayout>

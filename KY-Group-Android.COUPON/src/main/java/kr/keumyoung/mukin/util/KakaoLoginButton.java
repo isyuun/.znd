@@ -3,7 +3,7 @@ package kr.keumyoung.mukin.util;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.kakao.widget.LoginButton;
+import com.kakao.usermgmt.LoginButton;
 
 import kr.keumyoung.mukin.R;
 
