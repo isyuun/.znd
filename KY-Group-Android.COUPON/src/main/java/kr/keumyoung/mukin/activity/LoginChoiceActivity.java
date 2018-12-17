@@ -15,6 +15,8 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.kakao.auth.ISessionCallback;
@@ -157,7 +159,16 @@ public class LoginChoiceActivity extends _BaseActivity {
 
     @Override
     protected void onDestroy() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
         super.onDestroy();
+    }
+
+    @Override
+    protected void onLoginFailure() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
+        super.onLoginFailure();
+        kakaoLogoutUnlink();
+        facebookLogoutUnlink();
     }
 
     private void kakaoButton() {
@@ -167,6 +178,7 @@ public class LoginChoiceActivity extends _BaseActivity {
 
     private void makeKakaoLogin() {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
+        Session.getCurrentSession().clearCallbacks();
         Session.getCurrentSession().addCallback(new SessionCallback() {
             @Override
             public void onSessionOpened() {
@@ -234,9 +246,9 @@ public class LoginChoiceActivity extends _BaseActivity {
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
                         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "kakaoLogin:onFailure()");
-                        hideProgress();
                         t.printStackTrace();
                         kakaoLogoutUnlink();
+                        hideProgress();
                     }
                 });
     }
@@ -246,7 +258,6 @@ public class LoginChoiceActivity extends _BaseActivity {
         kakaoLogout();
         kakaoUnlink();
     }
-
 
     private void kakaoLogout() {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
@@ -301,12 +312,14 @@ public class LoginChoiceActivity extends _BaseActivity {
                     public void onCancel() {
                         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "FacebookCallback:" + getMethodName());
                         toastHelper.showError(R.string.please_continue_with_facebook_login);
+                        facebookLogoutUnlink();
                     }
 
                     @Override
                     public void onError(FacebookException exception) {
                         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NO]" + "FacebookCallback:" + getMethodName());
                         toastHelper.showError(R.string.please_continue_with_facebook_login);
+                        facebookLogoutUnlink();
                         exception.printStackTrace();
                     }
                 });
@@ -332,7 +345,13 @@ public class LoginChoiceActivity extends _BaseActivity {
                         profileImage = "https://graph.facebook.com/" + socialid + "/picture";
                         registerUserToDF(email, name, password, profileImage, sociallogin, socialid);
                     } catch (Exception e) {
+                        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NO]" + "facebookLogin:onResponse()" + "[" + email + "]" + "[" + password + "]" + "[" + name + "]");
                         e.printStackTrace();
+                        if (email.isEmpty()) {
+                            toastHelper.showError(R.string.facebook_talk_email_check);
+                        }
+                        facebookLogoutUnlink();
+                        hideProgress();
                     }
                 });
 
@@ -340,5 +359,17 @@ public class LoginChoiceActivity extends _BaseActivity {
         parameters.putString("fields", "id,name,email");
         request.setParameters(parameters);
         request.executeAsync();
+    }
+
+    private void facebookLogoutUnlink() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + AccessToken.getCurrentAccessToken());
+        new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
+                .Callback() {
+            @Override
+            public void onCompleted(GraphResponse graphResponse) {
+                if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "facebookLogoutUnlink:" + getMethodName());
+                LoginManager.getInstance().logOut();
+            }
+        }).executeAsync();
     }
 }

@@ -35,6 +35,19 @@ public class BaseActivity3 extends BaseActivity2 {
     @Inject
     ToastHelper toastHelper;
 
+    private void showError(JSONObject error) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + error);
+        try {
+            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "\n" + (error != null ? error.toString(2): ""));
+            String code = error.getString("code");
+            String message = error.getString("message");
+            toastHelper.showError("오류:" + message + "[" + code + "]");
+        } catch (Exception e) {
+            e.printStackTrace();
+            toastHelper.showError(R.string.invalid_credential);
+        }
+    }
+
     String email;
     String pass;
 
@@ -73,12 +86,8 @@ public class BaseActivity3 extends BaseActivity2 {
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();
                         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "loginUser:onResponse()" + "\n" + errorString);
-                        JSONObject json = new JSONObject(errorString).getJSONObject(Constants.ERROR);
-                        String code = json.getString(Constants.CODE);
-                        if (code.equalsIgnoreCase(Constants.INVALID_SESSION)) {
-                            toastHelper.showError(R.string.invalid_credential);
-                        }
-                        // TODO: 29/01/18 handle error response during login
+                        showError(new JSONObject(errorString).getJSONObject(Constants.ERROR));
+                        onLoginFailure();
                         hideProgress();
                     }
                 } catch (Exception e) {
@@ -145,8 +154,7 @@ public class BaseActivity3 extends BaseActivity2 {
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();
                         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "fetchUserData:onResponse()" + "\n" + errorString);
-                        JSONObject json = new JSONObject(errorString);
-                        toastHelper.showError(getString(R.string.common_api_error));
+                        showError(new JSONObject(errorString).getJSONObject(Constants.ERROR));
                         onLoginFailure();
                         hideProgress();
                     }
@@ -192,11 +200,8 @@ public class BaseActivity3 extends BaseActivity2 {
                     restApi.logout(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN)).enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                            hideProgress();
-                            //preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, "");
-                            //preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, "");
-                            //navigationHelper.navigateWithClearTask(HomeActivity.this, LoginChoiceActivity.class);
                             onLogoutSuccess();
+                            hideProgress();
                         }
 
                         @Override
@@ -237,17 +242,18 @@ public class BaseActivity3 extends BaseActivity2 {
                         if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[OK]" + "registerUserToDF:onResponse()" + "\n" + responseString);
                         JSONObject json = new JSONObject(responseString);
                         if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, "\n" + (json != null ? json.toString(2) : ""));
-                        if (json.has(Constants.SUCCESS))
+                        if (json.has(Constants.SUCCESS)) {
                             loginUserAndAcquireSession(email, password, name, profileImage, sociallogin, socialid);
+                        }
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();
                         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "registerUserToDF:onResponse()" + "\n" + errorString);
                         JSONObject json = new JSONObject(errorString).getJSONObject(Constants.ERROR).getJSONObject(Constants.CONTEXT);
                         if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, "\n" + (json != null ? json.toString(2) : ""));
                         if (json.has(Constants.EMAIL)) {
-                            //hideProgress();
-                            //toastHelper.showError(R.string.email_already_exists);
                             loginUserAndAcquireSession(email, password, name, profileImage, sociallogin, socialid);
+                        } else {
+                            showError(new JSONObject(errorString).getJSONObject(Constants.ERROR));
                         }
                     }
                 } catch (Exception e) {
@@ -297,12 +303,7 @@ public class BaseActivity3 extends BaseActivity2 {
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();
                         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "loginUserAndAcquireSession:onResponse()" + "\n" + errorString);
-                        JSONObject json = new JSONObject(errorString);
-                        if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, "\n" + (json != null ? json.toString(2) : ""));
-                        JSONObject error = json.getJSONObject("error");
-                        String code = error.getString("code");
-                        String message = error.getString("message");
-                        toastHelper.showError("오류:" + message + "[" + code + "]");
+                        showError(new JSONObject(errorString).getJSONObject(Constants.ERROR));
                         onLoginFailure();
                         hideProgress();
                     }
@@ -358,6 +359,8 @@ public class BaseActivity3 extends BaseActivity2 {
                         if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, "\n" + (json != null ? json.toString(2) : ""));
                         if (json.has(Constants.RESOURCE)) {
                             registerUserCustom(dfid, name, profileImage, email, sociallogin, socialid);
+                        } else {
+                            showError(new JSONObject(errorString).getJSONObject(Constants.ERROR));
                         }
                     }
                 } catch (Exception e) {
@@ -404,8 +407,7 @@ public class BaseActivity3 extends BaseActivity2 {
                     } else if (errorBody != null) {
                         String errorString = errorBody.string();
                         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "updateUserCustom:onResponse()" + "\n" + errorString);
-                        JSONObject json = new JSONObject(errorString);
-                        if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, "\n" + (json != null ? json.toString(2) : ""));
+                        showError(new JSONObject(errorString).getJSONObject(Constants.ERROR));
                     }
                 } catch (Exception e) {
                     if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NO]" + "updateUserCustom:onResponse()");
@@ -456,8 +458,9 @@ public class BaseActivity3 extends BaseActivity2 {
                         if (json.has(Constants.EMAIL)) {
                             hideProgress();
                             toastHelper.showError(R.string.email_already_exists);
+                        } else {
+                            showError(new JSONObject(errorString).getJSONObject(Constants.ERROR));
                         }
-                        // TODO: 29/01/18 handle error response during registration
                     }
                 } catch (Exception e) {
                     if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "registerUserCustom:onResponse()");

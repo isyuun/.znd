@@ -2,9 +2,10 @@
 <resources>
     <string name="app_name">Mukin</string>
     <string name="facebook">Facebook</string>
+    <string name="facebook_talk_email_check" >페이스북계정 이메일을 확인해주세요</string>
     <string name="of_sign_in_using_email">or Sign in using Email</string>
     <string name="kakao_talk">Kakao Talk</string>
-    <string name="kakao_talk_email_check" >&quot;[선택] 카카오계정(이메일)&quot; 동의항목을 체크해주세요</string>
+    <string name="kakao_talk_email_check" >카카오계정 이메일을 확인해주세요</string>
     <string name="sign_in_with">SIGN IN WITH</string>
     <string name="no_account_yet">No account yet? </string>
     <string name="signup">Sign up</string>

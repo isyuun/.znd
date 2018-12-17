@@ -139,7 +139,8 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-    implementation 'com.facebook.android:facebook-android-sdk:4.35.0'
+    //implementation 'com.facebook.android:facebook-android-sdk:4.35.0'
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 
     //implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.0.52'
     implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.15.1'

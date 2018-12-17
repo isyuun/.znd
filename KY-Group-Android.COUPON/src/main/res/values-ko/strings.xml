@@ -2,9 +2,10 @@
 <resources>
     <string name="app_name">뮤즐</string>
     <string name="facebook">페이스북으로 로그인하기</string>
+    <string name="facebook_talk_email_check" >페이스북계정 이메일을 확인해주세요</string>
     <string name="of_sign_in_using_email">또는 이메일로 로그인하기</string>
     <string name="kakao_talk">카카오톡으로 로그인하기</string>
-    <string name="kakao_talk_email_check" >&quot;[선택] 카카오계정(이메일)&quot; 동의항목을 체크해주세요</string>
+    <string name="kakao_talk_email_check" >카카오계정 이메일을 확인해주세요</string>
     <string name="sign_in_with">연동로그인</string>
     <string name="no_account_yet">계정이 없으신가요?</string>
     <string name="signup">계정만들기</string>
