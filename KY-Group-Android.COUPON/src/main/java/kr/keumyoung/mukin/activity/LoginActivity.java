@@ -118,6 +118,7 @@ public class LoginActivity extends _BaseActivity {
     @Override
     protected void onLoginSuccess(String email, String nickName) {
         super.onLoginSuccess(email, nickName);
+        setLoginText();
         getFragmentManager().popBackStack();
     }
 
@@ -143,6 +144,7 @@ public class LoginActivity extends _BaseActivity {
     }
 
     private void setLoginText() {
+        updateSavedValue();
         if (isLogin()) {
             loginText.setText(R.string.logout);
             emailEt.setEnabled(false);

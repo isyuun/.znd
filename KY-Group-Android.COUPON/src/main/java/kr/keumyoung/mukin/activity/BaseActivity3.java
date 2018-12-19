@@ -140,10 +140,6 @@ public class BaseActivity3 extends BaseActivity2 {
                             //화면이동...
                             if (preferenceHelper.getString(getString(R.string.coupon), "").isEmpty()) {
                                 openPreferenceCoupon();
-                                //로그인창에서만
-                                if (BaseActivity3.this instanceof _LoginActivity) {
-                                    finish();
-                                }
                             }
                             onLoginSuccess(email, nickName);
                         } else {

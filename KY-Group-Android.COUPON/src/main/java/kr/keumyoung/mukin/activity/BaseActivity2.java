@@ -178,16 +178,18 @@ public class BaseActivity2 extends BaseActivity {
         ActivityCompat.startActivityForResult(this, i, KARAOKE_INTENT_ACTION_REGISTER, null);
     };
 
-    public void openPreferenceLogin() {
-        post(openPreferenceLogin);
-    }
-
-    private Runnable openPreferenceLogin = () -> {
-        Intent i = new Intent(this, _LoginActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        ActivityCompat.startActivityForResult(this, i, KARAOKE_INTENT_ACTION_LOGIN, null);
-    };
+    //@Deprecated
+    //public void openPreferenceLogin() {
+    //    post(openPreferenceLogin);
+    //}
+    //
+    //@Deprecated
+    //private Runnable openPreferenceLogin = () -> {
+    //    Intent i = new Intent(this, _LoginActivity.class);
+    //    i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+    //    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    //    ActivityCompat.startActivityForResult(this, i, KARAOKE_INTENT_ACTION_LOGIN, null);
+    //};
 
     public void openPreferenceLoginChoice() {
         post(openPreferenceLoginChoice);

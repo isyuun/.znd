@@ -13,6 +13,7 @@ import io.reactivex.schedulers.Schedulers;
 import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.util.Constants;
 
+@Deprecated
 public class LoginChoiceActivity2 extends LoginChoiceActivity {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
@@ -24,13 +25,12 @@ public class LoginChoiceActivity2 extends LoginChoiceActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        loginToInstagram("strwyvan@gmail.com", "4q4q4q4q!!");
     }
 
-    private void loginToInstagram(final String username, final String password) {
+    private void loginToInstagram(final String usr, final String pwd) {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
 
-        Instagram4Android instagram = Instagram4Android.builder().username(username).password(password).build();
+        Instagram4Android instagram = Instagram4Android.builder().username(usr).password(pwd).build();
 
         attemptLogin(instagram)
                 .subscribeOn(Schedulers.io())
@@ -38,7 +38,7 @@ public class LoginChoiceActivity2 extends LoginChoiceActivity {
                 .subscribe(instagramLoginResult -> {
                     if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + instagramLoginResult.getLogged_in_user());
                     String email = "";
-                    String pwd = "";
+                    String password = "";
                     String name = "";
                     String profileImage = "";
                     String sociallogin = Constants.INSTAGRAM;
@@ -46,10 +46,10 @@ public class LoginChoiceActivity2 extends LoginChoiceActivity {
                     if (instagramLoginResult.getLogged_in_user() != null) {
                         InstagramLoggedUser user = instagramLoginResult.getLogged_in_user();
                         email = user.username;
-                        pwd = socialid = "" + user.pk;
+                        password = socialid = "" + user.pk;
                         name = user.username;
                         profileImage = user.profile_pic_url;
-                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "\n" + email + "\n" + pwd + "\n" + socialid + "\n" + name + "\n" + profileImage);
+                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "\n" + email + "\n" + password + "\n" + socialid + "\n" + name + "\n" + profileImage);
                         //registerUserToDF(email, name, pwd, profileImage, sociallogin, socialid);
                     }
                 });

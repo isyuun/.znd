@@ -81,7 +81,6 @@ public class LoginChoiceActivity extends LoginActivity {
         //로그인
         if (!preferenceHelper.getString(PreferenceKeys.LOGIN_EMAIL).isEmpty() && !preferenceHelper.getString(PreferenceKeys.LOGIN_PASSWORD).isEmpty() &&
                 !preferenceHelper.getString(PreferenceKeys.USER_ID).isEmpty() && !preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN).isEmpty()) {
-            //finish();
         }
     }
 
@@ -150,7 +149,6 @@ public class LoginChoiceActivity extends LoginActivity {
             if (savedPassword == null || savedPassword.isEmpty()) {
                 // email is saved but password is not. nothing to do
             } else {
-                //openPreferenceLogin();
             }
         }
     }

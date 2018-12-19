@@ -46,4 +46,9 @@ public class RegisterActivity2 extends RegisterActivity {
         return ret;
     }
 
+    @Override
+    protected void onLoginSuccess(String email, String nickName) {
+        super.onLoginSuccess(email, nickName);
+        finish();
+    }
 }
