@@ -312,7 +312,7 @@ class Listen4X extends Listen4 implements ISongPlay {
 	@Override
 	public boolean isPlaying() {
 		if (type == TYPE.SOUNDTOUCHPLAY) {
-			//if (BuildConfig.DEBUG) Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + song);
+			//if (BuildConfig.DEBUG) _Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + song);
 			if (song != null) {
 				return song.isPlaying();
 			} else {
@@ -515,7 +515,7 @@ class Listen4X extends Listen4 implements ISongPlay {
 	@Override
 	public void setPitch(int value) {
 		if (song != null) {
-			//Log.w(__CLASSNAME__, getMethodName() + value + ":" + song);
+			//_Log.w(__CLASSNAME__, getMethodName() + value + ":" + song);
 			song.setPitch(value);
 		}
 	}

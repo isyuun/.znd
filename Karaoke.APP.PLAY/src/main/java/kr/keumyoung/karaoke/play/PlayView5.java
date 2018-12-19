@@ -126,7 +126,7 @@ class PlayView5 extends PlayView4XX {
 
 	@Override
 	public void onTime(int t) {
-		//Log.e(__CLASSNAME__, getMethodName() + t + "/" + getTotalTime() + ":" + seekBar);
+		//_Log.e(__CLASSNAME__, getMethodName() + t + "/" + getTotalTime() + ":" + seekBar);
 		super.onTime(t);
 
 		if (seekBar != null) {

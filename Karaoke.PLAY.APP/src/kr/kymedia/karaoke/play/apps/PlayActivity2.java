@@ -33,7 +33,8 @@
 package kr.kymedia.karaoke.play.apps;
 
 import kr.kymedia.karaoke.play.app.R;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
+
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -69,7 +70,7 @@ public class PlayActivity2 extends PlayActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 
 
 		super.onCreate(savedInstanceState);
@@ -86,7 +87,7 @@ public class PlayActivity2 extends PlayActivity {
 
 	@Override
 	protected void onNewIntent(Intent intent) {
-		Log.i(__CLASSNAME__, getMethodName() + intent);
+		_Log.i(__CLASSNAME__, getMethodName() + intent);
 
 
 		super.onNewIntent(intent);
@@ -97,7 +98,7 @@ public class PlayActivity2 extends PlayActivity {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 
-		Log.e(__CLASSNAME__, getMethodName() + newConfig);
+		_Log.e(__CLASSNAME__, getMethodName() + newConfig);
 		super.onConfigurationChanged(newConfig);
 	}
 }

@@ -41,7 +41,7 @@ public class user2 extends user {
         //    @Override
         //    public void onTextChanged(CharSequence s, int start, int before, int count) {
         //        int digits = mCouponView.getText().toString().length();
-        //        Log.d("LENGTH", "" + digits);
+        //        _Log.d("LENGTH", "" + digits);
         //        if (!lastChar.equals("-")) {
         //            if (digits == 4 || digits == 9 || digits == 14) {
         //                mCouponView.append("-");

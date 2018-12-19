@@ -32,7 +32,7 @@
 
 package kr.kymedia.karaoke.app;
 
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
@@ -94,7 +94,7 @@ public class Activity extends android.app.Activity {
 
 	@SuppressLint("InlinedApi")
 	protected void openMain(Bundle extras, Uri data) {
-		Log.e(toString(), getMethodName() + "Extras[" + extras + "] - Data[" + data + "]");
+		_Log.e(toString(), getMethodName() + "Extras[" + extras + "] - Data[" + data + "]");
 
 		Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
 

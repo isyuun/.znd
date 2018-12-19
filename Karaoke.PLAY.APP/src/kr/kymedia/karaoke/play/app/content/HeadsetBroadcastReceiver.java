@@ -32,7 +32,8 @@
 
 package kr.kymedia.karaoke.play.app.content;
 
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -67,16 +68,16 @@ public class HeadsetBroadcastReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		// Log.i(__CLASSNAME__, getMethodName());
+		// _Log.i(__CLASSNAME__, getMethodName());
 
 		if (intent.getAction().equals(Intent.ACTION_HEADSET_PLUG)) {
 			int state = intent.getIntExtra("state", -1);
 			switch (state) {
 			case 0:
-				Log.d(__CLASSNAME__, getMethodName() + "Headset unplugged");
+				_Log.d(__CLASSNAME__, getMethodName() + "Headset unplugged");
 				break;
 			case 1:
-				Log.d(__CLASSNAME__, getMethodName() + "Headset plugged");
+				_Log.d(__CLASSNAME__, getMethodName() + "Headset plugged");
 				break;
 			}
 		}

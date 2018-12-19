@@ -98,7 +98,7 @@ public class KaraokePlay extends Activity {
 		// String url = "aHR0cDsvL3Jnc291cWNlLm95bWVhaWEubXIvcmJjb3JsL2twZnAvMjoxMzA/MDIvOjQvMT4wNDA8Mkc5QVBRVSY0Lm0lYQ==";
 		// String url = "XkdNQA0cFkJdQFZFS1BcHlFKVFVfWlgeV0EWQlhQVkJaHFJAUEMWAnACCgB1AwsfdAcWAXADDQB2AX4JC2NoZXAHF11zUg==";
 		// String temp = SongUtil.makeDecryption("", new String(Base64.decode(url.replace(" ", "+"), 0)));
-		// Log.d("KaraokePlay", "temp:"+temp);
+		// _Log.d("KaraokePlay", "temp:"+temp);
 
 		// 플레이어 뷰 생성
 		player = new Player(this);
@@ -270,7 +270,7 @@ public class KaraokePlay extends Activity {
 		super.onDestroy();
 
 		// recorder.close();
-		// Log.e("KaraokePlay", "destroy");
+		// _Log.e("KaraokePlay", "destroy");
 		player.destroy();
 	}
 
@@ -279,7 +279,7 @@ public class KaraokePlay extends Activity {
 		super.onStop();
 
 		// recorder.close();
-		// Log.e("KaraokePlay", "destroy");
+		// _Log.e("KaraokePlay", "destroy");
 		player.destroy();
 	}
 
@@ -363,7 +363,7 @@ public class KaraokePlay extends Activity {
 		public void onCompletion() {
 			Log.e("KaraokePlay", "onCompletion");
 			if (player != null) {
-				// Log.d("MainActivity", "score:"+player.getScore());
+				// _Log.d("MainActivity", "score:"+player.getScore());
 				player.stop();
 				// score.load("", "");
 				play();

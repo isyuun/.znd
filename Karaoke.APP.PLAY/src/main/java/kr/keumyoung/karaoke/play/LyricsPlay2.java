@@ -73,7 +73,7 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const , SurfaceHolder.Callback
 	}
 
 	public boolean isPlaying() {
-		//if (BuildConfig.DEBUG) Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + m_mp);
+		//if (BuildConfig.DEBUG) _Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + m_mp);
 		if (m_mp != null && m_mp.isPlaying()) {
 			return true;
 		} else {
@@ -187,7 +187,7 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const , SurfaceHolder.Callback
 	// */
 	//public void setSleepTime(long time) {
     //
-	//	Log.wtf(__CLASSNAME__ + _Const.TAG_LYRIC, getMethodName() + time);
+	//	_Log.wtf(__CLASSNAME__ + _Const.TAG_LYRIC, getMethodName() + time);
 	//	this.mThreadSleepTime = time;
 	//	if (mKPLyrics != null) {
 	//		mKPLyrics.setSleepTime(time);

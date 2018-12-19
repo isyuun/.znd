@@ -33,7 +33,7 @@
 package kr.kymedia.karaoke.play.app.view;
 
 import kr.kymedia.karaoke.play.app.R;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import kr.kymedia.karaoke.view.EnabledRadioGroup;
 import kr.kymedia.karaoke.widget.AutoRepeatImageButton;
 import kr.kymedia.karaoke.widget.BalanceSeekBar;
@@ -107,7 +107,7 @@ public class PlayViewValance extends PlayView {
 	}
 
 	private void clearValance() {
-		// Log.e(__CLASSNAME__, getMethodName());
+		// _Log.e(__CLASSNAME__, getMethodName());
 		((RadioButton) findViewById(R.id.radioValanceC)).setChecked(false);
 		((RadioButton) findViewById(R.id.radioValanceL)).setChecked(false);
 		((RadioButton) findViewById(R.id.radioValanceR)).setChecked(false);
@@ -126,7 +126,7 @@ public class PlayViewValance extends PlayView {
 	@Override
 	void setPlayView() {
 
-		Log.e(__CLASSNAME__, getMethodName());
+		_Log.e(__CLASSNAME__, getMethodName());
 		super.setPlayView();
 
 		seekValance = (BalanceSeekBar) findViewById(R.id.seekValance);
@@ -138,7 +138,7 @@ public class PlayViewValance extends PlayView {
 	@Override
 	protected void init(boolean init) {
 
-		Log.w(__CLASSNAME__, getMethodName() + init);
+		_Log.w(__CLASSNAME__, getMethodName() + init);
 		super.init(init);
 
 		try {
@@ -189,7 +189,7 @@ public class PlayViewValance extends PlayView {
 	}
 
 	public void mute(boolean enabled) {
-		Log.e(__CLASSNAME__, getMethodName() + enabled);
+		_Log.e(__CLASSNAME__, getMethodName() + enabled);
 
 		float LR = seekValance.getDisBalance();
 
@@ -212,7 +212,7 @@ public class PlayViewValance extends PlayView {
 		float balance = seekValance.getDisBalance();
 		float min = seekValance.getDisMinBalance();
 		float max = seekValance.getDisMaxBalance();
-		Log.i(__CLASSNAME__, getMethodName() + init + " - balance:" + balance + " - " + min + "~" + max);
+		_Log.i(__CLASSNAME__, getMethodName() + init + " - balance:" + balance + " - " + min + "~" + max);
 
 		seekValance.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
@@ -301,7 +301,7 @@ public class PlayViewValance extends PlayView {
 						// } else if (checkedId == R.id.radioValanceL) {
 						// } else if (checkedId == R.id.radioValanceR) {
 						// }
-						// Log.e(__CLASSNAME__, getMethodName() + val + ":" + findViewById(checkedId));
+						// _Log.e(__CLASSNAME__, getMethodName() + val + ":" + findViewById(checkedId));
 					}
 				});
 
@@ -312,7 +312,7 @@ public class PlayViewValance extends PlayView {
 
 				int val = 0;
 
-				Log.e(__CLASSNAME__, getMethodName() + val + ":" + v);
+				_Log.e(__CLASSNAME__, getMethodName() + val + ":" + v);
 
 				seekValance.setBalance(val);
 
@@ -326,7 +326,7 @@ public class PlayViewValance extends PlayView {
 
 				int val = (int) (seekValance.getMinBalance());
 
-				Log.e(__CLASSNAME__, getMethodName() + val + ":" + v);
+				_Log.e(__CLASSNAME__, getMethodName() + val + ":" + v);
 
 				seekValance.setBalance(val);
 
@@ -340,7 +340,7 @@ public class PlayViewValance extends PlayView {
 
 				int val = (int) (seekValance.getMaxBalance());
 
-				Log.e(__CLASSNAME__, getMethodName() + val + ":" + v);
+				_Log.e(__CLASSNAME__, getMethodName() + val + ":" + v);
 
 				seekValance.setBalance(val);
 
@@ -351,7 +351,7 @@ public class PlayViewValance extends PlayView {
 
 	@Override
 	public void setValance(final float LR) {
-		// Log.w(__CLASSNAME__, getMethodName() + LR);
+		// _Log.w(__CLASSNAME__, getMethodName() + LR);
 
 
 		super.setValance(LR);
@@ -376,12 +376,12 @@ public class PlayViewValance extends PlayView {
 			lab = "L:";
 		}
 
-		// Log.e(__CLASSNAME__, getMethodName() + lab + LR);
+		// _Log.e(__CLASSNAME__, getMethodName() + lab + LR);
 
 		// float balance = seekValance.getDisBalance();
 		// float min = seekValance.getDisMinBalance();
 		// float max = seekValance.getDisMaxBalance();
-		// Log.w(__CLASSNAME__, getMethodName() + "balance:" + balance + " - " + min + "~" + max);
+		// _Log.w(__CLASSNAME__, getMethodName() + "balance:" + balance + " - " + min + "~" + max);
 
 		// String text = String.format(lab + "%.1f", Math.abs(seekValance.getDisBalance()));
 		String text = String.format(lab + "%.1f", Math.abs(LR));

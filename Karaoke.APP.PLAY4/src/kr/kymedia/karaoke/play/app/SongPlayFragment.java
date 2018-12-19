@@ -273,7 +273,7 @@ public class SongPlayFragment extends SongServiceFragment implements ISongPlay, 
 	@Override
 	public boolean load(String path) throws Exception {
 
-		// Log.w(toString(), getMethodName() + handler + " - " + path);
+		// _Log.w(toString(), getMethodName() + handler + " - " + path);
 		Log.w(toString(), getMethodName() + song + " - " + path);
 
 		this.path = path;

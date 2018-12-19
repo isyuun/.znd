@@ -104,7 +104,7 @@ public class SeekBarVertical_Reverse extends SeekBar {
 		// int i=0;
 		// i=getMax() - (int) (getMax() * event.getY() / getHeight());
 		// setProgress(100-i);
-		// //Log.i("Progress",getProgress()+"");
+		// //_Log.i("Progress",getProgress()+"");
 		// onSizeChanged(getWidth(), getHeight(), 0, 0);
 		// break;
 		//

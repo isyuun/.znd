@@ -220,7 +220,7 @@ public class SongPlay /* extends SongService */ implements ISongPlay, ISongPlay.
 
 	@Override
 	public void setPath(String path) {
-		// Log.e(__CLASSNAME__, getMethodName() + " - " + path);
+		// _Log.e(__CLASSNAME__, getMethodName() + " - " + path);
 
 		this.path = path;
 	}
@@ -321,7 +321,7 @@ public class SongPlay /* extends SongService */ implements ISongPlay, ISongPlay.
 
 	@Override
 	public void setOnListener(Listener listener) {
-		// Log.e(__CLASSNAME__, getMethodName() + (listener instanceof Listener) + ":" + listener);
+		// _Log.e(__CLASSNAME__, getMethodName() + (listener instanceof Listener) + ":" + listener);
 
 		this.listener = listener;
 	}

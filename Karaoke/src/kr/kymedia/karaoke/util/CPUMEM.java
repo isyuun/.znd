@@ -78,7 +78,7 @@ public class CPUMEM {
 	private RandomAccessFile reader;
 
 	public CPUMEM(int pid, long period) {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 
 		this.pid = pid;
 		this.period = period;
@@ -121,7 +121,7 @@ public class CPUMEM {
 	private long period = 2000;
 
 	public void start() {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 
 		try {
 			task = new TimerTask() {
@@ -142,7 +142,7 @@ public class CPUMEM {
 	}
 
 	public void stop() {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 
 		try {
 			handler = null;
@@ -191,7 +191,7 @@ public class CPUMEM {
 	};
 
 	private void readUsage() {
-		// Log.i(__CLASSNAME__, getMethodName());
+		// _Log.i(__CLASSNAME__, getMethodName());
 		readUsageTop();
 
 		if (handler != null) {
@@ -200,7 +200,7 @@ public class CPUMEM {
 	}
 
 	private void readUsageTop() {
-		// Log.i(__CLASSNAME__, getMethodName());
+		// _Log.i(__CLASSNAME__, getMethodName());
 
 		Runtime runtime = Runtime.getRuntime();
 		Process process;
@@ -216,7 +216,7 @@ public class CPUMEM {
 
 			// info = "";
 			while ((line = br.readLine()) != null) {
-				// Log.w(__CLASSNAME__, line);
+				// _Log.w(__CLASSNAME__, line);
 				String segs[] = line.trim().split("[ ]+");
 				if (segs[0].equalsIgnoreCase("" + pid)) {
 					info = line;
@@ -225,16 +225,16 @@ public class CPUMEM {
 				}
 			}
 
-			// Log.i(__CLASSNAME__, info);
+			// _Log.i(__CLASSNAME__, info);
 		} catch (Exception e) {
 			e.fillInStackTrace();
-			Log.e(__CLASSNAME__, "Unable to execute top command - " + res);
+			_Log.e(__CLASSNAME__, "Unable to execute top command - " + res);
 		}
 
 	}
 
 	private void readUsageFile() {
-		// Log.i(__CLASSNAME__, getMethodName());
+		// _Log.i(__CLASSNAME__, getMethodName());
 
 		info = "";
 
@@ -268,7 +268,7 @@ public class CPUMEM {
 			// return (float) (cpu2 - cpu1) / ((cpu2 + idle2) - (cpu1 + idle1));
 			usage = (float) (cpu2 - cpu1) / ((cpu2 + idle2) - (cpu1 + idle1));
 
-			// Log.i(__CLASSNAME__, info);
+			// _Log.i(__CLASSNAME__, info);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

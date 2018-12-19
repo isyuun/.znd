@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.GestureDetectorCompat;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -13,7 +12,7 @@ import android.view.ViewGroup;
 
 import kr.kymedia.karaoke.play.app.BaseFullActivity;
 import kr.kymedia.karaoke.play.app.R;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 
 public class PlayFragment7 extends PlayFragment6 {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
@@ -34,7 +33,7 @@ public class PlayFragment7 extends PlayFragment6 {
     @TargetApi(Build.VERSION_CODES.CUPCAKE)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.e(__CLASSNAME__, getMethodName());
+        _Log.e(__CLASSNAME__, getMethodName());
         View v = super.onCreateView(inflater, container, savedInstanceState);
 
         if (getActivity() instanceof BaseFullActivity) {

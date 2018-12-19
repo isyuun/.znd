@@ -3,7 +3,7 @@ package kr.kymedia.karaoke.play.app;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 
 public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureListener {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
@@ -53,20 +53,20 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
         if ((deltaXAbs >= MIN_SWIPE_DISTANCE_X) && (deltaXAbs <= MAX_SWIPE_DISTANCE_X)) {
             if (deltaX > 0) {
                 //this.activity.displayMessage("Swipe to left");
-                Log.e(__CLASSNAME__, getMethodName() + "Swipe to left");
+                _Log.e(__CLASSNAME__, getMethodName() + "Swipe to left");
             } else {
                 //this.activity.displayMessage("Swipe to right");
-                Log.e(__CLASSNAME__, getMethodName() + "Swipe to right");
+                _Log.e(__CLASSNAME__, getMethodName() + "Swipe to right");
             }
         }
 
         if ((deltaYAbs >= MIN_SWIPE_DISTANCE_Y) && (deltaYAbs <= MAX_SWIPE_DISTANCE_Y)) {
             if (deltaY > 0) {
                 //this.activity.displayMessage("Swipe to up");
-                Log.e(__CLASSNAME__, getMethodName() + "Swipe to up");
+                _Log.e(__CLASSNAME__, getMethodName() + "Swipe to up");
             } else {
                 //this.activity.displayMessage("Swipe to down");
-                Log.e(__CLASSNAME__, getMethodName() + "Swipe to down");
+                _Log.e(__CLASSNAME__, getMethodName() + "Swipe to down");
             }
         }
 
@@ -77,7 +77,7 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
     // Invoked when single tap screen.
     @Override
     public boolean onSingleTapConfirmed(MotionEvent e) {
-        Log.e(__CLASSNAME__, getMethodName() + e);
+        _Log.e(__CLASSNAME__, getMethodName() + e);
         //this.activity.displayMessage("Single tap occurred.");
         return true;
     }
@@ -85,7 +85,7 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
     // Invoked when double tap screen.
     @Override
     public boolean onDoubleTap(MotionEvent e) {
-        Log.e(__CLASSNAME__, getMethodName() + e);
+        _Log.e(__CLASSNAME__, getMethodName() + e);
         //this.activity.displayMessage("Double tap occurred.");
         return true;
     }

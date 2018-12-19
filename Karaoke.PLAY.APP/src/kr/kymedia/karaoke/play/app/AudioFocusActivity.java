@@ -33,7 +33,7 @@
 package kr.kymedia.karaoke.play.app;
 
 import kr.kymedia.karaoke.play.apps._PlayFragment;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import android.media.AudioManager;
 import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.os.Bundle;
@@ -69,7 +69,7 @@ public class AudioFocusActivity extends AudioActivity implements OnAudioFocusCha
 	private OnAudioFocusChangeListener mListener;
 
 	public int requestAudioFocus(OnAudioFocusChangeListener l) {
-		Log.w(__CLASSNAME__, getMethodName() + mListener + ":" + l);
+		_Log.w(__CLASSNAME__, getMethodName() + mListener + ":" + l);
 		mListener = l;
 		// Request audio focus for playback
 		int ret = getAudioManager().requestAudioFocus(this,
@@ -86,7 +86,7 @@ public class AudioFocusActivity extends AudioActivity implements OnAudioFocusCha
 	}
 
 	public int abandonAudioFocus() {
-		Log.w(__CLASSNAME__, getMethodName() + mListener);
+		_Log.w(__CLASSNAME__, getMethodName() + mListener);
 		mListener = null;
 		// Abandon audio focus when playback complete
 		int ret = getAudioManager().abandonAudioFocus(this);
@@ -96,7 +96,7 @@ public class AudioFocusActivity extends AudioActivity implements OnAudioFocusCha
 	@Override
 	public void onAudioFocusChange(int focusChange) {
 
-		// Log.w(__CLASSNAME__, getMethodName() + mListener + ":" + focusChange);
+		// _Log.w(__CLASSNAME__, getMethodName() + mListener + ":" + focusChange);
 
 		String msg = null;
 		if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
@@ -131,7 +131,7 @@ public class AudioFocusActivity extends AudioActivity implements OnAudioFocusCha
 			mListener.onAudioFocusChange(focusChange);
 		}
 
-		Log.w(__CLASSNAME__, msg);
+		_Log.w(__CLASSNAME__, msg);
 		// Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
 	}
 

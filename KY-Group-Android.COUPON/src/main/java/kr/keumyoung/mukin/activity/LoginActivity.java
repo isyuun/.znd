@@ -5,11 +5,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -41,21 +41,16 @@ public class LoginActivity extends _BaseActivity {
     @Inject
     RestApi restApi;
 
-    @Inject
-    PreferenceHelper preferenceHelper;
-
     @BindView(R.id.signup_anchor)
     TextView signupAnchor;
-    @BindView(R.id.signup_section)
-    LinearLayout signupSection;
     @BindView(R.id.login_button)
-    CardView loginButton;
+    FrameLayout loginButton;
     @BindView(R.id.email_et)
     EditText emailEt;
     @BindView(R.id.password_et)
     EditText passwordEt;
-    @BindView(R.id.middle_spacer)
-    View middleSpacer;
+    @BindView(R.id.login_text)
+    TextView loginText;
 
     @Override
     protected void setFlags() {
@@ -65,6 +60,10 @@ public class LoginActivity extends _BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        onCreate();
+    }
+
+    protected void onCreate() {
         View view = LayoutInflater.from(this).inflate(R.layout.activity_login, null, false);
         inflateContainerView(view);
 
@@ -86,7 +85,6 @@ public class LoginActivity extends _BaseActivity {
                 // email is saved but password is not. nothing to do
             } else {
                 passwordEt.setText(savedPassword);
-                //onSongSelected(loginButton);
             }
         }
     }
@@ -123,12 +121,20 @@ public class LoginActivity extends _BaseActivity {
         getFragmentManager().popBackStack();
     }
 
+    @Override
+    protected void onLogoutSuccess() {
+        super.onLogoutSuccess();
+        //if (!BuildConfig.DEBUG)
+        {
+            //emailEt.setText("");
+            passwordEt.setText("");
+        }
+        setLoginText();
+    }
+
     boolean isLogin() {
         return (!preferenceHelper.getString(getString(R.string.email)).isEmpty());
     }
-
-    @BindView(R.id.login_text)
-    TextView loginText;
 
     @Override
     protected void onResume() {
@@ -166,17 +172,6 @@ public class LoginActivity extends _BaseActivity {
                 emailEt.setTextColor(getResources().getColor(android.R.color.black));
             }
         }
-    }
-
-    @Override
-    protected void onLogoutSuccess() {
-        super.onLogoutSuccess();
-        //if (!BuildConfig.DEBUG)
-        {
-            //emailEt.setText("");
-            passwordEt.setText("");
-        }
-        setLoginText();
     }
 
     @OnClick({R.id.signup_anchor, R.id.login_button})

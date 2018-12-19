@@ -307,7 +307,7 @@ public class MediaPlayerPlay2 extends MediaPlayerPlay implements ISongPlay, ISon
 
 	@Override
 	public void onTime(final int t) {
-		// Log.w(toString(), getMethodName() + t);
+		// _Log.w(toString(), getMethodName() + t);
 
 		super.onTime(t);
 
@@ -328,7 +328,7 @@ public class MediaPlayerPlay2 extends MediaPlayerPlay implements ISongPlay, ISon
 
 	@Override
 	public int getCurrentTime() {
-		// Log.e(toString(), getMethodName() + isPrepared);
+		// _Log.e(toString(), getMethodName() + isPrepared);
 
 		super.getCurrentTime();
 
@@ -342,7 +342,7 @@ public class MediaPlayerPlay2 extends MediaPlayerPlay implements ISongPlay, ISon
 
 	@Override
 	public int getTotalTime() {
-		// Log.e(toString(), getMethodName() + isPrepared);
+		// _Log.e(toString(), getMethodName() + isPrepared);
 
 		super.getTotalTime();
 
@@ -377,7 +377,7 @@ public class MediaPlayerPlay2 extends MediaPlayerPlay implements ISongPlay, ISon
 
 	@Override
 	public void onPrepared(MediaPlayer mp) {
-		// Log.e(toString(), getMethodName() + isPrepared + ":" + mp);
+		// _Log.e(toString(), getMethodName() + isPrepared + ":" + mp);
 
 		onPrepared();
 	}

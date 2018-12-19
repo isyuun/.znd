@@ -32,7 +32,7 @@
 
 package kr.kymedia.karaoke.play.app;
 
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
@@ -66,7 +66,7 @@ public class FragmentActivity extends AudioFocusActivity {
 
 	@Override
 	protected void addFragment(int containerViewId, Fragment fragment, String tag) {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.add(R.id.fragment1, fragment, tag);
 		ft.commit();
@@ -74,7 +74,7 @@ public class FragmentActivity extends AudioFocusActivity {
 
 	@Override
 	protected void replaceFragment(int containerViewId, Fragment fragment, String tag) {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.replace(R.id.fragment1, fragment, tag);
 		ft.commit();
@@ -82,7 +82,7 @@ public class FragmentActivity extends AudioFocusActivity {
 
 	@Override
 	public Fragment getCurrentFragment() {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 		try {
 			Fragment fragment = null;
 			// fragment = getSupportFragmentManager().findFragmentById(R.id.fragment1);

@@ -154,7 +154,7 @@ class Listen2 implements _Const {
 	}
 
 	public boolean isPlaying() {
-		//if (BuildConfig.DEBUG) Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + m_mp);
+		//if (BuildConfig.DEBUG) _Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + m_mp);
 		if (m_mp != null && m_mp.isPlaying()) {
 			return true;
 		}
@@ -162,7 +162,7 @@ class Listen2 implements _Const {
 	}
 
 	public boolean isPausing() {
-		//if (BuildConfig.DEBUG) Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + m_mp);
+		//if (BuildConfig.DEBUG) _Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + m_mp);
 		if (m_mp != null && !m_mp.isPlaying()) {
 			return true;
 		}

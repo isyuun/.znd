@@ -122,8 +122,8 @@ public class TrackerTime extends PopupWindow implements OnTouchListener {
 					chk = true;
 				}
 			}
-			// android.util.if (_IKaraoke.DEBUG)Log.d("","rawX : "+sumX);
-			// android.util.if (_IKaraoke.DEBUG)Log.d("","rawY : "+sumY);
+			// android.util.if (_IKaraoke.DEBUG)_Log.d("","rawX : "+sumX);
+			// android.util.if (_IKaraoke.DEBUG)_Log.d("","rawY : "+sumY);
 
 			int offX = 0;
 			int offY = sumY;
@@ -134,7 +134,7 @@ public class TrackerTime extends PopupWindow implements OnTouchListener {
 				dismiss();
 			}
 
-			// if (_IKaraoke.DEBUG)Log.i(__CLASSNAME__, getMethodName());
+			// if (_IKaraoke.DEBUG)_Log.i(__CLASSNAME__, getMethodName());
 
 		} catch (Exception e) {
 

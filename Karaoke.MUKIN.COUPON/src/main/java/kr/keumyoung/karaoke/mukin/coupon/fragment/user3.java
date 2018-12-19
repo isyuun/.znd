@@ -63,7 +63,7 @@ public class user3 extends user2 {
     @Override
     protected String getGoogleAccount() {
         String email = super.getGoogleAccount();
-        //if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + "[ACCOUNT]" + email);
+        //if (BuildConfig.DEBUG) _Log.e(__CLASSNAME__, getMethodName() + "[ACCOUNT]" + email);
         //mEmailView.setText(email);
         return email;
     }
@@ -175,7 +175,7 @@ public class user3 extends user2 {
 
     @Override
     public void onRequestPermissionsResult(int code, @NonNull String[] permissions, @NonNull int[] grants) {
-        //Log.e(__CLASSNAME__, getMethodName() + code + "," + permissions + "," + grants);
+        //_Log.e(__CLASSNAME__, getMethodName() + code + "," + permissions + "," + grants);
         super.onRequestPermissionsResult(code, permissions, grants);
         if (code == REQUEST_PERMISSIONS) {
             if (grants.length == 2 && grants[0] == PackageManager.PERMISSION_GRANTED && grants[1] == PackageManager.PERMISSION_GRANTED) {

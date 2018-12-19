@@ -33,7 +33,7 @@
 package kr.kymedia.karaoke.play.app.view;
 
 import kr.kymedia.karaoke.play.app.R;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -83,7 +83,7 @@ public class PlayViewType extends PlayViewChoir {
 	@Override
 	public void setEnabled(boolean enabled) {
 
-		// Log.e(__CLASSNAME__, getMethodName() + type);
+		// _Log.e(__CLASSNAME__, getMethodName() + type);
 
 		super.setEnabled(enabled);
 
@@ -97,7 +97,7 @@ public class PlayViewType extends PlayViewChoir {
 	@Override
 	public void showSongControl(boolean visible) {
 
-		Log.e(__CLASSNAME__, getMethodName() + type);
+		_Log.e(__CLASSNAME__, getMethodName() + type);
 
 		findViewById(R.id.buttonShow).setEnabled(true);
 
@@ -126,7 +126,7 @@ public class PlayViewType extends PlayViewChoir {
 
 	@Override
 	public void start() {
-		Log.i(__CLASSNAME__, getMethodName() + type);
+		_Log.i(__CLASSNAME__, getMethodName() + type);
 
 		super.start();
 	}

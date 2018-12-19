@@ -63,10 +63,9 @@ import kr.kymedia.karaoke.play.app.view.PlayView;
 import kr.kymedia.karaoke.play.app.view.PlayViewValance;
 import kr.kymedia.karaoke.play.app.view.SongPlayView;
 import kr.kymedia.karaoke.play.app.view._PlayView;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import kr.kymedia.karaoke.util.TextUtil;
 import kr.kymedia.karaoke.view.EnabledRadioGroup;
-import kr.kymedia.karaoke.widget.KaraokePath;
 
 /**
  *
@@ -123,7 +122,7 @@ public class PlayFragment extends ChoirPlayFragment {
 	}
 
 	private void setPlayView() {
-		Log.e(__CLASSNAME__, getMethodName());
+		_Log.e(__CLASSNAME__, getMethodName());
 
 		setSong(null);
 
@@ -153,7 +152,7 @@ public class PlayFragment extends ChoirPlayFragment {
 
 	@Override
 	public void release() {
-		Log.d(__CLASSNAME__, getMethodName());
+		_Log.d(__CLASSNAME__, getMethodName());
 		super.release();
 
 
@@ -166,7 +165,7 @@ public class PlayFragment extends ChoirPlayFragment {
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 
 		super.onCreate(savedInstanceState);
 	}
@@ -187,16 +186,16 @@ public class PlayFragment extends ChoirPlayFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-		Log.e(__CLASSNAME__, getMethodName() + "[ST]" + savedInstanceState);
+		_Log.e(__CLASSNAME__, getMethodName() + "[ST]" + savedInstanceState);
 		mRootView = (ViewGroup) inflater.inflate(R.layout.fragment_play, container, false);
-		Log.e(__CLASSNAME__, getMethodName() + "[ED]" + savedInstanceState);
+		_Log.e(__CLASSNAME__, getMethodName() + "[ED]" + savedInstanceState);
 		// return super.onCreateView(inflater, container, savedInstanceState);
 		return mRootView;
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		Log.i(__CLASSNAME__, getMethodName() + savedInstanceState);
+		_Log.i(__CLASSNAME__, getMethodName() + savedInstanceState);
 
 		super.onActivityCreated(savedInstanceState);
 
@@ -205,7 +204,7 @@ public class PlayFragment extends ChoirPlayFragment {
 
 	@Override
 	protected void onActivityCreated() {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 
 
 		super.onActivityCreated();
@@ -241,7 +240,7 @@ public class PlayFragment extends ChoirPlayFragment {
 
 	@Override
 	public void onDestroy() {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 
 		super.onDestroy();
 
@@ -252,7 +251,7 @@ public class PlayFragment extends ChoirPlayFragment {
 	private void openIntent(final Intent intent) {
 
 		if (intent == null) {
-			Log.e(__CLASSNAME__, getMethodName() + "[NG]" + intent);
+			_Log.e(__CLASSNAME__, getMethodName() + "[NG]" + intent);
 			return;
 		}
 
@@ -261,13 +260,13 @@ public class PlayFragment extends ChoirPlayFragment {
 		String path = "";
 
 		if (extras == null) {
-			Log.e(__CLASSNAME__, getMethodName() + "[NG]" + extras);
+			_Log.e(__CLASSNAME__, getMethodName() + "[NG]" + extras);
 			return;
 		}
 
 		if (extras.getParcelable("pathPlay") != null) {
 			Uri uri = extras.getParcelable("pathPlay");
-			// Log.e(__CLASSNAME__, getMethodName() + uri);
+			// _Log.e(__CLASSNAME__, getMethodName() + uri);
 			path = uri.toString();
 			// URL확인후아니면로컬경로확인!!!지랄~~~
 			if (!TextUtil.isNetworkUrl(path)) {
@@ -278,7 +277,7 @@ public class PlayFragment extends ChoirPlayFragment {
 			openKaraoke(extras);
 		}
 
-		Log.e(__CLASSNAME__, getMethodName() + path + "\n" + extras);
+		_Log.e(__CLASSNAME__, getMethodName() + path + "\n" + extras);
 
 		if (!TextUtil.isEmpty(path)) {
 			if (isPlaying() && !path.equalsIgnoreCase(getPath())) {
@@ -295,7 +294,7 @@ public class PlayFragment extends ChoirPlayFragment {
 	}
 
 	protected void onNewIntent(Intent intent) {
-		Log.e(__CLASSNAME__, getMethodName() + intent.getExtras());
+		_Log.e(__CLASSNAME__, getMethodName() + intent.getExtras());
 
 
 		openIntent(intent);
@@ -303,7 +302,7 @@ public class PlayFragment extends ChoirPlayFragment {
 
 	@Override
 	public void start() {
-		Log.e(__CLASSNAME__, getMethodName());
+		_Log.e(__CLASSNAME__, getMethodName());
 
 		super.start();
 
@@ -319,7 +318,7 @@ public class PlayFragment extends ChoirPlayFragment {
 	}
 
 	private void setPlayControl() {
-		Log.e(__CLASSNAME__, getMethodName());
+		_Log.e(__CLASSNAME__, getMethodName());
 
 
 		((RadioGroup) findViewById(R.id.radioServer))
@@ -368,7 +367,7 @@ public class PlayFragment extends ChoirPlayFragment {
 			@Override
 			public void onClick(View v) {
 
-				Log.i(__CLASSNAME__, getMethodName() + isPlaying() + " - " + isPause());
+				_Log.i(__CLASSNAME__, getMethodName() + isPlaying() + " - " + isPause());
 
 				if (isPlaying()) {
 					if (isPause()) {
@@ -452,7 +451,7 @@ public class PlayFragment extends ChoirPlayFragment {
 	 * </pre>
 	 */
 	private String openKaraoke(Bundle extras) {
-		Log.d(__CLASSNAME__, getMethodName() + extras);
+		_Log.d(__CLASSNAME__, getMethodName() + extras);
 
 		String ret = null;
 		try {
@@ -516,14 +515,14 @@ public class PlayFragment extends ChoirPlayFragment {
 
 		ret = String.format(host + path + form, number);
 
-		Log.e(__CLASSNAME__, getMethodName() + number + "-" + ret);
+		_Log.e(__CLASSNAME__, getMethodName() + number + "-" + ret);
 
 		return ret;
 	}
 
 	@Override
 	public void setPath(String path) {
-		// Log.e(__CLASSNAME__, getMethodName() + path);
+		// _Log.e(__CLASSNAME__, getMethodName() + path);
 
 		super.setPath(path);
 
@@ -534,7 +533,7 @@ public class PlayFragment extends ChoirPlayFragment {
 
 	@Override
 	public boolean load(String path) throws Exception {
-		Log.d(__CLASSNAME__, getMethodName());
+		_Log.d(__CLASSNAME__, getMethodName());
 
 		// mPlayView.open(path);
 		// setPath(path);
@@ -545,7 +544,7 @@ public class PlayFragment extends ChoirPlayFragment {
 
 	@Override
 	public void prepare() {
-		Log.d(__CLASSNAME__, getMethodName());
+		_Log.d(__CLASSNAME__, getMethodName());
 
 		if (mWakeLock == null) {
 			mWakeLock.acquire();
@@ -557,7 +556,7 @@ public class PlayFragment extends ChoirPlayFragment {
 
 	@Override
 	public void onPrepared() {
-		Log.w(__CLASSNAME__, getMethodName());
+		_Log.w(__CLASSNAME__, getMethodName());
 
 
 		super.onPrepared();
@@ -569,7 +568,7 @@ public class PlayFragment extends ChoirPlayFragment {
 
 	@Override
 	public boolean play() {
-		Log.d(__CLASSNAME__, getMethodName());
+		_Log.d(__CLASSNAME__, getMethodName());
 
 		// mPlayView.play();
 		// executeAsyncTask(new play(), mPlayView);
@@ -614,7 +613,7 @@ public class PlayFragment extends ChoirPlayFragment {
 
 	@Override
 	public void restart() {
-		Log.d(__CLASSNAME__, getMethodName());
+		_Log.d(__CLASSNAME__, getMethodName());
 
 		// mPlayView.restart();
 		// executeAsyncTask(new restart(), mPlayView);
@@ -624,7 +623,7 @@ public class PlayFragment extends ChoirPlayFragment {
 
 	@Override
 	public void repeat() {
-		Log.d(__CLASSNAME__, getMethodName());
+		_Log.d(__CLASSNAME__, getMethodName());
 
 		// mPlayView.repeat();
 		// executeAsyncTask(new repeat(), mPlayView);
@@ -716,7 +715,7 @@ public class PlayFragment extends ChoirPlayFragment {
 
 	@Override
 	public void onError() {
-		Log.w(__CLASSNAME__, getMethodName());
+		_Log.w(__CLASSNAME__, getMethodName());
 
 		super.onError();
 	}
@@ -724,7 +723,7 @@ public class PlayFragment extends ChoirPlayFragment {
 	@Override
 	public void onError(final ERROR t, final Exception e) {
 
-		Log.w(__CLASSNAME__, getMethodName() + t);
+		_Log.w(__CLASSNAME__, getMethodName() + t);
 
 		super.onError(t, e);
 
@@ -732,7 +731,7 @@ public class PlayFragment extends ChoirPlayFragment {
 			int count = mPlayView.getCount();
 			String time = android.text.format.DateFormat.format("yyyy/MM/dd HH:mm:ss",
 					System.currentTimeMillis()).toString();
-			String err = "NG(" + count + ") - " + time + "\n" + t + "\n" + Log.getStackTraceString(e);
+			String err = "NG(" + count + ") - " + time + "\n" + t + "\n" + _Log.getStackTraceString(e);
 			((TextView) findViewById(R.id.textError)).setText(err);
 			findViewById(R.id.merge_play_error).setVisibility(View.VISIBLE);
 		} catch (Exception e1) {
@@ -744,7 +743,7 @@ public class PlayFragment extends ChoirPlayFragment {
 
 	@Override
 	public void onTimeout(long timeout) {
-		Log.w(__CLASSNAME__, getMethodName() + timeout);
+		_Log.w(__CLASSNAME__, getMethodName() + timeout);
 
 		Toast.makeText(getActivity().getApplicationContext(),
 				"ERROR:" + ERROR.TIMEOUT + "(" + PlayView.TIME_TIMEOUT_OPEN + ")",
@@ -756,7 +755,7 @@ public class PlayFragment extends ChoirPlayFragment {
 	public void onCompletion() {
 
 		boolean repeat = ((CheckBox) findViewById(R.id.checkRepeatRestart)).isChecked();
-		Log.w(__CLASSNAME__, getMethodName() + repeat);
+		_Log.w(__CLASSNAME__, getMethodName() + repeat);
 
 		super.onCompletion();
 
@@ -799,7 +798,7 @@ public class PlayFragment extends ChoirPlayFragment {
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-				// Log.d(__CLASSNAME__, getMethodName() + progress + "/" + seekBar.getMax());
+				// _Log.d(__CLASSNAME__, getMethodName() + progress + "/" + seekBar.getMax());
 				if (fromUser) {
 				}
 				setPlayTime();
@@ -855,7 +854,7 @@ public class PlayFragment extends ChoirPlayFragment {
 	}
 
 	protected void setEnabled(final boolean enabled) {
-		// Log.d(__CLASSNAME__, getMethodName() + enabled + ":" + isPlaying());
+		// _Log.d(__CLASSNAME__, getMethodName() + enabled + ":" + isPlaying());
 
 		boolean enable = enabled;
 

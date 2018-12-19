@@ -33,7 +33,7 @@
 package kr.kymedia.karaoke.play.apps;
 
 import android.view.Menu;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 
 /**
  *
@@ -68,7 +68,7 @@ public class PlayActivity4 extends PlayActivity2 {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 
 		return super.onCreateOptionsMenu(menu);
 		// getMenuInflater().inflate(R.menu.play, menu);

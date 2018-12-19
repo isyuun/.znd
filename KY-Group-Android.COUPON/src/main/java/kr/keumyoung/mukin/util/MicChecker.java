@@ -143,7 +143,7 @@ public class MicChecker {
             micCheckEventListener.onStateChangedEvent(states);
 
 
-        //Log.d(TAG, "states = " + states);
+        //_Log.d(TAG, "states = " + states);
         Log.e("MicChecker", "switchBlueToothStates()" + ":" + devicename + ":" + bStates + ":" + states);
 
         return true;

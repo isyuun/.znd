@@ -110,7 +110,7 @@ public class WidgetUtils {
 		w1 = bm.getWidth();
 		h2 = v.getHeight();
 		w2 = v.getWidth();
-		// Log.e("RESIZE", "[BF]->" + w1 + ":" + h1 + " = " + w2 + ":" + h2);
+		// _Log.e("RESIZE", "[BF]->" + w1 + ":" + h1 + " = " + w2 + ":" + h2);
 		if (h1 > w1) {
 			h2 = (h1 / w1) * w2;
 		} else if (h1 < w1) {
@@ -121,7 +121,7 @@ public class WidgetUtils {
 		LayoutParams params = v.getLayoutParams();
 		params.height = (int) (h2 > 0 ? h2 : params.height);
 		v.setLayoutParams(params);
-		// Log.e("RESIZE", "[AF]->" + w1 + ":" + h1 + " = " + w2 + ":" + h2);
+		// _Log.e("RESIZE", "[AF]->" + w1 + ":" + h1 + " = " + w2 + ":" + h2);
 	}
 
 	public static <T extends View> List<T> findViewsWithClass(View v, Class<T> clazz) {
@@ -155,7 +155,7 @@ public class WidgetUtils {
 			shortcutIntent.setData(uri);
 		} else if (("app").equalsIgnoreCase(type)) {
 
-			// Log.d("DEBUGGING", "Inside app installation " + url + " : " + className + " : " + packageName);
+			// _Log.d("DEBUGGING", "Inside app installation " + url + " : " + className + " : " + packageName);
 			shortcutIntent.setClassName(url, className);
 		}
 
@@ -269,7 +269,7 @@ public class WidgetUtils {
 		try {
 			return context.getResources().getIdentifier(name, defType, context.getPackageName());
 		} catch (Exception e) {
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			return 0;
 		}
 	}
@@ -278,7 +278,7 @@ public class WidgetUtils {
 		try {
 			return context.getResources().getIdentifier(name, defType, context.getPackageName());
 		} catch (Exception e) {
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			return 0;
 		}
 	}
@@ -288,7 +288,7 @@ public class WidgetUtils {
 			return context.getResources().getIdentifier(name, "id", context.getPackageName());
 		} catch (Exception e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			return 0;
 		}
 	}
@@ -297,7 +297,7 @@ public class WidgetUtils {
 		try {
 			return context.getResources().getIdentifier(name, "drawable", context.getPackageName());
 		} catch (Exception e) {
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			return 0;
 		}
 	}
@@ -371,7 +371,7 @@ public class WidgetUtils {
 		try {
 			return context.getResources().getIdentifier(name, "color", context.getPackageName());
 		} catch (Exception e) {
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			return 0;
 		}
 	}
@@ -626,7 +626,7 @@ public class WidgetUtils {
 		int statusBarHeight = rectgle.top;
 		// int contentViewTop = window.findViewById(Window.ID_ANDROID_CONTENT).getTop();
 		// int titleBarHeight = contentViewTop - StatusBarHeight;
-		// Log.i("StatusBarTest" , "StatusBar Height= " + statusBarHeight +
+		// _Log.i("StatusBarTest" , "StatusBar Height= " + statusBarHeight +
 		// " TitleBar Height = " + titleBarHeight);
 		return statusBarHeight;
 	}
@@ -661,7 +661,7 @@ public class WidgetUtils {
 		default:
 			statusBarHeight = MEDIUM_DPI_STATUS_BAR_HEIGHT;
 		}
-		// Log.i("StatusBarTest" , "onCreate StatusBar Height= " + statusBarHeight);
+		// _Log.i("StatusBarTest" , "onCreate StatusBar Height= " + statusBarHeight);
 
 		return statusBarHeight;
 	}
@@ -691,7 +691,7 @@ public class WidgetUtils {
 			if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
 				GooglePlayServicesUtil.getErrorDialog(resultCode, activity, PLAY_SERVICES_RESOLUTION_REQUEST).show();
 			} else {
-				// Log.i(TAG, "This device is not supported.");
+				// _Log.i(TAG, "This device is not supported.");
 				// finish();
 			}
 			return false;

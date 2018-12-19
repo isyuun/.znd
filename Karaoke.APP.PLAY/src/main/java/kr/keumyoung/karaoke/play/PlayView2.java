@@ -218,7 +218,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 	//public void setLyric(ArrayList<String> lyrics) {
 	//	this.m_lyrics = lyrics;
 	//	for (int i = 0; i < m_lyrics.size(); i++) {
-	//		if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__ + TAG_PLAY, getMethodName() + m_lyrics.get(i));
+	//		if (BuildConfig.DEBUG) _Log.wtf(__CLASSNAME__ + TAG_PLAY, getMethodName() + m_lyrics.get(i));
 	//	}
 	//}
 
@@ -241,7 +241,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 	//	if (m_lyrics != null && m_songIdx > -1 && m_songIdx < m_lyrics.size()) {
 	//		ret = m_lyrics.get(m_songIdx);
 	//	}
-	//	if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__ + TAG_PLAY, getMethodName() + ":" + ret + ":" + m_songIdx + ":" + m_lyrics);
+	//	if (BuildConfig.DEBUG) _Log.wtf(__CLASSNAME__ + TAG_PLAY, getMethodName() + ":" + ret + ":" + m_songIdx + ":" + m_lyrics);
 	//	return ret;
 	//}
 
@@ -462,7 +462,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 	};
 
 	public boolean isPlaying() {
-		//if (BuildConfig.DEBUG) Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + m_mp);
+		//if (BuildConfig.DEBUG) _Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + m_mp);
 		if (m_mp != null && m_mp.isPlaying()) {
 			return true;
 		}
@@ -470,7 +470,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 	}
 
 	public boolean isPause() {
-		//if (BuildConfig.DEBUG) Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + m_mp);
+		//if (BuildConfig.DEBUG) _Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + m_mp);
 		if (m_mp != null && !m_mp.isPlaying()) {
 			return true;
 		}
@@ -521,7 +521,7 @@ class PlayView2 extends PlayView1 implements _Const, MediaPlayer.OnBufferingUpda
 					m_mp.stop();
 				}
 
-				//if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[RESET]" + isPlaying() + ":" + m_state);
+				//if (BuildConfig.DEBUG) _Log.w(__CLASSNAME__, getMethodName() + "[RESET]" + isPlaying() + ":" + m_state);
 				//reset();
 
 				mLyricsPlay.stop();

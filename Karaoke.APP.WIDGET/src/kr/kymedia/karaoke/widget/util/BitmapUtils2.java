@@ -139,7 +139,7 @@ public class BitmapUtils2 {
     // }
     // } catch (Exception e) {
     // // Oh well, SHA-1 not available (weird), don't cache bitmaps.
-    // Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+    // _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
     // }
     //
     // return cachedBitmap;
@@ -244,9 +244,9 @@ public class BitmapUtils2 {
                     // fos.write(respBytes);
                     // fos.close();
                     // } catch (FileNotFoundException e) {
-                    // Log.w(TAG, "Error writing to bitmap cache: " + cacheFile.toString(), e);
+                    // _Log.w(TAG, "Error writing to bitmap cache: " + cacheFile.toString(), e);
                     // } catch (IOException e) {
-                    // Log.w(TAG, "Error writing to bitmap cache: " + cacheFile.toString(), e);
+                    // _Log.w(TAG, "Error writing to bitmap cache: " + cacheFile.toString(), e);
                     // }
                     // }
                     putBitmapFromCacheFile(context, url, respBytes);
@@ -304,7 +304,7 @@ public class BitmapUtils2 {
             }
         } catch (Exception e) {
 
-            // Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+            // _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
             v.setImageResource(res);
         }
         return v;
@@ -328,7 +328,7 @@ public class BitmapUtils2 {
             }
         } catch (Exception e) {
 
-            // Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+            // _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
             v.setImageDrawable(drawable);
         }
         return v;
@@ -372,7 +372,7 @@ public class BitmapUtils2 {
             }
         } catch (Exception e) {
 
-            // Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+            // _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
         }
 
         return v;
@@ -444,7 +444,7 @@ public class BitmapUtils2 {
             }
         } catch (Exception e) {
 
-            // Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+            // _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
         }
 
         return v;
@@ -456,7 +456,7 @@ public class BitmapUtils2 {
         w1 = bm.getWidth();
         h2 = v.getHeight();
         w2 = v.getWidth();
-        // Log.e("RESIZE", "[BF]->" + w1 + ":" + h1 + " = " + w2 + ":" + h2);
+        // _Log.e("RESIZE", "[BF]->" + w1 + ":" + h1 + " = " + w2 + ":" + h2);
         if (h1 > w1) {
             h2 = (h1 / w1) * w2;
         } else if (h1 < w1) {
@@ -467,7 +467,7 @@ public class BitmapUtils2 {
         LayoutParams params = (LayoutParams) v.getLayoutParams();
         params.height = (int) (h2 > 0 ? h2 : params.height);
         v.setLayoutParams(params);
-        // Log.e("RESIZE", "[AF]->" + w1 + ":" + h1 + " = " + w2 + ":" + h2);
+        // _Log.e("RESIZE", "[AF]->" + w1 + ":" + h1 + " = " + w2 + ":" + h2);
     }
 
     public static Bitmap putSafeDecodeBitmap(Context context, ImageView im, Uri uri) {

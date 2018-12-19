@@ -32,7 +32,7 @@
 
 package kr.kymedia.karaoke.play.app.view;
 
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import android.content.Context;
 import android.util.AttributeSet;
 
@@ -51,7 +51,7 @@ public class _PlayView extends PlayViewFileDialogMulti {
 
 	public _PlayView(Context context) {
 		super(context);
-		Log.w(__CLASSNAME__, toString());
+		_Log.w(__CLASSNAME__, toString());
 	}
 
 	public _PlayView(Context context, AttributeSet attrs) {
@@ -76,7 +76,7 @@ public class _PlayView extends PlayViewFileDialogMulti {
 
 	@Override
 	public void onTime(int t) {
-		// Log.w(__CLASSNAME__, getMethodName() + t);
+		// _Log.w(__CLASSNAME__, getMethodName() + t);
 
 		super.onTime(t);
 	}

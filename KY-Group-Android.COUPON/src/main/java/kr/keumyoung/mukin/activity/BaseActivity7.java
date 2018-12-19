@@ -9,7 +9,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 
 public class BaseActivity7 extends BaseActivity6 {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
@@ -23,12 +23,12 @@ public class BaseActivity7 extends BaseActivity6 {
     }
 
     protected void volumeUp(int keyCode, KeyEvent event) {
-        Log.e(__CLASSNAME__, getMethodName() + keyCode + ", " + event);
+        _Log.e(__CLASSNAME__, getMethodName() + keyCode + ", " + event);
         mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, AudioManager.FLAG_SHOW_UI);
     }
 
     protected void volumeDown(int keyCode, KeyEvent event) {
-        Log.e(__CLASSNAME__, getMethodName() + keyCode + ", " + event);
+        _Log.e(__CLASSNAME__, getMethodName() + keyCode + ", " + event);
         mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_LOWER, AudioManager.FLAG_SHOW_UI);
     }
 

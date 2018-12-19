@@ -157,7 +157,7 @@ public class SongPlayView extends LinearLayout implements ISongPlay, _SoundTouch
 	// //song = new MediaPlayerPlay2();
 	// song = new _SoundTouchPlay();
 	// }
-	// Log.e(toString(), getMethodName());
+	// _Log.e(toString(), getMethodName());
 	// }
 	public void init(TYPE type) {
 		SongPlayView.type = type;
@@ -201,7 +201,7 @@ public class SongPlayView extends LinearLayout implements ISongPlay, _SoundTouch
 
 	@Override
 	public boolean post(Runnable action) {
-		// Log.w(toString(), getMethodName() + action);
+		// _Log.w(toString(), getMethodName() + action);
 
 
 		return super.post(action);
@@ -209,7 +209,7 @@ public class SongPlayView extends LinearLayout implements ISongPlay, _SoundTouch
 
 	@Override
 	public boolean postDelayed(Runnable action, long delayMillis) {
-		// Log.w(toString(), getMethodName() + action + delayMillis);
+		// _Log.w(toString(), getMethodName() + action + delayMillis);
 
 
 		return super.postDelayed(action, delayMillis);
@@ -244,7 +244,7 @@ public class SongPlayView extends LinearLayout implements ISongPlay, _SoundTouch
 	@Override
 	public boolean load(String path) throws Exception {
 
-		// Log.w(toString(), getMethodName() + handler + " - " + path);
+		// _Log.w(toString(), getMethodName() + handler + " - " + path);
 		Log.w(toString(), getMethodName() + " - " + path);
 
 		isPrepared = false;

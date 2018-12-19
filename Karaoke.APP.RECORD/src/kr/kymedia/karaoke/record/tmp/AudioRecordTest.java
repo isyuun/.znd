@@ -13,7 +13,7 @@ package kr.kymedia.karaoke.record.tmp;
 
 import java.io.IOException;
 
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import android.app.Activity;
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -60,7 +60,7 @@ class AudioRecordTest extends Activity
 			mPlayer.prepare();
 			mPlayer.start();
 		} catch (IOException e) {
-			Log.e(LOG_TAG, "prepare() failed");
+			_Log.e(LOG_TAG, "prepare() failed");
 		}
 	}
 
@@ -79,7 +79,7 @@ class AudioRecordTest extends Activity
 		try {
 			mRecorder.prepare();
 		} catch (IOException e) {
-			Log.e(LOG_TAG, "prepare() failed");
+			_Log.e(LOG_TAG, "prepare() failed");
 		}
 
 		mRecorder.start();

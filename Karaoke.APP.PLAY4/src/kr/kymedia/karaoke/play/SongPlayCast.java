@@ -85,7 +85,7 @@ public class SongPlayCast extends SongPlay implements ISongPlayCast {
 		if (TextUtil.isNetworkUrl(path)) {
 			return null;
 		}
-		// Log.e(__CLASSNAME__, getMethodName() + "[MP3Info]");
+		// _Log.e(__CLASSNAME__, getMethodName() + "[MP3Info]");
 		try {
 			File file = new File(path);
 			TagOptionSingleton.getInstance().setAndroid(true);

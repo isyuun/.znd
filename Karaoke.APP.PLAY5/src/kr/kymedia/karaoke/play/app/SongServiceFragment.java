@@ -99,7 +99,7 @@ class SongServiceFragment extends Fragment implements ISongService {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// Log.i(toString(), getMethodName());
+		// _Log.i(toString(), getMethodName());
 
 
 		super.onCreate(savedInstanceState);

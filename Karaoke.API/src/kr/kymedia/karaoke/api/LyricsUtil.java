@@ -186,8 +186,8 @@ public class LyricsUtil {
 			bos.close();
 
 		if (_IKaraoke.DEBUG) Log2.e(__CLASSNAME__, "down() [END]");
-		// if (_IKaraoke.DEBUG)Log.e(__CLASSNAME__, getMethodName() + url.toString());
-		// if (_IKaraoke.DEBUG)Log.e(__CLASSNAME__, getMethodName() + path);
+		// if (_IKaraoke.DEBUG)_Log.e(__CLASSNAME__, getMethodName() + url.toString());
+		// if (_IKaraoke.DEBUG)_Log.e(__CLASSNAME__, getMethodName() + path);
 
 		return path;
 	}

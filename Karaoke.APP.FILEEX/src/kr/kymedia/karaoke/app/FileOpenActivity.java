@@ -35,7 +35,8 @@ package kr.kymedia.karaoke.app;
 import java.io.File;
 import java.util.ArrayList;
 
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -82,25 +83,25 @@ public class FileOpenActivity extends AppCompatFragmentActivity implements FileD
 	}
 
 	public String getFilePath(String root, String name) {
-		// Log.e(__CLASSNAME__, getMethodName() + root);
+		// _Log.e(__CLASSNAME__, getMethodName() + root);
 
 		String path = "";
 		ArrayList<File> inFiles = getListFiles(new File(root));
 		for (File file : inFiles) {
-			// Log.d(__CLASSNAME__, file.getParent() + "/" + file.getName());
+			// _Log.d(__CLASSNAME__, file.getParent() + "/" + file.getName());
 			if (name.equalsIgnoreCase(file.getName())) {
 				path = file.getPath();
 				break;
 			}
 		}
-		Log.e(__CLASSNAME__, getMethodName() + path);
+		_Log.e(__CLASSNAME__, getMethodName() + path);
 		return path;
 	}
 
 	FileDialogFragmentMulti mFileDialogfragment;
 
 	public void openFileDialog(int selectionMode, FileDialogOpener opener, String start) {
-		Log.e(__CLASSNAME__, getMethodName() + start);
+		_Log.e(__CLASSNAME__, getMethodName() + start);
 
 		// DialogFragment.show() will take care of adding the fragment
 		// in a transaction. We also want to remove any currently showing
@@ -139,7 +140,7 @@ public class FileOpenActivity extends AppCompatFragmentActivity implements FileD
 
 	@Override
 	public void onFileDialogResult(final int requestCode, int resultCode, final Intent data) {
-		// Log.e(__CLASSNAME__, getMethodName() + data.getExtras());
+		// _Log.e(__CLASSNAME__, getMethodName() + data.getExtras());
 
 		if (resultCode == Activity.RESULT_OK) {
 			path = data.getStringExtra(FileDialogFragmentBase.RESULT_PATH);
@@ -154,7 +155,7 @@ public class FileOpenActivity extends AppCompatFragmentActivity implements FileD
 			System.out.println("Cancel..." + path);
 		}
 
-		Log.e(__CLASSNAME__, getMethodName() + path + "\n" + data.getExtras());
+		_Log.e(__CLASSNAME__, getMethodName() + path + "\n" + data.getExtras());
 	}
 
 	@Override

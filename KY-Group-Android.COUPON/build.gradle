@@ -33,12 +33,15 @@ android {
     defaultConfig {
         buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
 
-        //FACEBOOK
-        resValue "string", "facebook_app_id", "2262981153970579"
-        resValue "string", "fb_login_protocol_scheme", "fb2262981153970579"
         //KAKAO
         resValue "string", "kakao_app_key", "93d7274cb52ef14f486d9eed46e29104"
         resValue "string", "kakao_app_secret", "qCvzNBTT5KUsymyGUAOm3EgQRqRau7dX"
+        //FACEBOOK
+        resValue "string", "facebook_app_id", "2262981153970579"
+        resValue "string", "fb_login_protocol_scheme", "fb2262981153970579"
+        //INSTAGRAM
+        resValue "string", "instagram_client_id", "538f3d2829354df3895206a19ce71937"
+        resValue "string", "instagram_client_secret", "ed281c45b4c7466ab4b1768d85a64650"
     }
 
     signingConfigs {
@@ -139,11 +142,16 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
+    //KAKAO
+    //implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.0.52'
+    implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.15.1'
+
+    //FACEBOOOK
     //implementation 'com.facebook.android:facebook-android-sdk:4.35.0'
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 
-    //implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.0.52'
-    implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.15.1'
+    //INSTAGRAM
+    implementation 'com.github.charlieAndroidDev:Instagram4Android:0.2.7'
 
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'de.hdodenhof:circleimageview:2.2.0'

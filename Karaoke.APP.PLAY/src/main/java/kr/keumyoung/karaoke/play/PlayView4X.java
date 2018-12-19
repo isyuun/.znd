@@ -644,7 +644,7 @@ class PlayView4X extends PlayView4 implements ISongPlay {
 	@Override
 	public boolean isPlaying() {
 		if (type == TYPE.SOUNDTOUCHPLAY) {
-			//if (BuildConfig.DEBUG) Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + song);
+			//if (BuildConfig.DEBUG) _Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + song);
 			if (song != null) {
 				return song.isPlaying();
 			} else {

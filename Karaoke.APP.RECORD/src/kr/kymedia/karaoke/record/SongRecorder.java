@@ -34,7 +34,8 @@ package kr.kymedia.karaoke.record;
 
 import java.nio.ByteBuffer;
 
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
+
 import android.annotation.SuppressLint;
 import android.hardware.Camera;
 import android.media.AudioFormat;
@@ -182,7 +183,7 @@ public class SongRecorder implements ISongRecorder {
 	 */
 	@SuppressLint("NewApi")
 	public boolean hasCamcorderProfile(int quality) {
-		// Log.e(__CLASSNAME__, getMethodName() + ":" + quality);
+		// _Log.e(__CLASSNAME__, getMethodName() + ":" + quality);
 		boolean ret = true;
 
 		try {
@@ -198,13 +199,13 @@ public class SongRecorder implements ISongRecorder {
 			}
 
 			if (!ret) {
-				Log.e(__CLASSNAME__, getMethodName() + ret);
+				_Log.e(__CLASSNAME__, getMethodName() + ret);
 			}
 		} catch (Exception e) {
 
 			e.printStackTrace();
-			Log.e(__CLASSNAME__, getMethodName() + ret);
-			Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			_Log.e(__CLASSNAME__, getMethodName() + ret);
+			_Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		}
 
 		return ret;
@@ -224,7 +225,7 @@ public class SongRecorder implements ISongRecorder {
 	 * @see android.media.CamcorderProfile#get(int, int)
 	 */
 	public CamcorderProfile getCamcorderProfile(int quality) {
-		// Log.e(__CLASSNAME__, getMethodName() + ":" + quality);
+		// _Log.e(__CLASSNAME__, getMethodName() + ":" + quality);
 		CamcorderProfile ret = null;
 
 		ret = CamcorderProfile.get(quality);
@@ -243,15 +244,15 @@ public class SongRecorder implements ISongRecorder {
 			}
 
 			if (ret == null) {
-				Log.e(__CLASSNAME__, getMethodName() + ret);
+				_Log.e(__CLASSNAME__, getMethodName() + ret);
 				Exception e = new Exception("getMethodName() + ret");
 				throw e;
 			}
 		} catch (Exception e) {
 
 			e.printStackTrace();
-			Log.e(__CLASSNAME__, getMethodName() + ret);
-			Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			_Log.e(__CLASSNAME__, getMethodName() + ret);
+			_Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		}
 
 		return ret;
@@ -275,7 +276,7 @@ public class SongRecorder implements ISongRecorder {
 	 * @see android.media.CamcorderProfile#get(int, int)
 	 */
 	public int getCamcorderQuality(final int quality) {
-		Log.e(__CLASSNAME__, getMethodName());
+		_Log.e(__CLASSNAME__, getMethodName());
 
 		mQuality = quality;
 
@@ -290,7 +291,7 @@ public class SongRecorder implements ISongRecorder {
 			mSampleRate = profile.audioSampleRate;
 		}
 
-		Log.e(__CLASSNAME__, getMethodName() + quality + ":" + mSampleBitRate + ":" + mSampleRate
+		_Log.e(__CLASSNAME__, getMethodName() + quality + ":" + mSampleBitRate + ":" + mSampleRate
 				+ profile);
 
 		return quality;
@@ -311,7 +312,7 @@ public class SongRecorder implements ISongRecorder {
 	 * @see android.media.CamcorderProfile#hasProfile(int)
 	 */
 	public void putRecInfo() {
-		Log.e(__CLASSNAME__, getMethodName());
+		_Log.e(__CLASSNAME__, getMethodName());
 
 		mInfo = "";
 		try {

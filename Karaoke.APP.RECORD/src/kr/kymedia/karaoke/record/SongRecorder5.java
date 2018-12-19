@@ -78,7 +78,7 @@ public class SongRecorder5 extends SongRecorder2 {
 			return;
 		}
 
-		// Log.d(__CLASSNAME__, getMethodName() + songNumber + "," + mOutputFormat + "," + mAudioEncoder
+		// _Log.d(__CLASSNAME__, getMethodName() + songNumber + "," + mOutputFormat + "," + mAudioEncoder
 		// + "," + mSampleBitRate + "," + mSampleRate);
 
 		init(path);

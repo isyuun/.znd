@@ -223,7 +223,7 @@ public class BaseActivity3 extends BaseActivity2 {
     protected void onLogoutSuccess() {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
         preferenceHelper.saveString(PreferenceKeys.LOGIN_PASSWORD, "");
-        preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, "");
+        //preferenceHelper.saveString(PreferenceKeys.LOGIN_EMAIL, "");
         preferenceHelper.saveString(getString(R.string.email), "");
         preferenceHelper.saveString(getString(R.string.coupon), "");
     }

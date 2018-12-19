@@ -290,7 +290,7 @@ public class ImageDownLoader2 {
 		w1 = bm.getWidth();
 		h2 = v.getHeight();
 		w2 = v.getWidth();
-		// Log.e("RESIZE", "[BF]->" + w1 + ":" + h1 + " = " + w2 + ":" + h2);
+		// _Log.e("RESIZE", "[BF]->" + w1 + ":" + h1 + " = " + w2 + ":" + h2);
 		if (h1 > w1) {
 			h2 = (h1 / w1) * w2;
 		} else if (h1 < w1) {
@@ -301,6 +301,6 @@ public class ImageDownLoader2 {
 		LayoutParams params = (LayoutParams) v.getLayoutParams();
 		params.height = (int) (h2 > 0 ? h2 : params.height);
 		v.setLayoutParams(params);
-		// Log.e("RESIZE", "[AF]->" + w1 + ":" + h1 + " = " + w2 + ":" + h2);
+		// _Log.e("RESIZE", "[AF]->" + w1 + ":" + h1 + " = " + w2 + ":" + h2);
 	}
 }

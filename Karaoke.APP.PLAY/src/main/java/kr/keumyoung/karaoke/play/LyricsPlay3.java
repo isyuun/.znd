@@ -118,11 +118,11 @@ class LyricsPlay3 extends LyricsPlay2 {
         //}
         //w = size.x;
         //h = size.y;
-		//Log.e(__CLASSNAME__ + _Const.TAG_LYRIC, "init() " + w + "," + h + ":" + size);
+		//_Log.e(__CLASSNAME__ + _Const.TAG_LYRIC, "init() " + w + "," + h + ":" + size);
 		//w = getWidth();
 		//h = getHeight();
-		////Log.e(__CLASSNAME__ + _Const.TAG_LYRIC, "init() " + w + "," + h + ":" + rect);
-		//Log.e(__CLASSNAME__ + _Const.TAG_LYRIC, "init() " + w + "," + h);
+		////_Log.e(__CLASSNAME__ + _Const.TAG_LYRIC, "init() " + w + "," + h + ":" + rect);
+		//_Log.e(__CLASSNAME__ + _Const.TAG_LYRIC, "init() " + w + "," + h);
 
 		mLyricsMarginBottom = h / 8;
 
@@ -184,11 +184,11 @@ class LyricsPlay3 extends LyricsPlay2 {
 		boolean orientation = false;
 		switch(newConfig.orientation){
 			case Configuration.ORIENTATION_LANDSCAPE:
-				//Log.e(__CLASSNAME__, getMethodName() + "[ORIENTATION_LANDSCAPE]" + newConfig);
+				//_Log.e(__CLASSNAME__, getMethodName() + "[ORIENTATION_LANDSCAPE]" + newConfig);
 				orientation = true;
 				break;
 			case Configuration.ORIENTATION_PORTRAIT:
-				//Log.e(__CLASSNAME__, getMethodName() + "[ORIENTATION_PORTRAIT]" + newConfig);
+				//_Log.e(__CLASSNAME__, getMethodName() + "[ORIENTATION_PORTRAIT]" + newConfig);
 				orientation = true;
 				break;
 		}

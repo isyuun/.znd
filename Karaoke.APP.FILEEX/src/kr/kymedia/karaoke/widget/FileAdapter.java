@@ -138,7 +138,7 @@ public class FileAdapter extends ArrayAdapter<HashMap<String, Object>> {
 	}
 
 	private void bindView(int position, View view) {
-		// Log.e(toString(), getMethodName() + position + "-" + view);
+		// _Log.e(toString(), getMethodName() + position + "-" + view);
 		if (position > mData.size() - 1) {
 			return;
 		}
@@ -171,13 +171,13 @@ public class FileAdapter extends ArrayAdapter<HashMap<String, Object>> {
 					if (v instanceof Checkable) {
 						if (data instanceof Boolean) {
 							if (v instanceof CheckBox) {
-								// Log.e(toString(), getMethodName() + position + "-" + "CHECK" + data + ":" + v);
+								// _Log.e(toString(), getMethodName() + position + "-" + "CHECK" + data + ":" + v);
 								((CheckBox) v).setChecked((Boolean) data);
 							} else {
 								((Checkable) v).setChecked((Boolean) data);
 							}
 						} else if (v instanceof TextView) {
-							// Log.e(toString(), getMethodName() + position + "-" + "TEXT" + data + ":" + v);
+							// _Log.e(toString(), getMethodName() + position + "-" + "TEXT" + data + ":" + v);
 							// Note: keep the instanceof TextView check at the bottom of these
 							// ifs since a lot of views are TextViews (e.g. CheckBoxes).
 							setViewText((TextView) v, text);
@@ -286,9 +286,9 @@ public class FileAdapter extends ArrayAdapter<HashMap<String, Object>> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// if (position == 0) {
-		// Log.w(toString(), getMethodName() + position + "-" + isSelectable + ":" + convertView);
+		// _Log.w(toString(), getMethodName() + position + "-" + isSelectable + ":" + convertView);
 		// } else {
-		// Log.i(toString(), getMethodName() + position + "-" + isSelectable + ":" + convertView);
+		// _Log.i(toString(), getMethodName() + position + "-" + isSelectable + ":" + convertView);
 		// }
 
 
@@ -300,7 +300,7 @@ public class FileAdapter extends ArrayAdapter<HashMap<String, Object>> {
 
 		if (v != null && v instanceof CheckableSelectableRelativeLayout) {
 			HashMap<String, Object> item = getItem(position);
-			// Log.i(toString(), getMethodName() + position + "-" + isSelectable + ":" + item);
+			// _Log.i(toString(), getMethodName() + position + "-" + isSelectable + ":" + item);
 			Integer res = (Integer) item.get(SelectionItem.ITEM_IMAGE);
 			if (res == R.drawable.file) {
 				((CheckableSelectableRelativeLayout) v).setSelectable(isSelectable);
@@ -309,7 +309,7 @@ public class FileAdapter extends ArrayAdapter<HashMap<String, Object>> {
 			}
 			Boolean check = (Boolean) item.get(SelectionItem.ITEM_CHECK);
 			((CheckableSelectableRelativeLayout) v).setChecked(check);
-			// Log.w(toString(), getMethodName() + position + "-" + check);
+			// _Log.w(toString(), getMethodName() + position + "-" + check);
 		}
 
 		return v;
@@ -331,7 +331,7 @@ public class FileAdapter extends ArrayAdapter<HashMap<String, Object>> {
 		if (res == R.drawable.file) {
 			item.put(SelectionItem.ITEM_CHECK, check);
 		}
-		// Log.e(toString(), getMethodName() + position + "-" + check + item.get(SelectionItem.ITEM_CHECK));
+		// _Log.e(toString(), getMethodName() + position + "-" + check + item.get(SelectionItem.ITEM_CHECK));
 	}
 
 	@Override

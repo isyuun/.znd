@@ -96,7 +96,7 @@ public class _ImageViewFocused extends _ImageView {
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		if (isClickable()) {
-			// if (_IKaraoke.DEBUG)Log.e("ImageViewRounded", "onTouch(...) " + event.toString());
+			// if (_IKaraoke.DEBUG)_Log.e("ImageViewRounded", "onTouch(...) " + event.toString());
 			if (mAction != event.getAction()) {
 				mAction = event.getAction();
 				invalidate();

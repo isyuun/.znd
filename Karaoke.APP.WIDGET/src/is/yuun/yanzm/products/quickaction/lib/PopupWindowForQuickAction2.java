@@ -45,7 +45,7 @@ public class PopupWindowForQuickAction2 {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 
-				// Log.e(__CLASSNAME__, "onTouch()" + v.getId() + "\n" +event);
+				// _Log.e(__CLASSNAME__, "onTouch()" + v.getId() + "\n" +event);
 
 				if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
 					PopupWindowForQuickAction2.this.window.dismiss();

@@ -78,7 +78,7 @@ public class MonkeyListView extends ListView {
 
 	@Override
 	public void onTouchModeChanged(boolean isInTouchMode) {
-		// Log.d(__CLASSNAME__, getMethodName());
+		// _Log.d(__CLASSNAME__, getMethodName());
 
 		try {
 			super.onTouchModeChanged(isInTouchMode);
@@ -90,12 +90,12 @@ public class MonkeyListView extends ListView {
 
 	@Override
 	protected void layoutChildren() {
-		// Log.d(__CLASSNAME__, getMethodName());
+		// _Log.d(__CLASSNAME__, getMethodName());
 
 		try {
 			super.layoutChildren();
 		} catch (Exception e) {
-			// Log.e(__CLASSNAME__, getMethodName() + "This is not realy dangerous problem");
+			// _Log.e(__CLASSNAME__, getMethodName() + "This is not realy dangerous problem");
 		}
 	}
 
@@ -105,7 +105,7 @@ public class MonkeyListView extends ListView {
 			super.dispatchDraw(canvas);
 		} catch (Exception e) {
 			// samsung error
-			// Log.e(__CLASSNAME__, getMethodName() + "[ERROR]ListView dispatchDraw ERROR!!!");
+			// _Log.e(__CLASSNAME__, getMethodName() + "[ERROR]ListView dispatchDraw ERROR!!!");
 		}
 	}
 

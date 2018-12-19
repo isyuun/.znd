@@ -53,6 +53,7 @@ public class Constants {
     public static final String NAME = "name";
     public static final String CONTEXT = "context";
     public static final String FACEBOOK = "facebook";
+    public static final String INSTAGRAM = "instagram";
     public static final String MESSAGE = "message";
     public static final String CODE = "code";
     public static final String INVALID_SESSION = "401";

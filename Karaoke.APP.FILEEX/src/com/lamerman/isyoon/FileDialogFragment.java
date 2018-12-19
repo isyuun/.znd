@@ -378,7 +378,7 @@ class FileDialogFragment extends ListDialogFragment {
 		item.put(SelectionItem.ITEM_IMAGE, imageId);
 		item.put(SelectionItem.ITEM_CHECK, check);
 		item.put(SelectionItem.ITEM_PATH, path);
-		// Log.e(toString(), getMethodName() + item);
+		// _Log.e(toString(), getMethodName() + item);
 		list.add(item);
 	}
 
@@ -389,7 +389,7 @@ class FileDialogFragment extends ListDialogFragment {
 	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		// Log.i(toString(), getMethodName() + path.get(position));
+		// _Log.i(toString(), getMethodName() + path.get(position));
 		super.onListItemClick(l, v, position, id);
 
 		HashMap<String, Object> item = ((FileAdapter) getListAdapter()).getItem(position);

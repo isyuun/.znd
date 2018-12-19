@@ -27,8 +27,9 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 
 import kr.kymedia.karaoke._IKaraoke;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import kr.kymedia.karaoke.util.Util;
+
 import net.sourceforge.lame.Lame;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
@@ -88,7 +89,7 @@ public class SongRecorder1 extends SongRecorder implements ISongRecorder, AudioR
 	 * 
 	 */
 	public SongRecorder1(String songNumber) throws Exception {
-		Log.e(__CLASSNAME__, "SongRecorder(...) " + songNumber);
+		_Log.e(__CLASSNAME__, "SongRecorder(...) " + songNumber);
 
 		if (!android.os.Environment.getExternalStorageState().equals(
 				android.os.Environment.MEDIA_MOUNTED)) {
@@ -109,7 +110,7 @@ public class SongRecorder1 extends SongRecorder implements ISongRecorder, AudioR
 	 *
 	 */
 	public SongRecorder1(String songNumber, boolean compressed) throws Exception {
-		Log.e(__CLASSNAME__, getMethodName() + songNumber + "," + compressed);
+		_Log.e(__CLASSNAME__, getMethodName() + songNumber + "," + compressed);
 
 		if (!android.os.Environment.getExternalStorageState().equals(
 				android.os.Environment.MEDIA_MOUNTED)) {
@@ -124,11 +125,11 @@ public class SongRecorder1 extends SongRecorder implements ISongRecorder, AudioR
 	}
 
 	protected void init(String path) throws Exception {
-		Log.e(__CLASSNAME__, "init(...) " + path);
-		Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "fileFormat : " + getFileFormat(mOutputFormat));
-		Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "audioCodec : " + getAudioCodec(mAudioEncoder));
-		Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "audioBitRate : " + mSampleBitRate);
-		Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "audioSampleRate : " + mSampleRate);
+		_Log.e(__CLASSNAME__, "init(...) " + path);
+		_Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "fileFormat : " + getFileFormat(mOutputFormat));
+		_Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "audioCodec : " + getAudioCodec(mAudioEncoder));
+		_Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "audioBitRate : " + mSampleBitRate);
+		_Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "audioSampleRate : " + mSampleRate);
 
 		int channelConfig = AudioFormat.CHANNEL_IN_MONO;
 		if (mNumChannels > 1) {
@@ -163,7 +164,7 @@ public class SongRecorder1 extends SongRecorder implements ISongRecorder, AudioR
 	@Override
 	public boolean start() throws Exception {
 
-		// Log.d(__CLASSNAME__, "start()");
+		// _Log.d(__CLASSNAME__, "start()");
 		int ret = 0;
 		try {
 			if (getState() == AudioRecord.STATE_INITIALIZED) {
@@ -181,7 +182,7 @@ public class SongRecorder1 extends SongRecorder implements ISongRecorder, AudioR
 				return false;
 			}
 		} catch (Exception e) {
-			Log.e(__CLASSNAME__, "" + Log.getStackTraceString(e));
+			_Log.e(__CLASSNAME__, "" + _Log.getStackTraceString(e));
 			throw e;
 		}
 	}
@@ -194,7 +195,7 @@ public class SongRecorder1 extends SongRecorder implements ISongRecorder, AudioR
 	@Override
 	public boolean stop() throws Exception {
 
-		Log.d(__CLASSNAME__, "stop()");
+		_Log.d(__CLASSNAME__, "stop()");
 		if (getRecordingState() != AudioRecord.RECORDSTATE_RECORDING) {
 			return false;
 		}
@@ -213,7 +214,7 @@ public class SongRecorder1 extends SongRecorder implements ISongRecorder, AudioR
 				mMP3OutputStream.close();
 			} catch (Exception e) {
 				// TODO: handle exception
-				Log.e(__CLASSNAME__, "" + Log.getStackTraceString(e));
+				_Log.e(__CLASSNAME__, "" + _Log.getStackTraceString(e));
 				throw e;
 			}
 			// TODO: write Xing VBR/INFO tag to mp3 file here
@@ -227,7 +228,7 @@ public class SongRecorder1 extends SongRecorder implements ISongRecorder, AudioR
 				mWAVFile.close();
 			} catch (Exception e) {
 
-				Log.e(__CLASSNAME__, "" + Log.getStackTraceString(e));
+				_Log.e(__CLASSNAME__, "" + _Log.getStackTraceString(e));
 				throw e;
 			}
 		}
@@ -254,7 +255,7 @@ public class SongRecorder1 extends SongRecorder implements ISongRecorder, AudioR
 			String path) throws Exception {
 
 
-		Log.d(__CLASSNAME__, "init (...) " + ", " + audioSource + ", " + sampleRateInHz + ", "
+		_Log.d(__CLASSNAME__, "init (...) " + ", " + audioSource + ", " + sampleRateInHz + ", "
 				+ channelConfig + ", " + audioFormat + ", " + path);
 
 		if (audioFormat == AudioFormat.ENCODING_PCM_16BIT) {
@@ -281,19 +282,19 @@ public class SongRecorder1 extends SongRecorder implements ISongRecorder, AudioR
 
 		// 최소버퍼사이즈가 8K 이상은 퍼포먼스가 떨어진다.
 		if (minBufferSize > 8 * 1024) {
-			Log.e(__CLASSNAME__, "init() ... BUF NG!!!" + " --> " + sampleRateInHz + ", "
+			_Log.e(__CLASSNAME__, "init() ... BUF NG!!!" + " --> " + sampleRateInHz + ", "
 					+ mBufferSizeInBytes + ", " + mPeriodInFrames + ", " + minBufferSize + ", "
 					+ periodInFrames);
 			try {
 				throw new Exception(__CLASSNAME__ + "initialization failed");
 			} catch (Exception e) {
 
-				// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+				// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			}
 			return false;
 		}
 
-		Log.d(__CLASSNAME__, "MinBufferSize CHECK: " + mBufferSizeInBytes + ", " + mPeriodInFrames
+		_Log.d(__CLASSNAME__, "MinBufferSize CHECK: " + mBufferSizeInBytes + ", " + mPeriodInFrames
 				+ " --> " + minBufferSize + ", " + periodInFrames);
 
 		// AudioRecord Initialize시 최소 버퍼사이즈 확인
@@ -313,16 +314,16 @@ public class SongRecorder1 extends SongRecorder implements ISongRecorder, AudioR
 				mBufferSizeInBytes);
 
 		if (getState() == AudioRecord.STATE_INITIALIZED) {
-			Log.d(__CLASSNAME__, "init(...) ... OK!!!" + " --> " + sampleRateInHz + ", "
+			_Log.d(__CLASSNAME__, "init(...) ... OK!!!" + " --> " + sampleRateInHz + ", "
 					+ mBufferSizeInBytes + ", " + mPeriodInFrames);
 		} else {
-			Log.e(__CLASSNAME__, "init(...) ... NG!!!" + " --> " + sampleRateInHz + ", "
+			_Log.e(__CLASSNAME__, "init(...) ... NG!!!" + " --> " + sampleRateInHz + ", "
 					+ mBufferSizeInBytes + ", " + mPeriodInFrames);
 			try {
 				throw new Exception(__CLASSNAME__ + "initialization failed");
 			} catch (Exception e) {
 
-				// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+				// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			}
 			return false;
 		}
@@ -332,16 +333,16 @@ public class SongRecorder1 extends SongRecorder implements ISongRecorder, AudioR
 		int sucess = mAudioRecord.setPositionNotificationPeriod(mPeriodInFrames);
 
 		if (sucess == AudioRecord.SUCCESS) {
-			Log.d(__CLASSNAME__, "init setPositionNotificationPeriod(...) ... OK!!!" + " --> "
+			_Log.d(__CLASSNAME__, "init setPositionNotificationPeriod(...) ... OK!!!" + " --> "
 					+ sampleRateInHz + ", " + mBufferSizeInBytes + ", " + mPeriodInFrames);
 		} else {
-			Log.e(__CLASSNAME__, "init setPositionNotificationPeriod(...) ... NG!!!" + " --> "
+			_Log.e(__CLASSNAME__, "init setPositionNotificationPeriod(...) ... NG!!!" + " --> "
 					+ sampleRateInHz + ", " + mBufferSizeInBytes + ", " + mPeriodInFrames);
 			try {
 				throw new Exception(__CLASSNAME__ + "initialization failed");
 			} catch (Exception e) {
 
-				// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+				// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			}
 			return false;
 		}
@@ -376,16 +377,16 @@ public class SongRecorder1 extends SongRecorder implements ISongRecorder, AudioR
 			// Lame.setEncoderPreset(Lame.LAME_PRESET_EXTREME);
 			// } catch (ExceptionInInitializerError e) {
 			//
-			// Log.e(__CLASSNAME__, "init() ... NG!!!" + " --> " + Log.getStackTraceString(e));
-			// //Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, "init() ... NG!!!" + " --> " + _Log.getStackTraceString(e));
+			// //_Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			// } catch (NoClassDefFoundError e) {
 			//
-			// Log.e(__CLASSNAME__, "init() ... NG!!!" + " --> " + Log.getStackTraceString(e));
-			// //Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, "init() ... NG!!!" + " --> " + _Log.getStackTraceString(e));
+			// //_Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			// } catch (Exception e) {
 			// // TODO: handle exception
-			// Log.e(__CLASSNAME__, "init() ... NG!!!" + " --> " + Log.getStackTraceString(e));
-			// //Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, "init() ... NG!!!" + " --> " + _Log.getStackTraceString(e));
+			// //_Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			// }
 			// 변경명 : 1. 녹음mp3 품질개선
 			Lame.initializeEncoder(sampleRate, getChannelCount());
@@ -393,7 +394,7 @@ public class SongRecorder1 extends SongRecorder implements ISongRecorder, AudioR
 			Lame.setEncoderPreset(Lame.LAME_PRESET_EXTREME);
 		}
 
-		Log.e(__CLASSNAME__, "init() ... FINISH!!! (" + getSampleRate() + "," + mBufferSizeInBytes
+		_Log.e(__CLASSNAME__, "init() ... FINISH!!! (" + getSampleRate() + "," + mBufferSizeInBytes
 				+ "," + mPCMBuf.length + "," + mPeriodInFrames + ")");
 
 		return (getState() == AudioRecord.STATE_INITIALIZED);
@@ -402,13 +403,13 @@ public class SongRecorder1 extends SongRecorder implements ISongRecorder, AudioR
 	private String setFilePath(String songNumber) {
 		String ret = "";
 
-		Log.d(__CLASSNAME__, "setFilePath(...) " + songNumber);
+		_Log.d(__CLASSNAME__, "setFilePath(...) " + songNumber);
 
 		String path = "";
 
 		File audio = new File(_IKaraoke.RECORD_PATH);
 		audio.mkdirs();
-		// Log.d(LOG_TAG, "writing to directory " + audio.getAbsolutePath());
+		// _Log.d(LOG_TAG, "writing to directory " + audio.getAbsolutePath());
 
 		// construct file name
 		String mp3Path = audio.getAbsolutePath() + "/" + songNumber + "." + "mp3";
@@ -418,7 +419,7 @@ public class SongRecorder1 extends SongRecorder implements ISongRecorder, AudioR
 		// if (output.exists()) {
 		// output.delete();
 		// }
-		// Log.d(LOG_TAG, "writing to file " + wavPath);
+		// _Log.d(LOG_TAG, "writing to file " + wavPath);
 
 		// start the recording
 		if (mCompressed) {
@@ -441,7 +442,7 @@ public class SongRecorder1 extends SongRecorder implements ISongRecorder, AudioR
 	private String prepareFile(String path) throws Exception {
 		String ret = "";
 
-		Log.d(__CLASSNAME__, "prepareFile(...) " + path);
+		_Log.d(__CLASSNAME__, "prepareFile(...) " + path);
 
 		if (mCompressed) {
 			// Prepare MP3 File.
@@ -535,10 +536,10 @@ public class SongRecorder1 extends SongRecorder implements ISongRecorder, AudioR
 			return;
 		}
 
-		// Log.d(__CLASSNAME__, "onPeriodicNotification (...)" + mPCMBuf.toString() + "," + mPCMBuf.length);
+		// _Log.d(__CLASSNAME__, "onPeriodicNotification (...)" + mPCMBuf.toString() + "," + mPCMBuf.length);
 
 		if (mPaused) {
-			Log.d(__CLASSNAME__, "RECORD() ... PAUSE!!!");
+			_Log.d(__CLASSNAME__, "RECORD() ... PAUSE!!!");
 			return;
 		}
 
@@ -569,12 +570,12 @@ public class SongRecorder1 extends SongRecorder implements ISongRecorder, AudioR
 				}
 			} catch (Exception e) {
 
-				Log.e(__CLASSNAME__,
+				_Log.e(__CLASSNAME__,
 						"RECORD() ... NG!!! (" + mPCMBuf.toString() + ", " + mp3Buf.toString() + ", "
 								+ bytesEncoded + ")");
-				// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+				// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			}
-			Log.d(__CLASSNAME__, "write(...)" + "," + bytesRead + "," + samplesRead + ", "
+			_Log.d(__CLASSNAME__, "write(...)" + "," + bytesRead + "," + samplesRead + ", "
 					+ bytesEncoded + "," + mPayloadSize);
 		} else {
 			// put WAV buffer to File
@@ -582,14 +583,14 @@ public class SongRecorder1 extends SongRecorder implements ISongRecorder, AudioR
 				if (bytesRead > 0) {
 					mWAVFile.write(mPCMBuf, 0, bytesRead);
 				}
-				Log.d(__CLASSNAME__, "write(...)" + "," + bytesRead + "," + samplesRead + ", "
+				_Log.d(__CLASSNAME__, "write(...)" + "," + bytesRead + "," + samplesRead + ", "
 						+ bytesEncoded + "," + mPayloadSize);
 			} catch (Exception e) {
 
-				Log.e(__CLASSNAME__,
+				_Log.e(__CLASSNAME__,
 						"RECORD() ... NG!!! (" + mPCMBuf.toString() + ", " + mp3Buf.toString() + ", "
 								+ bytesEncoded + ")");
-				// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+				// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			}
 			mPayloadSize += bytesRead;
 		}
@@ -604,13 +605,13 @@ public class SongRecorder1 extends SongRecorder implements ISongRecorder, AudioR
 
 	@Override
 	public void pause() {
-		Log.d(__CLASSNAME__, "pause()");
+		_Log.d(__CLASSNAME__, "pause()");
 		mPaused = true;
 	}
 
 	@Override
 	public void resume() {
-		Log.d(__CLASSNAME__, "resume()");
+		_Log.d(__CLASSNAME__, "resume()");
 		mPaused = false;
 	}
 

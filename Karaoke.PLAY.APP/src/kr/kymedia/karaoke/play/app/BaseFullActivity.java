@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.Window;
 
 import kr.kymedia.karaoke.app.FileOpenActivity;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 
 @TargetApi(Build.VERSION_CODES.CUPCAKE)
 public class BaseFullActivity extends FileOpenActivity implements View.OnTouchListener, GestureDetector.OnDoubleTapListener {
@@ -32,9 +32,9 @@ public class BaseFullActivity extends FileOpenActivity implements View.OnTouchLi
         boolean isImmersiveModeEnabled =
                 ((uiOptions | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY) == uiOptions);
         if (isImmersiveModeEnabled) {
-            Log.e(__CLASSNAME__, getMethodName() + "Turning immersive mode mode off. " + isImmersiveModeEnabled);
+            _Log.e(__CLASSNAME__, getMethodName() + "Turning immersive mode mode off. " + isImmersiveModeEnabled);
         } else {
-            Log.e(__CLASSNAME__, getMethodName() + "Turning immersive mode mode on." + isImmersiveModeEnabled);
+            _Log.e(__CLASSNAME__, getMethodName() + "Turning immersive mode mode on." + isImmersiveModeEnabled);
         }
 
         // Immersive mode: Backward compatible to KitKat (API 19).
@@ -83,14 +83,14 @@ public class BaseFullActivity extends FileOpenActivity implements View.OnTouchLi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e(__CLASSNAME__, getMethodName());
+        _Log.e(__CLASSNAME__, getMethodName());
 
         View decorView = getWindow().getDecorView();
         decorView.setOnSystemUiVisibilityChangeListener
                 (new View.OnSystemUiVisibilityChangeListener() {
                     @Override
                     public void onSystemUiVisibilityChange(int visibility) {
-                        //Log.e(__CLASSNAME__, "onSystemUiVisibilityChange()" + visibility + ":" + (visibility & View.SYSTEM_UI_FLAG_FULLSCREEN));
+                        //_Log.e(__CLASSNAME__, "onSystemUiVisibilityChange()" + visibility + ":" + (visibility & View.SYSTEM_UI_FLAG_FULLSCREEN));
                         //// Note that system bars will only be "visible" if none of the
                         //// LOW_PROFILE, HIDE_NAVIGATION, or FULLSCREEN flags are set.
                         //if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
@@ -116,7 +116,7 @@ public class BaseFullActivity extends FileOpenActivity implements View.OnTouchLi
             new GestureDetector.SimpleOnGestureListener() {
                 @Override
                 public boolean onDoubleTap(MotionEvent e) {
-                    Log.e(__CLASSNAME__, "onDoubleTap()");
+                    _Log.e(__CLASSNAME__, "onDoubleTap()");
                     toggleHideyBar();
                     return super.onDoubleTap(e);
                 }
@@ -128,7 +128,7 @@ public class BaseFullActivity extends FileOpenActivity implements View.OnTouchLi
                 //
                 //@Override
                 //public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                //    //Log.e(__CLASSNAME__, "onFling()");
+                //    //_Log.e(__CLASSNAME__, "onFling()");
                 //    //toggleHideyBar();
                 //    return super.onFling(e1, e2, velocityX, velocityY);
                 //}
@@ -138,7 +138,7 @@ public class BaseFullActivity extends FileOpenActivity implements View.OnTouchLi
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        //Log.i(__CLASSNAME__, getMethodName() + " event:" + event);
+        //_Log.i(__CLASSNAME__, getMethodName() + " event:" + event);
         // Pass activity on touch event to the gesture detector.
         mDetector.onTouchEvent(event);
         // Return true to tell android OS that event has been consumed, do not pass it to other event listeners.
@@ -159,37 +159,37 @@ public class BaseFullActivity extends FileOpenActivity implements View.OnTouchLi
         int contentViewTop = window.findViewById(Window.ID_ANDROID_CONTENT).getTop();
         int titleBarHeight = contentViewTop - statusBarHeight;
 
-        Log.i("*** Elenasys :: ", "StatusBar Height= " + statusBarHeight + " , TitleBar Height = " + titleBarHeight);
+        _Log.i("*** Elenasys :: ", "StatusBar Height= " + statusBarHeight + " , TitleBar Height = " + titleBarHeight);
         return statusBarHeight;
     }
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
-        Log.i(__CLASSNAME__, getMethodName() + " hasCapture:" + hasCapture);
+        _Log.i(__CLASSNAME__, getMethodName() + " hasCapture:" + hasCapture);
 
     }
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        Log.i(__CLASSNAME__, getMethodName() + " view:" + view + " motionEven:" + motionEvent);
+        _Log.i(__CLASSNAME__, getMethodName() + " view:" + view + " motionEven:" + motionEvent);
         return false;
     }
 
     @Override
     public boolean onSingleTapConfirmed(MotionEvent motionEvent) {
-        Log.i(__CLASSNAME__, getMethodName() + " motionEven:" + motionEvent);
+        _Log.i(__CLASSNAME__, getMethodName() + " motionEven:" + motionEvent);
         return false;
     }
 
     @Override
     public boolean onDoubleTap(MotionEvent motionEvent) {
-        Log.i(__CLASSNAME__, getMethodName() + " motionEven:" + motionEvent);
+        _Log.i(__CLASSNAME__, getMethodName() + " motionEven:" + motionEvent);
         return false;
     }
 
     @Override
     public boolean onDoubleTapEvent(MotionEvent motionEvent) {
-        Log.i(__CLASSNAME__, getMethodName() + " motionEven:" + motionEvent);
+        _Log.i(__CLASSNAME__, getMethodName() + " motionEven:" + motionEvent);
         return false;
     }
 

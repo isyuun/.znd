@@ -355,7 +355,7 @@ public class SongRecorder3 extends SongRecorder implements ISongRecorder, SongSc
 			mIsNoiseInitialized = true;
 			if (noiseLevel > MAX_AMPLITUDE / 2) {
 				noiseLevel = MAX_AMPLITUDE / 2;
-				// Log.e("AudioRecordPlay", "Noise levels are too high.");
+				// _Log.e("AudioRecordPlay", "Noise levels are too high.");
 			}
 		}
 
@@ -767,7 +767,7 @@ public class SongRecorder3 extends SongRecorder implements ISongRecorder, SongSc
 	}
 
 	protected boolean init(String path) throws Exception {
-		// Log.e(__CLASSNAME__, getMethodName() + path);
+		// _Log.e(__CLASSNAME__, getMethodName() + path);
 
 		int number = 0;
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD_MR1) {
@@ -851,7 +851,7 @@ public class SongRecorder3 extends SongRecorder implements ISongRecorder, SongSc
 	 * public static String setFilePath(String songNumber) {
 	 * String ret = "";
 	 * 
-	 * //Log.d(__CLASSNAME__, "setFilePath(...) " + songNumber);
+	 * //_Log.d(__CLASSNAME__, "setFilePath(...) " + songNumber);
 	 * 
 	 * String path = "";
 	 * 
@@ -865,7 +865,7 @@ public class SongRecorder3 extends SongRecorder implements ISongRecorder, SongSc
 	 * 
 	 * ret = path;
 	 * 
-	 * //Log.d(__CLASSNAME__, "writing to file " + mPath);
+	 * //_Log.d(__CLASSNAME__, "writing to file " + mPath);
 	 * return ret;
 	 * }
 	 */
@@ -931,7 +931,7 @@ public class SongRecorder3 extends SongRecorder implements ISongRecorder, SongSc
 	 */
 	@Override
 	public boolean start() throws Exception {
-		// Log.d(__CLASSNAME__, "start()");
+		// _Log.d(__CLASSNAME__, "start()");
 		try {
 			open(mPath);
 			isRecording = true;
@@ -949,7 +949,7 @@ public class SongRecorder3 extends SongRecorder implements ISongRecorder, SongSc
 	 */
 	@Override
 	public boolean stop() throws Exception {
-		// Log.d(__CLASSNAME__, "stop()");
+		// _Log.d(__CLASSNAME__, "stop()");
 		try {
 			close();
 			isRecording = false;
@@ -1087,7 +1087,7 @@ public class SongRecorder3 extends SongRecorder implements ISongRecorder, SongSc
 	 */
 	@Override
 	public void release() {
-		// Log.d(__CLASSNAME__, "release()");
+		// _Log.d(__CLASSNAME__, "release()");
 		if (audioRecord != null) {
 			audioRecord.release();
 		}
@@ -1279,7 +1279,7 @@ public class SongRecorder3 extends SongRecorder implements ISongRecorder, SongSc
 				 * @Override
 				 * public void run() {
 				 * while(mState != State.STOPPED) {
-				 * Log.e(__CLASSNAME__, "DoRecord()");
+				 * _Log.e(__CLASSNAME__, "DoRecord()");
 				 * DoRecord();
 				 * try {
 				 * Thread.sleep(100);
@@ -1344,7 +1344,7 @@ public class SongRecorder3 extends SongRecorder implements ISongRecorder, SongSc
 			if (mOnListener != null) {
 				mScore = score();
 				mOnListener.onCompletion(mScore);
-				// Log.e("SongRecorder3", "score:"+mScore);
+				// _Log.e("SongRecorder3", "score:"+mScore);
 			}
 
 			try {

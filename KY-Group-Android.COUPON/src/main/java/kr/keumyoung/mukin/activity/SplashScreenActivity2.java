@@ -147,14 +147,14 @@ public class SplashScreenActivity2 extends SplashScreenActivity {
     private Observable<String> copyFilesToLocal() {
         return Observable.create(subscriber -> {
             File obbDir = getObbDir();
-            //if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName()+ "[OBB.DIR]" + obbDir.getAbsolutePath());
+            //if (BuildConfig.DEBUG) _Log.e(__CLASSNAME__, getMethodName()+ "[OBB.DIR]" + obbDir.getAbsolutePath());
             //if (Boolean.parseBoolean(AppConstants.DEVELOPMENT)) {
             //    obbDir = ImageUtils.getBaseFolder();
-            //    if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + "[OBB][OBB.DIR][DEV]" + obbDir.getAbsolutePath());
+            //    if (BuildConfig.DEBUG) _Log.wtf(__CLASSNAME__, getMethodName() + "[OBB][OBB.DIR][DEV]" + obbDir.getAbsolutePath());
             //}
             if (obbDir.exists()) {
                 String obbFileName = "main" + "." + AppConstants.OBB_VERSION + "." + getPackageName() + "." + "obb";
-                //if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName()+ "[OBB.FILE]" + obbFileName);
+                //if (BuildConfig.DEBUG) _Log.e(__CLASSNAME__, getMethodName()+ "[OBB.FILE]" + obbFileName);
                 File obbFile = new File(obbDir, obbFileName);
                 if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + "[OBB][OBB.PATH]" + obbFile.exists() + ":" + obbFile.getAbsolutePath());
                 if (!obbFile.exists()) {

@@ -43,7 +43,7 @@ public class PlayView1 extends PlayView implements ISongPlay.Listener {
 
     @Override
     public void onTime(int t) {
-        //if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + ":" + t + ":" + listener);
+        //if (BuildConfig.DEBUG) _Log.i(__CLASSNAME__, getMethodName() + ":" + t + ":" + listener);
         if (listener != null) {
             listener.onTime(t);
         }

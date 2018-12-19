@@ -225,9 +225,9 @@ class KPLyricsX extends KPLyrics {
 		Rect r2 = outSize(paint, getString(R.string.hint_song_composer));
 		Rect r3 = outSize(paint, getString(R.string.hint_song_lyricist));
 
-		//if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + strSinger + ":" + r1);
-		//if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + strComposer + ":" + r2);
-		//if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + strLyricist + ":" + r3);
+		//if (BuildConfig.DEBUG) _Log.i(__CLASSNAME__, getMethodName() + strSinger + ":" + r1);
+		//if (BuildConfig.DEBUG) _Log.i(__CLASSNAME__, getMethodName() + strComposer + ":" + r2);
+		//if (BuildConfig.DEBUG) _Log.i(__CLASSNAME__, getMethodName() + strLyricist + ":" + r3);
 
 		int w = r1.width();
 		Rect rect = r1;
@@ -386,7 +386,7 @@ class KPLyricsX extends KPLyrics {
 					sleep(mSleepTime);
 				}
 			} catch (Exception e) {
-				//Log.wtf(toString(), "runDraw() " + "sleep()" + "[NG]" + "\n" + Log.getStackTraceString(e));
+				//_Log.wtf(toString(), "runDraw() " + "sleep()" + "[NG]" + "\n" + _Log.getStackTraceString(e));
 				//e.printStackTrace();
 			}
 		}

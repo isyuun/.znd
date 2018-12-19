@@ -101,7 +101,7 @@ public class ResizableCameraPreview extends CameraPreview {
 		adjustSurfaceLayoutSize(previewSize, portrait, width, height);
 		// boolean layoutChanged = adjustSurfaceLayoutSize(previewSize, portrait, width, height);
 		// if (layoutChanged) {
-		// Log.d(__CLASSNAME__, getMethodName() + "[CHANGE]" + layoutChanged);
+		// _Log.d(__CLASSNAME__, getMethodName() + "[CHANGE]" + layoutChanged);
 		// mSurfaceConfiguring = true;
 		// return;
 		// }

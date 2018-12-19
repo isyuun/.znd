@@ -48,25 +48,25 @@ public class PlayView7 extends PlayView6 {
         seek_pitch_tempo.setOnCrossClickListener(new ContCircularSeekBar.OnCrossClickListener() {
             @Override
             public void onUpClick(View v) {
-                //Log.e(__CLASSNAME__, getMethodName() + "[UP]");
+                //_Log.e(__CLASSNAME__, getMethodName() + "[UP]");
                 setPitchUP();
             }
 
             @Override
             public void onDownClick(View v) {
-                //Log.e(__CLASSNAME__, "onDownClick()" + "[DOWN]");
+                //_Log.e(__CLASSNAME__, "onDownClick()" + "[DOWN]");
                 setPitchDN();
             }
 
             @Override
             public void onLeftClick(View v) {
-                //Log.e(__CLASSNAME__, "onLeftClick()" + "[LEFT]");
+                //_Log.e(__CLASSNAME__, "onLeftClick()" + "[LEFT]");
                 setTempoDN();
             }
 
             @Override
             public void onRightClick(View v) {
-                //Log.e(__CLASSNAME__, "onRightClick()" + "[RIGHT]");
+                //_Log.e(__CLASSNAME__, "onRightClick()" + "[RIGHT]");
                 setTempoUP();
             }
 
@@ -98,7 +98,7 @@ public class PlayView7 extends PlayView6 {
         setOnKeyListener(new OnKeyListener() {
             @Override
             public boolean onKey(View v, int code, KeyEvent event) {
-                //Log.e(__CLASSNAME__, "onKey()" + v + "," + code + "," + event);
+                //_Log.e(__CLASSNAME__, "onKey()" + v + "," + code + "," + event);
                 if (event.getAction() != KeyEvent.ACTION_DOWN) return false;
                 switch (code) {
                     case KeyEvent.KEYCODE_ENTER:

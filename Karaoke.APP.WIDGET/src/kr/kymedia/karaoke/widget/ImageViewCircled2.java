@@ -90,7 +90,7 @@ class ImageViewCircled2 extends ImageViewCircled {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		// if (_IKaraoke.DEBUG)Log.e("ImageViewRounded", "onTouch(...) " + event.toString());
+		// if (_IKaraoke.DEBUG)_Log.e("ImageViewRounded", "onTouch(...) " + event.toString());
 		if (mAction != event.getAction()) {
 			mAction = event.getAction();
 			invalidate();

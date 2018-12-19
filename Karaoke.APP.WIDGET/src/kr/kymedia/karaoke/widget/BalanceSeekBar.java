@@ -193,7 +193,7 @@ public class BalanceSeekBar extends SeekBar implements SeekBar.OnSeekBarChangeLi
 
 		balance = (int) ((getProgress() + min) * unt);
 
-		// Log.e(toString(), getMethodName() + "balance:" + balance + " - " + min + "~" + max);
+		// _Log.e(toString(), getMethodName() + "balance:" + balance + " - " + min + "~" + max);
 
 	}
 

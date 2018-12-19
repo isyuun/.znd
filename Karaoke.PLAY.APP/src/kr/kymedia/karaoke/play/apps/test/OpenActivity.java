@@ -32,7 +32,8 @@
 
 package kr.kymedia.karaoke.play.apps.test;
 
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -71,7 +72,7 @@ public class OpenActivity extends _Activity {
 		super.onCreate(savedInstanceState);
 
 		Intent intent = getIntent();
-		Log.i(__CLASSNAME__, getMethodName() + intent);
+		_Log.i(__CLASSNAME__, getMethodName() + intent);
 
 		openIntent(intent);
 		finish();
@@ -80,11 +81,11 @@ public class OpenActivity extends _Activity {
 
 	@Override
 	protected void onNewIntent(Intent intent) {
-		// Log.i(__CLASSNAME__, getMethodName());
+		// _Log.i(__CLASSNAME__, getMethodName());
 
 
 		super.onNewIntent(intent);
-		Log.i(__CLASSNAME__, getMethodName() + intent);
+		_Log.i(__CLASSNAME__, getMethodName() + intent);
 
 		openIntent(intent);
 		finish();
@@ -92,7 +93,7 @@ public class OpenActivity extends _Activity {
 
 	@Override
 	protected void onResume() {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 
 
 		super.onResume();

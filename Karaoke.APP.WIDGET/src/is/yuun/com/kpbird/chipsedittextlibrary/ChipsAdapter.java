@@ -53,7 +53,7 @@ public class ChipsAdapter extends BaseAdapter implements Filterable {
 		// for(int i=0;i<items.size();i++){
 		// if(items.get(i).getName().trim().toLowerCase().startsWith(uid.trim().toLowerCase())){
 		// img = items.get(i).getFlagId();
-		// Log.i(TAG, "Found " + uid);
+		// _Log.i(TAG, "Found " + uid);
 		// break;
 		// }
 		// }
@@ -78,7 +78,7 @@ public class ChipsAdapter extends BaseAdapter implements Filterable {
 			vh = (ViewHolder) view.getTag();
 		}
 
-		// Log.i(TAG, suggestions.get(position).getName() + " = " + suggestions.get(position).getFlag());
+		// _Log.i(TAG, suggestions.get(position).getName() + " = " + suggestions.get(position).getFlag());
 		vh.img.setImageDrawable(suggestions.get(position).getImage());
 		vh.tv.setText(suggestions.get(position).getName());
 
@@ -99,7 +99,7 @@ public class ChipsAdapter extends BaseAdapter implements Filterable {
 
 		@Override
 		public CharSequence convertResultToString(Object resultValue) {
-			// Log.i(TAG, "convertResultToString :" + resultValue);
+			// _Log.i(TAG, "convertResultToString :" + resultValue);
 			String str = ((ChipsItem) resultValue).getName();
 			return str;
 		}
@@ -115,7 +115,7 @@ public class ChipsAdapter extends BaseAdapter implements Filterable {
 					for (int i = 0; i < items.size(); i++) {
 
 						if (items.get(i).getName().toLowerCase().startsWith(constraint.toString().toLowerCase())) {
-							// Log.d("filter", "Found --- " + items.get(i).getTitle());
+							// _Log.d("filter", "Found --- " + items.get(i).getTitle());
 							suggestions.add(items.get(i));
 						}
 
@@ -130,7 +130,7 @@ public class ChipsAdapter extends BaseAdapter implements Filterable {
 
 		@Override
 		protected void publishResults(CharSequence constraint, FilterResults results) {
-			// Log.i(TAG, "publish results " + results.count);
+			// _Log.i(TAG, "publish results " + results.count);
 
 			if (results != null && results.count > 0) {
 				notifyDataSetChanged();

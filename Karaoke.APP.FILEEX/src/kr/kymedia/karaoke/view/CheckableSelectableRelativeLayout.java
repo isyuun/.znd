@@ -72,7 +72,7 @@ public class CheckableSelectableRelativeLayout extends CheckableRelativeLayoutBa
 	}
 
 	public void setSelectable(boolean isSelectable) {
-		//Log.w(toString(), getMethodName() + isSelectable);
+		//_Log.w(toString(), getMethodName() + isSelectable);
 
 		this.isSelectable = isSelectable;
 		if (c != null) {
@@ -86,7 +86,7 @@ public class CheckableSelectableRelativeLayout extends CheckableRelativeLayoutBa
 
 	@Override
 	public void setSelected(boolean selected) {
-		//Log.w(toString(), getMethodName() + selected);
+		//_Log.w(toString(), getMethodName() + selected);
 
 		if (isSelectable) {
 			super.setSelected(isChecked());
@@ -99,7 +99,7 @@ public class CheckableSelectableRelativeLayout extends CheckableRelativeLayoutBa
 
 	@Override
 	public void setChecked(boolean isChecked) {
-		//Log.w(toString(), getMethodName() + isChecked);
+		//_Log.w(toString(), getMethodName() + isChecked);
 
 		super.setChecked(isChecked);
 	}

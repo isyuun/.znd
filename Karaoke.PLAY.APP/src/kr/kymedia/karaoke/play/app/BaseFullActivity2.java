@@ -69,7 +69,7 @@ public class BaseFullActivity2 extends BaseFullActivity implements OnGestureList
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Log.i(__CLASSNAME__, getMethodName() + "[START]");
+        // _Log.i(__CLASSNAME__, getMethodName() + "[START]");
 
         // setNoTitle();
         // setActionBarOverlay(true);
@@ -77,7 +77,7 @@ public class BaseFullActivity2 extends BaseFullActivity implements OnGestureList
 
         super.onCreate(savedInstanceState);
 
-        // Log.i(__CLASSNAME__, getMethodName() + "[END]");
+        // _Log.i(__CLASSNAME__, getMethodName() + "[END]");
 
         mDetector = new GestureDetectorCompat(this, this);
     }

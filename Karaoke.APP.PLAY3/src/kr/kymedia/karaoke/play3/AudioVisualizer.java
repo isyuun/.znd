@@ -169,13 +169,13 @@ public class AudioVisualizer
 		 * int min = equalizer.getBandLevelRange()[0];
 		 * int max = equalizer.getBandLevelRange()[1];
 		 * 
-		 * Log.d("AudioVisualizer", "getNumberOfBands:" + band);
+		 * _Log.d("AudioVisualizer", "getNumberOfBands:" + band);
 		 * 
 		 * for ( int i = 0; i < band; i++ ) {
-		 * Log.d("AudioVisualizer", (equalizer.getCenterFreq((short)i) / 1000) + " Hz");
-		 * Log.d("AudioVisualizer", "minEQLevel:" + (min / 100) + " dB");
-		 * Log.d("AudioVisualizer", "maxEQLevel:" + (max / 100) + " dB");
-		 * Log.d("AudioVisualizer", "getBandLevel:" + (equalizer.getBandLevel((short)i)));
+		 * _Log.d("AudioVisualizer", (equalizer.getCenterFreq((short)i) / 1000) + " Hz");
+		 * _Log.d("AudioVisualizer", "minEQLevel:" + (min / 100) + " dB");
+		 * _Log.d("AudioVisualizer", "maxEQLevel:" + (max / 100) + " dB");
+		 * _Log.d("AudioVisualizer", "getBandLevel:" + (equalizer.getBandLevel((short)i)));
 		 * }
 		 */
 	}

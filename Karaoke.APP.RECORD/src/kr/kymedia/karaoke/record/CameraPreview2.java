@@ -223,7 +223,7 @@ public class CameraPreview2 extends CameraPreview {
 	}
 
 	private CamcorderProfile addCamcorderProfile(int cameraId, int quality) {
-		// Log.e(__CLASSNAME__, getMethodName() + cameraId + ", " + quality);
+		// _Log.e(__CLASSNAME__, getMethodName() + cameraId + ", " + quality);
 
 		CamcorderProfile profile = null;
 
@@ -269,7 +269,7 @@ public class CameraPreview2 extends CameraPreview {
 
 	/** Check if this device has a camera */
 	public static boolean checkCameraHardware(Context context) {
-		// Log.e(__CLASSNAME__, getMethodName());
+		// _Log.e(__CLASSNAME__, getMethodName());
 
 		// if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
 		// // this device has a camera
@@ -302,7 +302,7 @@ public class CameraPreview2 extends CameraPreview {
 			}
 		}
 
-		// Log.e(__CLASSNAME__, getMethodName() + find + ":" + cameraId);
+		// _Log.e(__CLASSNAME__, getMethodName() + find + ":" + cameraId);
 		return cameraId;
 	}
 
@@ -321,7 +321,7 @@ public class CameraPreview2 extends CameraPreview {
 	}
 
 	public void setCameraSize(int index, int width, int height) {
-		// Log.e(__CLASSNAME__, getMethodName());
+		// _Log.e(__CLASSNAME__, getMethodName());
 
 		CamcorderProfile profile = getCamorderProfile(index);
 
@@ -349,7 +349,7 @@ public class CameraPreview2 extends CameraPreview {
 		// 레이아웃사이즈변경확인불필요. 왜? 꽉차니까.
 		// boolean layoutChanged = adjustSurfaceLayoutSize(previewSize, portrait, width, height);
 		// if (layoutChanged) {
-		// Log.e(__CLASSNAME__, getMethodName() + "[CHANGE]" + layoutChanged);
+		// _Log.e(__CLASSNAME__, getMethodName() + "[CHANGE]" + layoutChanged);
 		// mSurfaceConfiguring = true;
 		// return;
 		// }

@@ -34,8 +34,9 @@ package kr.kymedia.karaoke.play.app.view;
 
 import kr.kymedia.karaoke.play.app.R;
 import kr.kymedia.karaoke.play.apps.PlayActivity2;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import kr.kymedia.karaoke.util.TextUtil;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -91,7 +92,7 @@ public class PlayViewFileDialog extends PlayViewType implements FileDialogOpener
 
 	@Override
 	public void onFileDialogResult(final int requestCode, int resultCode, final Intent data) {
-		// Log.e(__CLASSNAME__, getMethodName() + data.getExtras());
+		// _Log.e(__CLASSNAME__, getMethodName() + data.getExtras());
 
 		String path = getPath();
 
@@ -108,7 +109,7 @@ public class PlayViewFileDialog extends PlayViewType implements FileDialogOpener
 			System.out.println("Cancel..." + path);
 		}
 
-		Log.e(__CLASSNAME__, getMethodName() + path + "\n" + data.getExtras());
+		_Log.e(__CLASSNAME__, getMethodName() + path + "\n" + data.getExtras());
 
 		if (!TextUtil.isEmpty(path)) {
 			if (isPlaying() && !path.equalsIgnoreCase(getPath())) {
@@ -134,14 +135,14 @@ public class PlayViewFileDialog extends PlayViewType implements FileDialogOpener
 	}
 
 	private void dialog(boolean init) {
-		Log.i(__CLASSNAME__, getMethodName() + init);
+		_Log.i(__CLASSNAME__, getMethodName() + init);
 
 		ImageButton buttonOpen = (ImageButton) findViewById(R.id.buttonOpen);
 		buttonOpen.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Log.i(__CLASSNAME__, getMethodName() + v);
+				_Log.i(__CLASSNAME__, getMethodName() + v);
 
 				String start = Environment.getExternalStorageDirectory() + "/Music";
 				// openFileDialog(PlayViewFileDialog.this, root);

@@ -33,7 +33,7 @@
 package kr.kymedia.karaoke.play.app;
 
 import kr.kymedia.karaoke.app.FSActivity;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -67,7 +67,7 @@ public class FullScreenActivity extends FSActivity implements OnTouchListener {
 	}
 
 	protected void setFullScreen(boolean enabled) {
-		Log.i(__CLASSNAME__, getMethodName() + enabled);
+		_Log.i(__CLASSNAME__, getMethodName() + enabled);
 
 	}
 

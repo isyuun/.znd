@@ -97,7 +97,7 @@ public class KPItem implements Parcelable {
 			// return value.replace("\\", "");
 		} catch (Exception e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			return null;
 		}
 	}
@@ -113,7 +113,7 @@ public class KPItem implements Parcelable {
 			data = this.json.toString();
 		} catch (Exception e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		}
 		return json;
 	}
@@ -126,7 +126,7 @@ public class KPItem implements Parcelable {
 			data = this.json.toString();
 		} catch (Exception e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		}
 		return object;
 	}
@@ -146,14 +146,14 @@ public class KPItem implements Parcelable {
 			return json.toString(indentSpaces);
 		} catch (Exception e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			return "";
 		}
 	}
 
 	public void merge(KPItem item) {
 		try {
-			// Log.d("KPnnnnItem.merge():BF", getJSON().toString(2));
+			// _Log.d("KPnnnnItem.merge():BF", getJSON().toString(2));
 
 			if (item == null) {
 				return;
@@ -167,7 +167,7 @@ public class KPItem implements Parcelable {
 				getJSON().put(key, json.get(key));
 			}
 
-			// Log.d("KPnnnnItem::merge():AF", getJSON().toString(2));
+			// _Log.d("KPnnnnItem::merge():AF", getJSON().toString(2));
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -200,7 +200,7 @@ public class KPItem implements Parcelable {
 			json = new JSONObject(data);
 		} catch (Exception e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		}
 	}
 
@@ -217,7 +217,7 @@ public class KPItem implements Parcelable {
 			json = new JSONObject(data);
 		} catch (Exception e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		}
 	}
 

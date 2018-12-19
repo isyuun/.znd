@@ -23,7 +23,8 @@ import java.io.File;
 import java.nio.ByteBuffer;
 
 import kr.kymedia.karaoke._IKaraoke;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
+
 import android.media.MediaRecorder;
 import android.media.MediaRecorder.OnErrorListener;
 import android.media.MediaRecorder.OnInfoListener;
@@ -74,7 +75,7 @@ public class SongRecorder2 extends SongRecorder implements ISongRecorder, MediaR
 	@Override
 	public void onError(MediaRecorder mr, int what, int extra) {
 
-		Log.e(__CLASSNAME__, getMethodName() + mr.toString() + "," + what + "," + extra);
+		_Log.e(__CLASSNAME__, getMethodName() + mr.toString() + "," + what + "," + extra);
 		isRecording = false;
 		if (elistener != null) {
 			elistener.onError(mr, what, extra);
@@ -84,7 +85,7 @@ public class SongRecorder2 extends SongRecorder implements ISongRecorder, MediaR
 	@Override
 	public void onInfo(MediaRecorder mr, int what, int extra) {
 
-		// Log.e(__CLASSNAME__, getMethodName() + mr.toString() + "," + what + "," + extra);
+		// _Log.e(__CLASSNAME__, getMethodName() + mr.toString() + "," + what + "," + extra);
 		// isRecording = false;
 		if (ilistener != null) {
 			ilistener.onInfo(mr, what, extra);
@@ -106,7 +107,7 @@ public class SongRecorder2 extends SongRecorder implements ISongRecorder, MediaR
 			return;
 		}
 
-		Log.d(__CLASSNAME__, getMethodName() + name + "," + mOutputFormat + ","
+		_Log.d(__CLASSNAME__, getMethodName() + name + "," + mOutputFormat + ","
 				+ mAudioEncoder + "," + mSampleBitRate + "," + mSampleRate);
 
 		init(path);
@@ -124,7 +125,7 @@ public class SongRecorder2 extends SongRecorder implements ISongRecorder, MediaR
 			return;
 		}
 
-		Log.d(__CLASSNAME__, getMethodName() + songNumber + "," + mOutputFormat + ","
+		_Log.d(__CLASSNAME__, getMethodName() + songNumber + "," + mOutputFormat + ","
 				+ mAudioEncoder + "," + mSampleBitRate + "," + mSampleRate);
 
 		init(path);
@@ -132,18 +133,18 @@ public class SongRecorder2 extends SongRecorder implements ISongRecorder, MediaR
 	}
 
 	protected void init(String path) throws Exception {
-		Log.e(__CLASSNAME__, getMethodName() + path);
+		_Log.e(__CLASSNAME__, getMethodName() + path);
 
 		mPath = path;
 
 		// try {
 		// prepare(CamcorderProfile.QUALITY_HIGH);
-		// Log.e(__CLASSNAME__, getMethodName() + "OK!!!" + path);
+		// _Log.e(__CLASSNAME__, getMethodName() + "OK!!!" + path);
 		// return;
 		// } catch (Exception e) {
 		//
-		// Log.e(__CLASSNAME__, "prepare(...) CamcorderProfile.QUALITY_HIGH - NG!!!" + path);
-		// Log.e(__CLASSNAME__, "" + Log.getStackTraceString(e));
+		// _Log.e(__CLASSNAME__, "prepare(...) CamcorderProfile.QUALITY_HIGH - NG!!!" + path);
+		// _Log.e(__CLASSNAME__, "" + _Log.getStackTraceString(e));
 		// e.printStackTrace();
 		// release();
 		// }
@@ -154,12 +155,12 @@ public class SongRecorder2 extends SongRecorder implements ISongRecorder, MediaR
 		//
 		// try {
 		// prepare(CamcorderProfile.QUALITY_LOW);
-		// Log.e(__CLASSNAME__, getMethodName() + "OK!!!" + path);
+		// _Log.e(__CLASSNAME__, getMethodName() + "OK!!!" + path);
 		// return;
 		// } catch (Exception e) {
 		//
-		// Log.e(__CLASSNAME__, "prepare(...) CamcorderProfile.QUALITY_LOW - NG!!!" + path);
-		// Log.e(__CLASSNAME__, "" + Log.getStackTraceString(e));
+		// _Log.e(__CLASSNAME__, "prepare(...) CamcorderProfile.QUALITY_LOW - NG!!!" + path);
+		// _Log.e(__CLASSNAME__, "" + _Log.getStackTraceString(e));
 		// e.printStackTrace();
 		// release();
 		// //throw e;
@@ -173,32 +174,32 @@ public class SongRecorder2 extends SongRecorder implements ISongRecorder, MediaR
 		do {
 			try {
 				prepare(CAMCORDER_QUALITY[i]);
-				Log.e(__CLASSNAME__, getMethodName() + "OK!!!" + mPath);
+				_Log.e(__CLASSNAME__, getMethodName() + "OK!!!" + mPath);
 				return;
 			} catch (Exception e) {
 
-				err = Log.getStackTraceString(e);
+				err = _Log.getStackTraceString(e);
 				e.printStackTrace();
 				release();
-				Log.e(__CLASSNAME__, getMethodName() + "NG!!!" + mPath);
+				_Log.e(__CLASSNAME__, getMethodName() + "NG!!!" + mPath);
 			}
 		} while ((++i < CAMCORDER_QUALITY.length) && mMediaRecorder == null);
 
 		if (mMediaRecorder == null) {
 			addRecInfo(err);
-			Log.e(__CLASSNAME__, getRecInfo());
+			_Log.e(__CLASSNAME__, getRecInfo());
 			throw new Exception(err);
 		}
 
 	}
 
 	protected void prepare(int quality) throws Exception {
-		Log.e(__CLASSNAME__, getMethodName() + "[START] RECORDING.QUALITY - " + quality);
-		Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "path : " + mPath);
-		Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "fileFormat : " + getFileFormat(mOutputFormat));
-		Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "audioCodec : " + getAudioCodec(mAudioEncoder));
-		Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "audioBitRate : " + mSampleBitRate);
-		Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "audioSampleRate : " + mSampleRate);
+		_Log.e(__CLASSNAME__, getMethodName() + "[START] RECORDING.QUALITY - " + quality);
+		_Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "path : " + mPath);
+		_Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "fileFormat : " + getFileFormat(mOutputFormat));
+		_Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "audioCodec : " + getAudioCodec(mAudioEncoder));
+		_Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "audioBitRate : " + mSampleBitRate);
+		_Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "audioSampleRate : " + mSampleRate);
 
 		mQuality = quality;
 
@@ -249,7 +250,7 @@ public class SongRecorder2 extends SongRecorder implements ISongRecorder, MediaR
 		// * setAudioSamplingRate : LG옵티머스2X : LG-SU660
 		// if (("LG-SU660").compareToIgnoreCase(android.os.Build.MODEL) == 0
 		// || ("LG-P990").compareToIgnoreCase(android.os.Build.MODEL) == 0) {
-		// Log.e("폰별예외처리:", Build.MODEL.toString());
+		// _Log.e("폰별예외처리:", Build.MODEL.toString());
 		// //이런씨댕
 		// try {
 		// getCamcorderQuality(quality);
@@ -269,9 +270,9 @@ public class SongRecorder2 extends SongRecorder implements ISongRecorder, MediaR
 		mMediaRecorder.prepare();
 
 		putRecInfo();
-		Log.i(__CLASSNAME__, getMethodName() + "\n" + getRecInfo());
+		_Log.i(__CLASSNAME__, getMethodName() + "\n" + getRecInfo());
 
-		Log.e(__CLASSNAME__, getMethodName() + "[END] RECORDING.QUALITY - " + quality);
+		_Log.e(__CLASSNAME__, getMethodName() + "[END] RECORDING.QUALITY - " + quality);
 	}
 
 	public String getPath() {
@@ -281,13 +282,13 @@ public class SongRecorder2 extends SongRecorder implements ISongRecorder, MediaR
 	public String setFilePath(String name) {
 		String ret = "";
 
-		Log.d(__CLASSNAME__, "setFilePath(...) " + name);
+		_Log.d(__CLASSNAME__, "setFilePath(...) " + name);
 
 		String path = "";
 
 		File audio = new File(_IKaraoke.RECORD_PATH);
 		audio.mkdirs();
-		// Log.d(LOG_TAG, "writing to directory " + audio.getAbsolutePath());
+		// _Log.d(LOG_TAG, "writing to directory " + audio.getAbsolutePath());
 
 		// 파일확장자m4a통일
 		// construct file name
@@ -311,7 +312,7 @@ public class SongRecorder2 extends SongRecorder implements ISongRecorder, MediaR
 		ret = path;
 		mPath = path;
 
-		Log.d(__CLASSNAME__, "writing to file " + mPath);
+		_Log.d(__CLASSNAME__, "writing to file " + mPath);
 		return ret;
 	}
 
@@ -355,22 +356,22 @@ public class SongRecorder2 extends SongRecorder implements ISongRecorder, MediaR
 	@Override
 	public boolean start() throws Exception {
 
-		Log.d(__CLASSNAME__, "start()");
+		_Log.d(__CLASSNAME__, "start()");
 		try {
 			mMediaRecorder.start();
 			isRecording = true;
 			return true;
 		} catch (Exception e) {
 
-			Log.e(__CLASSNAME__, getMethodName() + Log.getStackTraceString(e));
-			throw new Exception(Log.getStackTraceString(e));
+			_Log.e(__CLASSNAME__, getMethodName() + _Log.getStackTraceString(e));
+			throw new Exception(_Log.getStackTraceString(e));
 		}
 	}
 
 	@Override
 	public boolean stop() throws Exception {
 
-		Log.d(__CLASSNAME__, "stop()");
+		_Log.d(__CLASSNAME__, "stop()");
 		try {
 			if (mMediaRecorder != null) {
 				if (isRecording) {
@@ -382,7 +383,7 @@ public class SongRecorder2 extends SongRecorder implements ISongRecorder, MediaR
 			return true;
 		} catch (Exception e) {
 
-			Log.e(__CLASSNAME__, "" + Log.getStackTraceString(e));
+			_Log.e(__CLASSNAME__, "" + _Log.getStackTraceString(e));
 			throw e;
 		}
 	}
@@ -408,7 +409,7 @@ public class SongRecorder2 extends SongRecorder implements ISongRecorder, MediaR
 	// * hz단위 예) 44.1khz -> 44100
 	// */
 	// public void setAudioSamplingRate(int samplingRate) {
-	// Log.d(__CLASSNAME__, "setAudioSamplingRate()" + samplingRate);
+	// _Log.d(__CLASSNAME__, "setAudioSamplingRate()" + samplingRate);
 	// mSamplingRate = samplingRate;
 	// if (mMediaReorder != null) {
 	// reset();
@@ -431,7 +432,7 @@ public class SongRecorder2 extends SongRecorder implements ISongRecorder, MediaR
 	// * setAudioEncodingBitRate : LG옵티머스2X/모토로라 아트릭스
 	// */
 	// public void setAudioEncodingBitRate(int bitRate) {
-	// Log.d(__CLASSNAME__, "setAudioEncodingBitRate()" + bitRate);
+	// _Log.d(__CLASSNAME__, "setAudioEncodingBitRate()" + bitRate);
 	// mBitRate = bitRate;
 	// if (mMediaReorder != null) {
 	// reset();
@@ -452,7 +453,7 @@ public class SongRecorder2 extends SongRecorder implements ISongRecorder, MediaR
 	// *
 	// */
 	// public void setAudioEncoder(int audioEncoder) {
-	// Log.d(__CLASSNAME__, "setAudioEncoder()" + audioEncoder);
+	// _Log.d(__CLASSNAME__, "setAudioEncoder()" + audioEncoder);
 	// mAudioEncoder = audioEncoder;
 	// if (mMediaReorder != null) {
 	// reset();
@@ -545,7 +546,7 @@ public class SongRecorder2 extends SongRecorder implements ISongRecorder, MediaR
 	@Override
 	public void release() {
 
-		Log.d(__CLASSNAME__, "release()");
+		_Log.d(__CLASSNAME__, "release()");
 		if (mMediaRecorder != null) {
 			mMediaRecorder.release();
 			mMediaRecorder = null;

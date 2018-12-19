@@ -34,7 +34,7 @@ package kr.kymedia.karaoke.play.apps;
 
 import kr.kymedia.karaoke.play.app.R;
 import kr.kymedia.karaoke.util.EnvironmentUtils;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import kr.kymedia.karaoke.util.TextUtil;
 import android.net.Uri;
 import android.os.Bundle;
@@ -90,7 +90,7 @@ public class PlayFragmentMediaRouter extends PlayFragment4 {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 		// Inflate the menu and configure the media router action provider.
 		inflater.inflate(R.menu.play, menu);
 
@@ -109,7 +109,7 @@ public class PlayFragmentMediaRouter extends PlayFragment4 {
 
 	@Override
 	protected void onActivityCreated() {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 
 		super.onActivityCreated();
 
@@ -134,7 +134,7 @@ public class PlayFragmentMediaRouter extends PlayFragment4 {
 	// your app works with so the framework can discover them.
 	@Override
 	public void onStart() {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 		mMediaRouter.addCallback(mMediaRouteSelector, mMediaRouterCallback,
 				MediaRouter.CALLBACK_FLAG_REQUEST_DISCOVERY);
 		super.onStart();
@@ -144,21 +144,21 @@ public class PlayFragmentMediaRouter extends PlayFragment4 {
 	// needs to discover routes for your app.
 	@Override
 	public void onStop() {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 		mMediaRouter.removeCallback(mMediaRouterCallback);
 		super.onStop();
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 
 		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
 	public void onDestroy() {
-		Log.e(__CLASSNAME__, getMethodName());
+		_Log.e(__CLASSNAME__, getMethodName());
 
 
 		super.onDestroy();
@@ -179,7 +179,7 @@ public class PlayFragmentMediaRouter extends PlayFragment4 {
 
 		@Override
 		public void onRouteSelected(MediaRouter router, RouteInfo route) {
-			Log.i(__CLASSNAME__, getMethodName());
+			_Log.i(__CLASSNAME__, getMethodName());
 
 			if (route.supportsControlCategory(MediaControlIntent.CATEGORY_REMOTE_PLAYBACK)) {
 				// remote playback device
@@ -192,7 +192,7 @@ public class PlayFragmentMediaRouter extends PlayFragment4 {
 
 		@Override
 		public void onRouteUnselected(MediaRouter router, RouteInfo route) {
-			Log.i(__CLASSNAME__, getMethodName());
+			_Log.i(__CLASSNAME__, getMethodName());
 
 			if (route.supportsControlCategory(MediaControlIntent.CATEGORY_REMOTE_PLAYBACK)) {
 				// remote playback device
@@ -205,7 +205,7 @@ public class PlayFragmentMediaRouter extends PlayFragment4 {
 
 		@Override
 		public void onRoutePresentationDisplayChanged(MediaRouter router, RouteInfo route) {
-			Log.i(__CLASSNAME__, getMethodName());
+			_Log.i(__CLASSNAME__, getMethodName());
 
 			if (route.supportsControlCategory(MediaControlIntent.CATEGORY_REMOTE_PLAYBACK)) {
 				// remote playback device
@@ -224,7 +224,7 @@ public class PlayFragmentMediaRouter extends PlayFragment4 {
 	private RemotePlaybackClient mRemotePlaybackClient;
 
 	private void updateRemotePlayer(RouteInfo route) {
-		Log.e(__CLASSNAME__, getMethodName() + "route=" + route);
+		_Log.e(__CLASSNAME__, getMethodName() + "route=" + route);
 
 		// Changed route: tear down previous client
 		if (mRoute != null && mRemotePlaybackClient != null) {
@@ -245,14 +245,14 @@ public class PlayFragmentMediaRouter extends PlayFragment4 {
 			@Override
 			public void onItemStatusChanged(Bundle data, String sessionId,
 					MediaSessionStatus sessionStatus, String itemId, MediaItemStatus itemStatus) {
-				Log.e(__CLASSNAME__, getMethodName());
+				_Log.e(__CLASSNAME__, getMethodName());
 
 				super.onItemStatusChanged(data, sessionId, sessionStatus, itemId, itemStatus);
 			}
 
 			@Override
 			public void onSessionChanged(String sessionId) {
-				Log.e(__CLASSNAME__, getMethodName());
+				_Log.e(__CLASSNAME__, getMethodName());
 
 				super.onSessionChanged(sessionId);
 			}
@@ -260,7 +260,7 @@ public class PlayFragmentMediaRouter extends PlayFragment4 {
 			@Override
 			public void onSessionStatusChanged(Bundle data, String sessionId,
 					MediaSessionStatus sessionStatus) {
-				Log.e(__CLASSNAME__, getMethodName());
+				_Log.e(__CLASSNAME__, getMethodName());
 
 				super.onSessionStatusChanged(data, sessionId, sessionStatus);
 			}
@@ -282,7 +282,7 @@ public class PlayFragmentMediaRouter extends PlayFragment4 {
 			if (!TextUtil.isNetworkUrl(path)) {
 				String ip = EnvironmentUtils.getIpAddress();
 				path = "http://" + ip + ":8089/nnnn.mp3";
-				Log.e(__CLASSNAME__, getMethodName() + path);
+				_Log.e(__CLASSNAME__, getMethodName() + path);
 			}
 
 			try {
@@ -294,13 +294,13 @@ public class PlayFragmentMediaRouter extends PlayFragment4 {
 							@Override
 							public void onResult(Bundle data, String sessionId, MediaSessionStatus sessionStatus,
 									String itemId, MediaItemStatus itemStatus) {
-								Log.i(__CLASSNAME__, getMethodName() + "play: succeeded for item " + itemId);
+								_Log.i(__CLASSNAME__, getMethodName() + "play: succeeded for item " + itemId);
 								// super.onResult(data, sessionId, sessionStatus, itemId, itemStatus);
 							}
 
 							@Override
 							public void onError(String error, int code, Bundle data) {
-								Log.i(__CLASSNAME__, getMethodName() + "play: failed - error:" + code + " - " + error);
+								_Log.i(__CLASSNAME__, getMethodName() + "play: failed - error:" + code + " - " + error);
 								// super.onError(error, code, data);
 							}
 						});
@@ -327,14 +327,14 @@ public class PlayFragmentMediaRouter extends PlayFragment4 {
 
 					@Override
 					public void onResult(Bundle data, String sessionId, MediaSessionStatus sessionStatus) {
-						Log.i(__CLASSNAME__, getMethodName() + "stop: succeeded for item " + sessionStatus);
+						_Log.i(__CLASSNAME__, getMethodName() + "stop: succeeded for item " + sessionStatus);
 
 						super.onResult(data, sessionId, sessionStatus);
 					}
 
 					@Override
 					public void onError(String error, int code, Bundle data) {
-						Log.i(__CLASSNAME__, getMethodName() + "stop: failed - error:" + code + " - " + error);
+						_Log.i(__CLASSNAME__, getMethodName() + "stop: failed - error:" + code + " - " + error);
 
 						super.onError(error, code, data);
 					}
@@ -359,14 +359,14 @@ public class PlayFragmentMediaRouter extends PlayFragment4 {
 
 					@Override
 					public void onResult(Bundle data, String sessionId, MediaSessionStatus sessionStatus) {
-						Log.i(__CLASSNAME__, getMethodName() + "pause: succeeded for item " + sessionStatus);
+						_Log.i(__CLASSNAME__, getMethodName() + "pause: succeeded for item " + sessionStatus);
 
 						super.onResult(data, sessionId, sessionStatus);
 					}
 
 					@Override
 					public void onError(String error, int code, Bundle data) {
-						Log.i(__CLASSNAME__, getMethodName() + "pause: failed - error:" + code + " - " + error);
+						_Log.i(__CLASSNAME__, getMethodName() + "pause: failed - error:" + code + " - " + error);
 
 						super.onError(error, code, data);
 					}
@@ -393,12 +393,12 @@ public class PlayFragmentMediaRouter extends PlayFragment4 {
 							@Override
 							public void onResult(Bundle data, String sessionId, MediaSessionStatus sessionStatus,
 									String itemId, MediaItemStatus itemStatus) {
-								Log.i(__CLASSNAME__, getMethodName() + "seek: succeeded for item " + itemId);
+								_Log.i(__CLASSNAME__, getMethodName() + "seek: succeeded for item " + itemId);
 							}
 
 							@Override
 							public void onError(String error, int code, Bundle data) {
-								Log.i(__CLASSNAME__, getMethodName() + "seek: failed - error:" + code + " - " + error);
+								_Log.i(__CLASSNAME__, getMethodName() + "seek: failed - error:" + code + " - " + error);
 							}
 						});
 			} catch (Exception e) {

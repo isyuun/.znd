@@ -115,7 +115,7 @@ public class OutputStreamMonitored extends FilterOutputStream {
 	}
 
 	private void setProgress(long size, long total) {
-		// Log.e(__CLASSNAME__, getMethodName() + "size:" + size + ", total:" + total);
+		// _Log.e(__CLASSNAME__, getMethodName() + "size:" + size + ", total:" + total);
 		// int percent = (int) Math.round(100.0 * (double) size / (double) total);
 		if (mProgressListener != null) {
 			// mProgressListener.onPercent(percent);
@@ -130,7 +130,7 @@ public class OutputStreamMonitored extends FilterOutputStream {
 
 	@Deprecated
 	private void setProgress() {
-		// Log.e(__CLASSNAME__, getMethodName() + "size:" + size + ", total:" + total);
+		// _Log.e(__CLASSNAME__, getMethodName() + "size:" + size + ", total:" + total);
 		// int percent = (int) Math.round(100.0 * (double) size / (double) total);
 		if (mProgressListener != null) {
 			// mProgressListener.onPercent(percent);

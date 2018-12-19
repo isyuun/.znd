@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">뮤즐</string>
-    <string name="facebook">페이스북으로 로그인하기</string>
+    <string name="instagram_login">인스타그램으로 로그인하기</string>
+    <string name="facebook_login">페이스북으로 로그인하기</string>
     <string name="facebook_talk_email_check" >페이스북계정 이메일을 확인해주세요</string>
     <string name="of_sign_in_using_email">또는 이메일로 로그인하기</string>
     <string name="kakao_talk">카카오톡으로 로그인하기</string>
@@ -56,6 +57,7 @@
     <string name="share_on">공유하기</string>
     <string name="link_to_your_music">내노래 링크</string>
     <string name="share_and_fun">친구에게 공유하기</string>
+    <string name="facebook">페이스북</string>
     <string name="twitter">트위터</string>
     <string name="instagram">인스타그램</string>
     <string name="whatsapp">왓츠앱</string>

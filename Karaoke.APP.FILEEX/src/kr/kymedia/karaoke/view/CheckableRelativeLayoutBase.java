@@ -35,7 +35,8 @@ package kr.kymedia.karaoke.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -162,7 +163,7 @@ public class CheckableRelativeLayoutBase extends RelativeLayout {
 	}
 
 	public void toggle() {
-		Log.w(toString(), getMethodName());
+		_Log.w(toString(), getMethodName());
 		//isChecked = !isChecked;
 		//for (Checkable c : checkableViews) {
 		//	c.toggle();

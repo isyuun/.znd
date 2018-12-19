@@ -83,7 +83,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	private static SparseBooleanArray tracks = new SparseBooleanArray();
 
 	private int putID() {
-		// Log.i(__CLASSNAME__, getMethodName() + tracks);
+		// _Log.i(__CLASSNAME__, getMethodName() + tracks);
 		int id = 0;
 		while (tracks.get(id)) {
 			id++;
@@ -236,7 +236,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	//
 	// @Override
 	// protected Void doInBackground(Void... params) {
-	// Log.e(SoundTouchPlay.this.__CLASSNAME__, getMethodName());
+	// _Log.e(SoundTouchPlay.this.__CLASSNAME__, getMethodName());
 	//
 	// load();
 	// return null;
@@ -364,7 +364,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	// private class restart extends Thread {
 	// @Override
 	// public void run() {
-	// Log.i(__CLASSNAME__, getMethodName());
+	// _Log.i(__CLASSNAME__, getMethodName());
 	// super.run();
 	// restart();
 	// }
@@ -396,7 +396,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	// private class repeat extends Thread {
 	// @Override
 	// public void run() {
-	// Log.i(__CLASSNAME__, getMethodName());
+	// _Log.i(__CLASSNAME__, getMethodName());
 	// super.run();
 	// repeat();
 	// }
@@ -529,7 +529,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	 * </a>
 	 */
 	private void get(String path) throws Exception {
-		//Log.wtf(__CLASSNAME__, getMethodName() + path);
+		//_Log.wtf(__CLASSNAME__, getMethodName() + path);
 		if (BuildConfig.DEBUG) {
 			Log.wtf(__CLASSNAME__, getMethodName() + path);
 		} else {
@@ -554,7 +554,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 			}
 		}
 
-		// Log.i(__CLASSNAME__, getMethodName() + st);
+		// _Log.i(__CLASSNAME__, getMethodName() + st);
 
 		// test
 		// throw (new IOException("SoundTouchPlay get() TEST...ERROR..."));
@@ -583,7 +583,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	@Override
 	public void onProgressChanged(int track, double currentPercentage, long position) {
 
-		// Log.e(__CLASSNAME__, getMethodName() + track + "," + currentPercentage + "," + position);
+		// _Log.e(__CLASSNAME__, getMethodName() + track + "," + currentPercentage + "," + position);
 
 		isOpening = false;
 		isPlaying = true;
@@ -599,7 +599,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	@Override
 	protected void onTime() {
 		// if (timeout != null) {
-		// Log.e(__CLASSNAME__, getMethodName());
+		// _Log.e(__CLASSNAME__, getMethodName());
 		// stopTimeout();
 		// }
 		super.onTime();
@@ -608,7 +608,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	@Override
 	public void onTime(int t) {
 		// if (timeout != null) {
-		// Log.e(__CLASSNAME__, getMethodName() + t);
+		// _Log.e(__CLASSNAME__, getMethodName() + t);
 		// stopTimeout();
 		// }
 		super.onTime(t);
@@ -752,7 +752,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 		Log.wtf(__CLASSNAME__, getMethodName() + tempo);
 		if (st != null && isPrepared()) {
 			//if (tempo < 0.5f || tempo > 2.0f) {
-			//	Log.wtf(__CLASSNAME__, "Tempo must be between 0.5f and 2.0f");
+			//	_Log.wtf(__CLASSNAME__, "Tempo must be between 0.5f and 2.0f");
 			//	return;
 			//}
 			st.setTempo(tempo);
@@ -787,7 +787,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	public void setTempoPercent(int percent) {
 		if (st != null && isPrepared()) {
 			//if (percent < -50 || percent > 100) {
-			//	Log.wtf(__CLASSNAME__, "Tempo percentage must be between -50 and 100");
+			//	_Log.wtf(__CLASSNAME__, "Tempo percentage must be between -50 and 100");
 			//	return;
 			//}
 			float temp = Math.round((0.01f * percent) * 100.0f) / 100.0f;
@@ -808,7 +808,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	public int getTempoPercent() {
 		if (st != null) {
 			float percent = st.getTempo() * 100f - 100f;
-			// Log.wtf(__CLASSNAME__, getMethodName() + percent + ":" + (int) percent + ":" + st.getTempo());
+			// _Log.wtf(__CLASSNAME__, getMethodName() + percent + ":" + (int) percent + ":" + st.getTempo());
 			int ret = Math.round(percent);
 			return ret;
 		} else {
@@ -910,7 +910,7 @@ class SoundTouchPlay extends SongPlay implements ISongPlay, ISongPlay.Listener, 
 	 */
 	@Override
 	public int getCurrentTime() {
-		// Log.i(__CLASSNAME__, getMethodName() + st.getPlayedDuration() + "-" + st.getPlayedDuration() / USEC2MSEC);
+		// _Log.i(__CLASSNAME__, getMethodName() + st.getPlayedDuration() + "-" + st.getPlayedDuration() / USEC2MSEC);
 
 		try {
 			if (st != null) {

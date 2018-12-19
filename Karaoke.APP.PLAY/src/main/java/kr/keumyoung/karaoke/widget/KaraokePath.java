@@ -118,7 +118,7 @@ public class KaraokePath extends android.support.v7.widget.AppCompatEditText {
 	// private static String hosts[] = null;
 
 	public boolean isKaraokeUri(Uri uri) {
-		// Log.e(toString(), getMethodName() + uri);
+		// _Log.e(toString(), getMethodName() + uri);
 
 		if (!isKaraoke()) {
 			return false;
@@ -126,13 +126,13 @@ public class KaraokePath extends android.support.v7.widget.AppCompatEditText {
 
 		boolean ret = TextUtil.isKaraokeUri(hosts, uri);
 
-		// Log.e(toString(), getMethodName() + ret + uri);
+		// _Log.e(toString(), getMethodName() + ret + uri);
 
 		return ret;
 	}
 
 	public void checkKaraoke(CharSequence text) {
-		// Log.e(toString(), getMethodName() + text);
+		// _Log.e(toString(), getMethodName() + text);
 
 		if (!isKaraoke()) {
 			return;
@@ -149,7 +149,7 @@ public class KaraokePath extends android.support.v7.widget.AppCompatEditText {
 
 	@Override
 	protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
-		// Log.e(toString(), getMethodName() + text);
+		// _Log.e(toString(), getMethodName() + text);
 
 
 		super.onTextChanged(text, start, lengthBefore, lengthAfter);
@@ -159,7 +159,7 @@ public class KaraokePath extends android.support.v7.widget.AppCompatEditText {
 
 	@Override
 	protected void onDraw(Canvas canvas) {
-		// Log.e(toString(), getMethodName() + canvas);
+		// _Log.e(toString(), getMethodName() + canvas);
 
 		super.onDraw(canvas);
 	}
@@ -169,7 +169,7 @@ public class KaraokePath extends android.support.v7.widget.AppCompatEditText {
 
 		String text = getText().toString();
 
-		// Log.e(toString(), getMethodName() + text);
+		// _Log.e(toString(), getMethodName() + text);
 
 		if (isKaraokeUri(Uri.parse(text))) {
 			visibility = View.GONE;

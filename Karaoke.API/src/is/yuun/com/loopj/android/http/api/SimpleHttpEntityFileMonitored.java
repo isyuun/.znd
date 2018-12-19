@@ -135,7 +135,7 @@ public class SimpleHttpEntityFileMonitored {
     }
 
     private void setProgress(Long... params) {
-        // Log.e(__CLASSNAME__, getMethodName() + "size:" + size + ", total:" + total);
+        // _Log.e(__CLASSNAME__, getMethodName() + "size:" + size + ", total:" + total);
         // int percent = (int) Math.round(100.0 * (double) size / (double) total);
         if (mProgressListener != null && params.length == 2) {
             // mProgressListener.onPercent(percent);
@@ -154,7 +154,7 @@ public class SimpleHttpEntityFileMonitored {
     private void setProgress() {
         // int percent = (int) Math.round(100.0 * (double) size / (double) total);
         if (mProgressListener != null) {
-            // Log.e(__CLASSNAME__, getMethodName() + "size:" + size + ", total:" + total);
+            // _Log.e(__CLASSNAME__, getMethodName() + "size:" + size + ", total:" + total);
             // mProgressListener.onPercent(percent);
             mProgressListener.onProgress(size, total);
         }
@@ -209,7 +209,7 @@ public class SimpleHttpEntityFileMonitored {
             size += bufferLength;
             // progressDialog에 다운로드 받은 바이트수를 표시해 준다. <-따로 progressDialog스레드를 작성해둘것
             setProgress();
-            // Log.e(__CLASSNAME__, getMethodName() + "size:" + size + ", total:" + total);
+            // _Log.e(__CLASSNAME__, getMethodName() + "size:" + size + ", total:" + total);
         }
         // 작업이 끝나면 파일을 close하여 저장한다.
         mOutputStream.flush();

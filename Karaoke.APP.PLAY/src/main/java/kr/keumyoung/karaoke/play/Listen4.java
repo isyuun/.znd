@@ -192,7 +192,7 @@ abstract class Listen4 extends Listen3 implements ISongPlay.Listener {
 				onRetry(count);
 				onTimeout(TIMER_RETRY);
 			} else {
-				//if (BuildConfig.DEBUG) Log.w(__CLASSNAME__, getMethodName() + "[RO]" + count);
+				//if (BuildConfig.DEBUG) _Log.w(__CLASSNAME__, getMethodName() + "[RO]" + count);
 				ISongPlay.ERROR t = ISongPlay.ERROR.TRYOUT;
 				Exception e = new Exception("RETRY OUT ERROR(" + count + ")");
 				Log.wtf(__CLASSNAME__ + TAG_SING, "onError() " + "(" + t + ", " + e + ")"/* + player.getPath() */ + "\n" + Log.getStackTraceString(e));

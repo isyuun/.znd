@@ -34,11 +34,10 @@ package kr.kymedia.karaoke.play.apps;
 
 import java.io.File;
 
-import kr.kymedia.karaoke.play.app.BaseFullActivity;
 import kr.kymedia.karaoke.play.app.R;
 import kr.kymedia.karaoke.play.app.view.PlayViewPitch;
 import kr.kymedia.karaoke.play.app.view._PlayView;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import kr.kymedia.karaoke.widget.BalanceSeekBar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -76,13 +75,13 @@ public class PlayFragment6 extends PlayFragment5 {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		Log.e(__CLASSNAME__, getMethodName() + menu + "," + inflater);
+		_Log.e(__CLASSNAME__, getMethodName() + menu + "," + inflater);
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 
     @Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Log.e(__CLASSNAME__, getMethodName() + item);
+		_Log.e(__CLASSNAME__, getMethodName() + item);
 		if (item.getItemId() == R.id.pitch_test_1) {
 			pitch_test_1();
 			return true;
@@ -101,7 +100,7 @@ public class PlayFragment6 extends PlayFragment5 {
 	}
 
 	private void reset() {
-		Log.e(__CLASSNAME__, getMethodName());
+		_Log.e(__CLASSNAME__, getMethodName());
 		findViewById(R.id.buttonStop).performClick();
 
 		findViewById(R.id.buttonHide).performClick();
@@ -112,7 +111,7 @@ public class PlayFragment6 extends PlayFragment5 {
 	}
 
 	private void pitch_test_1() {
-		Log.e(__CLASSNAME__, getMethodName());
+		_Log.e(__CLASSNAME__, getMethodName());
 		reset();
 
 		findViewById(R.id.buttonShow).performClick();
@@ -127,7 +126,7 @@ public class PlayFragment6 extends PlayFragment5 {
 	}
 
 	private void pitch_test_2() {
-		Log.e(__CLASSNAME__, getMethodName());
+		_Log.e(__CLASSNAME__, getMethodName());
 		reset();
 
 		findViewById(R.id.buttonShow).performClick();
@@ -143,7 +142,7 @@ public class PlayFragment6 extends PlayFragment5 {
 	}
 
 	private void choir_test_1() {
-		Log.e(__CLASSNAME__, getMethodName());
+		_Log.e(__CLASSNAME__, getMethodName());
 		reset();
 
 		String path1 = "file:///android_asset" + File.separator + "music" + File.separator + "1.mp3";
@@ -160,7 +159,7 @@ public class PlayFragment6 extends PlayFragment5 {
 	}
 
 	private void choir_test_2() {
-		Log.e(__CLASSNAME__, getMethodName());
+		_Log.e(__CLASSNAME__, getMethodName());
 		reset();
 
 		String path1 = "file:///android_asset" + File.separator + "music" + File.separator + "1.mp3";

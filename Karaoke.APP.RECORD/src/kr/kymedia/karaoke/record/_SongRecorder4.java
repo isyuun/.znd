@@ -22,7 +22,8 @@ package kr.kymedia.karaoke.record;
 import java.io.File;
 import java.nio.ByteBuffer;
 
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
+
 import android.media.AudioRecord;
 import android.media.MediaRecorder.OnErrorListener;
 import android.media.MediaRecorder.OnInfoListener;
@@ -104,7 +105,7 @@ class _SongRecorder4 extends SongRecorder implements ISongRecorder {
 			mHandler.post(run);
 		} catch (Exception e) {
 
-			Log.e(__CLASSNAME__, "" + Log.getStackTraceString(e));
+			_Log.e(__CLASSNAME__, "" + _Log.getStackTraceString(e));
 			throw e;
 		}
 		return true;
@@ -118,7 +119,7 @@ class _SongRecorder4 extends SongRecorder implements ISongRecorder {
 		} catch (Exception e) {
 
 
-			Log.e(__CLASSNAME__, "" + Log.getStackTraceString(e));
+			_Log.e(__CLASSNAME__, "" + _Log.getStackTraceString(e));
 			throw e;
 		}
 		return true;

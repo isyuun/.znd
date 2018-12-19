@@ -37,8 +37,9 @@ import java.util.ArrayList;
 import kr.kymedia.karaoke.play.app.R;
 import kr.kymedia.karaoke.play.apps.PlayActivity2;
 import kr.kymedia.karaoke.play.impl.ISongPlay;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import kr.kymedia.karaoke.util.TextUtil;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -96,7 +97,7 @@ public class PlayViewFileDialogMulti extends PlayViewFileDialog {
 
 	@Override
 	public void onFileDialogResult(int requestCode, int resultCode, Intent data) {
-		Log.i(__CLASSNAME__, getMethodName() + data.getExtras());
+		_Log.i(__CLASSNAME__, getMethodName() + data.getExtras());
 
 		super.onFileDialogResult(requestCode, resultCode, data);
 
@@ -120,7 +121,7 @@ public class PlayViewFileDialogMulti extends PlayViewFileDialog {
 			System.out.println("Cancel..." + path);
 		}
 
-		Log.e(__CLASSNAME__, getMethodName() + paths);
+		_Log.e(__CLASSNAME__, getMethodName() + paths);
 
 		if (!TextUtil.isEmpty(path)) {
 			if (isPlaying() && !path.equalsIgnoreCase(getPath())) {
@@ -153,7 +154,7 @@ public class PlayViewFileDialogMulti extends PlayViewFileDialog {
 	}
 
 	private void dialog(boolean init) {
-		Log.i(__CLASSNAME__, getMethodName() + init);
+		_Log.i(__CLASSNAME__, getMethodName() + init);
 
 		if (init) {
 			if (isChoir()) {
@@ -167,7 +168,7 @@ public class PlayViewFileDialogMulti extends PlayViewFileDialog {
 
 			@Override
 			public void onClick(View v) {
-				Log.i(__CLASSNAME__, getMethodName() + v);
+				_Log.i(__CLASSNAME__, getMethodName() + v);
 
 				String start = Environment.getExternalStorageDirectory() + "/Music";
 				// openFileDialog(PlayViewFileDialog.this, root);
@@ -209,7 +210,7 @@ public class PlayViewFileDialogMulti extends PlayViewFileDialog {
 					path = paths.get(index);
 				}
 
-				Log.e(__CLASSNAME__, getMethodName() + path);
+				_Log.e(__CLASSNAME__, getMethodName() + path);
 
 				if (!TextUtil.isEmpty(path)) {
 
@@ -251,7 +252,7 @@ public class PlayViewFileDialogMulti extends PlayViewFileDialog {
 					path = paths.get(index);
 				}
 
-				Log.e(__CLASSNAME__, getMethodName() + path);
+				_Log.e(__CLASSNAME__, getMethodName() + path);
 
 				if (!TextUtil.isEmpty(path)) {
 
@@ -288,7 +289,7 @@ public class PlayViewFileDialogMulti extends PlayViewFileDialog {
 				path = paths.get(index);
 			}
 
-			Log.e(__CLASSNAME__, getMethodName() + path);
+			_Log.e(__CLASSNAME__, getMethodName() + path);
 
 			if (!TextUtil.isEmpty(path)) {
 

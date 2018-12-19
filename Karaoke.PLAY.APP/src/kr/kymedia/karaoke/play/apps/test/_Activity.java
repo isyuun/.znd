@@ -34,7 +34,8 @@ package kr.kymedia.karaoke.play.apps.test;
 
 import kr.kymedia.karaoke.play.apps.PlayFragment;
 import kr.kymedia.karaoke.play.apps._PlayActivity;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
+
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -73,7 +74,7 @@ public class _Activity extends kr.kymedia.karaoke.play.app._Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 
 		super.onCreate(savedInstanceState);
 	}
@@ -85,18 +86,18 @@ public class _Activity extends kr.kymedia.karaoke.play.app._Activity {
 	}
 
 	protected void openIntent(Intent intent) {
-		// Log.e(__CLASSNAME__, getMethodName() + intent);
+		// _Log.e(__CLASSNAME__, getMethodName() + intent);
 
 		if (intent.getData() != null) {
 			final Uri uri = intent.getData();
 
 			if (!TextUtils.isEmpty(uri.getPath())) {
-				// Log.e(__CLASSNAME__, getMethodName() + "[DATA]" + uri);
+				// _Log.e(__CLASSNAME__, getMethodName() + "[DATA]" + uri);
 
 				Bundle extras = new Bundle();
 				extras.putParcelable("pathPlay", uri);
 
-				Log.w(__CLASSNAME__, getMethodName() + "[DATA]" + uri);
+				_Log.w(__CLASSNAME__, getMethodName() + "[DATA]" + uri);
 				// openMain(extras, null);
 				openPlay(extras, null);
 			}
@@ -104,12 +105,12 @@ public class _Activity extends kr.kymedia.karaoke.play.app._Activity {
 			final Uri uri = intent.getExtras().getParcelable("pathPlay");
 
 			if (uri != null && !TextUtils.isEmpty(uri.getPath())) {
-				// Log.e(__CLASSNAME__, getMethodName() + "[DATA]" + uri);
+				// _Log.e(__CLASSNAME__, getMethodName() + "[DATA]" + uri);
 
 
 				Bundle extras = intent.getExtras();
 
-				Log.w(__CLASSNAME__, getMethodName() + "[EXTRA]" + extras);
+				_Log.w(__CLASSNAME__, getMethodName() + "[EXTRA]" + extras);
 				openPlay(extras, null);
 			}
 		}
@@ -117,7 +118,7 @@ public class _Activity extends kr.kymedia.karaoke.play.app._Activity {
 
 	@Override
 	protected void openMain(Bundle extras, Uri data) {
-		Log.e(__CLASSNAME__, getMethodName() + "Extras[" + extras + "] - Data[" + data + "]");
+		_Log.e(__CLASSNAME__, getMethodName() + "Extras[" + extras + "] - Data[" + data + "]");
 
 		super.openMain(extras, data);
 	}
@@ -128,7 +129,7 @@ public class _Activity extends kr.kymedia.karaoke.play.app._Activity {
 	 * </pre>
 	 */
 	protected void openPlay(Bundle extras, Uri data) {
-		Log.e(__CLASSNAME__, getMethodName() + "Extras[" + extras + "] - Data[" + data + "]");
+		_Log.e(__CLASSNAME__, getMethodName() + "Extras[" + extras + "] - Data[" + data + "]");
 
 		Intent intent = new Intent(getApplicationContext(), _PlayActivity.class);
 
@@ -138,7 +139,7 @@ public class _Activity extends kr.kymedia.karaoke.play.app._Activity {
 
 		intent.setData(data);
 
-		// Log.e(__CLASSNAME__, getMethodName() + intent);
+		// _Log.e(__CLASSNAME__, getMethodName() + intent);
 		intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		startActivity(intent);
 	}
@@ -153,7 +154,7 @@ public class _Activity extends kr.kymedia.karaoke.play.app._Activity {
 			int state = intent.getIntExtra("state", -1);
 			switch (state) {
 			case 0:
-				Log.e(__CLASSNAME__, "Headset unplugged");
+				_Log.e(__CLASSNAME__, "Headset unplugged");
 				getAudioManager().setStreamMute(AudioManager.STREAM_MUSIC, true);
 				Fragment fragment = getCurrentFragment();
 				if (fragment instanceof PlayFragment) {
@@ -167,7 +168,7 @@ public class _Activity extends kr.kymedia.karaoke.play.app._Activity {
 				});
 				break;
 			case 1:
-				Log.e(__CLASSNAME__, "Headset plugged");
+				_Log.e(__CLASSNAME__, "Headset plugged");
 				// if (fragment instanceof PlayFragment) {
 				// ((PlayFragment) fragment).resume();
 				// }

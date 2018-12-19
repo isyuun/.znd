@@ -32,7 +32,8 @@
 
 package kr.kymedia.karaoke.app;
 
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
+
 import android.app.ActionBar;
 import android.content.Intent;
 import android.net.Uri;
@@ -92,7 +93,7 @@ public class AppCompatActivity extends android.support.v7.app.AppCompatActivity 
 	}
 
 	protected void openMain(Bundle extras, Uri data) {
-		Log.e(__CLASSNAME__, getMethodName() + "Extras[" + extras + "] - Data[" + data + "]");
+		_Log.e(__CLASSNAME__, getMethodName() + "Extras[" + extras + "] - Data[" + data + "]");
 
 		Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
 

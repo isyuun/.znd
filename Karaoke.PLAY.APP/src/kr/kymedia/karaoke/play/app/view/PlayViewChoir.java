@@ -33,7 +33,7 @@
 package kr.kymedia.karaoke.play.app.view;
 
 import kr.kymedia.karaoke.play.app.R;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -144,7 +144,7 @@ public class PlayViewChoir extends PlayViewTempo {
 	}
 
 	void choir(boolean init) {
-		Log.i(__CLASSNAME__, getMethodName() + isChoir + ":" + init);
+		_Log.i(__CLASSNAME__, getMethodName() + isChoir + ":" + init);
 
 		if (init) {
 			if (isChoir) {
@@ -192,7 +192,7 @@ public class PlayViewChoir extends PlayViewTempo {
 
 	@Override
 	public void setEnabled(final boolean enabled) {
-		// Log.w(__CLASSNAME__, getMethodName() + enabled + ":" + isPlaying());
+		// _Log.w(__CLASSNAME__, getMethodName() + enabled + ":" + isPlaying());
 
 		super.setEnabled(enabled);
 
@@ -211,7 +211,7 @@ public class PlayViewChoir extends PlayViewTempo {
 	@Override
 	void setPlayView() {
 
-		Log.e(__CLASSNAME__, getMethodName());
+		_Log.e(__CLASSNAME__, getMethodName());
 		super.setPlayView();
 
 		((ImageButton) findViewById(R.id.buttonReset)).setOnClickListener(new OnClickListener() {

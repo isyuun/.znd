@@ -116,7 +116,7 @@ public class KaraokeEdit extends RelativeLayout {
 				@Override
 				public void onSystemUiVisibilityChange(int visibility) {
 
-					// Log.d(edit.toString(), getMethodName() + visibility);
+					// _Log.d(edit.toString(), getMethodName() + visibility);
 					if (visibility == 6) {
 						setEditable(false);
 					}
@@ -129,7 +129,7 @@ public class KaraokeEdit extends RelativeLayout {
 
 			@Override
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-				// Log.w(edit.toString(), getMethodName() + v + actionId + event);
+				// _Log.w(edit.toString(), getMethodName() + v + actionId + event);
 
 				return false;
 			}
@@ -137,7 +137,7 @@ public class KaraokeEdit extends RelativeLayout {
 	}
 
 	public void setEditable(boolean enabled) {
-		// Log.e(toString(), getMethodName() + enabled);
+		// _Log.e(toString(), getMethodName() + enabled);
 
 		this.edit.setFocusable(true);
 		this.edit.setFocusableInTouchMode(true);

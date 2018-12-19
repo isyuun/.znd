@@ -37,7 +37,7 @@ import kr.kymedia.karaoke.play._SoundTouchPlay;
 import kr.kymedia.karaoke.play.app.R;
 import kr.kymedia.karaoke.play.app.view.SongPlayView;
 import kr.kymedia.karaoke.play.app.view._PlayView;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import kr.kymedia.karaoke.widget.KaraokeTextEdit;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -94,7 +94,7 @@ public class PlayFragment2 extends PlayFragment {
 	}
 
 	protected _PlayView addChoir() {
-		Log.w(__CLASSNAME__, getMethodName() + getChoirs().size());
+		_Log.w(__CLASSNAME__, getMethodName() + getChoirs().size());
 
 		_PlayView view = null;
 
@@ -113,8 +113,8 @@ public class PlayFragment2 extends PlayFragment {
 			String path = ((KaraokeTextEdit) findViewById(R.id.editPath)).getText().toString();
 			view.setPath(path);
 
-			Log.e(__CLASSNAME__, getMethodName() + getPath());
-			Log.e(__CLASSNAME__, getMethodName() + view.getPath());
+			_Log.e(__CLASSNAME__, getMethodName() + getPath());
+			_Log.e(__CLASSNAME__, getMethodName() + view.getPath());
 		}
 
 		return view;
@@ -134,7 +134,7 @@ public class PlayFragment2 extends PlayFragment {
 	}
 
 	private void choir(boolean init) {
-		Log.e(__CLASSNAME__, getMethodName());
+		_Log.e(__CLASSNAME__, getMethodName());
 
 		if (init) {
 			setChoir(R.id.choir);
@@ -156,7 +156,7 @@ public class PlayFragment2 extends PlayFragment {
 
 	@Override
 	protected void setChoirs() {
-		// Log.i(__CLASSNAME__, getMethodName() + getChoirs());
+		// _Log.i(__CLASSNAME__, getMethodName() + getChoirs());
 		super.setChoirs();
 
 		for (SongPlayView song : getChoirs()) {
@@ -166,7 +166,7 @@ public class PlayFragment2 extends PlayFragment {
 
 	@Override
 	public void onPrepared() {
-		Log.d(__CLASSNAME__, getMethodName());
+		_Log.d(__CLASSNAME__, getMethodName());
 
 
 		if (getChoirs().size() > 0) {

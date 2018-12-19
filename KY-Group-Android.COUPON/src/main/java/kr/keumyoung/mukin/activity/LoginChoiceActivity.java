@@ -7,8 +7,10 @@ import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -49,17 +51,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginChoiceActivity extends _BaseActivity {
+public class LoginChoiceActivity extends LoginActivity {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
-
-    @BindView(R.id.alternative_sign_in_button)
-    CardView alternativeSignInButton;
-    @BindView(R.id.kakao_button)
-    FrameLayout kakaoButton;
-    @BindView(R.id.facebook_button)
-    FrameLayout facebookButton;
-    @BindView(R.id.social_login_section)
-    LinearLayout socialLoginSection;
 
     @Inject
     NavigationHelper navigationHelper;
@@ -72,6 +65,11 @@ public class LoginChoiceActivity extends _BaseActivity {
 
     CallbackManager callbackManager;
 
+    @BindView(R.id.kakao_button)
+    FrameLayout kakaoButton;
+    @BindView(R.id.facebook_button)
+    FrameLayout facebookButton;
+
     @Override
     protected void setFlags() {
         //super.setFlags();
@@ -83,7 +81,7 @@ public class LoginChoiceActivity extends _BaseActivity {
         //로그인
         if (!preferenceHelper.getString(PreferenceKeys.LOGIN_EMAIL).isEmpty() && !preferenceHelper.getString(PreferenceKeys.LOGIN_PASSWORD).isEmpty() &&
                 !preferenceHelper.getString(PreferenceKeys.USER_ID).isEmpty() && !preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN).isEmpty()) {
-            finish();
+            //finish();
         }
     }
 
@@ -104,7 +102,7 @@ public class LoginChoiceActivity extends _BaseActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        View view = LayoutInflater.from(this).inflate(R.layout.activity_login_choice, null, false);
+        View view = LayoutInflater.from(this).inflate(R.layout.activity_login_choice_2, null, false);
         inflateContainerView(view);
 
         MainApplication.getInstance().getMainComponent().inject(this);
@@ -120,7 +118,30 @@ public class LoginChoiceActivity extends _BaseActivity {
         makeKakaoLogin();
     }
 
-    private void updateSavedValue() {
+    /**
+     * 가지랄하네
+     * {@link LoginActivity#onCreate()}
+     */
+    @Override
+    protected void onCreate() {
+    }
+
+    //@OnClick({R.id.kakao_button, R.id.facebook_button})
+    @OnClick({R.id.signup_anchor, R.id.login_button, R.id.kakao_button, R.id.facebook_button})
+    public void onViewClicked(View view) {
+        super.onViewClicked(view);
+        switch (view.getId()) {
+            case R.id.kakao_button:
+                kakaoButton();
+                break;
+            case R.id.facebook_button:
+                facebookButton();
+                break;
+        }
+    }
+
+    protected void updateSavedValue() {
+        super.updateSavedValue();
         String savedEmail = preferenceHelper.getString(PreferenceKeys.LOGIN_EMAIL);
         if (savedEmail == null || savedEmail.isEmpty()) {
             // nothing saved
@@ -129,23 +150,8 @@ public class LoginChoiceActivity extends _BaseActivity {
             if (savedPassword == null || savedPassword.isEmpty()) {
                 // email is saved but password is not. nothing to do
             } else {
-                onViewClicked(alternativeSignInButton);
+                //openPreferenceLogin();
             }
-        }
-    }
-
-    @OnClick({R.id.alternative_sign_in_button, R.id.kakao_button, R.id.facebook_button})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.alternative_sign_in_button:
-                navigationHelper.navigate(this, _LoginActivity.class, true, null);
-                break;
-            case R.id.kakao_button:
-                kakaoButton();
-                break;
-            case R.id.facebook_button:
-                facebookButton();
-                break;
         }
     }
 
@@ -164,11 +170,22 @@ public class LoginChoiceActivity extends _BaseActivity {
     }
 
     @Override
+    protected void onLoginSuccess(String email, String nickName) {
+        super.onLoginSuccess(email, nickName);
+        finish();
+    }
+
+    @Override
     protected void onLoginFailure() {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
         super.onLoginFailure();
         kakaoLogoutUnlink();
         facebookLogoutUnlink();
+    }
+
+    @Override
+    protected void onLogoutSuccess() {
+        super.onLogoutSuccess();
     }
 
     private void kakaoButton() {

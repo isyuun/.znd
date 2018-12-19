@@ -119,13 +119,13 @@ public class RequestParams3 extends RequestParams2 {
                 // param이둘이상
                 for (int i = 0; i < aParam.length; i++) {
                     String param = aParam[i];
-                    // Log.e(__CLASSNAME__, param[i]);
+                    // _Log.e(__CLASSNAME__, param[i]);
                     putParam(param);
                 }
             } else {
                 String param = params;
                 // param이하나만
-                // Log.e(__CLASSNAME__, param);
+                // _Log.e(__CLASSNAME__, param);
                 putParam(param);
             }
         }

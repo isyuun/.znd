@@ -172,7 +172,7 @@ public class Application2 extends Application {
     public void onSuccess(int statusCode, Header[] headers, String response) {
         // called when response HTTP status is "200 OK"
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "onSuccess(...)" + statusCode + "," + convertHeadersToHashMap(headers) + "." + response);
-        //Log.e(__CLASSNAME__, "[text]" + response);
+        //_Log.e(__CLASSNAME__, "[text]" + response);
         //showProgress(false);
         //Toast.makeText(getActivity(), response, Toast.LENGTH_LONG).show();
         SharedPreferences sharedPref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
@@ -182,13 +182,13 @@ public class Application2 extends Application {
         String date = "";
         try {
             JSONObject json = new JSONObject(response).getJSONObject(getString(R.string.JSN));
-            //Log.e(__CLASSNAME__, "[JSN]" + json.toString(2));
+            //_Log.e(__CLASSNAME__, "[JSN]" + json.toString(2));
             JSONObject err = json.getJSONObject(getString(R.string.ERR));
             code = err.getString(getString(R.string.code));
             message = err.getString(getString(R.string.message));
-            //Log.e(__CLASSNAME__, "[ERR]" + err.toString(2));
+            //_Log.e(__CLASSNAME__, "[ERR]" + err.toString(2));
             JSONObject dat = json.getJSONArray(getString(R.string.DAT)).getJSONObject(0);
-            //Log.e(__CLASSNAME__, "[DAT]" + dat.toString(2));
+            //_Log.e(__CLASSNAME__, "[DAT]" + dat.toString(2));
             this.email = (dat.has(getString(R.string.email)) ? dat.getString(getString(R.string.email)) : null);
             editor.putString(getString(R.string.email), this.email);
             this.coupon = (dat.has("coupon_num") ? dat.getString("coupon_num") : null);

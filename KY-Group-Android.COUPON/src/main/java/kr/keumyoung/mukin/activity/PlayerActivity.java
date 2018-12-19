@@ -265,7 +265,7 @@ public class PlayerActivity extends _BaseActivity {
             //    if (audioJNI != null && isPlayed) {
             //        songFinishWithMic = false;
             //        audioJNI.StopAudio();
-            //        Log.d(TAG, "StopAudio");
+            //        _Log.d(TAG, "StopAudio");
             //        alertMessageBox(getResources().getString(R.string.error_headset_eject));
             //        enableRecordUI(false);
             //    }
@@ -619,7 +619,7 @@ public class PlayerActivity extends _BaseActivity {
             //if (isPossibleRecord()) {
             //    if (audioJNI != null) {
             //        audioJNI.StartAudio(sampleRate, bufferSize, tempPath, destinationPath);
-            //        Log.d(TAG, "StartAudio " + MicChecker.getInstance().getStates());
+            //        _Log.d(TAG, "StartAudio " + MicChecker.getInstance().getStates());
             //        enableRecordUI(true);
             //        enableMicEffectUI(true);
             //    }

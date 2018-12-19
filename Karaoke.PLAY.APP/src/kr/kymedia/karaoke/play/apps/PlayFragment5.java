@@ -115,13 +115,13 @@ public class PlayFragment5 extends PlayFragment4 {
 	private class MediaRouterCallback extends MediaRouter.Callback {
 		@Override
 		public void onRouteSelected(MediaRouter router, RouteInfo route) {
-			// Log.d(__CLASSNAME__, "onRouteSelected: " + route);
+			// _Log.d(__CLASSNAME__, "onRouteSelected: " + route);
 			PlayFragment5.this.onRouteSelected(route);
 		}
 
 		@Override
 		public void onRouteUnselected(MediaRouter router, RouteInfo route) {
-			// Log.d(__CLASSNAME__, "onRouteUnselected: " + route);
+			// _Log.d(__CLASSNAME__, "onRouteUnselected: " + route);
 			PlayFragment5.this.onRouteUnselected(route);
 		}
 	}
@@ -284,7 +284,7 @@ public class PlayFragment5 extends PlayFragment4 {
 
 		@Override
 		protected Void doInBackground(String... params) {
-			// Log.e(PlayFragmentCastChrome.this.toString(), getMethodName() + getPath());
+			// _Log.e(PlayFragmentCastChrome.this.toString(), getMethodName() + getPath());
 
 			if (!TextUtils.isEmpty(getPath())) {
 				open();
@@ -379,7 +379,7 @@ public class PlayFragment5 extends PlayFragment4 {
 	@Override
 	public void onTime(int t) {
 
-		// Log.d(__CLASSNAME__, getMethodName() + t);
+		// _Log.d(__CLASSNAME__, getMethodName() + t);
 		super.onTime(t);
 
 		getLead().setOnTime(t);

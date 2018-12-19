@@ -31,7 +31,7 @@
     <header android:title="@string/pref_login">
         <intent
             android:action="intent.open.keumyoung.karaoke.Login.Acitivity"
-            android:targetClass="kr.keumyoung.mukin.activity.LoginChoiceActivity" />
+            android:targetClass="kr.keumyoung.mukin.activity._LoginChoiceActivity" />
     </header>
 
     <header

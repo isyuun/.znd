@@ -20,12 +20,12 @@
  *  of (c)KYGroup Co.,Ltd. ("Confidential Information").
  * 
  * project	:	Karaoke.KPOP
- * filename	:	if (_IKaraoke.DEBUG)Log.java
+ * filename	:	if (_IKaraoke.DEBUG)_Log.java
  * author	:	isyoon
  *
  * <pre>
  * kr.kymedia.karaoke.util
- *    |_ if (_IKaraoke.DEBUG)Log.java
+ *    |_ if (_IKaraoke.DEBUG)_Log.java
  * </pre>
  * 
  */
@@ -50,7 +50,7 @@ public class Log2 {
 
 	// private static boolean enable = true;
 
-	// public Log() {
+	// public _Log() {
 	// // TODO Auto-generated constructor stub
 	// }
 

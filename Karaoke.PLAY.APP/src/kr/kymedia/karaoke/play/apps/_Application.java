@@ -32,7 +32,8 @@
 
 package kr.kymedia.karaoke.play.apps;
 
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
+
 import android.app.Application;
 
 /**
@@ -65,7 +66,7 @@ public class _Application extends Application {
 
 	@Override
 	public void onCreate() {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 
 
 		super.onCreate();
@@ -73,7 +74,7 @@ public class _Application extends Application {
 
 	@Override
 	public void onTerminate() {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 
 
 		super.onTerminate();

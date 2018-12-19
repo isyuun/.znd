@@ -32,7 +32,8 @@
 
 package kr.kymedia.karaoke.widget;
 
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -98,14 +99,14 @@ public class KaraokeTextEdit extends KaraokeText implements OnClickListener, OnL
 
 	@Override
 	public void onClick(View v) {
-		Log.w(toString(), getMethodName() + v);
+		_Log.w(toString(), getMethodName() + v);
 
 		setEditable(true);
 	}
 
 	@Override
 	public boolean onLongClick(View v) {
-		Log.w(toString(), getMethodName() + v);
+		_Log.w(toString(), getMethodName() + v);
 
 		setEditable(true);
 		return true;

@@ -84,7 +84,7 @@ public class FileDialogFragmentBase extends FileDialogFragment implements
 
 	@Override
 	public void setResult(int resultCode, Intent data) {
-		// Log.e(toString(), getMethodName() + resultCode + ":" + data);
+		// _Log.e(toString(), getMethodName() + resultCode + ":" + data);
 
 
 		super.setResult(resultCode, data);
@@ -104,14 +104,14 @@ public class FileDialogFragmentBase extends FileDialogFragment implements
 
 		// return super.onCreateView(inflater, container, savedInstanceState);
 		root = inflater.inflate(R.layout.file_dialog_main, container, false);
-		// Log.e(toString(), getMethodName() + root);
+		// _Log.e(toString(), getMethodName() + root);
 		return root;
 	}
 
 	@Override
 	@NonNull
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		// Log.i(toString(), getMethodName());
+		// _Log.i(toString(), getMethodName());
 
 		// return super.onCreateDialog(savedInstanceState);
 		Dialog dialog = super.onCreateDialog(savedInstanceState);
@@ -193,7 +193,7 @@ public class FileDialogFragmentBase extends FileDialogFragment implements
 
 	@Override
 	public final boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-		// Log.e(toString(), getMethodName() + dialog + keyCode + event);
+		// _Log.e(toString(), getMethodName() + dialog + keyCode + event);
 
 
 		if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {

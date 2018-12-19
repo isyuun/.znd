@@ -89,19 +89,19 @@ public class ContCircularSeekBar extends RelativeLayout {
 
         //up
         if ((x > w * 1/3) && (x < w * 2/3) && y < h * 1/3) {
-            //Log.e(__CLASSNAME__, getMethodName() + "[UP]");
+            //_Log.e(__CLASSNAME__, getMethodName() + "[UP]");
             if (this.listener != null) listener.onUpClick(this);
         } else if ((x > w * 1/3) && (x < w * 2/3) && y > h * 2/3) {
-            //Log.e(__CLASSNAME__, getMethodName() + "[DOWN]");
+            //_Log.e(__CLASSNAME__, getMethodName() + "[DOWN]");
             if (this.listener != null) listener.onDownClick(this);
         } else if ((y > h * 1/3) && (y < h * 2/3) && x < w * 1/3) {
-            //Log.e(__CLASSNAME__, getMethodName() + "[LEFT]");
+            //_Log.e(__CLASSNAME__, getMethodName() + "[LEFT]");
             if (this.listener != null) listener.onLeftClick(this);
         } else if ((y > h * 1/3) && (y < h * 2/3) && x > w * 2/3) {
-            //Log.e(__CLASSNAME__, getMethodName() + "[RIGHT]");
+            //_Log.e(__CLASSNAME__, getMethodName() + "[RIGHT]");
             if (this.listener != null) listener.onRightClick(this);
         } else if ((x > w * 1/3) && (x < w * 2/3) && (y > h * 1/3) && (y < h * 2/3)) {
-            //Log.e(__CLASSNAME__, getMethodName() + "[CENTER]");
+            //_Log.e(__CLASSNAME__, getMethodName() + "[CENTER]");
             if (this.listener != null) listener.onCenterClick(this);
         }
 

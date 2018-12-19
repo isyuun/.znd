@@ -127,7 +127,7 @@ public class TextUtil {
 		// ret = ret.replace(filename, filename_enc);
 		// } catch (Exception e) {
 		//
-		// Log.e("[encNetworkFileUrl]", Log.getStackTraceString(e));
+		// _Log.e("[encNetworkFileUrl]", _Log.getStackTraceString(e));
 		// };
 		// 일단은 공백만 처리해 본다.
 		ret = ret.replace(" ", "%20");
@@ -147,7 +147,7 @@ public class TextUtil {
 	// ret = cursor.getString(column_index);
 	// } catch (Exception e) {
 	//
-	// Log.e("[getRealPathFromURI]", Log.getStackTraceString(e));
+	// _Log.e("[getRealPathFromURI]", _Log.getStackTraceString(e));
 	// }
 	// return ret;
 	// }
@@ -338,7 +338,7 @@ public class TextUtil {
 			return ret;
 		} catch (Exception e) {
 
-			// Log.e("[numberFormat]", Log.getStackTraceString(e));
+			// _Log.e("[numberFormat]", _Log.getStackTraceString(e));
 			return str;
 		}
 	}
@@ -350,7 +350,7 @@ public class TextUtil {
 			return ret;
 		} catch (Exception e) {
 
-			// Log.e("[unNumberFormat]", Log.getStackTraceString(e));
+			// _Log.e("[unNumberFormat]", _Log.getStackTraceString(e));
 			return str;
 		}
 	}
@@ -484,14 +484,14 @@ public class TextUtil {
 	// String ret = "";
 	// try {
 	// Field f = cls.getDeclaredField("MY_KEYCODE_01");
-	// Log.d(TAG, f.toString());
+	// _Log.d(TAG, f.toString());
 	// value = f.getInt(null);
 	// } catch (Exception e) {
 	//
-	// Log.e("[getValueByName]", Log.getStackTraceString(e));
+	// _Log.e("[getValueByName]", _Log.getStackTraceString(e));
 	// }
 	//
-	// Log.d(TAG, "value = " + value);
+	// _Log.d(TAG, "value = " + value);
 	// return ret;
 	// }
 
@@ -658,7 +658,7 @@ public class TextUtil {
 	}
 
 	public static String getMimeTypeFromFile(String file) {
-		// Log.i("[MIME]", "" + file);
+		// _Log.i("[MIME]", "" + file);
 
 		String fileExtension = getFileExtension(file);
 		String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(fileExtension);
@@ -674,7 +674,7 @@ public class TextUtil {
 	 * >Android: Content type error using ACTION_VIEW with a local file</a>
 	 */
 	public static String getMimeTypeFromFile(File file) {
-		// Log.i("[MIME]", "" + file);
+		// _Log.i("[MIME]", "" + file);
 
 		// Get the file path
 		Uri path = Uri.fromFile(file);
@@ -693,7 +693,7 @@ public class TextUtil {
 	}
 
 	public static String getMimeTypeFromUrl(String url) {
-		// Log.i("[MIME]", "" + url);
+		// _Log.i("[MIME]", "" + url);
 
 		String type = null;
 		String extension = MimeTypeMap.getFileExtensionFromUrl(url);
@@ -714,7 +714,7 @@ public class TextUtil {
 	// */
 	// public static String getMimeTypeFromUrl(String url)
 	// {
-	// Log.i("[MIME]", "" + url);
+	// _Log.i("[MIME]", "" + url);
 	//
 	// String mimeType = "";
 	//
@@ -733,7 +733,7 @@ public class TextUtil {
 	// connection.setConnectTimeout(150);
 	// connection.setReadTimeout(150);
 	// mimeType = connection.getContentType();
-	// Log.i("[MIME]", "mimeType from content-type "+ mimeType);
+	// _Log.i("[MIME]", "mimeType from content-type "+ mimeType);
 	// }
 	// catch (Exception ignored)
 	// {
@@ -754,7 +754,7 @@ public class TextUtil {
 	// catch (Exception ignored)
 	// {
 	// }
-	// Log.i("[MIME]", "mimeType guessed from url "+ mimeType);
+	// _Log.i("[MIME]", "mimeType guessed from url "+ mimeType);
 	// }
 	// return mimeType;
 	// }

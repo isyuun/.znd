@@ -287,7 +287,7 @@ public class ChipsMultiAutoCompleteTextview extends MultiAutoCompleteTextView im
 			// }
 			mRecipients += name + __TOKENIZER__;
 
-			// Log.i(__CLASSNAME__, getMethodName() + "ChipsItem -> " + uid + "," + name);
+			// _Log.i(__CLASSNAME__, getMethodName() + "ChipsItem -> " + uid + "," + name);
 			idx++;
 		}
 

@@ -32,8 +32,9 @@
 
 package kr.kymedia.karaoke.record;
 
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import kr.kymedia.karaoke.util.Util;
+
 import net.sourceforge.lame.Lame;
 import android.media.AudioRecord;
 import android.os.AsyncTask;
@@ -144,10 +145,10 @@ public class SongRecorder4 extends SongRecorder1 {
 			return;
 		}
 
-		// Log.d(__CLASSNAME__, "onPeriodicNotification (...)" + mPCMBuf.toString() + "," + mPCMBuf.length);
+		// _Log.d(__CLASSNAME__, "onPeriodicNotification (...)" + mPCMBuf.toString() + "," + mPCMBuf.length);
 
 		if (mPaused) {
-			Log.d(__CLASSNAME__, "RECORD() ... PAUSE!!!");
+			_Log.d(__CLASSNAME__, "RECORD() ... PAUSE!!!");
 			return;
 		}
 
@@ -180,12 +181,12 @@ public class SongRecorder4 extends SongRecorder1 {
 				}
 			} catch (Exception e) {
 
-				Log.e(__CLASSNAME__,
+				_Log.e(__CLASSNAME__,
 						"RECORD() ... NG!!! (" + mPCMBuf.toString() + ", " + mp3Buf.toString() + ", "
 								+ bytesEncoded + ")");
-				// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+				// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			}
-			Log.d(__CLASSNAME__, "write(...)" + "," + bytesRead + "," + samplesRead + ", "
+			_Log.d(__CLASSNAME__, "write(...)" + "," + bytesRead + "," + samplesRead + ", "
 					+ bytesEncoded + "," + mPayloadSize);
 		} else {
 			// put WAV buffer to File
@@ -193,14 +194,14 @@ public class SongRecorder4 extends SongRecorder1 {
 				if (bytesRead > 0) {
 					mWAVFile.write(mPCMBuf, 0, bytesRead);
 				}
-				Log.d(__CLASSNAME__, "write(...)" + "," + bytesRead + "," + samplesRead + ", "
+				_Log.d(__CLASSNAME__, "write(...)" + "," + bytesRead + "," + samplesRead + ", "
 						+ bytesEncoded + "," + mPayloadSize);
 			} catch (Exception e) {
 
-				Log.e(__CLASSNAME__,
+				_Log.e(__CLASSNAME__,
 						"RECORD() ... NG!!! (" + mPCMBuf.toString() + ", " + mp3Buf.toString() + ", "
 								+ bytesEncoded + ")");
-				// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+				// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			}
 			mPayloadSize += bytesRead;
 		}

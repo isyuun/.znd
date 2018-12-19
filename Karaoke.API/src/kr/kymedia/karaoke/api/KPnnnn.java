@@ -197,7 +197,7 @@ public class KPnnnn extends KPjson {
 		p_opcode = opcode;
 		__CLASSNAME__ = toString();
 
-		// if (_IKaraoke.DEBUG)Log.e(__CLASSNAME__, "[INIT:" + p_opcode + "]" + getMethodName());
+		// if (_IKaraoke.DEBUG)_Log.e(__CLASSNAME__, "[INIT:" + p_opcode + "]" + getMethodName());
 		if (_IKaraoke.DEBUG) Log2.e(__CLASSNAME__, "[INIT:" + p_opcode + "]" + this.getClass().getSimpleName());
 		if (_IKaraoke.DEBUG) Log2.i(__CLASSNAME__, "[OPCODE]" + p_opcode);
 		if (_IKaraoke.DEBUG) Log2.i(__CLASSNAME__, "[M1]" + p_m1);
@@ -391,7 +391,7 @@ public class KPnnnn extends KPjson {
 	 * 전문리스너
 	 */
 	public void setOnKPnnnnListner(KPnnnnListener listener) {
-		// if (_IKaraoke.DEBUG)Log.e(__CLASSNAME__, getMethodName() + listener);
+		// if (_IKaraoke.DEBUG)_Log.e(__CLASSNAME__, getMethodName() + listener);
 		this.mListener = listener;
 	}
 
@@ -544,7 +544,7 @@ public class KPnnnn extends KPjson {
 			mOnStartListener = null;
 			mOnSuccessListener = null;
 
-			// if (_IKaraoke.APP_API_TEST || _IKaraoke.DEBUG)Log.e("MEMINFO-HEAPINFO", this + "::" + getMethodName() + "[BF]");
+			// if (_IKaraoke.APP_API_TEST || _IKaraoke.DEBUG)_Log.e("MEMINFO-HEAPINFO", this + "::" + getMethodName() + "[BF]");
 			// if (_IKaraoke.APP_API_TEST || _IKaraoke.DEBUG)EnvironmentUtils.getMemoryInfo(__CLASSNAME__ + ":" + getMethodName(), context);
 		} catch (Exception e) {
 
@@ -559,10 +559,10 @@ public class KPnnnn extends KPjson {
 
 		release();
 
-		// if (_IKaraoke.APP_API_TEST || _IKaraoke.DEBUG)Log.d("MEMINFO-HEAPINFO", this + "::" + getMethodName() + "[BF]");
+		// if (_IKaraoke.APP_API_TEST || _IKaraoke.DEBUG)_Log.d("MEMINFO-HEAPINFO", this + "::" + getMethodName() + "[BF]");
 		// if (_IKaraoke.APP_API_TEST || _IKaraoke.DEBUG)EnvironmentUtils.getMemoryInfo(__CLASSNAME__ + ":" + getMethodName(), context);
 		// System.gc();
-		// if (_IKaraoke.APP_API_TEST || _IKaraoke.DEBUG)Log.d("MEMINFO-HEAPINFO", this + "::" + getMethodName() + "[AF]");
+		// if (_IKaraoke.APP_API_TEST || _IKaraoke.DEBUG)_Log.d("MEMINFO-HEAPINFO", this + "::" + getMethodName() + "[AF]");
 		// if (_IKaraoke.APP_API_TEST || _IKaraoke.DEBUG)EnvironmentUtils.getMemoryInfo(__CLASSNAME__ + ":" + getMethodName(), context);
 	}
 
@@ -574,7 +574,7 @@ public class KPnnnn extends KPjson {
 
 		this.mHandler = handler;
 
-		// if (_IKaraoke.DEBUG)Log.e(__CLASSNAME__, "mid:" + mid + ", passtype:" + passtype + ", passcnt:" + passcnt);
+		// if (_IKaraoke.DEBUG)_Log.e(__CLASSNAME__, "mid:" + mid + ", passtype:" + passtype + ", passcnt:" + passcnt);
 		isQuerying = false;
 
 		this.KPparam = KP_info;
@@ -609,7 +609,7 @@ public class KPnnnn extends KPjson {
 		// // message = "Downloading..." + message;
 		// //}
 		// //
-		// //if (_IKaraoke.DEBUG)Log.e(__CLASSNAME__, message + " - HEADER:" + diff + " - " + size + " / " + total + " - " + (size) + " / " + (total-diff));
+		// //if (_IKaraoke.DEBUG)_Log.e(__CLASSNAME__, message + " - HEADER:" + diff + " - " + size + " / " + total + " - " + (size) + " / " + (total-diff));
 		//
 		// if (mListener != null) {
 		// mListener.onKPnnnnProgress(size, total);
@@ -753,7 +753,7 @@ public class KPnnnn extends KPjson {
 					// message = "Downloading..." + message;
 					// }
 					//
-					// if (_IKaraoke.DEBUG)Log.e(__CLASSNAME__, message + " - HEADER:" + diff + " - " + size + " / " + total + " - " + (size) + " / " + (total-diff));
+					// if (_IKaraoke.DEBUG)_Log.e(__CLASSNAME__, message + " - HEADER:" + diff + " - " + size + " / " + total + " - " + (size) + " / " + (total-diff));
 
 					if (_IKaraoke.DEBUG) Log2.e(__CLASSNAME__, "onProgress" + message);
 				} catch (Exception e) {
@@ -846,7 +846,7 @@ public class KPnnnn extends KPjson {
 		super.sendMessage(what, r_code, r_message);
 
 		// if (getLists() != null) {
-		// Log.i(__CLASSNAME__, getMethodName() + what + ", " + p_opcode + ", size:" + getLists().size());
+		// _Log.i(__CLASSNAME__, getMethodName() + what + ", " + p_opcode + ", size:" + getLists().size());
 		// }
 
 		post(new Runnable() {
@@ -854,13 +854,13 @@ public class KPnnnn extends KPjson {
 			@Override
 			public void run() {
 
-				// if (_IKaraoke.DEBUG || _IKaraoke.DEBUG) Log.w(KPnnnn.this.toString(), "[RECV:" + p_opcode + "]" + what);
-				// if (_IKaraoke.DEBUG || _IKaraoke.DEBUG) Log.w(KPnnnn.this.toString(), "[RECV:" + p_opcode + "]" + mOnStartListener);
-				// if (_IKaraoke.DEBUG || _IKaraoke.DEBUG) Log.w(KPnnnn.this.toString(), "[RECV:" + p_opcode + "]" + mOnFailListener);
-				// if (_IKaraoke.DEBUG || _IKaraoke.DEBUG) Log.w(KPnnnn.this.toString(), "[RECV:" + p_opcode + "]" + mOnErrorListener);
-				// if (_IKaraoke.DEBUG || _IKaraoke.DEBUG) Log.w(KPnnnn.this.toString(), "[RECV:" + p_opcode + "]" + mOnSuccessListener);
-				// if (_IKaraoke.DEBUG || _IKaraoke.DEBUG) Log.w(KPnnnn.this.toString(), "[RECV:" + p_opcode + "]" + mOnCancelListener);
-				// if (_IKaraoke.DEBUG || _IKaraoke.DEBUG) Log.w(KPnnnn.this.toString(), "[RECV:" + p_opcode + "]" + mOnFinishListener);
+				// if (_IKaraoke.DEBUG || _IKaraoke.DEBUG) _Log.w(KPnnnn.this.toString(), "[RECV:" + p_opcode + "]" + what);
+				// if (_IKaraoke.DEBUG || _IKaraoke.DEBUG) _Log.w(KPnnnn.this.toString(), "[RECV:" + p_opcode + "]" + mOnStartListener);
+				// if (_IKaraoke.DEBUG || _IKaraoke.DEBUG) _Log.w(KPnnnn.this.toString(), "[RECV:" + p_opcode + "]" + mOnFailListener);
+				// if (_IKaraoke.DEBUG || _IKaraoke.DEBUG) _Log.w(KPnnnn.this.toString(), "[RECV:" + p_opcode + "]" + mOnErrorListener);
+				// if (_IKaraoke.DEBUG || _IKaraoke.DEBUG) _Log.w(KPnnnn.this.toString(), "[RECV:" + p_opcode + "]" + mOnSuccessListener);
+				// if (_IKaraoke.DEBUG || _IKaraoke.DEBUG) _Log.w(KPnnnn.this.toString(), "[RECV:" + p_opcode + "]" + mOnCancelListener);
+				// if (_IKaraoke.DEBUG || _IKaraoke.DEBUG) _Log.w(KPnnnn.this.toString(), "[RECV:" + p_opcode + "]" + mOnFinishListener);
 
 				boolean sent = false;
 
@@ -1530,22 +1530,22 @@ public class KPnnnn extends KPjson {
 		// 구파일업로드
 		// String res = "";
 		//
-		// if (_IKaraoke.DEBUG)Log.e(__CLASSNAME__, getParams());
+		// if (_IKaraoke.DEBUG)_Log.e(__CLASSNAME__, getParams());
 		//
 		// try {
 		// res = FileUploder.HttpFileUpload(mStrQuery, getParams(), path);
 		//
 		// JSONObject obj = new JSONObject(res);
-		// //if (_IKaraoke.DEBUG)Log.d(__CLASSNAME__, obj.toString(2));
+		// //if (_IKaraoke.DEBUG)_Log.d(__CLASSNAME__, obj.toString(2));
 		//
 		// JSONObject record = obj.getJSONObject("record");
-		// //if (_IKaraoke.DEBUG)Log.i(__CLASSNAME__, "record - " + "\"" + record.toString() + "\"");
+		// //if (_IKaraoke.DEBUG)_Log.i(__CLASSNAME__, "record - " + "\"" + record.toString() + "\"");
 		//
 		// JSONArray infos = record.getJSONArray("info");
 		// JSONObject info = infos.getJSONObject(0);
 		//
 		// setInfo(new KPnnnnItem(info));
-		// if (_IKaraoke.DEBUG)Log.i(__CLASSNAME__, "info - " + "\"" + getInfo().toString(2) + "\"");
+		// if (_IKaraoke.DEBUG)_Log.i(__CLASSNAME__, "info - " + "\"" + getInfo().toString(2) + "\"");
 		//
 		// if (getInfo().getString("result_code").equals("00000")) {
 		// sendMessage(STATE_DATA_QUERY_SUCCESS, getInfo().getString("result_code"), getInfo()
@@ -3376,15 +3376,15 @@ public class KPnnnn extends KPjson {
 		// test
 		// String tst = "http://resource.kymedia.kr/record/kpop/20130402/64/1304022G9NPQU64.m4a";
 		// tst = android.util.Base64.encodeToString(SongUtil.makeEncryption("6390", tst).getBytes(), android.util.Base64.DEFAULT);
-		// if (_IKaraoke.DEBUG)Log.e(__CLASSNAME__, "test_url:" + tst);
+		// if (_IKaraoke.DEBUG)_Log.e(__CLASSNAME__, "test_url:" + tst);
 		// tst = SongUtil.makeDecryption("6390", new String(android.util.Base64.decode(tst.replace(" ", "+"), 0)));
-		// if (_IKaraoke.DEBUG)Log.e(__CLASSNAME__, "test_url:" + tst);
+		// if (_IKaraoke.DEBUG)_Log.e(__CLASSNAME__, "test_url:" + tst);
 		// 노출금지
 		String url = list.getValue("down_url");
-		// if (_IKaraoke.DEBUG)Log.e(__CLASSNAME__, "down_url:" + url);
+		// if (_IKaraoke.DEBUG)_Log.e(__CLASSNAME__, "down_url:" + url);
 		url = SongUtil.makeDecryption("6390", new String(android.util.Base64.decode(url.replace(" ", "+"), 0)));
 		// 노출금지
-		// if (_IKaraoke.DEBUG)Log.e(__CLASSNAME__, "down_url:" + url);
+		// if (_IKaraoke.DEBUG)_Log.e(__CLASSNAME__, "down_url:" + url);
 		long size = 0;
 		long total = Long.parseLong(list.getValue("filesize"));
 		if (!URLUtil.isNetworkUrl(url)) {

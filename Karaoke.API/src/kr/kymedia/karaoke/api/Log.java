@@ -20,12 +20,12 @@
  *  of (c)KYGroup Co.,Ltd. ("Confidential Information").
  * 
  * project	:	Karaoke.KPOP
- * filename	:	Log.java
+ * filename	:	_Log.java
  * author	:	isyoon
  *
  * <pre>
  * kr.kymedia.karaoke.util
- *    |_ Log.java
+ *    |_ _Log.java
  * </pre>
  * 
  */
@@ -48,7 +48,7 @@ public class Log {
 
 	private static boolean enable = _IKaraoke.DEBUG;
 
-	// public Log() {
+	// public _Log() {
 	// // TODO Auto-generated constructor stub
 	// }
 
@@ -232,9 +232,9 @@ public class Log {
 
 		//if (_IKaraoke.DEBUG && enable) {
 		//	if (_IKaraoke.IS_ABOVE_HONEYCOMB) {
-		//		return android.util.Log.e(tag, msg);
+		//		return android.util._Log.e(tag, msg);
 		//	} else {
-		//		return android.util.Log.e(tag, msg);
+		//		return android.util._Log.e(tag, msg);
 		//	}
 		//} else {
 		//	return 0;

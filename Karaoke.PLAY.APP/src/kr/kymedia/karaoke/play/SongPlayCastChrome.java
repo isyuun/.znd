@@ -155,7 +155,7 @@ public class SongPlayCastChrome extends SongPlayCast implements ISongPlayCast, I
 			@Override
 			public void onStatusUpdated() {
 				try {
-					// Log.e(__CLASSNAME__, getMethodName() + mRemoteMediaPlayer.getMediaStatus());
+					// _Log.e(__CLASSNAME__, getMethodName() + mRemoteMediaPlayer.getMediaStatus());
 					MediaStatus mediaStatus = mRemoteMediaPlayer.getMediaStatus();
 					if (mediaStatus != null) {
 						if (isPlaying && mediaStatus.getPlayerState() == MediaStatus.PLAYER_STATE_IDLE) {
@@ -176,11 +176,11 @@ public class SongPlayCastChrome extends SongPlayCast implements ISongPlayCast, I
 			@Override
 			public void onMetadataUpdated() {
 				try {
-					// Log.e(__CLASSNAME__, getMethodName() + mRemoteMediaPlayer.getMediaInfo());
+					// _Log.e(__CLASSNAME__, getMethodName() + mRemoteMediaPlayer.getMediaInfo());
 					// MediaInfo mediaInfo = mRemoteMediaPlayer.getMediaInfo();
 					// if (mediaInfo != null) {
 					// MediaMetadata metaData = mediaInfo.getMetadata();
-					// Log.e(__CLASSNAME__, getMethodName() + metaData);
+					// _Log.e(__CLASSNAME__, getMethodName() + metaData);
 					// }
 				} catch (Exception e) {
 
@@ -451,7 +451,7 @@ public class SongPlayCastChrome extends SongPlayCast implements ISongPlayCast, I
 				if (!TextUtil.isEmpty(tag.getFirst(FieldKey.TITLE)))
 					mediaMetadata.putString(MediaMetadata.KEY_TITLE, tag.getFirst(FieldKey.TITLE));
 				// if (!TextUtil.isEmpty(tag.getFirst(FieldKey.COMMENT)))
-				// Log.i("[MP3Info]", "COMMENT:" + tag.getFirst(FieldKey.COMMENT));
+				// _Log.i("[MP3Info]", "COMMENT:" + tag.getFirst(FieldKey.COMMENT));
 				// if (!TextUtil.isEmpty(tag.getFirst(FieldKey.YEAR)))
 				// mediaMetadata.putString(MediaMetadata.KEY_BROADCAST_DATE, tag.getFirst(FieldKey.YEAR));
 				if (!TextUtil.isEmpty(tag.getFirst(FieldKey.TRACK)) && TextUtil.isNumeric(tag.getFirst(FieldKey.TRACK)))
@@ -461,7 +461,7 @@ public class SongPlayCastChrome extends SongPlayCast implements ISongPlayCast, I
 				if (!TextUtil.isEmpty(tag.getFirst(FieldKey.COMPOSER)))
 					mediaMetadata.putString(MediaMetadata.KEY_COMPOSER, tag.getFirst(FieldKey.COMPOSER));
 				// if (!TextUtil.isEmpty(tag.getFirst(FieldKey.ARTIST_SORT)))
-				// Log.i("[MP3Info]", "ARTIST_SORT:" + tag.getFirst(FieldKey.ARTIST_SORT));
+				// _Log.i("[MP3Info]", "ARTIST_SORT:" + tag.getFirst(FieldKey.ARTIST_SORT));
 			} else {
 				String title = path.substring(path.lastIndexOf("/") + 1, path.lastIndexOf("."));
 				mediaMetadata.putString(MediaMetadata.KEY_TITLE, title);

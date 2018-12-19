@@ -11,7 +11,8 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 
 import kr.kymedia.karaoke._IKaraoke;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
+
 import net.sourceforge.lame.Lame;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
@@ -50,7 +51,7 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 	byte mp3Buf[] = null;
 
 	public _SongRecorder3(String songNumber) throws Exception {
-		Log.e(__CLASSNAME__, "SongRecorder3(...) " + songNumber);
+		_Log.e(__CLASSNAME__, "SongRecorder3(...) " + songNumber);
 
 		if (!android.os.Environment.getExternalStorageState().equals(
 				android.os.Environment.MEDIA_MOUNTED)) {
@@ -65,7 +66,7 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 	}
 
 	public _SongRecorder3(String songNumber, boolean compressed) throws Exception {
-		Log.e(__CLASSNAME__, "SongRecorder3(...) " + songNumber + "," + compressed);
+		_Log.e(__CLASSNAME__, "SongRecorder3(...) " + songNumber + "," + compressed);
 
 		if (!android.os.Environment.getExternalStorageState().equals(
 				android.os.Environment.MEDIA_MOUNTED)) {
@@ -81,10 +82,10 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 
 	protected void init(String path) throws Exception {
 		mPath = path;
-		Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "fileFormat : " + getFileFormat(mOutputFormat));
-		Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "audioCodec : " + getAudioCodec(mAudioEncoder));
-		Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "audioBitRate : " + mSampleBitRate);
-		Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "audioSampleRate : " + mSampleRate);
+		_Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "fileFormat : " + getFileFormat(mOutputFormat));
+		_Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "audioCodec : " + getAudioCodec(mAudioEncoder));
+		_Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "audioBitRate : " + mSampleBitRate);
+		_Log.e(__CLASSNAME__, "RECORDING.QUALITY >> " + "audioSampleRate : " + mSampleRate);
 
 		int channelConfig = AudioFormat.CHANNEL_IN_MONO;
 		if (mNumChannels > 1) {
@@ -114,7 +115,7 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 		int sampleRate = getSampleRate();
 		// Lame.LAME_PRESET_MEDIUM/Lame.LAME_PRESET_STANDARD/LAME_PRESET_EXTREME
 		int preset = Lame.LAME_PRESET_STANDARD;
-		Log.d(__CLASSNAME__, "initLame()" + ", " + sampleRate + ", " + getChannelCount() + ", "
+		_Log.d(__CLASSNAME__, "initLame()" + ", " + sampleRate + ", " + getChannelCount() + ", "
 				+ preset);
 
 		try {
@@ -123,18 +124,18 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 			Lame.setEncoderPreset(preset);
 		} catch (ExceptionInInitializerError e) {
 
-			Log.e(__CLASSNAME__, "initLame() ... NG!!!" + " --> " + Log.getStackTraceString(e));
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			_Log.e(__CLASSNAME__, "initLame() ... NG!!!" + " --> " + _Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			throw e;
 		} catch (NoClassDefFoundError e) {
 
-			Log.e(__CLASSNAME__, "initLame() ... NG!!!" + " --> " + Log.getStackTraceString(e));
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			_Log.e(__CLASSNAME__, "initLame() ... NG!!!" + " --> " + _Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			throw e;
 		} catch (Exception e) {
 			// TODO: handle exception
-			Log.e(__CLASSNAME__, "initLame() ... NG!!!" + " --> " + Log.getStackTraceString(e));
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			_Log.e(__CLASSNAME__, "initLame() ... NG!!!" + " --> " + _Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			throw e;
 		}
 	}
@@ -142,7 +143,7 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 	public String setFilePath(String songNumber) {
 		String ret = "";
 
-		// Log.d(__CLASSNAME__, "setFilePath(...) " + songNumber);
+		// _Log.d(__CLASSNAME__, "setFilePath(...) " + songNumber);
 
 		String path = "";
 
@@ -166,7 +167,7 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 		ret = path;
 		mPath = path;
 
-		Log.d(__CLASSNAME__, "setFilePath(...) " + mPath);
+		_Log.d(__CLASSNAME__, "setFilePath(...) " + mPath);
 		return ret;
 	}
 
@@ -211,7 +212,7 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 	@Override
 	public boolean start() throws Exception {
 
-		Log.e(__CLASSNAME__, "start()");
+		_Log.e(__CLASSNAME__, "start()");
 
 		try {
 			if (mAudioRecord != null) {
@@ -231,7 +232,7 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 			}
 		} catch (Exception e) {
 
-			Log.e(__CLASSNAME__, "" + Log.getStackTraceString(e));
+			_Log.e(__CLASSNAME__, "" + _Log.getStackTraceString(e));
 			throw e;
 		}
 		return true;
@@ -251,7 +252,7 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 	@Override
 	public boolean stop() throws Exception {
 
-		Log.e(__CLASSNAME__, "stop()");
+		_Log.e(__CLASSNAME__, "stop()");
 
 		try {
 			if (null != mAudioRecord) {
@@ -271,14 +272,14 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 			}
 		} catch (Exception e) {
 
-			Log.e(__CLASSNAME__, "" + Log.getStackTraceString(e));
+			_Log.e(__CLASSNAME__, "" + _Log.getStackTraceString(e));
 			throw e;
 		}
 		return true;
 	}
 
 	private void writeWAVFileHeader() {
-		Log.d(__CLASSNAME__, "writeWAVFileHeader()");
+		_Log.d(__CLASSNAME__, "writeWAVFileHeader()");
 		// FileOutputStream out = null;
 		//
 		// try {
@@ -291,10 +292,10 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 		// out.close();
 		// } catch (FileNotFoundException e) {
 		//
-		// //Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+		// //_Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		// } catch (IOException e) {
 		//
-		// //Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+		// //_Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		// }
 		// Prepare WAV File.
 		RandomAccessFile out;
@@ -319,10 +320,10 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 			out.close();
 		} catch (FileNotFoundException e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		} catch (IOException e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		}
 	}
 
@@ -381,7 +382,7 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 	}
 
 	private void writeAudioDataToFile() {
-		Log.d(__CLASSNAME__, "writeAudioDataToFile()");
+		_Log.d(__CLASSNAME__, "writeAudioDataToFile()");
 
 		int bytesRead = 0;
 		byte pcmBuf[] = new byte[mBufferSizeInBytes];
@@ -423,7 +424,7 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 					count++;
 
 					if (mPaused) {
-						Log.d(__CLASSNAME__, "RECORD() ... PAUSE!!!");
+						_Log.d(__CLASSNAME__, "RECORD() ... PAUSE!!!");
 						continue;
 					}
 
@@ -435,7 +436,7 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 								if (samplesRead > 0) {
 									bytesEncoded = Lame.encode(pcmLBuf, pcmRBuf, samplesRead, mp3Buf, mp3Buf.length);
 								} else {
-									Log.e(__CLASSNAME__, "read(...) BREAK !!!" + "," + samplesRead);
+									_Log.e(__CLASSNAME__, "read(...) BREAK !!!" + "," + samplesRead);
 									break;
 								}
 							} else {
@@ -444,7 +445,7 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 								if (samplesRead > 0) {
 									bytesEncoded = Lame.encode(pcmLBuf, pcmLBuf, samplesRead, mp3Buf, mp3Buf.length);
 								} else {
-									Log.e(__CLASSNAME__, "read(...) BREAK !!!" + "," + samplesRead);
+									_Log.e(__CLASSNAME__, "read(...) BREAK !!!" + "," + samplesRead);
 									break;
 								}
 							}
@@ -452,12 +453,12 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 								out.write(mp3Buf, 0, bytesEncoded);
 								mPayloadSize += bytesEncoded;
 							}
-							Log.d(__CLASSNAME__, "write(" + count + ")" + "," + bytesRead + "," + samplesRead
+							_Log.d(__CLASSNAME__, "write(" + count + ")" + "," + bytesRead + "," + samplesRead
 									+ ", " + bytesEncoded + "," + mPayloadSize);
 						} else {
 							out.write(pcmBuf);
 							mPayloadSize += bytesRead;
-							Log.d(__CLASSNAME__, "write(" + count + ")" + "," + bytesRead + "," + mPayloadSize);
+							_Log.d(__CLASSNAME__, "write(" + count + ")" + "," + bytesRead + "," + mPayloadSize);
 						} // if (mCompressed) {
 					} // if(AudioRecord.ERROR_INVALID_OPERATION != byteRead){
 				} // while(isRecording){
@@ -475,10 +476,10 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 			e1.printStackTrace();
 		} catch (IOException e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		} catch (Exception e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		}
 
 	}
@@ -512,7 +513,7 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 			index++;
 		}
 
-		// Log.d(__CLASSNAME__, "read(...)" + "(" + bytesRead + ", " + index + ") " + src.length + "," + dst.length);
+		// _Log.d(__CLASSNAME__, "read(...)" + "(" + bytesRead + ", " + index + ") " + src.length + "," + dst.length);
 
 		return index;
 	}
@@ -549,7 +550,7 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 			}
 		}
 
-		// Log.d(__CLASSNAME__, "read(...)" + "(" + bytesRead + ", " + index + ") " + src.length + "," + left.length + "," + right.length);
+		// _Log.d(__CLASSNAME__, "read(...)" + "(" + bytesRead + ", " + index + ") " + src.length + "," + left.length + "," + right.length);
 
 		return index;
 	}
@@ -558,7 +559,7 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 	 * Close WAV File.
 	 */
 	private void closeWAVFile() {
-		Log.d(__CLASSNAME__, "closeWAVFile()");
+		_Log.d(__CLASSNAME__, "closeWAVFile()");
 
 		RandomAccessFile out = null;
 		try {
@@ -570,13 +571,13 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 			out.close();
 		} catch (FileNotFoundException e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		} catch (IOException e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		} catch (Exception e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		}
 	}
 
@@ -585,7 +586,7 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 	 */
 	@SuppressWarnings("unused")
 	private void closeMP3File() {
-		Log.d(__CLASSNAME__, "closeMP3File()");
+		_Log.d(__CLASSNAME__, "closeMP3File()");
 
 		int bytesEncoded = 0;
 
@@ -595,29 +596,29 @@ public class _SongRecorder3 extends SongRecorder implements ISongRecorder {
 			bytesEncoded = Lame.flushEncoder(mp3Buf, mp3Buf.length);
 			out.write(mp3Buf, 0, bytesEncoded);
 			out.close();
-			Log.d(__CLASSNAME__, "flush(...)" + "," + mp3Buf.length + "," + bytesEncoded);
+			_Log.d(__CLASSNAME__, "flush(...)" + "," + mp3Buf.length + "," + bytesEncoded);
 			// TODO: write Xing VBR/INFO tag to mp3 file here
 		} catch (FileNotFoundException e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		} catch (IOException e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		} catch (Exception e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		}
 	}
 
 	@Override
 	public void pause() {
-		Log.d(__CLASSNAME__, "pause()");
+		_Log.d(__CLASSNAME__, "pause()");
 		mPaused = true;
 	}
 
 	@Override
 	public void resume() {
-		Log.d(__CLASSNAME__, "resume()");
+		_Log.d(__CLASSNAME__, "resume()");
 		mPaused = false;
 	}
 

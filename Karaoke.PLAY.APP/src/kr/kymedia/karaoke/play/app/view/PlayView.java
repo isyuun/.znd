@@ -37,7 +37,7 @@ import java.util.Locale;
 
 import kr.kymedia.karaoke.play.app.R;
 import kr.kymedia.karaoke.play.apps._PlayFragment;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import kr.kymedia.karaoke.widget.KaraokeTextEdit;
 import android.content.Context;
 import android.os.Build;
@@ -88,7 +88,7 @@ public class PlayView extends SongPlayView {
 
 	public PlayView(Context context) {
 		super(context);
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 	}
 
 	public PlayView(Context context, AttributeSet attrs) {
@@ -101,7 +101,7 @@ public class PlayView extends SongPlayView {
 
 	@Override
 	protected void onAttachedToWindow() {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 
 		super.onAttachedToWindow();
 
@@ -112,27 +112,27 @@ public class PlayView extends SongPlayView {
 
 	@Override
 	protected void onDetachedFromWindow() {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 
 		super.onDetachedFromWindow();
 	}
 
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
-		// Log.i(__CLASSNAME__, getMethodName());
+		// _Log.i(__CLASSNAME__, getMethodName());
 
 		super.onLayout(changed, l, t, r, b);
 
 	}
 
 	protected void init(boolean init) {
-		Log.w(__CLASSNAME__, getMethodName() + init);
+		_Log.w(__CLASSNAME__, getMethodName() + init);
 
 	}
 
 	@Override
 	public void start() {
-		Log.d(__CLASSNAME__, getMethodName() + handler);
+		_Log.d(__CLASSNAME__, getMethodName() + handler);
 
 		super.start();
 
@@ -227,7 +227,7 @@ public class PlayView extends SongPlayView {
 		ViewGroup p = (ViewGroup) findViewById(R.id.merge_song_control);
 		for (int i = 0; i < p.getChildCount(); i++) {
 			View c = p.getChildAt(i);
-			// Log.i(__CLASSNAME__, getMethodName() + c);
+			// _Log.i(__CLASSNAME__, getMethodName() + c);
 
 			if (c instanceof ViewGroup) {
 				String text = "";
@@ -282,12 +282,12 @@ public class PlayView extends SongPlayView {
 	}
 
 	private void setErrorTime(ERROR t, Exception e) {
-		// Log.i(this.toString(), getMethodName() + "\n" + + t + "\n" + Log.getStackTraceString(e));
+		// _Log.i(this.toString(), getMethodName() + "\n" + + t + "\n" + _Log.getStackTraceString(e));
 		// try {
 		//
 		// String time = android.text.format.DateFormat.format("yyyy/MM/dd HH:mm:ss",
 		// System.currentTimeMillis()).toString();
-		// String err = "NG(" + count + ") - " + time + "\n" + t + "\n" + Log.getStackTraceString(e);
+		// String err = "NG(" + count + ") - " + time + "\n" + t + "\n" + _Log.getStackTraceString(e);
 		// ((TextView) findViewById(R.id.textError)).setText(err);
 		// findViewById(R.id.merge_play_error).setVisibility(View.VISIBLE);
 		// } catch (Exception e1) {
@@ -316,7 +316,7 @@ public class PlayView extends SongPlayView {
 
 	@Override
 	public void setPath(String path) {
-		Log.e(__CLASSNAME__, getMethodName() + path);
+		_Log.e(__CLASSNAME__, getMethodName() + path);
 
 
 		super.setPath(path);
@@ -341,13 +341,13 @@ public class PlayView extends SongPlayView {
 	@Override
 	public boolean load(final String path) throws Exception {
 
-		Log.d(__CLASSNAME__, getMethodName() + "count:" + count);
+		_Log.d(__CLASSNAME__, getMethodName() + "count:" + count);
 
 		post(new Runnable() {
 
 			@Override
 			public void run() {
-				// Log.e(__CLASSNAME__, "open() post() " + getMethodName() + PlayView.this.getSong());
+				// _Log.e(__CLASSNAME__, "open() post() " + getMethodName() + PlayView.this.getSong());
 
 
 				try {
@@ -375,7 +375,7 @@ public class PlayView extends SongPlayView {
 
 	@Override
 	public void prepare() {
-		Log.d(__CLASSNAME__, getMethodName() + "count:" + count);
+		_Log.d(__CLASSNAME__, getMethodName() + "count:" + count);
 
 		super.prepare();
 
@@ -399,7 +399,7 @@ public class PlayView extends SongPlayView {
 
 	@Override
 	public boolean play() {
-		// Log.e(__CLASSNAME__, getMethodName() + "count:" + count + " - " + path);
+		// _Log.e(__CLASSNAME__, getMethodName() + "count:" + count + " - " + path);
 		super.play();
 
 		setPlay();
@@ -443,7 +443,7 @@ public class PlayView extends SongPlayView {
 
 	@Override
 	public void stop() {
-		Log.d(__CLASSNAME__, getMethodName() + "count:" + count);
+		_Log.d(__CLASSNAME__, getMethodName() + "count:" + count);
 		super.stop();
 		post(new Runnable() {
 
@@ -456,7 +456,7 @@ public class PlayView extends SongPlayView {
 	}
 
 	public void setStop(final boolean progress) {
-		Log.d(__CLASSNAME__, getMethodName() + progress);
+		_Log.d(__CLASSNAME__, getMethodName() + progress);
 		if (!ViewCompat.isAttachedToWindow(this)) {
 			return;
 		}
@@ -484,7 +484,7 @@ public class PlayView extends SongPlayView {
 
 	@Override
 	public void restart() {
-		Log.d(__CLASSNAME__, getMethodName() + "count:" + count);
+		_Log.d(__CLASSNAME__, getMethodName() + "count:" + count);
 
 		super.restart();
 
@@ -502,7 +502,7 @@ public class PlayView extends SongPlayView {
 
 	@Override
 	public void repeat() {
-		Log.d(__CLASSNAME__, getMethodName() + "count:" + count);
+		_Log.d(__CLASSNAME__, getMethodName() + "count:" + count);
 
 		super.repeat();
 
@@ -520,7 +520,7 @@ public class PlayView extends SongPlayView {
 
 	@Override
 	public void seek(int msec) {
-		// Log.d(__CLASSNAME__, getMethodName() + msec);
+		// _Log.d(__CLASSNAME__, getMethodName() + msec);
 
 		super.seek(msec);
 
@@ -534,7 +534,7 @@ public class PlayView extends SongPlayView {
 	@Override
 	public void onTime(int t) {
 
-		// Log.d(__CLASSNAME__, getMethodName() + t);
+		// _Log.d(__CLASSNAME__, getMethodName() + t);
 
 		super.onTime(t);
 
@@ -550,7 +550,7 @@ public class PlayView extends SongPlayView {
 	@Override
 	public void onSeekComplete() {
 
-		Log.w(__CLASSNAME__, getMethodName());
+		_Log.w(__CLASSNAME__, getMethodName());
 
 		super.onSeekComplete();
 
@@ -559,7 +559,7 @@ public class PlayView extends SongPlayView {
 	@Override
 	public void onRelease() {
 
-		Log.w(__CLASSNAME__, getMethodName());
+		_Log.w(__CLASSNAME__, getMethodName());
 
 		super.onRelease();
 
@@ -568,7 +568,7 @@ public class PlayView extends SongPlayView {
 	@Override
 	public void onReady(int count) {
 
-		Log.w(__CLASSNAME__, getMethodName());
+		_Log.w(__CLASSNAME__, getMethodName());
 
 		super.onReady(count);
 
@@ -577,7 +577,7 @@ public class PlayView extends SongPlayView {
 	@Override
 	public void onPrepared() {
 
-		Log.w(__CLASSNAME__, getMethodName());
+		_Log.w(__CLASSNAME__, getMethodName());
 
 		super.onPrepared();
 
@@ -587,7 +587,7 @@ public class PlayView extends SongPlayView {
 	@Override
 	public void onError() {
 
-		Log.w(__CLASSNAME__, getMethodName());
+		_Log.w(__CLASSNAME__, getMethodName());
 
 		super.onError();
 
@@ -614,7 +614,7 @@ public class PlayView extends SongPlayView {
 
 	@Override
 	public void onError(final ERROR t, final Exception e) {
-		Log.w(__CLASSNAME__, getMethodName() + t);
+		_Log.w(__CLASSNAME__, getMethodName() + t);
 
 
 		super.onError(t, e);
@@ -633,14 +633,14 @@ public class PlayView extends SongPlayView {
 
 	@Override
 	public void onTimeout(final long timeout) {
-		Log.w(__CLASSNAME__, getMethodName() + timeout);
+		_Log.w(__CLASSNAME__, getMethodName() + timeout);
 
 		super.onTimeout(timeout);
 	}
 
 	@Override
 	public void onRetry(final int count) {
-		Log.w(__CLASSNAME__, getMethodName() + count);
+		_Log.w(__CLASSNAME__, getMethodName() + count);
 
 
 		super.onRetry(count);
@@ -650,7 +650,7 @@ public class PlayView extends SongPlayView {
 	public void onCompletion() {
 
 		boolean repeat = ((CheckBox) findViewById(R.id.checkRepeatRestart)).isChecked();
-		Log.w(__CLASSNAME__, getMethodName() + repeat + ", count:" + count);
+		_Log.w(__CLASSNAME__, getMethodName() + repeat + ", count:" + count);
 
 		super.onCompletion();
 
@@ -659,7 +659,7 @@ public class PlayView extends SongPlayView {
 	@Override
 	public void onBufferingUpdate(int percent) {
 
-		Log.w(__CLASSNAME__, getMethodName() + percent);
+		_Log.w(__CLASSNAME__, getMethodName() + percent);
 
 		super.onBufferingUpdate(percent);
 
@@ -698,7 +698,7 @@ public class PlayView extends SongPlayView {
 	SeekBar seekPlay;
 
 	void progress(boolean init) {
-		Log.e(__CLASSNAME__, getMethodName() + init);
+		_Log.e(__CLASSNAME__, getMethodName() + init);
 
 		seekPlay = (SeekBar) findViewById(R.id.seekPlay);
 		seekPlay.setEnabled(false);
@@ -722,7 +722,7 @@ public class PlayView extends SongPlayView {
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-				// Log.d(__CLASSNAME__, getMethodName() + progress + "/" + seekBar.getMax());
+				// _Log.d(__CLASSNAME__, getMethodName() + progress + "/" + seekBar.getMax());
 				setPlayTime();
 			}
 		});

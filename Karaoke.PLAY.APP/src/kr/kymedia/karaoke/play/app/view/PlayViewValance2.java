@@ -32,7 +32,8 @@
 
 package kr.kymedia.karaoke.play.app.view;
 
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
+
 import android.content.Context;
 import android.util.AttributeSet;
 
@@ -82,7 +83,7 @@ public class PlayViewValance2 extends PlayViewValance {
 	@Override
 	protected void init(boolean init) {
 
-		Log.w(__CLASSNAME__, getMethodName() + init);
+		_Log.w(__CLASSNAME__, getMethodName() + init);
 		super.init(init);
 
 		try {
@@ -117,14 +118,14 @@ public class PlayViewValance2 extends PlayViewValance {
 	@Override
 	public void setValance(float LR) {
 
-		Log.w(__CLASSNAME__, getMethodName() + LR);
+		_Log.w(__CLASSNAME__, getMethodName() + LR);
 		super.setValance(LR);
 	}
 
 	@Override
 	public void setValanceText(float LR) {
 
-		Log.w(__CLASSNAME__, getMethodName() + LR);
+		_Log.w(__CLASSNAME__, getMethodName() + LR);
 		super.setValanceText(LR);
 	}
 

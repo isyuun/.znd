@@ -33,7 +33,7 @@
 package kr.kymedia.karaoke.play.app;
 
 import kr.kymedia.karaoke.app.FileOpenActivity;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;

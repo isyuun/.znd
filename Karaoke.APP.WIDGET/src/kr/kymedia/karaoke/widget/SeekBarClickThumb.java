@@ -78,21 +78,21 @@ public class SeekBarClickThumb extends SeekBar implements OnSeekBarChangeListene
 
 	public SeekBarClickThumb(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		// Log.e(__CLASSNAME__, getMethodName());
+		// _Log.e(__CLASSNAME__, getMethodName());
 		setOnTouchListener(this);
 		setOnSeekBarChangeListener(this);
 	}
 
 	public SeekBarClickThumb(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		// Log.e(__CLASSNAME__, getMethodName());
+		// _Log.e(__CLASSNAME__, getMethodName());
 		setOnTouchListener(this);
 		setOnSeekBarChangeListener(this);
 	}
 
 	public SeekBarClickThumb(Context context) {
 		super(context);
-		// Log.e(__CLASSNAME__, getMethodName());
+		// _Log.e(__CLASSNAME__, getMethodName());
 		setOnTouchListener(this);
 		setOnSeekBarChangeListener(this);
 	}
@@ -148,7 +148,7 @@ public class SeekBarClickThumb extends SeekBar implements OnSeekBarChangeListene
 	public boolean onTouch(View v, MotionEvent event) {
 		// String vn = getResources().getResourceEntryName(v.getId());
 		// String cn = v.getClass().getSimpleName();
-		// Log.e(__CLASSNAME__, getMethodName() + vn + ", " + cn + ", " + event);
+		// _Log.e(__CLASSNAME__, getMethodName() + vn + ", " + cn + ", " + event);
 
 
 		if (!isEnabled()) {
@@ -163,7 +163,7 @@ public class SeekBarClickThumb extends SeekBar implements OnSeekBarChangeListene
 		long dtime = event.getDownTime();
 		long etime = event.getEventTime();
 
-		// Log.e(__CLASSNAME__, getMethodName() + Math.abs(x - event.getX()) + ":" + MAX_CLICK_SIZE);
+		// _Log.e(__CLASSNAME__, getMethodName() + Math.abs(x - event.getX()) + ":" + MAX_CLICK_SIZE);
 
 		// MotionEvent.ACTION_MOVE를 제외하고 일단처먹고들어간다.
 		switch (event.getAction()) {
@@ -208,7 +208,7 @@ public class SeekBarClickThumb extends SeekBar implements OnSeekBarChangeListene
 			break;
 		}
 
-		// Log.e(__CLASSNAME__, getMethodName() + event.getAction() + "-" + ret + "," + MAX_CLICK_FIRE + " - " + Math.abs(etime - dtime) + "," + Math.abs(x - event.getX()));
+		// _Log.e(__CLASSNAME__, getMethodName() + event.getAction() + "-" + ret + "," + MAX_CLICK_FIRE + " - " + Math.abs(etime - dtime) + "," + Math.abs(x - event.getX()));
 		if (!ret && tlistener != null) {
 			tlistener.onTouch(v, event);
 		}
@@ -227,7 +227,7 @@ public class SeekBarClickThumb extends SeekBar implements OnSeekBarChangeListene
 
 	public void onClickSeekBarTumb() {
 
-		// Log.e(__CLASSNAME__, getMethodName());
+		// _Log.e(__CLASSNAME__, getMethodName());
 		playSoundEffect(SoundEffectConstants.CLICK);
 		if (clistener != null) {
 			clistener.onClickSeekBarTumb();
@@ -237,7 +237,7 @@ public class SeekBarClickThumb extends SeekBar implements OnSeekBarChangeListene
 	@Override
 	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-		// Log.e(__CLASSNAME__, getMethodName() + progress + "," + fromUser);
+		// _Log.e(__CLASSNAME__, getMethodName() + progress + "," + fromUser);
 		if (clistener != null) {
 			clistener.onProgressChanged(seekBar, progress, fromUser);
 		}
@@ -246,7 +246,7 @@ public class SeekBarClickThumb extends SeekBar implements OnSeekBarChangeListene
 	@Override
 	public void onStartTrackingTouch(SeekBar seekBar) {
 
-		// Log.e(__CLASSNAME__, getMethodName());
+		// _Log.e(__CLASSNAME__, getMethodName());
 		if (clistener != null) {
 			clistener.onStartTrackingTouch(seekBar);
 		}
@@ -255,7 +255,7 @@ public class SeekBarClickThumb extends SeekBar implements OnSeekBarChangeListene
 	@Override
 	public void onStopTrackingTouch(SeekBar seekBar) {
 
-		// Log.e(__CLASSNAME__, getMethodName());
+		// _Log.e(__CLASSNAME__, getMethodName());
 		if (clistener != null) {
 			clistener.onStopTrackingTouch(seekBar);
 		}

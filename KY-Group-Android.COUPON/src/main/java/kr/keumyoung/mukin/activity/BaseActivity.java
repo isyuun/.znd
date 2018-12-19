@@ -60,6 +60,7 @@ public class BaseActivity extends AppCompatActivity {
     // instance of shared preference helper. injected via DI
     @Inject
     PreferenceHelper preferenceHelper;
+
     boolean isShowingProgress;
     private boolean keyboardListenersAttached = false;
     private ViewTreeObserver.OnGlobalLayoutListener keyboardLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {

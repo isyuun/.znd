@@ -93,7 +93,7 @@ public class MediaPlayerPlay extends SongService implements SongPlay, SongPlayLi
 
 	@Override
 	public void setOnListener(SongPlayListener listener) {
-		// Log.d("MediaPlayerPlay", "setOnListener");
+		// _Log.d("MediaPlayerPlay", "setOnListener");
 		mOnListener = listener;
 	}
 
@@ -103,13 +103,13 @@ public class MediaPlayerPlay extends SongService implements SongPlay, SongPlayLi
 			mDestroy = true;
 			close();
 
-			// Log.d("MediaPlayerPlay", "destroy");
+			// _Log.d("MediaPlayerPlay", "destroy");
 			mMediaPlayer.release();
 
 			if (mOnListener != null)
 				mOnListener.onRelease();
 		}
-		// Log.d("MediaPlayerPlay", "destroy end");
+		// _Log.d("MediaPlayerPlay", "destroy end");
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class MediaPlayerPlay extends SongService implements SongPlay, SongPlayLi
 
 	@Override
 	public boolean load(String path) {
-		// Log.d("MediaPlayerPlay", "load");
+		// _Log.d("MediaPlayerPlay", "load");
 		Log.d("player", "load()");
 		if (mDestroy == true)
 			return false;
@@ -135,7 +135,7 @@ public class MediaPlayerPlay extends SongService implements SongPlay, SongPlayLi
 			mMediaPlayer.setDataSource(path);
 			mMediaPlayer.prepareAsync();
 		} catch (Exception e) {
-			// Log.d("MediaPlayerPlay", "load error");
+			// _Log.d("MediaPlayerPlay", "load error");
 			// e.printStackTrace();
 			Log.e("player", "load() - ERROR!!!\n" + Log.getStackTraceString(e));
 			return false;
@@ -146,7 +146,7 @@ public class MediaPlayerPlay extends SongService implements SongPlay, SongPlayLi
 			public void onCompletion(MediaPlayer arg) {
 				if (mOnListener != null)
 					mOnListener.onCompletion();
-				// Log.d("MediaPlayerPlay", "onCompletion");
+				// _Log.d("MediaPlayerPlay", "onCompletion");
 			}
 		};
 		mMediaPlayer.setOnCompletionListener(onMediaPlayerComplete);
@@ -156,7 +156,7 @@ public class MediaPlayerPlay extends SongService implements SongPlay, SongPlayLi
 			public boolean onError(MediaPlayer mp, int what, int extra) {
 				if (mOnListener != null)
 					mOnListener.onError();
-				// Log.d("MediaPlayerPlay", "onError");
+				// _Log.d("MediaPlayerPlay", "onError");
 				return true;
 			}
 		};
@@ -167,7 +167,7 @@ public class MediaPlayerPlay extends SongService implements SongPlay, SongPlayLi
 			public void onPrepared(MediaPlayer mp) {
 				if (mOnListener != null)
 					mOnListener.onPrepared();
-				// Log.d("MediaPlayerPlay", "onPrepared");
+				// _Log.d("MediaPlayerPlay", "onPrepared");
 			}
 		};
 		mMediaPlayer.setOnPreparedListener(onMediaPlayerPrepared);
@@ -181,7 +181,7 @@ public class MediaPlayerPlay extends SongService implements SongPlay, SongPlayLi
 
 					mPercent = percent;
 				}
-				// Log.d("MediaPlayerPlay", "onBufferingUpdate");
+				// _Log.d("MediaPlayerPlay", "onBufferingUpdate");
 			}
 		};
 		mMediaPlayer.setOnBufferingUpdateListener(onMediaPlayerBufferingUpdate);
@@ -192,7 +192,7 @@ public class MediaPlayerPlay extends SongService implements SongPlay, SongPlayLi
 				mSeek = false;
 				if (mOnListener != null)
 					mOnListener.onSeekComplete();
-				// Log.d("MediaPlayerPlay", "onSeekComplete");
+				// _Log.d("MediaPlayerPlay", "onSeekComplete");
 			}
 		};
 		mMediaPlayer.setOnSeekCompleteListener(onMediaPlayerSeekComplete);
@@ -202,7 +202,7 @@ public class MediaPlayerPlay extends SongService implements SongPlay, SongPlayLi
 
 	@Override
 	public boolean play() {
-		// Log.d("MediaPlayerPlay", "play");
+		// _Log.d("MediaPlayerPlay", "play");
 		if (mDestroy == true)
 			return false;
 
@@ -218,14 +218,14 @@ public class MediaPlayerPlay extends SongService implements SongPlay, SongPlayLi
 		} catch (IllegalStateException e) {
 			return false;
 		}
-		// Log.d("MediaPlayerPlay", "play end");
+		// _Log.d("MediaPlayerPlay", "play end");
 
 		return true;
 	}
 
 	@Override
 	public boolean play(int time) {
-		// Log.d("MediaPlayerPlay", "play");
+		// _Log.d("MediaPlayerPlay", "play");
 		if (mDestroy == true)
 			return false;
 
@@ -243,7 +243,7 @@ public class MediaPlayerPlay extends SongService implements SongPlay, SongPlayLi
 		} catch (IllegalStateException e) {
 			return false;
 		}
-		// Log.d("MediaPlayerPlay", "play end");
+		// _Log.d("MediaPlayerPlay", "play end");
 
 		return true;
 	}
@@ -259,7 +259,7 @@ public class MediaPlayerPlay extends SongService implements SongPlay, SongPlayLi
 
 	@Override
 	public void close() {
-		// Log.d("MediaPlayerPlay", "close");
+		// _Log.d("MediaPlayerPlay", "close");
 		if (mDestroy == true)
 			return;
 

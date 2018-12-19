@@ -155,7 +155,7 @@ public class FileDialogFragmentMulti extends FileDialogFragmentBase {
 	}
 
 	private void setCheck2All(boolean check) {
-		// Log.e(toString(), getMethodName() + check);
+		// _Log.e(toString(), getMethodName() + check);
 
 		paths.clear();
 
@@ -168,11 +168,11 @@ public class FileDialogFragmentMulti extends FileDialogFragmentBase {
 		((FileAdapter) getListAdapter()).setNotifyOnChange(true);
 		((FileAdapter) getListAdapter()).notifyDataSetChanged();
 
-		// Log.e(toString(), getMethodName() + paths);
+		// _Log.e(toString(), getMethodName() + paths);
 	}
 
 	private void setCheck(int position, boolean check, boolean refresh) {
-		// Log.e(toString(), getMethodName() + position + "-" + check);
+		// _Log.e(toString(), getMethodName() + position + "-" + check);
 
 		if (refresh) {
 			((FileAdapter) getListAdapter()).setNotifyOnChange(false);
@@ -196,7 +196,7 @@ public class FileDialogFragmentMulti extends FileDialogFragmentBase {
 			((FileAdapter) getListAdapter()).notifyDataSetChanged();
 		}
 
-		// Log.e(toString(), getMethodName() + paths);
+		// _Log.e(toString(), getMethodName() + paths);
 	}
 
 	private void setSelectionMode() {
@@ -264,7 +264,7 @@ public class FileDialogFragmentMulti extends FileDialogFragmentBase {
 	@Override
 	public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 		// return super.onItemLongClick(parent, view, position, id);
-		// Log.i(toString(), getMethodName() + getPath().get(position));
+		// _Log.i(toString(), getMethodName() + getPath().get(position));
 
 
 		Log.i(toString(), getMethodName() + isSelectable());
@@ -284,12 +284,12 @@ public class FileDialogFragmentMulti extends FileDialogFragmentBase {
 
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		// Log.i(toString(), getMethodName() + getPath().get(position));
+		// _Log.i(toString(), getMethodName() + getPath().get(position));
 
 		super.onListItemClick(l, v, position, id);
 
 		File file = getSelectedFile();
-		// Log.e(toString(), getMethodName() + isSelectable() + ":" + file.isFile() + "-" + file.getPath());
+		// _Log.e(toString(), getMethodName() + isSelectable() + ":" + file.isFile() + "-" + file.getPath());
 
 		if (file.isFile()) {
 			if (isSelectable()) {
@@ -306,7 +306,7 @@ public class FileDialogFragmentMulti extends FileDialogFragmentBase {
 		} else {
 			layoutSelect.setVisibility(View.GONE);
 		}
-		// Log.e(toString(), getMethodName() + v.isSelected() + ":" + paths);
+		// _Log.e(toString(), getMethodName() + v.isSelected() + ":" + paths);
 	}
 
 	@Override
@@ -315,7 +315,7 @@ public class FileDialogFragmentMulti extends FileDialogFragmentBase {
 
 
 		getIntent().putStringArrayListExtra(RESULT_PATHS, paths);
-		// Log.e(toString(),
+		// _Log.e(toString(),
 		// getIntent().getExtras().getStringArrayList(FileDialogFragmentMulti.RESULT_PATHS));
 
 		super.setResult(resultCode, data);

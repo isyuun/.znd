@@ -123,7 +123,7 @@ public class MusicVideoView extends android.widget.VideoView {
 	//		}
 	//	}
     //
-	//	Log.e(__CLASSNAME__ + _Const.TAG_VIDEO, "getDisPlaySize() " + displaySize);
+	//	_Log.e(__CLASSNAME__ + _Const.TAG_VIDEO, "getDisPlaySize() " + displaySize);
 	//}
 
 	// 븅신...어디선본건있어가지구...쓸데없는짓은...

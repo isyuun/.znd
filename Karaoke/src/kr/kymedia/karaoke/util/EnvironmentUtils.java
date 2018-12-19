@@ -116,9 +116,9 @@ public class EnvironmentUtils {
 		if (files != null) {
 			for (int i = 0; i < files.length; i++) {
 				if (files[i].isDirectory()) {
-					// Log.d("Directory : ", "" + files[i]);
+					// _Log.d("Directory : ", "" + files[i]);
 				} else {
-					// Log.d("File :", "" + files[i]);
+					// _Log.d("File :", "" + files[i]);
 					files[i].delete();
 				}
 			}
@@ -162,7 +162,7 @@ public class EnvironmentUtils {
 		// final int count = accts.length;
 		// for (int i = 0; i < count; i++) {
 		// Account acct = accts[i];
-		// Log.i("ANDROES", "Account - name=" + acct.name + ", type=" + acct.type);
+		// _Log.i("ANDROES", "Account - name=" + acct.name + ", type=" + acct.type);
 		// }
 
 		return accounts;
@@ -283,16 +283,16 @@ public class EnvironmentUtils {
 		// try {
 		// Bundle authTokenBundle = accountManagerFuture.getResult();
 		// String authToken = authTokenBundle.get(AccountManager.KEY_AUTHTOKEN).toString();
-		// Log.i("ANDROES", "authToken:" + authToken);
+		// _Log.i("ANDROES", "authToken:" + authToken);
 		// } catch (OperationCanceledException e) {
 		//
-		// //Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+		// //_Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		// } catch (AuthenticatorException e) {
 		//
-		// //Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+		// //_Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		// } catch (IOException e) {
 		//
-		// //Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+		// //_Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		// }
 	}
 
@@ -342,7 +342,7 @@ public class EnvironmentUtils {
 			outputStreamWriter.write(src);
 			outputStreamWriter.close();
 		} catch (Exception e) {
-			// Log.e("Exception", "File write failed: " + e.toString());
+			// _Log.e("Exception", "File write failed: " + e.toString());
 			e.printStackTrace();
 		}
 	}
@@ -368,9 +368,9 @@ public class EnvironmentUtils {
 				ret = stringBuilder.toString();
 			}
 			// } catch (FileNotFoundException e) {
-			// Log.e("login activity", "File not found: " + e.toString());
+			// _Log.e("login activity", "File not found: " + e.toString());
 		} catch (IOException e) {
-			// Log.e("login activity", "Can not read file: " + e.toString());
+			// _Log.e("login activity", "Can not read file: " + e.toString());
 			e.printStackTrace();
 		}
 
@@ -383,7 +383,7 @@ public class EnvironmentUtils {
 			outputStreamWriter.write(src);
 			outputStreamWriter.close();
 		} catch (Exception e) {
-			// Log.e("Exception", "File write failed: " + e.toString());
+			// _Log.e("Exception", "File write failed: " + e.toString());
 			e.printStackTrace();
 		}
 	}
@@ -409,7 +409,7 @@ public class EnvironmentUtils {
 				ret = stringBuilder.toString();
 			}
 		} catch (IOException e) {
-			// Log.e("login activity", "Can not read file: " + e.toString());
+			// _Log.e("login activity", "Can not read file: " + e.toString());
 			e.printStackTrace();
 		}
 
@@ -454,9 +454,9 @@ public class EnvironmentUtils {
 		MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
 		activityManager.getMemoryInfo(memoryInfo);
 
-		// android.util.Log.d(__CLASSNAME__, " memoryInfo.availMem " + memoryInfo.availMem + "\n" );
-		// android.util.Log.d(__CLASSNAME__, " memoryInfo.lowMemory " + memoryInfo.lowMemory + "\n" );
-		// android.util.Log.d(__CLASSNAME__, " memoryInfo.threshold " + memoryInfo.threshold + "\n" );
+		// android.util._Log.d(__CLASSNAME__, " memoryInfo.availMem " + memoryInfo.availMem + "\n" );
+		// android.util._Log.d(__CLASSNAME__, " memoryInfo.lowMemory " + memoryInfo.lowMemory + "\n" );
+		// android.util._Log.d(__CLASSNAME__, " memoryInfo.threshold " + memoryInfo.threshold + "\n" );
 
 		List<RunningAppProcessInfo> runningAppProcesses = activityManager.getRunningAppProcesses();
 
@@ -507,8 +507,8 @@ public class EnvironmentUtils {
 		android.util.Log.i("MEMINFO-PAGEINFO", memInfo);
 
 		heapMaximum = activityManager.getMemoryClass() * 1000 * 1000;
-		// Log.v("MEMINFO-HEAPINFO", String.format("** HEAPINFO Max : memoryClass : %d kB", heapMaximum / 1000));
-		// Log.v("MEMINFO-HEAPINFO", String.format("** HEAPINFO Max : maxMemory : %d kB", Runtime.getRuntime().maxMemory() / 1000));
+		// _Log.v("MEMINFO-HEAPINFO", String.format("** HEAPINFO Max : memoryClass : %d kB", heapMaximum / 1000));
+		// _Log.v("MEMINFO-HEAPINFO", String.format("** HEAPINFO Max : maxMemory : %d kB", Runtime.getRuntime().maxMemory() / 1000));
 
 		// dalvikHeapSize = (Runtime.getRuntime().totalMemory() + Debug.getNativeHeapSize());
 		// dalvikHeapAlloc = ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) + (Debug
@@ -615,7 +615,7 @@ public class EnvironmentUtils {
 						(mNativeMaxHeapSize - (mNativeLastHeapSize == 0 ? nativeHeapSize : mNativeLastHeapSize)) / 1000,
 						(mNativeMaxHeapAlloc - (mNativeLastHeapAlloc == 0 ? nativeHeapAlloc
 								: mNativeLastHeapAlloc)) / 1000);
-		// android.util.Log.i("MEMINFO-HEAPINFO", heapInfo);
+		// android.util._Log.i("MEMINFO-HEAPINFO", heapInfo);
 
 		warning = false;
 
@@ -734,7 +734,7 @@ public class EnvironmentUtils {
 			mToast.show();
 		} catch (Exception e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		}
 	}
 
@@ -747,7 +747,7 @@ public class EnvironmentUtils {
 			mToast.show();
 		} catch (Exception e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 		}
 	}
 
@@ -759,7 +759,7 @@ public class EnvironmentUtils {
 					InetAddress inetAddress = (InetAddress) enumIpAddr.nextElement();
 					if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
 						String ipAddress = inetAddress.getHostAddress().toString();
-						// Log.e("IP address", "" + ipAddress);
+						// _Log.e("IP address", "" + ipAddress);
 						return ipAddress;
 					}
 				}

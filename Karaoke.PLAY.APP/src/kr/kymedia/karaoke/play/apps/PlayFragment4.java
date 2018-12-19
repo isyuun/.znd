@@ -35,7 +35,7 @@ package kr.kymedia.karaoke.play.apps;
 import kr.kymedia.karaoke.play.app.R;
 import kr.kymedia.karaoke.play.app.view.PlayView;
 import kr.kymedia.karaoke.play.app.view.SongPlayView;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -99,7 +99,7 @@ public class PlayFragment4 extends PlayFragment3 {
 		}
 
 		PlayView.type = this.type;
-		Log.e(__CLASSNAME__, getMethodName() + PlayView.type);
+		_Log.e(__CLASSNAME__, getMethodName() + PlayView.type);
 	}
 
 }

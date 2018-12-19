@@ -103,7 +103,7 @@ public class SongDownThread extends Thread implements _IKaraoke {
         } catch (InterruptedException e) {
 
             // InterruptedException은 오류로 전달하지 않는다.
-            // Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+            // _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
         }
         mState = State;
     }
@@ -122,7 +122,7 @@ public class SongDownThread extends Thread implements _IKaraoke {
             // Thread.sleep(100);
             // } catch (InterruptedException e) {
             //
-            // //Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+            // //_Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
             // }
             ret = isAlive();
         }
@@ -156,27 +156,27 @@ public class SongDownThread extends Thread implements _IKaraoke {
 
         switch (what) {
             case STATE_SONG_DOWNLOAD_START:
-                // Log.d("STATE_SONG_DOWNLOAD_START", "" +
+                // _Log.d("STATE_SONG_DOWNLOAD_START", "" +
                 // mByteRead+File.separator+mByteTotal + ", "+mMsg);
                 break;
 
             case STATE_SONG_DOWNLOAD_RUNNING:
-                // Log.d("STATE_SONG_DOWNLOAD_RUNNING", "" +
+                // _Log.d("STATE_SONG_DOWNLOAD_RUNNING", "" +
                 // mByteRead+File.separator+mByteTotal + ", "+mMsg);
                 break;
 
             case STATE_SONG_DOWNLOAD_COMPLETE:
-                // Log.d("STATE_SONG_DOWNLOAD_COMPLETE", "" +
+                // _Log.d("STATE_SONG_DOWNLOAD_COMPLETE", "" +
                 // mByteRead+File.separator+mByteTotal + ", "+mMsg);
                 break;
 
             case STATE_SONG_DOWNLOAD_CANCEL:
-                // Log.d("STATE_SONG_DOWNLOAD_CANCEL", "" +
+                // _Log.d("STATE_SONG_DOWNLOAD_CANCEL", "" +
                 // mByteRead+File.separator+mByteTotal + ", "+mMsg);
                 break;
 
             case STATE_SONG_DOWNLOAD_ERROR:
-                // Log.d("STATE_SONG_DOWNLOAD_ERROR", ""+message+", "+mMsg);
+                // _Log.d("STATE_SONG_DOWNLOAD_ERROR", ""+message+", "+mMsg);
                 break;
 
             default:
@@ -209,7 +209,7 @@ public class SongDownThread extends Thread implements _IKaraoke {
 
         mSongItem.dst = SKYM_PATH + File.separator + mSongItem.number + ".skym";
 
-        // Log.d(__CLASSNAME__, "HttpGet [" + mSongItem.url + ", " + mSongItem.dst);
+        // _Log.d(__CLASSNAME__, "HttpGet [" + mSongItem.url + ", " + mSongItem.dst);
 
         HttpClient client = new DefaultHttpClient();
         HttpGet get = new HttpGet(mSongItem.url);
@@ -230,7 +230,7 @@ public class SongDownThread extends Thread implements _IKaraoke {
                         mByteTotal = Long.parseLong(h.getValue());
                     } catch (NumberFormatException e) {
 
-                        // Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+                        // _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
                         mByteRead = 4 * 1024 * 1024;
                     }
                 }
@@ -338,7 +338,7 @@ public class SongDownThread extends Thread implements _IKaraoke {
         } catch (InterruptedException e) {
 
             // InterruptedException은 오류로 전달하지 않는다.
-            // Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+            // _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
             return;
         }
 

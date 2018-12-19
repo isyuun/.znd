@@ -97,7 +97,7 @@ public class ListDialogFragment extends DialogFragment implements OnItemClickLis
 	}
 
 	public View findViewById(int id) {
-		//Log.e(toString(), getMethodName() + view.findViewById(id));
+		//_Log.e(toString(), getMethodName() + view.findViewById(id));
 		if (root != null) {
 			return root.findViewById(id);
 		} else {
@@ -110,7 +110,7 @@ public class ListDialogFragment extends DialogFragment implements OnItemClickLis
 	}
 
 	public View findViewById(String name) {
-		//Log.e(toString(), getMethodName() + name + ":" + view.findViewById(getResource(name, "id")));
+		//_Log.e(toString(), getMethodName() + name + ":" + view.findViewById(getResource(name, "id")));
 		if (root != null) {
 			return root.findViewById(getResource(name, "id"));
 		} else {
@@ -223,25 +223,25 @@ public class ListDialogFragment extends DialogFragment implements OnItemClickLis
 
 	@Override
 	public final void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		//Log.i(toString(), getMethodName() + position + "-" + view.isSelected());
+		//_Log.i(toString(), getMethodName() + position + "-" + view.isSelected());
 
 
 		//if (view instanceof CheckableSelectableRelativeLayout) {
 		//	boolean checked = ((CheckableSelectableRelativeLayout) view).isChecked();
 		//	((CheckableSelectableRelativeLayout) view).setSelected(checked);
-		//	//Log.e(toString(), getMethodName() + position + "-" + view.isSelected() + ":" + checked);
+		//	//_Log.e(toString(), getMethodName() + position + "-" + view.isSelected() + ":" + checked);
 		//}
 
 		onListItemClick((ListView) parent, view, position, id);
 	}
 
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		//Log.i(toString(), getMethodName() + position + "-" + v.isSelected());
+		//_Log.i(toString(), getMethodName() + position + "-" + v.isSelected());
 
 		//if (v instanceof CheckableSelectableRelativeLayout) {
 		//	boolean checked = ((CheckableSelectableRelativeLayout) v).isChecked();
 		//	((CheckableSelectableRelativeLayout) v).setSelected(checked);
-		//	//Log.e(toString(), getMethodName() + position + "-" + v.isSelected() + ":" + checked);
+		//	//_Log.e(toString(), getMethodName() + position + "-" + v.isSelected() + ":" + checked);
 		//}
 
 	}

@@ -13,7 +13,7 @@ import kr.keumyoung.mukin.util.MicChecker;
 
 public class LyricsTimes extends ArrayList<LyricsTime> {
     public int getWithMillis(long currentTick, MicChecker.MIC_CONNECTION_STATES states) {
-        //Log.e("MicChecker", "LyricsTimes.getWithMillis()" + ":" + currentTick + ":" + states);
+        //_Log.e("MicChecker", "LyricsTimes.getWithMillis()" + ":" + currentTick + ":" + states);
         long startTick = 0;
         for (int index = 0; index < size(); index++) {
             LyricsTime lyricsTime = get(index);
@@ -45,7 +45,7 @@ public class LyricsTimes extends ArrayList<LyricsTime> {
                     tick = 110;
                     break;
             }
-            //Log.e("MicChecker", "LyricsTimes.getWithMillis()" + ":" + currentTick + ":" + states + "-" + lyricsTime.getBpm() + ":" + tick + "-" + startTick + ":" + (startTick + tick));
+            //_Log.e("MicChecker", "LyricsTimes.getWithMillis()" + ":" + currentTick + ":" + states + "-" + lyricsTime.getBpm() + ":" + tick + "-" + startTick + ":" + (startTick + tick));
             startTick += tick;
 
             if ((startTick >= currentTick - 15) && (startTick <= currentTick + 15)) {

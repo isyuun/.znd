@@ -192,7 +192,7 @@ public class KPjson extends AsyncHttpAgent implements _IKaraoke, JsonHttpRespons
 			json = mLists.get(index);
 		} catch (Exception e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			return null;
 		}
 		return json.getValue(name);
@@ -244,7 +244,7 @@ public class KPjson extends AsyncHttpAgent implements _IKaraoke, JsonHttpRespons
 		if (_IKaraoke.DEBUG) Log.e(__CLASSNAME__, getMethodName());
 		if (_IKaraoke.DEBUG) Log.e(__CLASSNAME__, "[OPCODE]\t" + opcode);
 		// 노출금지
-		// if (_IKaraoke.DEBUG)Log.e(__CLASSNAME__, "[QUERY]\t" + query);
+		// if (_IKaraoke.DEBUG)_Log.e(__CLASSNAME__, "[QUERY]\t" + query);
 
 		this.mStrQuery = query;
 		this.p_opcode = opcode;
@@ -310,7 +310,7 @@ public class KPjson extends AsyncHttpAgent implements _IKaraoke, JsonHttpRespons
 
 		} catch (Exception e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			throw e;
 		}
 
@@ -374,7 +374,7 @@ public class KPjson extends AsyncHttpAgent implements _IKaraoke, JsonHttpRespons
 			}
 		} catch (Exception e) {
 
-			// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+			// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 			if (_IKaraoke.DEBUG) Log.wtf(__CLASSNAME__, file.toString());
 			sendMessage(STATE_DATA_QUERY_ERROR, ERROR_CODE_UNKOWNDATAERROR, Log.getStackTraceString(e));
 			throw e;
@@ -421,10 +421,10 @@ public class KPjson extends AsyncHttpAgent implements _IKaraoke, JsonHttpRespons
 			if (_IKaraoke.DEBUG) Log.w(__CLASSNAME__, "[" + p_opcode + "]" + "\n" + mInfo);
 
 			super.onSuccess(statusCode, headers, response);
-			// if (_IKaraoke.DEBUG)Log.d(__CLASSNAME__, obj.toString(2));
+			// if (_IKaraoke.DEBUG)_Log.d(__CLASSNAME__, obj.toString(2));
 
 			JSONObject record = response.getJSONObject("record");
-			// if (_IKaraoke.DEBUG)Log.i(__CLASSNAME__, "record - " + "\"" + record.toString(2) + "\"");
+			// if (_IKaraoke.DEBUG)_Log.i(__CLASSNAME__, "record - " + "\"" + record.toString(2) + "\"");
 
 			JSONArray infos = record.getJSONArray("info");
 			JSONObject info = infos.getJSONObject(0);
@@ -479,7 +479,7 @@ public class KPjson extends AsyncHttpAgent implements _IKaraoke, JsonHttpRespons
 				return;
 			}
 
-			// if (_IKaraoke.DEBUG)Log.w(__CLASSNAME__, "info - " + "\"" + mInfo.toString(2) + "\"");
+			// if (_IKaraoke.DEBUG)_Log.w(__CLASSNAME__, "info - " + "\"" + mInfo.toString(2) + "\"");
 
 			if (r_code != null && r_code.equals("00000")) {
 				if (getDownload() != null) {
@@ -528,7 +528,7 @@ public class KPjson extends AsyncHttpAgent implements _IKaraoke, JsonHttpRespons
 		if (_IKaraoke.DEBUG) Log.e(__CLASSNAME__, "[" + p_opcode + "]");
 		if (_IKaraoke.DEBUG) Log.e(__CLASSNAME__, "info - " + (mInfo != null ? mInfo.toString(2) : mInfo));
 
-		// Log.e(__CLASSNAME__, Log.getStackTraceString(e));
+		// _Log.e(__CLASSNAME__, _Log.getStackTraceString(e));
 
 		this.r_code = "";
 		String r_code = ERROR_CODE_UNKOWNDATAERROR;
@@ -560,11 +560,11 @@ public class KPjson extends AsyncHttpAgent implements _IKaraoke, JsonHttpRespons
 			// putInfoErrorStatus(((IOException) e).hashCode(), ((IOException) e).getMessage());
 			// r_code = Integer.toString(e.hashCode());
 			// } else {
-			// putInfoErrorStatus(e.hashCode(), Log.getStackTraceString(e));
+			// putInfoErrorStatus(e.hashCode(), _Log.getStackTraceString(e));
 			// r_code = Integer.toString(e.hashCode());
 		}
 		this.r_code = r_code;
-		// sendMessage(STATE_DATA_QUERY_FAIL, Integer.toString(e.hashCode()), Log.getStackTraceString(e));
+		// sendMessage(STATE_DATA_QUERY_FAIL, Integer.toString(e.hashCode()), _Log.getStackTraceString(e));
 		sendMessage(STATE_DATA_QUERY_FAIL, r_code, Log.getStackTraceString(throwable));
 	}
 

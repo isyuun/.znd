@@ -208,7 +208,7 @@ public class ImageDownLoader3 implements ImageLoadingListener, IImageDownLoader 
 				}
 			}
 		} else {
-			// android.util.Log.e(__CLASSNAME__, "[ERROR:" + view + "]" + loadedImage);
+			// android.util._Log.e(__CLASSNAME__, "[ERROR:" + view + "]" + loadedImage);
 		}
 	}
 
@@ -242,7 +242,7 @@ public class ImageDownLoader3 implements ImageLoadingListener, IImageDownLoader 
 				cacheDir = StorageUtils.getIndividualCacheDirectory(context);
 			}
 
-			// Log.e(__CLASSNAME__, "[CACHE:" + cacheDir.exists() + "]" + cacheDir);
+			// _Log.e(__CLASSNAME__, "[CACHE:" + cacheDir.exists() + "]" + cacheDir);
 
 			// DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
 			// .bitmapConfig(Bitmap.Config.RGB_565)

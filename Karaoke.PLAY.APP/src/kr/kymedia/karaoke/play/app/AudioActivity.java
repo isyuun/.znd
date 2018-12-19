@@ -34,7 +34,7 @@
 package kr.kymedia.karaoke.play.app;
 
 import kr.kymedia.karaoke.play.app.content.HeadsetBroadcastReceiver;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -99,7 +99,7 @@ public class AudioActivity extends BaseFullActivity2 implements FileDialogOpener
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 
 		super.onCreate(savedInstanceState);
 
@@ -119,21 +119,21 @@ public class AudioActivity extends BaseFullActivity2 implements FileDialogOpener
 	}
 
 	protected void volumeUp(int keyCode, KeyEvent event) {
-		Log.e(__CLASSNAME__, getMethodName() + keyCode + ", " + event);
+		_Log.e(__CLASSNAME__, getMethodName() + keyCode + ", " + event);
 		mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, AudioManager.FLAG_SHOW_UI);
 	}
 
 	protected void volumeDown(int keyCode, KeyEvent event) {
-		Log.e(__CLASSNAME__, getMethodName() + keyCode + ", " + event);
+		_Log.e(__CLASSNAME__, getMethodName() + keyCode + ", " + event);
 		mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_LOWER, AudioManager.FLAG_SHOW_UI);
 	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// if (mFileDialogfragment != null) {
-		// Log.d(__CLASSNAME__, getMethodName() + mFileDialogfragment.isVisible() + keyCode + event);
+		// _Log.d(__CLASSNAME__, getMethodName() + mFileDialogfragment.isVisible() + keyCode + event);
 		// }
-		Log.d(__CLASSNAME__, getMethodName() + keyCode + event);
+		_Log.d(__CLASSNAME__, getMethodName() + keyCode + event);
 
 		boolean ret = false;
 

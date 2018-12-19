@@ -33,7 +33,8 @@
 package kr.kymedia.karaoke.play.apps;
 
 import kr.kymedia.karaoke.play.app._Activity;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
+
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -89,7 +90,7 @@ public class PlayActivity extends _Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Log.e(__CLASSNAME__, getMethodName() + item);
+		_Log.e(__CLASSNAME__, getMethodName() + item);
 
 		return super.onOptionsItemSelected(item);
 	}

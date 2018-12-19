@@ -130,7 +130,7 @@ public class PlayActivity3 extends PlayActivity2 {
 		sliding.setPanelSlideListener(new PanelSlideListener() {
 			@Override
 			public void onPanelSlide(View panel, float slidingOffset) {
-				// Log.w(__CLASSNAME__, getMethodName() + panel + "," + slidingOffset);
+				// _Log.w(__CLASSNAME__, getMethodName() + panel + "," + slidingOffset);
 			}
 
 			@Override

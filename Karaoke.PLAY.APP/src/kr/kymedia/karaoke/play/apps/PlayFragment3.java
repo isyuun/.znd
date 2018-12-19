@@ -35,7 +35,7 @@ package kr.kymedia.karaoke.play.apps;
 import kr.kymedia.karaoke.play.app.R;
 import kr.kymedia.karaoke.play.app.view.PlayViewTempo;
 import kr.kymedia.karaoke.play.app.view.SongPlayView;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import kr.kymedia.karaoke.widget.AutoRepeatImageButton;
 import kr.kymedia.karaoke.widget.BalanceSeekBar;
 import android.view.View;
@@ -101,7 +101,7 @@ public class PlayFragment3 extends PlayFragment2 {
 		float balance = seekTempo.getDisBalance();
 		float min = seekTempo.getDisMinBalance();
 		float max = seekTempo.getDisMaxBalance();
-		Log.i(__CLASSNAME__, getMethodName() + init + " - balance:" + balance + " - " + min + "~" + max);
+		_Log.i(__CLASSNAME__, getMethodName() + init + " - balance:" + balance + " - " + min + "~" + max);
 
 		// 템포설정
 		int tempo = seekTempo.getBalance();
@@ -175,7 +175,7 @@ public class PlayFragment3 extends PlayFragment2 {
 
 	@Override
 	public void setTempoPercent(int percent) {
-		// Log.w(__CLASSNAME__, getMethodName() + tempo);
+		// _Log.w(__CLASSNAME__, getMethodName() + tempo);
 
 
 		super.setTempoPercent(percent);

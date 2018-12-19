@@ -66,7 +66,7 @@ import kr.kymedia.karaoke.play.app.view.PlayView;
 import kr.kymedia.karaoke.play.app.view._PlayView;
 import kr.kymedia.karaoke.play.impl.ISongPlay.TYPE;
 import kr.kymedia.karaoke.util.BuildUtils;
-import kr.kymedia.karaoke.util.Log;
+import kr.kymedia.karaoke.util._Log;
 import kr.kymedia.karaoke.util.TextUtil;
 import kr.kymedia.karaoke.widget.util.WidgetUtils;
 
@@ -98,7 +98,7 @@ public class MainActivity extends _Activity implements OnClickListener, OnLongCl
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Log.i(__CLASSNAME__, getMethodName());
+		_Log.i(__CLASSNAME__, getMethodName());
 
 		super.onCreate(savedInstanceState);
 
@@ -110,7 +110,7 @@ public class MainActivity extends _Activity implements OnClickListener, OnLongCl
 
 		Intent intent = getIntent();
 
-		Log.i(__CLASSNAME__, getMethodName() + PlayView.type + ":" + intent);
+		_Log.i(__CLASSNAME__, getMethodName() + PlayView.type + ":" + intent);
 
 		openIntent(intent);
 
@@ -133,11 +133,11 @@ public class MainActivity extends _Activity implements OnClickListener, OnLongCl
 
 	@Override
 	protected void onNewIntent(Intent intent) {
-		// Log.i(__CLASSNAME__, getMethodName());
+		// _Log.i(__CLASSNAME__, getMethodName());
 
 
 		super.onNewIntent(intent);
-		Log.i(__CLASSNAME__, getMethodName() + intent);
+		_Log.i(__CLASSNAME__, getMethodName() + intent);
 
 		openIntent(intent);
 	}
@@ -145,7 +145,7 @@ public class MainActivity extends _Activity implements OnClickListener, OnLongCl
 	@Override
 	public void onClick(View v) {
 
-		Log.e(__CLASSNAME__, getMethodName() + v);
+		_Log.e(__CLASSNAME__, getMethodName() + v);
 		if (v.getId() == R.id.open) {
 			open(null);
 		}
@@ -157,7 +157,7 @@ public class MainActivity extends _Activity implements OnClickListener, OnLongCl
 		if (!TextUtil.isEmpty(path)) {
 			Uri uri = Uri.parse(path);
 			extras.putParcelable("pathPlay", uri);
-			Log.e(__CLASSNAME__, getMethodName() + extras + " - Uri[" + uri + "]");
+			_Log.e(__CLASSNAME__, getMethodName() + extras + " - Uri[" + uri + "]");
 		}
 		extras.putString("editSong", ((EditText) findViewById(R.id.editSong)).getText().toString());
 		extras.putInt("radioServer",
@@ -171,7 +171,7 @@ public class MainActivity extends _Activity implements OnClickListener, OnLongCl
 	@Override
 	public boolean onLongClick(View v) {
 
-		// Log.e(__CLASSNAME__, getMethodName() + v);
+		// _Log.e(__CLASSNAME__, getMethodName() + v);
 		if (v.getId() == R.id.open) {
 			// openPlay(null, null);
 			openTest();
@@ -186,7 +186,7 @@ public class MainActivity extends _Activity implements OnClickListener, OnLongCl
 	// };
 	@SuppressLint({ "InlinedApi", "NewApi" })
 	void openTest() {
-		Log.e(__CLASSNAME__, getMethodName());
+		_Log.e(__CLASSNAME__, getMethodName());
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
 		builder.setTitle("Sing a Happy Song");
@@ -229,7 +229,7 @@ public class MainActivity extends _Activity implements OnClickListener, OnLongCl
 	 * 버전정보
 	 */
 	protected void showVersion() {
-		// if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, getMethodName());
+		// if (BuildConfig.DEBUG) _Log.d(__CLASSNAME__, getMethodName());
 		findViewById(R.id.version).setVisibility(View.VISIBLE);
 	}
 
@@ -237,7 +237,7 @@ public class MainActivity extends _Activity implements OnClickListener, OnLongCl
 	 * 버전정보
 	 */
 	protected void hideVersion() {
-		// if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, getMethodName());
+		// if (BuildConfig.DEBUG) _Log.d(__CLASSNAME__, getMethodName());
 		findViewById(R.id.version).setVisibility(View.INVISIBLE);
 	}
 
@@ -245,7 +245,7 @@ public class MainActivity extends _Activity implements OnClickListener, OnLongCl
 	 * 버전정보
 	 */
 	protected void startVersion() {
-		// if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, getMethodName());
+		// if (BuildConfig.DEBUG) _Log.d(__CLASSNAME__, getMethodName());
 
 		try {
 			post(new Runnable() {

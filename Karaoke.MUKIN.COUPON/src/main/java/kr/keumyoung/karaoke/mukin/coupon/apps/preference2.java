@@ -27,9 +27,9 @@ public class preference2 extends preference {
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void onBuildHeaders(List<Header> target) {
         super.onBuildHeaders(target);
-        //if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[PREF]" + getMethodName() + target);
+        //if (BuildConfig.DEBUG) _Log.e(__CLASSNAME__, "[PREF]" + getMethodName() + target);
         //for (Header h : target) {
-        //    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[PREF]" + getMethodName() + h.fragment);
+        //    if (BuildConfig.DEBUG) _Log.e(__CLASSNAME__, "[PREF]" + getMethodName() + h.fragment);
         //}
     }
 

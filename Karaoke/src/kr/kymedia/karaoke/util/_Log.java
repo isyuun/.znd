@@ -20,12 +20,12 @@
  *  of (c)KYGroup Co.,Ltd. ("Confidential Information").
  * 
  * project	:	Karaoke.KPOP
- * filename	:	if (_IKaraoke.DEBUG)Log.java
+ * filename	:	if (_IKaraoke.DEBUG)_Log.java
  * author	:	isyoon
  *
  * <pre>
  * kr.kymedia.karaoke.util
- *    |_ if (_IKaraoke.DEBUG)Log.java
+ *    |_ if (_IKaraoke.DEBUG)_Log.java
  * </pre>
  * 
  */
@@ -45,7 +45,7 @@ import kr.kymedia.karaoke.BuildConfig;
  * @see
  */
 
-public class Log {
+public class _Log {
 
 	// private static boolean enable = true;
 	private static boolean enable = BuildConfig.DEBUG;
@@ -62,7 +62,7 @@ public class Log {
 	 *          the enable to set
 	 */
 	public static void setEnable(boolean enable) {
-		Log.enable = enable;
+		_Log.enable = enable;
 	}
 
 	public static int v(String tag, String msg) {
@@ -191,11 +191,11 @@ public class Log {
 		}
 		if (enable) {
 			// if (_IKaraoke.IS_ABOVE_HONEYCOMB) {
-			// return android.util.Log.e(tag, msg);
+			// return android.util._Log.e(tag, msg);
 			// } else {
-			// return android.util.Log.e(tag, msg);
+			// return android.util._Log.e(tag, msg);
 			// }
-			return Log.e(tag, msg);
+			return _Log.e(tag, msg);
 		} else {
 			return 0;
 		}
@@ -204,11 +204,11 @@ public class Log {
 	public static int wtf(String tag, Throwable tr) {
 		if (enable) {
 			// if (_IKaraoke.IS_ABOVE_HONEYCOMB) {
-			// return android.util.Log.wtf(tag, tr);
+			// return android.util._Log.wtf(tag, tr);
 			// } else {
-			// return android.util.Log.wtf(tag, tr.getMessage());
+			// return android.util._Log.wtf(tag, tr.getMessage());
 			// }
-			return Log.e(tag, tr.getMessage());
+			return _Log.e(tag, tr.getMessage());
 		} else {
 			return 0;
 		}
@@ -232,9 +232,9 @@ public class Log {
 
 		//if (IKaraoke.DEBUG && enable) {
 		//	if (IKaraoke.IS_ABOVE_HONEYCOMB) {
-		//		return android.util.Log.e(tag, msg);
+		//		return android.util._Log.e(tag, msg);
 		//	} else {
-		//		return android.util.Log.e(tag, msg);
+		//		return android.util._Log.e(tag, msg);
 		//	}
 		//} else {
 		//	return 0;
@@ -248,11 +248,11 @@ public class Log {
 		}
 		if (enable) {
 			// if (_IKaraoke.IS_ABOVE_HONEYCOMB) {
-			// return android.util.Log.wtf(tag, msg, tr);
+			// return android.util._Log.wtf(tag, msg, tr);
 			// } else {
-			// return android.util.Log.wtf(tag, msg, tr);
+			// return android.util._Log.wtf(tag, msg, tr);
 			// }
-			return Log.e(tag, msg, tr);
+			return _Log.e(tag, msg, tr);
 		} else {
 			return 0;
 		}
