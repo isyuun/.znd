@@ -1,6 +1,7 @@
 package kr.keumyoung.mukin.activity;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import javax.inject.Inject;
@@ -18,11 +18,11 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.api.RestApi;
 import kr.keumyoung.mukin.helper.NavigationHelper;
-import kr.keumyoung.mukin.helper.PreferenceHelper;
 import kr.keumyoung.mukin.helper.ToastHelper;
 import kr.keumyoung.mukin.util.CommonHelper;
 import kr.keumyoung.mukin.util.PreferenceKeys;
@@ -141,6 +141,16 @@ public class LoginActivity extends _BaseActivity {
     protected void onResume() {
         super.onResume();
         setLoginText();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + (requestCode == KARAOKE_INTENT_ACTION_REGISTER) + ":" + (requestCode == KARAOKE_INTENT_ACTION_REGISTER) + ":" + requestCode + ":" + resultCode + ":" + data);
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == KARAOKE_INTENT_ACTION_REGISTER && resultCode == KARAOKE_RESULT_LOGIN_SUCCESS) {
+            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + "[KARAOKE_INTENT_ACTION_REGISTER]" + "[KARAOKE_RESULT_LOGIN_SUCCESS]");
+            finish();
+        }
     }
 
     private void setLoginText() {

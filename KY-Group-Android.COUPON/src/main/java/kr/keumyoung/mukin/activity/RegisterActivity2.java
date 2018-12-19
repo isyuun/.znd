@@ -49,6 +49,7 @@ public class RegisterActivity2 extends RegisterActivity {
     @Override
     protected void onLoginSuccess(String email, String nickName) {
         super.onLoginSuccess(email, nickName);
+        setResult(KARAOKE_RESULT_LOGIN_SUCCESS);
         finish();
     }
 }

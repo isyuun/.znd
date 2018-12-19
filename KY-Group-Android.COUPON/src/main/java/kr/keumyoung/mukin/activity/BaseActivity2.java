@@ -143,6 +143,8 @@ public class BaseActivity2 extends BaseActivity {
     int KARAOKE_RESULT_OK = Activity.RESULT_OK;
     int KARAOKE_RESULT_DEFAULT = Activity.RESULT_FIRST_USER;
     int KARAOKE_RESULT_REFRESH = Activity.RESULT_FIRST_USER + 1;
+    int KARAOKE_RESULT_LOGIN_SUCCESS = Activity.RESULT_FIRST_USER + 2;
+    int KARAOKE_RESULT_LOGIN_FAILURE = Activity.RESULT_FIRST_USER + 3;
 
     protected void openHomeActivity() {
         post(openHomeActivity);
