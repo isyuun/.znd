@@ -131,7 +131,7 @@ public class MicChecker {
 
             last_bluetooth_device_name = devicename;
         } else {
-            if (devicename.compareToIgnoreCase(last_bluetooth_device_name) == 0)
+            if (("" + devicename).compareToIgnoreCase(last_bluetooth_device_name) == 0)
                 states = MIC_CONNECTION_STATES.NONE;
         }
 

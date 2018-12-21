@@ -14,8 +14,8 @@ apply plugin: 'io.fabric'
 
 android {
     defaultConfig {
-        versionCode 17
-        versionName "1.7"
+        versionCode 18
+        versionName "1.8"
         applicationId "kr.keumyoung.mukin"
         minSdkVersion 21
         targetSdkVersion 27

@@ -205,7 +205,7 @@ public class BaseActivity2 extends BaseActivity {
     };
 
     protected void openPreferenceCoupon() {
-        postDelayed(openPreferenceCoupen, 500);
+        post(openPreferenceCoupen);
     }
 
     private Runnable openPreferenceCoupen = () -> {
