@@ -1,12 +1,21 @@
 package kr.keumyoung.mukin.activity;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.View;
+import android.widget.FrameLayout;
 
+import butterknife.BindView;
 import kr.keumyoung.mukin.BuildConfig;
+import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.util.PreferenceKeys;
 
 public class PlayerActivity2 extends PlayerActivity {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
+
+    @BindView(R.id.jump)
+    FrameLayout jump;
 
     protected String getMethodName() {
         String name = Thread.currentThread().getStackTrace()[3].getMethodName();
@@ -30,5 +39,32 @@ public class PlayerActivity2 extends PlayerActivity {
         int pitch = preferenceHelper.getInt(PreferenceKeys.PITCH_VALUE);
         int sex = preferenceHelper.getInt(PreferenceKeys.SONG_GENDER, -1);
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":tempo:" + tempo + ":pitch:" + pitch + ":sex:" + sex);
+    }
+
+    @Override
+    public void onViewClicked(View view) {
+        super.onViewClicked(view);
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //jump = findViewById(R.id.jump);
+        jump.setOnClickListener(v -> {
+            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
+            if (lyricsTimingHelper != null && lyricsTimingHelper.isPlaying()) {
+                lyricsTimingHelper.jump();
+            }
+        });
+    }
+
+    public void showJump() {
+        //if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
+        jump.setVisibility(View.VISIBLE);
+    }
+
+    public void hideJump() {
+        //if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
+        jump.setVisibility(View.INVISIBLE);
     }
 }

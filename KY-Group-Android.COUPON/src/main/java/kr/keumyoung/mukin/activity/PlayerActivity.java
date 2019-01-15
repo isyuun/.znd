@@ -248,10 +248,10 @@ public class PlayerActivity extends _BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        if (playerJNI != null) playerJNI.FinalizeAudio();
-//        if (audioJNI != null) audioJNI.FinalizeAudio();
-//        playerJNI = null;
-//        audioJNI = null;
+        //if (playerJNI != null) playerJNI.FinalizeAudio();
+        //if (audioJNI != null) audioJNI.FinalizeAudio();
+        //playerJNI = null;
+        //audioJNI = null;
     }
 
     public Context mContext;
@@ -415,6 +415,10 @@ public class PlayerActivity extends _BaseActivity {
                         }, this::prepareMediaPlayer));
     }
 
+    public long GetTimePerClock() {
+        return microTimePerClock;
+    }
+
     protected void prepareMediaPlayer() {
         try {
             if (playerJNI == null) playerJNI = new PlayerJNI();
@@ -527,7 +531,8 @@ public class PlayerActivity extends _BaseActivity {
                 timeProgressBar.setProgress(percent);
 
                 long remainingTime = mediaDuration - mediaCurrentPosition;
-                durationText.setText(dateHelper.getDuration(Math.round(remainingTime / 1000000)));
+                //durationText.setText(dateHelper.getDuration(Math.round(remainingTime / 1000000)));
+                durationText.setText(dateHelper.getDuration(Math.round(mediaCurrentPosition / 1000000)));
 
                 if (remainingTime == 0) {
 

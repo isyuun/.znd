@@ -260,6 +260,31 @@
 
     </RelativeLayout>
 
+    <FrameLayout
+        android:id="@+id/jump"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/controls_panel"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="16dp"
+        android:visibility="invisible">
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:color/transparent"
+            app:srcCompat="@android:drawable/ic_media_play" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="16dp"
+            android:text="점프"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white" />
+    </FrameLayout>
+
     <RelativeLayout
         android:id="@+id/controls_panel"
         android:layout_width="match_parent"
