@@ -4,6 +4,6 @@ public class SplashScreenActivity3 extends SplashScreenActivity2 {
     @Override
     protected void proceedToNextActivity() {
         super.proceedToNextActivity();
-        getMainApplication().sendUser();
+        getApp().sendUser();
     }
 }

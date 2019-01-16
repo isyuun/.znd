@@ -14,28 +14,20 @@
         android:layout_margin="8dp"
         android:visibility="gone" />
 
-    <com.andexert.library.RippleView
-        android:id="@+id/parent_item"
+    <RelativeLayout
+        android:id="@+id/song_ripple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:rv_centered="false"
-        app:rv_color="@android:color/black"
-        app:rv_rippleDuration="100"
-        app:rv_type="simpleRipple">
-
-        <!--<RelativeLayout-->
-        <!--android:id="@+id/ripple_view"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_toLeftOf="@+id/favorite_ripple"-->
-        <!--android:visibility="visible">-->
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="visible">
 
         <LinearLayout
             android:id="@+id/song_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/favorite_ripple"
+            android:layout_toStartOf="@+id/favorite_ripple"
             android:orientation="horizontal"
             android:padding="8dp"
             android:visibility="visible">
@@ -45,7 +37,7 @@
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/dummy"
+                android:background="@drawable/dummy"
                 app:riv_corner_radius="4dp" />
 
             <RelativeLayout
@@ -53,7 +45,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:background="@android:color/transparent">
 
                 <TextView
                     android:id="@+id/song_name"
@@ -89,27 +82,48 @@
 
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/free_button"
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:background="@drawable/blank_button_bg"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="@string/free"
-                android:textColor="@color/colorAccent"
-                android:padding="3dp"
-                android:textSize="12sp"
-                android:typeface="sans"
-                android:visibility="visible" />
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/reserve_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/blank_button_bg"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:padding="3dp"
+                    android:text="@string/reserve"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="12sp"
+                    android:typeface="sans"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/free_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/blank_button_bg"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:padding="3dp"
+                    android:text="@string/free"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="12sp"
+                    android:typeface="sans"
+                    android:visibility="visible" />
+            </RelativeLayout>
 
         </LinearLayout>
-        <!--</RelativeLayout>-->
 
-        <com.andexert.library.RippleView
+        <RelativeLayout
             android:id="@+id/favorite_ripple"
             android:layout_width="48dp"
             android:layout_height="48dp"
@@ -117,10 +131,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="12dp"
-            android:layout_marginRight="12dp"
-            app:rv_centered="true"
-            app:rv_color="@android:color/black"
-            app:rv_rippleDuration="100">
+            android:layout_marginRight="12dp">
 
             <CheckBox
                 android:id="@+id/favorite_button"
@@ -131,8 +142,8 @@
                 android:scaleType="center"
                 android:src="@drawable/ic_favorite"
                 android:visibility="visible" />
-        </com.andexert.library.RippleView>
-    </com.andexert.library.RippleView>
+        </RelativeLayout>
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"

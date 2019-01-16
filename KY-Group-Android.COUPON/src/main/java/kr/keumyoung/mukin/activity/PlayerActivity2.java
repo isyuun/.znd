@@ -47,6 +47,42 @@ public class PlayerActivity2 extends PlayerActivity {
     }
 
     @Override
+    protected void cancelRecording() {
+        if (!isPlaying) {
+            release();
+            return;
+        }
+        super.cancelRecording();
+    }
+
+    private void release() {
+        try {
+            if (service != null) service.shutdown();
+            closePlayer = true;
+            preferenceHelper.clearSavedSettings();
+
+            if (playerJNI != null) {
+                playerJNI.FinalizePlayer();
+                playerJNI = null;
+            }
+
+            if (audioJNI != null) {
+                //dsjung 종료시 플레이중에 Finalize 하면 오류
+                if (isPlayed) audioJNI.StopAudio();
+                audioJNI.FinalizeAudio();
+                audioJNI = null;
+            }
+
+            lyricsTimingHelper.stop();
+
+            navigationHelper.finish(this);
+            //navigationHelper.navigate(PlayerActivity.this, HomeActivity.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //jump = findViewById(R.id.jump);

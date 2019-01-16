@@ -10,6 +10,13 @@ import java.util.ArrayList;
  */
 
 public class Song extends SongModel implements Serializable {
+
+    @Override
+    public String toString() {
+        //return super.toString();
+        return songId;
+    }
+
     private String songId, identifier, artistId, songTitle, songSubTitle, albumImage, artistName, genreName, songFile, songFileName, lyricsFile, language, gender;
     private int hits, duration;
     private DateTime createdOn, updatedOn;
@@ -178,4 +185,13 @@ public class Song extends SongModel implements Serializable {
         this.free = free;
     }
 
+    private boolean reserve = false;
+
+    public boolean isReserve() {
+        return reserve;
+    }
+
+    public void setReserve(boolean reserve) {
+        this.reserve = reserve;
+    }
 }

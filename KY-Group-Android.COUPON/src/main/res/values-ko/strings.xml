@@ -127,4 +127,9 @@
     <string name="do_you_want_to_stop_playing">재생을 중단하시겠습니까?</string>
     <string name="function_not_support">해당기능은 현재 지원하지 않습니다.</string>
     <string name="upload">업로드</string>
+    <string name="interlude_jump">점프</string>
+    <string name="interlude_play">(간주중)</string>
+    <string name="reserve">예약</string>
+    <string name="reserve_next">다음</string>
+    <string name="reserve_play">시작</string>
 </resources>

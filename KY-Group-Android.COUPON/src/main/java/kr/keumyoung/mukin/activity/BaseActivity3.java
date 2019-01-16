@@ -175,7 +175,7 @@ public class BaseActivity3 extends BaseActivity2 {
     protected void onLoginSuccess(String email, String nickName) {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
         preferenceHelper.saveString(getString(R.string.email), email);
-        getMainApplication().send("Q", email, "");
+        getApp().send("Q", email, "");
     }
 
     protected void onLoginFailure() {
@@ -478,7 +478,7 @@ public class BaseActivity3 extends BaseActivity2 {
     protected void onRegisterSuccess(String email, String nickName) {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
         preferenceHelper.saveString(getString(R.string.email), email);
-        getMainApplication().send("Q", email, "");
+        getApp().send("Q", email, "");
     }
 
     public boolean handleDFError(JSONObject errorObject, SessionRefreshListener listener) throws JSONException {

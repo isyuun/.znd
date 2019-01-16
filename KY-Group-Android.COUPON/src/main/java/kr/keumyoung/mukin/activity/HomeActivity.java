@@ -170,7 +170,7 @@ public class HomeActivity extends _BaseActivity {
     //
     //// on song selection, open the player activity after registering the user hit
     //@Subscribe
-    //public void onSongSelected(Song song) {
+    //public void onSongClick(Song song) {
     //    this.song = song;
     //    CommonHelper.hideSoftKeyboard(this);
     //

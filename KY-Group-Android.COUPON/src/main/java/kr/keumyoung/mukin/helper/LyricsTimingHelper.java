@@ -21,6 +21,7 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.activity.BaseActivity;
 import kr.keumyoung.mukin.activity.PlayerActivity;
@@ -314,7 +315,7 @@ public class LyricsTimingHelper {
                 info += "[" + jumpTime + "]";
                 info += "[" + lyricsTime.getCurrentWord() + "]";
                 info += "[" + lyricsTime.getCurrentLine() + "]";
-                Log.e("LyricsTimingHelper", "[LyricsTime]" + info);
+                if (BuildConfig.DEBUG) Log.e("LyricsTimingHelper", "[LyricsTime]" + info);
             }
         }
 
@@ -324,7 +325,7 @@ public class LyricsTimingHelper {
     }
 
     public void jump() {
-        Log.e("LyricsTimingHelper", "jump()");
+        if (BuildConfig.DEBUG) Log.e("LyricsTimingHelper", "jump()");
         if (isPlaying && this.activity instanceof _PlayerActivity) {
             //isyuun:머누
             ((_PlayerActivity) this.activity).getPlayerJNI().Seek((int) (jumpTime / MSEC2SEC - 1) * 50);
@@ -369,7 +370,7 @@ public class LyricsTimingHelper {
     }
 
     public void updateView(int currentTick) {
-        long currentClocks = currentTick;
+        long checkTime = currentTick;
 
         //System.out.println("currentMillis: " + currentMillis);
         //long currentTick = activity.GetCurrentClocks();
@@ -405,12 +406,12 @@ public class LyricsTimingHelper {
 
         try {
             if (isPlaying) {
-                long currTime = currentClocks * microTimePerClock;
+                checkTime = (long) (checkTime * microTimePerClock + (1.3 * MSEC2SEC));
                 //String info = "";
-                //info += "[curr:" + currTime + "]";
+                //info += "[curr:" + checkTime + "]";
                 //info += "[jump:" + jumpTime + "]";
-                //Log.e("LyricsTimingHelper", "[updateView]" + info);
-                if ((currTime + 1 * MSEC2SEC) < jumpTime) {
+                //if (BuildConfig.DEBUG) Log.e("LyricsTimingHelper", "[updateView]" + info);
+                if (checkTime < jumpTime) {
                     showJump();
                 } else {
                     hideJump();

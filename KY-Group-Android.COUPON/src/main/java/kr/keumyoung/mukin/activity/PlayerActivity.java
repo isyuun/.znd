@@ -182,8 +182,8 @@ public class PlayerActivity extends _BaseActivity {
     boolean isFinished = false;
     @BindView(R.id.status_layout)
     LinearLayout statusLayout;
-    private PlayerJNI playerJNI;
-    private AudioJNI audioJNI;
+    protected PlayerJNI playerJNI;
+    protected AudioJNI audioJNI;
     private String tempPath, destinationPath;
     private PlayerKyUnpackJNI playerKyUnpackJNI;
     private MicChecker.MIC_CONNECTION_STATES preStatas;
@@ -880,7 +880,7 @@ public class PlayerActivity extends _BaseActivity {
         }
     }
 
-    private void cancelRecording() {
+    protected void cancelRecording() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
         if (songFinishWithMic == true)

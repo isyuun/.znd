@@ -1,8 +1,6 @@
 package kr.keumyoung.mukin.fragment;
 
-import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 
@@ -64,27 +62,32 @@ public class BaseFragment2 extends BaseFragment {
     }
 
     protected void onPopulateSongs() {
-        updateFavoriteSongs();
+        updateSongs();
     }
 
 
     Songs songs = new Songs();
     SongAdapter songAdapter;
 
-    public void updateFavoriteSongs() {
+    public void updateSongs() {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + activity.getFavorites() + ":" + songs + ":" + songAdapter);
         for (Song song : songs) {
             song.setFavorite(activity.isFavorites(song.getSongId()));
+            song.setReserve(activity.isReserves(song.getSongId()));
         }
+        postDelayed(notifyDataSetChanged, 100);
+    }
+
+    private Runnable notifyDataSetChanged = () -> {
         if (songAdapter != null) {
             songAdapter.notifyDataSetChanged();
         }
-    }
+    };
 
     @Override
     public void onResume() {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
         super.onResume();
-        updateFavoriteSongs();
+        updateSongs();
     }
 }

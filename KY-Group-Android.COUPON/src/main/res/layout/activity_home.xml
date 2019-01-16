@@ -33,37 +33,54 @@
             </com.andexert.library.RippleView>
 
             <!--<FrameLayout-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="34dp">-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="34dp">-->
 
-            <FrameLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal">
-
-                <TextView
-                    android:id="@+id/header_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="16dp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:typeface="sans"
-                    android:text="@string/newsongs"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    android:visibility="gone" />
+                android:layout_gravity="center_horizontal"
+                android:gravity="center">
 
                 <ImageView
                     android:id="@+id/header_image"
                     android:layout_width="96dp"
                     android:layout_height="48dp"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
                     android:src="@drawable/logo_01" />
 
+                <TextView
+                    android:id="@+id/header_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@string/newsongs"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:typeface="sans"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/reserve_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@string/reserve"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:typeface="sans"
+                    android:visibility="invisible" />
+
                 <!--android:layout_centerInParent="true"-->
-            </FrameLayout>
+            </RelativeLayout>
 
             <com.andexert.library.RippleView
                 android:id="@+id/menu_anchor"
@@ -92,6 +109,31 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/toolbar" />
 
+        <FrameLayout
+            android:id="@+id/play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/fragment_container"
+            android:layout_gravity="bottom|start"
+            android:layout_margin="16dp"
+            android:visibility="invisible">
+
+            <android.support.design.widget.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:color/transparent"
+                app:srcCompat="@android:drawable/ic_media_play" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:elevation="16dp"
+                android:text="@string/reserve_play"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white"
+                android:visibility="visible" />
+        </FrameLayout>
     </RelativeLayout>
 
     <FrameLayout

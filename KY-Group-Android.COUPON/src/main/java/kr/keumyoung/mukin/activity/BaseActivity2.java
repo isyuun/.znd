@@ -10,13 +10,11 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 
 import kr.keumyoung.karaoke.mukin.coupon.apps._preference;
 import kr.keumyoung.karaoke.mukin.coupon.fragment._coupon;
-import kr.keumyoung.mukin.BuildConfig;
-import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
+import kr.keumyoung.mukin._MainApplication;
 import kr.keumyoung.mukin.fragment._BaseFragment;
 import kr.kymedia.karaoke.util.EnvironmentUtils;
 
@@ -33,8 +31,8 @@ public class BaseActivity2 extends BaseActivity {
         return text;
     }
 
-    public MainApplication getMainApplication() {
-        return (MainApplication) super.getApplication();
+    public _MainApplication getApp() {
+        return (_MainApplication) super.getApplication();
     }
 
     // current fragment always holds the currently added fragment to the container

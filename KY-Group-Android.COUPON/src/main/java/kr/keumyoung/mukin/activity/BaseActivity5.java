@@ -9,11 +9,9 @@ import java.util.ArrayList;
 
 import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.R;
-import kr.keumyoung.mukin.adapter.SongAdapter;
 import kr.keumyoung.mukin.api.RequestModel;
 import kr.keumyoung.mukin.data.SongParser;
 import kr.keumyoung.mukin.data.model.Song;
-import kr.keumyoung.mukin.data.model.Songs;
 import kr.keumyoung.mukin.data.request.SongHitRequest;
 import kr.keumyoung.mukin.util.Constants;
 import kr.keumyoung.mukin.util.PreferenceKeys;
@@ -38,6 +36,14 @@ public class BaseActivity5 extends BaseActivity4 {
 
     protected void clearFavorites() {
         favorites.clear();
+    }
+
+    protected void onFavoriteSelected(Song song) {
+        if (!isFavorites(song.getSongId())) {
+            addFavoriteSong(song);
+        } else {
+            delFavoriteSong(song);
+        }
     }
 
     protected void addFavoriteSong(Song song) {
@@ -148,7 +154,7 @@ public class BaseActivity5 extends BaseActivity4 {
     private void updateFavoriteSongs() {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + getCurrentFragment() + ":" + getChildCurrentFragment());
         if (getChildCurrentFragment() != null) {
-            getChildCurrentFragment().updateFavoriteSongs();
+            getChildCurrentFragment().updateSongs();
         }
     }
 }

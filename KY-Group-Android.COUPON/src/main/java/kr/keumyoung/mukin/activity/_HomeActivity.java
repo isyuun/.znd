@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.squareup.otto.Subscribe;
 
+import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.data.model.SongView;
 
 public final class _HomeActivity extends HomeActivity2 {
@@ -19,7 +20,15 @@ public final class _HomeActivity extends HomeActivity2 {
         busEventListener = new Object() {
             @Subscribe
             public void post(SongView songView) {
-                onSongSelected(songView);
+                if (songView.getClick() == 1) {
+                    if (songView.getView().getId() == R.id.favorite_button) {
+                        onFavoriteClick(songView);
+                    } else {
+                        onSongClick(songView);
+                    }
+                } else if (songView.getClick() == 2) {
+                    onReserveClick(songView);
+                }
             }
         };
 

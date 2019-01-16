@@ -1,19 +1,45 @@
 package kr.keumyoung.mukin.activity;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
+import butterknife.BindView;
 import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.R;
+import kr.keumyoung.mukin.data.model.Song;
 import kr.keumyoung.mukin.data.model.SongView;
 import kr.keumyoung.mukin.util.PreferenceKeys;
 
 public class HomeActivity2 extends HomeActivity {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
+    @BindView(R.id.play)
+    FrameLayout play;
+
+    @BindView(R.id.reserve_text)
+    TextView reserveText;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //play.setOnTouchListener(new View.OnTouchListener() {
+        //    @Override
+        //    public boolean onTouch(View v, MotionEvent event) {
+        //        return true;
+        //    }
+        //});
+        play.setOnClickListener(v -> {
+            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "play.onClick()");
+        });
+    }
+
     @Override
     protected void onMenuClick() {
         if (currentFragment != null && currentFragment.onMenuClick()) return;
-
         openPreference();
     }
 
@@ -37,23 +63,76 @@ public class HomeActivity2 extends HomeActivity {
         getFreeSongs();
     }
 
-    protected void onSongSelected(SongView song) {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + song + ":" + preferenceHelper.getString(PreferenceKeys.USER_ID) + ":" + song.getSong().getSongId() + ":" + song.getSong().getSongTitle() + ":");
+    protected void onSongClick(SongView songView) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + songView + ":" + preferenceHelper.getString(PreferenceKeys.USER_ID) + ":" + songView.getSong().getSongId() + ":" + songView.getSong().getSongTitle() + ":" + songView.getClick());
+        onSongSelected(songView.getSong());
+    }
 
-        if (song.getView().getId() == R.id.favorite_button) {
-            if (!isFavorites(song.getSong().getSongId())) {
-                addFavoriteSong(song.getSong());
-            } else {
-                delFavoriteSong(song.getSong());
-            }
+    protected void onFavoriteClick(SongView songView) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + songView + ":" + preferenceHelper.getString(PreferenceKeys.USER_ID) + ":" + songView.getSong().getSongId() + ":" + songView.getSong().getSongTitle() + ":" + songView.getClick());
+        onFavoriteSelected(songView.getSong());
+    }
+
+    protected void onReserveClick(SongView songView) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + songView + ":" + preferenceHelper.getString(PreferenceKeys.USER_ID) + ":" + songView.getSong().getSongId() + ":" + songView.getSong().getSongTitle() + ":" + songView.getClick());
+        onReserveSelected(songView.getSong());
+    }
+
+    @Override
+    public void onReserveSelected(Song song) {
+        super.onReserveSelected(song);
+        setReserveText();
+        if (getApp().getReserves().size() > 0) {
+            play.setVisibility(View.VISIBLE);
         } else {
-            onSongSelected(song.getSong());
+            play.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    public void setReserveText() {
+        String text = getApp().getReserves().toString();
+        if (headerImage.getVisibility() == View.VISIBLE)
+            animationHelper.hideWithFadeAnim(headerImage);
+
+        if (headerText.getVisibility() == View.VISIBLE)
+            animationHelper.hideWithFadeAnim(headerText);
+
+        if (getApp().getReserves().size() > 0) {
+            reserveText.setText(text);
+            animationHelper.showHeaderText(reserveText);
+        } else {
+            reserveText.setText(R.string.reserve);
+            animationHelper.hideWithFadeAnim(reserveText);
         }
     }
 
     @Override
+    public void setHeaderText(int text) {
+        if (getApp().getReserves().size() > 0) {
+            return;
+        }
+        super.setHeaderText(text);
+    }
+
+    @Override
+    public void instantHideHeaderImage() {
+        if (getApp().getReserves().size() > 0) {
+            return;
+        }
+        super.instantHideHeaderImage();
+    }
+
+    @Override
+    public void showHeaderImage() {
+        if (getApp().getReserves().size() > 0) {
+            return;
+        }
+        super.showHeaderImage();
+    }
+
+    @Override
     public void onBackPressed() {
-        Log.e(__CLASSNAME__, getMethodName() + isShowingProgress());
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + isShowingProgress());
         super.onBackPressed();
         hideProgress();
     }

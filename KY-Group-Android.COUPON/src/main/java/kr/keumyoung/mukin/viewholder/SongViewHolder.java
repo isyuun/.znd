@@ -5,10 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.andexert.library.RippleView;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.otto.Bus;
 
@@ -64,16 +66,18 @@ public class SongViewHolder extends RecyclerView.ViewHolder {
     TextView artistName;
     @BindView(R.id.hits_count_text)
     TextView hitsCountText;
-    @BindView(R.id.free_button)
-    TextView freeButton;
     @BindView(R.id.loading)
     ProgressBar loading;
-    @BindView(R.id.parent_item)
+    @BindView(R.id.song_ripple)
     RelativeLayout parentItem;
-    //@BindView(R.id.song_item)
-    //RelativeLayout songItem;
+    @BindView(R.id.song_item)
+    LinearLayout songItem;
     @BindView(R.id.favorite_button)
     CheckBox favoriteButton;
+    @BindView(R.id.free_button)
+    TextView freeButton;
+    @BindView(R.id.reserve_button)
+    TextView reserveButton;
 
     public SongViewHolder(View itemView, int viewType) {
         super(itemView);
@@ -81,12 +85,19 @@ public class SongViewHolder extends RecyclerView.ViewHolder {
         //R.layout.item_song
         MainApplication.getInstance().getMainComponent().inject(this);
         ButterKnife.bind(this, itemView);
-        //rippleView.setOnClickListener(view -> rippleView.setOnRippleCompleteListener(rippleView1 -> onSongSelected(view)));
-        itemView.findViewById(R.id.song_item).setOnClickListener(view -> {
-            onSongSelected(view);
+        //parentItem.setOnClickListener(v -> parentItem.setOnRippleCompleteListener(rippleView -> onSongClick(v.findViewById(R.id.song_item))));
+        parentItem.setOnClickListener(v -> {
+            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "parentItem.onClick(...)" + v);
+            onReserveClick(v);
         });
-        itemView.findViewById(R.id.favorite_button).setOnClickListener(view -> {
-            onFavoriteSelected(view);
+        parentItem.setOnLongClickListener(v -> {
+            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "parentItem.onLongClick(...)" + v);
+            onSongClick(v);
+            return false;
+        });
+        favoriteButton.setOnClickListener(v -> {
+            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "favoriteButton.onClick(...)" + v);
+            onFavoriteClick(v);
         });
         if (viewType == SongAdapter.DATA) {
             parentItem.setVisibility(View.VISIBLE);
@@ -97,20 +108,31 @@ public class SongViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    public void onSongSelected(View view) {
+    public void onSongClick(View view) {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + view);
-        bus.post(new SongView(song, view));
+        bus.post(new SongView(song, view, 1));
     }
 
-    public void onFavoriteSelected(View view) {
+    public void onFavoriteClick(View view) {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + view);
-        bus.post(new SongView(song, view));
+        bus.post(new SongView(song, view, 1));
+    }
+
+    public void onReserveClick(View view) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + view);
+        bus.post(new SongView(song, view, 2));
     }
 
     public void setData(Song song) {
+        boolean reload = false;
+        if (this.song != song) {
+            reload = true;
+        }
         this.song = song;
 
-        mediaManager.loadImageIntoView(song.getAlbumImage(), albumImage);
+        if (reload) {
+            mediaManager.loadImageIntoView(song.getAlbumImage(), albumImage);
+        }
         //songName.setText(String.format("%s (%s)", song.getSongTitle(), song.getIdentifier()));
         songName.setText(String.format("[%s] %s", song.getIdentifier(), song.getSongTitle()));
         artistName.setText(song.getArtistName());
@@ -123,10 +145,16 @@ public class SongViewHolder extends RecyclerView.ViewHolder {
 
         favoriteButton.setChecked(song.isFavorite());
 
-        if (song.isFree()) {
-            freeButton.setVisibility(View.VISIBLE);
-        } else {
+        if (song.isReserve()) {
+            reserveButton.setVisibility(View.VISIBLE);
             freeButton.setVisibility(View.GONE);
+        } else {
+            reserveButton.setVisibility(View.GONE);
+            if (song.isFree()) {
+                freeButton.setVisibility(View.VISIBLE);
+            } else {
+                freeButton.setVisibility(View.GONE);
+            }
         }
     }
 }
