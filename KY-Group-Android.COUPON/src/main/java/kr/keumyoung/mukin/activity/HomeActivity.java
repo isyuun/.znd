@@ -296,7 +296,7 @@ public class HomeActivity extends _BaseActivity {
         animationHelper.showWithFadeAnim(navIcon);
     }
 
-    public void setHeaderText(int text) {
+    public void showHeaderText(int text) {
         if (headerImage.getVisibility() == View.VISIBLE)
             animationHelper.hideWithFadeAnim(headerImage);
 

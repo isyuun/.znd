@@ -35,6 +35,7 @@ import kr.keumyoung.mukin.fragment.FeaturedFragment;
 import kr.keumyoung.mukin.fragment.GenreFragment;
 import kr.keumyoung.mukin.fragment.HomeFragment;
 import kr.keumyoung.mukin.fragment.RecommendedFragment;
+import kr.keumyoung.mukin.fragment.ReservesFragment;
 import kr.keumyoung.mukin.fragment.SearchFragment;
 import kr.keumyoung.mukin.fragment.SongsFragment;
 import kr.keumyoung.mukin.fragment.TopHitsFragment;
@@ -167,4 +168,6 @@ public interface MainComponent {
     void inject(TopHitsFragment topHitsFragment);
 
     void inject(FavoritesFragment favoritesFragment);
+
+    void inject(ReservesFragment reservesFragment);
 }

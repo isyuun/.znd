@@ -70,11 +70,16 @@ public class BaseFragment2 extends BaseFragment {
     SongAdapter songAdapter;
 
     public void updateSongs() {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + activity.getFavorites() + ":" + songs + ":" + songAdapter);
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName()/* + ":" + activity.getFavorites() + ":" + songs + ":" + songAdapter*/);
         for (Song song : songs) {
             song.setFavorite(activity.isFavorites(song.getSongId()));
-            song.setReserve(activity.isReserves(song.getSongId()));
+            song.setReserve(activity.getApp().isReserves(song.getSongId()));
         }
+        notifyDataSetChanged();
+    }
+
+    public void notifyDataSetChanged() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
         postDelayed(notifyDataSetChanged, 100);
     }
 

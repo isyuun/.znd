@@ -26,7 +26,6 @@ import kr.keumyoung.mukin.adapter.SongAdapter;
 import kr.keumyoung.mukin.api.RestApi;
 import kr.keumyoung.mukin.data.SongParser;
 import kr.keumyoung.mukin.data.model.Song;
-import kr.keumyoung.mukin.data.model.Songs;
 import kr.keumyoung.mukin.helper.AnimationHelper;
 import kr.keumyoung.mukin.helper.PreferenceHelper;
 import kr.keumyoung.mukin.interfaces.SessionRefreshListener;
@@ -110,7 +109,7 @@ public class SongsFragment extends _BaseFragment {
         super.onStart();
         activity.changeNavigationIcon(R.drawable.back_icon);
         activity.instantHideHeaderImage();
-        activity.setHeaderText(R.string.songs);
+        activity.showHeaderText(R.string.songs);
         activity.hideMenuIcon();
 
         parentFragment.hideIcons();

@@ -130,6 +130,7 @@
     <string name="interlude_jump">점프</string>
     <string name="interlude_play">(간주중)</string>
     <string name="reserve">예약</string>
+    <string name="reserve_song">예약곡</string>
     <string name="reserve_next">다음</string>
     <string name="reserve_play">시작</string>
 </resources>

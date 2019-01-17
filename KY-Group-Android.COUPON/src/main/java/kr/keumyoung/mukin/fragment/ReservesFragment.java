@@ -7,14 +7,10 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -23,31 +19,22 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.adapter.SongAdapter;
 import kr.keumyoung.mukin.api.RestApi;
-import kr.keumyoung.mukin.data.SongParser;
 import kr.keumyoung.mukin.data.model.Song;
 import kr.keumyoung.mukin.helper.AnimationHelper;
 import kr.keumyoung.mukin.helper.PreferenceHelper;
 import kr.keumyoung.mukin.interfaces.SessionRefreshListener;
-import kr.keumyoung.mukin.util.CommonHelper;
 import kr.keumyoung.mukin.util.Constants;
 import kr.keumyoung.mukin.util.PaginationScrollListener;
-import kr.keumyoung.mukin.util.PreferenceKeys;
-import kr.keumyoung.mukin.util.TableNames;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  *  on 12/01/18.
  */
 
-public class FavoritesFragment extends _BaseFragment {
+public class ReservesFragment extends _BaseFragment {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
     @Inject
@@ -106,7 +93,7 @@ public class FavoritesFragment extends _BaseFragment {
     public void onStart() {
         super.onStart();
         activity.changeNavigationIcon(R.drawable.back_icon);
-        activity.showHeaderText(R.string.favorites);
+        activity.showHeaderText(R.string.reserve_song);
         activity.hideMenuIcon();
 
         parentFragment.hideIcons();
@@ -115,75 +102,6 @@ public class FavoritesFragment extends _BaseFragment {
         //initiateTextWatcher();
     }
 
-    //private void initiateTextWatcher() {
-    //    textWatcher = new TextWatcher() {
-    //        @Override
-    //        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-    //
-    //        }
-    //
-    //        @Override
-    //        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-    //
-    //        }
-    //
-    //        @Override
-    //        public void afterTextChanged(Editable editable) {
-    //            String keyword = editable.toString().trim();
-    //            if (keyword.isEmpty()) populateSongs();
-    //            else performSearch(keyword);
-    //        }
-    //    };
-    //
-    //    parentFragment.addTextWatcher(textWatcher);
-    //}
-    //
-    //private void performSearch(String keyword) {
-    //    restApi.searchCustomScript(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), getTableName(), keyword)
-    //            .enqueue(new Callback<ResponseBody>() {
-    //                @Override
-    //                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-    //                    try {
-    //                        ResponseBody responseBody = response.body();
-    //                        ResponseBody errorBody = response.errorBody();
-    //
-    //                        if (responseBody != null) {
-    //                            String responseString = responseBody.string();
-    //                            JSONObject responseObject = new JSONObject(responseString);
-    //
-    //                            JSONArray resultArray = responseObject.getJSONArray(Constants.RESULT);
-    //                            int length = resultArray.length();
-    //                            songs.clear();
-    //                            for (int index = 0; index < length; index++) {
-    //                                JSONObject songObject = resultArray.getJSONObject(index);
-    //                                Song song = SongParser.convertToSongFromJson(songObject);
-    //                                songs.add(song);
-    //                            }
-    //                            songAdapter.notifyDataSetChanged();
-    //                            updateEmptyVisibility();
-    //                        } else if (errorBody != null) {
-    //                            String errorString = errorBody.string();
-    //                            JSONObject errorObject = new JSONObject(errorString);
-    //                            if (activity.handleDFError(errorObject, sessionRefreshListener)) {
-    //                                // error is handled in base activity. nothing to do here
-    //                            } else {
-    //                                // TODO: 02/02/18 handle more errors here related to search
-    //                            }
-    //
-    //                        }
-    //
-    //                    } catch (Exception e) {
-    //                        e.printStackTrace();
-    //                    }
-    //                }
-    //
-    //                @Override
-    //                public void onFailure(Call<ResponseBody> call, Throwable t) {
-    //
-    //                }
-    //            });
-    //}
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -191,7 +109,7 @@ public class FavoritesFragment extends _BaseFragment {
     }
 
     private void setupRecyclerView() {
-        if (songAdapter == null) songAdapter = new SongAdapter(songs);
+        if (songAdapter == null) songAdapter = new SongAdapter(activity.getApp().getReserves());
         LinearLayoutManager manager = new LinearLayoutManager(activity);
         featuredRecycler.setLayoutManager(manager);
         featuredRecycler.setAdapter(songAdapter);
@@ -213,82 +131,83 @@ public class FavoritesFragment extends _BaseFragment {
                 populateSongs(offset);
             }
         });
+
+        updateSongs();
     }
 
-    protected void populateSongs(int offset) {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
-
-        activity.showProgress();
-        CommonHelper.hideSoftKeyboard(activity);
-
-        this.offset = offset;
-
-        if (offset == 0) {
-            activity.showProgress();
-            featuredSwipeRefresh.setRefreshing(true);
-        } else {
-            songAdapter.setLoading(true);
-            songAdapter.notifyDataSetChanged();
-        }
-
-        isLoading = true;
-
-        String filter = "userid=" + preferenceHelper.getString(PreferenceKeys.USER_ID);
-        restApi.tableGetRequestWithFilter(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), TableNames.FAVORITE, filter)
-                .enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        try {
-                            ResponseBody responseBody = response.body();
-                            ResponseBody errorBody = response.errorBody();
-                            if (responseBody != null) {
-                                String responseString = responseBody.string();
-                                JSONObject responseObject = new JSONObject(responseString);
-
-                                JSONArray songArray = responseObject.getJSONArray(Constants.RESOURCE);
-                                int length = songArray.length();
-                                songs.clear();
-                                for (int index = 0; index < length; index++) {
-                                    JSONObject songObject = songArray.getJSONObject(index);
-                                    Song song = SongParser.convertToSongFromJson(songObject);
-                                    song.setFavorite(activity.isFavorites(song.getSongId()));
-                                    songs.add(song);
-                                }
-                                if (activity.isShowingProgress()) activity.hideProgress();
-
-                                if (songAdapter.isLoading()) songAdapter.setLoading(false);
-                                //songAdapter.notifyDataSetChanged();
-                                updateSongs();
-
-                                updateEmptyVisibility();
-                            } else if (errorBody != null) {
-                                String errorString = errorBody.string();
-                                JSONObject errorObject = new JSONObject(errorString);
-                                if (activity.handleDFError(errorObject, sessionRefreshListener)) {
-                                    // df session error. handled from base activity
-                                } else {
-                                    // TODO: 30/01/18 handle more error here
-                                }
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            if (activity.isShowingProgress()) activity.hideProgress();
-                            if (songAdapter.isLoading()) songAdapter.setLoading(false);
-                            songAdapter.notifyDataSetChanged();
-                            updateEmptyVisibility();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        t.printStackTrace();
-                        if (activity.isShowingProgress()) activity.hideProgress();
-                        if (songAdapter.isLoading()) songAdapter.setLoading(false);
-                        songAdapter.notifyDataSetChanged();
-                        updateEmptyVisibility();
-                    }
-                });
-    }
+    //protected void populateSongs(int offset) {
+    //    activity.showProgress();
+    //    CommonHelper.hideSoftKeyboard(activity);
+    //
+    //    this.offset = offset;
+    //
+    //    if (offset == 0) {
+    //        activity.showProgress();
+    //        featuredSwipeRefresh.setRefreshing(true);
+    //    } else {
+    //        songAdapter.setLoading(true);
+    //        songAdapter.notifyDataSetChanged();
+    //    }
+    //
+    //    return;
+    //
+    //    isLoading = true;
+    //
+    //    String filter = "userid=" + preferenceHelper.getString(PreferenceKeys.USER_ID);
+    //    restApi.tableGetRequestWithFilter(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), TableNames.FAVORITE, filter)
+    //            .enqueue(new Callback<ResponseBody>() {
+    //                @Override
+    //                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+    //                    try {
+    //                        ResponseBody responseBody = response.body();
+    //                        ResponseBody errorBody = response.errorBody();
+    //                        if (responseBody != null) {
+    //                            String responseString = responseBody.string();
+    //                            JSONObject responseObject = new JSONObject(responseString);
+    //
+    //                            JSONArray songArray = responseObject.getJSONArray(Constants.RESOURCE);
+    //                            int length = songArray.length();
+    //                            songs.clear();
+    //                            for (int index = 0; index < length; index++) {
+    //                                JSONObject songObject = songArray.getJSONObject(index);
+    //                                Song song = SongParser.convertToSongFromJson(songObject);
+    //                                song.setFavorite(activity.isFavorites(song.getSongId()));
+    //                                songs.add(song);
+    //                            }
+    //                            if (activity.isShowingProgress()) activity.hideProgress();
+    //
+    //                            if (songAdapter.isLoading()) songAdapter.setLoading(false);
+    //                            songAdapter.notifyDataSetChanged();
+    //
+    //                            updateEmptyVisibility();
+    //                        } else if (errorBody != null) {
+    //                            String errorString = errorBody.string();
+    //                            JSONObject errorObject = new JSONObject(errorString);
+    //                            if (activity.handleDFError(errorObject, sessionRefreshListener)) {
+    //                                // df session error. handled from base activity
+    //                            } else {
+    //                                // TODO: 30/01/18 handle more error here
+    //                            }
+    //                        }
+    //                    } catch (Exception e) {
+    //                        e.printStackTrace();
+    //                        if (activity.isShowingProgress()) activity.hideProgress();
+    //                        if (songAdapter.isLoading()) songAdapter.setLoading(false);
+    //                        songAdapter.notifyDataSetChanged();
+    //                        updateEmptyVisibility();
+    //                    }
+    //                }
+    //
+    //                @Override
+    //                public void onFailure(Call<ResponseBody> call, Throwable t) {
+    //                    t.printStackTrace();
+    //                    if (activity.isShowingProgress()) activity.hideProgress();
+    //                    if (songAdapter.isLoading()) songAdapter.setLoading(false);
+    //                    songAdapter.notifyDataSetChanged();
+    //                    updateEmptyVisibility();
+    //                }
+    //            });
+    //}
 
     //protected String getTableName() {
     //    return TableNames.FAVORITE;

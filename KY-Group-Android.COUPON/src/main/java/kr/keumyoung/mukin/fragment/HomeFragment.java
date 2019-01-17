@@ -116,7 +116,7 @@ public class HomeFragment extends _BaseFragment {
         replaceChildFragment(recommendedFragment);
     }
 
-    private void replaceChildFragment(_BaseFragment fragment) {
+    public void replaceChildFragment(_BaseFragment fragment) {
         if (currentChildFragment != null &&
                 fragment.getClass().getSimpleName().equalsIgnoreCase(
                         currentChildFragment.getClass().getSimpleName()))
@@ -274,9 +274,9 @@ public class HomeFragment extends _BaseFragment {
         searchEditRipple.setVisibility(View.GONE);
     }
 
-    public void activateSearch() {
-        activateSearch(true);
-    }
+    //public void activateSearch() {
+    //    activateSearch(true);
+    //}
 
     public void activateSearch(boolean clear) {
         searchEt.setEnabled(true);
@@ -294,11 +294,11 @@ public class HomeFragment extends _BaseFragment {
     }
 
     public void deactivateSearch() {
-        searchEt.setFocusableInTouchMode(false);
-        searchEt.setEnabled(false);
-        searchClose.setVisibility(View.GONE);
-
-        CommonHelper.hideSoftKeyboard(activity);
+        //searchEt.setFocusableInTouchMode(false);
+        //searchEt.setEnabled(false);
+        //searchClose.setVisibility(View.GONE);
+        //
+        //CommonHelper.hideSoftKeyboard(activity);
     }
 
     public void addTextWatcher(TextWatcher watcher) {

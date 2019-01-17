@@ -99,7 +99,7 @@ public class ArtistFragment extends _BaseFragment {
     public void onStart() {
         super.onStart();
         activity.changeNavigationIcon(R.drawable.back_icon);
-        activity.setHeaderText(R.string.favorites);
+        activity.showHeaderText(R.string.favorites);
         activity.hideMenuIcon();
 
         parentFragment.hideIcons();

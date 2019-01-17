@@ -26,13 +26,6 @@ public class PlayerActivity2 extends PlayerActivity {
     }
 
     @Override
-    protected void initiatePlayer() {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":mediaManager:" + mediaManager);
-        //if (mediaManager == null) mediaManager = new MediaManager();
-        super.initiatePlayer();
-    }
-
-    @Override
     protected void prepareMediaPlayer() {
         super.prepareMediaPlayer();
         int tempo = preferenceHelper.getInt(PreferenceKeys.TEMPO_VALUE);

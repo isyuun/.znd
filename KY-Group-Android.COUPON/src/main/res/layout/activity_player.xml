@@ -282,8 +282,7 @@
             android:elevation="16dp"
             android:text="@string/reserve_next"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/white"
-            android:visibility="visible"/>
+            android:textColor="@android:color/white" />
     </FrameLayout>
 
     <FrameLayout
@@ -308,8 +307,7 @@
             android:elevation="16dp"
             android:text="@string/interlude_jump"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/white"
-            android:visibility="visible"/>
+            android:textColor="@android:color/white" />
     </FrameLayout>
 
     <RelativeLayout

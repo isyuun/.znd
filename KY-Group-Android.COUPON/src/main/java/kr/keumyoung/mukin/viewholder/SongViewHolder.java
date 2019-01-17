@@ -3,6 +3,8 @@ package kr.keumyoung.mukin.viewholder;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -10,7 +12,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.andexert.library.RippleView;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.otto.Bus;
 
@@ -79,22 +80,47 @@ public class SongViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.reserve_button)
     TextView reserveButton;
 
+    GestureDetector gestureDetector;
+
+    private class GestureListener extends GestureDetector.SimpleOnGestureListener {
+        @Override
+        public boolean onContextClick(MotionEvent e) {
+            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + e);
+            return super.onContextClick(e);
+        }
+
+        @Override
+        public void onLongPress(MotionEvent e) {
+            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + e);
+            onSongClick(parentItem);
+            super.onLongPress(e);
+        }
+
+        @Override
+        public boolean onDoubleTap(MotionEvent e) {
+            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + e);
+            onSongClick(parentItem);
+            return super.onDoubleTap(e);
+        }
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + e);
+            onReserveClick(parentItem);
+            return super.onSingleTapConfirmed(e);
+        }
+    }
+
     public SongViewHolder(View itemView, int viewType) {
         super(itemView);
+        gestureDetector = new GestureDetector(context, new GestureListener());
+
         this.viewType = viewType;
         //R.layout.item_song
         MainApplication.getInstance().getMainComponent().inject(this);
         ButterKnife.bind(this, itemView);
         //parentItem.setOnClickListener(v -> parentItem.setOnRippleCompleteListener(rippleView -> onSongClick(v.findViewById(R.id.song_item))));
-        parentItem.setOnClickListener(v -> {
-            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "parentItem.onClick(...)" + v);
-            onReserveClick(v);
-        });
-        parentItem.setOnLongClickListener(v -> {
-            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "parentItem.onLongClick(...)" + v);
-            onSongClick(v);
-            return false;
-        });
+        parentItem.setOnTouchListener((v, event) -> gestureDetector.onTouchEvent(event));
         favoriteButton.setOnClickListener(v -> {
             if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "favoriteButton.onClick(...)" + v);
             onFavoriteClick(v);

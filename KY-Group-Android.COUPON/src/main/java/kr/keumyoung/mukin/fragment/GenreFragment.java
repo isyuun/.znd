@@ -106,7 +106,7 @@ public class GenreFragment extends _BaseFragment {
         super.onStart();
         activity.changeNavigationIcon(R.drawable.back_icon);
         activity.instantHideHeaderImage();
-        activity.setHeaderText(R.string.genre);
+        activity.showHeaderText(R.string.genre);
         activity.hideMenuIcon();
 
         parentFragment.hideIcons();

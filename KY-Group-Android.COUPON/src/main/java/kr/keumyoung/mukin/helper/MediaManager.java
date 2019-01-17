@@ -54,12 +54,14 @@ public class MediaManager {
         //Log.d(TAG, " loadImageIntoView img url = " + url);
         if (BuildConfig.DEBUG) Log.d(TAG, "loadImageIntoView" + "[" + url + "][" + formattedUrl + "]");
 
+        int res = RandromAlbumImage.getInstance().getAlbumResourceID();
+
         ////db 바뀌면 어차피 바뀔텐데...isyuun:그런다고 마구 박으면...
         if (url.compareToIgnoreCase("images/album/albumart.jpg") == 0) {
-            int resId = RandromAlbumImage.getInstance().getAlbumResourceID();
-            if (imageView.getTag() == null || ((Integer) imageView.getTag()) == 0) {
-                imageView.setImageResource(resId);
-                imageView.setTag(resId);
+            if (imageView.getDrawable() == null || imageView.getTag() == null || ((Integer) imageView.getTag()) == 0) {
+                //imageView.setImageResource(res);
+                Picasso.get().load(res).into(imageView);
+                imageView.setTag(res);
             }
         } else {
             Picasso.get().load(formattedUrl).into(imageView);
@@ -98,14 +100,11 @@ public class MediaManager {
         if (res != 0 && url.compareToIgnoreCase("images/album/albumart.jpg") == 0) {
             imageViewAlbum.setImageResource(res);
             //blur
-//            Picasso.get()
-//                    .load(res)
-//                    .transform(new BlurTransformation(context, 2)).into(imageViewBackgrounf);
+            //Picasso.get().load(res).transform(new BlurTransformation(context, 2)).into(imageViewBackgrounf);
 
             Picasso.get()
                     .load(res).placeholder(R.drawable.images_album_albumart_01)
                     .transform(new BlurTransformation(context, 2)).into(imageViewBackgrounf);
-
         } else {
             Picasso.get().load(formattedUrl).placeholder(R.drawable.images_album_albumart_01).into(imageViewAlbum);
             Picasso.get()

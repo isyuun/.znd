@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import kr.keumyoung.mukin.data.model.Song;
+import kr.keumyoung.mukin.data.model.Songs;
 
 public class MainApplication2 extends MainApplication {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
@@ -17,36 +18,33 @@ public class MainApplication2 extends MainApplication {
         return text;
     }
 
-    private ArrayList<Song> reserves = new ArrayList<>();
+    private Songs reserves = new Songs();
 
-    protected boolean isReserves(Song song) {
-        return (reserves.indexOf(song) > -1);
-    }
-
-    public boolean isReserves(String songid) {
-        boolean ret = false;
+    private int index(String songid) {
+        int ret = -1;
         for (Song song : reserves) {
-            if (song.getSongId() == songid) {
-                ret = true;
+            if (song.getSongId().equalsIgnoreCase(songid)) {
+                ret = reserves.indexOf(song);
                 break;
             }
         }
         return ret;
     }
 
-    protected void addReserve(Song song) {
-        song.setReserve(true);
-        reserves.add(song);
+    public boolean isReserves(String songid) {
+        return !(index(songid) == -1);
     }
 
-    protected void delReserve(Song song) {
-        song.setReserve(false);
-        reserves.remove(song);
+    private void delReserve(String songid) {
+        int idx;
+        while ((idx = index(songid)) > -1) {
+            reserves.remove(idx);
+        }
     }
 
     public void delReserve() {
         if (reserves.size() > 0) {
-            delReserve(reserves.get(reserves.size() - 1));
+            reserves.remove(reserves.get(reserves.size() - 1));
         }
     }
 
@@ -57,15 +55,15 @@ public class MainApplication2 extends MainApplication {
         reserves.clear();
     }
 
-    public ArrayList<Song> getReserves() {
+    public Songs getReserves() {
         return reserves;
     }
 
     public void onReserveSelected(Song song) {
-        if (!isReserves(song)) {
-            addReserve(song);
+        if (index(song.getSongId()) == -1) {
+            reserves.add(song);
         } else {
-            delReserve(song);
+            delReserve(song.getSongId());
         }
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + getReserves());
     }

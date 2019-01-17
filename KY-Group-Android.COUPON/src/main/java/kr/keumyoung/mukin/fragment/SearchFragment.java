@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -34,7 +33,6 @@ import kr.keumyoung.mukin.adapter.SongAdapter;
 import kr.keumyoung.mukin.api.RestApi;
 import kr.keumyoung.mukin.data.SongParser;
 import kr.keumyoung.mukin.data.model.Song;
-import kr.keumyoung.mukin.data.model.Songs;
 import kr.keumyoung.mukin.helper.AnimationHelper;
 import kr.keumyoung.mukin.helper.PreferenceHelper;
 import kr.keumyoung.mukin.helper.ToastHelper;
@@ -105,7 +103,7 @@ public class SearchFragment extends _BaseFragment {
     public void onStart() {
         super.onStart();
         activity.changeNavigationIcon(R.drawable.back_icon);
-        activity.setHeaderText(R.string.search);
+        activity.showHeaderText(R.string.search);
 
         updateEmptyVisibility();
 
@@ -230,7 +228,8 @@ public class SearchFragment extends _BaseFragment {
                                 }
                                 countText.setText(String.format("%s %s", Integer.toString(length),
                                         length > 1 ? getResources().getString(R.string.songs_found) : getResources().getString(R.string.song_found)));
-                                songAdapter.notifyDataSetChanged();
+                                //songAdapter.notifyDataSetChanged();
+                                updateSongs();
                                 updateEmptyVisibility();
                             } else if (errorBody != null) {
                                 String errorString = errorBody.string();

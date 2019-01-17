@@ -37,7 +37,7 @@
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:scaleType="centerCrop"
-                android:background="@drawable/dummy"
+                android:background="@null"
                 app:riv_corner_radius="4dp" />
 
             <RelativeLayout

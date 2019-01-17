@@ -2,6 +2,7 @@ package kr.keumyoung.mukin.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -12,6 +13,8 @@ import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.data.model.Song;
 import kr.keumyoung.mukin.data.model.SongView;
+import kr.keumyoung.mukin.fragment.HomeFragment;
+import kr.keumyoung.mukin.fragment.ReservesFragment;
 import kr.keumyoung.mukin.util.PreferenceKeys;
 
 public class HomeActivity2 extends HomeActivity {
@@ -22,6 +25,9 @@ public class HomeActivity2 extends HomeActivity {
 
     @BindView(R.id.reserve_text)
     TextView reserveText;
+
+    @BindView(R.id.reserve_label)
+    View reserveLabel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,7 +40,11 @@ public class HomeActivity2 extends HomeActivity {
         //});
         play.setOnClickListener(v -> {
             if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "play.onClick()");
+            if (getApp().getReserves().size() > 0) {
+                onSongSelected(getApp().getReserves().get(0));
+            }
         });
+        setReserveText();
     }
 
     @Override
@@ -89,41 +99,112 @@ public class HomeActivity2 extends HomeActivity {
         }
     }
 
+    public void setTextViewMarquee(final TextView tv, boolean enable) {
+        if (tv == null) {
+            return;
+        }
+        // set the ellipsize mode to MARQUEE and make it scroll only once
+        // tv.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+        // tv.setMarqueeRepeatLimit(1);
+        // in order to start strolling, it has to be focusable and focused
+        // tv.setFocusable(true);
+        // tv.setFocusableInTouchMode(true);
+        // tv.requestFocus();
+        if (enable) {
+            tv.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+        } else {
+            tv.setEllipsize(TextUtils.TruncateAt.END);
+        }
+        tv.setSingleLine(true);
+        tv.setSelected(enable);
+    }
+
+    ReservesFragment reservesFragment;
+
+    private void openReserves() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
+        post(openReserves);
+    }
+
+    private Runnable openReserves = new Runnable() {
+        @Override
+        public void run() {
+            if (reservesFragment == null) reservesFragment = new ReservesFragment();
+            if (getCurrentFragment() instanceof HomeFragment) ((HomeFragment) getCurrentFragment()).replaceChildFragment(reservesFragment);
+        }
+    };
+
     public void setReserveText() {
         String text = getApp().getReserves().toString();
-        if (headerImage.getVisibility() == View.VISIBLE)
-            animationHelper.hideWithFadeAnim(headerImage);
-
-        if (headerText.getVisibility() == View.VISIBLE)
-            animationHelper.hideWithFadeAnim(headerText);
+        setTextViewMarquee(reserveText, true);
 
         if (getApp().getReserves().size() > 0) {
-            reserveText.setText(text);
+            reserveLabel.setVisibility(View.VISIBLE);
             animationHelper.showHeaderText(reserveText);
+            reserveText.setText(text);
+            reserveText.setClickable(true);
+            reserveText.setOnClickListener(v -> {
+                openReserves();
+            });
+            reserveLabel.setClickable(true);
+            reserveLabel.setOnClickListener(v -> {
+                openReserves();
+            });
+            navIcon.setVisibility(View.GONE);
+            if (headerImage.getVisibility() == View.VISIBLE) {
+                animationHelper.hideWithFadeAnim(headerImage);
+            }
+            if (headerText.getVisibility() == View.VISIBLE) {
+                animationHelper.hideWithFadeAnim(headerText);
+            }
         } else {
-            reserveText.setText(R.string.reserve);
-            animationHelper.hideWithFadeAnim(reserveText);
+            reserveLabel.setVisibility(View.INVISIBLE);
+            reserveText.setVisibility(View.INVISIBLE);
+            reserveText.setText("");
+            reserveText.setClickable(false);
+            reserveText.setOnClickListener(null);
+            reserveLabel.setClickable(false);
+            reserveLabel.setOnClickListener(null);
+            if (this.headerId > 0) {
+                navIcon.setVisibility(View.VISIBLE);
+                showHeaderText(this.headerId);
+            } else {
+                navIcon.setVisibility(View.INVISIBLE);
+                showHeaderImage();
+            }
         }
     }
 
     @Override
-    public void setHeaderText(int text) {
+    public void hideNavigationIcon() {
         if (getApp().getReserves().size() > 0) {
             return;
         }
-        super.setHeaderText(text);
+        super.hideNavigationIcon();
     }
 
     @Override
-    public void instantHideHeaderImage() {
+    public void changeNavigationIcon(int icon) {
         if (getApp().getReserves().size() > 0) {
             return;
         }
-        super.instantHideHeaderImage();
+        super.changeNavigationIcon(icon);
+    }
+
+    private int headerId = 0;
+
+    @Override
+    public void showHeaderText(int text) {
+        this.headerId = text;
+        if (getApp().getReserves().size() > 0) {
+            return;
+        }
+        super.showHeaderText(text);
     }
 
     @Override
     public void showHeaderImage() {
+        this.headerId = 0;
         if (getApp().getReserves().size() > 0) {
             return;
         }

@@ -26,7 +26,6 @@ import kr.keumyoung.mukin.adapter.SongAdapter;
 import kr.keumyoung.mukin.api.RestApi;
 import kr.keumyoung.mukin.data.SongParser;
 import kr.keumyoung.mukin.data.model.Song;
-import kr.keumyoung.mukin.data.model.Songs;
 import kr.keumyoung.mukin.helper.AnimationHelper;
 import kr.keumyoung.mukin.helper.PreferenceHelper;
 import kr.keumyoung.mukin.interfaces.SessionRefreshListener;
@@ -102,7 +101,7 @@ public class FeaturedFragment extends _BaseFragment {
     public void onStart() {
         super.onStart();
         activity.changeNavigationIcon(R.drawable.back_icon);
-        activity.setHeaderText(R.string.newsongs);
+        activity.showHeaderText(R.string.newsongs);
         activity.hideMenuIcon();
 
         parentFragment.hideIcons();

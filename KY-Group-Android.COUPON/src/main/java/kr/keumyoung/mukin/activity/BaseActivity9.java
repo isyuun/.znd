@@ -20,10 +20,6 @@ public class BaseActivity9 extends BaseActivity8 {
         updateReserveSongs();
     }
 
-    public boolean isReserves(String songid) {
-        return getApp().isReserves(songid);
-    }
-
     private void updateReserveSongs() {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + getCurrentFragment() + ":" + getChildCurrentFragment());
         if (getChildCurrentFragment() != null) {
