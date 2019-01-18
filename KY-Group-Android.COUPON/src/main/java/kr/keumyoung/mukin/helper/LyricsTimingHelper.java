@@ -337,7 +337,7 @@ public class LyricsTimingHelper {
             info += "[" + jumpTime + "]";
             info += "[" + lyricsTime.getCurrentWord() + "]";
             info += "[" + lyricsTime.getCurrentLine() + "]";
-            if (BuildConfig.DEBUG) Log.e("[LyricsTime]", info);
+            if (BuildConfig.DEBUG) Log.wtf("[LyricsTime]", info);
             if (jumpTime == 0 && lyricsTime.isCountDownItem()) {
                 jumpTime = lyricsTime.getStartTick() * microTimePerClock;
             }

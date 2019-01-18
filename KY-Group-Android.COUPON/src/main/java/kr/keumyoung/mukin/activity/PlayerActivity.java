@@ -27,7 +27,7 @@ import com.leff.midi.MidiFile;
 import com.leff.midi.event.MidiEvent;
 import com.leff.midi.event.NoteOn;
 import com.leff.midi.event.meta.Tempo;
-import com.leff.midi.examples.EventPrinter;
+import com.leff.midi.util.MidiEventListener;
 import com.leff.midi.util.MidiProcessor;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.otto.Bus;
@@ -958,44 +958,10 @@ public class PlayerActivity extends _BaseActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
-                case Constants.API_KY3_DOWNLOAD: {
+                case Constants.API_KY3_DOWNLOAD:
                     System.out.println("#### API_KY3_DOWNLOAD!!!");
-                    String ky3Path = ImageUtils.BASE_PATH + song.getIdentifier() + ".KY3";
-
-                    playerKyUnpackJNI.Init(ky3Path, ImageUtils.BASE_PATH, Integer.parseInt(song.getIdentifier()));
-                    prepareMediaPlayer();
-
-                    String SokPath = ImageUtils.BASE_PATH + Integer.parseInt(song.getIdentifier()) + ".sok";
-                    System.out.println("#### ky3Path : " + ky3Path + " || SokPath : " + SokPath);
-                    lyricsTimingHelper.initiateWithLyrics(PlayerActivity.this, lyricsView, SokPath);
-                    //		lyricsTimingHelper.parseSokLineArray(SokPath);
-                    playerKyUnpackJNI.LyricSokParse(lyricsTimingHelper.GetLyricsLineString());
-
-                    try {
-                        File ky3File = new File(ky3Path);
-                        ky3File.delete();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        String midPath = ImageUtils.BASE_PATH + Integer.parseInt(song.getIdentifier()) + ".mid";
-                        File midiFile = new File(midPath);
-                        MidiFile midi = new MidiFile(midiFile);
-                        parsMidi(midi);
-                        midiFile.delete();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        File sokFile = new File(SokPath);
-                        sokFile.delete();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                break;
+                    parseKY3();
+                    break;
                 case Constants.API_ERROR_CODE:
                     toastHelper.showError(R.string.file_not_found);
                     preferenceHelper.clearSavedSettings();
@@ -1005,20 +971,95 @@ public class PlayerActivity extends _BaseActivity {
         }
     };
 
+    private void parseKY3() {
+        String ky3Path = ImageUtils.BASE_PATH + song.getIdentifier() + ".KY3";
+
+        playerKyUnpackJNI.Init(ky3Path, ImageUtils.BASE_PATH, Integer.parseInt(song.getIdentifier()));
+        prepareMediaPlayer();
+
+        String SokPath = ImageUtils.BASE_PATH + Integer.parseInt(song.getIdentifier()) + ".sok";
+        System.out.println("#### ky3Path : " + ky3Path + " || SokPath : " + SokPath);
+        lyricsTimingHelper.initiateWithLyrics(PlayerActivity.this, lyricsView, SokPath);
+        //		lyricsTimingHelper.parseSokLineArray(SokPath);
+        playerKyUnpackJNI.LyricSokParse(lyricsTimingHelper.GetLyricsLineString());
+
+        try {
+            File ky3File = new File(ky3Path);
+            ky3File.delete();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            String midPath = ImageUtils.BASE_PATH + Integer.parseInt(song.getIdentifier()) + ".mid";
+            File midiFile = new File(midPath);
+            MidiFile midi = new MidiFile(midiFile);
+            parsMidi(midi);
+            midiFile.delete();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            File sokFile = new File(SokPath);
+            sokFile.delete();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // This class will print any event it receives to the console
+    public class EventPrinter implements MidiEventListener {
+        private String mLabel;
+
+        public EventPrinter(String label) {
+            mLabel = label;
+        }
+
+        @Override
+        public void onStart(boolean fromBeginning) {
+            if (fromBeginning) {
+                //System.out.println(mLabel + " Started!");
+                if (BuildConfig.DEBUG) Log.wtf("[MIDI]", mLabel + " Started!");
+            } else {
+                //System.out.println(mLabel + " resumed");
+                if (BuildConfig.DEBUG) Log.wtf("[MIDI]", mLabel + " resumed");
+            }
+        }
+
+        @Override
+        public void onEvent(MidiEvent event, long ms) {
+            //System.out.println(mLabel + " received event: " + event);
+            if (BuildConfig.DEBUG) Log.wtf("[MIDI]", mLabel + "[" + ms + "]" + " received event: " + event);
+
+        }
+
+        @Override
+        public void onStop(boolean finished) {
+            if (finished) {
+                //System.out.println(mLabel + " Finished!");
+                if (BuildConfig.DEBUG) Log.wtf("[MIDI]", mLabel + " Finished!");
+            } else {
+                //System.out.println(mLabel + " paused");
+                if (BuildConfig.DEBUG) Log.wtf("[MIDI]", mLabel + " paused");
+            }
+        }
+    }
+
     private void parsMidi(MidiFile midi) {
         // Create a new MidiProcessor:
         MidiProcessor processor = new MidiProcessor(midi);
 
-        // Register for the events you're interested in:
-        EventPrinter ep = new EventPrinter("Individual Listener");
-        processor.registerEventListener(ep, Tempo.class);
-        processor.registerEventListener(ep, NoteOn.class);
+        //// Register for the events you're interested in:
+        //EventPrinter ep = new EventPrinter("Individual Listener");
+        //processor.registerEventListener(ep, Tempo.class);
+        //processor.registerEventListener(ep, NoteOn.class);
 
         // or listen for all events:
-        EventPrinter ep2 = new EventPrinter("Listener For All");
+        EventPrinter ep2 = new EventPrinter("[Listener For All]");
         processor.registerEventListener(ep2, MidiEvent.class);
 
         // Start the processor:
-        processor.start();
+        //processor.start();
     }
 }
