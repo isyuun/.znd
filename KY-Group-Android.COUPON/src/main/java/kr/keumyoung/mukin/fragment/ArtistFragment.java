@@ -38,10 +38,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- *  on 12/01/18.
+ * on 12/01/18.
  */
 
-public class ArtistFragment extends _BaseFragment {
+public class ArtistFragment extends _BaseListFragment {
 
     @Inject
     RestApi restApi;
@@ -52,10 +52,10 @@ public class ArtistFragment extends _BaseFragment {
     @Inject
     AnimationHelper animationHelper;
 
-    @BindView(R.id.artist_recycler)
+    @BindView(R.id.recycler)
     RecyclerView artistRecycler;
     @BindView(R.id.swipe_refresh)
-    SwipeRefreshLayout artistSwipeRefresh;
+    SwipeRefreshLayout swipeRefresh;
     @BindView(R.id.empty_frame)
     LinearLayout emptyFrame;
 
@@ -92,7 +92,7 @@ public class ArtistFragment extends _BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        artistSwipeRefresh.setOnRefreshListener(this::populateArtists);
+        swipeRefresh.setOnRefreshListener(this::populateArtists);
     }
 
     @Override
@@ -121,7 +121,7 @@ public class ArtistFragment extends _BaseFragment {
     }
 
     private void populateArtists() {
-        artistSwipeRefresh.setRefreshing(true);
+        swipeRefresh.setRefreshing(true);
         activity.showProgress();
         String order = Constants.ARTIST_NAME + " ASC";
         //restApi.tableGetRequestWithOrder(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), TableNames.ARTIST, order).enqueue(new Callback<ResponseBody>() {
@@ -184,29 +184,29 @@ public class ArtistFragment extends _BaseFragment {
         return artist;
     }
 
-    private void updateEmptyVisibility() {
-        try {
-            if (artistSwipeRefresh != null && artistSwipeRefresh.isRefreshing())
-                artistSwipeRefresh.setRefreshing(false);
-            if (artists.isEmpty() && emptyFrame.getVisibility() != View.VISIBLE) {
-                animationHelper.hideViewWithZoomAnim(artistRecycler);
-                animationHelper.showWithZoomAnim(emptyFrame);
-            } else if (artistRecycler.getVisibility() != View.VISIBLE) {
-                animationHelper.showWithZoomAnim(artistRecycler);
-                animationHelper.hideViewWithZoomAnim(emptyFrame);
-            } else if (emptyFrame.getVisibility() == View.VISIBLE) {
-                animationHelper.hideViewWithZoomAnim(emptyFrame);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    //private void updateEmptyVisibility() {
+    //    try {
+    //        if (swipeRefresh != null && swipeRefresh.isRefreshing())
+    //            swipeRefresh.setRefreshing(false);
+    //        if (artists.isEmpty() && emptyFrame.getVisibility() != View.VISIBLE) {
+    //            animationHelper.hideViewWithZoomAnim(artistRecycler);
+    //            animationHelper.showWithZoomAnim(emptyFrame);
+    //        } else if (artistRecycler.getVisibility() != View.VISIBLE) {
+    //            animationHelper.showWithZoomAnim(artistRecycler);
+    //            animationHelper.hideViewWithZoomAnim(emptyFrame);
+    //        } else if (emptyFrame.getVisibility() == View.VISIBLE) {
+    //            animationHelper.hideViewWithZoomAnim(emptyFrame);
+    //        }
+    //    } catch (Exception e) {
+    //        e.printStackTrace();
+    //    }
+    //}
 
     @Override
     public void onStop() {
         super.onStop();
 
-//        activity.changeNavigationIcon(R.drawable.menu_icon);
+        //activity.changeNavigationIcon(R.drawable.menu_icon);
         activity.showMenuIcon();
 
         parentFragment.showIcons();

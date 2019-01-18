@@ -267,13 +267,13 @@
         android:layout_above="@+id/controls_panel"
         android:layout_gravity="bottom|start"
         android:layout_margin="16dp"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@android:color/transparent"
-            app:srcCompat="@android:drawable/ic_media_play" />
+            app:srcCompat="@drawable/ic_next" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -282,7 +282,8 @@
             android:elevation="16dp"
             android:text="@string/reserve_next"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:visibility="visible"/>
     </FrameLayout>
 
     <FrameLayout
@@ -307,7 +308,8 @@
             android:elevation="16dp"
             android:text="@string/interlude_jump"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:visibility="visible"/>
     </FrameLayout>
 
     <RelativeLayout

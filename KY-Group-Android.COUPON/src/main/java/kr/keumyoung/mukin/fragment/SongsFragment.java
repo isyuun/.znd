@@ -42,7 +42,7 @@ import retrofit2.Response;
  * on 13/01/18.
  */
 
-public class SongsFragment extends _BaseFragment {
+public class SongsFragment extends _BaseListFragment {
 
     @Inject
     PreferenceHelper preferenceHelper;
@@ -53,10 +53,10 @@ public class SongsFragment extends _BaseFragment {
     @Inject
     AnimationHelper animationHelper;
 
-    @BindView(R.id.songs_recycler)
+    @BindView(R.id.recycler)
     RecyclerView songsRecycler;
     @BindView(R.id.swipe_refresh)
-    SwipeRefreshLayout songsSwipeRefresh;
+    SwipeRefreshLayout swipeRefresh;
     @BindView(R.id.empty_frame)
     LinearLayout emptyFrame;
 
@@ -113,41 +113,13 @@ public class SongsFragment extends _BaseFragment {
         activity.hideMenuIcon();
 
         parentFragment.hideIcons();
-        //parentFragment.activateSearch();
-        //initiateTextWatcher();
     }
-
-    //private void initiateTextWatcher() {
-    //    textWatcher = new TextWatcher() {
-    //        @Override
-    //        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-    //
-    //        }
-    //
-    //        @Override
-    //        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-    //
-    //        }
-    //
-    //        @Override
-    //        public void afterTextChanged(Editable editable) {
-    //            String keyword = editable.toString().trim();
-    //            if (keyword.isEmpty()) populateSongs();
-    //            else processSearch(keyword);
-    //        }
-    //    };
-    //    parentFragment.addTextWatcher(textWatcher);
-    //}
-    //
-    //private void processSearch(String keyword) {
-    //    String filter = String.format("((%s) and (songtitle like %%%s%%) or (songsubtitle like %%%s%%))", this.filter, keyword, keyword);
-    //    populateSongs(filter, false, 0);
-    //}
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setupRecyclerView();
+        swipeRefresh.setOnRefreshListener(this::populateSongs);
     }
 
     private void setupRecyclerView() {
@@ -185,7 +157,7 @@ public class SongsFragment extends _BaseFragment {
     }
 
     private void populateSongs(String filter, boolean showProgress, int offset) {
-        if (songAdapter.getItemCount() == 0) songsSwipeRefresh.setRefreshing(true);
+        if (songAdapter.getItemCount() == 0) swipeRefresh.setRefreshing(true);
         else songAdapter.setLoading(true);
         try {
             if (showProgress) activity.showProgress();
@@ -325,23 +297,23 @@ public class SongsFragment extends _BaseFragment {
         }
     }
 
-    private void updateEmptyVisibility() {
-        try {
-            if (songsSwipeRefresh != null && songsSwipeRefresh.isRefreshing())
-                songsSwipeRefresh.setRefreshing(false);
-            if (songs.isEmpty() && emptyFrame.getVisibility() != View.VISIBLE) {
-                animationHelper.hideViewWithZoomAnim(songsRecycler);
-                animationHelper.showWithZoomAnim(emptyFrame);
-            } else if (songsRecycler.getVisibility() != View.VISIBLE) {
-                animationHelper.showWithZoomAnim(songsRecycler);
-                animationHelper.hideViewWithZoomAnim(emptyFrame);
-            } else if (emptyFrame.getVisibility() == View.VISIBLE) {
-                animationHelper.hideViewWithZoomAnim(emptyFrame);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    //private void updateEmptyVisibility() {
+    //    try {
+    //        if (swipeRefresh != null && swipeRefresh.isRefreshing())
+    //            swipeRefresh.setRefreshing(false);
+    //        if (songs.isEmpty() && emptyFrame.getVisibility() != View.VISIBLE) {
+    //            animationHelper.hideViewWithZoomAnim(songsRecycler);
+    //            animationHelper.showWithZoomAnim(emptyFrame);
+    //        } else if (songsRecycler.getVisibility() != View.VISIBLE) {
+    //            animationHelper.showWithZoomAnim(songsRecycler);
+    //            animationHelper.hideViewWithZoomAnim(emptyFrame);
+    //        } else if (emptyFrame.getVisibility() == View.VISIBLE) {
+    //            animationHelper.hideViewWithZoomAnim(emptyFrame);
+    //        }
+    //    } catch (Exception e) {
+    //        e.printStackTrace();
+    //    }
+    //}
 
     @Override
     public void onStop() {
@@ -351,7 +323,7 @@ public class SongsFragment extends _BaseFragment {
 
         parentFragment.showIcons();
         parentFragment.deactivateSearch();
-       // parentFragment.removeTextWatcher(textWatcher); dsjung 검색 문제로 삭제
+        // parentFragment.removeTextWatcher(textWatcher); dsjung 검색 문제로 삭제
     }
 
     @Override

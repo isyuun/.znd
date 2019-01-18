@@ -6,10 +6,11 @@
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="visible">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/genre_recycler"
+            android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layoutAnimation="@anim/layout_animation_fall_down" />
@@ -27,12 +28,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="1"
             android:ellipsize="end"
-            android:typeface="sans"
+            android:maxLines="1"
             android:text="@string/empty_genre_message"
             android:textColor="@color/empty_color"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:typeface="sans" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.adapter.SongAdapter;
@@ -31,10 +33,10 @@ import kr.keumyoung.mukin.util.Constants;
 import kr.keumyoung.mukin.util.PaginationScrollListener;
 
 /**
- *  on 12/01/18.
+ * on 12/01/18.
  */
 
-public class ReservesFragment extends _BaseFragment {
+public class ReservesFragment extends _BaseListFragment {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
     @Inject
@@ -60,11 +62,11 @@ public class ReservesFragment extends _BaseFragment {
     int offset = 0;
     boolean isLoading = false, isLastPage = false;
 
-    @BindView(R.id.featured_recycler)
+    @BindView(R.id.recycler)
     RecyclerView featuredRecycler;
     Unbinder unbinder;
     @BindView(R.id.swipe_refresh)
-    SwipeRefreshLayout featuredSwipeRefresh;
+    SwipeRefreshLayout swipeRefresh;
     @BindView(R.id.empty_frame)
     LinearLayout emptyFrame;
 
@@ -78,7 +80,7 @@ public class ReservesFragment extends _BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_featured, container, false);
+        View view = inflater.inflate(R.layout.fragment_songs, container, false);
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
@@ -86,7 +88,7 @@ public class ReservesFragment extends _BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        featuredSwipeRefresh.setOnRefreshListener(this::populateSongs);
+        swipeRefresh.setOnRefreshListener(this::populateSongs);
     }
 
     @Override
@@ -97,9 +99,6 @@ public class ReservesFragment extends _BaseFragment {
         activity.hideMenuIcon();
 
         parentFragment.hideIcons();
-
-        //parentFragment.activateSearch();
-        //initiateTextWatcher();
     }
 
     @Override
@@ -135,6 +134,19 @@ public class ReservesFragment extends _BaseFragment {
         updateSongs();
     }
 
+    @Override
+    public void populateSongs() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
+        super.populateSongs();
+    }
+
+    @Override
+    protected void populateSongs(int offset) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + offset);
+        super.populateSongs(offset);
+        swipeRefresh.setRefreshing(false);
+    }
+
     //protected void populateSongs(int offset) {
     //    activity.showProgress();
     //    CommonHelper.hideSoftKeyboard(activity);
@@ -143,7 +155,7 @@ public class ReservesFragment extends _BaseFragment {
     //
     //    if (offset == 0) {
     //        activity.showProgress();
-    //        featuredSwipeRefresh.setRefreshing(true);
+    //        swipeRefresh.setRefreshing(true);
     //    } else {
     //        songAdapter.setLoading(true);
     //        songAdapter.notifyDataSetChanged();
@@ -208,28 +220,28 @@ public class ReservesFragment extends _BaseFragment {
     //                }
     //            });
     //}
-
+    //
     //protected String getTableName() {
     //    return TableNames.FAVORITE;
     //}
-
-    private void updateEmptyVisibility() {
-        try {
-            if (featuredSwipeRefresh != null && featuredSwipeRefresh.isRefreshing())
-                featuredSwipeRefresh.setRefreshing(false);
-            if (songs.isEmpty() && emptyFrame.getVisibility() != View.VISIBLE) {
-                animationHelper.hideViewWithZoomAnim(featuredRecycler);
-                animationHelper.showWithZoomAnim(emptyFrame);
-            } else if (featuredRecycler.getVisibility() != View.VISIBLE) {
-                animationHelper.showWithZoomAnim(featuredRecycler);
-                animationHelper.hideViewWithZoomAnim(emptyFrame);
-            } else if (emptyFrame.getVisibility() == View.VISIBLE) {
-                animationHelper.hideViewWithZoomAnim(emptyFrame);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    //
+    //private void updateEmptyVisibility() {
+    //    try {
+    //        if (swipeRefresh != null && swipeRefresh.isRefreshing())
+    //            swipeRefresh.setRefreshing(false);
+    //        if (songs.isEmpty() && emptyFrame.getVisibility() != View.VISIBLE) {
+    //            animationHelper.hideViewWithZoomAnim(featuredRecycler);
+    //            animationHelper.showWithZoomAnim(emptyFrame);
+    //        } else if (featuredRecycler.getVisibility() != View.VISIBLE) {
+    //            animationHelper.showWithZoomAnim(featuredRecycler);
+    //            animationHelper.hideViewWithZoomAnim(emptyFrame);
+    //        } else if (emptyFrame.getVisibility() == View.VISIBLE) {
+    //            animationHelper.hideViewWithZoomAnim(emptyFrame);
+    //        }
+    //    } catch (Exception e) {
+    //        e.printStackTrace();
+    //    }
+    //}
 
     @Override
     public void onStop() {
@@ -253,11 +265,11 @@ public class ReservesFragment extends _BaseFragment {
         unbinder.unbind();
     }
 
-    ArrayList<String> favorites = new ArrayList<>();
+    ArrayList<String> reserves = new ArrayList<>();
 
     public int favorites() {
         int ret = 0;
-        for (String song: this.favorites) {
+        for (String song : this.reserves) {
             if (activity.isFavorites(song)) ret++;
         }
         return ret;
@@ -267,9 +279,9 @@ public class ReservesFragment extends _BaseFragment {
     public void onResume() {
         super.onResume();
 
-        this.favorites.clear();
+        this.reserves.clear();
         for (Song song : songs) {
-            this.favorites.add(song.getSongId());
+            this.reserves.add(song.getSongId());
         }
 
         if (songs.isEmpty() || favorites() > 0) populateSongs();

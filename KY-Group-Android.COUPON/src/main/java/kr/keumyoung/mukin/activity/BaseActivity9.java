@@ -6,6 +6,7 @@ import android.util.Log;
 
 import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.data.model.Song;
+import kr.keumyoung.mukin.fragment._BaseListFragment;
 
 public class BaseActivity9 extends BaseActivity8 {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
@@ -22,8 +23,8 @@ public class BaseActivity9 extends BaseActivity8 {
 
     private void updateReserveSongs() {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + getCurrentFragment() + ":" + getChildCurrentFragment());
-        if (getChildCurrentFragment() != null) {
-            getChildCurrentFragment().updateSongs();
+        if (getChildCurrentFragment() != null && getChildCurrentFragment() instanceof _BaseListFragment) {
+            ((_BaseListFragment) getChildCurrentFragment()).updateSongs();
         }
     }
 }

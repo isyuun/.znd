@@ -69,8 +69,8 @@ public class SongViewHolder extends RecyclerView.ViewHolder {
     TextView hitsCountText;
     @BindView(R.id.loading)
     ProgressBar loading;
-    @BindView(R.id.song_ripple)
-    RelativeLayout parentItem;
+    @BindView(R.id.song_anchor)
+    RelativeLayout songAnchor;
     @BindView(R.id.song_item)
     LinearLayout songItem;
     @BindView(R.id.favorite_button)
@@ -89,24 +89,24 @@ public class SongViewHolder extends RecyclerView.ViewHolder {
             return super.onContextClick(e);
         }
 
-        @Override
-        public void onLongPress(MotionEvent e) {
-            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + e);
-            onSongClick(parentItem);
-            super.onLongPress(e);
-        }
+        //@Override
+        //public void onLongPress(MotionEvent e) {
+        //    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + e);
+        //    onSongClick(songAnchor);
+        //    super.onLongPress(e);
+        //}
 
         @Override
         public boolean onDoubleTap(MotionEvent e) {
             if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + e);
-            onSongClick(parentItem);
+            onSongClick(songAnchor);
             return super.onDoubleTap(e);
         }
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
             if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + e);
-            onReserveClick(parentItem);
+            onReserveClick(songAnchor);
             return super.onSingleTapConfirmed(e);
         }
     }
@@ -119,18 +119,18 @@ public class SongViewHolder extends RecyclerView.ViewHolder {
         //R.layout.item_song
         MainApplication.getInstance().getMainComponent().inject(this);
         ButterKnife.bind(this, itemView);
-        //parentItem.setOnClickListener(v -> parentItem.setOnRippleCompleteListener(rippleView -> onSongClick(v.findViewById(R.id.song_item))));
-        parentItem.setOnTouchListener((v, event) -> gestureDetector.onTouchEvent(event));
+        //songAnchor.setOnClickListener(v -> songAnchor.setOnRippleCompleteListener(rippleView -> onSongClick(v.findViewById(R.id.song_item))));
+        songAnchor.setOnTouchListener((v, event) -> gestureDetector.onTouchEvent(event));
         favoriteButton.setOnClickListener(v -> {
             if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "favoriteButton.onClick(...)" + v);
             onFavoriteClick(v);
         });
         if (viewType == SongAdapter.DATA) {
-            parentItem.setVisibility(View.VISIBLE);
+            songAnchor.setVisibility(View.VISIBLE);
             loading.setVisibility(View.GONE);
         } else {
             loading.setVisibility(View.VISIBLE);
-            parentItem.setVisibility(View.GONE);
+            songAnchor.setVisibility(View.GONE);
         }
     }
 

@@ -38,6 +38,7 @@ public class HomeActivity2 extends HomeActivity {
         //        return true;
         //    }
         //});
+        play.setVisibility(View.INVISIBLE);
         play.setOnClickListener(v -> {
             if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "play.onClick()");
             if (getApp().getReserves().size() > 0) {
@@ -130,7 +131,7 @@ public class HomeActivity2 extends HomeActivity {
         @Override
         public void run() {
             if (reservesFragment == null) reservesFragment = new ReservesFragment();
-            if (getCurrentFragment() instanceof HomeFragment) ((HomeFragment) getCurrentFragment()).replaceChildFragment(reservesFragment);
+            if (getCurrentFragment() instanceof HomeFragment) ((HomeFragment) getCurrentFragment()).replaceListFragment(reservesFragment);
         }
     };
 

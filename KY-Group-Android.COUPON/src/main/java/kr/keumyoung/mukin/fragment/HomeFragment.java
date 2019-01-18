@@ -33,7 +33,6 @@ import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.data.model.Artist;
 import kr.keumyoung.mukin.data.model.Genre;
 import kr.keumyoung.mukin.helper.AnimationHelper;
-import kr.keumyoung.mukin.util.CommonHelper;
 import kr.keumyoung.mukin.util.Constants;
 
 /**
@@ -108,20 +107,20 @@ public class HomeFragment extends _BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if (currentChildFragment == null) loadRecommendedFragment();
+        if (currentListFragment == null) loadRecommendedFragment();
     }
 
     private void loadRecommendedFragment() {
         if (recommendedFragment == null) recommendedFragment = new RecommendedFragment();
-        replaceChildFragment(recommendedFragment);
+        replaceListFragment(recommendedFragment);
     }
 
-    public void replaceChildFragment(_BaseFragment fragment) {
-        if (currentChildFragment != null &&
+    public void replaceListFragment(_BaseListFragment fragment) {
+        if (currentListFragment != null &&
                 fragment.getClass().getSimpleName().equalsIgnoreCase(
-                        currentChildFragment.getClass().getSimpleName()))
+                        currentListFragment.getClass().getSimpleName()))
             return;
-        currentChildFragment = fragment;
+        currentListFragment = fragment;
         String fragmentTag = fragment.getClass().getSimpleName();
         FragmentManager manager = getChildFragmentManager();
 
@@ -163,7 +162,7 @@ public class HomeFragment extends _BaseFragment {
         arguments.putString(Constants.ID, artist.getArtistId());
 
         songsFragment.setArguments(arguments);
-        replaceChildFragment(songsFragment);
+        replaceListFragment(songsFragment);
     }
 
     @Subscribe
@@ -175,7 +174,7 @@ public class HomeFragment extends _BaseFragment {
         arguments.putString(Constants.ID, genre.getGenreId());
 
         songsFragment.setArguments(arguments);
-        replaceChildFragment(songsFragment);
+        replaceListFragment(songsFragment);
     }
 
     @Override
@@ -190,42 +189,42 @@ public class HomeFragment extends _BaseFragment {
             case R.id.search_edit_ripple:
                 //dsjung 장르, 노래 프레그먼트 검색창 클릭 안되는 문제로
                 //Song, Genre 프레그먼트 추가
-                if (currentChildFragment instanceof RecommendedFragment
-                        || currentChildFragment instanceof FeaturedFragment
-                        || currentChildFragment instanceof TopHitsFragment
-                        || currentChildFragment instanceof GenreFragment //?
-                        || currentChildFragment instanceof SongsFragment //?
-                        || currentChildFragment instanceof ArtistFragment) {
+                if (currentListFragment instanceof RecommendedFragment
+                        || currentListFragment instanceof FeaturedFragment
+                        || currentListFragment instanceof TopHitsFragment
+                        || currentListFragment instanceof GenreFragment //?
+                        || currentListFragment instanceof SongsFragment //?
+                        || currentListFragment instanceof ArtistFragment) {
                     searchEditRipple.setOnRippleCompleteListener(rippleView -> {
                         if (searchFragment == null) searchFragment = new SearchFragment();
-                        replaceChildFragment(searchFragment);
+                        replaceListFragment(searchFragment);
                     });
                 }
                 break;
             case R.id.newsongs_item:
                 featuredRipple.setOnRippleCompleteListener(rippleView -> {
                     if (featuredFragment == null) featuredFragment = new FeaturedFragment();
-                    replaceChildFragment(featuredFragment);
+                    replaceListFragment(featuredFragment);
                 });
                 break;
             case R.id.tophits_item:
                 topHitRipple.setOnRippleCompleteListener(rippleView -> {
                     if (topHitsFragment == null) topHitsFragment = new TopHitsFragment();
-                    replaceChildFragment(topHitsFragment);
+                    replaceListFragment(topHitsFragment);
                 });
                 break;
             case R.id.genres_item:
                 genreRipple.setOnRippleCompleteListener(rippleView -> {
                     if (genreFragment == null) genreFragment = new GenreFragment();
-                    replaceChildFragment(genreFragment);
+                    replaceListFragment(genreFragment);
                 });
                 break;
             case R.id.favorites_item:
                 favoriteRipple.setOnRippleCompleteListener(rippleView -> {
                     //if (artistFragment == null) artistFragment = new ArtistFragment();
-                    //replaceChildFragment(artistFragment);
+                    //replaceListFragment(artistFragment);
                     if (favoritesFragment == null) favoritesFragment = new FavoritesFragment();
-                    replaceChildFragment(favoritesFragment);
+                    replaceListFragment(favoritesFragment);
                 });
                 break;
             case R.id.search_close:
@@ -236,8 +235,8 @@ public class HomeFragment extends _BaseFragment {
 
     @Override
     public boolean onNavigationClick() {
-        if (currentChildFragment instanceof RecommendedFragment) return false;
-        if (currentChildFragment != null) return currentChildFragment.onNavigationClick();
+        if (currentListFragment instanceof RecommendedFragment) return false;
+        if (currentListFragment != null) return currentListFragment.onNavigationClick();
         return super.onNavigationClick();
     }
 
@@ -250,7 +249,7 @@ public class HomeFragment extends _BaseFragment {
         FragmentManager fragmentManager = getChildFragmentManager();
         if (fragmentManager.getBackStackEntryCount() > 0) {
             fragmentManager.popBackStackImmediate();
-            currentChildFragment = (_BaseFragment) fragmentManager.findFragmentById(R.id.child_fragment_container);
+            currentListFragment = (_BaseListFragment) fragmentManager.findFragmentById(R.id.child_fragment_container);
         }
     }
 

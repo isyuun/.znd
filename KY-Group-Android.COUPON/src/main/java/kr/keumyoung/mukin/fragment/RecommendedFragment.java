@@ -11,21 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import kr.keumyoung.mukin.MainApplication;
-import kr.keumyoung.mukin.R;
-import kr.keumyoung.mukin.adapter.SongAdapter;
-import kr.keumyoung.mukin.api.RestApi;
-import kr.keumyoung.mukin.data.SongParser;
-import kr.keumyoung.mukin.data.model.Song;
-import kr.keumyoung.mukin.data.model.Songs;
-import kr.keumyoung.mukin.helper.AnimationHelper;
-import kr.keumyoung.mukin.helper.PreferenceHelper;
-import kr.keumyoung.mukin.interfaces.SessionRefreshListener;
-import kr.keumyoung.mukin.util.Constants;
-import kr.keumyoung.mukin.util.PaginationScrollListener;
-import kr.keumyoung.mukin.util.PreferenceKeys;
-import kr.keumyoung.mukin.util.TableNames;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -34,16 +19,29 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import kr.keumyoung.mukin.MainApplication;
+import kr.keumyoung.mukin.R;
+import kr.keumyoung.mukin.adapter.SongAdapter;
+import kr.keumyoung.mukin.api.RestApi;
+import kr.keumyoung.mukin.data.SongParser;
+import kr.keumyoung.mukin.data.model.Song;
+import kr.keumyoung.mukin.helper.AnimationHelper;
+import kr.keumyoung.mukin.helper.PreferenceHelper;
+import kr.keumyoung.mukin.interfaces.SessionRefreshListener;
+import kr.keumyoung.mukin.util.Constants;
+import kr.keumyoung.mukin.util.PaginationScrollListener;
+import kr.keumyoung.mukin.util.PreferenceKeys;
+import kr.keumyoung.mukin.util.TableNames;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- *  on 12/01/18.
+ * on 12/01/18.
  */
 
-public class RecommendedFragment extends _BaseFragment {
+public class RecommendedFragment extends _BaseListFragment {
 
     @Inject
     RestApi restApi;
@@ -54,12 +52,12 @@ public class RecommendedFragment extends _BaseFragment {
     @Inject
     AnimationHelper animationHelper;
 
-    @BindView(R.id.recommended_recycler)
+    @BindView(R.id.recycler)
     RecyclerView recommendedRecycler;
     @BindView(R.id.empty_frame)
     LinearLayout emptyFrame;
     @BindView(R.id.swipe_refresh)
-    SwipeRefreshLayout recommendedSwipeRefresh;
+    SwipeRefreshLayout swipeRefresh;
 
     SessionRefreshListener sessionRefreshListener = new SessionRefreshListener() {
         @Override
@@ -92,7 +90,7 @@ public class RecommendedFragment extends _BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recommendedSwipeRefresh.setOnRefreshListener(() -> populateSongs());
+        swipeRefresh.setOnRefreshListener(() -> populateSongs());
     }
 
     @Override
@@ -157,7 +155,7 @@ public class RecommendedFragment extends _BaseFragment {
 
         if (offset == 0) {
             activity.showProgress();
-            recommendedSwipeRefresh.setRefreshing(true);
+            swipeRefresh.setRefreshing(true);
         } else {
             songAdapter.setLoading(true);
             //songAdapter.notifyDataSetChanged();
@@ -225,23 +223,23 @@ public class RecommendedFragment extends _BaseFragment {
                 });
     }
 
-    private void updateEmptyVisibility() {
-        try {
-            if (recommendedSwipeRefresh != null && recommendedSwipeRefresh.isRefreshing())
-                recommendedSwipeRefresh.setRefreshing(false);
-            if (songs.isEmpty() && emptyFrame.getVisibility() != View.VISIBLE) {
-                animationHelper.hideViewWithZoomAnim(recommendedRecycler);
-                animationHelper.showWithZoomAnim(emptyFrame);
-            } else if (recommendedRecycler != null && recommendedRecycler.getVisibility() != View.VISIBLE) {
-                animationHelper.showWithZoomAnim(recommendedRecycler);
-                animationHelper.hideViewWithZoomAnim(emptyFrame);
-            } else if (emptyFrame != null && emptyFrame.getVisibility() == View.VISIBLE) {
-                animationHelper.hideViewWithZoomAnim(emptyFrame);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    //private void updateEmptyVisibility() {
+    //    try {
+    //        if (swipeRefresh != null && swipeRefresh.isRefreshing())
+    //            swipeRefresh.setRefreshing(false);
+    //        if (songs.isEmpty() && emptyFrame.getVisibility() != View.VISIBLE) {
+    //            animationHelper.hideViewWithZoomAnim(recommendedRecycler);
+    //            animationHelper.showWithZoomAnim(emptyFrame);
+    //        } else if (recommendedRecycler != null && recommendedRecycler.getVisibility() != View.VISIBLE) {
+    //            animationHelper.showWithZoomAnim(recommendedRecycler);
+    //            animationHelper.hideViewWithZoomAnim(emptyFrame);
+    //        } else if (emptyFrame != null && emptyFrame.getVisibility() == View.VISIBLE) {
+    //            animationHelper.hideViewWithZoomAnim(emptyFrame);
+    //        }
+    //    } catch (Exception e) {
+    //        e.printStackTrace();
+    //    }
+    //}
 
     @Override
     public void onDestroyView() {

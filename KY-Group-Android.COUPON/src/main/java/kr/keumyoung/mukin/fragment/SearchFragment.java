@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -49,7 +50,7 @@ import retrofit2.Response;
  * on 12/01/18.
  */
 
-public class SearchFragment extends _BaseFragment {
+public class SearchFragment extends _BaseListFragment {
 
     @Inject
     PreferenceHelper preferenceHelper;
@@ -65,8 +66,10 @@ public class SearchFragment extends _BaseFragment {
 
     @BindView(R.id.count_text)
     TextView countText;
-    @BindView(R.id.search_recycler)
+    @BindView(R.id.recycler)
     RecyclerView searchRecycler;
+    @BindView(R.id.swipe_refresh)
+    SwipeRefreshLayout swipeRefresh;
     @BindView(R.id.empty_frame)
     LinearLayout emptyFrame;
 
@@ -116,6 +119,7 @@ public class SearchFragment extends _BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setupRecyclerView();
+        swipeRefresh.setOnRefreshListener(this::searchSong);
     }
 
     private void setupRecyclerView() {
@@ -308,7 +312,7 @@ public class SearchFragment extends _BaseFragment {
 //                });
 //    }
 
-    private void updateEmptyVisibility() {
+    protected void updateEmptyVisibility() {
         try {
             if (songs.isEmpty() || parentFragment.searchEt.getText().toString().isEmpty()) {
                 if(countText != null)

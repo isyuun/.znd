@@ -11,6 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.adapter.GenreAdapter;
@@ -25,26 +34,16 @@ import kr.keumyoung.mukin.util.Constants;
 import kr.keumyoung.mukin.util.PaginationScrollListener;
 import kr.keumyoung.mukin.util.PreferenceKeys;
 import kr.keumyoung.mukin.util.TableNames;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- *  on 12/01/18.
+ * on 12/01/18.
  */
 
-public class GenreFragment extends _BaseFragment {
+public class GenreFragment extends _BaseListFragment {
 
     @Inject
     PreferenceHelper preferenceHelper;
@@ -55,10 +54,10 @@ public class GenreFragment extends _BaseFragment {
     @Inject
     AnimationHelper animationHelper;
 
-    @BindView(R.id.genre_recycler)
+    @BindView(R.id.recycler)
     RecyclerView genreRecycler;
     @BindView(R.id.swipe_refresh)
-    SwipeRefreshLayout genreSwipeRefresh;
+    SwipeRefreshLayout swipeRefresh;
     @BindView(R.id.empty_frame)
     LinearLayout emptyFrame;
 
@@ -98,7 +97,7 @@ public class GenreFragment extends _BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        genreSwipeRefresh.setOnRefreshListener(this::populateGenres);
+        swipeRefresh.setOnRefreshListener(this::populateGenres);
     }
 
     @Override
@@ -110,7 +109,7 @@ public class GenreFragment extends _BaseFragment {
         activity.hideMenuIcon();
 
         parentFragment.hideIcons();
-       //parentFragment.hideSearch(); dsjung 검색 문제로 주석처리
+        //parentFragment.hideSearch(); dsjung 검색 문제로 주석처리
     }
 
     @Override
@@ -158,7 +157,7 @@ public class GenreFragment extends _BaseFragment {
 
         if (offset == 0) {
             activity.showProgress();
-            genreSwipeRefresh.setRefreshing(true);
+            swipeRefresh.setRefreshing(true);
         } else {
             genreAdapter.setLoading(true);
             genreAdapter.notifyDataSetChanged();
@@ -232,10 +231,11 @@ public class GenreFragment extends _BaseFragment {
         return genre;
     }
 
-    private void updateEmptyVisibility() {
+    @Override
+    protected void updateEmptyVisibility() {
         try {
-            if (genreSwipeRefresh != null && genreSwipeRefresh.isRefreshing())
-                genreSwipeRefresh.setRefreshing(false);
+            if (swipeRefresh != null && swipeRefresh.isRefreshing())
+                swipeRefresh.setRefreshing(false);
             if (genres.isEmpty() && emptyFrame.getVisibility() != View.VISIBLE) {
                 animationHelper.hideViewWithZoomAnim(genreRecycler);
                 animationHelper.showWithZoomAnim(emptyFrame);

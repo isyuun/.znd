@@ -3,6 +3,7 @@ package kr.keumyoung.mukin.fragment;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
+import android.view.View;
 
 import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.R;
@@ -33,66 +34,19 @@ public class BaseFragment2 extends BaseFragment {
         return handler.postDelayed(r, delayMillis);
     }
 
-    _BaseFragment currentChildFragment;
-
-    public _BaseFragment getChildCurrentFragment() {
-        return currentChildFragment;
+    public View findViewById(int id) {
+        return getActivity().findViewById(id);
     }
 
-    public void populateSongs() {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
-        populateSongs(0);
-    }
+    _BaseListFragment currentListFragment;
 
-    protected void populateSongs(int offset) {
+    public _BaseListFragment getChildCurrentFragment() {
+        return currentListFragment;
     }
 
     public void onBackPressed() {
-        if (getActivity().findViewById(R.id.swipe_refresh) != null) {
-            ((SwipeRefreshLayout)getActivity().findViewById(R.id.swipe_refresh)).setRefreshing(false);
-        }
     }
 
     public void refresh() {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
-        if (getActivity().findViewById(R.id.swipe_refresh) != null) {
-            ((SwipeRefreshLayout)getActivity().findViewById(R.id.swipe_refresh)).setRefreshing(false);
-        }
-        populateSongs();
-    }
-
-    protected void onPopulateSongs() {
-        updateSongs();
-    }
-
-
-    Songs songs = new Songs();
-    SongAdapter songAdapter;
-
-    public void updateSongs() {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName()/* + ":" + activity.getFavorites() + ":" + songs + ":" + songAdapter*/);
-        for (Song song : songs) {
-            song.setFavorite(activity.isFavorites(song.getSongId()));
-            song.setReserve(activity.getApp().isReserves(song.getSongId()));
-        }
-        notifyDataSetChanged();
-    }
-
-    public void notifyDataSetChanged() {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
-        postDelayed(notifyDataSetChanged, 100);
-    }
-
-    private Runnable notifyDataSetChanged = () -> {
-        if (songAdapter != null) {
-            songAdapter.notifyDataSetChanged();
-        }
-    };
-
-    @Override
-    public void onResume() {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
-        super.onResume();
-        updateSongs();
     }
 }

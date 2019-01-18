@@ -13,6 +13,7 @@ import kr.keumyoung.mukin.api.RequestModel;
 import kr.keumyoung.mukin.data.SongParser;
 import kr.keumyoung.mukin.data.model.Song;
 import kr.keumyoung.mukin.data.request.SongHitRequest;
+import kr.keumyoung.mukin.fragment._BaseListFragment;
 import kr.keumyoung.mukin.util.Constants;
 import kr.keumyoung.mukin.util.PreferenceKeys;
 import kr.keumyoung.mukin.util.TableNames;
@@ -153,8 +154,8 @@ public class BaseActivity5 extends BaseActivity4 {
 
     private void updateFavoriteSongs() {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + getCurrentFragment() + ":" + getChildCurrentFragment());
-        if (getChildCurrentFragment() != null) {
-            getChildCurrentFragment().updateSongs();
+        if (getChildCurrentFragment() != null && getChildCurrentFragment() instanceof _BaseListFragment) {
+            ((_BaseListFragment) getChildCurrentFragment()).updateSongs();
         }
     }
 }

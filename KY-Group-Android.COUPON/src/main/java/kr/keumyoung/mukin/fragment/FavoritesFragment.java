@@ -44,10 +44,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- *  on 12/01/18.
+ * on 12/01/18.
  */
 
-public class FavoritesFragment extends _BaseFragment {
+public class FavoritesFragment extends _BaseListFragment {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
     @Inject
@@ -73,11 +73,11 @@ public class FavoritesFragment extends _BaseFragment {
     int offset = 0;
     boolean isLoading = false, isLastPage = false;
 
-    @BindView(R.id.featured_recycler)
-    RecyclerView featuredRecycler;
+    @BindView(R.id.recycler)
+    RecyclerView songsRecycler;
     Unbinder unbinder;
     @BindView(R.id.swipe_refresh)
-    SwipeRefreshLayout featuredSwipeRefresh;
+    SwipeRefreshLayout swipeRefresh;
     @BindView(R.id.empty_frame)
     LinearLayout emptyFrame;
 
@@ -91,7 +91,7 @@ public class FavoritesFragment extends _BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_featured, container, false);
+        View view = inflater.inflate(R.layout.fragment_songs, container, false);
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
@@ -99,7 +99,7 @@ public class FavoritesFragment extends _BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        featuredSwipeRefresh.setOnRefreshListener(this::populateSongs);
+        swipeRefresh.setOnRefreshListener(this::populateSongs);
     }
 
     @Override
@@ -110,79 +110,7 @@ public class FavoritesFragment extends _BaseFragment {
         activity.hideMenuIcon();
 
         parentFragment.hideIcons();
-
-        //parentFragment.activateSearch();
-        //initiateTextWatcher();
     }
-
-    //private void initiateTextWatcher() {
-    //    textWatcher = new TextWatcher() {
-    //        @Override
-    //        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-    //
-    //        }
-    //
-    //        @Override
-    //        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-    //
-    //        }
-    //
-    //        @Override
-    //        public void afterTextChanged(Editable editable) {
-    //            String keyword = editable.toString().trim();
-    //            if (keyword.isEmpty()) populateSongs();
-    //            else performSearch(keyword);
-    //        }
-    //    };
-    //
-    //    parentFragment.addTextWatcher(textWatcher);
-    //}
-    //
-    //private void performSearch(String keyword) {
-    //    restApi.searchCustomScript(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), getTableName(), keyword)
-    //            .enqueue(new Callback<ResponseBody>() {
-    //                @Override
-    //                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-    //                    try {
-    //                        ResponseBody responseBody = response.body();
-    //                        ResponseBody errorBody = response.errorBody();
-    //
-    //                        if (responseBody != null) {
-    //                            String responseString = responseBody.string();
-    //                            JSONObject responseObject = new JSONObject(responseString);
-    //
-    //                            JSONArray resultArray = responseObject.getJSONArray(Constants.RESULT);
-    //                            int length = resultArray.length();
-    //                            songs.clear();
-    //                            for (int index = 0; index < length; index++) {
-    //                                JSONObject songObject = resultArray.getJSONObject(index);
-    //                                Song song = SongParser.convertToSongFromJson(songObject);
-    //                                songs.add(song);
-    //                            }
-    //                            songAdapter.notifyDataSetChanged();
-    //                            updateEmptyVisibility();
-    //                        } else if (errorBody != null) {
-    //                            String errorString = errorBody.string();
-    //                            JSONObject errorObject = new JSONObject(errorString);
-    //                            if (activity.handleDFError(errorObject, sessionRefreshListener)) {
-    //                                // error is handled in base activity. nothing to do here
-    //                            } else {
-    //                                // TODO: 02/02/18 handle more errors here related to search
-    //                            }
-    //
-    //                        }
-    //
-    //                    } catch (Exception e) {
-    //                        e.printStackTrace();
-    //                    }
-    //                }
-    //
-    //                @Override
-    //                public void onFailure(Call<ResponseBody> call, Throwable t) {
-    //
-    //                }
-    //            });
-    //}
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -193,10 +121,10 @@ public class FavoritesFragment extends _BaseFragment {
     private void setupRecyclerView() {
         if (songAdapter == null) songAdapter = new SongAdapter(songs);
         LinearLayoutManager manager = new LinearLayoutManager(activity);
-        featuredRecycler.setLayoutManager(manager);
-        featuredRecycler.setAdapter(songAdapter);
+        songsRecycler.setLayoutManager(manager);
+        songsRecycler.setAdapter(songAdapter);
 
-        featuredRecycler.addOnScrollListener(new PaginationScrollListener(manager) {
+        songsRecycler.addOnScrollListener(new PaginationScrollListener(manager) {
             @Override
             public boolean isLoading() {
                 return isLoading;
@@ -216,7 +144,7 @@ public class FavoritesFragment extends _BaseFragment {
     }
 
     protected void populateSongs(int offset) {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + offset);
 
         activity.showProgress();
         CommonHelper.hideSoftKeyboard(activity);
@@ -225,7 +153,7 @@ public class FavoritesFragment extends _BaseFragment {
 
         if (offset == 0) {
             activity.showProgress();
-            featuredSwipeRefresh.setRefreshing(true);
+            swipeRefresh.setRefreshing(true);
         } else {
             songAdapter.setLoading(true);
             songAdapter.notifyDataSetChanged();
@@ -290,27 +218,23 @@ public class FavoritesFragment extends _BaseFragment {
                 });
     }
 
-    //protected String getTableName() {
-    //    return TableNames.FAVORITE;
+    //private void updateEmptyVisibility() {
+    //    try {
+    //        if (swipeRefresh != null && swipeRefresh.isRefreshing())
+    //            swipeRefresh.setRefreshing(false);
+    //        if (songs.isEmpty() && emptyFrame.getVisibility() != View.VISIBLE) {
+    //            animationHelper.hideViewWithZoomAnim(songsRecycler);
+    //            animationHelper.showWithZoomAnim(emptyFrame);
+    //        } else if (songsRecycler.getVisibility() != View.VISIBLE) {
+    //            animationHelper.showWithZoomAnim(songsRecycler);
+    //            animationHelper.hideViewWithZoomAnim(emptyFrame);
+    //        } else if (emptyFrame.getVisibility() == View.VISIBLE) {
+    //            animationHelper.hideViewWithZoomAnim(emptyFrame);
+    //        }
+    //    } catch (Exception e) {
+    //        e.printStackTrace();
+    //    }
     //}
-
-    private void updateEmptyVisibility() {
-        try {
-            if (featuredSwipeRefresh != null && featuredSwipeRefresh.isRefreshing())
-                featuredSwipeRefresh.setRefreshing(false);
-            if (songs.isEmpty() && emptyFrame.getVisibility() != View.VISIBLE) {
-                animationHelper.hideViewWithZoomAnim(featuredRecycler);
-                animationHelper.showWithZoomAnim(emptyFrame);
-            } else if (featuredRecycler.getVisibility() != View.VISIBLE) {
-                animationHelper.showWithZoomAnim(featuredRecycler);
-                animationHelper.hideViewWithZoomAnim(emptyFrame);
-            } else if (emptyFrame.getVisibility() == View.VISIBLE) {
-                animationHelper.hideViewWithZoomAnim(emptyFrame);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public void onStop() {
@@ -338,7 +262,7 @@ public class FavoritesFragment extends _BaseFragment {
 
     public int favorites() {
         int ret = 0;
-        for (String song: this.favorites) {
+        for (String song : this.favorites) {
             if (activity.isFavorites(song)) ret++;
         }
         return ret;

@@ -9,9 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/search_edit_ripple"
-        android:layout_marginBottom="12dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
+        android:layout_marginBottom="12dp"
         android:gravity="top"
         android:orientation="horizontal">
 
@@ -40,12 +40,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/newsongs"
-                    android:maxLines="1"
                     android:ellipsize="end"
-                    android:typeface="sans"
+                    android:maxLines="1"
+                    android:text="@string/newsongs"
                     android:textColor="@color/semi_white_text_color"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:typeface="sans" />
 
             </LinearLayout>
         </com.andexert.library.RippleView>
@@ -75,12 +75,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/top_hits"
-                    android:maxLines="1"
                     android:ellipsize="end"
-                    android:typeface="sans"
+                    android:maxLines="1"
+                    android:text="@string/top_hits"
                     android:textColor="@color/semi_white_text_color"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:typeface="sans" />
 
             </LinearLayout>
         </com.andexert.library.RippleView>
@@ -110,12 +110,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/genre"
-                    android:maxLines="1"
                     android:ellipsize="end"
-                    android:typeface="sans"
+                    android:maxLines="1"
+                    android:text="@string/genre"
                     android:textColor="@color/semi_white_text_color"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:typeface="sans" />
 
             </LinearLayout>
         </com.andexert.library.RippleView>
@@ -145,12 +145,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/favorites"
-                    android:maxLines="1"
                     android:ellipsize="end"
-                    android:typeface="sans"
+                    android:maxLines="1"
+                    android:text="@string/favorites"
                     android:textColor="@color/semi_white_text_color"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:typeface="sans" />
 
             </LinearLayout>
         </com.andexert.library.RippleView>
