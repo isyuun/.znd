@@ -17,14 +17,6 @@ public class PlayerActivity2 extends PlayerActivity {
     @BindView(R.id.jump)
     FrameLayout jump;
 
-    protected String getMethodName() {
-        String name = Thread.currentThread().getStackTrace()[3].getMethodName();
-        String text = String.format("%s()", name);
-        // int line = Thread.currentThread().getStackTrace()[3].getLineNumber();
-        // text = String.format("line:%d - %s() ", line, name);
-        return text;
-    }
-
     @Override
     protected void prepareMediaPlayer() {
         super.prepareMediaPlayer();

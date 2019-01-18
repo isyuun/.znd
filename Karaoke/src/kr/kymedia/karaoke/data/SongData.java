@@ -14,11 +14,11 @@ import java.io.RandomAccessFile;
 
 import android.text.TextUtils;
 
-/*import kr.kymedia.karaoke.kpop.play2.midilib.MidiFile;
- import kr.kymedia.karaoke.kpop.play2.midilib.MidiTrack;
- import kr.kymedia.karaoke.kpop.play2.midilib.event.MidiEvent;
- import kr.kymedia.karaoke.kpop.play2.midilib.event.ProgramChange;
- import kr.kymedia.karaoke.kpop.play2.midilib.event.meta.Tempo;*/
+//import kr.kymedia.karaoke.kpop.play2.midilib.MidiFile;
+//import kr.kymedia.karaoke.kpop.play2.midilib.MidiTrack;
+//import kr.kymedia.karaoke.kpop.play2.midilib.event.MidiEvent;
+//import kr.kymedia.karaoke.kpop.play2.midilib.event.ProgramChange;
+//import kr.kymedia.karaoke.kpop.play2.midilib.event.meta.Tempo;
 
 public class SongData {
 	public final static String AUTHOR = "작곡";

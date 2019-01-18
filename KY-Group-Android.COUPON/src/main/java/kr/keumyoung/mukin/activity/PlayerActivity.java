@@ -23,6 +23,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.andexert.library.RippleView;
+import com.leff.midi.MidiFile;
+import com.leff.midi.event.MidiEvent;
+import com.leff.midi.event.NoteOn;
+import com.leff.midi.event.meta.Tempo;
+import com.leff.midi.examples.EventPrinter;
+import com.leff.midi.util.MidiProcessor;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
@@ -397,23 +403,23 @@ public class PlayerActivity extends _BaseActivity {
         }
     }
 
-    private void downloadSongJson() {
-        //dsjung
-        //setProgressMessage(R.string.fetching_lyrics);
-        String timingFileName = String.format("%s.json", song.getIdentifier());
-        String url = String.format("%ssongs/json/%s", Constants.FILE_API, timingFileName);
-
-        downloadHelper.download(url, timingFileName)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(file -> lyricsTimingHelper.initiateWithLyricsView(this, lyricsView, file)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(this::setProgressMessage, throwable -> {
-                            throwable.printStackTrace();
-                            hideProgress();
-                        }, this::prepareMediaPlayer));
-    }
+    //private void downloadSongJson() {
+    //    //dsjung
+    //    //setProgressMessage(R.string.fetching_lyrics);
+    //    String timingFileName = String.format("%s.json", song.getIdentifier());
+    //    String url = String.format("%ssongs/json/%s", Constants.FILE_API, timingFileName);
+    //
+    //    downloadHelper.download(url, timingFileName)
+    //            .subscribeOn(Schedulers.io())
+    //            .observeOn(AndroidSchedulers.mainThread())
+    //            .subscribe(file -> lyricsTimingHelper.initiateWithLyricsView(this, lyricsView, file)
+    //                    .subscribeOn(Schedulers.io())
+    //                    .observeOn(AndroidSchedulers.mainThread())
+    //                    .subscribe(this::setProgressMessage, throwable -> {
+    //                        throwable.printStackTrace();
+    //                        hideProgress();
+    //                    }, this::prepareMediaPlayer));
+    //}
 
     public long GetTimePerClock() {
         return microTimePerClock;
@@ -975,6 +981,8 @@ public class PlayerActivity extends _BaseActivity {
                     try {
                         String midPath = ImageUtils.BASE_PATH + Integer.parseInt(song.getIdentifier()) + ".mid";
                         File midiFile = new File(midPath);
+                        MidiFile midi = new MidiFile(midiFile);
+                        parsMidi(midi);
                         midiFile.delete();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -996,4 +1004,21 @@ public class PlayerActivity extends _BaseActivity {
             }
         }
     };
+
+    private void parsMidi(MidiFile midi) {
+        // Create a new MidiProcessor:
+        MidiProcessor processor = new MidiProcessor(midi);
+
+        // Register for the events you're interested in:
+        EventPrinter ep = new EventPrinter("Individual Listener");
+        processor.registerEventListener(ep, Tempo.class);
+        processor.registerEventListener(ep, NoteOn.class);
+
+        // or listen for all events:
+        EventPrinter ep2 = new EventPrinter("Listener For All");
+        processor.registerEventListener(ep2, MidiEvent.class);
+
+        // Start the processor:
+        processor.start();
+    }
 }

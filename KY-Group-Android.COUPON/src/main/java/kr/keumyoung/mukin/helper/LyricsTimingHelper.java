@@ -4,10 +4,6 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,7 +16,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
 import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.activity.BaseActivity;
@@ -39,6 +34,15 @@ import kr.keumyoung.mukin.util.MicChecker;
  */
 
 public class LyricsTimingHelper {
+    private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
+
+    protected String getMethodName() {
+        String name = Thread.currentThread().getStackTrace()[3].getMethodName();
+        String text = String.format("%s()", name);
+        // int line = Thread.currentThread().getStackTrace()[3].getLineNumber();
+        // text = String.format("line:%d - %s() ", line, name);
+        return text;
+    }
 
     @Inject
     Context context;
@@ -76,90 +80,95 @@ public class LyricsTimingHelper {
         return lyricLineString;
     }
 
-    public Observable<Integer> initiateWithLyricsView(BaseActivity activity, TwoLineLyricsView lyricsView, File timingFile) {
-        return Observable.create(subscriber -> {
-            this.lyricsView = lyricsView;
-            this.timingFile = timingFile;
-            this.activity = activity;
-
-            try {
-                //dsjung
-                //subscriber.onNext(R.string.reading_lyrics);
-                String jsonString = fileHelper.getStringFromFile(timingFile.getAbsolutePath());
-                JSONArray timingArray = new JSONArray(jsonString);
-
-                //dsjung
-                //subscriber.onNext(R.string.processing_lyrics);
-                parseTimeArray(timingArray);
-
-                subscriber.onComplete();
-            } catch (Exception e) {
-                e.printStackTrace();
-                subscriber.onError(e);
-            }
-        });
-    }
+    //public Observable<Integer> initiateWithLyricsView(BaseActivity activity, TwoLineLyricsView lyricsView, File timingFile) {
+    //    if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName());
+    //    return Observable.create(subscriber -> {
+    //        this.lyricsView = lyricsView;
+    //        this.timingFile = timingFile;
+    //        this.activity = activity;
+    //
+    //        try {
+    //            //dsjung
+    //            //subscriber.onNext(R.string.reading_lyrics);
+    //            String jsonString = fileHelper.getStringFromFile(timingFile.getAbsolutePath());
+    //            JSONArray timingArray = new JSONArray(jsonString);
+    //
+    //            //dsjung
+    //            //subscriber.onNext(R.string.processing_lyrics);
+    //            parseTimeArray(timingArray);
+    //
+    //            subscriber.onComplete();
+    //        } catch (Exception e) {
+    //            e.printStackTrace();
+    //            subscriber.onError(e);
+    //        }
+    //    });
+    //}
+    //
+    //private void parseTimeArray(JSONArray timingArray) throws JSONException {
+    //    if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName());
+    //    int length = timingArray.length();
+    //    lyricsTimes.clear();
+    //    for (int index = 0; index < length; index++) {
+    //        JSONObject timeObject = timingArray.getJSONObject(index);
+    //
+    //        int lineNumber = Integer.parseInt(timeObject.getString(Constants.LINE_NUMBER));
+    //        String word = timeObject.getString(Constants.WORD);
+    //        String nextLine = timeObject.getString(Constants.NEXT_LINE);
+    //        long startTime = Long.parseLong(timeObject.getString(Constants.START_TIME));
+    //        String previousLine = timeObject.getString(Constants.PREVIOUS_LINE);
+    //        long wordLength = Long.parseLong(timeObject.getString(Constants.LENGTH));
+    //        long endTime = Long.parseLong(timeObject.getString(Constants.END_TIME));
+    //        String currentLine = timeObject.getString(Constants.CURRENT_LINE);
+    //        int wordIndex = Integer.parseInt(timeObject.getString(Constants.WORD_INDEX));
+    //
+    //        JSONArray words = timeObject.getJSONArray(Constants.WORDS);
+    //        ArrayList<String> wordList = new ArrayList<>();
+    //        for (int wIndex = 0; wIndex < words.length(); wIndex++)
+    //            wordList.add(words.getString(wIndex));
+    //        int type = 1; //Integer.parseInt(timeObject.getString(Constants.TYPE));
+    //
+    //        LyricsTime lyricsTime = new LyricsTime(previousLine, nextLine, currentLine, word, startTime, endTime, wordLength, lineNumber, wordIndex, type, 0, 0, wordList);
+    //
+    //        lyricsTimes.add(lyricsTime);
+    //    }
+    //
+    //    // countdown logic
+    //    LyricsTime firstItem = lyricsTimes.get(0);
+    //
+    //    long bufferTick = (INITIAL_BUFFER * 2) / 4;
+    //
+    //    long countDownStart = firstItem.getStartTick() - bufferTick;
+    //
+    //    LyricsTime lyricsTime = new LyricsTime();
+    //    lyricsTime.setCurrentLine(firstItem.getCurrentLine());
+    //    lyricsTime.setCurrentWord(firstItem.getCurrentWord());
+    //    lyricsTime.setStartTick(countDownStart);
+    //    lyricsTime.setEndMillis(countDownStart + bufferTick);
+    //    lyricsTime.setNextLine(firstItem.getNextLine());
+    //    lyricsTime.setPreviousLine("");
+    //    lyricsTime.setLineNumber(-1);
+    //    lyricsTime.setLength(bufferTick);
+    //    lyricsTime.setWordIndex(0);
+    //    ArrayList<String> words = new ArrayList<>();
+    //    words.add("");
+    //    lyricsTime.setWords(words);
+    //    lyricsTime.setCountDownItem(true);
+    //
+    //    lyricsTimes.add(0, lyricsTime);
+    //}
 
     public void initiateWithLyrics(BaseActivity activity, TwoLineLyricsView lyricsView, String filePath) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + filePath);
         this.lyricsView = lyricsView;
         this.activity = activity;
 
         parseSokLineArray(filePath);
     }
 
-    private void parseTimeArray(JSONArray timingArray) throws JSONException {
-        int length = timingArray.length();
-        lyricsTimes.clear();
-        for (int index = 0; index < length; index++) {
-            JSONObject timeObject = timingArray.getJSONObject(index);
-
-            int lineNumber = Integer.parseInt(timeObject.getString(Constants.LINE_NUMBER));
-            String word = timeObject.getString(Constants.WORD);
-            String nextLine = timeObject.getString(Constants.NEXT_LINE);
-            long startTime = Long.parseLong(timeObject.getString(Constants.START_TIME));
-            String previousLine = timeObject.getString(Constants.PREVIOUS_LINE);
-            long wordLength = Long.parseLong(timeObject.getString(Constants.LENGTH));
-            long endTime = Long.parseLong(timeObject.getString(Constants.END_TIME));
-            String currentLine = timeObject.getString(Constants.CURRENT_LINE);
-            int wordIndex = Integer.parseInt(timeObject.getString(Constants.WORD_INDEX));
-
-            JSONArray words = timeObject.getJSONArray(Constants.WORDS);
-            ArrayList<String> wordList = new ArrayList<>();
-            for (int wIndex = 0; wIndex < words.length(); wIndex++)
-                wordList.add(words.getString(wIndex));
-            int type = 1; //Integer.parseInt(timeObject.getString(Constants.TYPE));
-
-            LyricsTime lyricsTime = new LyricsTime(previousLine, nextLine, currentLine, word, startTime, endTime, wordLength, lineNumber, wordIndex, type, 0, 0, wordList);
-
-            lyricsTimes.add(lyricsTime);
-        }
-
-        // countdown logic
-        LyricsTime firstItem = lyricsTimes.get(0);
-
-        long bufferTick = (INITIAL_BUFFER * 2) / 4;
-
-        long countDownStart = firstItem.getStartTick() - bufferTick;
-
-        LyricsTime lyricsTime = new LyricsTime();
-        lyricsTime.setCurrentLine(firstItem.getCurrentLine());
-        lyricsTime.setCurrentWord(firstItem.getCurrentWord());
-        lyricsTime.setStartTick(countDownStart);
-        lyricsTime.setEndMillis(countDownStart + bufferTick);
-        lyricsTime.setNextLine(firstItem.getNextLine());
-        lyricsTime.setPreviousLine("");
-        lyricsTime.setLineNumber(-1);
-        lyricsTime.setLength(bufferTick);
-        lyricsTime.setWordIndex(0);
-        ArrayList<String> words = new ArrayList<>();
-        words.add("");
-        lyricsTime.setWords(words);
-        lyricsTime.setCountDownItem(true);
-
-        lyricsTimes.add(0, lyricsTime);
-    }
-
     public void parseSokLineArray(String file_path) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + file_path);
+
         lyricsTimes.clear();
         //	StringBuffer strBuffer = new StringBuffer();
 
@@ -184,6 +193,8 @@ public class LyricsTimingHelper {
                 line = line.replace("    ", " ");
                 //encodedString = URLEncoder.encode(line, "euc-kr");
                 //System.out.println("##### line str : " + line + " | len : " + line.length());
+                if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "##### line str : " + line + " | len : " + line.length());
+
                 if (line.length() != 0)
                     lyricLineString.add(line);
             }
@@ -195,6 +206,18 @@ public class LyricsTimingHelper {
     }
 
     static public void parseSokTimeArray(String word, String next_line, String pre_line, String cur_line, int line_num, int word_idx, int word_len, int start_time, int end_time, int bpm) {
+        //String info = "";
+        //info += "[" + word + "]";
+        //info += "[" + next_line + "]";
+        //info += "[" + pre_line + "]";
+        //info += "[" + cur_line + "]";
+        //info += "[" + line_num + "]";
+        //info += "[" + word_idx + "]";
+        //info += "[" + word_len + "]";
+        //info += "[" + start_time + "]";
+        //info += "[" + end_time + "]";
+        //info += "[" + bpm + "]";
+        //if (BuildConfig.DEBUG) Log.wtf("[parseSokTimeArray]", info);
         //	System.out.println("==== parseSokTimeArray word " + word + " next_line " + next_line + " pre_line " + pre_line + " cur_line " + cur_line + " line_num " + line_num);
         //	System.out.println("#### word_idx " + word_idx + " word_len " + word_len + " start_time " + start_time + " end_time " + end_time + " bpm " + bpm);
 
@@ -249,6 +272,7 @@ public class LyricsTimingHelper {
     }
 
     static public void parseSokCountTimeArray(int delay) {
+        if (BuildConfig.DEBUG) Log.wtf("[parseSokCountTimeArray]", "" + delay);
         LyricsTime firstItem = lyricsTimes.get(0);
 
         for (int i = 5; i > 0; i--) {
@@ -303,19 +327,19 @@ public class LyricsTimingHelper {
             //lyricsTimes.get(index).setShown(false);
             LyricsTime lyricsTime = lyricsTimes.get(index);
             lyricsTime.setShown(false);
+            String info = "";
+            info += "[" + lyricsTime.getWordIndex() + "]";
+            info += "[" + lyricsTime.isCountDownItem() + "]";
+            info += "[" + lyricsTime.isShown() + "]";
+            info += "[" + ((_PlayerActivity) this.activity).getPlayerJNI().GetTotalClocks() + "]";
+            info += "[" + lyricsTime.getStartTick() + "]";
+            info += "[" + lyricsTime.getEndMillis() + "]";
+            info += "[" + jumpTime + "]";
+            info += "[" + lyricsTime.getCurrentWord() + "]";
+            info += "[" + lyricsTime.getCurrentLine() + "]";
+            if (BuildConfig.DEBUG) Log.e("[LyricsTime]", info);
             if (jumpTime == 0 && lyricsTime.isCountDownItem()) {
                 jumpTime = lyricsTime.getStartTick() * microTimePerClock;
-                String info = "";
-                info += "[" + lyricsTime.getWordIndex() + "]";
-                info += "[" + lyricsTime.isCountDownItem() + "]";
-                info += "[" + lyricsTime.isShown() + "]";
-                info += "[" + ((_PlayerActivity) this.activity).getPlayerJNI().GetTotalClocks() + "]";
-                info += "[" + lyricsTime.getStartTick() + "]";
-                info += "[" + lyricsTime.getEndMillis() + "]";
-                info += "[" + jumpTime + "]";
-                info += "[" + lyricsTime.getCurrentWord() + "]";
-                info += "[" + lyricsTime.getCurrentLine() + "]";
-                if (BuildConfig.DEBUG) Log.e("LyricsTimingHelper", "[LyricsTime]" + info);
             }
         }
 

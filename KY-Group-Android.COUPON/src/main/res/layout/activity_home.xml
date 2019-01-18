@@ -72,6 +72,8 @@
                         android:id="@+id/reserve_anchor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/header_image"
+                        android:layout_alignBottom="@+id/header_image"
                         android:layout_centerInParent="true"
                         android:background="?android:attr/selectableItemBackground"
                         android:clickable="true"
@@ -83,13 +85,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
-                            android:layout_alignParentTop="true"
+                            android:layout_centerInParent="true"
                             android:layout_marginStart="11dp"
                             android:layout_marginTop="0dp"
                             android:layout_marginEnd="10dp"
                             android:background="@drawable/white_button_bg"
-                            android:clickable="true"
-                            android:focusable="true"
                             android:padding="3dp"
                             android:text="@string/reserve"
                             android:textColor="@android:color/white"
@@ -104,9 +104,7 @@
                             android:layout_centerInParent="true"
                             android:layout_gravity="start"
                             android:layout_toEndOf="@+id/reserve_label"
-                            android:clickable="true"
                             android:ellipsize="end"
-                            android:focusable="true"
                             android:maxLines="1"
                             android:text=""
                             android:textAlignment="textStart"
@@ -122,7 +120,7 @@
                     android:id="@+id/menu_anchor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="center"
                     android:layout_marginRight="8dp"
                     app:rv_centered="true"
                     app:rv_color="@android:color/black"
@@ -136,6 +134,7 @@
                         android:padding="8dp"
                         android:src="@drawable/ic_menu_more" />
                 </com.andexert.library.RippleView>
+
             </LinearLayout>
 
         </android.support.v7.widget.Toolbar>

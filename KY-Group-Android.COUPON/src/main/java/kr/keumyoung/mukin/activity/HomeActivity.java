@@ -298,7 +298,7 @@ public class HomeActivity extends _BaseActivity {
 
     public void showHeaderText(int text) {
         if (headerImage.getVisibility() == View.VISIBLE)
-            animationHelper.hideWithFadeAnim(headerImage);
+            animationHelper.hideWithFadeAnim(headerImage, true);
 
         headerText.setText(text);
         animationHelper.showHeaderText(headerText);
@@ -308,7 +308,7 @@ public class HomeActivity extends _BaseActivity {
         if (headerImage.getVisibility() != View.VISIBLE)
             animationHelper.showWithFadeAnim(headerImage, true, 500);
         if (headerText.getVisibility() == View.VISIBLE)
-            animationHelper.hideHeaderText(headerText);
+            animationHelper.hideHeaderText(headerText, true);
     }
 
     public void hideMenuIcon() {

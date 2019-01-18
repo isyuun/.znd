@@ -163,6 +163,10 @@ public class AnimationHelper {
     }
 
     public void hideHeaderText(View view) {
+        hideHeaderText(view, false);
+    }
+
+    public void hideHeaderText(View view, boolean keepLayout) {
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_text_left_out);
         view.startAnimation(animation);
         animation.setAnimationListener(new Animation.AnimationListener() {
@@ -173,7 +177,7 @@ public class AnimationHelper {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                view.setVisibility(View.GONE);
+                view.setVisibility(keepLayout ? View.INVISIBLE : View.GONE);
             }
 
             @Override

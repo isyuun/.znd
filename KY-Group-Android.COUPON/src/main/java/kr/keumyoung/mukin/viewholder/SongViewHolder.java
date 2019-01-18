@@ -89,19 +89,19 @@ public class SongViewHolder extends RecyclerView.ViewHolder {
             return super.onContextClick(e);
         }
 
-        //@Override
-        //public void onLongPress(MotionEvent e) {
-        //    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + e);
-        //    onSongClick(songAnchor);
-        //    super.onLongPress(e);
-        //}
-
         @Override
-        public boolean onDoubleTap(MotionEvent e) {
+        public void onLongPress(MotionEvent e) {
             if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + e);
             onSongClick(songAnchor);
-            return super.onDoubleTap(e);
+            super.onLongPress(e);
         }
+
+        //@Override
+        //public boolean onDoubleTap(MotionEvent e) {
+        //    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + e);
+        //    onSongClick(songAnchor);
+        //    return super.onDoubleTap(e);
+        //}
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {

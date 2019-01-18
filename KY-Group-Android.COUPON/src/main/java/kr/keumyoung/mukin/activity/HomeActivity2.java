@@ -1,5 +1,8 @@
 package kr.keumyoung.mukin.activity;
 
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.RippleDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -22,6 +25,9 @@ public class HomeActivity2 extends HomeActivity {
 
     @BindView(R.id.play)
     FrameLayout play;
+
+    @BindView(R.id.reserve_anchor)
+    View reserveAnchor;
 
     @BindView(R.id.reserve_text)
     TextView reserveText;
@@ -135,45 +141,76 @@ public class HomeActivity2 extends HomeActivity {
         }
     };
 
+    protected void forceRippleAnimation(View view) {
+        Drawable background = view.getBackground();
+
+        if (Build.VERSION.SDK_INT >= 21 && background instanceof RippleDrawable) {
+            final RippleDrawable rippleDrawable = (RippleDrawable) background;
+
+            rippleDrawable.setState(new int[]{android.R.attr.state_pressed, android.R.attr.state_enabled});
+
+            postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    rippleDrawable.setState(new int[]{});
+                }
+            }, 200);
+        }
+    }
+
     public void setReserveText() {
         String text = getApp().getReserves().toString();
         setTextViewMarquee(reserveText, true);
+
+        if (getApp().getReserves().size() > 0) forceRippleAnimation(reserveAnchor);
 
         if (getApp().getReserves().size() > 0) {
             reserveLabel.setVisibility(View.VISIBLE);
             animationHelper.showHeaderText(reserveText);
             reserveText.setText(text);
-            reserveText.setClickable(true);
-            reserveText.setOnClickListener(v -> {
-                openReserves();
-            });
-            reserveLabel.setClickable(true);
-            reserveLabel.setOnClickListener(v -> {
-                openReserves();
-            });
+            reserveAnchor.setClickable(true);
+            reserveAnchor.setOnClickListener(v -> openReserves());
             navIcon.setVisibility(View.GONE);
-            if (headerImage.getVisibility() == View.VISIBLE) {
-                animationHelper.hideWithFadeAnim(headerImage);
-            }
-            if (headerText.getVisibility() == View.VISIBLE) {
-                animationHelper.hideWithFadeAnim(headerText);
-            }
+            hideHeaders();
         } else {
             reserveLabel.setVisibility(View.INVISIBLE);
             reserveText.setVisibility(View.INVISIBLE);
             reserveText.setText("");
-            reserveText.setClickable(false);
-            reserveText.setOnClickListener(null);
-            reserveLabel.setClickable(false);
-            reserveLabel.setOnClickListener(null);
-            if (this.headerId > 0) {
-                navIcon.setVisibility(View.VISIBLE);
-                showHeaderText(this.headerId);
-            } else {
-                navIcon.setVisibility(View.INVISIBLE);
-                showHeaderImage();
-            }
+            reserveAnchor.setClickable(false);
+            reserveAnchor.setOnClickListener(null);
+            showHeaders();
         }
+    }
+
+    private void showHeaders() {
+        if (this.headerId > 0) {
+            navIcon.setVisibility(View.VISIBLE);
+            showHeaderText(this.headerId);
+        } else {
+            navIcon.setVisibility(View.INVISIBLE);
+            showHeaderImage();
+        }
+    }
+
+    private void hideHeaders() {
+        if (headerImage.getVisibility() == View.VISIBLE) {
+            animationHelper.hideWithFadeAnim(headerImage, true);
+        }
+        if (headerText.getVisibility() == View.VISIBLE) {
+            animationHelper.hideWithFadeAnim(headerText, true);
+        }
+    }
+
+    @Override
+    public void showMenuIcon() {
+        //isyyun:가뫈좀놔둔다...
+        //super.showMenuIcon();
+    }
+
+    @Override
+    public void hideMenuIcon() {
+        //isyyun:가뫈좀놔둔다...
+        //super.hideMenuIcon();
     }
 
     @Override
