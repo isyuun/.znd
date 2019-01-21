@@ -44,19 +44,19 @@ public class MainApplication2 extends MainApplication {
 
     public void delReserve() {
         if (reserves.size() > 0) {
-            reserves.remove(reserves.get(reserves.size() - 1));
+            reserves.remove(0);
         }
-    }
-
-    public void clearReserve() {
-        for (Song song : reserves) {
-            song.setReserve(false);
-        }
-        reserves.clear();
     }
 
     public Songs getReserves() {
         return reserves;
+    }
+
+    public Song getReserve() {
+        if (reserves.size() > 0) {
+            return (reserves.get(0));
+        }
+        return null;
     }
 
     public void onReserveSelected(Song song) {

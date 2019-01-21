@@ -101,7 +101,6 @@ public class TwoLineLyricsView extends LinearLayout {
             lyricTextBottom.setVisibility(VISIBLE);
             lyricTextBottom.setText(object.getNextLine());
 
-	//		new Handler().postDelayed(() -> processCountDown(0, object.getCountDelayTime()), object.getCountDelayTime());
 			processCountDown(noteCount, object.getCountDelayTime());
 			noteCount++;
         }
@@ -133,9 +132,6 @@ public class TwoLineLyricsView extends LinearLayout {
                     countTextView.setTextColor(Color.WHITE);
                     break;
             }
-
-         //   new Handler().postDelayed(() -> processCountDown(count + 1), LyricsTimingHelper.INITIAL_BUFFER / 4);
-		//	new Handler().postDelayed(() -> processCountDown(count + 1, delay_time), delay_time);
         }
     }
 
@@ -144,7 +140,9 @@ public class TwoLineLyricsView extends LinearLayout {
         lyricLayoutTop.removeAllViews();
         lyricTextBottom.setText("");
         lyricTextTop.setText("");
-//        lyricFrameBottom.setVisibility(INVISIBLE);
-//        lyricFrameTop.setVisibility(INVISIBLE);
+        isLyricsStarted = false;
+        currentLine = 0;
+        noteCount = 0;
+        countTextView.setVisibility(INVISIBLE);
     }
 }

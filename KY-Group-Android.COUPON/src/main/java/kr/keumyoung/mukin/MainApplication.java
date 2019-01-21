@@ -100,7 +100,8 @@ public class MainApplication extends _Application {
         Fabric.with(this, new Crashlytics());
 
         mainComponent = DaggerMainComponent.builder().build();
-        TypeFaceUtil.overrideFonts(this);
+        //isyuun:갤럭시S9+오류발생
+        //TypeFaceUtil.overrideFonts(this);
 
         // for facebook session
         FacebookSdk.sdkInitialize(getApplicationContext());

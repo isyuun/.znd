@@ -51,7 +51,7 @@ public class HomeActivity2 extends HomeActivity {
                 onSongSelected(getApp().getReserves().get(0));
             }
         });
-        setReserveText();
+        setReserves();
     }
 
     @Override
@@ -78,6 +78,7 @@ public class HomeActivity2 extends HomeActivity {
 
         getFavoriteSongs();
         getFreeSongs();
+        setReserves();
     }
 
     protected void onSongClick(SongView songView) {
@@ -98,12 +99,7 @@ public class HomeActivity2 extends HomeActivity {
     @Override
     public void onReserveSelected(Song song) {
         super.onReserveSelected(song);
-        setReserveText();
-        if (getApp().getReserves().size() > 0) {
-            play.setVisibility(View.VISIBLE);
-        } else {
-            play.setVisibility(View.INVISIBLE);
-        }
+        setReserves();
     }
 
     public void setTextViewMarquee(final TextView tv, boolean enable) {
@@ -158,7 +154,7 @@ public class HomeActivity2 extends HomeActivity {
         }
     }
 
-    public void setReserveText() {
+    public void setReserves() {
         String text = getApp().getReserves().toString();
         setTextViewMarquee(reserveText, true);
 
@@ -179,6 +175,11 @@ public class HomeActivity2 extends HomeActivity {
             reserveAnchor.setClickable(false);
             reserveAnchor.setOnClickListener(null);
             showHeaders();
+        }
+        if (getApp().getReserves().size() > 0) {
+            play.setVisibility(View.VISIBLE);
+        } else {
+            play.setVisibility(View.INVISIBLE);
         }
     }
 

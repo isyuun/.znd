@@ -167,7 +167,7 @@ public class LyricsTimingHelper {
     }
 
     public void parseSokLineArray(String file_path) {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + file_path);
+        //if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + ":" + file_path);
 
         lyricsTimes.clear();
         //	StringBuffer strBuffer = new StringBuffer();
@@ -193,7 +193,7 @@ public class LyricsTimingHelper {
                 line = line.replace("    ", " ");
                 //encodedString = URLEncoder.encode(line, "euc-kr");
                 //System.out.println("##### line str : " + line + " | len : " + line.length());
-                if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "##### line str : " + line + " | len : " + line.length());
+                //if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, "##### line str : " + line + " | len : " + line.length());
 
                 if (line.length() != 0)
                     lyricLineString.add(line);
@@ -272,7 +272,7 @@ public class LyricsTimingHelper {
     }
 
     static public void parseSokCountTimeArray(int delay) {
-        if (BuildConfig.DEBUG) Log.wtf("[parseSokCountTimeArray]", "" + delay);
+        //if (BuildConfig.DEBUG) Log.wtf("[parseSokCountTimeArray]", "" + delay);
         LyricsTime firstItem = lyricsTimes.get(0);
 
         for (int i = 5; i > 0; i--) {
@@ -327,17 +327,17 @@ public class LyricsTimingHelper {
             //lyricsTimes.get(index).setShown(false);
             LyricsTime lyricsTime = lyricsTimes.get(index);
             lyricsTime.setShown(false);
-            String info = "";
-            info += "[" + lyricsTime.getWordIndex() + "]";
-            info += "[" + lyricsTime.isCountDownItem() + "]";
-            info += "[" + lyricsTime.isShown() + "]";
-            info += "[" + ((_PlayerActivity) this.activity).getPlayerJNI().GetTotalClocks() + "]";
-            info += "[" + lyricsTime.getStartTick() + "]";
-            info += "[" + lyricsTime.getEndMillis() + "]";
-            info += "[" + jumpTime + "]";
-            info += "[" + lyricsTime.getCurrentWord() + "]";
-            info += "[" + lyricsTime.getCurrentLine() + "]";
-            if (BuildConfig.DEBUG) Log.wtf("[LyricsTime]", info);
+            //String info = "";
+            //info += "[" + lyricsTime.getWordIndex() + "]";
+            //info += "[" + lyricsTime.isCountDownItem() + "]";
+            //info += "[" + lyricsTime.isShown() + "]";
+            //info += "[" + ((_PlayerActivity) this.activity).getPlayerJNI().GetTotalClocks() + "]";
+            //info += "[" + lyricsTime.getStartTick() + "]";
+            //info += "[" + lyricsTime.getEndMillis() + "]";
+            //info += "[" + jumpTime + "]";
+            //info += "[" + lyricsTime.getCurrentWord() + "]";
+            //info += "[" + lyricsTime.getCurrentLine() + "]";
+            //if (BuildConfig.DEBUG) Log.wtf("LyricsTimingHelper", "[LyricsTime]" + info);
             if (jumpTime == 0 && lyricsTime.isCountDownItem()) {
                 jumpTime = lyricsTime.getStartTick() * microTimePerClock;
             }
@@ -364,7 +364,6 @@ public class LyricsTimingHelper {
 
     private void hideJump() {
         if (this.activity instanceof _PlayerActivity) {
-            //isyuun:머누
             ((_PlayerActivity) this.activity).hideJump();
         }
     }

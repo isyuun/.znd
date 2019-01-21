@@ -993,8 +993,8 @@ public class PlayerActivity extends _BaseActivity {
         try {
             String midPath = ImageUtils.BASE_PATH + Integer.parseInt(song.getIdentifier()) + ".mid";
             File midiFile = new File(midPath);
-            MidiFile midi = new MidiFile(midiFile);
-            parsMidi(midi);
+            //MidiFile midi = new MidiFile(midiFile);
+            //parsMidi(midi);
             midiFile.delete();
         } catch (Exception e) {
             e.printStackTrace();
@@ -1008,58 +1008,58 @@ public class PlayerActivity extends _BaseActivity {
         }
     }
 
-    // This class will print any event it receives to the console
-    public class EventPrinter implements MidiEventListener {
-        private String mLabel;
-
-        public EventPrinter(String label) {
-            mLabel = label;
-        }
-
-        @Override
-        public void onStart(boolean fromBeginning) {
-            if (fromBeginning) {
-                //System.out.println(mLabel + " Started!");
-                if (BuildConfig.DEBUG) Log.wtf("[MIDI]", mLabel + " Started!");
-            } else {
-                //System.out.println(mLabel + " resumed");
-                if (BuildConfig.DEBUG) Log.wtf("[MIDI]", mLabel + " resumed");
-            }
-        }
-
-        @Override
-        public void onEvent(MidiEvent event, long ms) {
-            //System.out.println(mLabel + " received event: " + event);
-            if (BuildConfig.DEBUG) Log.wtf("[MIDI]", mLabel + "[" + ms + "]" + " received event: " + event);
-
-        }
-
-        @Override
-        public void onStop(boolean finished) {
-            if (finished) {
-                //System.out.println(mLabel + " Finished!");
-                if (BuildConfig.DEBUG) Log.wtf("[MIDI]", mLabel + " Finished!");
-            } else {
-                //System.out.println(mLabel + " paused");
-                if (BuildConfig.DEBUG) Log.wtf("[MIDI]", mLabel + " paused");
-            }
-        }
-    }
-
-    private void parsMidi(MidiFile midi) {
-        // Create a new MidiProcessor:
-        MidiProcessor processor = new MidiProcessor(midi);
-
-        //// Register for the events you're interested in:
-        //EventPrinter ep = new EventPrinter("Individual Listener");
-        //processor.registerEventListener(ep, Tempo.class);
-        //processor.registerEventListener(ep, NoteOn.class);
-
-        // or listen for all events:
-        EventPrinter ep2 = new EventPrinter("[Listener For All]");
-        processor.registerEventListener(ep2, MidiEvent.class);
-
-        // Start the processor:
-        //processor.start();
-    }
+    //// This class will print any event it receives to the console
+    //public class EventPrinter implements MidiEventListener {
+    //    private String mLabel;
+    //
+    //    public EventPrinter(String label) {
+    //        mLabel = label;
+    //    }
+    //
+    //    @Override
+    //    public void onStart(boolean fromBeginning) {
+    //        if (fromBeginning) {
+    //            //System.out.println(mLabel + " Started!");
+    //            if (BuildConfig.DEBUG) Log.wtf("[MIDI]", mLabel + " Started!");
+    //        } else {
+    //            //System.out.println(mLabel + " resumed");
+    //            if (BuildConfig.DEBUG) Log.wtf("[MIDI]", mLabel + " resumed");
+    //        }
+    //    }
+    //
+    //    @Override
+    //    public void onEvent(MidiEvent event, long ms) {
+    //        //System.out.println(mLabel + " received event: " + event);
+    //        if (BuildConfig.DEBUG) Log.wtf("[MIDI]", mLabel + "[" + ms + "]" + " received event: " + event);
+    //
+    //    }
+    //
+    //    @Override
+    //    public void onStop(boolean finished) {
+    //        if (finished) {
+    //            //System.out.println(mLabel + " Finished!");
+    //            if (BuildConfig.DEBUG) Log.wtf("[MIDI]", mLabel + " Finished!");
+    //        } else {
+    //            //System.out.println(mLabel + " paused");
+    //            if (BuildConfig.DEBUG) Log.wtf("[MIDI]", mLabel + " paused");
+    //        }
+    //    }
+    //}
+    //
+    //private void parsMidi(MidiFile midi) {
+    //    // Create a new MidiProcessor:
+    //    MidiProcessor processor = new MidiProcessor(midi);
+    //
+    //    //// Register for the events you're interested in:
+    //    //EventPrinter ep = new EventPrinter("Individual Listener");
+    //    //processor.registerEventListener(ep, Tempo.class);
+    //    //processor.registerEventListener(ep, NoteOn.class);
+    //
+    //    // or listen for all events:
+    //    EventPrinter ep2 = new EventPrinter("[Listener For All]");
+    //    processor.registerEventListener(ep2, MidiEvent.class);
+    //
+    //    // Start the processor:
+    //    processor.start();
+    //}
 }
