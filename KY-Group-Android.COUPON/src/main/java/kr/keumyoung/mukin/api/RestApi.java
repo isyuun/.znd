@@ -6,6 +6,7 @@ import kr.keumyoung.mukin.data.request.LoginRequest;
 import kr.keumyoung.mukin.data.request.RegisterUserCustomRequest;
 import kr.keumyoung.mukin.data.request.RegisterUserRequest;
 import kr.keumyoung.mukin.data.request.SongHitRequest;
+import kr.keumyoung.mukin.data.request.SongHitRequest2;
 import kr.keumyoung.mukin.data.request.UpdateUserCustomRequest;
 import kr.keumyoung.mukin.data.request.UserSongRequest;
 import okhttp3.MultipartBody;
@@ -147,7 +148,7 @@ public interface RestApi {
     @POST("kymedia/_table/songhits")
     Call<ResponseBody> updateSongHits(
             @Header("X-DreamFactory-Session-Token") String sessionToken,
-            @Body RequestModel<SongHitRequest> request
+            @Body RequestModel<SongHitRequest2> request
     );
 
     @POST("kymedia/_table/usersongs")

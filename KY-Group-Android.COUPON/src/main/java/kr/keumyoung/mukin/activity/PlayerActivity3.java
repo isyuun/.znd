@@ -11,10 +11,11 @@ import butterknife.BindView;
 import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.data.model.Song;
+import kr.keumyoung.mukin.elements.ControlPanelPlay;
 import kr.keumyoung.mukin.elements.OperationPopup;
 import kr.keumyoung.mukin.util.Constants;
 
-import static kr.keumyoung.mukin.elements.OperationPopup.PlayerOperation.RESTART;
+import static kr.keumyoung.mukin.elements.OperationPopup.PlayerOperation.NEXT;
 
 public class PlayerActivity3 extends PlayerActivity2 {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
@@ -30,7 +31,7 @@ public class PlayerActivity3 extends PlayerActivity2 {
 
     private void next() {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
-        onControlOperation(OperationPopup.PlayerOperation.RESTART);
+        onControlOperation(NEXT);
     }
 
     @Override
@@ -45,10 +46,9 @@ public class PlayerActivity3 extends PlayerActivity2 {
                 Bundle bundle = intent.getBundleExtra(Constants.DATA);
                 if (bundle != null) bundle.putSerializable(Constants.SONG, song);
             }
-            getApp().delReserve();
         }
         super.initiatePlayer();
-        if (getApp().getReserves().size() > 0) {
+        if (getApp().getReserves().size() > 1) {
             next.setVisibility(View.VISIBLE);
         } else {
             next.setVisibility(View.INVISIBLE);
@@ -56,19 +56,16 @@ public class PlayerActivity3 extends PlayerActivity2 {
     }
 
     @Override
-    protected void prepareMediaPlayer() {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
-        super.prepareMediaPlayer();
-    }
-
-    @Override
     public void onControlOperation(OperationPopup.PlayerOperation playerOperation) {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + "[" + (playerOperation == RESTART) + "]" + playerOperation);
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + "[" + (playerOperation == NEXT) + "]" + playerOperation);
+        if (playerOperation == NEXT) getApp().delReserve();
         super.onControlOperation(playerOperation);
     }
 
     @Override
-    public void onViewClicked(View view) {
-        super.onViewClicked(view);
+    protected void onPause() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
+        super.onPause();
+        getApp().delReserve();
     }
 }

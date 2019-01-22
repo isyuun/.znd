@@ -22,7 +22,7 @@ public class OperationPopup extends ControlsPopup {
     LinearLayout parentLayout;
 
     public enum PlayerOperation {
-        RESUME, FINISH, RESTART
+        RESUME, FINISH, RESTART, NEXT
     }
 
     public OperationPopup(PlayerActivity activity) {

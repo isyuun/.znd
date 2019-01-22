@@ -96,18 +96,11 @@ public class SongViewHolder extends RecyclerView.ViewHolder {
             super.onLongPress(e);
         }
 
-        //@Override
-        //public boolean onDoubleTap(MotionEvent e) {
-        //    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + e);
-        //    onSongClick(songAnchor);
-        //    return super.onDoubleTap(e);
-        //}
-
         @Override
-        public boolean onSingleTapConfirmed(MotionEvent e) {
+        public boolean onSingleTapUp(MotionEvent e) {
             if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + e);
             onReserveClick(songAnchor);
-            return super.onSingleTapConfirmed(e);
+            return super.onSingleTapUp(e);
         }
     }
 
@@ -120,11 +113,10 @@ public class SongViewHolder extends RecyclerView.ViewHolder {
         MainApplication.getInstance().getMainComponent().inject(this);
         ButterKnife.bind(this, itemView);
         //songAnchor.setOnClickListener(v -> songAnchor.setOnRippleCompleteListener(rippleView -> onSongClick(v.findViewById(R.id.song_item))));
-        songAnchor.setOnTouchListener((v, event) -> gestureDetector.onTouchEvent(event));
-        favoriteButton.setOnClickListener(v -> {
-            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "favoriteButton.onClick(...)" + v);
-            onFavoriteClick(v);
-        });
+        songAnchor.setClickable(true);
+        //songAnchor.setOnTouchListener((v, event) -> gestureDetector.onTouchEvent(event));
+        songAnchor.setOnClickListener(v -> onReserveClick(v));
+        favoriteButton.setOnClickListener(v -> onFavoriteClick(v));
         if (viewType == SongAdapter.DATA) {
             songAnchor.setVisibility(View.VISIBLE);
             loading.setVisibility(View.GONE);

@@ -25,7 +25,7 @@ import kr.keumyoung.mukin.helper.AnimationHelper;
 public class ControlPanelPlay extends LinearLayout {
 
     public enum PlayButtonState {
-        INIT, PLAY, PAUSE, FINISHED
+        INIT, PLAY, PAUSE, RESUME, FINISHED
     }
 
     @BindView(R.id.play_bg)
@@ -83,6 +83,7 @@ public class ControlPanelPlay extends LinearLayout {
                 playBg.clearAnimation();
                 break;
             case PLAY:
+            case RESUME:
                 playIcon.setImageResource(R.drawable.pause_icon);
                 playBg.setImageResource(R.drawable.play_stroke_02_icon);
                 animationHelper.rotateInfinite(playBg);
@@ -104,9 +105,11 @@ public class ControlPanelPlay extends LinearLayout {
     private PlayButtonState getNextState() {
         switch (playButtonState) {
             case INIT:
-            case PAUSE:
                 return PlayButtonState.PLAY;
+            case PAUSE:
+                return PlayButtonState.RESUME;
             case PLAY:
+            case RESUME:
                 return PlayButtonState.PAUSE;
             case FINISHED:
             default:

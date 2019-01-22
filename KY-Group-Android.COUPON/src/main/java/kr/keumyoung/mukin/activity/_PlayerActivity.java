@@ -71,7 +71,6 @@ public class _PlayerActivity extends PlayerActivity3 {
         super.onControlOperation(playerOperation);
     }
 
-    @Subscribe
     @Override
     public void updateViewWithState(ControlPanelPlay.PlayButtonState buttonState) {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":buttonState:" + buttonState);

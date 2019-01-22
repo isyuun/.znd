@@ -545,8 +545,13 @@ public class PlayerActivity extends _BaseActivity {
                     //dsjung 종료시 헤드셋이 아니거나 헤드셋을 해제한 경우가 있는경우에는 FINISH 안띄움
                     if (songFinishWithMic)
                         onControlOperation(OperationPopup.PlayerOperation.FINISH);
-                    else
-                        onControlOperation(OperationPopup.PlayerOperation.RESTART);
+                    else {
+                        if (getApp().getReserves().size() > 0) {
+                            onControlOperation(OperationPopup.PlayerOperation.NEXT);
+                        } else {
+                            onControlOperation(OperationPopup.PlayerOperation.RESTART);
+                        }
+                    }
                 }
             }
 
@@ -573,6 +578,7 @@ public class PlayerActivity extends _BaseActivity {
                 showOperationPopup();
                 break;
             case PLAY:
+            case RESUME:
                 onClickPlayButton();
                 if (initStateFrame.getVisibility() == View.VISIBLE)
                     animationHelper.hideWithFadeAnim(initStateFrame);
@@ -679,6 +685,7 @@ public class PlayerActivity extends _BaseActivity {
 
         switch (playerOperation) {
             case RESTART:
+            case NEXT:
                 if (audioJNI != null) audioJNI.FinalizeAudio();
                 if (playerJNI != null) playerJNI.Stop();
                 playerJNI = null;

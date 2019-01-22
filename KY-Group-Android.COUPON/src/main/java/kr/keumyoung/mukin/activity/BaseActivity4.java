@@ -11,6 +11,7 @@ import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.api.RequestModel;
 import kr.keumyoung.mukin.data.model.Song;
 import kr.keumyoung.mukin.data.request.SongHitRequest;
+import kr.keumyoung.mukin.data.request.SongHitRequest2;
 import kr.keumyoung.mukin.interfaces.SessionRefreshListener;
 import kr.keumyoung.mukin.util.CommonHelper;
 import kr.keumyoung.mukin.util.Constants;
@@ -40,7 +41,12 @@ public class BaseActivity4 extends BaseActivity3 {
         showProgress();
         setProgressMessage();
 
-        RequestModel<SongHitRequest> model = new RequestModel<>(new SongHitRequest(preferenceHelper.getString(PreferenceKeys.USER_ID), song.getSongId()));
+        updateSongHits(song, 0);
+    }
+
+    public void updateSongHits(Song song, int playtime) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + song + ":" + playtime);
+        RequestModel<SongHitRequest2> model = new RequestModel<>(new SongHitRequest2(preferenceHelper.getString(PreferenceKeys.USER_ID), song.getSongId(), playtime));
         restApi.updateSongHits(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), model)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override

@@ -6,9 +6,14 @@ import android.util.Log;
 import com.squareup.otto.Subscribe;
 
 import kr.keumyoung.mukin.R;
+import kr.keumyoung.mukin.data.bus.ControlPanelItemAction;
+import kr.keumyoung.mukin.data.bus.EffectPopupAction;
+import kr.keumyoung.mukin.data.bus.ModePopupAction;
 import kr.keumyoung.mukin.data.model.SongView;
+import kr.keumyoung.mukin.elements.ControlPanelPlay;
+import kr.keumyoung.mukin.elements.OperationPopup;
 
-public final class _HomeActivity extends HomeActivity2 {
+public final class _HomeActivity extends HomeActivity3 {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
     private Object busEventListener;
@@ -30,6 +35,31 @@ public final class _HomeActivity extends HomeActivity2 {
                     onReserveClick(songView);
                 }
             }
+
+            @Subscribe
+            public void post(ControlPanelPlay.PlayButtonState buttonState) {
+                updateViewWithState(buttonState);
+            }
+
+            @Subscribe
+            public void post(OperationPopup.PlayerOperation playerOperation) {
+                onControlOperation(playerOperation);
+            }
+
+            @Subscribe
+            public void post(ControlPanelItemAction action) {
+                updateViewWithPanelOptions(action);
+            }
+
+            @Subscribe
+            public void post(ModePopupAction action) {
+                onSelectionModeItem(action);
+            }
+
+            @Subscribe
+            public void post(EffectPopupAction action) {
+                onSelectionEffectItem(action);
+            }
         };
 
     }
@@ -49,5 +79,4 @@ public final class _HomeActivity extends HomeActivity2 {
         //bus.unregister(this);
         bus.unregister(busEventListener);
     }
-
 }

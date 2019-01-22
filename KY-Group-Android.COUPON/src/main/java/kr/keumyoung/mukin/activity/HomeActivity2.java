@@ -46,12 +46,15 @@ public class HomeActivity2 extends HomeActivity {
         //});
         play.setVisibility(View.INVISIBLE);
         play.setOnClickListener(v -> {
-            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "play.onClick()");
-            if (getApp().getReserves().size() > 0) {
-                onSongSelected(getApp().getReserves().get(0));
-            }
         });
         setReserves();
+    }
+
+    protected void play() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
+        if (getApp().getReserves().size() > 0) {
+            onSongSelected(getApp().getReserves().get(0));
+        }
     }
 
     @Override
@@ -176,11 +179,11 @@ public class HomeActivity2 extends HomeActivity {
             reserveAnchor.setOnClickListener(null);
             showHeaders();
         }
-        if (getApp().getReserves().size() > 0) {
-            play.setVisibility(View.VISIBLE);
-        } else {
-            play.setVisibility(View.INVISIBLE);
-        }
+        //if (getApp().getReserves().size() > 0) {
+        //    play.setVisibility(View.VISIBLE);
+        //} else {
+        //    play.setVisibility(View.INVISIBLE);
+        //}
     }
 
     private void showHeaders() {
