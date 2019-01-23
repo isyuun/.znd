@@ -17,6 +17,8 @@ import kr.keumyoung.bubbleseekbar.BubbleSeekBar;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.activity.PlayerActivity;
+import kr.keumyoung.mukin.activity._BaseActivity;
+import kr.keumyoung.mukin.activity._PlayerActivity;
 import kr.keumyoung.mukin.util.PreferenceKeys;
 
 /**
@@ -30,7 +32,7 @@ public class PitchPopup extends ControlsPopup implements BubbleSeekBar.OnProgres
     @Inject
     Bus bus;
 
-    PlayerActivity instance;
+    _BaseActivity instance;
     @BindView(R.id.left_arrow_button)
     ImageView leftArrowButton;
     @BindView(R.id.right_arrow_button)
@@ -40,7 +42,7 @@ public class PitchPopup extends ControlsPopup implements BubbleSeekBar.OnProgres
     @BindView(R.id.right_arrow_button_ripple)
     RippleView rightArrowButtonRipple;
 
-    public PitchPopup(PlayerActivity activity) {
+    public PitchPopup(_BaseActivity activity) {
         super(activity);
         instance = activity;
 
@@ -88,8 +90,10 @@ public class PitchPopup extends ControlsPopup implements BubbleSeekBar.OnProgres
     public void getProgressOnFinally(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat, boolean fromUser) {
         if (fromUser) {
             int paramValue = progress;
-            if (instance != null && instance.getPlayerJNI() != null) {
-                instance.getPlayerJNI().SetKeyControl(paramValue);
+            if (instance != null) {
+                if (instance instanceof _PlayerActivity && ((_PlayerActivity) instance).getPlayerJNI() != null) {
+                    ((_PlayerActivity) instance).getPlayerJNI().SetKeyControl(paramValue);
+                }
                 instance.getPreferenceHelper().saveInt(PreferenceKeys.PITCH_VALUE, paramValue);
             }
         }
@@ -133,8 +137,6 @@ public class PitchPopup extends ControlsPopup implements BubbleSeekBar.OnProgres
         }
     }
 }
-
-
 
 /*
 public class PitchPopup extends TempoPopup {

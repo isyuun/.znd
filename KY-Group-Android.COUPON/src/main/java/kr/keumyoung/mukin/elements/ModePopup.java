@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.activity.PlayerActivity;
+import kr.keumyoung.mukin.activity._BaseActivity;
 import kr.keumyoung.mukin.data.bus.ModePopupAction;
 
 /**
@@ -39,7 +40,7 @@ public class ModePopup extends ControlsPopup {
 
     Map<ModeOptions, ModePopupItem> popupItemMap;
 
-    public ModePopup(PlayerActivity activity) {
+    public ModePopup(_BaseActivity activity) {
         super(activity);
         MainApplication.getInstance().getMainComponent().inject(this);
         bus.register(this);

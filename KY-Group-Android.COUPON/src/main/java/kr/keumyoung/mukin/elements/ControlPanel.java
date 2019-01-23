@@ -7,9 +7,6 @@ import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import kr.keumyoung.mukin.MainApplication;
-import kr.keumyoung.mukin.R;
-import kr.keumyoung.mukin.data.bus.ControlPanelItemAction;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
@@ -18,10 +15,13 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import static kr.keumyoung.mukin.elements.ControlPanel.ControlPanelOption.FAVORITE;
+import kr.keumyoung.mukin.MainApplication;
+import kr.keumyoung.mukin.R;
+import kr.keumyoung.mukin.activity._HomeActivity;
+import kr.keumyoung.mukin.data.bus.ControlPanelItemAction;
 
 /**
- *  on 15/01/18.
+ * on 15/01/18.
  */
 
 public class ControlPanel extends LinearLayout {
@@ -69,7 +69,7 @@ public class ControlPanel extends LinearLayout {
 
         removeAllViews();
 
-        createOptionForItem(FAVORITE);
+        createOptionForItem(ControlPanelOption.FAVORITE);
         createOptionForItem(ControlPanelOption.TEMPO);
         createPlayButton();
         createOptionForItem(ControlPanelOption.PITCH);
@@ -86,7 +86,7 @@ public class ControlPanel extends LinearLayout {
         for (ControlPanelOption option : optionMap.keySet()) {
 
             //dsjung for disable status
-            if(optionMap.get(option).getSelectionState().equals(ControlPanelItem.SelectionState.DISABLE))
+            if (optionMap.get(option).getSelectionState().equals(ControlPanelItem.SelectionState.DISABLE))
                 return;
 
             if (option.equals(action.getPanelOption()))
@@ -121,6 +121,8 @@ public class ControlPanel extends LinearLayout {
         optionMap.put(option, panelItem);
 
         addView(panelItem);
+
+        //if (context instanceof _HomeActivity) panelItem.setVisibility(INVISIBLE);
     }
 
     public ControlPanelPlay.PlayButtonState getPlayState() {
@@ -134,7 +136,7 @@ public class ControlPanel extends LinearLayout {
     public void deselectAllPanels() {
         for (ControlPanelOption option : optionMap.keySet()) {
             //dsjung test
-            if(optionMap.get(option).getSelectionState().equals(ControlPanelItem.SelectionState.DISABLE))
+            if (optionMap.get(option).getSelectionState().equals(ControlPanelItem.SelectionState.DISABLE))
                 continue;
             optionMap.get(option).updateSelectionWithState(ControlPanelItem.SelectionState.NOT_SELECTED);
         }
@@ -148,7 +150,7 @@ public class ControlPanel extends LinearLayout {
     public void updateEffectButtonWithState(ControlPanelItem.SelectionState buttonState) {
 
         for (ControlPanelOption option : optionMap.keySet()) {
-            if (option.equals(FAVORITE))
+            if (option.equals(ControlPanelOption.FAVORITE))
                 optionMap.get(option).updateSelectionWithState(buttonState);
         }
     }
@@ -159,7 +161,7 @@ public class ControlPanel extends LinearLayout {
     public void updateFavoriteButtonWithState(ControlPanelItem.SelectionState buttonState) {
 
         for (ControlPanelOption option : optionMap.keySet()) {
-            if (option.equals(FAVORITE)) {
+            if (option.equals(ControlPanelOption.FAVORITE)) {
                 optionMap.get(option).updateSelectionWithState(buttonState);
             }
         }
@@ -168,7 +170,7 @@ public class ControlPanel extends LinearLayout {
     public void updateFavoriteButtonWithIcon(int resId) {
 
         for (ControlPanelOption option : optionMap.keySet()) {
-            if (option.equals(FAVORITE)) {
+            if (option.equals(ControlPanelOption.FAVORITE)) {
                 optionMap.get(option).setImageResource(resId);
             }
         }

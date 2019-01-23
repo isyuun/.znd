@@ -1,11 +1,7 @@
 package kr.keumyoung.mukin.activity;
 
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.RippleDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -16,14 +12,13 @@ import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.data.model.Song;
 import kr.keumyoung.mukin.data.model.SongView;
-import kr.keumyoung.mukin.fragment.HomeFragment;
-import kr.keumyoung.mukin.fragment.ReservesFragment;
 import kr.keumyoung.mukin.util.PreferenceKeys;
 
 public class HomeActivity2 extends HomeActivity {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
     @BindView(R.id.play)
+    @Deprecated
     FrameLayout play;
 
     @BindView(R.id.reserve_anchor)
@@ -38,12 +33,6 @@ public class HomeActivity2 extends HomeActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //play.setOnTouchListener(new View.OnTouchListener() {
-        //    @Override
-        //    public boolean onTouch(View v, MotionEvent event) {
-        //        return true;
-        //    }
-        //});
         play.setVisibility(View.INVISIBLE);
         play.setOnClickListener(v -> {
         });
@@ -105,58 +94,6 @@ public class HomeActivity2 extends HomeActivity {
         setReserves();
     }
 
-    public void setTextViewMarquee(final TextView tv, boolean enable) {
-        if (tv == null) {
-            return;
-        }
-        // set the ellipsize mode to MARQUEE and make it scroll only once
-        // tv.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-        // tv.setMarqueeRepeatLimit(1);
-        // in order to start strolling, it has to be focusable and focused
-        // tv.setFocusable(true);
-        // tv.setFocusableInTouchMode(true);
-        // tv.requestFocus();
-        if (enable) {
-            tv.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-        } else {
-            tv.setEllipsize(TextUtils.TruncateAt.END);
-        }
-        tv.setSingleLine(true);
-        tv.setSelected(enable);
-    }
-
-    ReservesFragment reservesFragment;
-
-    private void openReserves() {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
-        post(openReserves);
-    }
-
-    private Runnable openReserves = new Runnable() {
-        @Override
-        public void run() {
-            if (reservesFragment == null) reservesFragment = new ReservesFragment();
-            if (getCurrentFragment() instanceof HomeFragment) ((HomeFragment) getCurrentFragment()).replaceListFragment(reservesFragment);
-        }
-    };
-
-    protected void forceRippleAnimation(View view) {
-        Drawable background = view.getBackground();
-
-        if (Build.VERSION.SDK_INT >= 21 && background instanceof RippleDrawable) {
-            final RippleDrawable rippleDrawable = (RippleDrawable) background;
-
-            rippleDrawable.setState(new int[]{android.R.attr.state_pressed, android.R.attr.state_enabled});
-
-            postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    rippleDrawable.setState(new int[]{});
-                }
-            }, 200);
-        }
-    }
-
     public void setReserves() {
         String text = getApp().getReserves().toString();
         setTextViewMarquee(reserveText, true);
@@ -169,7 +106,6 @@ public class HomeActivity2 extends HomeActivity {
             reserveText.setText(text);
             reserveAnchor.setClickable(true);
             reserveAnchor.setOnClickListener(v -> openReserves());
-            navIcon.setVisibility(View.GONE);
             hideHeaders();
         } else {
             reserveLabel.setVisibility(View.INVISIBLE);
@@ -179,11 +115,6 @@ public class HomeActivity2 extends HomeActivity {
             reserveAnchor.setOnClickListener(null);
             showHeaders();
         }
-        //if (getApp().getReserves().size() > 0) {
-        //    play.setVisibility(View.VISIBLE);
-        //} else {
-        //    play.setVisibility(View.INVISIBLE);
-        //}
     }
 
     private void showHeaders() {
@@ -197,6 +128,7 @@ public class HomeActivity2 extends HomeActivity {
     }
 
     private void hideHeaders() {
+        navIcon.setVisibility(View.GONE);
         if (headerImage.getVisibility() == View.VISIBLE) {
             animationHelper.hideWithFadeAnim(headerImage, true);
         }

@@ -15,8 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
-import kr.keumyoung.mukin.activity.PlayerActivity;
-import kr.keumyoung.mukin.activity.PlayerActivity;
+import kr.keumyoung.mukin.activity._BaseActivity;
 import kr.keumyoung.mukin.helper.AnimationHelper;
 
 /**
@@ -25,14 +24,14 @@ import kr.keumyoung.mukin.helper.AnimationHelper;
 
 public abstract class ControlsPopup {
 
-    PlayerActivity activity;
+    _BaseActivity activity;
     View view;
     ViewHolder viewHolder;
 
     @Inject
     AnimationHelper animationHelper;
 
-    public ControlsPopup(PlayerActivity activity) {
+    public ControlsPopup(_BaseActivity activity) {
         this.activity = activity;
         view = LayoutInflater.from(activity).inflate(R.layout.control_popup, null, false);
         viewHolder = new ViewHolder(view, this);

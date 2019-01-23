@@ -9,9 +9,7 @@ import android.widget.FrameLayout;
 import butterknife.BindView;
 import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.R;
-import kr.keumyoung.mukin.elements.OperationPopup;
-
-import static kr.keumyoung.mukin.elements.OperationPopup.PlayerOperation.FINISH;
+import kr.keumyoung.mukin.elements.ControlPanelPlay;
 
 public class PlayerActivity2 extends PlayerActivity {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
@@ -20,52 +18,34 @@ public class PlayerActivity2 extends PlayerActivity {
     FrameLayout jump;
 
     @Override
-    protected void cancelRecording() {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
-        if (!isPlaying) {
-            release();
-            return;
-        }
-        super.cancelRecording();
-    }
-
-    private void release() {
-        try {
-            if (service != null) service.shutdown();
-            closePlayer = true;
-            preferenceHelper.clearSavedSettings();
-
-            if (playerJNI != null) {
-                playerJNI.FinalizePlayer();
-                playerJNI = null;
-            }
-
-            if (audioJNI != null) {
-                //dsjung 종료시 플레이중에 Finalize 하면 오류
-                if (isPlayed) audioJNI.StopAudio();
-                audioJNI.FinalizeAudio();
-                audioJNI = null;
-            }
-
-            lyricsTimingHelper.stop();
-
-            navigationHelper.finish(this);
-            //navigationHelper.navigate(PlayerActivity.this, HomeActivity.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //jump = findViewById(R.id.jump);
+        jump.setVisibility(View.INVISIBLE);
         jump.setOnClickListener(v -> {
             if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
             if (lyricsTimingHelper != null && lyricsTimingHelper.isPlaying()) {
                 lyricsTimingHelper.jump();
             }
         });
+    }
+
+    @Override
+    public void updatePlayerState(ControlPanelPlay.PlayButtonState buttonState) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + buttonState);
+        super.updatePlayerState(buttonState);
+        switch (buttonState) {
+            case INIT:
+                hideJump();
+                break;
+            case PLAY:
+                break;
+            case PAUSE:
+                break;
+            case RESUME:
+                break;
+            case FINISHED:
+                break;
+        }
     }
 
     public void showJump() {

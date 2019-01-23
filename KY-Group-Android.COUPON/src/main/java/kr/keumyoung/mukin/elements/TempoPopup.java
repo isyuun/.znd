@@ -17,8 +17,8 @@ import butterknife.OnClick;
 import kr.keumyoung.bubbleseekbar.BubbleSeekBar;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
-import kr.keumyoung.mukin.activity.PlayerActivity;
-import kr.keumyoung.mukin.activity.PlayerActivity;
+import kr.keumyoung.mukin.activity._BaseActivity;
+import kr.keumyoung.mukin.activity._PlayerActivity;
 import kr.keumyoung.mukin.util.PreferenceKeys;
 
 /**
@@ -35,7 +35,7 @@ public class TempoPopup extends ControlsPopup implements BubbleSeekBar.OnProgres
     @Inject
     Bus bus;
 
-    PlayerActivity instance;
+    _BaseActivity instance;
     @BindView(R.id.left_arrow_button)
     ImageView leftArrowButton;
     @BindView(R.id.seekbar_min_value)
@@ -49,7 +49,7 @@ public class TempoPopup extends ControlsPopup implements BubbleSeekBar.OnProgres
     @BindView(R.id.right_arrow_button_ripple)
     RippleView rightArrowButtonRipple;
 
-    public TempoPopup(PlayerActivity activity) {
+    public TempoPopup(_BaseActivity activity) {
         super(activity);
         instance = activity;
 
@@ -77,7 +77,8 @@ public class TempoPopup extends ControlsPopup implements BubbleSeekBar.OnProgres
     }
 
     public void updatePresetValue(int value) {
-        seekbar.setProgress(value);
+        int progress = value + getMiddleValue();
+        seekbar.setProgress(progress);
     }
 
     @Override
@@ -101,42 +102,40 @@ public class TempoPopup extends ControlsPopup implements BubbleSeekBar.OnProgres
     @Override
     public void getProgressOnFinally(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat, boolean fromUser) {
         if (fromUser) {
-            int paramValue = progress;
-            //seekValue.setText(String.format("%sx", String.valueOf(paramValue)));
-            if (instance != null && instance.getPlayerJNI() != null) {
-                instance.getPlayerJNI().SetSpeedControl(paramValue * 2);
+            int paramValue = progress - getMiddleValue();
+            if (instance != null) {
+                if (instance instanceof _PlayerActivity && ((_PlayerActivity) instance).getPlayerJNI() != null) {
+                    ((_PlayerActivity) instance).getPlayerJNI().SetSpeedControl(paramValue);
+                }
                 instance.getPreferenceHelper().saveInt(PreferenceKeys.TEMPO_VALUE, paramValue);
             }
         }
     }
 
-
-    /*
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int value, boolean fromUser) {
-        if (fromUser) {
-//            int paramValue = Math.round(value / 5f) - 10;
-            int paramValue = value - 4;
-            seekValue.setText(String.format("%sx", String.valueOf(paramValue)));
-
-            instance.getPlayerJNI().SetSpeedControl(paramValue);
-
-            instance.getPreferenceHelper().saveInt(PreferenceKeys.TEMPO_VALUE, paramValue);
-        }
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-        int value = seekBar.getProgress();
-        int tempoValue = Math.round(value / 5f) - 10;
-        bus.post(new PlayerLog(PlayerLog.LogType.TEMPO, tempoValue));
-    }
-    */
+    //@Override
+    //public void onProgressChanged(SeekBar seekBar, int value, boolean fromUser) {
+    //    if (fromUser) {
+    //          int paramValue = Math.round(value / 5f) - 10;
+    //        int paramValue = value - 4;
+    //        seekValue.setText(String.format("%sx", String.valueOf(paramValue)));
+    //
+    //        instance.getPlayerJNI().SetSpeedControl(paramValue);
+    //
+    //        instance.getPreferenceHelper().saveInt(PreferenceKeys.TEMPO_VALUE, paramValue);
+    //    }
+    //}
+    //
+    //@Override
+    //public void onStartTrackingTouch(SeekBar seekBar) {
+    //
+    //}
+    //
+    //@Override
+    //public void onStopTrackingTouch(SeekBar seekBar) {
+    //    int value = seekBar.getProgress();
+    //    int tempoValue = Math.round(value / 5f) - 10;
+    //    bus.post(new PlayerLog(PlayerLog.LogType.TEMPO, tempoValue));
+    //}
 
     public int getMaxValue() {
         return (int) seekbar.getMax();

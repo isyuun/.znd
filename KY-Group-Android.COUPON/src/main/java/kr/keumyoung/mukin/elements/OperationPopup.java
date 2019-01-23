@@ -40,8 +40,8 @@ public class OperationPopup extends ControlsPopup {
 
     private void initiateChildren() {
         parentLayout.removeAllViews();
-        parentLayout.addView(createElementForPopup(PlayerOperation.RESUME));
-        parentLayout.addView(createElementForPopup(PlayerOperation.FINISH));
+        parentLayout.addView(createElementForPopup(PlayerOperation.NEXT));
+        //parentLayout.addView(createElementForPopup(PlayerOperation.FINISH));
         parentLayout.addView(createElementForPopup(PlayerOperation.RESTART));
 
     }
@@ -61,9 +61,9 @@ public class OperationPopup extends ControlsPopup {
     private OperationPopupItem createElementForPopup(PlayerOperation operation) {
         OperationPopupItem popupItem;
         switch (operation) {
-            case RESUME:
+            case NEXT:
             default:
-                popupItem = new OperationPopupItem(activity, R.drawable.resume_01_icon, R.string.resume, operation);
+                popupItem = new OperationPopupItem(activity, R.drawable.resume_01_icon, R.string.reserve_next, operation);
                 break;
             case FINISH:
                 popupItem = new OperationPopupItem(activity, R.drawable.finish_01_icon, R.string.finish, operation);

@@ -131,6 +131,7 @@
     <string name="interlude_play">(간주중)</string>
     <string name="reserve">예약</string>
     <string name="reserve_song">예약곡</string>
-    <string name="reserve_next">다음</string>
+    <string name="reserve_next">다음곡</string>
     <string name="reserve_play">시작</string>
+    <string name="in_playing_work">노래화면에서사용합니다.</string>
 </resources>

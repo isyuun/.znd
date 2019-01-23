@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.squareup.otto.Subscribe;
 
-import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.data.bus.ControlPanelItemAction;
 import kr.keumyoung.mukin.data.bus.EffectPopupAction;
 import kr.keumyoung.mukin.data.bus.ModePopupAction;
@@ -24,7 +23,7 @@ public class _PlayerActivity extends PlayerActivity3 {
         busEventListener = new Object() {
             @Subscribe
             public void post(ControlPanelPlay.PlayButtonState buttonState) {
-                updateViewWithState(buttonState);
+                updatePlayerState(buttonState);
             }
 
             @Subscribe
@@ -65,33 +64,33 @@ public class _PlayerActivity extends PlayerActivity3 {
         bus.unregister(busEventListener);
     }
 
-    @Override
-    public void onControlOperation(OperationPopup.PlayerOperation playerOperation) {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":playerOperation:" + playerOperation);
-        super.onControlOperation(playerOperation);
-    }
-
-    @Override
-    public void updateViewWithState(ControlPanelPlay.PlayButtonState buttonState) {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":buttonState:" + buttonState);
-        super.updateViewWithState(buttonState);
-    }
-
-    @Override
-    public void updateViewWithPanelOptions(ControlPanelItemAction action) {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":action:" + action);
-        super.updateViewWithPanelOptions(action);
-    }
-
-    @Override
-    public void onSelectionModeItem(ModePopupAction action) {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":action:" + action);
-        super.onSelectionModeItem(action);
-    }
-
-    @Override
-    public void onSelectionEffectItem(EffectPopupAction action) {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":action:" + action);
-        super.onSelectionEffectItem(action);
-    }
+    //@Override
+    //public void onControlOperation(OperationPopup.PlayerOperation playerOperation) {
+    //    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":playerOperation:" + playerOperation);
+    //    super.onControlOperation(playerOperation);
+    //}
+    //
+    //@Override
+    //public void updatePlayerState(ControlPanelPlay.PlayButtonState buttonState) {
+    //    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":buttonState:" + buttonState);
+    //    super.updatePlayerState(buttonState);
+    //}
+    //
+    //@Override
+    //public void updateViewWithPanelOptions(ControlPanelItemAction action) {
+    //    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":action:" + action);
+    //    super.updateViewWithPanelOptions(action);
+    //}
+    //
+    //@Override
+    //public void onSelectionModeItem(ModePopupAction action) {
+    //    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":action:" + action);
+    //    super.onSelectionModeItem(action);
+    //}
+    //
+    //@Override
+    //public void onSelectionEffectItem(EffectPopupAction action) {
+    //    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":action:" + action);
+    //    super.onSelectionEffectItem(action);
+    //}
 }

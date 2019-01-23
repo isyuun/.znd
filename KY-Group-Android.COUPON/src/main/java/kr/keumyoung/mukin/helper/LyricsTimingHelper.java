@@ -304,6 +304,7 @@ public class LyricsTimingHelper {
     long jumpTime;
     long microTimePerClock = 4000;
     long MSEC2SEC = 1000000;
+    float INTERVAL = 2.0f;
 
     public void start() {
         timeElapsed = 0;
@@ -344,56 +345,27 @@ public class LyricsTimingHelper {
         }
 
         //jump();   //test
-
         showJump();
     }
 
-    public void jump() {
-        if (BuildConfig.DEBUG) Log.e("LyricsTimingHelper", "jump()");
-        if (isPlaying && this.activity instanceof _PlayerActivity) {
-            //isyuun:머누
-            ((_PlayerActivity) this.activity).getPlayerJNI().Seek((int) (jumpTime / MSEC2SEC - 1) * 50);
-        }
-    }
-
-    private void showJump() {
-        if (this.activity instanceof _PlayerActivity) {
-            ((_PlayerActivity) this.activity).showJump();
-        }
-    }
-
-    private void hideJump() {
-        if (this.activity instanceof _PlayerActivity) {
-            ((_PlayerActivity) this.activity).hideJump();
-        }
-    }
-
-    private Runnable getRunnable() {
-        return () -> {
-            try {
-                clockTick += 1;
-
-                if (isPlaying) {
-                    activity.runOnUiThread(() -> {
-                        int currentTick = 0;
-                        if (activity instanceof PlayerActivity && ((PlayerActivity) activity).getPlayerJNI() != null) {
-                            currentTick = ((PlayerActivity) activity).getPlayerJNI().GetCurrentClocks();
-                        } else if (activity instanceof PreviewActivity && ((PreviewActivity) activity).getPlayerJNI() != null) {
-                            currentTick = ((PreviewActivity) activity).getPlayerJNI().GetCurrentClocks();
-                        }
-                        updateView(currentTick);
-                    });
-                    timeElapsed += 1;
-                }
-                Thread.sleep(5);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        };
-    }
-
     public void updateView(int currentTick) {
-        long checkTime = currentTick;
+        try {
+            if (isPlaying) {
+                final long checkTime = (long) (currentTick * microTimePerClock + (INTERVAL * MSEC2SEC));
+                //String info = "";
+                //info += "[curr:" + checkTime + "]";
+                //info += "[jump:" + jumpTime + "]";
+                //if (BuildConfig.DEBUG) Log.e("LyricsTimingHelper", "[updateView]" + info);
+                if (checkTime < jumpTime) {
+                    showJump();
+                } else {
+                    hideInitStateFrame();
+                    hideJump();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         //System.out.println("currentMillis: " + currentMillis);
         //long currentTick = activity.GetCurrentClocks();
@@ -426,23 +398,56 @@ public class LyricsTimingHelper {
                 lyricsTimes.add(currentIndex, currentLyricsTime);
             }
         }
+    }
 
-        try {
-            if (isPlaying) {
-                checkTime = (long) (checkTime * microTimePerClock + (1.3 * MSEC2SEC));
-                //String info = "";
-                //info += "[curr:" + checkTime + "]";
-                //info += "[jump:" + jumpTime + "]";
-                //if (BuildConfig.DEBUG) Log.e("LyricsTimingHelper", "[updateView]" + info);
-                if (checkTime < jumpTime) {
-                    showJump();
-                } else {
-                    hideJump();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void jump() {
+        if (BuildConfig.DEBUG) Log.e("LyricsTimingHelper", "jump()");
+        if (isPlaying && this.activity instanceof _PlayerActivity) {
+            //isyuun:머누
+            ((_PlayerActivity) this.activity).getPlayerJNI().Seek((int) (jumpTime / MSEC2SEC - INTERVAL) * 50);
         }
+    }
+
+    private void showJump() {
+        if (this.activity instanceof _PlayerActivity) {
+            ((_PlayerActivity) this.activity).showJump();
+        }
+    }
+
+    private void hideJump() {
+        if (this.activity instanceof _PlayerActivity) {
+            ((_PlayerActivity) this.activity).hideJump();
+        }
+    }
+
+    private void hideInitStateFrame() {
+        if (this.activity instanceof _PlayerActivity) {
+            ((_PlayerActivity) this.activity).hideInitStateFrame();
+        }
+    }
+
+    private Runnable getRunnable() {
+        return () -> {
+            try {
+                clockTick += 1;
+
+                if (isPlaying) {
+                    activity.runOnUiThread(() -> {
+                        int currentTick = 0;
+                        if (activity instanceof PlayerActivity && ((PlayerActivity) activity).getPlayerJNI() != null) {
+                            currentTick = ((PlayerActivity) activity).getPlayerJNI().GetCurrentClocks();
+                        } else if (activity instanceof PreviewActivity && ((PreviewActivity) activity).getPlayerJNI() != null) {
+                            currentTick = ((PreviewActivity) activity).getPlayerJNI().GetCurrentClocks();
+                        }
+                        updateView(currentTick);
+                    });
+                    timeElapsed += 1;
+                }
+                Thread.sleep(5);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        };
     }
 
     public void stop() {

@@ -23,12 +23,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.andexert.library.RippleView;
-import com.leff.midi.MidiFile;
-import com.leff.midi.event.MidiEvent;
-import com.leff.midi.event.NoteOn;
-import com.leff.midi.event.meta.Tempo;
-import com.leff.midi.util.MidiEventListener;
-import com.leff.midi.util.MidiProcessor;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
@@ -123,7 +117,7 @@ public class PlayerActivity extends _BaseActivity {
     @BindView(R.id.header_song_name_section)
     LinearLayout headerSongNameSection;
     @BindView(R.id.header_toolbar)
-    LinearLayout headerToolbar;
+    RelativeLayout headerToolbar;
     @BindView(R.id.time_progress_bar)
     ProgressBar timeProgressBar;
     @BindView(R.id.album_cover_image)
@@ -230,7 +224,7 @@ public class PlayerActivity extends _BaseActivity {
         //dsjung 초기화면 뜨도록 수정함.
         //왜 시작시 초기화면 안뜨게 했는지..?
         controlPanelComponent.updatePlayButtonWithState(ControlPanelPlay.PlayButtonState.INIT);
-        updateViewWithState(ControlPanelPlay.PlayButtonState.INIT);
+        updatePlayerState(ControlPanelPlay.PlayButtonState.INIT);
     }
 
     @Override
@@ -442,8 +436,7 @@ public class PlayerActivity extends _BaseActivity {
             // update pitch based on song gender
             if (modePopup == null) modePopup = new ModePopup(this);
             ModePopupAction modePopupActionSettings = new ModePopupAction(
-                    song.getGender().equalsIgnoreCase(Constants.MALE) ?
-                            ModePopup.ModeOptions.MALE : ModePopup.ModeOptions.FEMALE,
+                    song.getGender().equalsIgnoreCase(Constants.MALE) ? ModePopup.ModeOptions.MALE : ModePopup.ModeOptions.FEMALE,
                     ModePopupItem.SelectionState.SELECTED
             );
             modePopup.onSelectionEffectItem(modePopupActionSettings);
@@ -460,19 +453,19 @@ public class PlayerActivity extends _BaseActivity {
             if (pitchPopup == null) pitchPopup = new PitchPopup(this);
             pitchPopup.updatePresetValue(pitchValue);
 
-            int presetSongGender = preferenceHelper.getInt(PreferenceKeys.SONG_GENDER, -1);
-            if (presetSongGender != -1) {
-                ModePopupAction modePopupAction = new ModePopupAction(
-                        presetSongGender == 0 ?
-                                ModePopup.ModeOptions.MALE : ModePopup.ModeOptions.FEMALE,
-                        ModePopupItem.SelectionState.SELECTED
-                );
-                modePopup.onSelectionEffectItem(modePopupAction);
-                onSelectionModeItem(modePopupAction);
-            }
+            //int presetSongGender = preferenceHelper.getInt(PreferenceKeys.SONG_GENDER, -1);
+            //if (presetSongGender != -1) {
+            //    ModePopupAction modePopupAction = new ModePopupAction(
+            //            presetSongGender == 0 ? ModePopup.ModeOptions.MALE : ModePopup.ModeOptions.FEMALE,
+            //            ModePopupItem.SelectionState.SELECTED
+            //    );
+            //    modePopup.onSelectionEffectItem(modePopupAction);
+            //    onSelectionModeItem(modePopupAction);
+            //}
 
-            if (playerJNI != null) playerJNI.SetKeyControl(0);
-            if (playerJNI != null) playerJNI.SetSpeedControl(0);
+            //if (playerJNI != null) playerJNI.SetKeyControl(0);
+            //if (playerJNI != null) playerJNI.SetSpeedControl(0);
+
             //setupRecorder();
 
             //dsjung 초기화면에 song total time 쓰레기 값으로 나오던 문제 수정
@@ -560,19 +553,17 @@ public class PlayerActivity extends _BaseActivity {
 
     //    boolean bDelay;
     @Subscribe
-    public void updateViewWithState(ControlPanelPlay.PlayButtonState buttonState) {
+    public void updatePlayerState(ControlPanelPlay.PlayButtonState buttonState) {
 
-        Log.d(TAG, "updateViewWithState = " + buttonState);
+        Log.d(TAG, "updatePlayerState = " + buttonState);
 
         switch (buttonState) {
             case INIT:
-                initStateFrame.setVisibility(View.VISIBLE);
-                animationHelper.showWithFadeAnim(initFrameContent, false, 1500);
+                showInitStateFrame();
                 playerFrame.setVisibility(View.GONE);
                 break;
             case PAUSE:
                 onClickPauseButton();
-
                 statusText.setText(R.string.paused);
                 animationHelper.showHeaderText(statusText, false);
                 showOperationPopup();
@@ -580,15 +571,14 @@ public class PlayerActivity extends _BaseActivity {
             case PLAY:
             case RESUME:
                 onClickPlayButton();
-                if (initStateFrame.getVisibility() == View.VISIBLE)
-                    animationHelper.hideWithFadeAnim(initStateFrame);
+                //hideInitStateFrame();
                 if (playerFrame.getVisibility() != View.VISIBLE) {
                     animationHelper.showWithFadeAnim(playerFrame, false, 1500);
                 }
                 if (timeProgressBar.getVisibility() != View.VISIBLE)
                     animationHelper.showWithFadeAnim(timeProgressBar, false, 1500);
-                if (headerSongNameSection.getVisibility() != View.VISIBLE)
-                    animationHelper.showHeaderText(headerSongNameSection, false);
+                //if (headerSongNameSection.getVisibility() != View.VISIBLE)
+                //    animationHelper.showHeaderText(headerSongNameSection, false);
                 if (songFinishWithMic)
                     statusText.setText(R.string.recording);
                 else
@@ -601,6 +591,17 @@ public class PlayerActivity extends _BaseActivity {
                 playerFrame.setVisibility(View.VISIBLE);
                 break;
         }
+    }
+
+    public void showInitStateFrame() {
+        initStateFrame.setVisibility(View.VISIBLE);
+        animationHelper.showWithFadeAnim(initFrameContent, false, 1500);
+    }
+
+    public void hideInitStateFrame() {
+        //if (initStateFrame.getVisibility() == View.VISIBLE)
+        //    animationHelper.hideWithFadeAnim(initStateFrame);
+        initStateFrame.setVisibility(View.INVISIBLE);
     }
 
     private void onClickPauseButton() {
@@ -701,11 +702,11 @@ public class PlayerActivity extends _BaseActivity {
 
                 //dsjung 재시작시 버튼, 화면 초기화 하도록 추가함
                 controlPanelComponent.updatePlayButtonWithState(ControlPanelPlay.PlayButtonState.INIT);
-                updateViewWithState(ControlPanelPlay.PlayButtonState.INIT);
+                updatePlayerState(ControlPanelPlay.PlayButtonState.INIT);
                 break;
             case RESUME:
-                controlPanelComponent.updatePlayButtonWithState(ControlPanelPlay.PlayButtonState.PLAY);
-                updateViewWithState(ControlPanelPlay.PlayButtonState.PLAY);
+                controlPanelComponent.updatePlayButtonWithState(ControlPanelPlay.PlayButtonState.RESUME);
+                updatePlayerState(ControlPanelPlay.PlayButtonState.RESUME);
                 break;
             case FINISH:
                 if (!isFinished)
@@ -842,7 +843,7 @@ public class PlayerActivity extends _BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.close_ripple:
-                closeRipple.setOnRippleCompleteListener(rippleView -> cancelRecording());
+                closeRipple.setOnRippleCompleteListener(rippleView -> cancel());
                 break;
             case R.id.header_song_name:
                 break;
@@ -851,14 +852,23 @@ public class PlayerActivity extends _BaseActivity {
 
     @Subscribe
     public void onSelectionModeItem(ModePopupAction action) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + action.getModeOptions() + ":" + song.getGender());
         if (action.getSelectionState() == ModePopupItem.SelectionState.SELECTED) {
             switch (action.getModeOptions()) {
                 case MALE:
-                    if (playerJNI != null) playerJNI.SetKeyControl(-7);
+                    if (playerJNI != null && !Constants.MALE.equalsIgnoreCase(song.getGender())) {
+                        playerJNI.SetKeyControl(-7);
+                    } else {
+                        playerJNI.SetKeyControl(0);
+                    }
                     preferenceHelper.saveInt(PreferenceKeys.SONG_GENDER, 0);
                     break;
                 case FEMALE:
-                    if (playerJNI != null) playerJNI.SetKeyControl(7);
+                    if (playerJNI != null && !Constants.FEMALE.equalsIgnoreCase(song.getGender())) {
+                        playerJNI.SetKeyControl(7);
+                    } else {
+                        playerJNI.SetKeyControl(0);
+                    }
                     preferenceHelper.saveInt(PreferenceKeys.SONG_GENDER, 1);
                     break;
             }
@@ -893,40 +903,24 @@ public class PlayerActivity extends _BaseActivity {
         }
     }
 
-    protected void cancelRecording() {
+    private void cancel() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
+        if (!isPlaying) {
+            release();
+            return;
+        }
+
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
-        if (songFinishWithMic == true)
-            alertDialogBuilder.setMessage(getResources().getString(R.string.do_you_want_to_stop_recording));
-        else
-            alertDialogBuilder.setMessage(getResources().getString(R.string.do_you_want_to_stop_playing));
+        //if (songFinishWithMic == true)
+        //    alertDialogBuilder.setMessage(getResources().getString(R.string.do_you_want_to_stop_recording));
+        //else
+        //    alertDialogBuilder.setMessage(getResources().getString(R.string.do_you_want_to_stop_playing));
+        alertDialogBuilder.setMessage(getResources().getString(R.string.do_you_want_to_stop_playing));
 
         alertDialogBuilder.setPositiveButton(getResources().getString(R.string.yes),
                 (arg0, arg1) -> {
-                    try {
-                        if (service != null) service.shutdown();
-                        closePlayer = true;
-                        preferenceHelper.clearSavedSettings();
-
-                        if (playerJNI != null) {
-                            playerJNI.FinalizePlayer();
-                            playerJNI = null;
-                        }
-
-                        if (audioJNI != null) {
-                            //dsjung 종료시 플레이중에 Finalize 하면 오류
-                            if (isPlayed) audioJNI.StopAudio();
-                            audioJNI.FinalizeAudio();
-                            audioJNI = null;
-                        }
-
-                        lyricsTimingHelper.stop();
-
-                        navigationHelper.finish(this);
-                        //navigationHelper.navigate(PlayerActivity.this, HomeActivity.class);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    release();
                 }
         );
 
@@ -937,6 +931,33 @@ public class PlayerActivity extends _BaseActivity {
         alertDialog.show();
     }
 
+    private void release() {
+        try {
+            if (service != null) service.shutdown();
+            closePlayer = true;
+            preferenceHelper.clearSavedSettings();
+
+            if (playerJNI != null) {
+                playerJNI.FinalizePlayer();
+                playerJNI = null;
+            }
+
+            if (audioJNI != null) {
+                //dsjung 종료시 플레이중에 Finalize 하면 오류
+                if (isPlayed) audioJNI.StopAudio();
+                audioJNI.FinalizeAudio();
+                audioJNI = null;
+            }
+
+            lyricsTimingHelper.stop();
+
+            navigationHelper.finish(this);
+            //navigationHelper.navigate(PlayerActivity.this, HomeActivity.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void onPopupClose() {
         controlPanelComponent.deselectAllPanels();
         controlsPopup.setVisibility(View.GONE);
@@ -945,7 +966,7 @@ public class PlayerActivity extends _BaseActivity {
 
     @Override
     public void onBackPressed() {
-        cancelRecording();
+        cancel();
     }
 
     @Subscribe

@@ -56,11 +56,11 @@ public class PreferenceHelper {
     }
 
     public void clearSavedSettings() {
-        saveInt(PreferenceKeys.IS_DELAY, 0);
-        saveInt(PreferenceKeys.IS_ECHO, 0);
-        saveInt(PreferenceKeys.IS_REVERB, 0);
-        saveInt(PreferenceKeys.TEMPO_VALUE, 0);
-        saveInt(PreferenceKeys.PITCH_VALUE, 0);
-        saveInt(PreferenceKeys.SONG_GENDER, 0);
+        //saveInt(PreferenceKeys.IS_DELAY, 0);
+        //saveInt(PreferenceKeys.IS_ECHO, 0);
+        //saveInt(PreferenceKeys.IS_REVERB, 0);
+        //saveInt(PreferenceKeys.TEMPO_VALUE, 0);
+        //saveInt(PreferenceKeys.PITCH_VALUE, 0);
+        //saveInt(PreferenceKeys.SONG_GENDER, 0);
     }
 }
