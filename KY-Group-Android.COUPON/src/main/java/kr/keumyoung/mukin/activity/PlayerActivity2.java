@@ -29,25 +29,6 @@ public class PlayerActivity2 extends PlayerActivity {
         });
     }
 
-    @Override
-    public void updatePlayerState(ControlPanelPlay.PlayButtonState buttonState) {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + buttonState);
-        super.updatePlayerState(buttonState);
-        switch (buttonState) {
-            case INIT:
-                hideJump();
-                break;
-            case PLAY:
-                break;
-            case PAUSE:
-                break;
-            case RESUME:
-                break;
-            case FINISHED:
-                break;
-        }
-    }
-
     public void showJump() {
         //if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + isPlaying);
         if (isPlaying) jump.setVisibility(View.VISIBLE);

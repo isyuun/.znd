@@ -1,12 +1,11 @@
 package kr.keumyoung.mukin.elements;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.andexert.library.RippleView;
 import com.squareup.otto.Bus;
 
 import javax.inject.Inject;
@@ -15,11 +14,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kr.keumyoung.bubbleseekbar.BubbleSeekBar;
+import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.activity._BaseActivity;
-import kr.keumyoung.mukin.activity._PlayerActivity;
-import kr.keumyoung.mukin.util.PreferenceKeys;
 
 /**
  * on 16/01/18.
@@ -29,8 +27,6 @@ public class TempoPopup extends ControlsPopup implements BubbleSeekBar.OnProgres
 
     @BindView(R.id.seekbar)
     BubbleSeekBar seekbar;
-    @BindView(R.id.seek_value)
-    TextView seekValue;
 
     @Inject
     Bus bus;
@@ -38,16 +34,12 @@ public class TempoPopup extends ControlsPopup implements BubbleSeekBar.OnProgres
     _BaseActivity instance;
     @BindView(R.id.left_arrow_button)
     ImageView leftArrowButton;
-    @BindView(R.id.seekbar_min_value)
-    TextView seekbarMinValue;
-    @BindView(R.id.seek_bar_max_value)
-    TextView seekBarMaxValue;
     @BindView(R.id.right_arrow_button)
     ImageView rightArrowButton;
     @BindView(R.id.left_arrow_button_ripple)
-    RippleView leftArrowButtonRipple;
+    View leftArrowButtonRipple;
     @BindView(R.id.right_arrow_button_ripple)
-    RippleView rightArrowButtonRipple;
+    View rightArrowButtonRipple;
 
     public TempoPopup(_BaseActivity activity) {
         super(activity);
@@ -61,13 +53,7 @@ public class TempoPopup extends ControlsPopup implements BubbleSeekBar.OnProgres
         View view = LayoutInflater.from(activity).inflate(R.layout.tempo_popup, parent, false);
         ButterKnife.bind(this, view);
 
-        int maxValue = getMaxValue();
-        //seekbar.setMax(maxValue);
         seekbar.setProgress(getMiddleValue());
-        seekBarMaxValue.setText(String.format("%sx", String.valueOf(maxValue - getMiddleValue())));
-        seekbarMinValue.setText(String.format("%sx", String.valueOf(getMiddleValue() - maxValue)));
-
-        //seekbar.setOnSeekBarChangeListener(this);
         seekbar.setOnProgressChangedListener(this);
         return view;
     }
@@ -77,8 +63,7 @@ public class TempoPopup extends ControlsPopup implements BubbleSeekBar.OnProgres
     }
 
     public void updatePresetValue(int value) {
-        int progress = value + getMiddleValue();
-        seekbar.setProgress(progress);
+        seekbar.setProgress(value);
     }
 
     @Override
@@ -101,41 +86,14 @@ public class TempoPopup extends ControlsPopup implements BubbleSeekBar.OnProgres
 
     @Override
     public void getProgressOnFinally(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat, boolean fromUser) {
+        if (BuildConfig.DEBUG) Log.e("TempoPopup", "progress:" + progress + ", progressFloat:" + progressFloat + ", fromUser:" + fromUser);
         if (fromUser) {
-            int paramValue = progress - getMiddleValue();
+            int paramValue = progress;
             if (instance != null) {
-                if (instance instanceof _PlayerActivity && ((_PlayerActivity) instance).getPlayerJNI() != null) {
-                    ((_PlayerActivity) instance).getPlayerJNI().SetSpeedControl(paramValue);
-                }
-                instance.getPreferenceHelper().saveInt(PreferenceKeys.TEMPO_VALUE, paramValue);
+                instance.tempo(paramValue);
             }
         }
     }
-
-    //@Override
-    //public void onProgressChanged(SeekBar seekBar, int value, boolean fromUser) {
-    //    if (fromUser) {
-    //          int paramValue = Math.round(value / 5f) - 10;
-    //        int paramValue = value - 4;
-    //        seekValue.setText(String.format("%sx", String.valueOf(paramValue)));
-    //
-    //        instance.getPlayerJNI().SetSpeedControl(paramValue);
-    //
-    //        instance.getPreferenceHelper().saveInt(PreferenceKeys.TEMPO_VALUE, paramValue);
-    //    }
-    //}
-    //
-    //@Override
-    //public void onStartTrackingTouch(SeekBar seekBar) {
-    //
-    //}
-    //
-    //@Override
-    //public void onStopTrackingTouch(SeekBar seekBar) {
-    //    int value = seekBar.getProgress();
-    //    int tempoValue = Math.round(value / 5f) - 10;
-    //    bus.post(new PlayerLog(PlayerLog.LogType.TEMPO, tempoValue));
-    //}
 
     public int getMaxValue() {
         return (int) seekbar.getMax();
@@ -145,34 +103,27 @@ public class TempoPopup extends ControlsPopup implements BubbleSeekBar.OnProgres
     @OnClick({R.id.left_arrow_button_ripple, R.id.right_arrow_button_ripple})
     public void onViewClicked(View view) {
         int currentValue = seekbar.getProgress();
+        //if (BuildConfig.DEBUG) Log.e("TempoPopup", "onViewClicked()" + currentValue);
         switch (view.getId()) {
             case R.id.left_arrow_button_ripple:
-                leftArrowButtonRipple.setOnRippleCompleteListener(rippleView -> {
-
-                    if (currentValue == seekbar.getMin())
-                        return;
-                    else {
-                        int newValue = currentValue - 1;
-                        seekbar.setProgress(newValue);
-                        //onProgressChanged(seekbar, newValue, true);
-                        getProgressOnFinally(seekbar, newValue, newValue, true);
-                    }
-                });
-
+                if (currentValue == seekbar.getMin())
+                    return;
+                else {
+                    int newValue = currentValue - 1;
+                    seekbar.setProgress(newValue);
+                    getProgressOnFinally(seekbar, newValue, newValue, true);
+                }
                 break;
             case R.id.right_arrow_button_ripple:
-                rightArrowButtonRipple.setOnRippleCompleteListener(rippleView -> {
-                    if (currentValue == seekbar.getMax()) {
-                        return;
-                    } else {
-                        int newValue = currentValue + 1;
-                        seekbar.setProgress(newValue);
-                        //onProgressChanged(seekbar, newValue, true);
-                        getProgressOnFinally(seekbar, newValue, newValue, true);
-                    }
-                });
+                if (currentValue == seekbar.getMax()) {
+                    return;
+                } else {
+                    int newValue = currentValue + 1;
+                    seekbar.setProgress(newValue);
+                    getProgressOnFinally(seekbar, newValue, newValue, true);
+                }
+                break;
 
         }
     }
-
 }

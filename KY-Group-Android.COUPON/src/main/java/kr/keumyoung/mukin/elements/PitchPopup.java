@@ -1,11 +1,11 @@
 package kr.keumyoung.mukin.elements;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.andexert.library.RippleView;
 import com.squareup.otto.Bus;
 
 import javax.inject.Inject;
@@ -14,12 +14,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kr.keumyoung.bubbleseekbar.BubbleSeekBar;
+import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
-import kr.keumyoung.mukin.activity.PlayerActivity;
 import kr.keumyoung.mukin.activity._BaseActivity;
-import kr.keumyoung.mukin.activity._PlayerActivity;
-import kr.keumyoung.mukin.util.PreferenceKeys;
 
 /**
  * on 16/01/18.
@@ -29,6 +27,7 @@ public class PitchPopup extends ControlsPopup implements BubbleSeekBar.OnProgres
 
     @BindView(R.id.seekbar)
     BubbleSeekBar seekbar;
+
     @Inject
     Bus bus;
 
@@ -38,9 +37,9 @@ public class PitchPopup extends ControlsPopup implements BubbleSeekBar.OnProgres
     @BindView(R.id.right_arrow_button)
     ImageView rightArrowButton;
     @BindView(R.id.left_arrow_button_ripple)
-    RippleView leftArrowButtonRipple;
+    View leftArrowButtonRipple;
     @BindView(R.id.right_arrow_button_ripple)
-    RippleView rightArrowButtonRipple;
+    View rightArrowButtonRipple;
 
     public PitchPopup(_BaseActivity activity) {
         super(activity);
@@ -88,13 +87,11 @@ public class PitchPopup extends ControlsPopup implements BubbleSeekBar.OnProgres
 
     @Override
     public void getProgressOnFinally(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat, boolean fromUser) {
+        if (BuildConfig.DEBUG) Log.e("TempoPopup", "progress:" + progress + ", progressFloat:" + progressFloat + ", fromUser:" + fromUser);
         if (fromUser) {
             int paramValue = progress;
             if (instance != null) {
-                if (instance instanceof _PlayerActivity && ((_PlayerActivity) instance).getPlayerJNI() != null) {
-                    ((_PlayerActivity) instance).getPlayerJNI().SetKeyControl(paramValue);
-                }
-                instance.getPreferenceHelper().saveInt(PreferenceKeys.PITCH_VALUE, paramValue);
+                instance.pitch(paramValue);
             }
         }
     }
@@ -109,75 +106,23 @@ public class PitchPopup extends ControlsPopup implements BubbleSeekBar.OnProgres
         int currentValue = seekbar.getProgress();
         switch (view.getId()) {
             case R.id.left_arrow_button_ripple:
-                leftArrowButtonRipple.setOnRippleCompleteListener(rippleView -> {
-
-                    if (currentValue == seekbar.getMin())
-                        return;
-                    else {
-                        int newValue = currentValue - 1;
-                        seekbar.setProgress(newValue);
-                        //onProgressChanged(seekbar, newValue, true);
-                        getProgressOnFinally(seekbar, newValue, newValue, true);
-                    }
-                });
-
+                if (currentValue == seekbar.getMin())
+                    return;
+                else {
+                    int newValue = currentValue - 1;
+                    seekbar.setProgress(newValue);
+                    getProgressOnFinally(seekbar, newValue, newValue, true);
+                }
                 break;
             case R.id.right_arrow_button_ripple:
-                rightArrowButtonRipple.setOnRippleCompleteListener(rippleView -> {
-                    if (currentValue == seekbar.getMax()) {
-                        return;
-                    } else {
-                        int newValue = currentValue + 1;
-                        seekbar.setProgress(newValue);
-                        //onProgressChanged(seekbar, newValue, true);
-                        getProgressOnFinally(seekbar, newValue, newValue, true);
-                    }
-                });
-
+                if (currentValue == seekbar.getMax()) {
+                    return;
+                } else {
+                    int newValue = currentValue + 1;
+                    seekbar.setProgress(newValue);
+                    getProgressOnFinally(seekbar, newValue, newValue, true);
+                }
+                break;
         }
     }
 }
-
-/*
-public class PitchPopup extends TempoPopup {
-
-    public PitchPopup(PlayerActivity activity) {
-        super(activity);
-    }
-
-    @Override
-    protected int getPopupHeading() {
-        return R.string.adjust_pitch;
-    }
-
-
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int value, boolean fromUser) {
-        if (fromUser) {
-//            int paramValue = Math.round(value / 5f) - 10;
-            int paramValue = value - 6;
-            seekValue.setText(String.format("%sx", String.valueOf(paramValue)));
-
-            instance.getPlayerJNI().SetKeyControl(paramValue);
-
-            instance.getPreferenceHelper().saveInt(PreferenceKeys.PITCH_VALUE, paramValue);
-        }
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-        int value = seekBar.getProgress();
-        int pitchValue = Math.round(value / 5f) - 10;
-        bus.post(new PlayerLog(PlayerLog.LogType.PITCH, pitchValue));
-    }
-
-    @Override
-    public int getMaxValue() {
-        return 12;
-    }
-
-    public int getMiddleValue() {
-        return 6;
-    }
-}
-*/

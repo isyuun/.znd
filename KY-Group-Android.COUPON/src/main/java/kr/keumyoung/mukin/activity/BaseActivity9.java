@@ -89,14 +89,21 @@ public class BaseActivity9 extends BaseActivity8 {
         tv.setSelected(enable);
     }
 
-    public void onPopupClose() {
-    }
+    public void onPopupClose() {}
 
     public int tempo() {
         return preferenceHelper.getInt(PreferenceKeys.TEMPO_VALUE);
     }
 
+    public void tempo(int tempo) {
+        preferenceHelper.saveInt(PreferenceKeys.TEMPO_VALUE, tempo);
+    }
+
     public int pitch() {
         return preferenceHelper.getInt(PreferenceKeys.PITCH_VALUE);
+    }
+
+    public void pitch(int pitch) {
+        preferenceHelper.saveInt(PreferenceKeys.PITCH_VALUE, pitch);
     }
 }

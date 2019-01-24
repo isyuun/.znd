@@ -133,5 +133,6 @@
     <string name="reserve_song">예약곡</string>
     <string name="reserve_next">다음곡</string>
     <string name="reserve_play">시작</string>
+    <string name="reserve_please">목록을 선택해 예약해주세요.</string>
     <string name="in_playing_work">재생시사용합니다.</string>
 </resources>

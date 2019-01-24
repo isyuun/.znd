@@ -10,7 +10,6 @@ import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.api.RequestModel;
 import kr.keumyoung.mukin.data.model.Song;
-import kr.keumyoung.mukin.data.request.SongHitRequest;
 import kr.keumyoung.mukin.data.request.SongHitRequest2;
 import kr.keumyoung.mukin.interfaces.SessionRefreshListener;
 import kr.keumyoung.mukin.util.CommonHelper;
@@ -41,11 +40,20 @@ public class BaseActivity4 extends BaseActivity3 {
         showProgress();
         setProgressMessage();
 
-        updateSongHits(song, 0);
+        open(song);
     }
 
+    private void open(Song song) {
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + song);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Constants.SONG, song);
+        // navigate to player activity for playing the media and processing
+        navigationHelper.navigate(BaseActivity4.this, _PlayerActivity.class, false, bundle);
+    }
+
+
     public void updateSongHits(Song song, int playtime) {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + song + ":" + playtime);
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + song + ":" + playtime);
         RequestModel<SongHitRequest2> model = new RequestModel<>(new SongHitRequest2(preferenceHelper.getString(PreferenceKeys.USER_ID), song.getSongId(), playtime));
         restApi.updateSongHits(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), model)
                 .enqueue(new Callback<ResponseBody>() {
@@ -58,10 +66,7 @@ public class BaseActivity4 extends BaseActivity3 {
                             if (responseBody != null) {
                                 if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[OK]" + "updateSongHits:onResponse()" + "\n" + errorBody + "\n" + responseBody);
                                 hideProgress();
-                                Bundle bundle = new Bundle();
-                                bundle.putSerializable(Constants.SONG, song);
-                                // navigate to player activity for playing the media and processing
-                                navigationHelper.navigate(BaseActivity4.this, _PlayerActivity.class, false, bundle);
+                                if (!(BaseActivity4.this instanceof _PlayerActivity)) open(song);
                             } else if (errorBody != null) {
                                 String errorString = errorBody.string();
                                 if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "updateSongHits:onResponse()" + "\n" + errorString);

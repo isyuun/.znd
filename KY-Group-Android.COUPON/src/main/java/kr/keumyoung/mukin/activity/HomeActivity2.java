@@ -43,6 +43,8 @@ public class HomeActivity2 extends HomeActivity {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
         if (getApp().getReserves().size() > 0) {
             onSongSelected(getApp().getReserves().get(0));
+        } else {
+            toastHelper.showError(R.string.reserve_please);
         }
     }
 

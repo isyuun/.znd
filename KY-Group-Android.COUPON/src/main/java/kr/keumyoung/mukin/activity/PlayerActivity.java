@@ -77,6 +77,9 @@ import kr.keumyoung.mukin.util.PlayerJNI;
 import kr.keumyoung.mukin.util.PlayerKyUnpackJNI;
 import kr.keumyoung.mukin.util.PreferenceKeys;
 
+import static kr.keumyoung.mukin.elements.ControlPanelPlay.PlayButtonState.PLAY;
+import static kr.keumyoung.mukin.elements.ControlPanelPlay.PlayButtonState.RESUME;
+
 /**
  * on 13/01/18.
  */
@@ -423,10 +426,9 @@ public class PlayerActivity extends _BaseActivity {
         try {
             if (playerJNI == null) playerJNI = new PlayerJNI();
 
-            initializeError =
-                    playerJNI.Initialize(preferenceHelper.getString(PreferenceKeys.LIBRARY_PATH));
-            //    if (playerJNI != null)
-            //        playerJNI.SetPortSelectionMethod(5); // Type K
+            initializeError = playerJNI.Initialize(preferenceHelper.getString(PreferenceKeys.LIBRARY_PATH));
+            //if (playerJNI != null)
+            //  playerJNI.SetPortSelectionMethod(5); // Type K
 
             String midPath = ImageUtils.BASE_PATH + Integer.parseInt(song.getIdentifier()) + ".mid";
             setFileError = playerJNI.SetFile(midPath);
@@ -443,12 +445,12 @@ public class PlayerActivity extends _BaseActivity {
             onSelectionModeItem(modePopupActionSettings);
 
             // update preset values
-            int tempoValue = preferenceHelper.getInt(PreferenceKeys.TEMPO_VALUE);
-            if (playerJNI != null) playerJNI.SetSpeedControl(tempoValue);
+            int tempoValue = tempo();
+            if (playerJNI != null) playerJNI.SetSpeedControl(tempoValue * 2);
             if (tempoPopup == null) tempoPopup = new TempoPopup(this);
             tempoPopup.updatePresetValue(tempoValue);
 
-            int pitchValue = preferenceHelper.getInt(PreferenceKeys.PITCH_VALUE);
+            int pitchValue = pitch();
             if (playerJNI != null) playerJNI.SetKeyControl(pitchValue);
             if (pitchPopup == null) pitchPopup = new PitchPopup(this);
             pitchPopup.updatePresetValue(pitchValue);
@@ -551,60 +553,21 @@ public class PlayerActivity extends _BaseActivity {
         });
     }
 
-    //    boolean bDelay;
-    @Subscribe
-    public void updatePlayerState(ControlPanelPlay.PlayButtonState buttonState) {
-
-        Log.d(TAG, "updatePlayerState = " + buttonState);
-
-        switch (buttonState) {
-            case INIT:
-                showInitStateFrame();
-                playerFrame.setVisibility(View.GONE);
-                break;
-            case PAUSE:
-                onClickPauseButton();
-                statusText.setText(R.string.paused);
-                animationHelper.showHeaderText(statusText, false);
-                showOperationPopup();
-                break;
-            case PLAY:
-            case RESUME:
-                onClickPlayButton();
-                //hideInitStateFrame();
-                if (playerFrame.getVisibility() != View.VISIBLE) {
-                    animationHelper.showWithFadeAnim(playerFrame, false, 1500);
-                }
-                if (timeProgressBar.getVisibility() != View.VISIBLE)
-                    animationHelper.showWithFadeAnim(timeProgressBar, false, 1500);
-                //if (headerSongNameSection.getVisibility() != View.VISIBLE)
-                //    animationHelper.showHeaderText(headerSongNameSection, false);
-                if (songFinishWithMic)
-                    statusText.setText(R.string.recording);
-                else
-                    statusText.setText(R.string.playing);
-                animationHelper.showHeaderText(statusText, false);
-                hideAndRestoreOperationPopup();
-                break;
-            case FINISHED:
-                initStateFrame.setVisibility(View.GONE);
-                playerFrame.setVisibility(View.VISIBLE);
-                break;
-        }
+    protected void onPlayInit() {
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + song);
     }
 
-    public void showInitStateFrame() {
-        initStateFrame.setVisibility(View.VISIBLE);
-        animationHelper.showWithFadeAnim(initFrameContent, false, 1500);
+    protected void onPlayStart() {
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + song);
     }
 
-    public void hideInitStateFrame() {
-        //if (initStateFrame.getVisibility() == View.VISIBLE)
-        //    animationHelper.hideWithFadeAnim(initStateFrame);
-        initStateFrame.setVisibility(View.INVISIBLE);
+    protected void onPlayStop() {
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + song);
     }
 
-    private void onClickPauseButton() {
+    private void onPlayPause() {
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + song);
+
         isPlaying = false;
 
         lyricsTimingHelper.pause();
@@ -620,7 +583,60 @@ public class PlayerActivity extends _BaseActivity {
         if (audioJNI != null) audioJNI.pause();
     }
 
-    private void onClickPlayButton() {
+    protected void onPlayResume() {
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + song);
+    }
+
+    protected void onPlayFinish() {
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + song);
+    }
+
+    //    boolean bDelay;
+    @Subscribe
+    public void updatePlayerState(ControlPanelPlay.PlayButtonState buttonState) {
+
+        Log.d(TAG, "updatePlayerState = " + buttonState);
+
+        switch (buttonState) {
+            case INIT:
+                onPlayInit();
+                showInitStateFrame();
+                playerFrame.setVisibility(View.GONE);
+                break;
+            case PAUSE:
+                onPlayPause();
+                statusText.setText(R.string.paused);
+                animationHelper.showHeaderText(statusText, false);
+                showOperationPopup();
+                break;
+            case PLAY:
+            case RESUME:
+                if (buttonState == PLAY) onPlayStart();
+                else if (buttonState == RESUME) onPlayResume();
+                start();
+                //hideInitStateFrame();
+                if (playerFrame.getVisibility() != View.VISIBLE)
+                    animationHelper.showWithFadeAnim(playerFrame, false, 1500);
+                if (timeProgressBar.getVisibility() != View.VISIBLE)
+                    animationHelper.showWithFadeAnim(timeProgressBar, false, 1500);
+                //if (headerSongNameSection.getVisibility() != View.VISIBLE)
+                //    animationHelper.showHeaderText(headerSongNameSection, false);
+                if (songFinishWithMic)
+                    statusText.setText(R.string.recording);
+                else
+                    statusText.setText(R.string.playing);
+                animationHelper.showHeaderText(statusText, false);
+                hideAndRestoreOperationPopup();
+                break;
+            case FINISHED:
+                onPlayFinish();
+                initStateFrame.setVisibility(View.GONE);
+                playerFrame.setVisibility(View.VISIBLE);
+                break;
+        }
+    }
+
+    private void start() {
         isPlaying = true;
 
         if (isPlayed) {
@@ -654,6 +670,17 @@ public class PlayerActivity extends _BaseActivity {
         }
 
         if (playerJNI != null) playerJNI.Start();
+    }
+
+    public void showInitStateFrame() {
+        initStateFrame.setVisibility(View.VISIBLE);
+        animationHelper.showWithFadeAnim(initFrameContent, false, 1500);
+    }
+
+    public void hideInitStateFrame() {
+        //if (initStateFrame.getVisibility() == View.VISIBLE)
+        //    animationHelper.hideWithFadeAnim(initStateFrame);
+        initStateFrame.setVisibility(View.INVISIBLE);
     }
 
     private void hideAndRestoreOperationPopup() {
@@ -854,24 +881,27 @@ public class PlayerActivity extends _BaseActivity {
     public void onSelectionModeItem(ModePopupAction action) {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + action.getModeOptions() + ":" + song.getGender());
         if (action.getSelectionState() == ModePopupItem.SelectionState.SELECTED) {
+            int pitch = 0;
             switch (action.getModeOptions()) {
                 case MALE:
                     if (playerJNI != null && !Constants.MALE.equalsIgnoreCase(song.getGender())) {
-                        playerJNI.SetKeyControl(-7);
+                        pitch = -6;
                     } else {
-                        playerJNI.SetKeyControl(0);
+                        pitch = 0;
                     }
                     preferenceHelper.saveInt(PreferenceKeys.SONG_GENDER, 0);
                     break;
                 case FEMALE:
                     if (playerJNI != null && !Constants.FEMALE.equalsIgnoreCase(song.getGender())) {
-                        playerJNI.SetKeyControl(7);
+                        pitch = 6;
                     } else {
-                        playerJNI.SetKeyControl(0);
+                        pitch = 0;
                     }
                     preferenceHelper.saveInt(PreferenceKeys.SONG_GENDER, 1);
                     break;
             }
+            playerJNI.SetKeyControl(pitch);
+            pitch(pitch);
         }
     }
 
@@ -931,7 +961,7 @@ public class PlayerActivity extends _BaseActivity {
         alertDialog.show();
     }
 
-    private void release() {
+    protected void release() {
         try {
             if (service != null) service.shutdown();
             closePlayer = true;

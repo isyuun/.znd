@@ -81,12 +81,12 @@ public class HomeActivity3 extends HomeActivity2 {
         onSelectionModeItem(modePopupActionSettings);
 
         // update preset values
-        int tempoValue = preferenceHelper.getInt(PreferenceKeys.TEMPO_VALUE);
+        int tempoValue = tempo();
         //if (playerJNI != null) playerJNI.SetSpeedControl(tempoValue);
         if (tempoPopup == null) tempoPopup = new TempoPopup(this);
         tempoPopup.updatePresetValue(tempoValue);
 
-        int pitchValue = preferenceHelper.getInt(PreferenceKeys.PITCH_VALUE);
+        int pitchValue = pitch();
         //if (playerJNI != null) playerJNI.SetKeyControl(pitchValue);
         if (pitchPopup == null) pitchPopup = new PitchPopup(this);
         pitchPopup.updatePresetValue(pitchValue);
@@ -123,66 +123,67 @@ public class HomeActivity3 extends HomeActivity2 {
     @Subscribe
     public void updateViewWithPanelOptions(ControlPanelItemAction action) {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":action:" + action.getPanelOption());
-        //if (controlPanelComponent.getPlayState() == ControlPanelPlay.PlayButtonState.INIT
-        //        || controlPanelComponent.getPlayState() == ControlPanelPlay.PlayButtonState.PAUSE)
+        //toastHelper.showError(R.string.in_playing_work);
+        ////if (controlPanelComponent.getPlayState() == ControlPanelPlay.PlayButtonState.INIT
+        ////        || controlPanelComponent.getPlayState() == ControlPanelPlay.PlayButtonState.PAUSE)
+        ////    return;
+        //
+        //boolean hide = (lastAction != null && lastAction.getPanelOption() == action.getPanelOption() && controlsPopup.getVisibility() == View.VISIBLE);
+        //lastAction = action;
+        //
+        ////if (BuildConfig.DEBUG) Log.e(TAG, "updateViewWithPanelOptions(...)" + ":" + hide + ":" + controlsPopup.getVisibility());
+        //if (hide) {
+        //    controlsPopup.setVisibility(View.GONE);
         //    return;
-
-        boolean hide = (lastAction != null && lastAction.getPanelOption() == action.getPanelOption() && controlsPopup.getVisibility() == View.VISIBLE);
-        lastAction = action;
-
-        //if (BuildConfig.DEBUG) Log.e(TAG, "updateViewWithPanelOptions(...)" + ":" + hide + ":" + controlsPopup.getVisibility());
-        if (hide) {
-            controlsPopup.setVisibility(View.GONE);
-            return;
-        }
-
-        switch (action.getPanelOption()) {
-            case FAVORITE:
-                //마이크
-                //toastHelper.showError(R.string.mic_not_working);
-                //if (isPossibleRecord() == false) {
-                //    toastHelper.showError(R.string.error_miceffect_support);
-                //    break;
-                //}
-                //if (effectsPopup == null) effectsPopup = new EffectsPopup(this);
-                //controlsPopup.removeAllViews();
-                //controlsPopup.addView(effectsPopup.getView());
-                //controlsPopup.setVisibility(visibility);
-                toastHelper.showError(R.string.in_playing_work);
-                ///**
-                // * 애창곡
-                // */
-                //if (!isFavorites(song.getSongId())) {
-                //    addFavoriteSong(song);
-                //} else {
-                //    delFavoriteSong(song);
-                //}
-                break;
-
-            case MODE:
-                //toastHelper.showError(R.string.in_playing_work);
-                if (modePopup == null) modePopup = new ModePopup(this);
-                controlsPopup.removeAllViews();
-                controlsPopup.addView(modePopup.getView());
-                controlsPopup.setVisibility(View.VISIBLE);
-                break;
-
-            case PITCH:
-                if (pitchPopup == null) pitchPopup = new PitchPopup(this);
-                pitchPopup.updatePresetValue(pitch());
-                controlsPopup.removeAllViews();
-                controlsPopup.addView(pitchPopup.getView());
-                controlsPopup.setVisibility(View.VISIBLE);
-                break;
-
-            case TEMPO:
-                if (tempoPopup == null) tempoPopup = new TempoPopup(this);
-                tempoPopup.updatePresetValue(tempo());
-                controlsPopup.removeAllViews();
-                controlsPopup.addView(tempoPopup.getView());
-                controlsPopup.setVisibility(View.VISIBLE);
-                break;
-        }
+        //}
+        //
+        //switch (action.getPanelOption()) {
+        //    case FAVORITE:
+        //        //마이크
+        //        //toastHelper.showError(R.string.mic_not_working);
+        //        //if (isPossibleRecord() == false) {
+        //        //    toastHelper.showError(R.string.error_miceffect_support);
+        //        //    break;
+        //        //}
+        //        //if (effectsPopup == null) effectsPopup = new EffectsPopup(this);
+        //        //controlsPopup.removeAllViews();
+        //        //controlsPopup.addView(effectsPopup.getView());
+        //        //controlsPopup.setVisibility(visibility);
+        //        //toastHelper.showError(R.string.in_playing_work);
+        //        ///**
+        //        // * 애창곡
+        //        // */
+        //        //if (!isFavorites(song.getSongId())) {
+        //        //    addFavoriteSong(song);
+        //        //} else {
+        //        //    delFavoriteSong(song);
+        //        //}
+        //        break;
+        //
+        //    case MODE:
+        //        //toastHelper.showError(R.string.in_playing_work);
+        //        //if (modePopup == null) modePopup = new ModePopup(this);
+        //        //controlsPopup.removeAllViews();
+        //        //controlsPopup.addView(modePopup.getView());
+        //        //controlsPopup.setVisibility(View.VISIBLE);
+        //        break;
+        //
+        //    case PITCH:
+        //        if (pitchPopup == null) pitchPopup = new PitchPopup(this);
+        //        controlsPopup.removeAllViews();
+        //        controlsPopup.addView(pitchPopup.getView());
+        //        controlsPopup.setVisibility(View.VISIBLE);
+        //        pitchPopup.updatePresetValue(pitch());
+        //        break;
+        //
+        //    case TEMPO:
+        //        if (tempoPopup == null) tempoPopup = new TempoPopup(this);
+        //        controlsPopup.removeAllViews();
+        //        controlsPopup.addView(tempoPopup.getView());
+        //        controlsPopup.setVisibility(View.VISIBLE);
+        //        tempoPopup.updatePresetValue(tempo());
+        //        break;
+        //}
     }
 
     @Subscribe

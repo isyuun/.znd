@@ -11,12 +11,12 @@ import android.widget.TextView;
 import butterknife.BindView;
 import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.R;
+import kr.keumyoung.mukin.data.bus.ControlPanelItemAction;
 import kr.keumyoung.mukin.data.bus.ModePopupAction;
 import kr.keumyoung.mukin.data.model.Song;
 import kr.keumyoung.mukin.elements.ControlPanelPlay;
 import kr.keumyoung.mukin.elements.OperationPopup;
 import kr.keumyoung.mukin.util.Constants;
-import kr.keumyoung.mukin.util.PreferenceKeys;
 
 import static kr.keumyoung.mukin.elements.OperationPopup.PlayerOperation.NEXT;
 
@@ -114,13 +114,21 @@ public class PlayerActivity3 extends PlayerActivity2 {
 
     @Override
     protected void prepareMediaPlayer() {
+        tempo(0);
+        pitch(0);
         super.prepareMediaPlayer();
     }
 
     @Override
-    public void onSelectionModeItem(ModePopupAction action) {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + action.getModeOptions());
-        super.onSelectionModeItem(action);
+    public void tempo(int tempo) {
+        super.tempo(tempo);
+        if (playerJNI != null) playerJNI.SetSpeedControl(tempo * 2);
+    }
+
+    @Override
+    public void pitch(int pitch) {
+        super.pitch(pitch);
+        if (playerJNI != null) playerJNI.SetKeyControl(pitch);
     }
 
     @Override
@@ -130,11 +138,10 @@ public class PlayerActivity3 extends PlayerActivity2 {
             case RESUME:
                 break;
             case FINISH:
-                break;
             case RESTART:
-                break;
             case NEXT:
-                getApp().delReserve();
+                onPlayStop();
+                if (playerOperation == NEXT) getApp().delReserve();
                 break;
         }
         super.onControlOperation(playerOperation);
@@ -167,5 +174,54 @@ public class PlayerActivity3 extends PlayerActivity2 {
                 playHitAnchor.setVisibility(View.INVISIBLE);
                 break;
         }
+    }
+
+    @Override
+    public void onSelectionModeItem(ModePopupAction action) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + action.getModeOptions());
+        super.onSelectionModeItem(action);
+    }
+
+    @Override
+    public void updateViewWithPanelOptions(ControlPanelItemAction action) {
+        super.updateViewWithPanelOptions(action);
+        switch (action.getPanelOption()) {
+            case FAVORITE:
+                break;
+            case TEMPO:
+                tempoPopup.updatePresetValue(tempo());
+                break;
+            case PITCH:
+                pitchPopup.updatePresetValue(pitch());
+                break;
+            case MODE:
+                break;
+        }
+    }
+
+
+    private int playtime() {
+        return (int) (((playerJNI != null ? playerJNI.GetCurrentClocks() : 0) * microTimePerClock) / 1000000);
+    }
+
+
+    @Override
+    protected void onPlayStart() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + playtime());
+        super.onPlayStart();
+    }
+
+    @Override
+    protected void onPlayStop() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + playtime());
+        updateSongHits(song, playtime());
+        super.onPlayStop();
+    }
+
+    @Override
+    protected void release() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + playtime());
+        if (isPlaying) updateSongHits(song, playtime());
+        super.release();
     }
 }
