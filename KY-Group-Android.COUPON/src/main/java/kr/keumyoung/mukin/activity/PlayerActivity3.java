@@ -20,6 +20,7 @@ import kr.keumyoung.mukin.util.Constants;
 
 import static kr.keumyoung.mukin.elements.OperationPopup.PlayerOperation.NEXT;
 
+
 public class PlayerActivity3 extends PlayerActivity2 {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
