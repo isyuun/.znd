@@ -17,7 +17,6 @@ import javax.inject.Inject;
 
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
-import kr.keumyoung.mukin.activity._HomeActivity;
 import kr.keumyoung.mukin.data.bus.ControlPanelItemAction;
 
 /**

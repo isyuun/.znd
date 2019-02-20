@@ -3,14 +3,10 @@ package kr.keumyoung.mukin.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -125,7 +121,6 @@ public class LoginChoiceActivity extends LoginActivity {
     protected void onCreate() {
     }
 
-    //@OnClick({R.id.kakao_button, R.id.facebook_button})
     @OnClick({R.id.signup_anchor, R.id.login_button, R.id.kakao_button, R.id.facebook_button})
     public void onViewClicked(View view) {
         super.onViewClicked(view);

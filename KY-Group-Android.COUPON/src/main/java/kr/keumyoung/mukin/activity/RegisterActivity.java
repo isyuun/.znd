@@ -84,7 +84,7 @@ public class RegisterActivity extends _BaseActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = LayoutInflater.from(this).inflate(R.layout.activity_register, null, false);
+        View view = LayoutInflater.from(this).inflate(R.layout.activity_register_2, null, false);
         inflateContainerView(view);
         MainApplication.getInstance().getMainComponent().inject(this);
         ButterKnife.bind(this, view);

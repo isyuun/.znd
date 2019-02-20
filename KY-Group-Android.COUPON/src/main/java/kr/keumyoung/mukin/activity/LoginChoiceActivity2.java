@@ -1,71 +1,257 @@
 package kr.keumyoung.mukin.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CheckableImageButton;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 
-import dev.niekirk.com.instagram4android.Instagram4Android;
-import dev.niekirk.com.instagram4android.requests.payload.InstagramLoggedUser;
-import dev.niekirk.com.instagram4android.requests.payload.InstagramLoginResult;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
+import org.json.JSONObject;
+
 import kr.keumyoung.mukin.BuildConfig;
+import kr.keumyoung.mukin.R;
+import kr.keumyoung.mukin.data.request.PasswordChangeRequest;
+import kr.keumyoung.mukin.data.request.PasswordResetRequest;
 import kr.keumyoung.mukin.util.Constants;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-@Deprecated
 public class LoginChoiceActivity2 extends LoginChoiceActivity {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        findViewById(R.id.password_reset_anchor).setOnClickListener(v -> {
+            passwordResetWarning();
+        });
+        findViewById(R.id.password_change_button).setOnClickListener(v -> {
+            passwordChangeWarning();
+        });
     }
 
     @Override
     protected void onResume() {
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName());
         super.onResume();
+        passwordSetting(false);
     }
 
-    private void loginToInstagram(final String usr, final String pwd) {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
+    String confirm_code;
 
-        Instagram4Android instagram = Instagram4Android.builder().username(usr).password(pwd).build();
+    private CheckableImageButton findCheckableImageButton(View view) {
+        if (view instanceof CheckableImageButton) {
+            return (CheckableImageButton)view;
+        }
 
-        attemptLogin(instagram)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(instagramLoginResult -> {
-                    if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + instagramLoginResult.getLogged_in_user());
-                    String email = "";
-                    String password = "";
-                    String name = "";
-                    String profileImage = "";
-                    String sociallogin = Constants.INSTAGRAM;
-                    String socialid = "";
-                    if (instagramLoginResult.getLogged_in_user() != null) {
-                        InstagramLoggedUser user = instagramLoginResult.getLogged_in_user();
-                        email = user.username;
-                        password = socialid = "" + user.pk;
-                        name = user.username;
-                        profileImage = user.profile_pic_url;
-                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "\n" + email + "\n" + password + "\n" + socialid + "\n" + name + "\n" + profileImage);
-                        //registerUserToDF(email, name, pwd, profileImage, sociallogin, socialid);
-                    }
+        if (view instanceof ViewGroup) {
+            ViewGroup viewGroup = (ViewGroup) view;
+            for (int i = 0, ei = viewGroup.getChildCount(); i < ei; i++) {
+                CheckableImageButton checkableImageButton = findCheckableImageButton(viewGroup.getChildAt(i));
+                if (checkableImageButton != null) {
+                    return checkableImageButton;
+                }
+            }
+        }
+        return null;
+    }
+
+    private void passwordSetting(boolean clear) {
+        Intent intent = getIntent();
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + intent.getData());
+        if (intent != null && intent.getData() != null) {
+            this.email = intent.getData().getQueryParameter("email");
+            this.confirm_code = intent.getData().getQueryParameter("confirm_code");
+            //toastHelper.showError("email:" + email + ", confirm_code:" + confirm_code);
+        }
+
+        if (clear) this.confirm_code = "";
+
+        boolean passwordChange;
+        if ((email != null && !email.isEmpty()) && (confirm_code != null && !confirm_code.isEmpty())) {
+            passwordChange = true;
+            setTitle(R.string.password_change);
+            findViewById(R.id.login_change_section).setVisibility(View.VISIBLE);
+            findViewById(R.id.login_action_section).setVisibility(View.GONE);
+            //show password
+            //passwordEt.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+        } else {
+            passwordChange = false;
+            setTitle(R.string.login);
+            findViewById(R.id.login_change_section).setVisibility(View.GONE);
+            findViewById(R.id.login_action_section).setVisibility(View.VISIBLE);
+            //hide password
+            //passwordEt.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        }
+        if (email != null && !email.isEmpty()) {
+            emailEt.setText(email);
+            passwordEt.requestFocus();
+        }
+        if (isLogin()) {
+            findViewById(R.id.password_reset_section).setVisibility(View.INVISIBLE);
+        } else {
+            findViewById(R.id.password_reset_section).setVisibility(View.VISIBLE);
+        }
+        if (passwordChange && findCheckableImageButton(findViewById(R.id.password_anchor)) != null) {
+            findCheckableImageButton(findViewById(R.id.password_anchor)).performClick();
+        }
+    }
+
+    @Override
+    protected void onLoginSuccess(String email, String nickName) {
+        super.onLoginSuccess(email, nickName);
+        passwordSetting(true);
+    }
+
+    @Override
+    protected void onLoginFailure() {
+        super.onLoginFailure();
+        passwordSetting(true);
+    }
+
+    @Override
+    protected void onLogoutSuccess() {
+        super.onLogoutSuccess();
+        passwordSetting(true);
+    }
+
+    private void passwordChangeWarning() {
+        showAlertDialog(
+                getString(R.string.password_change_warning),
+                (dialog, which) -> {
+                    passwordChange();
+                },
+                (dialog, which) -> {
+                    passwordSetting(true);
                 });
-
     }
 
-    private Observable<InstagramLoginResult> attemptLogin(final Instagram4Android instagram) {
+    private void passwordChange() {
+        if (emailEt.getText().toString().isEmpty()) {
+            toastHelper.showError(R.string.email_blank_error);
+            emailEt.requestFocus();
+            return;
+        }
+        if (passwordEt.getText().toString().isEmpty()) {
+            toastHelper.showError(R.string.password_blank_error);
+            passwordEt.requestFocus();
+            return;
+        }
 
-        Observable<InstagramLoginResult> observable = Observable.create(observableEmitter -> {
+        showProgress(true);
 
-            instagram.setup();
-            observableEmitter.onNext(instagram.login());
+        this.pass = passwordEt.getText().toString();
 
+        restApi.changepassword(new PasswordChangeRequest(this.email, this.pass, confirm_code)).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                hideProgress();
+                ResponseBody body = response.body();
+                ResponseBody error = response.errorBody();
+                if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, "changepassword:onResponse()" + "\n" + error + "\n" + body);
+                try {
+                    if (body != null) {
+                        String bodyString = body.string();
+                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[OK]" + "changepassword:onResponse()" + "\n" + bodyString);
+                        JSONObject json = new JSONObject(bodyString);
+                        if (json.has(Constants.ERROR)) {
+                            showError(json.getJSONObject(Constants.ERROR));
+                        } else {
+                            toastHelper.showError(bodyString);
+                            passwordSetting(true);
+                            login(email, pass);
+                        }
+                    } else if (error != null) {
+                        String errorString = error.string();
+                        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "changepassword:onResponse()" + "\n" + errorString);
+                        showError(new JSONObject(errorString).getJSONObject(Constants.ERROR));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                hideProgress();
+                t.printStackTrace();
+                toastHelper.showError(R.string.common_api_error);
+            }
         });
+    }
 
-        return observable;
+    private void passwordResetWarning() {
+        showAlertDialog(
+                getString(R.string.password_reset_check),
+                (dialog, which) -> {
+                    passwordReset();
+                },
+                (dialog, which) -> {
+                    passwordSetting(true);
+                });
+    }
 
+    private void passwordReset() {
+        if (emailEt.getText().toString().isEmpty()) {
+            toastHelper.showError(R.string.email_blank_error);
+            emailEt.requestFocus();
+            return;
+        }
+
+        showProgress(true);
+
+        this.email = emailEt.getText().toString();
+
+        restApi.resetpassword(new PasswordResetRequest(this.email), true).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                hideProgress();
+                ResponseBody body = response.body();
+                ResponseBody error = response.errorBody();
+                if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, "resetpassword:onResponse()" + "\n" + error + "\n" + body);
+                try {
+                    if (body != null) {
+                        String bodyString = body.string();
+                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[OK]" + "resetpassword:onResponse()" + "\n" + bodyString);
+                        JSONObject json = new JSONObject(bodyString);
+                        if (json.has(Constants.ERROR)) {
+                            showError(json.getJSONObject(Constants.ERROR));
+                        } else {
+                            toastHelper.showError(bodyString);
+                            showAlertDialog(
+                                    getString(R.string.password_reset_check),
+                                    (dialog, which) -> {
+                                        openMailApp();
+                                    });
+                        }
+                    } else if (error != null) {
+                        String errorString = error.string();
+                        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "resetpassword:onResponse()" + "\n" + errorString);
+                        showError(new JSONObject(errorString).getJSONObject(Constants.ERROR));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                hideProgress();
+                t.printStackTrace();
+                toastHelper.showError(R.string.common_api_error);
+            }
+        });
+    }
+
+    private void openMailApp() {
+        Intent intent=Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_EMAIL);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//Min SDK 15
+        startActivity(intent);
     }
 }

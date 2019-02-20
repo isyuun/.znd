@@ -62,6 +62,9 @@ public class HomeActivity2 extends HomeActivity {
         text += "\n" + "[" + PreferenceKeys.USER_ID + "]" + preferenceHelper.getString(PreferenceKeys.USER_ID);
         text += "\n" + "[" + PreferenceKeys.SESSION_TOKEN + "]" + preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN);
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + text);
+        getFavoriteSongs();
+        getFreeSongs();
+        setReserves();
         //로그인
         if (preferenceHelper.getString(PreferenceKeys.LOGIN_EMAIL).isEmpty() || preferenceHelper.getString(PreferenceKeys.LOGIN_PASSWORD).isEmpty() ||
                 preferenceHelper.getString(PreferenceKeys.USER_ID).isEmpty() || preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN).isEmpty()) {
@@ -69,10 +72,6 @@ public class HomeActivity2 extends HomeActivity {
             //openPreferenceLogin();
             openPreferenceLoginChoice();
         }
-
-        getFavoriteSongs();
-        getFreeSongs();
-        setReserves();
     }
 
     protected void onSongClick(SongView songView) {

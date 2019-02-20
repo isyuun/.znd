@@ -133,7 +133,7 @@ public class LoginActivity extends _BaseActivity {
         setLoginText();
     }
 
-    boolean isLogin() {
+    protected boolean isLogin() {
         return (!preferenceHelper.getString(getString(R.string.email)).isEmpty());
     }
 

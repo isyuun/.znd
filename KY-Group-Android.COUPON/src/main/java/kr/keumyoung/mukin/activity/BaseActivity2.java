@@ -10,9 +10,11 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
 import kr.keumyoung.karaoke.mukin.coupon.apps._preference;
 import kr.keumyoung.karaoke.mukin.coupon.fragment._coupon;
+import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin._MainApplication;
 import kr.keumyoung.mukin.fragment._BaseFragment;
@@ -144,7 +146,21 @@ public class BaseActivity2 extends BaseActivity {
     int KARAOKE_RESULT_LOGIN_SUCCESS = Activity.RESULT_FIRST_USER + 2;
     int KARAOKE_RESULT_LOGIN_FAILURE = Activity.RESULT_FIRST_USER + 3;
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + getIntent().getData());
+    }
+
+    @Override
+    protected void onResume() {
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + getIntent().getData());
+        super.onResume();
+    }
+
     protected void openHomeActivity() {
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + getIntent().getData());
         post(openHomeActivity);
     }
 
@@ -152,8 +168,25 @@ public class BaseActivity2 extends BaseActivity {
         Intent i = new Intent(this, _HomeActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.setData(getIntent().getData());
+        getIntent().setData(null);
         ActivityCompat.startActivity(this, i, null);
         finish();
+    };
+
+    public void openPreferenceLoginChoice() {
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + getIntent().getData());
+        post(openPreferenceLoginChoice);
+    }
+
+    private Runnable openPreferenceLoginChoice = () -> {
+        Intent i = new Intent(this, _LoginChoiceActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.setData(getIntent().getData());
+        getIntent().setData(null);
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + i.getData());
+        ActivityCompat.startActivityForResult(this, i, KARAOKE_INTENT_ACTION_LOGIN, null);
     };
 
     protected void openPreference() {
@@ -164,6 +197,8 @@ public class BaseActivity2 extends BaseActivity {
         Intent i = new Intent(this, _preference.class);
         i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.setData(getIntent().getData());
+        getIntent().setData(null);
         ActivityCompat.startActivityForResult(this, i, KARAOKE_INTENT_ACTION_PREFERENCE, null);
     };
 
@@ -175,31 +210,9 @@ public class BaseActivity2 extends BaseActivity {
         Intent i = new Intent(this, _RegisterActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.setData(getIntent().getData());
+        getIntent().setData(null);
         ActivityCompat.startActivityForResult(this, i, KARAOKE_INTENT_ACTION_REGISTER, null);
-    };
-
-    //@Deprecated
-    //public void openPreferenceLogin() {
-    //    post(openPreferenceLogin);
-    //}
-    //
-    //@Deprecated
-    //private Runnable openPreferenceLogin = () -> {
-    //    Intent i = new Intent(this, _LoginActivity.class);
-    //    i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-    //    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    //    ActivityCompat.startActivityForResult(this, i, KARAOKE_INTENT_ACTION_LOGIN, null);
-    //};
-
-    public void openPreferenceLoginChoice() {
-        post(openPreferenceLoginChoice);
-    }
-
-    private Runnable openPreferenceLoginChoice = () -> {
-        Intent i = new Intent(this, _LoginChoiceActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        ActivityCompat.startActivityForResult(this, i, KARAOKE_INTENT_ACTION_LOGIN, null);
     };
 
     protected void openPreferenceCoupon() {
@@ -210,6 +223,8 @@ public class BaseActivity2 extends BaseActivity {
         Intent i = new Intent(this, _preference.class);
         i.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT, _coupon.class.getName());
         i.putExtra(PreferenceActivity.EXTRA_NO_HEADERS, true);
+        i.setData(getIntent().getData());
+        getIntent().setData(null);
         ActivityCompat.startActivityForResult(this, i, KARAOKE_INTENT_ACTION_COUPON, null);
     };
 
@@ -219,9 +234,13 @@ public class BaseActivity2 extends BaseActivity {
         //super.showProgress();
     }
 
+    public void showProgress(boolean show) {
+        if (show) super.showProgress();
+    }
+
     @Deprecated
     @Override
     public void hideProgress() {
-        //super.hideProgress();
+        super.hideProgress();
     }
 }

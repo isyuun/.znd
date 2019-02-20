@@ -35,7 +35,7 @@ public class BaseActivity3 extends BaseActivity2 {
     @Inject
     ToastHelper toastHelper;
 
-    private void showError(JSONObject error) {
+    protected void showError(JSONObject error) {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + error);
         try {
             if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "\n" + (error != null ? error.toString(2): ""));

@@ -3,6 +3,8 @@ package kr.keumyoung.mukin.api;
 import io.reactivex.Observable;
 import kr.keumyoung.mukin.data.model.UserRoleModel;
 import kr.keumyoung.mukin.data.request.LoginRequest;
+import kr.keumyoung.mukin.data.request.PasswordChangeRequest;
+import kr.keumyoung.mukin.data.request.PasswordResetRequest;
 import kr.keumyoung.mukin.data.request.RegisterUserCustomRequest;
 import kr.keumyoung.mukin.data.request.RegisterUserRequest;
 import kr.keumyoung.mukin.data.request.SongHitRequest;
@@ -31,6 +33,17 @@ import retrofit2.http.Url;
  */
 
 public interface RestApi {
+
+    @POST("user/password")
+    Call<ResponseBody> resetpassword(
+            @Body PasswordResetRequest request,
+            @Query("reset") Boolean reset
+    );
+
+    @POST("user/password")
+    Call<ResponseBody> changepassword(
+            @Body PasswordChangeRequest request
+    );
 
     @POST("user/register")
     Call<ResponseBody> registerUser(

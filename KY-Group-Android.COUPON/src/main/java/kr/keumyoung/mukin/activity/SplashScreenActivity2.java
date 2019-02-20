@@ -137,7 +137,7 @@ public class SplashScreenActivity2 extends SplashScreenActivity {
         });
     }
 
-    private void onCompleteCopyFilesToLocal() {
+    protected void onCompleteCopyFilesToLocal() {
         Log.e(__CLASSNAME__, getMethodName());
         postDelayed(() -> {
             openHomeActivity();
