@@ -56,8 +56,8 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="hostmukin"
-                    android:scheme="schememukin" />
+                    android:host="mukin"
+                    android:scheme="mukin" />
             </intent-filter>
         </activity>
         <!--<activity-->
