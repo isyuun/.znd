@@ -122,13 +122,18 @@ public class BaseActivity2 extends BaseActivity {
         }
     }
 
-    public final boolean post(Runnable r) {
+    public final void removeCallbacks(Runnable r)
+    {
         handler.removeCallbacks(r);
+    }
+
+    public final boolean post(Runnable r) {
+        removeCallbacks(r);
         return handler.post(r);
     }
 
     public final boolean postDelayed(Runnable r, long delayMillis) {
-        handler.removeCallbacks(r);
+        removeCallbacks(r);
         return handler.postDelayed(r, delayMillis);
     }
 
@@ -159,20 +164,11 @@ public class BaseActivity2 extends BaseActivity {
         super.onResume();
     }
 
+    /**
+     * {@link SplashScreenActivity3#openHomeActivity()}에서 알아서 한다 오지랄 하지마
+     */
     protected void openHomeActivity() {
-        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + getIntent().getData());
-        post(openHomeActivity);
     }
-
-    private Runnable openHomeActivity = () -> {
-        Intent i = new Intent(this, _HomeActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        i.setData(getIntent().getData());
-        getIntent().setData(null);
-        ActivityCompat.startActivity(this, i, null);
-        finish();
-    };
 
     public void openPreferenceLoginChoice() {
         if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + getIntent().getData());

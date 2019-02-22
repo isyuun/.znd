@@ -94,14 +94,11 @@ public class SplashScreenActivity2 extends SplashScreenActivity {
     protected void proceedToNextActivity() {
         Log.e(__CLASSNAME__, getMethodName());
 
-        new Handler().postDelayed(() -> {
+        postDelayed(() -> {
             showProgress();
             copyFilesToLocal()
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
-                    //.subscribe(s -> System.out.println("FILE COPY: " + s), throwable -> {
-                    //    hideProgress();
-                    //    throwable.printStackTrace();
                     .subscribe(
                             message -> {
                                 onNextCopyFilesToLocal(message);
@@ -114,7 +111,7 @@ public class SplashScreenActivity2 extends SplashScreenActivity {
                             () -> {
                                 onCompleteCopyFilesToLocal();
                                 /**
-                                 * {@link HomeActivity2#onResume()}에서 알아서 한다 오바지랄 하지마
+                                 * {@link HomeActivity2#onResume()}에서 알아서 한다 오지랄 하지마
                                  */
                             });
 

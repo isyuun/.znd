@@ -24,13 +24,18 @@ public class BaseFragment2 extends BaseFragment {
 
     Handler handler = new Handler();
 
-    public final boolean post(Runnable r) {
+    public final void removeCallbacks(Runnable r)
+    {
         handler.removeCallbacks(r);
+    }
+
+    public final boolean post(Runnable r) {
+        removeCallbacks(r);
         return handler.post(r);
     }
 
     public final boolean postDelayed(Runnable r, long delayMillis) {
-        handler.removeCallbacks(r);
+        removeCallbacks(r);
         return handler.postDelayed(r, delayMillis);
     }
 
