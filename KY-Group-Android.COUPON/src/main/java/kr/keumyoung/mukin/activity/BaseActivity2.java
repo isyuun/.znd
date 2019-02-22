@@ -122,21 +122,6 @@ public class BaseActivity2 extends BaseActivity {
         }
     }
 
-    public final void removeCallbacks(Runnable r)
-    {
-        handler.removeCallbacks(r);
-    }
-
-    public final boolean post(Runnable r) {
-        removeCallbacks(r);
-        return handler.post(r);
-    }
-
-    public final boolean postDelayed(Runnable r, long delayMillis) {
-        removeCallbacks(r);
-        return handler.postDelayed(r, delayMillis);
-    }
-
     //REQUEST
     int KARAOKE_INTENT_ACTION_DEFAULT = 0x01;
     int KARAOKE_INTENT_ACTION_PREFERENCE = 0x02;
@@ -151,6 +136,54 @@ public class BaseActivity2 extends BaseActivity {
     int KARAOKE_RESULT_LOGIN_SUCCESS = Activity.RESULT_FIRST_USER + 2;
     int KARAOKE_RESULT_LOGIN_FAILURE = Activity.RESULT_FIRST_USER + 3;
 
+    /**
+     * <a href="https://stackoverflow.com/questions/13560243/how-to-stop-runnable-when-the-app-goes-to-background">
+     * How to stop runnable when the app goes to background?
+     * </a>
+     */
+    private Runnable running = null;
+    private void clearRunning() {
+        this.running = null;
+    }
+
+    public final void removeCallbacks(Runnable r)
+    {
+        handler.removeCallbacks(r);
+    }
+
+    /**
+     * 일단 {@link #postDelayed(Runnable, long)}에서만
+     */
+    public final boolean post(Runnable r) {
+        //this.running = r;
+        removeCallbacks(r);
+        return handler.post(r);
+    }
+
+    /**
+     * 일단 {@link #postDelayed(Runnable, long)}에서만
+     */
+    public final boolean postDelayed(Runnable r, long delayMillis) {
+        this.running = r;
+        removeCallbacks(r);
+        return handler.postDelayed(r, delayMillis);
+    }
+
+    @Override
+    protected void onPause() {
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + getIntent().getData());
+        removeCallbacks(running);
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + getIntent().getData());
+        postDelayed(running, 100);
+        clearRunning();
+        super.onResume();
+    }
+
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -158,17 +191,23 @@ public class BaseActivity2 extends BaseActivity {
         if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + getIntent().getData());
     }
 
-    @Override
-    protected void onResume() {
-        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + getIntent().getData());
-        super.onResume();
-    }
-
     /**
      * {@link SplashScreenActivity3#openHomeActivity()}에서 알아서 한다 오지랄 하지마
      */
     protected void openHomeActivity() {
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + getIntent().getData());
+        post(openHomeActivity);
     }
+
+    private Runnable openHomeActivity = () -> {
+        Intent i = new Intent(this, _HomeActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.setData(getIntent().getData());
+        getIntent().setData(null);
+        ActivityCompat.startActivity(this, i, null);
+        finish();
+    };
 
     public void openPreferenceLoginChoice() {
         if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + getIntent().getData());
