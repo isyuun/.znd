@@ -136,35 +136,17 @@ public class BaseActivity2 extends BaseActivity {
     int KARAOKE_RESULT_LOGIN_SUCCESS = Activity.RESULT_FIRST_USER + 2;
     int KARAOKE_RESULT_LOGIN_FAILURE = Activity.RESULT_FIRST_USER + 3;
 
-    /**
-     * <a href="https://stackoverflow.com/questions/13560243/how-to-stop-runnable-when-the-app-goes-to-background">
-     * How to stop runnable when the app goes to background?
-     * </a>
-     */
-    private Runnable running = null;
-    private void clearRunning() {
-        this.running = null;
-    }
-
     public final void removeCallbacks(Runnable r)
     {
         handler.removeCallbacks(r);
     }
 
-    /**
-     * 일단 {@link #postDelayed(Runnable, long)}에서만
-     */
     public final boolean post(Runnable r) {
-        //this.running = r;
         removeCallbacks(r);
         return handler.post(r);
     }
 
-    /**
-     * 일단 {@link #postDelayed(Runnable, long)}에서만
-     */
     public final boolean postDelayed(Runnable r, long delayMillis) {
-        this.running = r;
         removeCallbacks(r);
         return handler.postDelayed(r, delayMillis);
     }
@@ -172,15 +154,12 @@ public class BaseActivity2 extends BaseActivity {
     @Override
     protected void onPause() {
         if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + getIntent().getData());
-        removeCallbacks(running);
         super.onPause();
     }
 
     @Override
     protected void onResume() {
         if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + getIntent().getData());
-        postDelayed(running, 100);
-        clearRunning();
         super.onResume();
     }
 
@@ -195,19 +174,7 @@ public class BaseActivity2 extends BaseActivity {
      * {@link SplashScreenActivity3#openHomeActivity()}에서 알아서 한다 오지랄 하지마
      */
     protected void openHomeActivity() {
-        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + getIntent().getData());
-        post(openHomeActivity);
     }
-
-    private Runnable openHomeActivity = () -> {
-        Intent i = new Intent(this, _HomeActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        i.setData(getIntent().getData());
-        getIntent().setData(null);
-        ActivityCompat.startActivity(this, i, null);
-        finish();
-    };
 
     public void openPreferenceLoginChoice() {
         if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + getIntent().getData());
@@ -225,10 +192,11 @@ public class BaseActivity2 extends BaseActivity {
     };
 
     protected void openPreference() {
-        postDelayed(openPreference, 1000);
+        post(openPreference);
     }
 
     private Runnable openPreference = () -> {
+        //clearRunning();
         Intent i = new Intent(this, _preference.class);
         i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

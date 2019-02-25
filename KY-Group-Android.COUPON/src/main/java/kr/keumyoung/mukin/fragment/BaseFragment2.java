@@ -23,35 +23,18 @@ public class BaseFragment2 extends BaseFragment {
     }
 
     Handler handler = new Handler();
-    /**
-     * <a href="https://stackoverflow.com/questions/13560243/how-to-stop-runnable-when-the-app-goes-to-background">
-     * How to stop runnable when the app goes to background?
-     * </a>
-     */
-    private Runnable running = null;
-    private void clearRunning() {
-        this.running = null;
-    }
 
     public final void removeCallbacks(Runnable r)
     {
         handler.removeCallbacks(r);
     }
 
-    /**
-     * 일단 {@link #postDelayed(Runnable, long)}에서만
-     */
     public final boolean post(Runnable r) {
-        //this.running = r;
         removeCallbacks(r);
         return handler.post(r);
     }
 
-    /**
-     * 일단 {@link #postDelayed(Runnable, long)}에서만
-     */
     public final boolean postDelayed(Runnable r, long delayMillis) {
-        this.running = r;
         removeCallbacks(r);
         return handler.postDelayed(r, delayMillis);
     }

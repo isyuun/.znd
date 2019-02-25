@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CheckableImageButton;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +15,8 @@ import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.data.request.PasswordChangeRequest;
 import kr.keumyoung.mukin.data.request.PasswordResetRequest;
 import kr.keumyoung.mukin.util.Constants;
+import kr.keumyoung.mukin.util.PreferenceKeys;
+import kr.keumyoung.mukin.util.TableNames;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,13 +41,14 @@ public class LoginChoiceActivity2 extends LoginChoiceActivity {
         if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName());
         super.onResume();
         passwordSetting(false);
+        fetchUserSocial();
     }
 
     String confirm_code;
 
     private CheckableImageButton findCheckableImageButton(View view) {
         if (view instanceof CheckableImageButton) {
-            return (CheckableImageButton)view;
+            return (CheckableImageButton) view;
         }
 
         if (view instanceof ViewGroup) {
@@ -98,27 +99,86 @@ public class LoginChoiceActivity2 extends LoginChoiceActivity {
         } else {
             findViewById(R.id.password_reset_section).setVisibility(View.VISIBLE);
         }
-        if (passwordChange && findCheckableImageButton(findViewById(R.id.password_anchor)) != null) {
-            findCheckableImageButton(findViewById(R.id.password_anchor)).performClick();
+        if (passwordChange) {
+            //if (findCheckableImageButton(findViewById(R.id.password_anchor)) != null) {
+            //    findCheckableImageButton(findViewById(R.id.password_anchor)).performClick();
+            //}
         }
+    }
+
+
+    private void fetchUserSocial() {
+        String dfid = preferenceHelper.getString(PreferenceKeys.DF_ID);
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + dfid);
+        if (dfid == null || dfid.isEmpty()) {
+            return;
+        }
+        // fetch the table data from the user table using the dfid
+        String filter = "dfid=" + dfid;
+        restApi.tableGetRequestWithFilter(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), TableNames.USER, filter).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                hideProgress();
+                ResponseBody body = response.body();
+                ResponseBody error = response.errorBody();
+                if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, "fetchUserSocial:onResponse()" + "\n" + error + "\n" + body);
+                try {
+                    if (body != null) {
+                        String bodyString = body.string();
+                        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, "[OK]" + "fetchUserSocial:onResponse()" + "\n" + bodyString);
+                        JSONObject json = new JSONObject(bodyString);
+                        if (json.has(Constants.ERROR)) {
+                            showError(json.getJSONObject(Constants.ERROR));
+                        } else {
+                            //toastHelper.showError(bodyString);
+                            JSONObject responseObject = new JSONObject(bodyString);
+                            JSONObject userObject = responseObject.getJSONArray(Constants.RESOURCE).getJSONObject(0);
+                            preferenceHelper.saveString(PreferenceKeys.SOCIAL_LOGIN, userObject.getString(PreferenceKeys.SOCIAL_LOGIN));
+                            preferenceHelper.saveString(PreferenceKeys.SOCIAL_ID, userObject.getString(PreferenceKeys.SOCIAL_ID));
+                            if (!preferenceHelper.getString(PreferenceKeys.SOCIAL_LOGIN).isEmpty() && !preferenceHelper.getString(PreferenceKeys.SOCIAL_ID).isEmpty()) {
+                                preferenceHelper.saveString(PreferenceKeys.SOCIAL_EMAIL, preferenceHelper.getString(PreferenceKeys.LOGIN_EMAIL));
+                            } else {
+                                preferenceHelper.saveString(PreferenceKeys.SOCIAL_EMAIL, "");
+                            }
+                        }
+                    } else if (error != null) {
+                        String errorString = error.string();
+                        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "[NG]" + "fetchUserSocial:onResponse()" + "\n" + errorString);
+                        showError(new JSONObject(errorString).getJSONObject(Constants.ERROR));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                hideProgress();
+                t.printStackTrace();
+                toastHelper.showError(R.string.common_api_error);
+            }
+        });
     }
 
     @Override
     protected void onLoginSuccess(String email, String nickName) {
         super.onLoginSuccess(email, nickName);
         passwordSetting(true);
+        fetchUserSocial();
     }
 
     @Override
     protected void onLoginFailure() {
         super.onLoginFailure();
         passwordSetting(true);
+        preferenceHelper.saveString(PreferenceKeys.DF_ID, "");
     }
 
     @Override
     protected void onLogoutSuccess() {
         super.onLogoutSuccess();
         passwordSetting(true);
+        preferenceHelper.saveString(PreferenceKeys.DF_ID, "");
     }
 
     private void passwordChangeWarning() {
@@ -187,6 +247,15 @@ public class LoginChoiceActivity2 extends LoginChoiceActivity {
     }
 
     private void passwordResetWarning() {
+        String email = emailEt.getText().toString();
+        if (email.equalsIgnoreCase(preferenceHelper.getString(PreferenceKeys.SOCIAL_EMAIL))) {
+            showAlertDialog(
+                    getString(R.string.password_reset_social),
+                    (dialog, which) -> {
+                    }
+            );
+            return;
+        }
         showAlertDialog(
                 getString(R.string.password_reset_check),
                 (dialog, which) -> {
@@ -250,7 +319,7 @@ public class LoginChoiceActivity2 extends LoginChoiceActivity {
     }
 
     private void openMailApp() {
-        Intent intent=Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_EMAIL);
+        Intent intent = Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_EMAIL);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//Min SDK 15
         startActivity(intent);
     }
