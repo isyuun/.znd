@@ -3,10 +3,9 @@ package kr.keumyoung.mukin.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CheckableImageButton;
+import android.support.design.widget.TextInputLayout;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 
 import org.json.JSONObject;
 
@@ -46,22 +45,23 @@ public class LoginChoiceActivity2 extends LoginChoiceActivity {
 
     String confirm_code;
 
-    private CheckableImageButton findCheckableImageButton(View view) {
-        if (view instanceof CheckableImageButton) {
-            return (CheckableImageButton) view;
-        }
-
-        if (view instanceof ViewGroup) {
-            ViewGroup viewGroup = (ViewGroup) view;
-            for (int i = 0, ei = viewGroup.getChildCount(); i < ei; i++) {
-                CheckableImageButton checkableImageButton = findCheckableImageButton(viewGroup.getChildAt(i));
-                if (checkableImageButton != null) {
-                    return checkableImageButton;
-                }
-            }
-        }
-        return null;
-    }
+    //@Deprecated
+    //private CheckableImageButton findCheckableImageButton(View view) {
+    //    if (view instanceof CheckableImageButton) {
+    //        return (CheckableImageButton) view;
+    //    }
+    //
+    //    if (view instanceof ViewGroup) {
+    //        ViewGroup viewGroup = (ViewGroup) view;
+    //        for (int i = 0, ei = viewGroup.getChildCount(); i < ei; i++) {
+    //            CheckableImageButton checkableImageButton = findCheckableImageButton(viewGroup.getChildAt(i));
+    //            if (checkableImageButton != null) {
+    //                return checkableImageButton;
+    //            }
+    //        }
+    //    }
+    //    return null;
+    //}
 
     private void passwordSetting(boolean clear) {
         Intent intent = getIntent();
@@ -158,6 +158,18 @@ public class LoginChoiceActivity2 extends LoginChoiceActivity {
                 toastHelper.showError(R.string.common_api_error);
             }
         });
+    }
+
+    @Override
+    protected void loginSetting() {
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + ":" + isLogin());
+        super.loginSetting();
+        if (isLogin()) {
+            ((TextInputLayout) findViewById(R.id.password_anchor)).setPasswordVisibilityToggleEnabled(false);
+        } else {
+            ((TextInputLayout) findViewById(R.id.password_anchor)).setPasswordVisibilityToggleEnabled(true);
+        }
+        if (BuildConfig.DEBUG) ((TextInputLayout) findViewById(R.id.password_anchor)).setPasswordVisibilityToggleEnabled(true);
     }
 
     @Override

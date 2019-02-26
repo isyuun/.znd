@@ -118,7 +118,7 @@ public class LoginActivity extends _BaseActivity {
     @Override
     protected void onLoginSuccess(String email, String nickName) {
         super.onLoginSuccess(email, nickName);
-        setLoginText();
+        loginSetting();
         getFragmentManager().popBackStack();
     }
 
@@ -130,7 +130,7 @@ public class LoginActivity extends _BaseActivity {
             //emailEt.setText("");
             passwordEt.setText("");
         }
-        setLoginText();
+        loginSetting();
     }
 
     protected boolean isLogin() {
@@ -140,7 +140,7 @@ public class LoginActivity extends _BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        setLoginText();
+        loginSetting();
     }
 
     @Override
@@ -153,7 +153,7 @@ public class LoginActivity extends _BaseActivity {
         }
     }
 
-    private void setLoginText() {
+    protected void loginSetting() {
         updateSavedValue();
         if (isLogin()) {
             loginText.setText(R.string.logout);

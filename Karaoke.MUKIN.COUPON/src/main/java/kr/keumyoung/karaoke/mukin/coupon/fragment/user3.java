@@ -17,6 +17,7 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
+import kr.keumyoung.karaoke.mukin.coupon.BuildConfig;
 import kr.keumyoung.karaoke.mukin.coupon.R;
 import kr.keumyoung.karaoke.mukin.coupon.app._Application;
 
@@ -34,7 +35,7 @@ public class user3 extends user2 {
         return getActivity().getPackageName();
     }
 
-    public _Application getApplication() {
+    public _Application getApp() {
         return (_Application) getActivity().getApplication();
     }
 
@@ -68,34 +69,43 @@ public class user3 extends user2 {
         return email;
     }
 
-    private void getUserInfo() {
+    TextHttpResponseHandler responsHandler = new TextHttpResponseHandler() {
+        @Override
+        public void onFailure(int statusCode, Header[] headers, String response, Throwable e) {
+            user3.this.onFailure(statusCode, headers, response, e);
+        }
+
+        @Override
+        public void onSuccess(int statusCode, Header[] headers, String response) {
+            user3.this.onSuccess(statusCode, headers, response);
+        }
+    };
+
+    private void getUserCoupon() {
         //getGoogleAccount();
         SharedPreferences sharedPref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
         String email = sharedPref.getString(getString(R.string.email), "");
         mEmailView.setText(email);
-        Log.e(__CLASSNAME__, getMethodName() + ":" + email);
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + email);
+        getApp().setResponsHandler(responsHandler);
+        showProgress(true);
         if (!email.isEmpty()) {
-            getApplication().send("Q", email, "");
+            getApp().send("Q", email, "");
         } else {
             showProgress(false);
         }
-        getApplication().setResponsHandler(new TextHttpResponseHandler() {
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String response, Throwable e) {
-                user3.this.onFailure(statusCode, headers, response, e);
-            }
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, String response) {
-                user3.this.onSuccess(statusCode, headers, response);
-            }
-        });
     }
 
     @Override
     public void onPause() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + this);
         super.onPause();
-        getApplication().setResponsHandler(null);
+    }
+
+    @Override
+    public void onResume() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + this);
+        super.onResume();
     }
 
     public void onFailure(int status, Header[] headers, String response, Throwable e) {
@@ -118,19 +128,17 @@ public class user3 extends user2 {
         /*if (!email.isEmpty()) */
         mEmailView.setText(email);
 
-        showProgress(true);
         populateAutoComplete();
     }
 
     private void populateAutoComplete() {
         if (!mayRequestPermissions()) {
-            //showProgress(false);
             return;
         }
 
         getLoaderManager().initLoader(0, null, this);
-        showProgress(true);
-        getUserInfo();
+
+        getUserCoupon();
     }
 
     protected static final int REQUEST_PERMISSIONS = 0;

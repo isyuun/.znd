@@ -118,6 +118,7 @@ dependencies {
     implementation project(':Karaoke')
     implementation project(':Karaoke.KEUMYOUNG')
     implementation project(':Karaoke.MUKIN.COUPON')
+    implementation 'com.loopj.android:android-async-http:1.4.9'
     implementation 'com.android.support:design:27.1.1'
     implementation "com.android.support:support-v4:27.1.1"
 

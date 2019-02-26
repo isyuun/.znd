@@ -3,11 +3,15 @@ package kr.keumyoung.mukin.activity;
 import android.app.AlertDialog;
 import android.util.Log;
 
+import com.loopj.android.http.TextHttpResponseHandler;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.inject.Inject;
 
+import cz.msebera.android.httpclient.Header;
+import kr.keumyoung.karaoke.mukin.coupon.fragment.user3;
 import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.api.RequestModel;
@@ -38,7 +42,7 @@ public class BaseActivity3 extends BaseActivity2 {
     protected void showError(JSONObject error) {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + error);
         try {
-            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "\n" + (error != null ? error.toString(2): ""));
+            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "\n" + (error != null ? error.toString(2) : ""));
             String code = error.getString("code");
             String message = error.getString("message");
             toastHelper.showError("오류:" + message + "[" + code + "]");
@@ -131,16 +135,8 @@ public class BaseActivity3 extends BaseActivity2 {
                             preferenceHelper.saveString(PreferenceKeys.NICK_NAME, nickName);
                             preferenceHelper.saveString(PreferenceKeys.PROFILE_IMAGE, profileImage);
 
-                            // login process completed. proceed to home activity
-                            //hideProgress();
-                            //toastHelper.showError(getString(R.string.login));
-                            //navigationHelper.navigate(LoginActivity.this, _HomeActivity.class);
                             hideProgress();
                             toastHelper.showError(getString(R.string.login) /*+ " " + nickName*/ + ":" + userId);
-                            //화면이동...
-                            if (preferenceHelper.getString(getString(R.string.coupon), "").isEmpty()) {
-                                openPreferenceCoupon();
-                            }
                             onLoginSuccess(email, nickName);
                         } else {
                             // user is not active. lets stop here
@@ -172,10 +168,37 @@ public class BaseActivity3 extends BaseActivity2 {
         });
     }
 
+    TextHttpResponseHandler responsHandler = new TextHttpResponseHandler() {
+        @Override
+        public void onFailure(int statusCode, Header[] headers, String response, Throwable e) {
+            BaseActivity3.this.onFailure(statusCode, headers, response, e);
+        }
+
+        @Override
+        public void onSuccess(int statusCode, Header[] headers, String response) {
+            BaseActivity3.this.onSuccess(statusCode, headers, response);
+        }
+    };
+
+    public void onFailure(int status, Header[] headers, String response, Throwable e) {
+    }
+
+    public void onSuccess(int status, Header[] headers, String response) {
+        if (preferenceHelper.getString(getString(R.string.coupon), "").isEmpty()) {
+            openPreferenceCoupon();
+        }
+    }
+
+    private void getUserCoupon(String email) {
+        preferenceHelper.saveString(getString(R.string.email), email);
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + email);
+        getApp().setResponsHandler(responsHandler);
+        getApp().send("Q", email, "");
+    }
+
     protected void onLoginSuccess(String email, String nickName) {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
-        preferenceHelper.saveString(getString(R.string.email), email);
-        getApp().send("Q", email, "");
+        getUserCoupon(email);
     }
 
     protected void onLoginFailure() {
@@ -473,12 +496,6 @@ public class BaseActivity3 extends BaseActivity2 {
                 toastHelper.showError(R.string.common_api_error);
             }
         });
-    }
-
-    protected void onRegisterSuccess(String email, String nickName) {
-        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
-        preferenceHelper.saveString(getString(R.string.email), email);
-        getApp().send("Q", email, "");
     }
 
     public boolean handleDFError(JSONObject errorObject, SessionRefreshListener listener) throws JSONException {

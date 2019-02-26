@@ -148,6 +148,7 @@ public class Application2 extends Application {
 
     TextHttpResponseHandler responsHandler;
     public void setResponsHandler(TextHttpResponseHandler responsHandler) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "setResponsHandler(...)" + responsHandler);
         this.responsHandler = responsHandler;
     }
 
@@ -209,6 +210,7 @@ public class Application2 extends Application {
         msg += (!date.isEmpty() ? "\n" + date : "");
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
         editor.commit();
+        //if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "onSuccess(...)" + this.responsHandler);
         if (this.responsHandler != null) this.responsHandler.onSuccess(statusCode, headers, response);
     }
 
@@ -218,6 +220,7 @@ public class Application2 extends Application {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "onFailure(...)" + statusCode + "," + convertHeadersToHashMap(headers) + "." + response + ",'" + e.getMessage());
         Log.e(__CLASSNAME__, "[text]" + response);
         //showProgress(false);
+        //if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, "onFailure(...)" + this.responsHandler);
         if (this.responsHandler != null) this.responsHandler.onFailure(statusCode, headers, response, e);
     }
 

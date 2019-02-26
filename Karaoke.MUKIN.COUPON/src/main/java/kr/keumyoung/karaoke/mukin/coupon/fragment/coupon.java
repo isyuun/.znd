@@ -59,7 +59,7 @@ public class coupon extends _user {
         if (getCoupon() != null && !getCoupon().isEmpty()) {
             //String text = getString(R.string.message_already_coupon, getCoupon());
             String text = getString(R.string.message_already_coupon_1);
-            text += "\n" + getApplication().getCouponDate(true);
+            text += "\n" + getApp().getCouponDate(true);
             Toast.makeText(getBaseContext(), text, Toast.LENGTH_LONG).show();
             showProgress(false);
             getActivity().onBackPressed();
@@ -68,26 +68,34 @@ public class coupon extends _user {
         String email = mEmailView.getText().toString();
         String coupon = mCouponView.getText().toString().toUpperCase()/*.replace("-", "")*/;
         Log.e(__CLASSNAME__, getMethodName() + "[email]" + email + "[coupon]" + coupon);
-        getApplication().send("I", email, coupon);
+        getApp().send("I", email, coupon);
     }
 
     @Override
     public void onSuccess(int status, Header[] headers, String response) {
-        super.onSuccess(status, headers, response);
-        String coupon = getCoupon();
-        if (coupon != null && !coupon.isEmpty()) {
-            String couponDate = getApplication().getCouponDate(false);
-            Log.e(__CLASSNAME__, getMethodName() + ":" + mCouponView + ":" + getCoupon() + ":" + couponDate);
-            ((TextView) findViewById(R.id.coupon_date)).setText(couponDate + "\n");
-            findViewById(R.id.coupon_date).setVisibility(View.VISIBLE);
-            mCouponView.setEnabled(false);
-            showKeyboard(false);
-        } else {
-            ((TextView) findViewById(R.id.coupon_date)).setText("\n");
-            findViewById(R.id.coupon_date).setVisibility(View.GONE);
-            mCouponView.setEnabled(true);
-            mCouponView.requestFocus();
-            showKeyboard(true);
+        try {
+            super.onSuccess(status, headers, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            String coupon = getCoupon();
+            if (coupon != null && !coupon.isEmpty()) {
+                String couponDate = getApp().getCouponDate(false);
+                Log.e(__CLASSNAME__, getMethodName() + ":" + mCouponView + ":" + getCoupon() + ":" + couponDate);
+                ((TextView) findViewById(R.id.coupon_date)).setText(couponDate + "\n");
+                findViewById(R.id.coupon_date).setVisibility(View.VISIBLE);
+                mCouponView.setEnabled(false);
+                showKeyboard(false);
+            } else {
+                ((TextView) findViewById(R.id.coupon_date)).setText("\n");
+                findViewById(R.id.coupon_date).setVisibility(View.GONE);
+                mCouponView.setEnabled(true);
+                mCouponView.requestFocus();
+                showKeyboard(true);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

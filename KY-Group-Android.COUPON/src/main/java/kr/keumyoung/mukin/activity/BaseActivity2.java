@@ -196,7 +196,6 @@ public class BaseActivity2 extends BaseActivity {
     }
 
     private Runnable openPreference = () -> {
-        //clearRunning();
         Intent i = new Intent(this, _preference.class);
         i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
