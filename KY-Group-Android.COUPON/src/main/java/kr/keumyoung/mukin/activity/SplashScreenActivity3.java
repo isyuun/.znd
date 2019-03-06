@@ -1,6 +1,5 @@
 package kr.keumyoung.mukin.activity;
 
-import android.arch.lifecycle.Lifecycle;
 import android.content.Intent;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
@@ -27,6 +26,7 @@ public class SplashScreenActivity3 extends SplashScreenActivity2 {
      * </a>
      */
     private Runnable running = null;
+
     private void clearRunning() {
         this.running = null;
     }

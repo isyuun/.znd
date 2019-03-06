@@ -112,39 +112,43 @@ public class MicChecker {
     }
 
     private boolean switchBlueToothStates(String devicename, boolean bStates) {
-        boolean bPreBlueToothStates = isBlueToothON;
+        try {
+            boolean bPreBlueToothStates = isBlueToothON;
 
-        isBlueToothON = bStates;
+            isBlueToothON = bStates;
 
-        Log.d(TAG, devicename + " Is connected = " + Boolean.toString(isBlueToothON));
+            Log.d(TAG, devicename + " Is connected = " + Boolean.toString(isBlueToothON));
 
-        //states = isBlueToothON ? MIC_CONNECTION_STATES.BLUETOOTH_MUKIN_K200 : MIC_CONNECTION_STATES.NONE;
+            //states = isBlueToothON ? MIC_CONNECTION_STATES.BLUETOOTH_MUKIN_K200 : MIC_CONNECTION_STATES.NONE;
 
-        if (bPreBlueToothStates == false && isBlueToothON) {
-            //뮤젠 마이크인경우
-            if (BLUETOOTH_MUKIN_K200.compareToIgnoreCase(devicename) == 0)
-                states = MIC_CONNECTION_STATES.BLUETOOTH_MUKIN_K200;
-            else if (BLUETOOTH_MUKIN_K200S.compareToIgnoreCase(devicename) == 0)
-                states = MIC_CONNECTION_STATES.BLUETOOTH_MUKIN_K200S;
-            else
-                states = MIC_CONNECTION_STATES.BLUETOOTH_OTHERS;
+            if (bPreBlueToothStates == false && isBlueToothON) {
+                //뮤젠 마이크인경우
+                if (BLUETOOTH_MUKIN_K200.compareToIgnoreCase(devicename) == 0)
+                    states = MIC_CONNECTION_STATES.BLUETOOTH_MUKIN_K200;
+                else if (BLUETOOTH_MUKIN_K200S.compareToIgnoreCase(devicename) == 0)
+                    states = MIC_CONNECTION_STATES.BLUETOOTH_MUKIN_K200S;
+                else
+                    states = MIC_CONNECTION_STATES.BLUETOOTH_OTHERS;
 
-            last_bluetooth_device_name = devicename;
-        } else {
-            if (("" + devicename).compareToIgnoreCase(last_bluetooth_device_name) == 0)
-                states = MIC_CONNECTION_STATES.NONE;
+                last_bluetooth_device_name = devicename;
+            } else {
+                if (last_bluetooth_device_name != null && (last_bluetooth_device_name).compareToIgnoreCase(devicename) == 0)
+                    states = MIC_CONNECTION_STATES.NONE;
+            }
+
+            //이어폰은 우선
+            if (isEarphoneON)
+                states = MIC_CONNECTION_STATES.HEADSET;
+
+            if (micCheckEventListener != null)
+                micCheckEventListener.onStateChangedEvent(states);
+
+
+            //_Log.d(TAG, "states = " + states);
+            Log.e("MicChecker", "switchBlueToothStates()" + ":" + devicename + ":" + bStates + ":" + states);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        //이어폰은 우선
-        if (isEarphoneON)
-            states = MIC_CONNECTION_STATES.HEADSET;
-
-        if (micCheckEventListener != null)
-            micCheckEventListener.onStateChangedEvent(states);
-
-
-        //_Log.d(TAG, "states = " + states);
-        Log.e("MicChecker", "switchBlueToothStates()" + ":" + devicename + ":" + bStates + ":" + states);
 
         return true;
     }

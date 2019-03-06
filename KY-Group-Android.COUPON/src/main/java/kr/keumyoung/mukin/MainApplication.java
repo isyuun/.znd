@@ -97,7 +97,7 @@ public class MainApplication extends _Application {
     public void onCreate() {
         mInstance = this;
         super.onCreate();
-        Fabric.with(this, new Crashlytics());
+        //Fabric.with(this, new Crashlytics());
 
         mainComponent = DaggerMainComponent.builder().build();
         //isyuun:갤럭시S9+오류발생

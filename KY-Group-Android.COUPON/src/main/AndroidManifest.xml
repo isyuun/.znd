@@ -142,8 +142,8 @@
             android:value="@string/kakao_app_key" />
 
         <meta-data
-        android:name="com.kakao.sdk.ClientSecret"
-        android:value="@string/kakao_app_secret" />
+            android:name="com.kakao.sdk.ClientSecret"
+            android:value="@string/kakao_app_secret" />
 
         <activity
             android:name="com.kakao.auth.authorization.authcode.KakaoWebViewActivity"
@@ -159,7 +159,8 @@
 
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="7cd27b7960ac60ed8c1459e7408f0c2bd2a8e94c" />
+            android:value="388669f2a17f1f94b410ee933ed83414440c32e1" />
+
     </application>
 
 </manifest>
