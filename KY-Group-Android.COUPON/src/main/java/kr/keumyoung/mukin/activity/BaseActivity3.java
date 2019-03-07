@@ -6,6 +6,7 @@ import android.util.Log;
 import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import javax.inject.Inject;
 
@@ -13,7 +14,6 @@ import cz.msebera.android.httpclient.Header;
 import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.api.RequestModel;
-import org.json.JSONObject;
 import kr.keumyoung.mukin.data.request.LoginRequest;
 import kr.keumyoung.mukin.data.request.RegisterUserCustomRequest;
 import kr.keumyoung.mukin.data.request.RegisterUserRequest;

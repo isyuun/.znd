@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="sixteen_dp">16dp</dimen>
-    <dimen name="lyric_text_sp">32sp</dimen>
-    <dimen name="count_text_sp">32sp</dimen>
+    <dimen name="count_text_dp">24dp</dimen>
+    <dimen name="count_text_sp">20sp</dimen>
+    <dimen name="lyric_text_sp">31sp</dimen>
 </resources>
