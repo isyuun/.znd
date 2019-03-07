@@ -114,11 +114,11 @@ public class LyricView extends FrameLayout {
                     layoutParams.width = val;
                     songLyricsCurrentOverlay.setLayoutParams(layoutParams);
                 });
-             //   anim.setDuration(lyricsTime.getLength() * 4);
- 			  //	int time_offset = (int)((60.0f / (lyricsTime.getBpm() * 120.0f)) * 1000);
+                //anim.setDuration(lyricsTime.getLength() * 4);
+ 			  	//int time_offset = (int)((60.0f / (lyricsTime.getBpm() * 120.0f)) * 1000);
              	//System.out.println("~~~~ getBpm : " + lyricsTime.getBpm() + " / time_offset : " + time_offset);
-			//	anim.setDuration(lyricsTime.getLength() * time_offset);
-			//	System.out.println("~~~~ lyricsTime.getTimeOffset() : " + lyricsTime.getTimeOffset());
+				//anim.setDuration(lyricsTime.getLength() * time_offset);
+				//System.out.println("~~~~ lyricsTime.getTimeOffset() : " + lyricsTime.getTimeOffset());
 			 	anim.setDuration(lyricsTime.getTimeOffset());
                 anim.start();
             }

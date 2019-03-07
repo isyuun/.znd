@@ -2,8 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingBottom="2dp"
-    android:paddingTop="2dp">
+    android:paddingTop="2dp"
+    android:paddingBottom="2dp">
 
     <TextView
         android:id="@+id/song_lyrics_current"
@@ -12,9 +12,10 @@
         android:ellipsize="none"
         android:gravity="left"
         android:singleLine="true"
-        android:typeface="sans"
+        android:text="@string/lyric_test_text"
         android:textColor="@color/song_lyrics_color_current"
-        android:textSize="26sp" />
+        android:textSize="@dimen/lyric_text_sp"
+        android:typeface="sans" />
 
     <TextView
         android:id="@+id/song_lyrics_current_overlay"
@@ -23,8 +24,9 @@
         android:ellipsize="none"
         android:gravity="left"
         android:singleLine="true"
-        android:typeface="sans"
+        android:text="@string/lyric_test_text"
         android:textColor="@color/song_lyrics_color_prev"
-        android:textSize="26sp"
+        android:textSize="@dimen/lyric_text_sp"
+        android:typeface="sans"
         android:visibility="visible" />
 </FrameLayout>

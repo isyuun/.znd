@@ -5,11 +5,12 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import kr.kymedia.karaoke.util._Log;
+import kr.keumyoung.mukin.BuildConfig;
 
 public class BaseActivity7 extends BaseActivity6 {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
@@ -23,12 +24,12 @@ public class BaseActivity7 extends BaseActivity6 {
     }
 
     protected void volumeUp(int keyCode, KeyEvent event) {
-        _Log.e(__CLASSNAME__, getMethodName() + keyCode + ", " + event);
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + keyCode + ", " + event);
         mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, AudioManager.FLAG_SHOW_UI);
     }
 
     protected void volumeDown(int keyCode, KeyEvent event) {
-        _Log.e(__CLASSNAME__, getMethodName() + keyCode + ", " + event);
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + keyCode + ", " + event);
         mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_LOWER, AudioManager.FLAG_SHOW_UI);
     }
 
@@ -36,20 +37,62 @@ public class BaseActivity7 extends BaseActivity6 {
     public boolean dispatchKeyEvent(KeyEvent event) {
         int action = event.getAction();
         int keyCode = event.getKeyCode();
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_VOLUME_UP:
-                if (action == KeyEvent.ACTION_DOWN) {
-                    volumeUp(keyCode, event);
-                }
-                return true;
-            case KeyEvent.KEYCODE_VOLUME_DOWN:
-                if (action == KeyEvent.ACTION_DOWN) {
-                    volumeDown(keyCode, event);
-                }
-                return true;
-            default:
-                return super.dispatchKeyEvent(event);
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + ":" + keyCode + ":" + event);
+        boolean ret = false;
+
+        //if (action == KeyEvent.ACTION_DOWN)
+        {
+            switch (keyCode) {
+                case KeyEvent.KEYCODE_MEDIA_PLAY:
+                case KeyEvent.KEYCODE_MEDIA_PAUSE:
+                case KeyEvent.KEYCODE_MEDIA_NEXT:
+                case KeyEvent.KEYCODE_MEDIA_PREVIOUS:
+                    ret = true;
+                    break;
+                default:
+                    break;
+            }
         }
+
+        if (ret) {
+            return ret;
+        }
+
+        return super.dispatchKeyEvent(event);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (BuildConfig.DEBUG) Log.d(__CLASSNAME__, getMethodName() + keyCode + event);
+
+        boolean ret = false;
+
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_MEDIA_PLAY:
+            case KeyEvent.KEYCODE_MEDIA_PAUSE:
+                ret = true;
+                break;
+            case KeyEvent.KEYCODE_VOLUME_UP:
+            case KeyEvent.KEYCODE_EQUALS:
+            case KeyEvent.KEYCODE_NUMPAD_ADD:
+                volumeUp(keyCode, event);
+                ret = true;
+                break;
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+            case KeyEvent.KEYCODE_MINUS:
+            case KeyEvent.KEYCODE_NUMPAD_SUBTRACT:
+                volumeDown(keyCode, event);
+                ret = true;
+                break;
+            default:
+                break;
+        }
+
+        if (ret) {
+            return ret;
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 
     public void hideKeyboard(Activity activity) {

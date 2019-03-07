@@ -132,7 +132,7 @@ public class LoginChoiceActivity2 extends LoginChoiceActivity {
                         } else {
                             //toastHelper.showError(bodyString);
                             JSONObject responseObject = new JSONObject(bodyString);
-                            JSONObject userObject = responseObject.getJSONArray(Constants.RESOURCE).getJSONObject(0);
+                            JSONObject userObject= responseObject.getJSONArray(Constants.RESOURCE).getJSONObject(0);
                             preferenceHelper.saveString(PreferenceKeys.SOCIAL_LOGIN, userObject.getString(PreferenceKeys.SOCIAL_LOGIN));
                             preferenceHelper.saveString(PreferenceKeys.SOCIAL_ID, userObject.getString(PreferenceKeys.SOCIAL_ID));
                             if (!preferenceHelper.getString(PreferenceKeys.SOCIAL_LOGIN).isEmpty() && !preferenceHelper.getString(PreferenceKeys.SOCIAL_ID).isEmpty()) {

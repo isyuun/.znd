@@ -92,7 +92,7 @@ public class PlayerActivity3 extends PlayerActivity2 {
         reserveAnchor.setVisibility(View.INVISIBLE);
     }
 
-    private void next() {
+    protected void next() {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
         onControlOperation(NEXT);
     }

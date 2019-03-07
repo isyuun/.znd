@@ -12,7 +12,7 @@ import kr.keumyoung.mukin.data.bus.ModePopupAction;
 import kr.keumyoung.mukin.elements.ControlPanelPlay;
 import kr.keumyoung.mukin.elements.OperationPopup;
 
-public class _PlayerActivity extends PlayerActivity3 {
+public class _PlayerActivity extends PlayerActivity4 {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
     private Object busEventListener;

@@ -21,9 +21,7 @@ import android.widget.TextView;
 import com.andexert.library.RippleView;
 import com.makeramen.roundedimageview.RoundedImageView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -43,6 +41,8 @@ import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
 import kr.keumyoung.mukin.api.RequestModel;
 import kr.keumyoung.mukin.api.RestApi;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import kr.keumyoung.mukin.data.PlayerLog;
 import kr.keumyoung.mukin.data.model.Song;
 import kr.keumyoung.mukin.data.request.UserSongRequest;

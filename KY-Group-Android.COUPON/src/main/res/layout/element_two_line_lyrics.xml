@@ -19,7 +19,7 @@
         android:visibility="invisible"
         android:text="5"
         android:textColor="@android:color/white"
-        android:textSize="12sp" />
+        android:textSize="@dimen/count_text_sp" />
 
     <FrameLayout
         android:id="@+id/lyric_frame_top"
@@ -37,7 +37,7 @@
             android:paddingTop="2dp"
             android:singleLine="true"
             android:textColor="@color/song_lyrics_color_current"
-            android:textSize="26sp"
+            android:textSize="@dimen/lyric_text_sp"
             android:visibility="visible" />
 
         <kr.keumyoung.mukin.elements.LyricsLayout
@@ -65,7 +65,7 @@
             android:paddingTop="2dp"
             android:singleLine="true"
             android:textColor="@color/song_lyrics_color_current"
-            android:textSize="26sp"
+            android:textSize="@dimen/lyric_text_sp"
             android:visibility="visible" />
 
         <kr.keumyoung.mukin.elements.LyricsLayout

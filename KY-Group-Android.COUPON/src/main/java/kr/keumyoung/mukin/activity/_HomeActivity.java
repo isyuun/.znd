@@ -13,7 +13,7 @@ import kr.keumyoung.mukin.data.model.SongView;
 import kr.keumyoung.mukin.elements.ControlPanelPlay;
 import kr.keumyoung.mukin.elements.OperationPopup;
 
-public final class _HomeActivity extends HomeActivity3 {
+public final class _HomeActivity extends HomeActivity4 {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
     private Object busEventListener;

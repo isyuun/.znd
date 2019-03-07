@@ -205,11 +205,34 @@ public class PlayerActivity extends _BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         MainApplication.getInstance().getMainComponent().inject(this);
         View view = LayoutInflater.from(this).inflate(R.layout.activity_player, null, false);
         inflateContainerView(view);
         ButterKnife.bind(this, view);
 
+        getSong();
+
+        showProgress();
+
+        postDelayed(onCreate, 500);
+    }
+
+    private Song getSong() {
+        Intent intent = getIntent();
+        if (intent.hasExtra(Constants.DATA)) {
+            Bundle bundle = intent.getBundleExtra(Constants.DATA);
+            if (bundle != null && bundle.containsKey(Constants.SONG))
+                song = (Song) bundle.getSerializable(Constants.SONG);
+        }
+        return song;
+    }
+
+    private Runnable onCreate = () -> {
+        onCreate();
+    };
+
+    private void onCreate() {
         //dsjung 절전모드 화면꺼짐 방지
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -330,14 +353,8 @@ public class PlayerActivity extends _BaseActivity {
     // initiate player. take song from the intent. download bitmap, song midi and song json
     protected void initiatePlayer() {
         showProgress();
-        Intent intent = getIntent();
-        if (intent.hasExtra(Constants.DATA)) {
-            Bundle bundle = intent.getBundleExtra(Constants.DATA);
-            if (bundle != null && bundle.containsKey(Constants.SONG))
-                song = (Song) bundle.getSerializable(Constants.SONG);
-        }
 
-        if (song != null) {
+        if (getSong() != null) {
             headerSongName.setText(song.getSongTitle());
             headerSongSubText.setText(song.getArtistName());
 
@@ -351,26 +368,26 @@ public class PlayerActivity extends _BaseActivity {
             songDuration.setText(dateHelper.getDuration(song.getDuration()));
             durationText.setText(dateHelper.getDuration(song.getDuration()));
 
-         /*   String destinationPath = String.format("%s%s", ImageUtils.BASE_PATH, song.getSongFileName());
-            String url = String.format("%s%s", Constants.FILE_API, song.getSongFile());
-            System.out.println("destinationPath: " + destinationPath);
-            System.out.println("url: " + url);*/
+            //String destinationPath = String.format("%s%s", ImageUtils.BASE_PATH, song.getSongFileName());
+            //String url = String.format("%s%s", Constants.FILE_API, song.getSongFile());
+            //System.out.println("destinationPath: " + destinationPath);
+            //System.out.println("url: " + url);
 
-            showProgress();
+            //showProgress();
             //  setProgressMessage(R.string.fetching_file);
 			
-        /*    downloadHelper.download(url, song.getSongFileName())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(file -> {
-                        songFile = file;
-                        downloadSongJson();
-                    }, throwable -> {
-                        throwable.printStackTrace();
-                        toastHelper.showError(R.string.file_not_found);
-                        preferenceHelper.clearSavedSettings();
-                        navigationHelper.finish(this);
-                });*/
+            //downloadHelper.download(url, song.getSongFileName())
+            //        .subscribeOn(Schedulers.io())
+            //        .observeOn(AndroidSchedulers.mainThread())
+            //        .subscribe(file -> {
+            //            songFile = file;
+            //            downloadSongJson();
+            //        }, throwable -> {
+            //            throwable.printStackTrace();
+            //            toastHelper.showError(R.string.file_not_found);
+            //            preferenceHelper.clearSavedSettings();
+            //            navigationHelper.finish(this);
+            //    });
 
             song.setSongFile(ImageUtils.BASE_PATH + song.getIdentifier() + ".KY3");
 

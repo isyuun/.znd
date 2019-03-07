@@ -9,7 +9,6 @@ import android.widget.FrameLayout;
 import butterknife.BindView;
 import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.R;
-import kr.keumyoung.mukin.elements.ControlPanelPlay;
 
 public class PlayerActivity2 extends PlayerActivity {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
@@ -22,11 +21,15 @@ public class PlayerActivity2 extends PlayerActivity {
         super.onCreate(savedInstanceState);
         jump.setVisibility(View.INVISIBLE);
         jump.setOnClickListener(v -> {
-            if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
-            if (lyricsTimingHelper != null && lyricsTimingHelper.isPlaying()) {
-                lyricsTimingHelper.jump();
-            }
+            jump();
         });
+    }
+
+    protected void jump() {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
+        if (lyricsTimingHelper != null && lyricsTimingHelper.isPlaying()) {
+            lyricsTimingHelper.jump();
+        }
     }
 
     public void showJump() {

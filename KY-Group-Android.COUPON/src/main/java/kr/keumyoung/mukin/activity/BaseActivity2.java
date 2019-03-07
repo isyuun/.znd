@@ -151,15 +151,34 @@ public class BaseActivity2 extends BaseActivity {
         return handler.postDelayed(r, delayMillis);
     }
 
+
+    /**
+     * <a href="https://stackoverflow.com/questions/13560243/how-to-stop-runnable-when-the-app-goes-to-background">
+     * How to stop runnable when the app goes to background?
+     * </a>
+     */
+    private Runnable running = null;
+
+    protected void putRunning(Runnable running) {
+        this.running = running;
+    }
+
+    protected boolean paused = false;
+
     @Override
     protected void onPause() {
-        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + getIntent().getData());
+        paused = true;
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + ":" + paused + ":" + running);
+        removeCallbacks(running);
         super.onPause();
     }
 
     @Override
     protected void onResume() {
-        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + getIntent().getData());
+        paused = false;
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + ":" + paused + ":" + running);
+        postDelayed(running, 100);
+        putRunning(null);
         super.onResume();
     }
 
