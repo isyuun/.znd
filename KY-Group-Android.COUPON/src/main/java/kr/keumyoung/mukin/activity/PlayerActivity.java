@@ -28,6 +28,7 @@ import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.concurrent.Executors;
@@ -39,8 +40,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import kr.keumyoung.mukin.BuildConfig;
 import kr.keumyoung.mukin.MainApplication;
 import kr.keumyoung.mukin.R;
@@ -198,6 +197,7 @@ public class PlayerActivity extends _BaseActivity {
         return playerJNI;
     }
 
+    @Deprecated
     public AudioJNI getAudioJNI() {
         return audioJNI;
     }
@@ -232,7 +232,7 @@ public class PlayerActivity extends _BaseActivity {
         onCreate();
     };
 
-    private void onCreate() {
+    protected void onCreate() {
         //dsjung 절전모드 화면꺼짐 방지
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -375,7 +375,7 @@ public class PlayerActivity extends _BaseActivity {
 
             //showProgress();
             //  setProgressMessage(R.string.fetching_file);
-			
+
             //downloadHelper.download(url, song.getSongFileName())
             //        .subscribeOn(Schedulers.io())
             //        .observeOn(AndroidSchedulers.mainThread())
@@ -389,31 +389,35 @@ public class PlayerActivity extends _BaseActivity {
             //            navigationHelper.finish(this);
             //    });
 
-            song.setSongFile(ImageUtils.BASE_PATH + song.getIdentifier() + ".KY3");
+            downlaodSongKY3();
 
-            String filename = String.format("%05d", Integer.parseInt(song.getIdentifier())) + ".KY3";
-            File ky3Path = new File(ImageUtils.BASE_PATH + filename); // ky3 폴더
-            System.out.println("#### SongDownload ky3Path : " + ky3Path + " filename " + filename);
-            //	if(!ky3Path.isFile())
-            {
-                int temp = (int) Math.floor(Integer.parseInt(song.getIdentifier()) / (double) 100);
-                String dir = String.format("%03d", temp);
-                String downUrl = Constants.BASE_HOST_URL + "/ky3/" + dir + File.separator + filename;
-                SongSearchApi.downloadFile(downUrl, ImageUtils.BASE_PATH, song.getIdentifier() + ".KY3", mHandler, Constants.API_KY3_DOWNLOAD);
-            }
-
-            downloadHelper.downloadBitmap(Constants.FILE_API + song.getAlbumImage())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(bitmap -> {
-                        rootBgImage.setVisibility(View.INVISIBLE);
-                        rootBgImage.setImageBitmap(bitmap);
-                        animationHelper.showWithFadeAnim(rootBgImage);
-                    }, Throwable::printStackTrace, () -> System.out.println("blurring completed"));
+            //downloadHelper.downloadBitmap(Constants.FILE_API + song.getAlbumImage())
+            //        .subscribeOn(Schedulers.io())
+            //        .observeOn(AndroidSchedulers.mainThread())
+            //        .subscribe(bitmap -> {
+            //            rootBgImage.setVisibility(View.INVISIBLE);
+            //            rootBgImage.setImageBitmap(bitmap);
+            //            animationHelper.showWithFadeAnim(rootBgImage);
+            //        }, Throwable::printStackTrace, () -> System.out.println("blurring completed"));
         } else {
             toastHelper.showError(R.string.song_not_playable);
             preferenceHelper.clearSavedSettings();
             navigationHelper.finish(this);
+        }
+    }
+
+    protected void downlaodSongKY3() {
+        song.setSongFile(ImageUtils.BASE_PATH + song.getIdentifier() + ".KY3");
+
+        String filename = String.format("%05d", Integer.parseInt(song.getIdentifier())) + ".KY3";
+        File ky3Path = new File(ImageUtils.BASE_PATH + filename); // ky3 폴더
+        System.out.println("#### SongDownload ky3Path : " + ky3Path + " filename " + filename);
+        //	if(!ky3Path.isFile())
+        {
+            int temp = (int) Math.floor(Integer.parseInt(song.getIdentifier()) / (double) 100);
+            String dir = String.format("%03d", temp);
+            String downUrl = Constants.BASE_HOST_URL + "/ky3/" + dir + File.separator + filename;
+            SongSearchApi.downloadFile(downUrl, ImageUtils.BASE_PATH, song.getIdentifier() + ".KY3", mHandler, Constants.API_KY3_DOWNLOAD);
         }
     }
 
@@ -432,26 +436,36 @@ public class PlayerActivity extends _BaseActivity {
     //                    .subscribe(this::setProgressMessage, throwable -> {
     //                        throwable.printStackTrace();
     //                        hideProgress();
-    //                    }, this::prepareMediaPlayer));
+    //                    }, this::prepare));
     //}
 
     public long GetTimePerClock() {
         return microTimePerClock;
     }
 
-    protected void prepareMediaPlayer() {
-        try {
-            if (playerJNI == null) playerJNI = new PlayerJNI();
 
+    protected void player() {
+        //if (playerJNI != null){
+        //    playerJNI.FinalizePlayer();
+        //    playerJNI = null;
+        //}
+        if (playerJNI == null) {
+            playerJNI = new PlayerJNI();
             initializeError = playerJNI.Initialize(preferenceHelper.getString(PreferenceKeys.LIBRARY_PATH));
-            //if (playerJNI != null)
-            //  playerJNI.SetPortSelectionMethod(5); // Type K
+        }
+        //if (playerJNI != null)
+        //  playerJNI.SetPortSelectionMethod(5); // Type K
 
-            String midPath = ImageUtils.BASE_PATH + Integer.parseInt(song.getIdentifier()) + ".mid";
-            setFileError = playerJNI.SetFile(midPath);
-            microTimePerClock = 4000; //GetTimePerClock();
-            setupProgressListener();
+        String midPath = ImageUtils.BASE_PATH + Integer.parseInt(song.getIdentifier()) + ".mid";
+        setFileError = playerJNI.SetFile(midPath);
+        microTimePerClock = 4000; //GetTimePerClock();
 
+        //dsjung 초기화면에 song total time 쓰레기 값으로 나오던 문제 수정
+        songDuration.setText(dateHelper.getDuration(Math.round(playerJNI.GetTotalClocks() * microTimePerClock / 1000000)));
+    }
+
+    protected void prepare() {
+        try {
             // update pitch based on song gender
             if (modePopup == null) modePopup = new ModePopup(this);
             ModePopupAction modePopupActionSettings = new ModePopupAction(
@@ -486,9 +500,6 @@ public class PlayerActivity extends _BaseActivity {
             //if (playerJNI != null) playerJNI.SetSpeedControl(0);
 
             //setupRecorder();
-
-            //dsjung 초기화면에 song total time 쓰레기 값으로 나오던 문제 수정
-            songDuration.setText(dateHelper.getDuration(Math.round(playerJNI.GetTotalClocks() * microTimePerClock / 1000000)));
         } catch (Exception e) {
             e.printStackTrace();
             hideProgress();
@@ -532,7 +543,7 @@ public class PlayerActivity extends _BaseActivity {
         }
     }
 
-    private void setupProgressListener() {
+    protected void progress() {
         service = Executors.newScheduledThreadPool(1);
         service.scheduleWithFixedDelay(getRunnable(), 0, microTimePerClock, TimeUnit.MICROSECONDS);
     }
@@ -653,13 +664,13 @@ public class PlayerActivity extends _BaseActivity {
         }
     }
 
-    private void start() {
+    protected void start() {
         isPlaying = true;
 
         if (isPlayed) {
             lyricsTimingHelper.resume();
             //dsjung 마이크 가능 상태일때만 restart
-            if (audioJNI != null && isPossibleRecord()) audioJNI.restart();
+            //if (audioJNI != null && isPossibleRecord()) audioJNI.restart();
         } else {
 
             isPlayed = true;
@@ -731,19 +742,10 @@ public class PlayerActivity extends _BaseActivity {
         switch (playerOperation) {
             case RESTART:
             case NEXT:
-                if (audioJNI != null) audioJNI.FinalizeAudio();
-                if (playerJNI != null) playerJNI.Stop();
-                playerJNI = null;
-                audioJNI = null;
-                isPlayed = false;
-                lyricsTimingHelper.remove();
-                if (service != null) service.shutdown();
-                service = null;
-                timeProgressBar.setProgress(0);
+                stop();
                 //statusLayout.setVisibility(View.INVISIBLE); dsjung INVISIBLE 하면 안됨
                 onPopupClose();
                 initiatePlayer();
-
                 //dsjung 재시작시 버튼, 화면 초기화 하도록 추가함
                 controlPanelComponent.updatePlayButtonWithState(ControlPanelPlay.PlayButtonState.INIT);
                 updatePlayerState(ControlPanelPlay.PlayButtonState.INIT);
@@ -950,59 +952,95 @@ public class PlayerActivity extends _BaseActivity {
         }
     }
 
+    @Override
+    public void finish() {
+        release();
+        super.finish();
+    }
+
     private void cancel() {
         if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName());
         if (!isPlaying) {
-            release();
+            finish();
             return;
         }
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        //AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        //
+        ////if (songFinishWithMic == true)
+        ////    alertDialogBuilder.setMessage(getResources().getString(R.string.do_you_want_to_stop_recording));
+        ////else
+        ////    alertDialogBuilder.setMessage(getResources().getString(R.string.do_you_want_to_stop_playing));
+        //alertDialogBuilder.setMessage(getResources().getString(R.string.do_you_want_to_stop_playing));
+        //
+        //alertDialogBuilder.setPositiveButton(getResources().getString(R.string.yes),
+        //        (arg0, arg1) -> {
+        //            finish();
+        //        }
+        //);
+        //
+        //alertDialogBuilder.setNegativeButton(getResources().getString(R.string.no), (dialog, which) -> {
+        //});
+        //
+        //AlertDialog alertDialog = alertDialogBuilder.create();
+        //alertDialog.show();
+        showAlertDialog(
+                getResources().getString(R.string.do_you_want_to_stop_playing),
+                (dialog, which) -> {
+                    finish();
+                },
+                (dialog, which) -> {
+                });
+    }
 
-        //if (songFinishWithMic == true)
-        //    alertDialogBuilder.setMessage(getResources().getString(R.string.do_you_want_to_stop_recording));
-        //else
-        //    alertDialogBuilder.setMessage(getResources().getString(R.string.do_you_want_to_stop_playing));
-        alertDialogBuilder.setMessage(getResources().getString(R.string.do_you_want_to_stop_playing));
 
-        alertDialogBuilder.setPositiveButton(getResources().getString(R.string.yes),
-                (arg0, arg1) -> {
-                    release();
-                }
-        );
-
-        alertDialogBuilder.setNegativeButton(getResources().getString(R.string.no), (dialog, which) -> {
-        });
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+    protected void stop() {
+        isPlayed = false;
+        if (audioJNI != null) {
+            audioJNI.FinalizeAudio();
+        }
+        audioJNI = null;
+        if (playerJNI != null) {
+            playerJNI.Stop();
+            playerJNI.FinalizePlayer();
+        }
+        playerJNI = null;
+        if (lyricsTimingHelper != null) {
+            lyricsTimingHelper.stop();
+            lyricsTimingHelper.remove();
+        }
+        if (service != null) {
+            service.shutdown();
+        }
+        service = null;
+        timeProgressBar.setProgress(0);
     }
 
     protected void release() {
-        try {
-            if (service != null) service.shutdown();
-            closePlayer = true;
-            preferenceHelper.clearSavedSettings();
-
-            if (playerJNI != null) {
-                playerJNI.FinalizePlayer();
-                playerJNI = null;
-            }
-
-            if (audioJNI != null) {
-                //dsjung 종료시 플레이중에 Finalize 하면 오류
-                if (isPlayed) audioJNI.StopAudio();
-                audioJNI.FinalizeAudio();
-                audioJNI = null;
-            }
-
-            lyricsTimingHelper.stop();
-
-            navigationHelper.finish(this);
-            //navigationHelper.navigate(PlayerActivity.this, HomeActivity.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        //try {
+        //    if (service != null) service.shutdown();
+        //    closePlayer = true;
+        //    preferenceHelper.clearSavedSettings();
+        //
+        //    if (playerJNI != null) {
+        //        playerJNI.FinalizePlayer();
+        //        playerJNI = null;
+        //    }
+        //
+        //    if (audioJNI != null) {
+        //        //dsjung 종료시 플레이중에 Finalize 하면 오류
+        //        if (isPlayed) audioJNI.StopAudio();
+        //        audioJNI.FinalizeAudio();
+        //        audioJNI = null;
+        //    }
+        //
+        //    lyricsTimingHelper.stop();
+        //
+        //} catch (Exception e) {
+        //    e.printStackTrace();
+        //}
+        closePlayer = true;
+        stop();
     }
 
     public void onPopupClose() {
@@ -1028,35 +1066,68 @@ public class PlayerActivity extends _BaseActivity {
         super.onConfigurationChanged(newConfig);
     }
 
-    public Handler mHandler = new Handler() {
+    static class MyInnerHandler extends Handler {
+        WeakReference<PlayerActivity> activity;
+
+        MyInnerHandler(PlayerActivity activity) {
+            this.activity = new WeakReference<PlayerActivity>(activity);
+        }
+
         @Override
         public void handleMessage(Message msg) {
+            PlayerActivity activity = this.activity.get();
             super.handleMessage(msg);
             switch (msg.what) {
                 case Constants.API_KY3_DOWNLOAD:
                     System.out.println("#### API_KY3_DOWNLOAD!!!");
-                    parseKY3();
+                    activity.parseKY3();
                     break;
                 case Constants.API_ERROR_CODE:
-                    toastHelper.showError(R.string.file_not_found);
-                    preferenceHelper.clearSavedSettings();
-                    navigationHelper.finish(PlayerActivity.this);
+                    activity.toastHelper.showError(R.string.file_not_found);
+                    activity.preferenceHelper.clearSavedSettings();
+                    activity.finish();
                     break;
             }
         }
-    };
+    }
 
-    private void parseKY3() {
+    public Handler mHandler = new MyInnerHandler(this);
+    //public Handler mHandler = new Handler() {
+    //    @Override
+    //    public void handleMessage(Message msg) {
+    //        super.handleMessage(msg);
+    //        switch (msg.what) {
+    //            case Constants.API_KY3_DOWNLOAD:
+    //                System.out.println("#### API_KY3_DOWNLOAD!!!");
+    //                parseKY3();
+    //                break;
+    //            case Constants.API_ERROR_CODE:
+    //                toastHelper.showError(R.string.file_not_found);
+    //                preferenceHelper.clearSavedSettings();
+    //                navigationHelper.finish(PlayerActivity.this);
+    //                break;
+    //        }
+    //    }
+    //};
+
+    protected void unpack() {
         String ky3Path = ImageUtils.BASE_PATH + song.getIdentifier() + ".KY3";
-
-        playerKyUnpackJNI.Init(ky3Path, ImageUtils.BASE_PATH, Integer.parseInt(song.getIdentifier()));
-        prepareMediaPlayer();
-
         String SokPath = ImageUtils.BASE_PATH + Integer.parseInt(song.getIdentifier()) + ".sok";
+
         System.out.println("#### ky3Path : " + ky3Path + " || SokPath : " + SokPath);
+        playerKyUnpackJNI.Init(ky3Path, ImageUtils.BASE_PATH, Integer.parseInt(song.getIdentifier()));
         lyricsTimingHelper.initiateWithLyrics(PlayerActivity.this, lyricsView, SokPath);
-        //		lyricsTimingHelper.parseSokLineArray(SokPath);
         playerKyUnpackJNI.LyricSokParse(lyricsTimingHelper.GetLyricsLineString());
+    }
+
+    public void parseKY3() {
+        String ky3Path = ImageUtils.BASE_PATH + song.getIdentifier() + ".KY3";
+        String SokPath = ImageUtils.BASE_PATH + Integer.parseInt(song.getIdentifier()) + ".sok";
+
+        unpack();
+        player();
+        progress();
+        prepare();
 
         try {
             File ky3File = new File(ky3Path);

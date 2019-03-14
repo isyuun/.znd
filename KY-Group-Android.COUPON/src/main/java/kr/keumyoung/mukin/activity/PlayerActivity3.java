@@ -114,10 +114,10 @@ public class PlayerActivity3 extends PlayerActivity2 {
     }
 
     @Override
-    protected void prepareMediaPlayer() {
+    protected void prepare() {
         tempo(0);
         pitch(0);
-        super.prepareMediaPlayer();
+        super.prepare();
     }
 
     @Override

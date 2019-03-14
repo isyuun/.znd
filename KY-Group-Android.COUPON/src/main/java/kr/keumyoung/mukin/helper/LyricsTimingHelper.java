@@ -50,7 +50,7 @@ public class LyricsTimingHelper {
     @Inject
     FileHelper fileHelper;
 
-//    LyricsView lyricsView;
+    //LyricsView lyricsView;
 
     TwoLineLyricsView lyricsView;
 
@@ -167,7 +167,7 @@ public class LyricsTimingHelper {
     }
 
     public void parseSokLineArray(String file_path) {
-        //if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + ":" + file_path);
+        if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + ":" + file_path);
 
         lyricsTimes.clear();
         //	StringBuffer strBuffer = new StringBuffer();

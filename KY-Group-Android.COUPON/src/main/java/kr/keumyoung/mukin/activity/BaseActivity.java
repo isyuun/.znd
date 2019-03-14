@@ -286,7 +286,7 @@ public class BaseActivity extends AppCompatActivity {
     //}
 
 
-    static class ViewHolder implements View.OnTouchListener, View.OnClickListener {
+    /*static */class ViewHolder implements View.OnTouchListener, View.OnClickListener {
         @BindView(R.id.container_frame)
         FrameLayout containerFrame;
         @BindView(R.id.progress_bar)

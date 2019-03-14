@@ -63,7 +63,7 @@ public abstract class ControlsPopup {
         return view;
     }
 
-    static class ViewHolder {
+    /*static */class ViewHolder {
         @BindView(R.id.popup_heading)
         TextView popupHeading;
         @BindView(R.id.close_button)

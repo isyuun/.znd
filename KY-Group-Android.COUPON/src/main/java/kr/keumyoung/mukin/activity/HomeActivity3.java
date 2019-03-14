@@ -22,7 +22,6 @@ import kr.keumyoung.mukin.elements.ModePopupItem;
 import kr.keumyoung.mukin.elements.OperationPopup;
 import kr.keumyoung.mukin.elements.PitchPopup;
 import kr.keumyoung.mukin.elements.TempoPopup;
-import kr.keumyoung.mukin.util.Constants;
 import kr.keumyoung.mukin.util.PreferenceKeys;
 
 import static kr.keumyoung.mukin.elements.ControlPanelPlay.PlayButtonState.INIT;

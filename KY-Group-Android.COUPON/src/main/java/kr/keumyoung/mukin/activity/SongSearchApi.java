@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.os.Message;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.lang.ref.WeakReference;
 
 import kr.keumyoung.mukin.util.Constants;
 import kr.keumyoung.mukin.util.SSLUtil;
@@ -43,6 +45,14 @@ public class SongSearchApi {
         SongApiService apiService = getApiService();
         String apiVersion = "v1";
 
+        final File path = new File(savePath);
+        File dir = new File(path.getPath());
+
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+        File downFile = new File(path + File.separator + saveName);
+
         Call<ResponseBody> response = apiService.downloadSoundLib(downUrl);
         response.enqueue(new Callback<ResponseBody>() {
             //성공시
@@ -54,42 +64,64 @@ public class SongSearchApi {
                     //     final String strpath = Environment.getExternalStorageDirectory().getAbsolutePath();
                     //     System.out.println("!!!---- strpath+File.separator+ savePath : "+strpath+File.separator+ savePath);
                     //     final File path = new File(strpath+File.separator+ savePath);
-                    final File path = new File(savePath);
 
-                    new AsyncTask<Void, Void, Boolean>() {
-                        @Override
-                        protected Boolean doInBackground(Void... voids) {
-                            boolean writtenToDisk = false;
-                            File dir = new File(path.getPath());
-
-                            if (!dir.exists()) {
-                                dir.mkdir();
-                            }
-
-                            File downFile = new File(path + File.separator + saveName);
-
-                            try {
-                                BufferedSource bufferedSource = response.body().source();
-                                BufferedSink bufferedSink = Okio.buffer(Okio.sink(downFile));
-                                bufferedSink.writeAll(bufferedSource);
-                                bufferedSink.close();
-                                writtenToDisk = true;
-                            } catch (Exception e) {
-                                writtenToDisk = false;
-                            }
-
-                            System.out.println("file download was a success? " + writtenToDisk);
-                            return writtenToDisk;
-                        }
-
-                        @Override
-                        protected void onPostExecute(Boolean result) {
-                            super.onPostExecute(result);
-                            Message msg = new Message();
-                            msg.what = what;
-                            handler.sendMessage(msg);
-                        }
-                    }.execute();
+                    //new AsyncTask<Void, Void, Boolean>() {
+                    //    @Override
+                    //    protected Boolean doInBackground(Void... voids) {
+                    //        boolean writtenToDisk = false;
+                    //        try {
+                    //            BufferedSource bufferedSource = response.body().source();
+                    //            BufferedSink bufferedSink = Okio.buffer(Okio.sink(downFile));
+                    //            bufferedSink.writeAll(bufferedSource);
+                    //            bufferedSink.close();
+                    //            writtenToDisk = true;
+                    //        } catch (Exception e) {
+                    //            writtenToDisk = false;
+                    //        }
+                    //
+                    //        System.out.println("file download was a success? " + writtenToDisk);
+                    //        return writtenToDisk;
+                    //    }
+                    //
+                    //    @Override
+                    //    protected void onPostExecute(Boolean result) {
+                    //        super.onPostExecute(result);
+                    //        Message msg = new Message();
+                    //        msg.what = what;
+                    //        handler.sendMessage(msg);
+                    //    }
+                    //}.execute();
+                    try {
+                        final BufferedSource bufferedSource = response.body().source();
+                        final BufferedSink bufferedSink = Okio.buffer(Okio.sink(downFile));
+                        //new AsyncTask<Void, Void, Boolean>() {
+                        //    @Override
+                        //    protected Boolean doInBackground(Void... voids) {
+                        //        boolean writtenToDisk = false;
+                        //        try {
+                        //            bufferedSink.writeAll(bufferedSource);
+                        //            bufferedSink.close();
+                        //            writtenToDisk = true;
+                        //        } catch (Exception e) {
+                        //            writtenToDisk = false;
+                        //        }
+                        //
+                        //        System.out.println("file download was a success? " + writtenToDisk);
+                        //        return writtenToDisk;
+                        //    }
+                        //
+                        //    @Override
+                        //    protected void onPostExecute(Boolean result) {
+                        //        super.onPostExecute(result);
+                        //        Message msg = new Message();
+                        //        msg.what = what;
+                        //        handler.sendMessage(msg);
+                        //    }
+                        //}.execute();
+                        new DownloadFileTask(handler, what, bufferedSink, bufferedSource).execute();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     handler.sendEmptyMessage(Constants.API_ERROR_CODE);
                     System.out.println("server contact failed");
@@ -102,5 +134,46 @@ public class SongSearchApi {
                 handler.sendEmptyMessage(Constants.API_ERROR_CODE);
             }
         });
+    }
+
+    private static class DownloadFileTask extends AsyncTask<Void, Void, Boolean> {
+        final int what;
+        final private WeakReference<Handler> handler;
+        final private WeakReference<BufferedSink> bufferedSink;
+        final private WeakReference<BufferedSource> bufferedSource;
+
+        public DownloadFileTask(final Handler handler, final int what, final BufferedSink bufferedSink, final BufferedSource bufferedSource) {
+            super();
+            this.what = what;
+            this.handler = new WeakReference<>(handler);
+            this.bufferedSink = new WeakReference<>(bufferedSink);
+            this.bufferedSource = new WeakReference<>(bufferedSource);
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            boolean writtenToDisk = false;
+            try {
+                final BufferedSink bufferedSink = this.bufferedSink.get();
+                final BufferedSource bufferedSource = this.bufferedSource.get();
+                bufferedSink.writeAll(bufferedSource);
+                bufferedSink.close();
+                writtenToDisk = true;
+            } catch (Exception e) {
+                writtenToDisk = false;
+            }
+
+            System.out.println("file download was a success? " + writtenToDisk);
+            return writtenToDisk;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+            final Handler handler = this.handler.get();
+            Message msg = new Message();
+            msg.what = what;
+            handler.sendMessage(msg);
+        }
     }
 }
