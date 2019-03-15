@@ -143,4 +143,7 @@
     <string name="reserve_please">목록을 선택해 예약해주세요.</string>
     <string name="in_playing_work">재생시사용합니다.</string>
     <string name="lyric_test_text">아아아아아아아아아아아아아~</string>
+    <string name="text_song_name">곡제목</string>
+    <string name="text_song_desc">곡설명</string>
+    <string name="text_song_duration">99:99</string>
 </resources>
