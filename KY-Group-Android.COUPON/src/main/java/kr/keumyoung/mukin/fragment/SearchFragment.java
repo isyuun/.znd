@@ -112,7 +112,7 @@ public class SearchFragment extends _BaseListFragment {
 
         parentFragment.hideIcons();
         parentFragment.activateSearch(songs.isEmpty());
-        new Handler().postDelayed(() -> parentFragment.popupKeyboard(), 100);
+        postDelayed(() -> parentFragment.popupKeyboard(), 100);
     }
 
     @Override

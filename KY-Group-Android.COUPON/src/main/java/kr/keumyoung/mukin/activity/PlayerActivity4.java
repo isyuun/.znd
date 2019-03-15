@@ -186,8 +186,12 @@ public class PlayerActivity4 extends PlayerActivity3 {
 
     @Override
     public void showProgress() {
-        showProgress(true);
+        post(showProgress);
     }
+
+    private Runnable showProgress = () -> {
+        showProgress(true);
+    };
 
     private Runnable hideProgress = () -> {
         super.hideProgress();

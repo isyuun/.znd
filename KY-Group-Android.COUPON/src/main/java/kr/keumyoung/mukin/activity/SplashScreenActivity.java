@@ -112,7 +112,7 @@ public class SplashScreenActivity extends _BaseActivity {
 
     // planning for checking whether the session is active or not here before going to the next activity when already logged in
     protected void proceedToNextActivity() {
-        new Handler().postDelayed(() -> {
+        postDelayed(() -> {
             showProgress();
             copyFilesToLocal()
                     .observeOn(AndroidSchedulers.mainThread())

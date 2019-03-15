@@ -48,7 +48,9 @@ public class BaseActivity9 extends BaseActivity8 {
         @Override
         public void run() {
             if (reservesFragment == null) reservesFragment = new ReservesFragment();
-            if (getCurrentFragment() instanceof HomeFragment) ((HomeFragment) getCurrentFragment()).replaceListFragment(reservesFragment);
+            if (getCurrentFragment() instanceof HomeFragment) {
+                ((HomeFragment) getCurrentFragment()).replaceListFragment(reservesFragment);
+            }
         }
     };
 

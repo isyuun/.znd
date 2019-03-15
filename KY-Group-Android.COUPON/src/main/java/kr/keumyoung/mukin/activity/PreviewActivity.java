@@ -243,7 +243,7 @@ public class PreviewActivity extends _BaseActivity implements MediaPlayer.OnComp
 
     private void initiatePlayer() {
         showProgress();
-        new Handler().postDelayed(() -> {
+        postDelayed(() -> {
             isPlayed = false;
             if (playerJNI == null) playerJNI = new PlayerJNI();
 
@@ -428,7 +428,7 @@ public class PreviewActivity extends _BaseActivity implements MediaPlayer.OnComp
                 playerJNI.Stop();
             }
 
-            new Handler().postDelayed(() -> {
+            postDelayed(() -> {
                 if (mediaPlayer != null) mediaPlayer.pause();
             }, 100);
 

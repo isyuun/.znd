@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -181,6 +182,7 @@ public class BaseActivity extends AppCompatActivity {
     // to show the progress bar added in the base activity. it can be called from a background thread also
     // keep the things under runOnUiThread
     public void showProgress() {
+        if (isShowingProgress) return;
         runOnUiThread(() -> {
             try {
                 isShowingProgress = true;
@@ -194,6 +196,7 @@ public class BaseActivity extends AppCompatActivity {
 
     // to hide the progress bar added in the base activity.
     public void hideProgress() {
+        if (!isShowingProgress) return;
         runOnUiThread(() -> {
             try {
                 isShowingProgress = false;

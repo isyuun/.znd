@@ -78,6 +78,7 @@ import kr.keumyoung.mukin.util.PreferenceKeys;
 
 import static kr.keumyoung.mukin.elements.ControlPanelPlay.PlayButtonState.PLAY;
 import static kr.keumyoung.mukin.elements.ControlPanelPlay.PlayButtonState.RESUME;
+import static kr.keumyoung.mukin.elements.OperationPopup.PlayerOperation.FINISH;
 
 /**
  * on 13/01/18.
@@ -215,7 +216,7 @@ public class PlayerActivity extends _BaseActivity {
 
         showProgress();
 
-        postDelayed(onCreate, 500);
+        onCreate();
     }
 
     private Song getSong() {
@@ -245,7 +246,7 @@ public class PlayerActivity extends _BaseActivity {
 
         imageUtils = new ImageUtils(this);
         playerKyUnpackJNI = new PlayerKyUnpackJNI();
-        initiatePlayer();
+        postDelayed(initiatePlayer, 500);
 
         //dsjung 초기화면 뜨도록 수정함.
         //왜 시작시 초기화면 안뜨게 했는지..?
@@ -331,13 +332,13 @@ public class PlayerActivity extends _BaseActivity {
             recording_circle.setColorFilter(getResources().getColor(R.color.recording_red), PorterDuff.Mode.SRC_ATOP);
             if (isPlaying) statusText.setText(R.string.recording);
 
-            operationPopup.enableElementForPopup(OperationPopup.PlayerOperation.FINISH, true);
+            operationPopup.enableElementForPopup(FINISH, true);
 
         } else {
             recording_circle.setColorFilter(getResources().getColor(R.color.recording_blue), PorterDuff.Mode.SRC_ATOP);
             if (isPlaying) statusText.setText(R.string.playing);
 
-            operationPopup.enableElementForPopup(OperationPopup.PlayerOperation.FINISH, false);
+            operationPopup.enableElementForPopup(FINISH, false);
 
             //장비 상태가 변경되었을 때 mic effect 등의 띄워져있는 팝업은 닫아준다.
             controlsPopup.setVisibility(View.GONE);
@@ -349,6 +350,10 @@ public class PlayerActivity extends _BaseActivity {
     private boolean isPossibleRecord() {
         return MicChecker.getInstance().getStates() == MicChecker.MIC_CONNECTION_STATES.HEADSET ? true : false;
     }
+
+    private Runnable initiatePlayer = () -> {
+        initiatePlayer();
+    };
 
     // initiate player. take song from the intent. download bitmap, song midi and song json
     protected void initiatePlayer() {
@@ -567,7 +572,7 @@ public class PlayerActivity extends _BaseActivity {
 
                     //dsjung 종료시 헤드셋이 아니거나 헤드셋을 해제한 경우가 있는경우에는 FINISH 안띄움
                     if (songFinishWithMic)
-                        onControlOperation(OperationPopup.PlayerOperation.FINISH);
+                        onControlOperation(FINISH);
                     else {
                         if (getApp().getReserves().size() > 0) {
                             onControlOperation(OperationPopup.PlayerOperation.NEXT);
@@ -739,24 +744,43 @@ public class PlayerActivity extends _BaseActivity {
 
         Log.d(TAG, "onControlOperation = " + playerOperation);
 
+        //switch (playerOperation) {
+        //    case RESTART:
+        //    case NEXT:
+        //        stop();
+        //        //statusLayout.setVisibility(View.INVISIBLE); dsjung INVISIBLE 하면 안됨
+        //        onPopupClose();
+        //        initiatePlayer();
+        //        //dsjung 재시작시 버튼, 화면 초기화 하도록 추가함
+        //        controlPanelComponent.updatePlayButtonWithState(ControlPanelPlay.PlayButtonState.INIT);
+        //        updatePlayerState(ControlPanelPlay.PlayButtonState.INIT);
+        //        break;
+        //    case RESUME:
+        //        controlPanelComponent.updatePlayButtonWithState(ControlPanelPlay.PlayButtonState.RESUME);
+        //        updatePlayerState(ControlPanelPlay.PlayButtonState.RESUME);
+        //        break;
+        //    case FINISH:
+        //        if (!isFinished)
+        //            uploadFile();
+        //        break;
+        //}
         switch (playerOperation) {
-            case RESTART:
-            case NEXT:
-                stop();
-                //statusLayout.setVisibility(View.INVISIBLE); dsjung INVISIBLE 하면 안됨
-                onPopupClose();
-                initiatePlayer();
-                //dsjung 재시작시 버튼, 화면 초기화 하도록 추가함
-                controlPanelComponent.updatePlayButtonWithState(ControlPanelPlay.PlayButtonState.INIT);
-                updatePlayerState(ControlPanelPlay.PlayButtonState.INIT);
-                break;
             case RESUME:
                 controlPanelComponent.updatePlayButtonWithState(ControlPanelPlay.PlayButtonState.RESUME);
                 updatePlayerState(ControlPanelPlay.PlayButtonState.RESUME);
                 break;
             case FINISH:
-                if (!isFinished)
-                    uploadFile();
+            case RESTART:
+            case NEXT:
+                showProgress();
+                stop();
+                //statusLayout.setVisibility(View.INVISIBLE); dsjung INVISIBLE 하면 안됨
+                onPopupClose();
+                postDelayed(initiatePlayer, 500);
+                //dsjung 재시작시 버튼, 화면 초기화 하도록 추가함
+                controlPanelComponent.updatePlayButtonWithState(ControlPanelPlay.PlayButtonState.INIT);
+                updatePlayerState(ControlPanelPlay.PlayButtonState.INIT);
+                if (playerOperation == FINISH && !isFinished) uploadFile();
                 break;
         }
     }

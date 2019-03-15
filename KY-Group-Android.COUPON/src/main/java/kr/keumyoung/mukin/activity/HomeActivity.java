@@ -327,7 +327,7 @@ public class HomeActivity extends _BaseActivity {
             } else {
                 backPressed = true;
                 toastHelper.showGenericToast(R.string.tap_once_for_exit);
-                new Handler().postDelayed(() -> backPressed = false, 2000);
+                postDelayed(() -> backPressed = false, 2000);
             }
         }
     }
