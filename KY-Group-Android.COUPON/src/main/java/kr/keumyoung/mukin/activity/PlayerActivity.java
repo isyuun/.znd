@@ -707,7 +707,7 @@ public class PlayerActivity extends _BaseActivity {
 
     public void showInitStateFrame() {
         initStateFrame.setVisibility(View.VISIBLE);
-        animationHelper.showWithFadeAnim(initFrameContent, false, 1500);
+        //animationHelper.showWithFadeAnim(initFrameContent, false, 1500);
     }
 
     public void hideInitStateFrame() {
@@ -1065,6 +1065,10 @@ public class PlayerActivity extends _BaseActivity {
         //}
         closePlayer = true;
         stop();
+        if (playerJNI != null) {
+            playerJNI.FinalizePlayer();
+        }
+        playerJNI = null;
     }
 
     public void onPopupClose() {

@@ -189,12 +189,15 @@ public class HomeFragment extends _BaseFragment {
             case R.id.search_edit_ripple:
                 //dsjung 장르, 노래 프레그먼트 검색창 클릭 안되는 문제로
                 //Song, Genre 프레그먼트 추가
-                if (currentListFragment instanceof RecommendedFragment
-                        || currentListFragment instanceof FeaturedFragment
-                        || currentListFragment instanceof TopHitsFragment
-                        || currentListFragment instanceof GenreFragment //?
-                        || currentListFragment instanceof SongsFragment //?
-                        || currentListFragment instanceof ArtistFragment) {
+                //if (currentListFragment instanceof RecommendedFragment
+                //        || currentListFragment instanceof FeaturedFragment
+                //        || currentListFragment instanceof TopHitsFragment
+                //        || currentListFragment instanceof GenreFragment //?
+                //        || currentListFragment instanceof SongsFragment //?
+                //        || currentListFragment instanceof ArtistFragment
+                //        || currentListFragment instanceof FavoritesFragment)
+                if (!(currentListFragment instanceof SearchFragment))
+                {
                     searchEditRipple.setOnRippleCompleteListener(rippleView -> {
                         if (searchFragment == null) searchFragment = new SearchFragment();
                         replaceListFragment(searchFragment);
