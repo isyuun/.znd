@@ -186,7 +186,8 @@ public class BaseActivity extends AppCompatActivity {
         runOnUiThread(() -> {
             try {
                 isShowingProgress = true;
-                animationHelper.showWithFadeAnim(viewHolder.progressBar);
+                //animationHelper.showWithFadeAnim(viewHolder.progressBar);
+                viewHolder.progressBar.setVisibility(View.VISIBLE);
                 viewHolder.containerFrame.setEnabled(false);
             } catch (NullPointerException e) {
                 e.printStackTrace();
@@ -200,7 +201,8 @@ public class BaseActivity extends AppCompatActivity {
         runOnUiThread(() -> {
             try {
                 isShowingProgress = false;
-                animationHelper.hideWithFadeAnim(viewHolder.progressBar);
+                //animationHelper.hideWithFadeAnim(viewHolder.progressBar);
+                viewHolder.progressBar.setVisibility(View.INVISIBLE);
                 viewHolder.containerFrame.setEnabled(true);
             } catch (NullPointerException e) {
                 e.printStackTrace();
@@ -294,8 +296,8 @@ public class BaseActivity extends AppCompatActivity {
         FrameLayout containerFrame;
         @BindView(R.id.progress_bar)
         RelativeLayout progressBar;
-        @BindView(R.id.spin_kit)
-        SpinKitView spinKitView;
+        //@BindView(R.id.spin_kit)
+        //SpinKitView spinKitView;
         @BindView(R.id.progress_message)
         TextView progressMessage;
         @BindView(R.id.popup_view)
@@ -322,6 +324,8 @@ public class BaseActivity extends AppCompatActivity {
             rootLayout.setOnClickListener(this);
 
             appVersion.setText(String.format("Ver: 1.%s", BuildConfig.VERSION_CODE));
+
+            progressBar.setVisibility(View.INVISIBLE);
         }
 
         @Override

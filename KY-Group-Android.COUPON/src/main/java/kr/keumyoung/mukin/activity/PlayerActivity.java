@@ -1020,24 +1020,30 @@ public class PlayerActivity extends _BaseActivity {
 
     protected void stop() {
         isPlayed = false;
-        if (audioJNI != null) {
-            audioJNI.FinalizeAudio();
+        try {
+            if (audioJNI != null) {
+                audioJNI.FinalizeAudio();
+            }
+            audioJNI = null;
+            if (playerJNI != null) {
+                playerJNI.Stop();
+                playerJNI.FinalizePlayer();
+            }
+            playerJNI = null;
+            if (service != null) {
+                service.shutdown();
+            }
+            service = null;
+            if (lyricsTimingHelper != null) {
+                lyricsTimingHelper.stop();
+                lyricsTimingHelper.remove();
+            }
+            if (timeProgressBar != null) {
+                timeProgressBar.setProgress(0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        audioJNI = null;
-        if (playerJNI != null) {
-            playerJNI.Stop();
-            playerJNI.FinalizePlayer();
-        }
-        playerJNI = null;
-        if (lyricsTimingHelper != null) {
-            lyricsTimingHelper.stop();
-            lyricsTimingHelper.remove();
-        }
-        if (service != null) {
-            service.shutdown();
-        }
-        service = null;
-        timeProgressBar.setProgress(0);
     }
 
     protected void release() {

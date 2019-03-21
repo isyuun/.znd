@@ -470,7 +470,7 @@ public class LyricsTimingHelper {
     }
 
     public void remove() {
-        lyricsView.setVisibility(View.INVISIBLE);
+        if (lyricsView != null) lyricsView.setVisibility(View.INVISIBLE);
         if (service != null) service.shutdownNow();
         service = null;
     }
