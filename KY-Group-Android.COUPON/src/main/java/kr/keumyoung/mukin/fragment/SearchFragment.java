@@ -1,7 +1,6 @@
 package kr.keumyoung.mukin.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -145,10 +144,9 @@ public class SearchFragment extends _BaseListFragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 String queryText = editable.toString().trim();
-                if (queryText.length() >= 1){
+                if (queryText.length() >= 1) {
                     parentFragment.searchClose.setVisibility(View.VISIBLE);
-                }
-                else {
+                } else {
                     parentFragment.searchClose.setVisibility(View.GONE);
                 }
             }
@@ -191,10 +189,9 @@ public class SearchFragment extends _BaseListFragment {
         String queryText = editable.toString().trim();
         //if (queryText.length() >= 3) performSearch(queryText);
         //dsjung 3글자 미만 제목의 곡이 검색 안되서 아래와 같이 수정함
-        if (queryText.length() >= 1){
+        if (queryText.length() >= 1) {
             performSearch(queryText);
-        }
-        else {
+        } else {
             clearSongList();
         }
     };
@@ -206,8 +203,8 @@ public class SearchFragment extends _BaseListFragment {
     }
 
     private void performSearch(String keyword) {
-        if(BuildConfig.DEBUG) Log.e("[SearchFragment]", "performSearch(...)" + keyword);
-        progressBar.setVisibility(View.VISIBLE);
+        if (BuildConfig.DEBUG) Log.e("[SearchFragment]", "performSearch(...)" + keyword);
+        if (progressBar != null) progressBar.setVisibility(View.VISIBLE);
         restApi.searchCustomScript(preferenceHelper.getString(PreferenceKeys.SESSION_TOKEN), "global", keyword)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
@@ -315,28 +312,24 @@ public class SearchFragment extends _BaseListFragment {
     protected void updateEmptyVisibility() {
         try {
             if (songs.isEmpty() || parentFragment.searchEt.getText().toString().isEmpty()) {
-                if(countText != null)
+                if (countText != null)
                     countText.setText("");
-                if(animationHelper != null)
-                {
+                if (animationHelper != null) {
                     animationHelper.hideViewWithZoomAnim(searchRecycler);
                     animationHelper.showWithZoomAnim(emptyFrame);
                 }
             } else if (searchRecycler != null && searchRecycler.getVisibility() != View.VISIBLE) {
-                if(animationHelper != null)
-                {
+                if (animationHelper != null) {
                     animationHelper.showWithZoomAnim(searchRecycler);
                     animationHelper.hideViewWithZoomAnim(emptyFrame);
                 }
             } else if (emptyFrame != null && emptyFrame.getVisibility() == View.VISIBLE) {
-                if(animationHelper != null)
+                if (animationHelper != null)
                     animationHelper.hideViewWithZoomAnim(emptyFrame);
             }
-            if(progressBar != null)
+            if (progressBar != null)
                 progressBar.setVisibility(View.INVISIBLE);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
