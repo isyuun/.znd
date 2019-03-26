@@ -26,7 +26,7 @@
         </activity>
         <activity
             android:name=".apps._play"
-            android:configChanges="orientation|keyboardHidden"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/title_activity_play"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

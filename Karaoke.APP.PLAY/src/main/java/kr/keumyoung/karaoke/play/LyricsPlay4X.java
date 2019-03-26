@@ -39,6 +39,7 @@ import kr.kymedia.karaoke.play._SoundTouchPlay;
 import kr.keumyoung.karaoke.play.BuildConfig;
 
 import android.content.Context;
+import android.view.View;
 
 /**
  * <pre>
@@ -114,4 +115,24 @@ class LyricsPlay4X extends LyricsPlay3 {
 		return ret;
 	}
 
+	public void show() {
+		try {
+			setVisibility(VISIBLE);
+            if (mKPLyrics == null)
+            {
+                mKPLyrics = new _KPLyrics((_LyricsPlay) this);
+            }
+            mKPLyrics.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+    @Override
+    protected void init() {
+        super.init();
+        if (!isPlaying() && getVisibility() == VISIBLE) {
+            show();
+        }
+    }
 }

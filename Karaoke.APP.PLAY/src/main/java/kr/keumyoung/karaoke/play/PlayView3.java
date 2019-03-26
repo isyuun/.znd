@@ -391,4 +391,18 @@ class PlayView3 extends PlayView2X {
 		stop();
 	}
 
+
+	@Override
+	public void onPrepared() {
+		super.onPrepared();
+		show();
+	}
+
+	public void show() {
+		try {
+			getLyricsPlay().show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

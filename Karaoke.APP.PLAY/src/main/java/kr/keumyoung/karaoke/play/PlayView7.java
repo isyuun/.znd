@@ -230,4 +230,16 @@ public class PlayView7 extends PlayView6 {
         seek_pitch_tempo.stopLoading();
         return ret;
     }
+
+    @Override
+    public void setOnListener(Listener listener) {
+        super.setOnListener(listener);
+    }
+
+    @Override
+    public void onPrepared() {
+        super.onPrepared();
+        seek_pitch_tempo.stopLoading();
+    }
+
 }

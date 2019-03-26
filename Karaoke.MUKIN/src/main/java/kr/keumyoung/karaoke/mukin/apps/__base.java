@@ -16,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import kr.keumyoung.karaoke.app.AppCompatActivity;
-import kr.keumyoung.karaoke.mukin.BuildConfig;
 import kr.keumyoung.karaoke.mukin.R;
 import kr.keumyoung.karaoke.mukin.coupon.apps._preference;
 

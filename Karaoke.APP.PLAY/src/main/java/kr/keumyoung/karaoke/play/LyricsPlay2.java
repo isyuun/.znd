@@ -38,283 +38,280 @@ import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.View;
-import android.widget.TextView;
 
 import kr.keumyoung.karaoke.api._Const;
 import kr.keumyoung.karaoke.data._SongData;
 
 /**
- *
  * @author isyoon
- * @since 2015. 2. 3.
  * @version 1.0
+ * @since 2015. 2. 3.
  */
-class LyricsPlay2 extends LyricsPlay1 implements _Const , SurfaceHolder.Callback  {
-	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
+class LyricsPlay2 extends LyricsPlay1 implements _Const, SurfaceHolder.Callback {
+    private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
-	protected String getMethodName() {
-		String name = Thread.currentThread().getStackTrace()[3].getMethodName();
-		// int line = Thread.currentThread().getStackTrace()[3].getLineNumber();
-		// name = String.format("line:%d - %s() ", line, name);
-		name += "() ";
-		return name;
-	}
+    protected String getMethodName() {
+        String name = Thread.currentThread().getStackTrace()[3].getMethodName();
+        // int line = Thread.currentThread().getStackTrace()[3].getLineNumber();
+        // name = String.format("line:%d - %s() ", line, name);
+        name += "() ";
+        return name;
+    }
 
-	public _SongData m_data = null;
+    public _SongData m_data = null;
 
-	public void setSongData(_SongData data) {
-		this.m_data = data;
-	}
+    public void setSongData(_SongData data) {
+        this.m_data = data;
+    }
 
-	private MediaPlayer m_mp = null;
+    private MediaPlayer m_mp = null;
 
-	public void setMediaPlayer(MediaPlayer mp) {
-		this.m_mp = mp;
-	}
+    public void setMediaPlayer(MediaPlayer mp) {
+        this.m_mp = mp;
+    }
 
-	public boolean isPlaying() {
-		//if (BuildConfig.DEBUG) _Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + m_mp);
-		if (m_mp != null && m_mp.isPlaying()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+    public boolean isPlaying() {
+        //if (BuildConfig.DEBUG) _Log.i(__CLASSNAME__ + "MediaPlayer", getMethodName() + m_mp);
+        if (m_mp != null && m_mp.isPlaying()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	@Override
-	public int getCurrentPosition() {
+    @Override
+    public int getCurrentPosition() {
 
-		// return super.getCurrentPosition();
-		if (isPlaying()) {
-			return m_mp.getCurrentPosition();
-		} else {
-			return 0;
-		}
-	}
+        // return super.getCurrentPosition();
+        if (isPlaying()) {
+            return m_mp.getCurrentPosition();
+        } else {
+            return 0;
+        }
+    }
 
-	@Override
-	public int getDuration() {
+    @Override
+    public int getDuration() {
 
-		if (m_mp != null) {
-			return m_mp.getDuration();
-		} else {
-			return 0;
-		}
-	}
+        if (m_mp != null) {
+            return m_mp.getDuration();
+        } else {
+            return 0;
+        }
+    }
 
-	public boolean m_redraw = false;
+    public boolean m_redraw = false;
 
-	public void setRedraw(boolean redraw) {
-		this.m_redraw = redraw;
-	}
+    public void setRedraw(boolean redraw) {
+        this.m_redraw = redraw;
+    }
 
-	public boolean isRedraw() {
-		return m_redraw;
-	}
+    public boolean isRedraw() {
+        return m_redraw;
+    }
 
-	public int m_iSongInfoPosition = 0;
+    public int m_iSongInfoPosition = 0;
 
-	public void setSongInfoPosition(int iSongInfoPosition) {
-		this.m_iSongInfoPosition = iSongInfoPosition;
-	}
+    public void setSongInfoPosition(int iSongInfoPosition) {
+        this.m_iSongInfoPosition = iSongInfoPosition;
+    }
 
-	public int m_iTitleFontSize = 0;
+    public int m_iTitleFontSize = 0;
 
-	public void setTitleFontSize(int iTitleFontSize) {
-		this.m_iTitleFontSize = iTitleFontSize;
-	}
+    public void setTitleFontSize(int iTitleFontSize) {
+        this.m_iTitleFontSize = iTitleFontSize;
+        if (mKPLyrics != null) mKPLyrics.setTitleFontSize(iTitleFontSize);
+    }
 
-	public int m_iLyricsFontSize = 0;
+    public int m_iLyricsFontSize = 0;
 
-	public void setLyricsFontSize(int iLyricsFontSize) {
-		this.m_iLyricsFontSize = iLyricsFontSize;
-	}
+    public void setLyricsFontSize(int iLyricsFontSize) {
+        this.m_iLyricsFontSize = iLyricsFontSize;
+        if (mKPLyrics != null) mKPLyrics.setLyricsFontSize(iLyricsFontSize);
+    }
 
-	public int m_iSingerFontSize = 0;
+    public int m_iSingerFontSize = 0;
 
-	public void setSingerFontSize(int iSingerFontSize) {
-		this.m_iSingerFontSize = iSingerFontSize;
-	}
+    public void setSingerFontSize(int iSingerFontSize) {
+        this.m_iSingerFontSize = iSingerFontSize;
+        if (mKPLyrics != null) mKPLyrics.setSingerFontSize(iSingerFontSize);
+    }
 
-	public int m_iReadyFontSize = 0;
+    public int m_iReadyFontSize = 0;
 
-	public void setReadyFontSize(int iReadyFontSize) {
-		this.m_iReadyFontSize = iReadyFontSize;
-	}
+    public void setReadyFontSize(int iReadyFontSize) {
+        this.m_iReadyFontSize = iReadyFontSize;
+        if (mKPLyrics != null) mKPLyrics.setReadyFontSize(iReadyFontSize);
+    }
 
-	public int m_iStrokeSize = 0;
+    public int m_iStrokeSize = 0;
 
-	public void setStrokeSize(int iStrokeSize) {
-		this.m_iStrokeSize = iStrokeSize;
-	}
+    public void setStrokeSize(int iStrokeSize) {
+        this.m_iStrokeSize = iStrokeSize;
+    }
 
-	// 아직 시작 안된 가사가 완료된 것으로 표시되는 증상 수정
-	public int m_iBeforeEnd = 0;
-	public String m_strContinueLyrics = "";
-	public boolean m_bContinue = false;
-	public boolean m_bSkipChangeColor = false;
+    // 아직 시작 안된 가사가 완료된 것으로 표시되는 증상 수정
+    public int m_iBeforeEnd = 0;
+    public String m_strContinueLyrics = "";
+    public boolean m_bContinue = false;
+    public boolean m_bSkipChangeColor = false;
 
-	public Typeface mTypeface = Typeface.defaultFromStyle(Typeface.NORMAL);
+    public Typeface mTypeface = Typeface.defaultFromStyle(Typeface.BOLD);
 
-	public void setTypeface(Typeface typeface) {
-		this.mTypeface = typeface;
-	}
+    public void setTypeface(Typeface typeface) {
+        this.mTypeface = typeface;
+    }
 
-	public LyricsPlay2(Context context) {
-		super(context);
-	}
+    public LyricsPlay2(Context context) {
+        super(context);
+    }
 
-	private _KPLyrics mKPLyrics;
+    protected _KPLyrics mKPLyrics;
 
-	public _KPLyrics getKPLyrics() {
-		return mKPLyrics;
-	}
+    public _KPLyrics getKPLyrics() {
+        return mKPLyrics;
+    }
 
-	///**
-	// * 가사처리슬립추가
-	// */
-	//private long mThreadSleepTime = 0;
+    ///**
+    // * 가사처리슬립추가
+    // */
+    //private long mThreadSleepTime = 0;
     //
-	///**
-	// * 가사처리슬립추가
-	// */
-	//public long getSleepTime() {
-	//	return mThreadSleepTime;
-	//}
+    ///**
+    // * 가사처리슬립추가
+    // */
+    //public long getSleepTime() {
+    //	return mThreadSleepTime;
+    //}
     //
-	///**
-	// * 가사처리슬립추가
-	// */
-	//public void setSleepTime(long time) {
+    ///**
+    // * 가사처리슬립추가
+    // */
+    //public void setSleepTime(long time) {
     //
-	//	_Log.wtf(__CLASSNAME__ + _Const.TAG_LYRIC, getMethodName() + time);
-	//	this.mThreadSleepTime = time;
-	//	if (mKPLyrics != null) {
-	//		mKPLyrics.setSleepTime(time);
-	//	}
-	//	((TextView) findViewById(R.id.txt_lyric_sleep_info)).setText("" + time);
-	//}
+    //	_Log.wtf(__CLASSNAME__ + _Const.TAG_LYRIC, getMethodName() + time);
+    //	this.mThreadSleepTime = time;
+    //	if (mKPLyrics != null) {
+    //		mKPLyrics.setSleepTime(time);
+    //	}
+    //	((TextView) findViewById(R.id.txt_lyric_sleep_info)).setText("" + time);
+    //}
 
-	private boolean hasSurface;
+    private boolean hasSurface;
 
-	SurfaceHolder holder;
-	protected void init() {
-		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName());
-		 this.holder = getHolder();
-		 //bgkim 배경을 투명하게
-		 setZOrderOnTop(true);    // necessary
-		 getHolder().setFormat(PixelFormat.TRANSLUCENT);
-		 getHolder().addCallback(this);
-		 hasSurface = false;
-		 //setFocusable(true);
-		 //setFocusableInTouchMode(true);
-	}
+    SurfaceHolder holder;
 
-	private void start() {
-		Log.w(__CLASSNAME__, getMethodName() + "[ST]" + mKPLyrics + ":" + getHolder());
-		try {
-			if (mKPLyrics != null) {
-				mKPLyrics.interrupt();
-				mKPLyrics = null;
-			}
+    protected void init() {
+        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName());
+        this.holder = getHolder();
+        //bgkim 배경을 투명하게
+        setZOrderOnTop(true);    // necessary
+        getHolder().setFormat(PixelFormat.TRANSLUCENT);
+        getHolder().addCallback(this);
+        hasSurface = false;
+        //setFocusable(true);
+        //setFocusableInTouchMode(true);
+    }
 
-			// if (mKPLyrics == null)
-			{
-				mKPLyrics = new _KPLyrics((_LyricsPlay) this);
-			}
+    public void KPLyrics() {
+        if (mKPLyrics != null) {
+            mKPLyrics.interrupt();
+            mKPLyrics = null;
+        }
 
-			mKPLyrics.start();
-		} catch (Exception e) {
+        // if (mKPLyrics == null)
+        {
+            mKPLyrics = new _KPLyrics((_LyricsPlay) this);
+        }
+    }
 
-			e.printStackTrace();
-		}
-	}
 
-	public void play() throws Exception {
-		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + "[ST]"/* + ":" + mThreadSleepTime*/ + ":" + mKPLyrics + ":" + getHolder());
+    public void play() throws Exception {
+        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + "[ST]"/* + ":" + mThreadSleepTime*/ + ":" + mKPLyrics + ":" + getHolder());
 
-		try {
-			setVisibility(View.VISIBLE);
+        try {
+            setVisibility(View.VISIBLE);
 
-			setRedraw(false);
+            setRedraw(false);
 
-			start();
+            KPLyrics();
+            mKPLyrics.start();
 
-			// 재생전설정값박기
-			Log.e(__CLASSNAME__, getMethodName()/* + ":" + mThreadSleepTime*/ + ":" + mKPLyrics + ":" + getHolder());
-			//setSleepTime(mThreadSleepTime);
-			if (mKPLyrics != null) {
-				mKPLyrics.setSleepTime(0);
-				((TextView) findViewById(R.id.txt_lyric_sleep_info)).setText("" + mKPLyrics.getSleepTime());
-			}
+            // 재생전설정값박기
+            Log.e(__CLASSNAME__, getMethodName()/* + ":" + mThreadSleepTime*/ + ":" + mKPLyrics + ":" + getHolder());
+            //setSleepTime(mThreadSleepTime);
+            if (mKPLyrics != null) {
+                mKPLyrics.setSleepTime(0);
+                //((TextView) findViewById(R.id.txt_lyric_sleep_info)).setText("" + mKPLyrics.getSleepTime());
+            }
 
-		} catch (Exception e) {
+        } catch (Exception e) {
 
-			Log.wtf(__CLASSNAME__, getMethodName() + "[NG]"/* + ":" + mThreadSleepTime*/ + ":" + mKPLyrics + ":" + getHolder() + "\n" + Log.getStackTraceString(e));
-			//e.printStackTrace();
-			throw (e);
-		}
+            Log.wtf(__CLASSNAME__, getMethodName() + "[NG]"/* + ":" + mThreadSleepTime*/ + ":" + mKPLyrics + ":" + getHolder() + "\n" + Log.getStackTraceString(e));
+            //e.printStackTrace();
+            throw (e);
+        }
 
-		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + "[ED]"/* + ":" + mThreadSleepTime*/ + ":" + mKPLyrics + ":" + getHolder());
-	}
+        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + "[ED]"/* + ":" + mThreadSleepTime*/ + ":" + mKPLyrics + ":" + getHolder());
+    }
 
-	public void stop() throws Exception {
-		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + mKPLyrics + ":" + getHolder());
+    public void stop() throws Exception {
+        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName() + mKPLyrics + ":" + getHolder());
 
-		try {
-			setVisibility(View.INVISIBLE);
+        try {
+            setVisibility(View.INVISIBLE);
 
-			setRedraw(true);
+            setRedraw(true);
 
-			if (mKPLyrics != null) {
-				mKPLyrics.requestExitAndWait();
-				mKPLyrics = null;
-			}
-		} catch (Exception e) {
+            if (mKPLyrics != null) {
+                mKPLyrics.requestExitAndWait();
+                mKPLyrics = null;
+            }
+        } catch (Exception e) {
 
-			if (BuildConfig.DEBUG) Log.w(__CLASSNAME__ + TAG_ERR, "[NG]" + getMethodName() + mKPLyrics + ":" + getHolder());
-			e.printStackTrace();
-			throw (e);
-		}
+            if (BuildConfig.DEBUG) Log.w(__CLASSNAME__ + TAG_ERR, "[NG]" + getMethodName() + mKPLyrics + ":" + getHolder());
+            e.printStackTrace();
+            throw (e);
+        }
 
-	}
+    }
 
-	public void pause() {
-		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName());
-		setVisibility(View.VISIBLE);
-		setRedraw(false);
-	}
+    public void pause() {
+        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName());
+        setVisibility(View.VISIBLE);
+        setRedraw(false);
+    }
 
-	public void resume() {
-		if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName());
-		setVisibility(View.VISIBLE);
-		setRedraw(false);
-	}
+    public void resume() {
+        if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName());
+        setVisibility(View.VISIBLE);
+        setRedraw(false);
+    }
 
-	 @Override
-	 public void surfaceCreated(SurfaceHolder holder) {
-		 if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + holder);
-		 this.holder = holder;
-		 hasSurface = true;
-		 //if (mLyricsViewThread == null) {
-		 // mLyricsViewThread = new KPLyrics(this);
-		 //}
-	 }
+    @Override
+    public void surfaceCreated(SurfaceHolder holder) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + holder);
+        this.holder = holder;
+        hasSurface = true;
+        //if (mLyricsViewThread == null) {
+        // mLyricsViewThread = new KPLyrics(this);
+        //}
+    }
 
-	 @Override
-	 public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
-		if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + holder + ":" + format + ", " + w + ", " + h);
-		this.holder = holder;
-		hasSurface = true;
-		//if (mKPLyrics != null) {
-		//	mKPLyrics.onWindowResize(w, h);
-		//}
-	 }
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + holder + ":" + format + ", " + w + ", " + h);
+        this.holder = holder;
+        hasSurface = true;
+        //if (mKPLyrics != null) {
+        //	mKPLyrics.onWindowResize(w, h);
+        //}
+    }
 
-	 @Override
-	 public void surfaceDestroyed(SurfaceHolder holder) {
-		 if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + holder);
-		 //this.holder = holder;
-		 hasSurface = false;
-	 }
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+        if (BuildConfig.DEBUG) Log.e(__CLASSNAME__, getMethodName() + holder);
+        //this.holder = holder;
+        hasSurface = false;
+    }
 }
