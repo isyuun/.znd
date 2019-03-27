@@ -144,7 +144,7 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const, SurfaceHolder.Callback 
         if (mKPLyrics != null) mKPLyrics.setReadyFontSize(iReadyFontSize);
     }
 
-    public int m_iStrokeSize = 0;
+    public int m_iStrokeSize = 6;
 
     public void setStrokeSize(int iStrokeSize) {
         this.m_iStrokeSize = iStrokeSize;
@@ -160,6 +160,7 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const, SurfaceHolder.Callback 
 
     public void setTypeface(Typeface typeface) {
         this.mTypeface = typeface;
+        this.mTypeface.defaultFromStyle(Typeface.BOLD);
     }
 
     public LyricsPlay2(Context context) {
@@ -204,13 +205,6 @@ class LyricsPlay2 extends LyricsPlay1 implements _Const, SurfaceHolder.Callback 
     protected void init() {
         if (BuildConfig.DEBUG) Log.i(__CLASSNAME__, getMethodName());
         this.holder = getHolder();
-        //bgkim 배경을 투명하게
-        setZOrderOnTop(true);    // necessary
-        getHolder().setFormat(PixelFormat.TRANSLUCENT);
-        getHolder().addCallback(this);
-        hasSurface = false;
-        //setFocusable(true);
-        //setFocusableInTouchMode(true);
     }
 
     public void KPLyrics() {

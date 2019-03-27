@@ -140,19 +140,19 @@ class KPLyrics extends Thread {
 
 
     public void setTitleFontSize(int iTitleFontSize) {
-        //if (m_paintTitle != null) m_paintTitle.setTextSize(iTitleFontSize);
+        if (m_paintTitle != null) m_paintTitle.setTextSize(iTitleFontSize);
     }
 
     public void setLyricsFontSize(int iLyricsFontSize) {
-        //if (m_paintLyrics != null) m_paintLyrics.setTextSize(iLyricsFontSize);
+        if (m_paintLyrics != null) m_paintLyrics.setTextSize(iLyricsFontSize);
     }
 
     public void setSingerFontSize(int iSingerFontSize) {
-        //if (m_paintSinger != null) m_paintSinger.setTextSize(iSingerFontSize);
+        if (m_paintSinger != null) m_paintSinger.setTextSize(iSingerFontSize);
     }
 
     public void setReadyFontSize(int iReadyFontSize) {
-        //if (m_paintReady != null) m_paintReady.setTextSize(iReadyFontSize);
+        if (m_paintReady != null) m_paintReady.setTextSize(iReadyFontSize);
     }
 
     public void init() {
@@ -362,7 +362,7 @@ class KPLyrics extends Thread {
 
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 y1 /= 2;
-                y2 /= 2;
+                y2 /= 1.5f;
             }
 
             outText(canvas, paint, str1, x1, y1, Color.WHITE, Color.BLACK);

@@ -73,12 +73,11 @@ public class play2 extends play {
         player = findViewById(R.id.player);
         player.start();
 
-        // bgkim 폰트 TYPE 적용
-        //player.setTypeface(Typeface.createFromAsset(getAssets(), "yun.ttf"));
+        //자막:폰트 TYPE 적용
         //player.setTypeface(Typeface.createFromAsset(getAssets(), "nanum.ttf"));
 
-        //???
-        player.setStrokeSize(6);
+        //자막:테두리 크기 적용
+        //player.setStrokeSize(6);
 
         player.setOnListener(new _Listener() {
 

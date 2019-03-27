@@ -149,7 +149,7 @@ class LyricsPlay3 extends LyricsPlay2 {
         setLyricsFontSize(iLyricsFontSize);
         setSingerFontSize(iSingerFontSize);
         setReadyFontSize(iReadyFontSize);
-        setStrokeSize(4);
+        setStrokeSize(6);
     }
 
     @Override
