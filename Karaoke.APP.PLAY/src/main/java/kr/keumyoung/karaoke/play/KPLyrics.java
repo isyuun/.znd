@@ -90,8 +90,8 @@ class KPLyrics extends Thread {
     protected Point m_ptLyrics;
     protected int m_width;
     protected int m_height;
-    private final int[] m_nInColor = new int[2];
-    private final int[] m_nOutColor = new int[2];
+    protected final int[] m_nInColor = new int[2];
+    protected final int[] m_nOutColor = new int[2];
     private int m_line;
 
     KPLyrics(_LyricsPlay lyricsPlay) {
@@ -248,6 +248,7 @@ class KPLyrics extends Thread {
     protected void doDraw(Canvas canvas) {
         try {
             if (!mLyricsPlay.m_redraw) {
+                //isyuun:불필요
                 //if (mLyricsPlay.isPlaying() || mLyricsPlay.getVisibility() == View.VISIBLE)
                 {
                     drawLyrics(canvas, mLyricsPlay.getCurrentPosition());

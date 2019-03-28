@@ -131,10 +131,8 @@ class KPLyricsX extends KPLyrics {
         runDraw();
     }
 
-    @Override
-    protected void doDraw(Canvas canvas) {
-        //if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, getMethodName() + canvas);
-        super.doDraw(canvas);
+    public Resources getResources() {
+        return mLyricsPlay.getResources();
     }
 
     @Override
@@ -144,14 +142,10 @@ class KPLyricsX extends KPLyrics {
         m_width = rect.width();
         m_height = rect.height();
 
-        // isyoon_20150427
+        // isyoon_20150427 : 불필요
         // canvas.setDensity(metrics.densityDpi);
-        super.drawLyrics(canvas, t);
-    }
 
-    @Override
-    void redrawLyrics(Canvas canvas, Paint paint, String str, int end, int type) {
-        super.redrawLyrics(canvas, paint, str, end, type);
+        super.drawLyrics(canvas, t);
     }
 
     /**
@@ -197,8 +191,59 @@ class KPLyricsX extends KPLyrics {
         canvas.drawRect(r2, paint);
     }
 
-    public Resources getResources() {
-        return mLyricsPlay.getResources();
+
+    @Override
+    protected Rect outSize(Paint paint, String str) {
+        Rect rect = new Rect();
+
+        if (str.length() == 0) {
+            rect.set(0, 0, 0, 0);
+            return rect;
+        }
+
+        paint.getTextBounds(str, 0, str.length(), rect);
+
+        if (rect.width() > 0) {
+            rect.right += 2;
+            rect.bottom += 2;
+        }
+
+        return rect;
+    }
+
+    @Override
+    void redrawLyrics(Canvas canvas, Paint paint, String str, int end, int type) {
+        Rect rect = outSize(paint, str);
+
+        mLyricsPlay.m_iBeforeEnd = end;
+
+        if (end == 0) {
+            if (mLyricsPlay.m_iBeforeEnd != end) {
+                int pos = 1 - getLinePos();
+                m_nInColor[pos] = Color.BLACK;
+                m_nOutColor[pos] = Color.YELLOW;
+            }
+        }
+
+        if (end > rect.width()) {
+            end = rect.width();
+
+            // bgkim
+            if (!mLyricsPlay.m_strContinueLyrics.equals("")) {
+                int pos = getLinePos();
+                m_nInColor[pos] = Color.BLACK;
+                m_nOutColor[pos] = Color.YELLOW;
+            }
+        }
+
+        canvas.save();
+
+        canvas.translate(m_ptDrawPos[type].x, m_ptDrawPos[type].y);
+        // bgkim 진행 중인 가사를 그릴 때 높이 유동 조정 (기존 25로 고정)
+        canvas.clipRect(-2, (mLyricsPlay.m_iLyricsFontSize * -1) /*+ 10*/, end, rect.height() - 25);
+        outText(canvas, paint, str, 0, 0, Color.BLACK, Color.YELLOW); // LYRICS COLOR
+
+        canvas.restore();
     }
 
     /**

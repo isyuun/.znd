@@ -121,28 +121,33 @@ class LyricsPlay3 extends LyricsPlay2 {
         //_Log.e(__CLASSNAME__ + _Const.TAG_LYRIC, "init() " + w + "," + h);
 
         mLyricsMarginBottom = h / 8;
-
         int iSongInfoPosition = w / 4;
-        int iTitleFontSize = h / 13;
+        int iTitleFontSize = h / 11;
         int iLyricsFontSize = h / 12;
         int iSingerFontSize = h / 14;
         int iReadyFontSize = h / 18;
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            mLyricsMarginBottom = h / 8;
             iSongInfoPosition = w / 3;
-            iTitleFontSize = w / 13;
+            iTitleFontSize = w / 11;
             iLyricsFontSize = w / 12;
             iSingerFontSize = w / 14;
             iReadyFontSize = w / 18;
         }
 
-        //if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+        float ratio = 1.5f;
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
         {
-            iTitleFontSize /= 1.5f;
-            iLyricsFontSize /= 1.5f;
-            iSingerFontSize /= 1.5f;
-            iReadyFontSize /= 1.5f;
+            ratio = 1.4f;
         }
+
+        iTitleFontSize /= ratio;
+        iLyricsFontSize /= ratio;
+        iSingerFontSize /= ratio;
+        iReadyFontSize /= ratio;
+
 
         setSongInfoPosition(iSongInfoPosition);
         setTitleFontSize(iTitleFontSize);
