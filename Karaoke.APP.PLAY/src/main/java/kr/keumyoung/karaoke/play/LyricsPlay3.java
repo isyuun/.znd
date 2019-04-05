@@ -35,6 +35,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
+import android.opengl.GLSurfaceView;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
@@ -164,6 +165,7 @@ class LyricsPlay3 extends LyricsPlay2 {
         //bgkim 배경을 투명하게
         setZOrderOnTop(true);    // necessary
         getHolder().setFormat(PixelFormat.TRANSLUCENT);
+        //getHolder().setFormat(PixelFormat.RGBA_8888);
         getHolder().addCallback(this);
     }
 

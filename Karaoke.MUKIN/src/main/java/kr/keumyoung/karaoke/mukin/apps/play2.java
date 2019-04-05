@@ -59,23 +59,27 @@ public class play2 extends play {
 
             @Override
             public void onTime(int t) {
+                //if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, "onTime()" + t);
                 super.onTime(t);
             }
 
             @Override
             public void onPrepared() {
+                if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, "onPrepared()");
                 super.onPrepared();
                 play2.this.play.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onCompletion() {
+                if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, "onCompletion()");
                 super.onCompletion();
                 stop();
             }
 
             @Override
             public void onError() {
+                if (BuildConfig.DEBUG) Log.wtf(__CLASSNAME__, "onError()");
                 super.onError();
                 stop();
             }

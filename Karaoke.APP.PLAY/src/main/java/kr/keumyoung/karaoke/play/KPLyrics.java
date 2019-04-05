@@ -617,6 +617,8 @@ class KPLyrics extends Thread {
                     m_itor++;
                     break;
                 case _Const.SYNC_READY:
+                    //isyuun.20190329
+                    if (mLyricsPlay.m_data.getListSyncTag().size() <= m_itor) break;
                     for (int i = 0; i < _Const.LINE_VIEW; i++) {
                         m_strLine[i] = SongUtil.byteToString(mLyricsPlay.m_data.getListLyricsTag().get(mLyricsPlay.m_data.getListSyncTag().get(m_itor).nLineDisplay + i).strLineLyrics);
                     }
