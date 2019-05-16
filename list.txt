@@ -1,0 +1,31 @@
+.apk        APK백업폴더
+.util       개발관련 안드로이드 유틸리티
+AndroidJaudiotagger     MP3 ID3 태그 파서
+AndroidSlidingUpPanel.library   슬라이드리플레시 라이브러리(https://github.com/umano/AndroidSlidingUpPanel)
+bubbleseekbar   버블시크바(싱랩커스텀버전:https://github.com/woxingxiao/BubbleSeekBar)
+FileExplorer.isyoon         파일탐색기(인식커스텀버전:???)
+Karaoke                     구노래방.라이브러리모음
+Karaoke.API                 구노래방.API모음
+Karaoke.APP                 구노래방.APP모음
+Karaoke.APP.FILEEX          구노래방.파일탐색기
+Karaoke.APP.PLAY            SKYM(스트리밍).재생APP모듈
+Karaoke.APP.PLAY3           SoundTouch-Android.1.0 스트리밍 재생엔진.인터페이스.모듈
+Karaoke.APP.PLAY4           SoundTouch-Android.1.0 스트리밍 재생엔진.V1
+Karaoke.APP.PLAY5           SoundTouch-Android.1.0 스트리밍 재생엔진.V2
+Karaoke.APP.RECORD          구노래방.MP3녹음모듈
+Karaoke.APP.WIDGET          구노래방.커스텀UI위젯
+Karaoke.KEUMYOUNG           신노래방라이브러리모음
+Karaoke.MUKIN               SKYM(스트리밍).재생테스트어플
+Karaoke.MUKIN.COUPON        [[[중요]]]뮤즐.쿠폰.모듈
+Karaoke.PLAY.APP            SKYM(스트리밍).재생APP모듈.화면모음
+Karaoke.PLAY.TST            SKYM(스트리밍).재생APP모듈.테스트어플
+KY-Group-Android.COUPON     [[[중요]]]뮤즐
+KySoftSynth                 소프트미디.네이티브소스(분석중)
+KySoftSynth.zip             소프트미디.네이티브소스.백업
+liblame                     구노래방.MP3녹음모듈
+libwave                     구노래방.WAV녹음모듈
+QuickActionLib              구노래방.퀵엑션라이브러리
+RoundedImageView            구노래방.
+soundtouch                  SoundTouch audio processing library v2.0.1pre(http://soundtouch.surina.net/)
+SoundTouch-Android.1.0      안드로이드용 SoundTouch 1.0 라이브러리
+SoundTouch-Android.2.0      안드로이드용 SoundTouch 2.0 라이브러리
