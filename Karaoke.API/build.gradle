@@ -12,9 +12,9 @@ apply plugin: 'com.android.library'
 dependencies {
     implementation project(':Karaoke')
 
-    implementation 'com.loopj.android:android-async-http:1.4.9'
+    implementation 'com.loopj.android:android-async-http:1.4.11'
     implementation fileTree(dir: 'libs', include: '*.jar')
-    implementation 'com.google.android.gms:play-services-ads:17.0.0'
+    implementation 'com.google.android.gms:play-services-ads:23.2.0'
 }
 
 android {

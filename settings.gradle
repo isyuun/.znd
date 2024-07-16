@@ -1,6 +1,6 @@
 //뮤즐
 //include ':KY-Group-Android'
-include ':KY-Group-Android.COUPON'
+//include ':KY-Group-Android.COUPON'
 include ':bubbleseekbar'
 include ':Karaoke.KEUMYOUNG'
 //모듈

@@ -3,6 +3,7 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 27
     //buildToolsVersion"27.0.3"
+    ndkVersion "23.0.7599858"
 
     /**
      * 전체빌드에서오류난다...jni는 따로 빌드한다.
