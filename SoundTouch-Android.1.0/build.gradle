@@ -25,7 +25,7 @@ android {
             renderscript.srcDirs = ['src']
             res.srcDirs = ['res']
             assets.srcDirs = ['assets']
-            jni.srcDirs = []  //disable automatic ndk-build call with auto-generated Android.mk file
+            //disable automatic ndk-build call with auto-generated Android.mk file
             jniLibs.srcDirs = ['libs']
         }
 
@@ -39,6 +39,10 @@ android {
         // by a similar customization.
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
+    }
+    buildFeatures {
+        renderScript true
+        aidl true
     }
 
 }

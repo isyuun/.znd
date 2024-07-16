@@ -18,6 +18,7 @@ android {
     publishNonDefault true
 
     compileSdkVersion 27
+    namespace 'com.makeramen.roundedimageview'
     //buildToolsVersion"27.0.3"
 
     //sourceSets {

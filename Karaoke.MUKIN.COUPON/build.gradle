@@ -9,8 +9,6 @@ android {
         //applicationId "kr.keumyoung.karaoke.mukin.coupon"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -21,6 +19,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    namespace 'kr.keumyoung.karaoke.mukin.coupon'
 }
 
 repositories {

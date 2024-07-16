@@ -52,4 +52,8 @@ android {
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
     }
+    buildFeatures {
+        renderScript true
+        aidl true
+    }
 }

@@ -19,9 +19,6 @@ dependencies {
 android {
     compileSdkVersion 27
     //buildToolsVersion"27.0.3"
-    lintOptions {
-        abortOnError false
-    }
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -42,5 +39,8 @@ android {
         // by a similar customization.
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
+    }
+    lint {
+        abortOnError false
     }
 }

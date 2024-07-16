@@ -24,6 +24,7 @@ android {
     }
 
     compileSdkVersion 27
+    namespace 'kr.keumyoung.karaoke.mukin'
 
     defaultConfig {
         applicationId "kr.keumyoung.karaoke.mukin"
