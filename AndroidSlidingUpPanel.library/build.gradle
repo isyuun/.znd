@@ -17,6 +17,8 @@ dependencies {
 }
 
 android {
+    namespace "com.sothree.slidinguppanel.library"
+
     compileSdkVersion 27
     //buildToolsVersion"27.0.3"
     sourceSets {

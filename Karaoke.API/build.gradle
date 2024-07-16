@@ -18,6 +18,8 @@ dependencies {
 }
 
 android {
+    namespace "kr.kymedia.karaoke.api"
+
     publishNonDefault true
 
     compileSdkVersion 27

@@ -18,6 +18,8 @@ dependencies {
 }
 
 android {
+    namespace "com.lamerman.isyoon"
+
     publishNonDefault true
 
     compileSdkVersion 27

@@ -17,6 +17,8 @@ dependencies {
 }
 
 android {
+    namespace "kr.kymedia.karaoke.record"
+
     publishNonDefault true
 
     compileSdkVersion 27
