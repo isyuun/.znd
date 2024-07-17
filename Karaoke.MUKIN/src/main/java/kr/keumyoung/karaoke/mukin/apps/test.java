@@ -2,7 +2,7 @@ package kr.keumyoung.karaoke.mukin.apps;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.ColorRes;
+import androidx.annotation.ColorRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;

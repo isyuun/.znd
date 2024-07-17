@@ -1,7 +1,7 @@
 package kr.keumyoung.karaoke.mukin.apps;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import kr.keumyoung.karaoke.mukin.BuildConfig;
 import kr.keumyoung.karaoke.mukin.R;

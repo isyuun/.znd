@@ -13,8 +13,8 @@
 
 package kr.keumyoung.bubbleseekbar;
 
-import android.support.annotation.ColorInt;
-import android.support.annotation.IntRange;
+import androidx.annotation.ColorInt;
+import androidx.annotation.IntRange;
 
 import static kr.keumyoung.bubbleseekbar.BubbleUtils.dp2px;
 import static kr.keumyoung.bubbleseekbar.BubbleUtils.sp2px;

@@ -2,7 +2,7 @@ package kr.keumyoung.karaoke.app;
 
 import android.accounts.Account;
 import android.os.Build;
-import android.support.annotation.IdRes;
+import androidx.annotation.IdRes;
 import android.view.View;
 
 import kr.keumyoung.karaoke.BuildConfig;

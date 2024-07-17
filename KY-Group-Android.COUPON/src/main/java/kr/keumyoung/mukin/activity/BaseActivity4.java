@@ -1,7 +1,7 @@
 package kr.keumyoung.mukin.activity;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import org.json.JSONObject;

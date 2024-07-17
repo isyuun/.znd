@@ -3,7 +3,7 @@ package kr.keumyoung.mukin.elements;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.LinearLayout;

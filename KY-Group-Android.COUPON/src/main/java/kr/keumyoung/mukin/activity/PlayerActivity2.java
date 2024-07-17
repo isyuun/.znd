@@ -1,7 +1,7 @@
 package kr.keumyoung.mukin.activity;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
