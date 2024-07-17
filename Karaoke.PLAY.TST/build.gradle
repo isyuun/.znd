@@ -1,12 +1,3 @@
-//buildscript {
-//    repositories {
-//        jcenter()
-//        google()
-//    }
-//    dependencies {
-//        classpath 'com.android.tools.build:gradle:3.1.4'
-//    }
-//}
 apply plugin: 'com.android.application'
 
 dependencies {
@@ -17,6 +8,8 @@ dependencies {
 
 android {
     namespace "kr.kymedia.karaoke.play.apps.test"
+
+    compileSdk 35
 
     //<a href="http://stackoverflow.com/questions/7607165/how-to-write-build-time-stamp-into-apk">How to write build time stamp into apk</a>
     defaultConfig {
@@ -40,12 +33,10 @@ android {
         }
     }
 
-    compileSdkVersion 27
-
     defaultConfig {
         applicationId "kr.kymedia.karaoke.play.apps.test"
-        minSdkVersion 14 //lower than 14 doesn't support multidex
-        targetSdkVersion 27
+        minSdk 14 //lower than 14 doesn't support multidex
+        targetSdk 35
         // Enabling multidex support.
         multiDexEnabled true
     }

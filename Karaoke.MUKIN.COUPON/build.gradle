@@ -1,14 +1,14 @@
-//apply plugin: 'com.android.application'
 apply plugin: 'com.android.library'
 
 android {
-    //useLibrary 'org.apache.http.legacy'
-    compileSdkVersion 27
+    namespace "kr.keumyoung.karaoke.mukin.coupon"
+
+    compileSdk 35
 
     defaultConfig {
         //applicationId "kr.keumyoung.karaoke.mukin.coupon"
-        minSdkVersion 15
-        targetSdkVersion 27
+        minSdk 15
+        targetSdk 35
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

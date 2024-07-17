@@ -17,8 +17,8 @@ android {
         versionCode 22
         versionName "2.2"
         applicationId "kr.keumyoung.mukin"
-        minSdkVersion 21
-        targetSdkVersion 27
+        minSdk 21
+        targetSdk 35
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
         multiDexEnabled true
@@ -65,9 +65,6 @@ android {
             signingConfig signingConfigs.release
         }
     }
-
-    compileSdkVersion 27
-    //buildtoolsversion "27.0.3"
 
     lintOptions {
         checkReleaseBuilds false

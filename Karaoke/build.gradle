@@ -18,12 +18,9 @@ dependencies {
 android {
     namespace "kr.kymedia.karaoke"
 
+    compileSdk 35
+
     publishNonDefault true
-
-    compileSdkVersion 27
-    //buildToolsVersion"27.0.3"
-
-    //useLibrary 'org.apache.http.legacy'
 
     sourceSets {
         main {
