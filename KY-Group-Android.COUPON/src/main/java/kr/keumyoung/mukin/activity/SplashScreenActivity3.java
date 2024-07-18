@@ -1,7 +1,7 @@
 package kr.keumyoung.mukin.activity;
 
 import android.content.Intent;
-import android.support.v4.app.ActivityCompat;
+import androidx.core.app.ActivityCompat;
 import android.util.Log;
 
 import kr.keumyoung.mukin.BuildConfig;

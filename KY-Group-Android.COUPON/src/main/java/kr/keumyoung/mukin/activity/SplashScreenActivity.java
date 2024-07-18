@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;

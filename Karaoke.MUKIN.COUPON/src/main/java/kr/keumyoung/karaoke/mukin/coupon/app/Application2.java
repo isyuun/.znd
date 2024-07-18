@@ -2,11 +2,9 @@ package kr.keumyoung.karaoke.mukin.coupon.app;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.ActivityManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v4.app.ActivityCompat;
+import androidx.core.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -23,7 +21,6 @@ import java.util.HashMap;
 import cz.msebera.android.httpclient.Header;
 import kr.keumyoung.karaoke.mukin.coupon.BuildConfig;
 import kr.keumyoung.karaoke.mukin.coupon.R;
-import kr.kymedia.karaoke.util.DeviceUuidFactory;
 
 public class Application2 extends Application {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();

@@ -3,7 +3,7 @@ package kr.kymedia.karaoke.play.apps;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.view.GestureDetectorCompat;
+import androidx.core.view.GestureDetectorCompat;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;

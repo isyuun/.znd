@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         //applicationId "kr.keumyoung.karaoke.mukin.coupon"
-        minSdk 15
+        minSdk 21
         targetSdk 35
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true

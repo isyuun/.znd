@@ -5,7 +5,7 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
-import android.support.v4.view.GestureDetectorCompat;
+import androidx.core.view.GestureDetectorCompat;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;

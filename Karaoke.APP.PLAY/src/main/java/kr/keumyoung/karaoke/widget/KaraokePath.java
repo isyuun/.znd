@@ -51,7 +51,7 @@ import kr.kymedia.karaoke.util.TextUtil;
  * @since 2014. 8. 22.
  * @version 1.0
  */
-public class KaraokePath extends android.support.v7.widget.AppCompatEditText {
+public class KaraokePath extends androidx.appcompat.widget.AppCompatEditText {
 	// private static String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
 	@Override

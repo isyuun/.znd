@@ -32,7 +32,7 @@
 package kr.kymedia.karaoke.play.app;
 
 import android.os.Bundle;
-import android.support.v4.view.GestureDetectorCompat;
+import androidx.core.view.GestureDetectorCompat;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.animation.Animation;

@@ -1,7 +1,7 @@
 package kr.keumyoung.karaoke.mukin.apps;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;

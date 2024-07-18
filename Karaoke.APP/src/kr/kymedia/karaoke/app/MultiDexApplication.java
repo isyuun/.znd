@@ -33,7 +33,7 @@
 package kr.kymedia.karaoke.app;
 
 import android.content.Context;
-import android.support.multidex.MultiDex;
+import androidx.multidex.MultiDex;
 
 /**
  * <pre>
@@ -59,7 +59,7 @@ import android.support.multidex.MultiDex;
  * @since 2015. 7. 2.
  * @version 1.0
  */
-public class MultiDexApplication extends android.support.multidex.MultiDexApplication {
+public class MultiDexApplication extends androidx.multidex.MultiDexApplication {
 	/**
 	 * 
 	 * <pre>

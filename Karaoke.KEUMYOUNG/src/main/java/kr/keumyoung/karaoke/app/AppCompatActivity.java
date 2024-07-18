@@ -5,7 +5,7 @@ import android.accounts.Account;
 import kr.keumyoung.karaoke.BuildConfig;
 import kr.kymedia.karaoke.util.EnvironmentUtils;
 
-public class AppCompatActivity extends android.support.v7.app.AppCompatActivity {
+public class AppCompatActivity extends androidx.appcompat.app.AppCompatActivity {
 	private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
     protected String getMethodName() {

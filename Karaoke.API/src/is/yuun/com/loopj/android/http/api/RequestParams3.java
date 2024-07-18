@@ -34,7 +34,7 @@ package is.yuun.com.loopj.android.http.api;
 import android.text.TextUtils;
 
 import java.io.File;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 
 import cz.msebera.android.httpclient.HttpEntity;
 import kr.kymedia.karaoke.api.Log;
@@ -131,7 +131,7 @@ public class RequestParams3 extends RequestParams2 {
         }
     }
 
-    public ConcurrentHashMap<String, String> getUrlParams() {
+    public ConcurrentSkipListMap<String, String> getUrlParams() {
         return urlParams;
     }
 

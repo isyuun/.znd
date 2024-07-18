@@ -1,7 +1,7 @@
 package kr.keumyoung.karaoke.app;
 
 import android.content.Context;
-import android.support.multidex.MultiDex;
+import androidx.multidex.MultiDex;
 
 public class Application extends android.app.Application {
     @Override
