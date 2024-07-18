@@ -1,6 +1,6 @@
 package kr.kymedia.karaoke.play.app;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 public class BaseFullFragment extends Fragment {
 }

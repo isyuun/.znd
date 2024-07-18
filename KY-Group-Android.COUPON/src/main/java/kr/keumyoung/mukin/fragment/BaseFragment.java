@@ -2,7 +2,7 @@ package kr.keumyoung.mukin.fragment;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import kr.keumyoung.mukin.activity._HomeActivity;
 

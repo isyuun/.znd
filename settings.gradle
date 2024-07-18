@@ -5,7 +5,7 @@ include ':bubbleseekbar'
 include ':Karaoke.KEUMYOUNG'
 //모듈
 include ':AndroidJaudiotagger'
-include ':AndroidSlidingUpPanel.library'
+//include ':AndroidSlidingUpPanel.library'
 include ':FileExplorer.isyoon'
 include ':Karaoke'
 include ':Karaoke.API'

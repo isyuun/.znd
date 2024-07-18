@@ -1,7 +1,7 @@
 package kr.keumyoung.mukin.util;
 
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  *  on 20/04/18.

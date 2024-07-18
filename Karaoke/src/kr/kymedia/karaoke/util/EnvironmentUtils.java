@@ -210,35 +210,35 @@ public class EnvironmentUtils {
 		return ret;
 	}
 
-	public static void newChooseGoogleAccount(android.support.v4.app.Fragment fragment, int requestCode, boolean dark) {
-		String[] types = new String[]{GoogleAuthUtil.GOOGLE_ACCOUNT_TYPE};
-		Intent intent = AccountPicker.newChooseAccountIntent(null, null, types, false, null, null, null, null);
-		// set the style
-		String theme = getThemeParentName(fragment.getActivity()).toLowerCase();
-		if (dark || (null != theme && theme.contains("dark"))) {
-			intent.putExtra("overrideTheme", 0);
-		} else {
-			intent.putExtra("overrideTheme", 1);
-		}
-		intent.putExtra("overrideCustomTheme", 0);
-		//Intent intent = AccountPicker.zza(null, null, types, false, null, null, null, null, false, 1, 0);
-		fragment.startActivityForResult(intent, requestCode);
-	}
+//	public static void newChooseGoogleAccount(android.support.v4.app.Fragment fragment, int requestCode, boolean dark) {
+//		String[] types = new String[]{GoogleAuthUtil.GOOGLE_ACCOUNT_TYPE};
+//		Intent intent = AccountPicker.newChooseAccountIntent(null, null, types, false, null, null, null, null);
+//		// set the style
+//		String theme = getThemeParentName(fragment.getActivity()).toLowerCase();
+//		if (dark || (null != theme && theme.contains("dark"))) {
+//			intent.putExtra("overrideTheme", 0);
+//		} else {
+//			intent.putExtra("overrideTheme", 1);
+//		}
+//		intent.putExtra("overrideCustomTheme", 0);
+//		//Intent intent = AccountPicker.zza(null, null, types, false, null, null, null, null, false, 1, 0);
+//		fragment.startActivityForResult(intent, requestCode);
+//	}
 
-	public static void newChooseGoogleAccount(android.support.v4.app.FragmentActivity activity, int requestCode, boolean dark) {
-		String[] types = new String[]{GoogleAuthUtil.GOOGLE_ACCOUNT_TYPE};
-		Intent intent = AccountPicker.newChooseAccountIntent(null, null, types, false, null, null, null, null);
-		// set the style
-		String theme = getThemeName(activity).toLowerCase();
-		if (dark || (null != theme && theme.contains("dark"))) {
-			intent.putExtra("overrideTheme", 0);
-		} else {
-			intent.putExtra("overrideTheme", 1);
-		}
-		intent.putExtra("overrideCustomTheme", 0);
-		//Intent intent = AccountPicker.zza(null, null, types, false, null, null, null, null, false, 1, 0);
-		activity.startActivityForResult(intent, requestCode);
-	}
+//	public static void newChooseGoogleAccount(android.support.v4.app.FragmentActivity activity, int requestCode, boolean dark) {
+//		String[] types = new String[]{GoogleAuthUtil.GOOGLE_ACCOUNT_TYPE};
+//		Intent intent = AccountPicker.newChooseAccountIntent(null, null, types, false, null, null, null, null);
+//		// set the style
+//		String theme = getThemeName(activity).toLowerCase();
+//		if (dark || (null != theme && theme.contains("dark"))) {
+//			intent.putExtra("overrideTheme", 0);
+//		} else {
+//			intent.putExtra("overrideTheme", 1);
+//		}
+//		intent.putExtra("overrideCustomTheme", 0);
+//		//Intent intent = AccountPicker.zza(null, null, types, false, null, null, null, null, false, 1, 0);
+//		activity.startActivityForResult(intent, requestCode);
+//	}
 
 	public static void newChooseGoogleAccount(Fragment fragment, int requestCode, boolean dark) {
 		String[] types = new String[]{GoogleAuthUtil.GOOGLE_ACCOUNT_TYPE};
