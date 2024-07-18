@@ -6,8 +6,12 @@ dependencies {
 
 android {
     namespace "net.sourceforge.lame"
-
     compileSdk 35
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 35
+    }
 
     sourceSets {
         main {

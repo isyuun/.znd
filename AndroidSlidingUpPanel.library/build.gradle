@@ -9,8 +9,12 @@ dependencies {
 
 android {
     namespace "com.sothree.slidinguppanel.library"
-
     compileSdk 35
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 35
+    }
 
     sourceSets {
         main {

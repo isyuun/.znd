@@ -2,8 +2,12 @@ apply plugin: 'com.android.library'
 
 android {
     namespace "com.smp.soundtouchandroid"
-
     compileSdk 35
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 35
+    }
 
     /**
      * 전체빌드에서오류난다...jni는 따로 빌드한다.

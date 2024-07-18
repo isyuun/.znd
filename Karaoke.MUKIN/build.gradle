@@ -2,8 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
     namespace 'kr.keumyoung.karaoke.mukin'
-
     compileSdk 35
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 35
+    }
 
     //<a href="http://stackoverflow.com/questions/7607165/how-to-write-build-time-stamp-into-apk">How to write build time stamp into apk</a>
     defaultConfig {
@@ -33,9 +37,6 @@ android {
         targetSdk 35
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
         multiDexEnabled true
     }
 

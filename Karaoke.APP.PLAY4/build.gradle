@@ -11,8 +11,12 @@ dependencies {
 
 android {
     namespace "kr.kymedia.karaoke.play"
-
     compileSdk 35
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 35
+    }
 
     publishNonDefault true
 
@@ -42,5 +46,6 @@ android {
     buildFeatures {
         renderScript true
         aidl true
+        buildConfig true
     }
 }

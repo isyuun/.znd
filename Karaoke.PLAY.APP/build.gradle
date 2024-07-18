@@ -22,8 +22,12 @@ dependencies {
 
 android {
     namespace "kr.kymedia.karaoke.play.app"
-
     compileSdk 35
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 35
+    }
 
     //<a href="http://stackoverflow.com/questions/7607165/how-to-write-build-time-stamp-into-apk">How to write build time stamp into apk</a>
     defaultConfig {
@@ -83,5 +87,6 @@ android {
     buildFeatures {
         renderScript true
         aidl true
+        buildConfig true
     }
 }
