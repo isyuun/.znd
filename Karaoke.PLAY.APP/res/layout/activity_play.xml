@@ -3,13 +3,19 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="ContentDescription,HardcodedText" >
+    tools:ignore="ContentDescription,HardcodedText">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name" />
 
     <FrameLayout
         android:id="@+id/fragment1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="false"
+        android:paddingBottom="?android:attr/actionBarSize"
         android:tag="fragment1" />
 
 </RelativeLayout>
