@@ -37,5 +37,5 @@ dependencies {
     testImplementation 'org.testng:testng:6.9.6'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    androidTestImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    //androidTestImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
 }

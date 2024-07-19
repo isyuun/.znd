@@ -12,11 +12,15 @@ android {
     /**
      * 전체빌드에서오류난다...jni는 따로 빌드한다.
      */
-    task ndkBuild(type: Exec) {
+    defaultConfig {
+        ndkVersion "26.1.10909125"
+    }
+
+    tasks.register('ndkBuild', Exec) {
         commandLine project.android.ndkDirectory.absolutePath + '\\build\\ndk-build.cmd', '-C', file('jni').absolutePath
     }
 
-    tasks.withType(JavaCompile) {
+    tasks.withType(JavaCompile).configureEach {
         compileTask -> compileTask.dependsOn ndkBuild
     }
 

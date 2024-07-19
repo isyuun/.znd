@@ -6,7 +6,8 @@ dependencies {
 
     implementation project(':Karaoke')
     implementation project(':QuickActionLib')
-    implementation project(':RoundedImageView')
+    //implementation project(':RoundedImageView')
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 
     implementation fileTree(dir: 'libs', include: '*.jar')
     implementation 'com.google.android.gms:play-services-base:18.5.0'
