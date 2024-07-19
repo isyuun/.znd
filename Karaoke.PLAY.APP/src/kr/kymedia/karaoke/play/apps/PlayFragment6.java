@@ -119,6 +119,7 @@ public class PlayFragment6 extends PlayFragment5 {
 		String path1 = "file:///android_asset" + File.separator + "piano" + File.separator + "Piano_060_C5.ogg";
 		setPath(path1);
 
+		((CheckBox) findViewById(R.id.checkRepeatRestart)).setChecked(true);
 		((CheckBox) findViewById(R.id.txt_pitch)).setChecked(true);
 		((RadioButton) findViewById(R.id.radioPitchUp)).setChecked(true);
 
