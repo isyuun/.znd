@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
+    namespace 'kr.keumyoung.karaoke.play'
     compileSdk 35
 
     defaultConfig {
@@ -14,11 +15,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    namespace 'kr.keumyoung.karaoke.play'
+
     buildFeatures {
         buildConfig true
     }
 
+    packagingOptions {
+        exclude 'META-INF/LICENSE-notice.md'
+        exclude 'META-INF/LICENSE.md'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
 }
 
 dependencies {
@@ -37,5 +44,5 @@ dependencies {
     testImplementation 'org.testng:testng:6.9.6'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    //androidTestImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    androidTestImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
 }
