@@ -19,7 +19,7 @@
         layout="@layout/merge_play_path"
         android:visibility="visible" />
 
-    <android.support.v4.widget.Space
+    <androidx.legacy.widget.Space
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:visibility="invisible" />
