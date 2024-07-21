@@ -8,7 +8,7 @@ REM copy /Y ".\bin\*-release.apk" .\
 REM [gradleºôµå]
 @echo ON
 cmd /c ..\gradlew --stacktrace -x test :%TITLE%:assembleRelease %1
-copy /Y ".\build\outputs\apk\*-release.apk" .\
+copy /Y ".\build\outputs\apk\release\*-release.apk" ..\.apk
 REM [PROGAUARD¹é¾÷]
 @echo off
 for /F "usebackq tokens=1,2 delims==" %%i in (`wmic os get LocalDateTime /VALUE 2^>NUL`) do if '.%%i.'=='.LocalDateTime.' set ldt=%%j
