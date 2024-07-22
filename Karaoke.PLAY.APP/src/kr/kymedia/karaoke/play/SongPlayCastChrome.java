@@ -79,6 +79,7 @@ import com.google.android.gms.common.api.Status;
  * @version 1.0
  * @since 2014. 10. 6.
  */
+@Deprecated
 public class SongPlayCastChrome extends SongPlayCast implements ISongPlayCast, ISongPlay.Listener {
     private final String __CLASSNAME__ = (new Exception()).getStackTrace()[0].getFileName();
 
